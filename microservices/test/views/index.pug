@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  hr
+
+  form(action='/message', method='POST')
+    p
+      | Message text:
+      input(type='text', name='message', value='Test message')
+    input(type='submit', value='Submit')
+
