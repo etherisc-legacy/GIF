@@ -45,8 +45,13 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - $ms`)
 });
 
-let messageQueue = {};
+let messageQueue = { publish: (_) => { return null; }};
+
 amqp.connect(mqBroker, function(error, connection) {
+    if (error) {
+        console.log(`[Broker connection error] ${error.message}`);
+        return;
+    }
     connection.createChannel(function(error, channel) {
         let exchangeName = 'GeneralTopic';
 
