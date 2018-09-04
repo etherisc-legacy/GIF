@@ -25,7 +25,7 @@ is the latest version.
     * To be able to work with the docker daemon use `eval $(minikube docker-env)` in 
     every console you use to dockerize microservices for minikube. 
     * For all the microservice folders, run in this same console:
-        > docker build < FOLDER PATH > -t '< MICROSERVICE NAME >:< MICROSERVICE VERSION >'
+        > docker build -f Dockerfile.< MICROSERVICE NAME > -t '< MICROSERVICE NAME >:< MICROSERVICE VERSION >' .
         >
         > \# As microservice name and version appearing in the global `deployment.yaml`
     * To deploy microservices, run their respective deployment scripts:
@@ -40,3 +40,7 @@ is the latest version.
         > kubectl port-forward deployment/< DEPLOYMENT NAME> 8080:8080 8081:8081
         >
         > `Final param is a list of space-delimetered port pairs going local:minikube`
+5. Updating microservices. 
+    * After you commit a new version of the microservice, you just need to build a new image and change the 
+      `deployment.yaml` file to reference the new tag, along with any other changes you may need ( env vars, number of replicas). 
+      Running `kubectl apply -f ./deployment.yaml` will update the service. 

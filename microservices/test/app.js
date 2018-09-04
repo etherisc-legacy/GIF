@@ -18,8 +18,7 @@ const routes = require('./routes');
 
 const port = process.env.PORT || config.port;
 
-const amqp = require('amqplib/callback_api');
-const mqBroker = process.env.MESSAGE_BROKER || config.broker;
+const messageQueue = require('./messages')(config);
 
 // error handler
 onerror(app);
@@ -43,35 +42,6 @@ app.use(async (ctx, next) => {
   await next();
   const ms = new Date() - start;
   console.log(`${ctx.method} ${ctx.url} - $ms`)
-});
-
-let messageQueue = { publish: (_) => { return null; }};
-
-amqp.connect(mqBroker, function(error, connection) {
-    if (error) {
-        console.log(`[Broker connection error] ${error.message}`);
-        return;
-    }
-    connection.createChannel(function(error, channel) {
-        let exchangeName = 'GeneralTopic';
-
-        channel.assertExchange(exchangeName, 'topic', {durable: true});
-
-        messageQueue.publish = (message) => {
-            let key = 'anonymous.info.v1';
-            channel.publish(exchangeName, key, new Buffer.from(message));
-            console.log(`[Write] ${key}: '${message}'`);
-        };
-
-        channel.assertQueue('', {exclusive: true}, function(err, {queue}) {
-            channel.bindQueue(queue, exchangeName, '#');
-
-            channel.consume(queue, function(message) {
-                console.log(`[Read] ${message.fields.routingKey}: '${message.content.toString()}'`);
-            }, {noAck: true});
-        });
-
-    });
 });
 
 routes(router, messageQueue);
