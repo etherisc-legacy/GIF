@@ -16,7 +16,9 @@ The following attributes are universally passed along with the payload of the me
     
 ### Using shared libraries between microservices
 * [Lerna](https://github.com/lerna/lerna) in an independent mode is used to manage independently versioned packages
-* 
+* Because we use a monorep setup with microservices which are each bundled into a Docker image, we had to employ Lerna 
+during `docker build` as well - dockerfiles for individual microservices are stored in the repo root so building them as 
+access to both microservices and shared files.
 
 
 ### GIT: commits, branches and pull requests
