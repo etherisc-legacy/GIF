@@ -1,5 +1,4 @@
 const amqp = require('amqplib/callback_api');
-const uuid = require('uuid/v4');
 const dipMessages = require('dip-messages');
 
 module.exports = (config) => {
@@ -7,7 +6,7 @@ module.exports = (config) => {
 
     let messageQueue = { publish: (_) => { return null; }};
 
-    let { pack, unpack } = dipMessages;
+    let { pack, unpack, headers } = dipMessages;
 
     amqp.connect(mqBroker, function(error, connection) {
         if (error) {
@@ -17,18 +16,14 @@ module.exports = (config) => {
         connection.createChannel(function(error, channel) {
             let exchangeName = 'GeneralTopic';
 
-            channel.assertExchange(exchangeName, 'topic', {durable: true});
+            channel.assertExchange(exchangeName, 'topic', {
+                durable: true
+            });
 
             messageQueue.publish = (message) => {
-                let key = 'anonymous.info.v1';
+                let key = 'anonymous.test.v1';
 
-                channel.publish(exchangeName, key, pack({ text: message }, 'test'), {
-                    correlationId: uuid(),
-                    headers: {
-                        originatorName: process.env.npm_package_name,
-                        originatorVersion: process.env.npm_package_version,
-                    }
-                });
+                channel.publish(exchangeName, key, pack({ text: message }, 'test'), headers());
 
                 console.log(`[Write] ${key}: '${message}'`);
             };
@@ -41,7 +36,7 @@ module.exports = (config) => {
                     console.log(
                         `[Read] ${message.fields.routingKey}: '${JSON.stringify(content)}' (${JSON.stringify(message.properties)})`
                     );
-                }, {noAck: true});
+                }, { noAck: true });
             });
 
         });

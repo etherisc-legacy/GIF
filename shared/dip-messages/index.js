@@ -1,3 +1,4 @@
+const uuid = require('uuid/v4');
 const types = require('./types');
 
 const Validator = require('jsonschema').Validator;
@@ -20,4 +21,18 @@ const unpack = (buffer, type, version) => {
   return object;
 };
 
-module.exports = { pack, unpack, validate };
+const headers = (customValues) => {
+  var serviceName = process.env.npm_package_name;
+  var serviceVersion = process.env.npm_package_version;
+  var correlationId = `${uuid()}-${serviceName}-${serviceVersion}-${process.hrtime()[0]}`;
+
+  return {
+    correlationId: correlationId,
+    headers: Object.assign({
+      originatorName: serviceName,
+      originatorVersion: serviceVersion,
+    }, customValues || {})
+  }
+};
+
+module.exports = { pack, unpack, validate, headers };
