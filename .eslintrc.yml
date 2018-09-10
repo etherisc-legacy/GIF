@@ -1,0 +1,49 @@
+root: true
+
+parser: 'babel-eslint'
+parserOptions:
+    sourceType: 'module'
+
+extends:
+    - airbnb
+
+env:
+    browser: true
+    node: true
+    mocha: true
+
+globals:
+    should: true
+
+rules:
+    import/no-unresolved: 0
+    import/no-dynamic-require: 0
+    import/newline-after-import:
+        - error
+        - count: 2
+    import/extensions: 0
+
+    react/jsx-filename-extension: 0
+
+    global-require: 0
+    no-underscore-dangle: 0
+    no-return-assign: 0
+    no-confusing-arrow: 0
+    no-nested-ternary: 0
+
+    require-jsdoc:
+        - 2
+        - require:
+              FunctionDeclaration: true
+              MethodDefinition: true
+              ClassDeclaration: true
+              ArrowFunctionExpression: true
+              FunctionExpression: true
+    valid-jsdoc:
+        - 2
+        - requireParamDescription: false
+          requireParamType: true
+          requireReturnDescription: false
+          requireReturn: false
+          prefer:
+              returns: return

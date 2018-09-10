@@ -19,9 +19,9 @@ is the latest version.
     Keep it handy for all other ports we'll potentially expose later on in the process.
 3. Setting up RabbitMQ    
     * Navigate to a project root directory
-         > kubectl apply -f service/rabbitmq_rbac.yaml
+         > kubectl apply -f services/rabbitmq/prod/rabbitmq_rbac.yaml
          >
-         > kubectl apply -f service/rabbitmq_statefulsets.yaml
+         > kubectl apply -f services/rabbitmq/prod/rabbitmq_statefulsets.yaml
     * That will create a cluster of rabbitmq pods. By navigating to a `<minikubeip>:31672` in your browser you can
     open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
 4. Deploying microservices    

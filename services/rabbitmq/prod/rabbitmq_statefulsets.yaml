@@ -94,7 +94,7 @@ spec:
         env:
           - name: MY_POD_IP
             valueFrom:
-              fieldRef:
+              fieldRef:l
                 fieldPath: status.podIP
           - name: RABBITMQ_USE_LONGNAME
             value: "true"

@@ -1,11 +1,23 @@
 {
-  "name": "root",
+  "name": "dip-platform",
+  "description": "Etherisc Decentralized Insurance Platform",
   "private": true,
+  "scripts": {
+    "dev:system_microservices:run": "docker-compose -f ./services/compose/dev/docker-compose.yml up -d",
+    "lint": "eslint --ext js .",
+    "docs": "esdoc"
+  },
   "devDependencies": {
+    "babel-eslint": "^9.0.0",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-jsx-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "lerna": "^3.2.1"
   }
 }
