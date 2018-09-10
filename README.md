@@ -1,5 +1,8 @@
 # DIP Platform Readme
 
+###### Documentation
+![documentation-badge](https://img.shields.io/badge/Documentation-6.19%25%20%287%2F113%29-red.svg)
+
 * [Contribution guidelines](CONTRIBUTION.md)
 * [License](LICENSE)
 
