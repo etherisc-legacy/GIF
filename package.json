@@ -7,6 +7,15 @@
     "lint": "eslint --ext js .",
     "docs": "esdoc"
   },
+  "files": [
+    "*"
+  ],
+  "oclif": {
+    "commands": "./commands",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
     "esdoc": "^1.1.0",
@@ -19,5 +28,14 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "lerna": "^3.2.1"
+  },
+  "dependencies": {
+    "@oclif/command": "^1.5.0",
+    "@oclif/config": "^1.7.4",
+    "@oclif/plugin-help": "^2.1.1",
+    "@rauschma/stringio": "^1.4.0",
+    "fast-glob": "^2.2.2",
+    "js-yaml": "^3.12.0",
+    "kubernetes-client": "^6.1.0"
   }
 }
