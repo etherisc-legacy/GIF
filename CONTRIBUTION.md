@@ -25,3 +25,8 @@ access to both microservices and shared files.
 * The commit message should ideally follow the following template:
     > [GENIT-#] a brief description of the changes ( a list of names for affected microservices )
 * If the commits for one Task-tracker issue are following one another - they should ideally be squashed into one before being merged into master
+
+### Documentation
+* Esdoc is used to generate documentation
+* Javascript files should be documented with JSDoc syntax [JSDdoc](http://usejsdoc.org/)
+* Use `npm run docs` to generate docs

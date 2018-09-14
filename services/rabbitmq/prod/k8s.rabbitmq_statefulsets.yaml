@@ -66,47 +66,47 @@ spec:
       serviceAccountName: rabbitmq
       terminationGracePeriodSeconds: 10
       containers:
-      - name: rabbitmq-k8s
-        image: rabbitmq:3.7
-        volumeMounts:
-          - name: config-volume
-            mountPath: /etc/rabbitmq
-        ports:
-          - name: http
-            protocol: TCP
-            containerPort: 15672
-          - name: amqp
-            protocol: TCP
-            containerPort: 5672
-        livenessProbe:
-          exec:
-            command: ["rabbitmqctl", "status"]
-          initialDelaySeconds: 60
-          periodSeconds: 60
-          timeoutSeconds: 10
-        readinessProbe:
-          exec:
-            command: ["rabbitmqctl", "status"]
-          initialDelaySeconds: 20
-          periodSeconds: 60
-          timeoutSeconds: 10
-        imagePullPolicy: Always
-        env:
-          - name: MY_POD_IP
-            valueFrom:
-              fieldRef:
-                fieldPath: status.podIP
-          - name: RABBITMQ_USE_LONGNAME
-            value: "true"
-          # See a note on cluster_formation.k8s.address_type in the config file section
-          - name: RABBITMQ_NODENAME
-            value: "rabbit@$(MY_POD_IP)"
-          - name: K8S_SERVICE_NAME
-            value: "rabbitmq"
-          - name: RABBITMQ_ERLANG_COOKIE
-            value: "mycookie"
-          # TODO: look into creating the cookie file in an entrypoint script,
-          # as knowing this cookie gives you the full access to all RabbitMQ internals
+        - name: rabbitmq-k8s
+          image: rabbitmq:3.7
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/rabbitmq
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 15672
+            - name: amqp
+              protocol: TCP
+              containerPort: 5672
+          livenessProbe:
+            exec:
+              command: ["rabbitmqctl", "status"]
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            timeoutSeconds: 10
+          readinessProbe:
+            exec:
+              command: ["rabbitmqctl", "status"]
+            initialDelaySeconds: 20
+            periodSeconds: 60
+            timeoutSeconds: 10
+          imagePullPolicy: Always
+          env:
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: RABBITMQ_USE_LONGNAME
+              value: "true"
+            # See a note on cluster_formation.k8s.address_type in the config file section
+            - name: RABBITMQ_NODENAME
+              value: "rabbit@$(MY_POD_IP)"
+            - name: K8S_SERVICE_NAME
+              value: "rabbitmq"
+            - name: RABBITMQ_ERLANG_COOKIE
+              value: "mycookie"
+            # TODO: look into creating the cookie file in an entrypoint script,
+            # as knowing this cookie gives you the full access to all RabbitMQ internals
       volumes:
         - name: config-volume
           configMap:

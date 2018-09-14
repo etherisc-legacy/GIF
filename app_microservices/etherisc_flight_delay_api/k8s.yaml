@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fddapi
+  labels:
+    app: fddapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fddapi
+  template:
+    metadata:
+      labels:
+        app: fddapi
+    spec:
+      containers:
+      - name: fddapi
+        image: gcr.io/speedy-atom-216213/fddapi:0.0.3
+        ports:
+        - containerPort: 3000
+        env:
+          - name: MESSAGE_BROKER
+            value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: fddapi
+  labels:
+    app: fddapi
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: fddapi

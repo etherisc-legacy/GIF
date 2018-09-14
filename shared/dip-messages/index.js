@@ -1,7 +1,8 @@
+const { Validator } = require('jsonschema');
 const uuid = require('uuid/v4');
 const types = require('./types');
 
-const Validator = require('jsonschema').Validator;
+
 const validator = new Validator();
 
 const validate = (object, type, version) => {
