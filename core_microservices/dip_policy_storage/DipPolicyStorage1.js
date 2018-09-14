@@ -1,30 +1,23 @@
-const amqp = require('amqplib');
-
-
 class DipPolicyStorage {
-  constructor({ amqpBroker }) {
-    this._amqpBroker = amqpBroker;
-    this._amqp = null;
+  constructor({ amqp, router }) {
+    this._amqpBroker = amqp;
+    this._router = router;
   }
 
-  async listen() {
-    const conn = await amqp.connect(this._amqpBroker);
+  async bootstrap() {
+    this._router.get('/test', ctx => ctx.body = 'test');
 
-    this._amqp = await conn.createChannel();
+    this._amqp = await this._amqpBroker.connection.createChannel();
 
     await this._amqp.assertExchange('POLICY', 'topic', { durable: true });
 
-    const policyCreateQ = await this._amqp.assertQueue('policy_storage_q', { exclusive: false });
+    const policyCreateQ = await this._amqp.assertQueue('policy.create', { exclusive: false });
     await this._amqp.bindQueue(policyCreateQ.queue, 'POLICY', 'policy.create.v1');
 
     await this._amqp.consume(policyCreateQ.queue, this.onPolicyCreate.bind(this), { noAck: true });
   }
 
   async onPolicyCreate(message) {
-    // const { routingKey } = message.fields;
-    // const content = message.content.toString();
-
-    // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     this._amqp.publish('POLICY', 'policy.creation_success.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId})), {
@@ -38,3 +31,4 @@ class DipPolicyStorage {
 }
 
 module.exports = DipPolicyStorage;
+

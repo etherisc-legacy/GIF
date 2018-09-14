@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dip-fiat-payout-gateway
+  labels:
+    app: dip-fiat-payout-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dip-fiat-payout-gateway
+  template:
+    metadata:
+      labels:
+        app: dip-fiat-payout-gateway
+    spec:
+      containers:
+      - name: dip-fiat-payout-gateway
+        image: gcr.io/speedy-atom-216213/dip-fiat-payout-gateway:0.0.1
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MESSAGE_BROKER
+          value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"

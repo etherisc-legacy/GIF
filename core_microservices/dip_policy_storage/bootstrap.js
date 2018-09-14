@@ -1,8 +1,5 @@
-const dipMicroservice = require('dip-microservice');
 const DipPolicyStorage = require('./DipPolicyStorage');
 
+const dipPolicyStorage = new DipPolicyStorage({ amqpBroker: process.env.MESSAGE_BROKER || 'amqp://localhost:5672' });
 
-dipMicroservice.bootstrap(DipPolicyStorage, { httpPort: 3010 })
-  .catch((err) => {
-    throw new Error(err);
-  });
+dipPolicyStorage.listen();

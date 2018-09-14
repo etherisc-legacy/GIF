@@ -116,6 +116,8 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_HOST: process.env.API_HOST,
+        API_PORT: process.env.API_PORT,
       },
     }),
   ].filter(Boolean),
