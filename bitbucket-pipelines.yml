@@ -26,9 +26,9 @@ pipelines:
         caches:
           - docker
         script:
-          — SDK_VERSION=216.0.0
-          — SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
-          — curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
+          - SDK_VERSION=216.0.0
+          - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
+          - curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
           - tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/
           - /tmp/google-cloud-sdk/install.sh -q
           - source /tmp/google-cloud-sdk/path.bash.inc
