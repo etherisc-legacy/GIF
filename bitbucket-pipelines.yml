@@ -12,16 +12,8 @@ pipelines:
   custom:
     deploy-staging:
     - step:
-        name: Test
-        script:
-        - export ENVIRONMENT=production
-        - npm install
-        - ./node_modules/.bin/lerna bootstrap
-        - npm run test
-    - step:
         name: Deploy to STAGING
         deployment: staging
-        trigger: manual
         services:
           - docker
         caches:
@@ -44,7 +36,7 @@ pipelines:
           - export ENVIRONMENT=production
           - npm install
           - ./node_modules/.bin/lerna bootstrap
-          - ./bin/run deploy
+          - NODE_ENV=production ./bin/run deploy
 
 definitions:
   services:
