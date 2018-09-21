@@ -1,7 +1,5 @@
 image: node:9.9.0
 
-option:
-  docker: true
 
 pipelines:
   default:
@@ -23,8 +21,15 @@ pipelines:
           deployment: staging
           trigger: manual
           image: google/cloud-sdk:latest
+          services:
+            - docker
+          caches:
+            - docker
           script:
-            - echo "Check env"
-            - node -v
-            - npm -v
             - gcloud -v
+            - docker version
+
+definitions:
+  services:
+    docker:
+      memory: 2048
