@@ -48,6 +48,7 @@ class Deploy extends Command {
   async run() {
     if (PROD && !process.env.GCLOUD_CLUSTER) throw new Error('GKE cluster should be specified');
     if (PROD && !process.env.GCLOUD_PROJECT) throw new Error('GKE project should be specified');
+    if (PROD && !process.env.GCLOUD_ZONE) throw new Error('GKE zone should be specified');
 
     this.log = {
       info: console.log, // eslint-disable-line
@@ -99,7 +100,7 @@ class Deploy extends Command {
 
 
     if (process.env.NODE_ENV === 'production') {
-      await this.execute(`kubectl config use-context ${process.env.GCLOUD_CLUSTER}`);
+      await this.execute(`kubectl config use-context ${process.env.GCLOUD_PROJECT}_${process.env.GCLOUD_ZONE}_${process.env.GCLOUD_CLUSTER}`);
     } else {
       await this.execute('kubectl config use-context minikube');
       await this.execute('minikube addons enable ingress');
