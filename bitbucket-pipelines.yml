@@ -21,18 +21,25 @@ pipelines:
         name: Deploy to STAGING
         deployment: staging
         trigger: manual
-        image: google/cloud-sdk:latest
         services:
           - docker
         caches:
           - docker
         script:
+          — SDK_VERSION=216.0.0
+          — SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
+          — curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
+          - tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/
+          - /tmp/google-cloud-sdk/install.sh -q
+          - source /tmp/google-cloud-sdk/path.bash.inc
+          - gcloud -v
           - echo $GCLOUD_API_KEYFILE | base64 --decode --ignore-garbage > ./gcloud-api-key.json
           - gcloud auth activate-service-account --key-file gcloud-api-key.json
           - gcloud config set project $GCLOUD_PROJECT
           - gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT
           - gcloud auth configure-docker --quiet
-          - kubectl config get-contexts
+          - node -v
+          - npm -v
 
 definitions:
   services:
