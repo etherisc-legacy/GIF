@@ -1,22 +1,22 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: dip-fiat-payout-gateway
+  name: fddapi
   labels:
-    app: dip-fiat-payout-gateway
+    app: fddapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dip-fiat-payout-gateway
+      app: fddapi
   template:
     metadata:
       labels:
-        app: dip-fiat-payout-gateway
+        app: fddapi
     spec:
       containers:
-      - name: dip-fiat-payout-gateway
-        image: gcr.io/speedy-atom-216213/dip-fiat-payout-gateway:0.0.1
+      - name: fddapi
+        image: <!--image-->
         ports:
         - containerPort: 3000
         env:

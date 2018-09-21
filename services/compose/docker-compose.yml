@@ -7,7 +7,7 @@ services:
         image: rabbitmq:3.7.7
         command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server; rabbitmq_web_stomp"
         volumes:
-            - ../../rabbitmq/dev/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+            - ./rabbitmq.config:ro
         ports:
             - "5672:5672"
             - "15672:15672"

@@ -1,6 +1,8 @@
 const WebSocket = require('ws');
 const uuid = require('uuid/v1');
 const amqp = require('amqplib');
+const http = require('http');
+
 
 const shared = {
   exhanges: {
@@ -46,7 +48,16 @@ class GenericInsurance {
 
     this._amqp = await conn.createChannel();
 
-    const wss = new WebSocket.Server({ port: wsPort });
+    const server = new http.createServer(function (req, res) {
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.write('{"status":200}');
+      res.end();
+    });
+
+    const wss = new WebSocket.Server({ server });
+
+    server.listen(wsPort);
+
     wss.on('connection', ws => this.register(ws));
 
     await this._amqp.assertExchange(shared.exhanges.policy, 'topic', { durable: true });

@@ -11,35 +11,49 @@ pipelines:
 
   custom:
     deploy-staging:
-    - step:
-        name: Test
-        script:
-        - export ENVIRONMENT=production
-        - npm install
-        - npm run test
-    - step:
-        name: Deploy to STAGING
-        deployment: staging
-        trigger: manual
-        services:
-          - docker
-        caches:
-          - docker
-        script:
-          - SDK_VERSION=216.0.0
-          - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
-          - curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
-          - tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/
-          - /tmp/google-cloud-sdk/install.sh -q
-          - source /tmp/google-cloud-sdk/path.bash.inc
-          - gcloud -v
-          - echo $GCLOUD_API_KEYFILE | base64 --decode --ignore-garbage > ./gcloud-api-key.json
-          - gcloud auth activate-service-account --key-file gcloud-api-key.json
-          - gcloud config set project $GCLOUD_PROJECT
-          - gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT
-          - gcloud auth configure-docker --quiet
-          - node -v
-          - npm -v
+      - step:
+          name: Test
+          script:
+          - export ENVIRONMENT=production
+          - npm install
+          - ./node_modules/.bin/lerna bootstrap
+          - npm run test
+      - step:
+          name: Deploy to STAGING
+          trigger: manual
+          deployment: staging
+          services:
+            - docker
+          caches:
+            - docker
+          script:
+            # Install kubectl
+            - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            - chmod +x ./kubectl
+            - mv ./kubectl /usr/local/bin/kubectl
+            # Install google-cloud-sdk
+            - SDK_VERSION=216.0.0
+            - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
+            - curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
+            - tar -xvf /tmp/google-cloud-sdk.tar.gz -C /tmp/
+            - /tmp/google-cloud-sdk/install.sh -q
+            - source /tmp/google-cloud-sdk/path.bash.inc
+            - gcloud -v
+            # Authorize to Google Cloud Console
+            - echo $GCLOUD_API_KEYFILE | base64 --decode --ignore-garbage > ./gcloud-api-key.json
+            - gcloud auth activate-service-account --key-file gcloud-api-key.json
+            - gcloud config set project $GCLOUD_PROJECT
+            - gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT
+            - gcloud auth configure-docker --quiet
+            - node -v
+            - npm -v
+            - kubectl config get-contexts
+            - kubectl version
+            - export ENVIRONMENT=production
+            # Deploy to Google Kubernetes Engine
+            - npm install
+            - ./node_modules/.bin/lerna bootstrap
+            - NODE_ENV=production ./bin/run deploy
 
 definitions:
   services:

@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: fddapi
+  labels:
+    app: fddapi
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: fddapi
