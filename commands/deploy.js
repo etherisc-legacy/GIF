@@ -100,7 +100,7 @@ class Deploy extends Command {
 
 
     if (process.env.NODE_ENV === 'production') {
-      await this.execute(`kubectl config use-context ${process.env.GCLOUD_PROJECT}_${process.env.GCLOUD_ZONE}_${process.env.GCLOUD_CLUSTER}`);
+      await this.execute(`kubectl config use-context gke_${process.env.GCLOUD_PROJECT}_${process.env.GCLOUD_ZONE}_${process.env.GCLOUD_CLUSTER}`);
     } else {
       await this.execute('kubectl config use-context minikube');
       await this.execute('minikube addons enable ingress');
