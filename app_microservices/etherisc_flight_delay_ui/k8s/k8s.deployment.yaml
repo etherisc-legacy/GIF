@@ -16,27 +16,11 @@ spec:
     spec:
       containers:
       - name: fddui
-        image: gcr.io/speedy-atom-216213/fddui:0.0.2
+        image: <!--image-->
         ports:
         - containerPort: 80
         env:
         - name: API_HOST
-          value: FDDAPI_SERVICE_HOST
+          value: "$(FDDAPI_SERVICE_HOST)"
         - name: API_PORT
-          value: FDDAPI_SERVICE_PORT
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: fddui
-  labels:
-    app: fddui
-spec:
-  type: LoadBalancer
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
-  selector:
-    app: fddui
-
+          value: "$(FDDAPI_SERVICE_PORT_HTTP)"

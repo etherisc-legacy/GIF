@@ -16,6 +16,7 @@ pipelines:
         script:
         - export ENVIRONMENT=production
         - npm install
+        - ./node_modules/bin/lerna bootstrap
         - npm run test
     - step:
         name: Deploy to STAGING
@@ -40,6 +41,10 @@ pipelines:
           - gcloud auth configure-docker --quiet
           - node -v
           - npm -v
+          - export ENVIRONMENT=production
+          - npm install
+          - ./node_modules/bin/lerna bootstrap
+          - ./bin/run deploy
 
 definitions:
   services:

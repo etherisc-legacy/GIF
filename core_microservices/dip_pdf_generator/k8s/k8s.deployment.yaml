@@ -1,22 +1,22 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: dip-policy-storage
+  name: dip-pdf-generator
   labels:
-    app: dip-policy-storage
+    app: dip-pdf-generator
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dip-policy-storage
+      app: dip-pdf-generator
   template:
     metadata:
       labels:
-        app: dip-policy-storage
+        app: dip-pdf-generator
     spec:
       containers:
-      - name: dip-policy-storage
-        image: gcr.io/speedy-atom-216213/dip-policy-storage:0.0.1
+      - name: dip-pdf-generator
+        image: <!--image-->
         ports:
         - containerPort: 3000
         env:

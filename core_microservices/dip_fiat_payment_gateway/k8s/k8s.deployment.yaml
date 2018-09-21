@@ -1,22 +1,22 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: dip-ethereum-client
+  name: dip-fiat-payment-gateway
   labels:
-    app: dip-ethereum-client
+    app: dip-fiat-payment-gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dip-ethereum-client
+      app: dip-fiat-payment-gateway
   template:
     metadata:
       labels:
-        app: dip-ethereum-client
+        app: dip-fiat-payment-gateway
     spec:
       containers:
-      - name: dip-policy-storage
-        image: gcr.io/speedy-atom-216213/dip-ethereum-client:0.0.1
+      - name: dip-fiat-payment-gateway
+        image: <!--image-->
         ports:
         - containerPort: 3000
         env:
