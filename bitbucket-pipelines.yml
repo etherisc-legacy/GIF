@@ -12,16 +12,10 @@ pipelines:
   custom:
     deploy-staging:
       - step:
-          name: Test
-          script:
-            - npm install
-            - npm run test
-      - step:
           name: Deploy to STAGING
           deployment: staging
-          trigger: manual
+          image: gloud
           services:
-            - cloudsdk
             - docker
           caches:
             - docker
@@ -33,7 +27,7 @@ pipelines:
 
 definitions:
   services:
-    cloudsdk:
+    gcloud:
       image: google/cloud-sdk:latest
     docker:
       memory: 2048
