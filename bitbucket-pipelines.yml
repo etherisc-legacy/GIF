@@ -20,16 +20,20 @@ pipelines:
           name: Deploy to STAGING
           deployment: staging
           trigger: manual
-          image: google/cloud-sdk:latest
           services:
+            - cloudsdk
             - docker
           caches:
             - docker
           script:
             - gcloud -v
             - docker version
+            - node -v
+            - npm -v
 
 definitions:
   services:
+    cloudsdk:
+      image: google/cloud-sdk:latest
     docker:
       memory: 2048
