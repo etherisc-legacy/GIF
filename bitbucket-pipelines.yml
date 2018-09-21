@@ -19,5 +19,11 @@ pipelines:
           name: Deploy to STAGING
           deployment: staging
           trigger: manual
+          image: google/cloud-sdk:latest
+          caches:
+            - docker
           script:
-            - echo Deploy
+            - echo "Check env"
+            - node -v
+            - npm -v
+            - gcloud -v
