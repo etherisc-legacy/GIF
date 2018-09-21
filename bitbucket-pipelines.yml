@@ -21,7 +21,7 @@ pipelines:
         script:
           - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
           - chmod +x ./kubectl
-          - sudo mv ./kubectl /usr/local/bin/kubectl
+          - mv ./kubectl /usr/local/bin/kubectl
           - SDK_VERSION=216.0.0
           - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
           - curl -o /tmp/google-cloud-sdk.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
