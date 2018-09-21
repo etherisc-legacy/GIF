@@ -1,0 +1,23 @@
+image: node:9.9.0
+
+pipelines:
+  default:
+    - step:
+        name: Test
+        script:
+          - npm install
+          - npm run test
+
+  custom:
+    deploy-staging:
+      - step:
+          name: Test
+          script:
+            - npm install
+            - npm run test
+      - step:
+          name: Deploy to STAGING
+          deployment: staging
+          trigger: manual
+          script:
+            - echo Deploy

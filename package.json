@@ -5,7 +5,8 @@
   "scripts": {
     "dev:system_microservices:run": "docker-compose -f ./services/compose/dev/docker-compose.yml up -d",
     "lint": "eslint --ext js .",
-    "docs": "esdoc"
+    "docs": "esdoc",
+    "test": "echo \"Test\""
   },
   "files": [
     "*"
@@ -36,6 +37,8 @@
     "@rauschma/stringio": "^1.4.0",
     "fast-glob": "^2.2.2",
     "js-yaml": "^3.12.0",
-    "kubernetes-client": "^6.1.0"
+    "kubernetes-client": "^6.1.0",
+    "lodash": "^4.17.11",
+    "uuid": "^3.3.2"
   }
 }
