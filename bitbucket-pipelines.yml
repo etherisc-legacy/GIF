@@ -3,31 +3,36 @@ image: node:9.9.0
 
 pipelines:
   default:
-    - step:
-        name: Test
-        script:
-          - npm install
-          - npm run test
+  - step:
+      name: Test
+      script:
+      - npm install
+      - npm run test
 
   custom:
     deploy-staging:
-      - step:
-          name: Deploy to STAGING
-          deployment: staging
-          image: gloud
-          services:
-            - docker
-          caches:
-            - docker
-          script:
-            - gcloud -v
-            - docker version
-            - node -v
-            - npm -v
+    - step:
+        name: Test
+        script:
+        - npm install
+        - npm run test
+    - step:
+        name: Deploy to STAGING
+        deployment: staging
+        trigger: manual
+        image: google/cloud-sdk:latest
+        services:
+          - docker
+        caches:
+          - docker
+        script:
+          - echo $GCLOUD_API_KEYFILE | base64 — decode — ignore-garbage > ./gcloud-api-key.json
+          - gcloud auth activate-service-account — key-file gcloud-api-key.json
+          - gcloud config set project $GCLOUD_PROJECT
+          - kubectl version
 
 definitions:
   services:
-    gcloud:
-      image: google/cloud-sdk:latest
     docker:
       memory: 2048
+
