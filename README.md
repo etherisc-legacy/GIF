@@ -78,7 +78,7 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 1. In GCP dashboard navigate to Kubernetes Engine > Clusters
 2. Create new cluster
 
-##### Creating authorization credentials for Bitbucket
+#### Create authorization credentials for Bitbucket
 Create an App Engine service account and API key. Bitbucket needs this information to deploy to App Engine.
 
 1. In the Google Cloud Platform Console, go to the [Credentials](https://console.cloud.google.com/apis/credentials) page.
@@ -89,7 +89,7 @@ Create an App Engine service account and API key. Bitbucket needs this informati
 
 4. Click the Create button. A copy of the JSON file downloads to your computer. (This is your JSON credential file)
 
-##### Configure the environment variables required by the pipeline script
+#### Configure the environment variables required by the pipeline script
 Open up your terminal and browse to the location of your JSON credential file from earlier. Then run the command below to encode your file in base64 format. Copy the output of the command to your clipboard.
 
 `base64 <your-credentials-file.json>`
