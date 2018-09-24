@@ -3,6 +3,7 @@
   "description": "Etherisc Decentralized Insurance Platform",
   "private": true,
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "dev:system_microservices:run": "docker-compose -f ./services/compose/dev/docker-compose.yml up -d",
     "lint": "eslint --ext js .",
     "docs": "esdoc",

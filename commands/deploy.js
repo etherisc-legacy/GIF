@@ -101,6 +101,12 @@ class Deploy extends Command {
 
     if (process.env.NODE_ENV === 'production') {
       await this.execute(`kubectl config use-context gke_${process.env.GCLOUD_PROJECT}_${process.env.GCLOUD_ZONE}_${process.env.GCLOUD_CLUSTER}`);
+
+      try {
+        await this.execute('kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account)');
+      } catch (e) {
+        this.log.info('cluster-admin-binding already exists');
+      }
     } else {
       await this.execute('kubectl config use-context minikube');
       await this.execute('minikube addons enable ingress');
