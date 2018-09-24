@@ -1,5 +1,5 @@
 const amqp = require('amqplib/callback_api');
-const dipMessages = require('dip-messages');
+const dipMessages = require('@etherisc/messages');
 
 module.exports = (config) => {
     const mqBroker = process.env.MESSAGE_BROKER || config.broker;

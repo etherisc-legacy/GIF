@@ -135,6 +135,13 @@ const config = {
       cached: true,
       colors: true,
     },
+    proxy: {
+      "/api/ws": {
+        target: 'ws://localhost:3000',
+        logLevel: 'debug',
+        ws: true,
+      },
+    },
   },
 };
 

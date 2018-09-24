@@ -51,8 +51,6 @@ class App extends Component {
   componentDidMount() {
     const socket = new WebSocket(location.href.replace(/^http/, 'ws') + 'api/ws');
 
-    //const socket = new WebSocket('ws://localhost:3000/ws');
-
     socket.onopen = () => this.state.socket = socket;
     socket.onclose = () => this.pushLog(JSON.stringify({app: 'UI', msg: 'WS connection closed'}));
     socket.onmessage = msg => this.pushLog(msg.data);

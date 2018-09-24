@@ -14,7 +14,7 @@
 3. `npm install` to install package dependencies
 4. `npm run bootstrap` to install dependencies for Lerna packages
 5. `npm run dev:services:run` to run Docker Compose with RabbitMQ and PostreSQL
-6. `./node_modules/.bin/lerna run dev` to start applications.
+6. `npm run dev` to start applications.
 7. `npm login` login into npm account with access to @etherisc organization private packages.
 7. `./node_modules/.bin/lerna publish` to publish packages to NPM
 

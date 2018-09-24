@@ -5,6 +5,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "dev:services:run": "docker-compose -f ./services/compose/docker-compose.yml up -d",
+    "dev": "lerna run dev --parallel",
     "lint": "eslint --ext js .",
     "docs": "esdoc",
     "test": "echo \"Test\""
