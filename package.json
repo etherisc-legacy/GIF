@@ -3,9 +3,12 @@
   "description": "Etherisc Decentralized Insurance Platform",
   "private": true,
   "scripts": {
+    "deploy": "./bin/run deploy",
     "bootstrap": "lerna bootstrap",
+    "migrate": "lerna run migrate --parallel",
     "dev:microservices": "lerna run dev --parallel",
     "dev:services:run": "docker-compose -f ./services/compose/docker-compose.yml up -d",
+    "dev:services:stop": "docker-compose -f ./services/compose/docker-compose.yml kill",
     "lint": "eslint --ext js .",
     "docs": "esdoc",
     "test": "echo \"Test\""

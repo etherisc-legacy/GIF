@@ -14,9 +14,10 @@
 3. `npm install` to install package dependencies
 4. `npm run bootstrap` to install dependencies for Lerna packages
 5. `npm run dev:services:run` to run Docker Compose with RabbitMQ and PostreSQL
-6. `npm run dev:microservices` to start applications.
-7. `npm login` login into npm account with access to @etherisc organization private packages.
-7. `./node_modules/.bin/lerna publish` to publish packages to NPM
+6. `npm run migrate` to run migrations.
+7. `npm run dev:microservices` to start applications.
+8. `npm login` login into npm account with access to @etherisc organization private packages.
+9. `./node_modules/.bin/lerna publish` to publish packages to NPM
 
 ### B. Setup local development e2e test environment
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Make sure `kubectl` is the latest version.
@@ -36,12 +37,16 @@
 
 4. `npm run bootstrap` to install dependencies for Lerna packages
 
-5. `./bin/rin deploy` to deploy to Minikube
+5. `./bin/run deploy` to deploy to Minikube
 
 #### Notes
-a. By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
+- By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
 
-b. To check whether the pods were created:
+- `etherisc_flight_delay_ui` is available on `<minikubeip>:80`.
+
+- `postgresql` is available on `<minikubeip>:30032`. Connections string `postgresql://dipadmin:dippassword@postgres:5432/dip`.
+
+- To check whether the pods were created:
 
 `kubectl get pods --show-labels`
 
@@ -49,7 +54,7 @@ b. To check whether the pods were created:
 
 `kubectl logs <pod name>`
 
-c. For the front-end services, the deployments should ideally be accompanied by services exposing node-ports outward. 
+- For the front-end services, the deployments should ideally be accompanied by services exposing node-ports outward. 
 But to forward the ports so deployment port interfaces are available from your local environment, run:
 
 `kubectl port-forward deployment/< DEPLOYMENT NAME> 8080:8080 8081:8081`
@@ -78,6 +83,7 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 #### Create Kubernetes cluster
 1. In GCP dashboard navigate to Kubernetes Engine > Clusters
 2. Create new cluster
+3. Create secrets using yaml files from `services/secrets`. To encode values use command `echo <password> | tr -d '\n' | base64`.
 
 #### Create authorization credentials for Bitbucket
 Create an App Engine service account and API key. Bitbucket needs this information to deploy to App Engine.

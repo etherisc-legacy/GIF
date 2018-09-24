@@ -20,6 +20,6 @@ services:
             POSTGRES_USER: postgresql
             POSTGRES_PASSWORD: postgresql
         volumes:
-            - ./postgresql/dev:/var/lib/postgresql
+            - ./postgresql:/var/lib/postgresql
         ports:
             - "5433:5432"

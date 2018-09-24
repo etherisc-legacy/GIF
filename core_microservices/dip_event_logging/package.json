@@ -1,0 +1,22 @@
+{
+  "name": "dip_event_logging",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "DATABASE_URL=${DATABASE_URL:-postgresql://postgresql:postgresql@localhost:5433/postgresql} node-pg-migrate up",
+    "dev": "nodemon -L --inspect=0.0.0.0:9229 bootstrap.js",
+    "prod": "node bootstrap.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.2",
+    "node-pg-migrate": "^3.11.0",
+    "pg": "^7.4.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
