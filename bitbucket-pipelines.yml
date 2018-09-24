@@ -5,6 +5,8 @@ pipelines:
   default:
   - step:
       name: Test
+      caches:
+        - node
       script:
       - npm install
       - npm run test
@@ -25,6 +27,7 @@ pipelines:
           services:
             - docker
           caches:
+            - node
             - docker
           script:
             # Install kubectl
