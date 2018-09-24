@@ -54,7 +54,9 @@ class Deploy extends Command {
       info: console.log, // eslint-disable-line
     };
 
-    const files = await glob(['**/k8s*.yaml', '!**/node_modules/**']);
+    const patterns = ['**/k8s*.yaml', '!**/node_modules/**'];
+    if (process.env.NODE_ENV === 'production') patterns.push('!**/secrets/**');
+    const files = await glob(patterns);
 
     const entities = {};
 
