@@ -32,7 +32,9 @@
     Note that the IP is new each time you restart minikube. You can get it at any time by running `minikube ip`.
     Keep it handy for all other ports we'll potentially expose later on in the process.
 3. `npm install` to install package dependencies
+
 4. `npm run bootstrap` to install dependencies for Lerna packages
+
 5. `./bin/rin deploy` to deploy to Minikube
 
 #### Notes
@@ -78,9 +80,13 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 
 ##### Creating authorization credentials for Bitbucket
 Create an App Engine service account and API key. Bitbucket needs this information to deploy to App Engine.
+
 1. In the Google Cloud Platform Console, go to the [Credentials](https://console.cloud.google.com/apis/credentials) page.
+
 2. Click Create credentials > Service account key.
+
 3. In the next page select Compute Engine default service account in the Service account dropdown.
+
 4. Click the Create button. A copy of the JSON file downloads to your computer. (This is your JSON credential file)
 
 ##### Configure the environment variables required by the pipeline script
