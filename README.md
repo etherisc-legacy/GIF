@@ -15,6 +15,7 @@
 4. `npm run bootstrap` to install dependencies for Lerna packages
 5. `npm run dev:system_microservices:run` to run Docker Compose with RabbitMQ and PostreSQL
 6. `npm run dev` to start applications.
+7. `npm login` login into npm account with access to @etherisc organization private packages.
 7. `./node_modules/.bin/lerna publish` to publish packages to NPM
 
 ### B. Setup local development e2e test environment
