@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "dev:microservices": "lerna run dev --parallel",
     "dev:services:run": "docker-compose -f ./services/compose/docker-compose.yml up -d",
-    "dev": "lerna run dev --parallel",
     "lint": "eslint --ext js .",
     "docs": "esdoc",
     "test": "echo \"Test\""
