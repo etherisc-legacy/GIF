@@ -19,11 +19,15 @@
 
 ### B. Setup local development e2e test environment
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Make sure `kubectl` is the latest version.
-2. Run Minikube:\
-    `minikube start` will start Minikube\
-    `minikube ip` will return local Minikube IP\
-    `minikube dashboard` will open Minikube dashboard for local Kubernetes cluster\
-    `minikube delete` will delete Minikube cluster\
+2. Run Minikube:
+
+    `minikube start` will start Minikube
+    
+    `minikube ip` will return local Minikube IP
+    
+    `minikube dashboard` will open Minikube dashboard for local Kubernetes cluster
+    
+    `minikube delete` will delete Minikube cluster
 
     Note that the IP is new each time you restart minikube. You can get it at any time by running `minikube ip`.
     Keep it handy for all other ports we'll potentially expose later on in the process.
@@ -32,17 +36,20 @@
 5. `./bin/rin deploy` to deploy to Minikube
 
 #### Notes
-a. By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`. \
-b. To check whether the pods were created:\
+a. By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
 
-`kubectl get pods --show-labels`\
-`kubectl describe pod <pod name>`\
-`kubectl logs <pod name>`\
+b. To check whether the pods were created:
+
+`kubectl get pods --show-labels`
+
+`kubectl describe pod <pod name>`
+
+`kubectl logs <pod name>`
 
 c. For the front-end services, the deployments should ideally be accompanied by services exposing node-ports outward. 
-But to forward the ports so deployment port interfaces are available from your local environment, run:\
+But to forward the ports so deployment port interfaces are available from your local environment, run:
 
-`kubectl port-forward deployment/< DEPLOYMENT NAME> 8080:8080 8081:8081`\
+`kubectl port-forward deployment/< DEPLOYMENT NAME> 8080:8080 8081:8081`
 
 Final param is a list of space-delimetered port pairs going local:minikube.
     
@@ -79,7 +86,7 @@ Create an App Engine service account and API key. Bitbucket needs this informati
 ##### Configure the environment variables required by the pipeline script
 Open up your terminal and browse to the location of your JSON credential file from earlier. Then run the command below to encode your file in base64 format. Copy the output of the command to your clipboard.
 
-`base64 <your-credentials-file.json>`\
+`base64 <your-credentials-file.json>`
 
 Go to your repository settings in Bitbucket and navigate to Pipelines > Environment variables. Create a new variable named GCLOUD_API_KEYFILE and paste the encoded service account credentials in it.
 
