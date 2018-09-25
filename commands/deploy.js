@@ -139,7 +139,8 @@ class Deploy extends Command {
             this.log.info('Push image to GCR');
             await this.execute(`docker push ${element.imageName}`);
           } else {
-            await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build -t ${element.imageName} .`);
+            const tag = element.imageName.replace('@', '');
+            await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build -t ${tag} .`);
           }
         }
 
