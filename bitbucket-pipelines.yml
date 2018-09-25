@@ -1,4 +1,4 @@
-image: node:9.9.0
+image: node:9.10.0
 
 
 pipelines:
@@ -7,19 +7,31 @@ pipelines:
       name: Test
       caches:
         - node
+      services:
+        - rabbitmq
+        - postgres
       script:
-      - npm install
-      - npm run test
+        - npm install
+        - npm run bootstrap
+        - npm run migrate
+        - npm run test
+        - npm run dev & (./node_modules/.bin/wait-on http://localhost:8080 && npm run test:e2e)
 
   custom:
     deploy-staging:
       - step:
           name: Test
+          caches:
+            - node
+          services:
+            - rabbitmq
+            - postgres
           script:
-          - export ENVIRONMENT=production
-          - npm install
-          - ./node_modules/.bin/lerna bootstrap
-          - npm run test
+            - npm install
+            - npm run bootstrap
+            - npm run migrate
+            - npm run test
+            - npm run dev & (./node_modules/.bin/wait-on http://localhost:8080 && npm run test:e2e)
       - step:
           name: Deploy to STAGING
           trigger: manual
@@ -62,4 +74,14 @@ definitions:
   services:
     docker:
       memory: 2048
-
+    rabbitmq:
+      image: rabbitmq:3.7.7
+      environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+    postgres:
+      image: postgres:10.5
+      environment:
+        POSTGRES_DB: postgresql
+        POSTGRES_USER: postgresql
+        POSTGRES_PASSWORD: postgresql

@@ -3,6 +3,25 @@
 ###### Documentation
 ![documentation-badge](https://img.shields.io/badge/Documentation-5.69%25%20%287%2F123%29-red.svg)
 
+###### Test coverage summary
+
+Module         | % Stmts       | % Branch      | % Funcs       | % Lines
+-------------- | --------------| --------------| --------------| --------------
+@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.02% (2/99) | 0% (0/24) | 3.23% (1/31) | 2.33% (2/86)
+@etherisc/etherisc_flight_delay_ui.v0.1.1 | 33.33% (11/33) | 0% (0/4) | 28.57% (4/14) | 39.29% (11/28)
+@etherisc/dip_ethereum_client.v0.1.1 | - | - | - | -
+dip_event_logging.v0.1.0 | - | - | - | -
+@etherisc/dip_fiat_payment_gateway.v0.1.1 | - | - | - | -
+@etherisc/dip_fiat_payout_gateway.v0.1.1 | - | - | - | -
+@etherisc/dip_pdf_generator.v1.0.1 | - | - | - | -
+@etherisc/dip_policy_storage.v0.1.1 | - | - | - | -
+@etherisc/test.v0.1.1 | - | - | - | -
+@etherisc/messages.v0.1.1 | - | - | - | -
+@etherisc/microservice.v0.1.1 | - | - | - | -
+[endOfCoverageTable]: #
+
+
+
 * [Contribution guidelines](CONTRIBUTION.md)
 * [License](LICENSE)
 
@@ -10,14 +29,14 @@
 
 ### A. Setup local development environment
 1. Install [Docker](https://docs.docker.com/install/#supported-platforms).
-2. Install [NodeJS](https://nodejs.org/en/). NodeJs version should be >=6 && < 10.
+2. Install [NodeJS](https://nodejs.org/en/). NodeJs version should be >=6 && <10.
 3. `npm install` to install package dependencies
 4. `npm run bootstrap` to install dependencies for Lerna packages
 5. `npm run dev:services:run` to run Docker Compose with RabbitMQ and PostreSQL
 6. `npm run migrate` to run migrations.
-7. `npm run dev:microservices` to start applications.
+7. `npm run dev` to start applications.
 8. `npm login` login into npm account with access to @etherisc organization private packages.
-9. `./node_modules/.bin/lerna publish` to publish packages to NPM
+9. `npm run publish` to update NPM packages
 
 ### B. Setup local development e2e test environment
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Make sure `kubectl` is the latest version.
@@ -68,9 +87,9 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 3. Create account / login to [Google Cloud Platform Console](https://console.cloud.google.com)
 4. In GCP dashboard navigate to Kubernetes Engine > Clusters and create new cluster
 5. Click "connect" button and run proposed command.
-3. `npm install` to install package dependencies
-4. `npm run bootstrap` to install dependencies for Lerna packages
-5. `GCLOUD_PROJECT=<project name> GCLOUD_CLUSTER=<cluster name> GLOUD_ZONE=<cluster zone> NODE_ENV=production ./bin/rin deploy` to deploy to GKE cluster
+6. `npm install` to install package dependencies
+7. `npm run bootstrap` to install dependencies for Lerna packages
+8. `GCLOUD_PROJECT=<project name> GCLOUD_CLUSTER=<cluster name> GLOUD_ZONE=<cluster zone> NODE_ENV=production ./bin/rin deploy` to deploy to GKE cluster
 
 ### D. Setup deployment to GKE clusters from Bitbucket Pipelines CI
 

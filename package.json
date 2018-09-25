@@ -2,16 +2,23 @@
   "name": "dip-platform",
   "description": "Etherisc Decentralized Insurance Platform",
   "private": true,
+  "engines": {
+    "node": ">=9.10.0 <10",
+    "npm": ">6"
+  },
   "scripts": {
     "deploy": "./bin/run deploy",
     "bootstrap": "lerna bootstrap",
     "migrate": "lerna run migrate --parallel",
-    "dev:microservices": "lerna run dev --parallel",
+    "dev": "lerna run dev --parallel",
     "dev:services:run": "docker-compose -f ./services/compose/docker-compose.yml up -d",
-    "dev:services:stop": "docker-compose -f ./services/compose/docker-compose.yml kill",
+    "dev:services:kill": "docker-compose -f ./services/compose/docker-compose.yml kill",
     "lint": "eslint --ext js .",
     "docs": "esdoc",
-    "test": "echo \"Test\""
+    "test:e2e": "NODE_ENV=test mocha",
+    "test": "lerna run test",
+    "coverage": "lerna run coverage",
+    "publish": "lerna publish"
   },
   "files": [
     "*"
@@ -23,26 +30,33 @@
     ]
   },
   "devDependencies": {
+    "amqplib": "^0.5.2",
+    "app-module-path": "^2.2.0",
     "babel-eslint": "^9.0.0",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-jsx-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^5.5.0",
+    "eslint": "^5.6.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "lerna": "^3.2.1"
+    "lerna": "^3.4.0",
+    "mocha": "^5.2.0",
+    "should": "^13.2.3",
+    "should-sinon": "0.0.6",
+    "sinon": "^6.3.4",
+    "wait-on": "^3.0.1",
+    "ws": "^6.0.0"
   },
   "dependencies": {
-    "@oclif/command": "^1.5.0",
-    "@oclif/config": "^1.7.4",
-    "@oclif/plugin-help": "^2.1.1",
+    "@oclif/command": "^1.5.1",
+    "@oclif/config": "^1.7.6",
+    "@oclif/plugin-help": "^2.1.2",
     "@rauschma/stringio": "^1.4.0",
     "fast-glob": "^2.2.2",
     "js-yaml": "^3.12.0",
-    "kubernetes-client": "^6.1.0",
     "lodash": "^4.17.11",
     "uuid": "^3.3.2"
   }

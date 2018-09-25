@@ -75,7 +75,7 @@ class GenericInsurance {
       });
 
       if (message.fields.routingKey === 'policy.state_changed.v1') {
-        this._app.onLogStateContractEvent(message.properties.correlationId, {
+        this._app.onLogSetState(message.properties.correlationId, {
           state: JSON.parse(message.content.toString()).state,
         });
       }
