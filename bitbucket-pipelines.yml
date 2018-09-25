@@ -11,10 +11,11 @@ pipelines:
         - rabbitmq
         - postgres
       script:
-      - npm install
-      - npm run bootstrap
-      - npm run test
-      - npm run test:e2e
+        - npm install
+        - npm run bootstrap
+        - npm run test
+        - npm run dev
+        - npm run test:e2e
 
   custom:
     deploy-staging:
