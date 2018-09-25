@@ -12,6 +12,7 @@ pipelines:
         - postgres
       script:
         - npm install
+        - npm run lint
         - npm run bootstrap
         - npm run migrate
         - npm run test
@@ -28,6 +29,7 @@ pipelines:
             - postgres
           script:
             - npm install
+            - npm run lint
             - npm run bootstrap
             - npm run migrate
             - npm run test
