@@ -1,7 +1,7 @@
 # DIP Platform Readme
 
 ###### Documentation
-![documentation-badge](https://img.shields.io/badge/Documentation-5.69%25%20%287%2F123%29-red.svg)
+![documentation-badge](https://img.shields.io/badge/Documentation-58.51%25%20%2879%2F135%29-yellow.svg)
 
 ###### Test coverage summary
 

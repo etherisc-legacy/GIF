@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">dip-platform/commands/deploy.js | dip-platform</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Etherisc Decentralized Insurance Platform"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="dip-platform"><meta property="twitter:description" content="Etherisc Decentralized Insurance Platform"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app-microservices-etherisc-flight-delay-api">app_microservices/etherisc_flight_delay_api</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js~FlightDelayInsurance.html">FlightDelayInsurance</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html">GenericInsurance</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app-microservices-etherisc-flight-delay-ui">app_microservices/etherisc_flight_delay_ui</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-config">config</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app-microservices-etherisc-flight-delay-ui-src-containers-root">app_microservices/etherisc_flight_delay_ui/src/containers/Root</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/Root/index.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#commands">commands</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/commands/collectCoverage.js~CollectCoverage.html">CollectCoverage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/commands/deploy.js~Deploy.html">Deploy</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-ethereum-client">core_microservices/dip_ethereum_client</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient.html">DipEtheremClient</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-event-logging">core_microservices/dip_event_logging</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html">DipEventLogging</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-fiat-payment-gateway">core_microservices/dip_fiat_payment_gateway</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway.html">DipFiatPaymentGateway</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-fiat-payout-gateway">core_microservices/dip_fiat_payout_gateway</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway.html">DipFiatPayoutGateway</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-pdf-generator">core_microservices/dip_pdf_generator</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_pdf_generator/DipPdfGenerator.js~DipPdfGenerator.html">DipPdfGenerator</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-policy-storage">core_microservices/dip_policy_storage</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html">DipPolicyStorage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html">DipPolicyStorage</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-messages-types">shared/etherisc-messages/types</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-test">test</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-schemaVersions">schemaVersions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice">shared/etherisc-microservice</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html">DipMicroservice</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dipMicroservice">dipMicroservice</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice-io">shared/etherisc-microservice/io</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-module">module</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice-io-amqp">shared/etherisc-microservice/io/amqp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html">Amqp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice-io-http">shared/etherisc-microservice/io/http</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-exceptionHandler">exceptionHandler</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice-io-http-routes">shared/etherisc-microservice/io/http/routes</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-healthCheck">healthCheck</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">dip-platform/commands/deploy.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">const { Command } = require(&apos;@oclif/command&apos;);
+const { EOL } = require(&apos;os&apos;);
+const fs = require(&apos;fs&apos;);
+const path = require(&apos;path&apos;);
+const { exec, execSync } = require(&apos;child_process&apos;);
+const glob = require(&apos;fast-glob&apos;);
+const yaml = require(&apos;js-yaml&apos;);
+const uuid = require(&apos;uuid/v1&apos;);
+
+
+const PROD = process.env.NODE_ENV === &apos;production&apos;;
+
+/**
+ * Deploy to k8s command
+ */
+class Deploy extends Command {
+  /**
+   * Promisified exec
+   * @param {string} cmd
+   * @return {Promise}
+   */
+  execute(cmd) {
+    return new Promise((resolve, reject) =&gt; {
+      this.log.info(`Run: ${cmd}`);
+
+      const sh = exec(cmd, (err, stdout, stderr) =&gt; {
+        if (err) {
+          const error = new Error(err);
+          error.stdout = stdout;
+          error.stderr = stderr;
+
+          this.log.info(stdout);
+          reject(err);
+          return;
+        }
+
+        resolve({ stdout, stderr });
+      });
+
+      sh.stdout.on(&apos;data&apos;, this.log.info);
+    });
+  }
+
+  /**
+   * Run deploy command
+   * @return {Promise&lt;void&gt;}
+   */
+  async run() {
+    if (PROD &amp;&amp; !process.env.GCLOUD_CLUSTER) throw new Error(&apos;GKE cluster should be specified&apos;);
+    if (PROD &amp;&amp; !process.env.GCLOUD_PROJECT) throw new Error(&apos;GKE project should be specified&apos;);
+    if (PROD &amp;&amp; !process.env.GCLOUD_ZONE) throw new Error(&apos;GKE zone should be specified&apos;);
+
+    this.log = {
+      info: console.log, // eslint-disable-line
+    };
+
+    const patterns = [
+      &apos;**/k8s*.yaml&apos;,
+      &apos;!**/node_modules/**&apos;,
+      PROD &amp;&amp; &apos;!**/secrets/**&apos;,
+    ].filter(Boolean);
+
+    const files = await glob(patterns);
+
+    const entities = {};
+
+    files.forEach((file) =&gt; {
+      const fileContent = fs.readFileSync(file, &apos;utf8&apos;);
+
+      const list = yaml.safeLoadAll(fileContent);
+
+      list.forEach((element) =&gt; {
+        if (!entities[element.kind]) entities[element.kind] = [];
+
+        const entity = {};
+
+        const filePathParts = file.split(&apos;/&apos;);
+
+        if (/&lt;!--image--&gt;/.test(JSON.stringify(element))) {
+          const dockerfilePath = path.join(...filePathParts.slice(0, -2));
+          const packageJsonfile = path.join(...filePathParts.slice(0, -2), &apos;package.json&apos;);
+
+          const packageJson = require(path.join(process.cwd(), packageJsonfile));
+
+          let imageName;
+          if (process.env.NODE_ENV !== &apos;production&apos;) {
+            imageName = `${packageJson.name}:${uuid()}`;
+          } else {
+            const commitHash = execSync(&apos;git rev-parse HEAD&apos;).toString().trim();
+            imageName = `gcr.io/${process.env.GCLOUD_PROJECT}/${packageJson.name}:${commitHash}`;
+          }
+
+          entity.dockerfilePath = path.join(process.cwd(), dockerfilePath);
+          entity.imageName = imageName;
+          entity.name = packageJson.name;
+          entity.version = packageJson.version;
+          entity.config = JSON.parse(JSON.stringify(element).replace(&apos;&lt;!--image--&gt;&apos;, imageName));
+          entity.config.metadata.labels.version = packageJson.version;
+        } else {
+          entity.config = element;
+        }
+
+        entities[element.kind].push(entity);
+      });
+    });
+
+
+    if (process.env.NODE_ENV === &apos;production&apos;) {
+      await this.execute(`kubectl config use-context gke_${process.env.GCLOUD_PROJECT}_${process.env.GCLOUD_ZONE}_${process.env.GCLOUD_CLUSTER}`);
+
+      try {
+        await this.execute(&apos;kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account)&apos;);
+      } catch (e) {
+        this.log.info(&apos;cluster-admin-binding already exists&apos;);
+      }
+    } else {
+      await this.execute(&apos;kubectl config use-context minikube&apos;);
+      await this.execute(&apos;minikube addons enable ingress&apos;);
+    }
+
+    const groups = Object.keys(entities);
+
+    for (let i = 0; i &lt; groups.length; i += 1) {
+      const group = groups[i];
+
+      this.log.info(`${EOL}${i + 1}. ${group}`);
+
+      for (let j = 0; j &lt; entities[group].length; j += 1) {
+        const element = entities[group][j];
+
+        this.log.info(`${EOL}Apply ${group} ${element.config.metadata.name}`);
+
+        if (element.dockerfilePath) {
+          this.log.info(`Start Docker build for ${element.imageName}`);
+
+          if (PROD) {
+            await this.execute(`cd ${element.dockerfilePath}; docker build -t ${element.imageName} .`);
+
+            this.log.info(&apos;Push image to GCR&apos;);
+            await this.execute(`docker push ${element.imageName}`);
+          } else {
+            const tag = element.imageName.replace(&apos;@&apos;, &apos;&apos;);
+            await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build -t ${tag} .`);
+          }
+        }
+
+        const file = path.join(process.cwd(), `tempfile-${group}-${element.config.metadata.name}.yaml`);
+
+        fs.writeFileSync(file, yaml.safeDump(element.config));
+        await this.execute(`kubectl apply -f ${file}`);
+        fs.unlinkSync(file);
+      }
+    }
+  }
+}
+
+Deploy.description = &apos;Deploy to Kubernetes cluster command&apos;;
+
+module.exports = Deploy;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

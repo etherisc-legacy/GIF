@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="">
+  <title data-ice="title">Source | dip-platform</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Etherisc Decentralized Insurance Platform"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="dip-platform"><meta property="twitter:description" content="Etherisc Decentralized Insurance Platform"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app-microservices-etherisc-flight-delay-api">app_microservices/etherisc_flight_delay_api</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js~FlightDelayInsurance.html">FlightDelayInsurance</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html">GenericInsurance</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app-microservices-etherisc-flight-delay-ui">app_microservices/etherisc_flight_delay_ui</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-config">config</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#app-microservices-etherisc-flight-delay-ui-src-containers-root">app_microservices/etherisc_flight_delay_ui/src/containers/Root</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/Root/index.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#commands">commands</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/commands/collectCoverage.js~CollectCoverage.html">CollectCoverage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/commands/deploy.js~Deploy.html">Deploy</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-ethereum-client">core_microservices/dip_ethereum_client</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient.html">DipEtheremClient</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-event-logging">core_microservices/dip_event_logging</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html">DipEventLogging</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-fiat-payment-gateway">core_microservices/dip_fiat_payment_gateway</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway.html">DipFiatPaymentGateway</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-fiat-payout-gateway">core_microservices/dip_fiat_payout_gateway</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway.html">DipFiatPayoutGateway</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-pdf-generator">core_microservices/dip_pdf_generator</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_pdf_generator/DipPdfGenerator.js~DipPdfGenerator.html">DipPdfGenerator</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core-microservices-dip-policy-storage">core_microservices/dip_policy_storage</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html">DipPolicyStorage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html">DipPolicyStorage</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-messages-types">shared/etherisc-messages/types</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-test">test</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-schemaVersions">schemaVersions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice">shared/etherisc-microservice</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html">DipMicroservice</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-dipMicroservice">dipMicroservice</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice-io">shared/etherisc-microservice/io</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-module">module</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice-io-amqp">shared/etherisc-microservice/io/amqp</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html">Amqp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice-io-http">shared/etherisc-microservice/io/http</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-exceptionHandler">exceptionHandler</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-etherisc-microservice-io-http-routes">shared/etherisc-microservice/io/http/routes</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-healthCheck">healthCheck</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">79/135</span></h1>
+
+<table class="files-summary" data-ice="files" data-use-coverage="true">
+  <thead>
+    <tr>
+      <td>File</td>
+      <td>Identifier</td>
+      <td class="coverage">Document</td>
+      <td style="display: none;">Size</td>
+      <td style="display: none;">Lines</td>
+      <td style="display: none;">Updated</td>
+    </tr>
+  </thead>
+  <tbody>
+    
+  <tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js.html#errorLines=9">dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js~FlightDelayInsurance.html">FlightDelayInsurance</a></span></td>
+      <td class="coverage"><span data-ice="coverage">93 %</span><span data-ice="coverageCount" class="coverage-count">14/15</span></td>
+      <td style="display: none;" data-ice="size">3713 byte</td>
+      <td style="display: none;" data-ice="lines">157</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:32:34 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js.html#errorLines=29,30,45,49,51,53,7">dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html">GenericInsurance</a></span></td>
+      <td class="coverage"><span data-ice="coverage">63 %</span><span data-ice="coverageCount" class="coverage-count">12/19</span></td>
+      <td style="display: none;" data-ice="size">6326 byte</td>
+      <td style="display: none;" data-ice="lines">254</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 16:21:54 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/app_microservices/etherisc_flight_delay_api/bootstrap.js.html#errorLines=5,6">dip-platform/app_microservices/etherisc_flight_delay_api/bootstrap.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">364 byte</td>
+      <td style="display: none;" data-ice="lines">11</td>
+      <td style="display: none;" data-ice="updated">2018-09-06 09:13:50 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/app_microservices/etherisc_flight_delay_ui/internals/enzyme-setup.js.html">dip-platform/app_microservices/etherisc_flight_delay_ui/internals/enzyme-setup.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">124 byte</td>
+      <td style="display: none;" data-ice="lines">5</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/app_microservices/etherisc_flight_delay_ui/src/bootstrap/index.js.html">dip-platform/app_microservices/etherisc_flight_delay_ui/src/bootstrap/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">1/1</span></td>
+      <td style="display: none;" data-ice="size">224 byte</td>
+      <td style="display: none;" data-ice="lines">13</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 16:00:20 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/Root/index.js.html#errorLines=60">dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/Root/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/Root/index.js~App.html">App</a></span></td>
+      <td class="coverage"><span data-ice="coverage">88 %</span><span data-ice="coverageCount" class="coverage-count">8/9</span></td>
+      <td style="display: none;" data-ice="size">5309 byte</td>
+      <td style="display: none;" data-ice="lines">226</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 16:13:01 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/app_microservices/etherisc_flight_delay_ui/src/root.js.html">dip-platform/app_microservices/etherisc_flight_delay_ui/src/root.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">145 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:23:53 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/app_microservices/etherisc_flight_delay_ui/webpack.config.js.html#errorLines=16,6">dip-platform/app_microservices/etherisc_flight_delay_ui/webpack.config.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-config">config</a></span></td>
+      <td class="coverage"><span data-ice="coverage">33 %</span><span data-ice="coverageCount" class="coverage-count">1/3</span></td>
+      <td style="display: none;" data-ice="size">2892 byte</td>
+      <td style="display: none;" data-ice="lines">137</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:58:37 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/commands/collectCoverage.js.html">dip-platform/commands/collectCoverage.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/commands/collectCoverage.js~CollectCoverage.html">CollectCoverage</a></span></td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">3/3</span></td>
+      <td style="display: none;" data-ice="size">2197 byte</td>
+      <td style="display: none;" data-ice="lines">72</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:57:53 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/commands/deploy.js.html#errorLines=11,53">dip-platform/commands/deploy.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/commands/deploy.js~Deploy.html">Deploy</a></span></td>
+      <td class="coverage"><span data-ice="coverage">60 %</span><span data-ice="coverageCount" class="coverage-count">3/5</span></td>
+      <td style="display: none;" data-ice="size">4971 byte</td>
+      <td style="display: none;" data-ice="lines">159</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:58:18 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js.html#errorLines=27,28,4">dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient.html">DipEtheremClient</a></span></td>
+      <td class="coverage"><span data-ice="coverage">57 %</span><span data-ice="coverageCount" class="coverage-count">4/7</span></td>
+      <td style="display: none;" data-ice="size">3124 byte</td>
+      <td style="display: none;" data-ice="lines">101</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:55:55 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_ethereum_client/bootstrap.js.html#errorLines=4">dip-platform/core_microservices/dip_ethereum_client/bootstrap.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">208 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js.html#errorLines=29,32,33,5">dip-platform/core_microservices/dip_event_logging/DipEventLogging.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html">DipEventLogging</a></span></td>
+      <td class="coverage"><span data-ice="coverage">42 %</span><span data-ice="coverageCount" class="coverage-count">3/7</span></td>
+      <td style="display: none;" data-ice="size">1439 byte</td>
+      <td style="display: none;" data-ice="lines">59</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:54:52 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_event_logging/bootstrap.js.html#errorLines=4">dip-platform/core_microservices/dip_event_logging/bootstrap.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">316 byte</td>
+      <td style="display: none;" data-ice="lines">9</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js.html#errorLines=27,28,4">dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway.html">DipFiatPaymentGateway</a></span></td>
+      <td class="coverage"><span data-ice="coverage">57 %</span><span data-ice="coverageCount" class="coverage-count">4/7</span></td>
+      <td style="display: none;" data-ice="size">1679 byte</td>
+      <td style="display: none;" data-ice="lines">67</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:53:59 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_fiat_payment_gateway/bootstrap.js.html#errorLines=4">dip-platform/core_microservices/dip_fiat_payment_gateway/bootstrap.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">229 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js.html#errorLines=27,28,4">dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway.html">DipFiatPayoutGateway</a></span></td>
+      <td class="coverage"><span data-ice="coverage">57 %</span><span data-ice="coverageCount" class="coverage-count">4/7</span></td>
+      <td style="display: none;" data-ice="size">1784 byte</td>
+      <td style="display: none;" data-ice="lines">70</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:52:54 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_fiat_payout_gateway/bootstrap.js.html#errorLines=4">dip-platform/core_microservices/dip_fiat_payout_gateway/bootstrap.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">224 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_pdf_generator/DipPdfGenerator.js.html#errorLines=27,28,4">dip-platform/core_microservices/dip_pdf_generator/DipPdfGenerator.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/core_microservices/dip_pdf_generator/DipPdfGenerator.js~DipPdfGenerator.html">DipPdfGenerator</a></span></td>
+      <td class="coverage"><span data-ice="coverage">57 %</span><span data-ice="coverageCount" class="coverage-count">4/7</span></td>
+      <td style="display: none;" data-ice="size">1869 byte</td>
+      <td style="display: none;" data-ice="lines">77</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:51:44 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_pdf_generator/bootstrap.js.html#errorLines=4">dip-platform/core_microservices/dip_pdf_generator/bootstrap.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">199 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js.html#errorLines=12,13">dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html">DipPolicyStorage</a></span></td>
+      <td class="coverage"><span data-ice="coverage">66 %</span><span data-ice="coverageCount" class="coverage-count">4/6</span></td>
+      <td style="display: none;" data-ice="size">1515 byte</td>
+      <td style="display: none;" data-ice="lines">55</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:50:14 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js.html#errorLines=11,12,22">dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html">DipPolicyStorage</a></span></td>
+      <td class="coverage"><span data-ice="coverage">57 %</span><span data-ice="coverageCount" class="coverage-count">4/7</span></td>
+      <td style="display: none;" data-ice="size">1406 byte</td>
+      <td style="display: none;" data-ice="lines">50</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:43:26 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_policy_storage/bootstrap.js.html#errorLines=4">dip-platform/core_microservices/dip_policy_storage/bootstrap.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">204 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/core_microservices/dip_policy_storage/bootstrap1.js.html">dip-platform/core_microservices/dip_policy_storage/bootstrap1.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">227 byte</td>
+      <td style="display: none;" data-ice="lines">8</td>
+      <td style="display: none;" data-ice="updated">2018-09-06 09:13:50 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-messages/index.js.html#errorLines=6">dip-platform/shared/etherisc-messages/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">80 %</span><span data-ice="coverageCount" class="coverage-count">4/5</span></td>
+      <td style="display: none;" data-ice="size">1539 byte</td>
+      <td style="display: none;" data-ice="lines">66</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:41:15 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-messages/types/index.js.html#errorLines=21">dip-platform/shared/etherisc-messages/types/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-test">test</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">539 byte</td>
+      <td style="display: none;" data-ice="lines">21</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:37:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-messages/types/test.js.html#errorLines=1">dip-platform/shared/etherisc-messages/types/test.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-schemaVersions">schemaVersions</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">174 byte</td>
+      <td style="display: none;" data-ice="lines">11</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-microservice/index.js.html#errorLines=15,25,27,4,56">dip-platform/shared/etherisc-microservice/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html">DipMicroservice</a></span>
+<span><a href="variable/index.html#static-variable-dipMicroservice">dipMicroservice</a></span></td>
+      <td class="coverage"><span data-ice="coverage">37 %</span><span data-ice="coverageCount" class="coverage-count">3/8</span></td>
+      <td style="display: none;" data-ice="size">1239 byte</td>
+      <td style="display: none;" data-ice="lines">56</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:32:28 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-microservice/io/amqp/index.js.html#errorLines=13">dip-platform/shared/etherisc-microservice/io/amqp/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html">Amqp</a></span></td>
+      <td class="coverage"><span data-ice="coverage">66 %</span><span data-ice="coverageCount" class="coverage-count">2/3</span></td>
+      <td style="display: none;" data-ice="size">344 byte</td>
+      <td style="display: none;" data-ice="lines">17</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 15:33:57 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-microservice/io/http/exceptionHandler.js.html#errorLines=1">dip-platform/shared/etherisc-microservice/io/http/exceptionHandler.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-exceptionHandler">exceptionHandler</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">285 byte</td>
+      <td style="display: none;" data-ice="lines">13</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-microservice/io/http/index.js.html#errorLines=10,11">dip-platform/shared/etherisc-microservice/io/http/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">573 byte</td>
+      <td style="display: none;" data-ice="lines">24</td>
+      <td style="display: none;" data-ice="updated">2018-09-02 15:50:28 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-microservice/io/http/routes/healthCheck.js.html#errorLines=1">dip-platform/shared/etherisc-microservice/io/http/routes/healthCheck.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-healthCheck">healthCheck</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">56 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2018-09-02 15:50:28 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-microservice/io/log/index.js.html">dip-platform/shared/etherisc-microservice/io/log/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">65 byte</td>
+      <td style="display: none;" data-ice="lines">4</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:50:30 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/dip-platform/shared/etherisc-microservice/io/module.js.html#errorLines=6">dip-platform/shared/etherisc-microservice/io/module.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-module">module</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">183 byte</td>
+      <td style="display: none;" data-ice="lines">11</td>
+      <td style="display: none;" data-ice="updated">2018-09-03 14:33:38 (UTC)</td>
+    </tr>
+</tbody>
+</table>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

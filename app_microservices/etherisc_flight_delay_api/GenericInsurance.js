@@ -56,8 +56,8 @@ class GenericInsurance {
   /**
    * Bootstrap and listen
    * @param {string} amqpBroker
-   * @param {number} wsPort
-   * @return {Promise<void>}
+   * @param {string} wsPort
+   * @return {*}
    */
   async listen({ amqpBroker, wsPort }) {
     const conn = await amqp.connect(amqpBroker);
