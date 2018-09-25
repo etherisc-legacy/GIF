@@ -13,8 +13,9 @@ pipelines:
       script:
         - npm install
         - npm run bootstrap
+        - npm run migrate
         - npm run test
-        - npm run dev & wait:then:test:e2e
+        - npm run dev & (./node_modules/.bin/wait-on http://localhost:8080 && npm run test:e2e)
 
   custom:
     deploy-staging:
