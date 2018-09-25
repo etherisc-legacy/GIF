@@ -18,7 +18,8 @@
     "test:e2e": "NODE_ENV=test mocha",
     "test": "lerna run test",
     "coverage": "lerna run coverage",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "wait:then:test": "wait-on http://localhost:8080 && npm run test:e2e"
   },
   "files": [
     "*"
@@ -47,6 +48,7 @@
     "should": "^13.2.3",
     "should-sinon": "0.0.6",
     "sinon": "^6.3.4",
+    "wait-on": "^3.0.1",
     "ws": "^6.0.0"
   },
   "dependencies": {
