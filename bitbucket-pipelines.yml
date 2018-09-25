@@ -7,10 +7,14 @@ pipelines:
       name: Test
       caches:
         - node
+      services:
+        - rabbitmq
+        - postgres
       script:
       - npm install
       - npm run bootstrap
       - npm run test
+      - npm run test:e2e
 
   custom:
     deploy-staging:
@@ -63,4 +67,17 @@ definitions:
   services:
     docker:
       memory: 2048
-
+    rabbitmq:
+      image: rabbitmq:3.7.7
+      environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+      ports:
+        - 5672:5672
+    postgres:
+      image: postgres:10.5
+      environment:
+        POSTGRES_USER: postgresql
+        POSTGRES_PASSWORD: postgresql
+      ports:
+      - 5433:5432
