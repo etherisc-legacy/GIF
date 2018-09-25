@@ -1,12 +1,26 @@
 const ioModule = require('./io/module');
+
+
 const ioDeps = ioModule();
 
-
+/**
+ * Dip Microservice
+ */
 class DipMicroservice {
+  /**
+   * Constructor
+   * @param {*} io
+   */
   constructor(io) {
     this.io = io;
   }
 
+  /**
+   * Bootstrap and run
+   * @param {class} Microservice
+   * @param {{}} config
+   * @return {Promise<void>}
+   */
   async bootstrap(Microservice, config) {
     this.config = config;
 
@@ -30,8 +44,8 @@ class DipMicroservice {
           const name = `${process.env.npm_package_name}.v${process.env.npm_package_version}`;
           this.io.log.info(`Microservice ${name} is listening http at http://localhost:${this.config.httpPort}`);
           resolve();
-        })
-      })
+        });
+      });
     } catch (err) {
       this.log.error(err);
       throw new Error(err);

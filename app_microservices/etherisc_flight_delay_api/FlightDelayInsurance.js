@@ -57,45 +57,76 @@ class FlightDelayInsurance {
 
     // SendFailed
     if (payload.state === 6) return this.onPolicySendFailedState(policyId, payload);
+
+    return null;
   }
 
   /**
    * Policy state handlers
    */
-  onPolicyAppliedState(policyId, payload) {
+
+  /**
+   * Handle applied policy state
+   * @param {string} policyId
+   */
+  onPolicyAppliedState(policyId) {
     // Policy applied
     this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} applied` });
   }
 
-  onPolicyAcceptedState(policyId, payload) {
+  /**
+   * Handle accepted policy state
+   * @param {string} policyId
+   */
+  onPolicyAcceptedState(policyId) {
     // Policy accepted
     this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} underwritten by oracle` });
 
     this.dip.chargeCard(policyId);
   }
 
-  onPolicyRevoked(policyId, payload) {
+  /**
+   * Handle revoked policy state
+   * @param {string} policyId
+   */
+  onPolicyRevoked(policyId) {
     // Policy revoked
     this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} revoked` });
   }
 
-  onPolicyPaidOutState(policyId, payload) {
+  /**
+   * Handle paidOut policy state
+   * @param {string} policyId
+   */
+  onPolicyPaidOutState(policyId) {
     // Policy paidout
     this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} for payout` });
     this.dip.payout(policyId);
   }
 
-  onPolicyExpiredState(policyId, payload) {
+  /**
+   * Handle expired policy state
+   * @param {string} policyId
+   */
+  onPolicyExpiredState(policyId) {
     // Policy expired
     this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} expired` });
   }
 
-  onPolicyDeclinedState(policyId, payload) {
+  /**
+   * Handle declined policy state
+   * @param {string} policyId
+   */
+  onPolicyDeclinedState(policyId) {
     // Policy declined
     this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} declined` });
   }
 
-  onPolicySendFailedState(policyId, payload) {
+  /**
+   * Handle send failed policy state
+   * @param {string} policyId
+   */
+  onPolicySendFailedState(policyId) {
     // Policy send failed
     this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} send failed` });
 
@@ -105,11 +136,20 @@ class FlightDelayInsurance {
   /**
    * App logic
    */
-  onCardCharged(policyId, payload) {
+
+  /**
+   * On card charged event handler
+   * @param {string} policyId
+   */
+  onCardCharged(policyId) {
     this.dip.issueCertificate(policyId);
   }
 
-  onCertificateIssued(policyId, payload) {
+  /**
+   * On certificated issued event handler
+   * @param {string} policyId
+   */
+  onCertificateIssued(policyId) {
     this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} accepted` });
   }
 }

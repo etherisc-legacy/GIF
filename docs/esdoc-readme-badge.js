@@ -3,16 +3,27 @@ const os = require('os');
 const path = require('path');
 
 
+/**
+ * Encode URI with strict rules
+ * @param {string} str
+ * @return {string}
+ */
 const strictEncodeURIComponent = str => encodeURIComponent(str)
   .replace(/[!'()*]/g, c => `%${c.charCodeAt(0).toString(16)}`);
 
+/**
+ * Provides metric level based on it's value
+ * @param {number} value
+ * @param {number} range
+ * @return {string}
+ */
 const getLevel = (value, range) => {
   if (value >= range[1]) return 'high';
   if (value >= range[0]) return 'medium';
   return 'low';
 };
 
-module.exports.onComplete = (ev) => {
+module.exports.onComplete = () => {
   const readmeFile = path.join(process.cwd(), 'README.md');
 
   if (!fs.existsSync(readmeFile)) return;
@@ -36,14 +47,14 @@ module.exports.onComplete = (ev) => {
   const base = 'https://img.shields.io/badge/';
   const caption = 'Documentation';
   const value = strictEncodeURIComponent(`${coverage} (${actualCount}/${expectCount})`);
-  const level = getLevel(parseInt(coverage), levelRange);
+  const level = getLevel(parseInt(coverage, 10), levelRange);
   const color = colors[level];
 
   const badge = `${base}${caption}-${value}-${color}.svg`;
 
   const badgeMd = `![documentation-badge](${badge})`;
 
-  const re = new RegExp(`!\\[documentation-badge\\]\\([^)]+\\)`, 'gi');
+  const re = new RegExp('!\\[documentation-badge\\]\\([^)]+\\)', 'gi');
 
   const updatedReadmeContent = re.test(readmeContent) ? readmeContent.replace(re, badgeMd) : `${badgeMd}${os.EOL}${readmeContent}`;
 

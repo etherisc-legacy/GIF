@@ -1,4 +1,4 @@
 module.exports = {
-    port: 8082,
-    broker: 'amqp://localhost:5672'
+  port: 8082,
+  broker: 'amqp://localhost:5672',
 };

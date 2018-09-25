@@ -3,11 +3,15 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
-const DEV = process.env.NODE_ENV === 'development';
 const PROD = process.env.NODE_ENV === 'production';
 
-const addHash = (template, hash) =>
-  template.replace(/\.[^.]+$/, `.[${hash}]$&`);
+/**
+ * Append hash suffix
+ * @param {string} template
+ * @param {string} hash
+ * @return {*}
+ */
+const addHash = (template, hash) => template.replace(/\.[^.]+$/, `.[${hash}]$&`);
 
 const config = {
   mode: PROD ? 'production' : 'development',
@@ -121,7 +125,7 @@ const config = {
       colors: true,
     },
     proxy: {
-      "/api/ws": {
+      '/api/ws': {
         target: 'ws://localhost:3000',
         logLevel: 'debug',
         ws: true,

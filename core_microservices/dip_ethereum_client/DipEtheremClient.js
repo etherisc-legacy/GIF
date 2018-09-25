@@ -1,5 +1,6 @@
 const amqp = require('amqplib');
 
+
 const shared = {
   exhanges: {
     policy: 'POLICY',
@@ -14,13 +15,23 @@ const shared = {
   },
 };
 
-
+/**
+ * DIP Ethereum Client microservice
+ */
 class DipEtheremClient {
+  /**
+   * Constructor
+   * @param {string} amqpBroker
+   */
   constructor({ amqpBroker }) {
     this._amqpBroker = amqpBroker;
     this._amqp = null;
   }
 
+  /**
+   * Bootstap and listen
+   * @return {Promise<void>}
+   */
   async listen() {
     const conn = await amqp.connect(this._amqpBroker);
 
@@ -34,6 +45,11 @@ class DipEtheremClient {
     await this._amqp.consume(q.queue, this.createTransaction.bind(this), { noAck: true });
   }
 
+  /**
+   * Handle successed policy creation message
+   * @param {{}} message
+   * @return {Promise<void>}
+   */
   async createTransaction(message) {
     // const { routingKey } = message.fields;
     // const content = message.content.toString();
@@ -41,7 +57,7 @@ class DipEtheremClient {
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.transaction_created.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId})), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.transaction_created.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,
@@ -52,7 +68,7 @@ class DipEtheremClient {
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 0})), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 0 })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,
@@ -62,7 +78,7 @@ class DipEtheremClient {
 
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 1})), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 1 })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,
@@ -72,7 +88,7 @@ class DipEtheremClient {
 
     await new Promise(resolve => setTimeout(resolve, 10000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 3})), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 3 })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,

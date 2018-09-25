@@ -46,7 +46,7 @@ describe('Etherisc Flight Delay API', () => {
           content: JSON.parse(message.content.toString()),
         };
 
-        console.log(data);
+        console.log(data); // eslint-disable-line
         messages.push(data);
       }, { noAck: true });
 

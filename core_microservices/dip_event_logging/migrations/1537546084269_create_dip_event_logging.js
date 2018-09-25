@@ -1,9 +1,9 @@
-exports.up = pgm => {
+exports.up = (pgm) => {
   pgm.createTable('dip_event_logging', {
     id: 'id',
-    properties: {type: 'json', notNull: true},
-    fields: {type: 'json', notNull: true},
-    content: {type: 'json', notNull: true},
+    properties: { type: 'json', notNull: true },
+    fields: { type: 'json', notNull: true },
+    content: { type: 'json', notNull: true },
     createdAt: {
       type: 'timestamp',
       notNull: true,
@@ -14,6 +14,6 @@ exports.up = pgm => {
   });
 };
 
-exports.down = pgm => {
+exports.down = (pgm) => {
   pgm.dropTable('dip_event_logging');
 };

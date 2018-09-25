@@ -1,5 +1,6 @@
-const {Pool, Client} = require('pg');
+const { Pool } = require('pg');
 const amqp = require('amqplib');
+
 
 const shared = {
   exhanges: {
@@ -15,8 +16,16 @@ const shared = {
   },
 };
 
+/**
+ * DIP Event Logging microservice
+ */
 class DipEventLogging {
-  constructor({amqpBroker, pgConnectionString}) {
+  /**
+   * Constructor
+   * @param {string} amqpBroker
+   * @param {string} pgConnectionString
+   */
+  constructor({ amqpBroker, pgConnectionString }) {
     this._pool = new Pool({
       connectionString: pgConnectionString,
     });
@@ -24,14 +33,18 @@ class DipEventLogging {
     this._amqp = null;
   }
 
+  /**
+   * Bootstrap and listen
+   * @return {Promise<void>}
+   */
   async listen() {
     const conn = await amqp.connect(this._amqpBroker);
 
     this._amqp = await conn.createChannel();
 
-    await this._amqp.assertExchange(shared.exhanges.policy, 'topic', {durable: true});
+    await this._amqp.assertExchange(shared.exhanges.policy, 'topic', { durable: true });
 
-    const q = await this._amqp.assertQueue('', {exclusive: false});
+    const q = await this._amqp.assertQueue('', { exclusive: false });
     await this._amqp.bindQueue(q.queue, shared.exhanges.policy, '#');
 
     await this._amqp.consume(q.queue, async (message) => {
@@ -39,7 +52,7 @@ class DipEventLogging {
         text: 'INSERT INTO dip_event_logging(properties, fields, content) VALUES($1, $2, $3)',
         values: [message.properties, message.fields, message.content.toString()],
       });
-    }, {noAck: true});
+    }, { noAck: true });
   }
 }
 

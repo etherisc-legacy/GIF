@@ -4,10 +4,23 @@ const fs = require('fs');
 const path = require('path');
 const { EOL } = require('os');
 
-
-const getMetric = metric => `${metric.pct}% (${metric.covered}/${metric.total})`;
-
+/**
+ * Collect coverage reports command
+ */
 class CollectCoverage extends Command {
+  /**
+   * Format moverage metric string
+   * @param {{}} metric
+   * @return {string}
+   */
+  getMetric(metric) {
+    return `${metric.pct}% (${metric.covered}/${metric.total})`;
+  }
+
+  /**
+   * Collect coverage reports from microservices and write results into README.md
+   * @return {Promise<void>}
+   */
   async run() {
     const patterns = [
       '**/package.json',
@@ -37,7 +50,7 @@ Module         | % Stmts       | % Branch      | % Funcs       | % Lines
       if (fs.existsSync(coverageFile)) {
         const { total } = require(coverageFile);
 
-        stats = `${getMetric(total.statements)} | ${getMetric(total.branches)} | ${getMetric(total.functions)} | ${getMetric(total.lines)}`;
+        stats = `${this.getMetric(total.statements)} | ${this.getMetric(total.branches)} | ${this.getMetric(total.functions)} | ${this.getMetric(total.lines)}`;
       }
 
       rows.push(`${name} | ${stats}`);

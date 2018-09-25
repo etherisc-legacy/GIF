@@ -18,17 +18,27 @@ const shared = {
   },
 };
 
-
-
+/**
+ * Logger
+ */
 class Logger {
+  /**
+   * Constructor
+   */
   constructor() {
     this.info = console.log;
     this.error = console.error;
   }
-};
+}
 
-
+/**
+ * Generic Insurance application wrapper
+ */
 class GenericInsurance {
+  /**
+   * Constructor
+   * @param {{}} app
+   */
   constructor(app) {
     const logger = new Logger();
 
@@ -43,16 +53,22 @@ class GenericInsurance {
     this._amqp = null;
   }
 
+  /**
+   * Bootstrap and listen
+   * @param {string} amqpBroker
+   * @param {number} wsPort
+   * @return {Promise<void>}
+   */
   async listen({ amqpBroker, wsPort }) {
     const conn = await amqp.connect(amqpBroker);
 
     this._amqp = await conn.createChannel();
 
-    const server = new http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'application/json'});
+    const server = http.createServer(((req, res) => {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
       res.write('{"status":200}');
       res.end();
-    });
+    }));
 
     const wss = new WebSocket.Server({ server });
 
@@ -87,13 +103,16 @@ class GenericInsurance {
       if (message.fields.routingKey === 'policy.sertificate_issued.v1') {
         this._app.onCertificateIssued(message.properties.correlationId, {});
       }
-
     }, { noAck: true });
 
 
     this.log.info(`${this._app.name} listening at ws://localhost:${wsPort}/ws`);
   }
 
+  /**
+   * Registrer WebSocket connection
+   * @param {{}} connection
+   */
   register(connection) {
     const connectionId = uuid();
 
@@ -102,12 +121,17 @@ class GenericInsurance {
     this.send(connectionId, {
       from: `${process.env.npm_package_name}.v${process.env.npm_package_version}`,
       topic: null,
-      msg: 'WebSocket connection successfully established'
+      msg: 'WebSocket connection successfully established',
     });
 
     connection.on('message', message => this.processMessage(connectionId, message));
   }
 
+  /**
+   * Process broker's message
+   * @param {string} connectionId
+   * @param {{}} message
+   */
   processMessage(connectionId, message) {
     const payload = JSON.parse(message);
 
@@ -121,10 +145,21 @@ class GenericInsurance {
     }
   }
 
+  /**
+   * Send message to WebSocket client
+   * @param {string} connectionId
+   * @param {{}} msg
+   */
   send(connectionId, msg) {
     this._connections[connectionId].send(JSON.stringify(msg));
   }
 
+  /**
+   * Send policy creation message to broker
+   * @param {string} clientId
+   * @param {{}} payload
+   * @return {Promise<void>}
+   */
   async createPolicy(clientId, payload) {
     const key = `${shared.topic.policyCreate}.v1`;
 
@@ -140,49 +175,79 @@ class GenericInsurance {
     });
   }
 
+  /**
+   * Send card charding message to broker
+   * @param {string} policyId
+   * @return {Promise<void>}
+   */
   async chargeCard(policyId) {
     const key = 'policy.charge_card.v1';
 
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    await this._amqp.publish(shared.exhanges.policy, key, Buffer.from(JSON.stringify({ policyId })), {
-      correlationId: policyId,
-      headers: {
-        originatorName: process.env.npm_package_name,
-        originatorVersion: process.env.npm_package_version,
+    await this._amqp.publish(
+      shared.exhanges.policy,
+      key,
+      Buffer.from(JSON.stringify({ policyId })),
+      {
+        correlationId: policyId,
+        headers: {
+          originatorName: process.env.npm_package_name,
+          originatorVersion: process.env.npm_package_version,
+        },
       },
-    });
+    );
   }
 
+  /**
+   * Send fiat payout message to broker
+   * @param {string} policyId
+   * @return {Promise<void>}
+   */
   async payout(policyId) {
     const key = 'policy.payout.v1';
 
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    await this._amqp.publish(shared.exhanges.policy, key, Buffer.from(JSON.stringify({ policyId })), {
-      correlationId: policyId,
-      headers: {
-        originatorName: process.env.npm_package_name,
-        originatorVersion: process.env.npm_package_version,
+    await this._amqp.publish(
+      shared.exhanges.policy,
+      key,
+      Buffer.from(JSON.stringify({ policyId })),
+      {
+        correlationId: policyId,
+        headers: {
+          originatorName: process.env.npm_package_name,
+          originatorVersion: process.env.npm_package_version,
+        },
       },
-    });
+    );
   }
 
+  /**
+   * Send certificate issuing message to broker
+   * @param {string} policyId
+   * @return {Promise<void>}
+   */
   async issueCertificate(policyId) {
     const key = 'policy.issue_certificate.v1';
 
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    await this._amqp.publish(shared.exhanges.policy, key, Buffer.from(JSON.stringify({ policyId })), {
-      correlationId: policyId,
-      headers: {
-        originatorName: process.env.npm_package_name,
-        originatorVersion: process.env.npm_package_version,
+    await this._amqp.publish(
+      shared.exhanges.policy,
+      key,
+      Buffer.from(JSON.stringify({ policyId })),
+      {
+        correlationId: policyId,
+        headers: {
+          originatorName: process.env.npm_package_name,
+          originatorVersion: process.env.npm_package_version,
+        },
       },
-    });
+    );
   }
 }
 

@@ -1,5 +1,6 @@
 const amqp = require('amqplib');
 
+
 const shared = {
   exhanges: {
     policy: 'POLICY',
@@ -14,13 +15,23 @@ const shared = {
   },
 };
 
-
+/**
+ * DIP Fiat Payout Gateway microservice
+ */
 class DipFiatPayoutGateway {
+  /**
+   * Constructor
+   * @param {string} amqpBroker
+   */
   constructor({ amqpBroker }) {
     this._amqpBroker = amqpBroker;
     this._amqp = null;
   }
 
+  /**
+   * Bootstrap and listen
+   * @return {Promise<void>}
+   */
   async listen() {
     const conn = await amqp.connect(this._amqpBroker);
 
@@ -34,6 +45,11 @@ class DipFiatPayoutGateway {
     await this._amqp.consume(policyCreateQ.queue, this.payout.bind(this), { noAck: true });
   }
 
+  /**
+   * Handle payout event message
+   * @param {{}} message
+   * @return {Promise<void>}
+   */
   async payout(message) {
     // const { routingKey } = message.fields;
     // const content = message.content.toString();
@@ -41,7 +57,7 @@ class DipFiatPayoutGateway {
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.paid_out.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId})), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.paid_out.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,

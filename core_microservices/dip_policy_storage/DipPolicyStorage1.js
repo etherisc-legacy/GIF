@@ -1,9 +1,21 @@
+/**
+ * DIP Policy Storage Microservice
+ */
 class DipPolicyStorage {
+  /**
+   * Constructor
+   * @param {Amqp} amqp
+   * @param {Router} router
+   */
   constructor({ amqp, router }) {
     this._amqpBroker = amqp;
     this._router = router;
   }
 
+  /**
+   * Bootstrap and listen
+   * @return {Promise<void>}
+   */
   async bootstrap() {
     this._router.get('/test', ctx => ctx.body = 'test');
 
@@ -17,10 +29,15 @@ class DipPolicyStorage {
     await this._amqp.consume(policyCreateQ.queue, this.onPolicyCreate.bind(this), { noAck: true });
   }
 
+  /**
+   * Handle policy.create.v1 message
+   * @param {{}} message
+   * @return {Promise<void>}
+   */
   async onPolicyCreate(message) {
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish('POLICY', 'policy.creation_success.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId})), {
+    this._amqp.publish('POLICY', 'policy.creation_success.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,
@@ -31,4 +48,3 @@ class DipPolicyStorage {
 }
 
 module.exports = DipPolicyStorage;
-
