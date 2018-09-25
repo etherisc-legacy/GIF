@@ -74,10 +74,12 @@ definitions:
         RABBITMQ_DEFAULT_USER: guest
         RABBITMQ_DEFAULT_PASS: guest
       ports:
-        - 5672:5672
+        - "5672:5672"
     postgres:
       image: postgres:10.5
       environment:
         POSTGRES_DB: postgresql
         POSTGRES_USER: postgresql
         POSTGRES_PASSWORD: postgresql
+      ports:
+        - "5433:5432"
