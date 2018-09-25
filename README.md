@@ -7,7 +7,20 @@
 
 Module         | % Stmts       | % Branch      | % Funcs       | % Lines
 -------------- | --------------| --------------| --------------| --------------
-Content Cell   | Content Cell  | Content Cell  | Content Cell Content Cell  | Content Cell
+@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.02% (2/99) | 0% (0/24)% | 3.23% (1/31)% | 2.33% (2/86)%
+@etherisc/etherisc_flight_delay_ui.v0.1.1 | 33.33% (11/33) | 0% (0/4)% | 28.57% (4/14)% | 39.29% (11/28)%
+@etherisc/dip_ethereum_client.v0.1.1 | - | - | - | -
+dip_event_logging.v0.1.0 | - | - | - | -
+@etherisc/dip_fiat_payment_gateway.v0.1.1 | - | - | - | -
+@etherisc/dip_fiat_payout_gateway.v0.1.1 | - | - | - | -
+@etherisc/dip_pdf_generator.v1.0.1 | - | - | - | -
+@etherisc/dip_policy_storage.v0.1.1 | - | - | - | -
+@etherisc/test.v0.1.1 | - | - | - | -
+@etherisc/messages.v0.1.1 | - | - | - | -
+@etherisc/microservice.v0.1.1 | - | - | - | -
+***
+
+
 
 * [Contribution guidelines](CONTRIBUTION.md)
 * [License](LICENSE)
