@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dip-rpc-node
+  labels:
+    app: dip-rpc-node
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 8545
+    targetPort: 8545
+  selector:
+    app: dip-rpc-node
