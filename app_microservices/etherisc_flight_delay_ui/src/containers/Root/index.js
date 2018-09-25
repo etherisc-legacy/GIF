@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { hot } from 'react-hot-loader';
-import { Card, Text, Button, TextInputField } from 'evergreen-ui';
+import {
+  Card, Text, Button, TextInputField,
+} from 'evergreen-ui';
 
 
 const LogMessage = (props) => {
@@ -9,7 +10,7 @@ const LogMessage = (props) => {
   return <Card elevation={0} backgroundColor="#ebf3fc" paddingLeft={10} paddingRight={10} paddingTop={4} paddingBottom={4} marginTop={10}>
     <div>
       <Text fontSize={14} fontWeight="bold">
-      {props.id}. {from}
+        {props.id}. {from}
       </Text>
     </div>
     {topic && <div>
@@ -26,7 +27,7 @@ const LogMessage = (props) => {
   </Card>
 }
 
-class App extends Component {
+export default class App extends Component {
   constructor() {
     super();
 
@@ -156,5 +157,3 @@ class App extends Component {
     </div>;
   }
 }
-
-export default hot(module)(App);

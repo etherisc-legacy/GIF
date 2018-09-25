@@ -30,3 +30,6 @@ access to both microservices and shared files.
 * Esdoc is used to generate documentation
 * Javascript files should be documented with JSDoc syntax [JSDdoc](http://usejsdoc.org/)
 * Use `npm run docs` to generate docs
+
+### Notes
+Markdown syntax [examples](https://bitbucket.org/tutorials/markdowndemo/src/master/)

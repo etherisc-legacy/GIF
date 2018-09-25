@@ -36,7 +36,7 @@ class FlightDelayInsurance {
    * @param {{}} payload
    * @return {Promise}
    */
-  onLogStateContractEvent(policyId, payload) {
+  onLogSetState(policyId, payload) {
     // Applied
     if (payload.state === 0) return this.onPolicyAppliedState(policyId, payload);
 
