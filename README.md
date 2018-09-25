@@ -18,7 +18,7 @@ dip_event_logging.v0.1.0 | - | - | - | -
 @etherisc/test.v0.1.1 | - | - | - | -
 @etherisc/messages.v0.1.1 | - | - | - | -
 @etherisc/microservice.v0.1.1 | - | - | - | -
-***
+[endOfCoverageTable]: #
 
 
 
