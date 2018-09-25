@@ -1,4 +1,4 @@
-# DIP Platform Readme
+# DIP Platform
 
 ###### Documentation
 ![documentation-badge](https://img.shields.io/badge/Documentation-58.51%25%20%2879%2F135%29-yellow.svg)
