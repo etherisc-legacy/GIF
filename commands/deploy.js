@@ -58,9 +58,9 @@ class Deploy extends Command {
       '**/k8s*.yaml',
       '!**/node_modules/**',
       PROD && '!**/secrets/**',
-    ];
+    ].filter(Boolean);
 
-    const files = await glob(patterns.filter(Boolean));
+    const files = await glob(patterns);
 
     const entities = {};
 
