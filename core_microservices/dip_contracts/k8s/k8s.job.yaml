@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate
+  labels:
+    app: migrate
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      name: migrate
+      labels:
+        app: migrate
+    spec:
+      containers:
+      - name: dip-contracts
+        image: <!--image-->
+        env:
+        - name: NETWORK
+          value: dip_rpc
+      restartPolicy: Never

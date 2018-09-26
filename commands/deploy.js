@@ -84,10 +84,10 @@ class Deploy extends Command {
 
           let imageName;
           if (process.env.NODE_ENV !== 'production') {
-            imageName = `${packageJson.name}:${uuid()}`;
+            imageName = `${packageJson.name.replace(/[^a-zA-Z]+/, '')}:${uuid()}`;
           } else {
             const commitHash = execSync('git rev-parse HEAD').toString().trim();
-            imageName = `gcr.io/${process.env.GCLOUD_PROJECT}/${packageJson.name}:${commitHash}`;
+            imageName = `gcr.io/${process.env.GCLOUD_PROJECT}/${packageJson.name.replace(/[^a-zA-Z0-9]+/, '')}:${commitHash}`;
           }
 
           entity.dockerfilePath = path.join(process.cwd(), dockerfilePath);
@@ -147,6 +147,7 @@ class Deploy extends Command {
         const file = path.join(process.cwd(), `tempfile-${group}-${element.config.metadata.name}.yaml`);
 
         fs.writeFileSync(file, yaml.safeDump(element.config));
+        if(group === 'Job') await this.execute(`kubectl delete -f ${file} --ignore-not-found=true`);
         await this.execute(`kubectl apply -f ${file}`);
         fs.unlinkSync(file);
       }
