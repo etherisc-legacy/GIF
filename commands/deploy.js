@@ -80,22 +80,24 @@ class Deploy extends Command {
           const dockerfilePath = path.join(...filePathParts.slice(0, -2));
           const packageJsonfile = path.join(...filePathParts.slice(0, -2), 'package.json');
 
-          const packageJson = require(path.join(process.cwd(), packageJsonfile));
+          const { name, version } = require(path.join(process.cwd(), packageJsonfile));
+
+          const packageName = name.replace(/[^a-zA-Z]+/, '');
 
           let imageName;
           if (process.env.NODE_ENV !== 'production') {
-            imageName = `${packageJson.name.replace(/[^a-zA-Z]+/, '')}:${uuid()}`;
+            imageName = `${packageName}:${uuid()}`;
           } else {
             const commitHash = execSync('git rev-parse HEAD').toString().trim();
-            imageName = `gcr.io/${process.env.GCLOUD_PROJECT}/${packageJson.name.replace(/[^a-zA-Z0-9]+/, '')}:${commitHash}`;
+            imageName = `gcr.io/${process.env.GCLOUD_PROJECT}/${packageName}:${commitHash}`;
           }
 
           entity.dockerfilePath = path.join(process.cwd(), dockerfilePath);
           entity.imageName = imageName;
-          entity.name = packageJson.name;
-          entity.version = packageJson.version;
+          entity.name = packageName;
+          entity.version = version;
           entity.config = JSON.parse(JSON.stringify(element).replace('<!--image-->', imageName));
-          entity.config.metadata.labels.version = packageJson.version;
+          entity.config.metadata.labels.version = version;
         } else {
           entity.config = element;
         }
@@ -139,8 +141,7 @@ class Deploy extends Command {
             this.log.info('Push image to GCR');
             await this.execute(`docker push ${element.imageName}`);
           } else {
-            const tag = element.imageName.replace('@', '');
-            await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build -t ${tag} .`);
+            await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build -t ${element.imageName} .`);
           }
         }
 
