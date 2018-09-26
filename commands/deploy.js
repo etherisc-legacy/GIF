@@ -147,7 +147,7 @@ class Deploy extends Command {
         const file = path.join(process.cwd(), `tempfile-${group}-${element.config.metadata.name}.yaml`);
 
         fs.writeFileSync(file, yaml.safeDump(element.config));
-        if(group === 'Job') await this.execute(`kubectl delete -f ${file} --ignore-not-found=true`);
+        if (group === 'Job') await this.execute(`kubectl delete -f ${file} --ignore-not-found=true`);
         await this.execute(`kubectl apply -f ${file}`);
         fs.unlinkSync(file);
       }
