@@ -7,18 +7,20 @@
     "npm": ">6"
   },
   "scripts": {
-    "deploy": "./bin/run deploy",
-    "bootstrap": "lerna bootstrap",
-    "migrate": "lerna run migrate --parallel",
-    "dev": "lerna run dev --parallel",
-    "dev:services:run": "docker-compose -f ./services/compose/docker-compose.yml up -d",
-    "dev:services:kill": "docker-compose -f ./services/compose/docker-compose.yml kill",
-    "lint": "eslint --ext js .",
-    "docs": "esdoc",
-    "test:e2e": "NODE_ENV=test mocha",
-    "test": "lerna run test",
-    "coverage": "lerna run coverage",
-    "publish": "lerna publish"
+    "deploy:minikube": "echo 'Deploy to Minikube'; NODE_ENV=development ./bin/run deploy",
+    "deploy:gke": "echo 'Deploy to GKE'; NODE_ENV=production ./bin/run deploy",
+    "bootstrap": "echo 'Install dependencies for packages'; lerna bootstrap",
+    "migrate": "echo 'Run database migrations for packages'; lerna run migrate --parallel",
+    "dev": "echo 'Start packages in development mode'; lerna run dev --parallel",
+    "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d",
+    "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",
+    "lint": "echo 'Link javascript files'; eslint --ext js .",
+    "docs": "echo 'Generage documentation'; esdoc",
+    "test:e2e": "echo 'Run e2e tests'; NODE_ENV=test mocha",
+    "test": "echo 'Run tests for packages'; lerna run test",
+    "coverage": "echo 'Run tests coverage for packages'; lerna run coverage",
+    "collect:coverage": "echo 'Collect tests coverage from packages in README.md'; ./bin/run collectCoverage",
+    "publish": "echo 'Publish updated packages to NPM'; lerna publish"
   },
   "files": [
     "*"

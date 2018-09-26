@@ -56,7 +56,7 @@ dip_event_logging.v0.1.0 | - | - | - | -
 
 4. `npm run bootstrap` to install dependencies for Lerna packages
 
-5. `./bin/run deploy` to deploy to Minikube
+5. `npm run deploy:minikube` to deploy to Minikube
 
 #### Notes
 - By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
@@ -89,7 +89,7 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 5. Click "connect" button and run proposed command.
 6. `npm install` to install package dependencies
 7. `npm run bootstrap` to install dependencies for Lerna packages
-8. `GCLOUD_PROJECT=<project name> GCLOUD_CLUSTER=<cluster name> GLOUD_ZONE=<cluster zone> NODE_ENV=production ./bin/rin deploy` to deploy to GKE cluster
+8. `GCLOUD_PROJECT=<project name> GCLOUD_CLUSTER=<cluster name> GLOUD_ZONE=<cluster zone> npm run deploy:gke` to deploy to GKE cluster
 
 ### D. Setup deployment to GKE clusters from Bitbucket Pipelines CI
 

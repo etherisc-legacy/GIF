@@ -31,5 +31,14 @@ access to both microservices and shared files.
 * Javascript files should be documented with JSDoc syntax [JSDdoc](http://usejsdoc.org/)
 * Use `npm run docs` to generate docs
 
+### Testing
+`npm run test:e2e` run end-to-end tests
+
+`npm run test` run tests for packages
+
+`npm run coverage` run tests coverage for packages
+
+`npm run collect:coverage` collect tests coverage from packages in README.md
+
 ### Notes
 Markdown syntax [examples](https://bitbucket.org/tutorials/markdowndemo/src/master/)
