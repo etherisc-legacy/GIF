@@ -70,6 +70,7 @@ pipelines:
             # Deploy to Google Kubernetes Engine
             - npm install
             - ./node_modules/.bin/lerna bootstrap
+            - gcloud config get-value account-
             - NODE_ENV=production ./bin/run deploy
 
 definitions:
