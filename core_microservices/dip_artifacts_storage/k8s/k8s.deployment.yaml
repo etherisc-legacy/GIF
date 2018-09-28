@@ -1,0 +1,36 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dip-artifacts-storage
+  labels:
+    app: dip-artifacts-storage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dip-artifacts-storage
+  template:
+    metadata:
+      labels:
+        app: dip-artifacts-storage
+    spec:
+      containers:
+      - name: dip-artifacts-storage
+        image: <!--image-->
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MESSAGE_BROKER
+          value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: MINIO_ACCESS_KEY
+        - name: AWS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: MINIO_SECRET_KEY
+        - name: AWS_ENDPOINT
+          value: "http://$(MINIO_SERVICE_HOST):$(MINIO_SERVICE_PORT)"

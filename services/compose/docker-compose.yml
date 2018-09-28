@@ -2,24 +2,38 @@ version: '3'
 
 services:
 
-    Rabbitmq:
-        container_name: dev_rabbitmq
-        image: rabbitmq:3.7.7
-        command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server; rabbitmq_web_stomp"
-        volumes:
-            - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config
-        ports:
-            - "5672:5672"
-            - "15672:15672"
+  Rabbitmq:
+    container_name: dev_rabbitmq
+    image: rabbitmq:3.7.7
+    command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server; rabbitmq_web_stomp"
+    volumes:
+    - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+    ports:
+    - "5672:5672"
+    - "15672:15672"
 
-    PostgreSql:
-        container_name: dev_postgresql
-        image: postgres:10.5
-        restart: always
-        environment:
-            POSTGRES_USER: postgresql
-            POSTGRES_PASSWORD: postgresql
-        volumes:
-            - ./postgresql:/var/lib/postgresql
-        ports:
-            - "5432:5432"
+  PostgreSql:
+    container_name: dev_postgresql
+    image: postgres:10.5
+    restart: always
+    environment:
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
+    volumes:
+    - ./postgresql:/var/lib/postgresql
+    ports:
+    # 5432 is used because of impossibility to use another port in bitbucket
+    - "5432:5432"
+
+  Minio:
+    container_name: dev_minio
+    image: minio/minio
+    command: server /data
+    restart: always
+    environment:
+      MINIO_ACCESS_KEY: accesskey
+      MINIO_SECRET_KEY: secretkey
+    volumes:
+    - ./minio:/data
+    ports:
+    - "9000:9000"

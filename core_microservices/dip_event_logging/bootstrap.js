@@ -6,4 +6,11 @@ const dipEventLogging = new DipEventLogging({
   pgConnectionString: process.env.DATABASE_URL || 'postgresql://postgresql:postgresql@localhost:5432/postgresql',
 });
 
-dipEventLogging.listen();
+(async () => {
+  try {
+    await dipEventLogging.listen();
+  } catch (e) {
+    console.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+    process.exit(1);
+  }
+})();
