@@ -7,8 +7,6 @@ pipelines:
       name: Test
       caches:
         - node
-        - rabbitmq
-        - postgres
       services:
         - rabbitmq
         - postgres
@@ -26,8 +24,6 @@ pipelines:
           name: Test
           caches:
             - node
-            - rabbitmq
-            - postgres
           services:
             - rabbitmq
             - postgres
