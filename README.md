@@ -86,10 +86,12 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 2. Install and initialize [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstarts)
 3. Create account / login to [Google Cloud Platform Console](https://console.cloud.google.com)
 4. In GCP dashboard navigate to Kubernetes Engine > Clusters and create new cluster
-5. Click "connect" button and run proposed command.
+5. Click "connect" button and run proposed command
 6. `npm install` to install package dependencies
 7. `npm run bootstrap` to install dependencies for Lerna packages
-8. `GCLOUD_PROJECT=<project name> GCLOUD_CLUSTER=<cluster name> GLOUD_ZONE=<cluster zone> npm run deploy:gke` to deploy to GKE cluster
+8. `gcloud auth configure-docker --quiet` to authorize to Google Registry
+9. Create secrets using yaml files from `services/secrets`. To encode values use command `echo <password> | tr -d '\n' | base64`
+10. `GCLOUD_PROJECT_ID=<project name> GCLOUD_CLUSTER=<cluster name> GCLOUD_ZONE=<cluster zone> npm run deploy:gke` to deploy to GKE cluster
 
 ### D. Setup deployment to GKE clusters from Bitbucket Pipelines CI
 

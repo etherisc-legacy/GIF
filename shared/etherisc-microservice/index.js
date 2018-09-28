@@ -1,56 +1,37 @@
+const isDockerHost = require('is-docker');
+const knexfile = require('./knexfile');
 const ioModule = require('./io/module');
-
-
-const ioDeps = ioModule();
+const DipMicroservice = require('./services/DipMicroservice');
 
 /**
- * Dip Microservice
+ * Start application
+ * @param {class} App
+ * @param {{}} config
  */
-class DipMicroservice {
-  /**
-   * Constructor
-   * @param {*} io
-   */
-  constructor(io) {
-    this.io = io;
-  }
+function bootstrap(App, config = {}) {
+  const ioConfig = {
+    db: knexfile,
+    ...config,
+  };
 
-  /**
-   * Bootstrap and run
-   * @param {class} Microservice
-   * @param {{}} config
-   * @return {Promise<void>}
-   */
-  async bootstrap(Microservice, config) {
-    this.config = config;
+  try {
+    const ioDeps = ioModule(ioConfig);
+    const microservice = new DipMicroservice(App, ioDeps);
 
-    this.app = new Microservice({
-      amqp: this.io.amqp,
-      router: this.io.router,
-      log: this.io.log,
-      config: this.config,
+    microservice.bootstrap().catch((err) => {
+      ioDeps.log.error(err);
+
+      if (err.exit) process.exit(1);
     });
+  } catch (err) {
+    console.error(err);
 
-    try {
-      await this.io.amqp.connect(this.config.amqpBroker);
-      await this.app.bootstrap();
-      await new Promise((resolve, reject) => {
-        this.io.http.listen(this.config.httpPort, (err) => {
-          if (err) {
-            reject(new Error(err));
-            return;
-          }
-
-          const name = `${process.env.npm_package_name}.v${process.env.npm_package_version}`;
-          this.io.log.info(`Microservice ${name} is listening http at http://localhost:${this.config.httpPort}`);
-          resolve();
-        });
-      });
-    } catch (err) {
-      this.log.error(err);
-      throw new Error(err);
-    }
+    if (err.exit) process.exit(1);
   }
 }
 
-module.exports = new DipMicroservice(ioDeps);
+module.exports = {
+  bootstrap,
+  isDockerHost,
+  knexfile,
+};
