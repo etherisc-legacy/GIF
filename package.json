@@ -14,7 +14,7 @@
     "dev": "echo 'Start packages in development mode'; lerna run dev --parallel",
     "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d",
     "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",
-    "lint": "echo 'Link javascript files'; eslint --ext js .",
+    "lint": "echo 'Lint javascript files'; eslint --ext js .",
     "docs": "echo 'Generage documentation'; esdoc",
     "test:e2e": "echo 'Run e2e tests'; NODE_ENV=test mocha",
     "test": "echo 'Run tests for packages'; lerna run test",

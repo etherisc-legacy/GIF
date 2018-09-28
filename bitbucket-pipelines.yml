@@ -7,6 +7,8 @@ pipelines:
       name: Test
       caches:
         - node
+        - rabbitmq
+        - postgres
       services:
         - rabbitmq
         - postgres
@@ -24,6 +26,8 @@ pipelines:
           name: Test
           caches:
             - node
+            - rabbitmq
+            - postgres
           services:
             - rabbitmq
             - postgres
@@ -66,11 +70,15 @@ pipelines:
             - npm -v
             - kubectl config get-contexts
             - kubectl version
-            - export ENVIRONMENT=production
-            # Deploy to Google Kubernetes Engine
+            - export NODE_ENV=production
+            # Install dependencies
             - npm install
             - ./node_modules/.bin/lerna bootstrap
-            - NODE_ENV=production ./bin/run deploy
+            # Add cluster-admin role if it's not created
+            - gcloud config get-value account
+            - kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account) 2> /dev/null
+            # Run deployment
+            - npm run deploy:gke
 
 definitions:
   services:

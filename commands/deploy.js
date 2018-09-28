@@ -47,7 +47,7 @@ class Deploy extends Command {
    */
   async run() {
     if (PROD && !process.env.GCLOUD_CLUSTER) throw new Error('GKE cluster should be specified');
-    if (PROD && !process.env.GCLOUD_PROJECT) throw new Error('GKE project should be specified');
+    if (PROD && !process.env.GCLOUD_PROJECT_ID) throw new Error('GKE project id should be specified');
     if (PROD && !process.env.GCLOUD_ZONE) throw new Error('GKE zone should be specified');
 
     this.log = {
@@ -89,7 +89,7 @@ class Deploy extends Command {
             imageName = `${packageName}:${uuid()}`;
           } else {
             const commitHash = execSync('git rev-parse HEAD').toString().trim();
-            imageName = `gcr.io/${process.env.GCLOUD_PROJECT}/${packageName}:${commitHash}`;
+            imageName = `gcr.io/${process.env.GCLOUD_PROJECT_ID}/${packageName}:${commitHash}`;
           }
 
           entity.dockerfilePath = path.join(process.cwd(), dockerfilePath);
@@ -108,7 +108,7 @@ class Deploy extends Command {
 
 
     if (process.env.NODE_ENV === 'production') {
-      await this.execute(`kubectl config use-context gke_${process.env.GCLOUD_PROJECT}_${process.env.GCLOUD_ZONE}_${process.env.GCLOUD_CLUSTER}`);
+      await this.execute(`kubectl config use-context gke_${process.env.GCLOUD_PROJECT_ID}_${process.env.GCLOUD_ZONE}_${process.env.GCLOUD_CLUSTER}`);
 
       try {
         await this.execute('kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account)');
