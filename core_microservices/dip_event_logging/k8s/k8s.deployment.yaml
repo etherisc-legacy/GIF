@@ -22,8 +22,6 @@ spec:
         env:
         - name: MESSAGE_BROKER
           value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: pg-connection
-              key: STRING
+        envFrom:
+        - secretRef:
+            name: pg-connection

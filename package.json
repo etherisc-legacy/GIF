@@ -8,6 +8,7 @@
   },
   "scripts": {
     "deploy:minikube": "echo 'Deploy to Minikube'; NODE_ENV=development ./bin/run deploy",
+    "deploy:gke:secret": "echo Deploy secrets to GKE; ./bin/run deploySecret",
     "deploy:gke": "echo 'Deploy to GKE'; NODE_ENV=production ./bin/run deploy",
     "bootstrap": "echo 'Install dependencies for packages'; lerna bootstrap",
     "migrate": "echo 'Run database migrations for packages'; lerna run migrate --parallel",
@@ -59,6 +60,7 @@
     "@oclif/plugin-help": "^2.1.2",
     "@rauschma/stringio": "^1.4.0",
     "fast-glob": "^2.2.2",
+    "inquirer": "^6.2.0",
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
     "uuid": "^3.3.2"
