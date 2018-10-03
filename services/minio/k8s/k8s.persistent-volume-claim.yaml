@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-pv-claim
+  labels:
+    app: minio
+spec:
+  storageClassName: minio
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi

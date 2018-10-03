@@ -5,7 +5,7 @@ metadata:
   labels:
     app: migrate
 spec:
-  backoffLimit: 0
+  # backoffLimit: 0
   template:
     metadata:
       name: migrate
@@ -18,4 +18,7 @@ spec:
         env:
         - name: NETWORK
           value: dip_rpc
-      restartPolicy: Never
+        - name: MESSAGE_BROKER
+          value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"
+      # restartPolicy: Never
+      restartPolicy: OnFailure

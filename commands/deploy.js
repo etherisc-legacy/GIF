@@ -118,6 +118,7 @@ class Deploy extends Command {
     } else {
       await this.execute('kubectl config use-context minikube');
       await this.execute('minikube addons enable ingress');
+      await this.execute('echo "sudo mkdir /data/minio; sudo ln -s /data/minio /var/minio; exit" | minikube ssh');
     }
 
     const groups = Object.keys(entities);

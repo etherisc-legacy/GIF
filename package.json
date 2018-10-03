@@ -14,6 +14,7 @@
     "dev": "echo 'Start packages in development mode'; lerna run dev --parallel",
     "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d",
     "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",
+    "dev:services:purge": "docker-compose -f ./services/compose/docker-compose.yml down -v; rm -rf ./services/compose/minio; rm -rf ./services/compose/postgresql",
     "lint": "echo 'Lint javascript files'; eslint --ext js .",
     "docs": "echo 'Generage documentation'; esdoc",
     "test:e2e": "echo 'Run e2e tests'; NODE_ENV=test mocha",

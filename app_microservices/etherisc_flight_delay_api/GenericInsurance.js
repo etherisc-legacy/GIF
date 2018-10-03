@@ -151,6 +151,7 @@ class GenericInsurance {
    * @param {{}} msg
    */
   send(connectionId, msg) {
+    if (!connectionId) return;
     this._connections[connectionId].send(JSON.stringify(msg));
   }
 
