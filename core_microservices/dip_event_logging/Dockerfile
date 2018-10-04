@@ -5,4 +5,4 @@ COPY . .
 
 RUN npm install --only=production --loglevel notice
 
-CMD npm run migrate up && npm run prod
+CMD npm run migrate && npm run prod
