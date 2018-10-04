@@ -72,7 +72,7 @@ pipelines:
             - ./node_modules/.bin/lerna bootstrap
             # Add cluster-admin role if it's not created
             - gcloud config get-value account
-            - ! kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account)
+            - kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account) || true
             # Run deployment
             - npm run deploy:gke
 
