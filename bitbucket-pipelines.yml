@@ -59,8 +59,8 @@ pipelines:
             # Authorize to Google Cloud Console
             - echo $GCLOUD_API_KEYFILE | base64 --decode --ignore-garbage > ./gcloud-api-key.json
             - gcloud auth activate-service-account --key-file gcloud-api-key.json
-            - gcloud config set project $GCLOUD_PROJECT
-            - gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT
+            - gcloud config set project $GCLOUD_PROJECT_ID
+            - gcloud container clusters get-credentials $GCLOUD_CLUSTER --zone=$GCLOUD_ZONE --project $GCLOUD_PROJECT_ID
             - gcloud auth configure-docker --quiet
             - node -v
             - npm -v
