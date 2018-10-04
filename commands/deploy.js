@@ -115,6 +115,24 @@ class Deploy extends Command {
       } catch (e) {
         this.log.info('cluster-admin-binding already exists');
       }
+
+      try {
+        await this.execute('gcloud compute firewall-rules create minio --allow tcp:30009');
+      } catch (e) {
+        this.log.info('firewall-rule minio already exists');
+      }
+
+      try {
+        await this.execute('gcloud compute firewall-rules create pg --allow tcp:30032');
+      } catch (e) {
+        this.log.info('firewall rule pg already exists');
+      }
+
+      try {
+        await this.execute('gcloud compute firewall-rules create rabbitmq --allow tcp:30672');
+      } catch (e) {
+        this.log.info('firewall rule rabbitmq already exists');
+      }
     } else {
       await this.execute('kubectl config use-context minikube');
       await this.execute('minikube addons enable ingress');
