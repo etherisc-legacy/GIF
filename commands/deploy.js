@@ -109,6 +109,7 @@ class Deploy extends Command {
 
     if (process.env.NODE_ENV === 'production') {
       await this.execute(`kubectl config use-context gke_${process.env.GCLOUD_PROJECT_ID}_${process.env.GCLOUD_ZONE}_${process.env.GCLOUD_CLUSTER}`);
+      await this.execute(`gcloud config set project ${process.env.GCLOUD_PROJECT_ID}`);
 
       try {
         await this.execute('kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account)');
