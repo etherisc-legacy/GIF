@@ -63,21 +63,36 @@ class DipArtifactsStorage {
 
   /**
    * Send artifact list
+   * @param {object} network
+   * @return {string}
+   */
+  async getLastVersion(network) {
+    const prefix = `${network}/`;
+    const response = await this._s3.listObjects({
+      Bucket: 'dip-artifacts-storage',
+      // Delimiter: '/',
+      Prefix: prefix,
+    }).promise();
+    return response.Contents.map(o => o.Key.replace(prefix, '').replace(/(.+)\/.+/, '$1')).sort().slice(-1)[0];
+  }
+
+  /**
+   * Send artifact list
    * @param {object} message
    * @return {void}
    */
   async sendArtifactList(message) {
     try {
-      const content = message.content.toString();
-      const { network, version } = JSON.parse(content);
-      const prefix = `${network}/${version}/`;
+      const content = JSON.parse(message.content.toString());
+      if (!content.version) content.version = await this.getLastVersion(content.network);
+      const prefix = `${content.network}/${content.version}/`;
       const response = await this._s3.listObjects({
         Bucket: 'dip-artifacts-storage',
         Delimiter: '/',
         Prefix: prefix,
       }).promise();
       const list = response.Contents.map(o => o.Key.replace(prefix, '').replace('.json', ''));
-      const answer = { network, version, list };
+      const answer = { network: content.network, version: content.version, list };
       await this._amqp.publish('POLICY', 'contract.artifact_list.v1', Buffer.from(JSON.stringify(answer)), {
         headers: {
           originatorName: process.env.npm_package_name,
@@ -98,7 +113,7 @@ class DipArtifactsStorage {
     try {
       const content = message.content.toString();
       const { network, version, contract } = JSON.parse(content);
-      const key = `${network}/${version}/${contract}.json`;
+      const key = `${network}/${version}/${contract}.json`; // add to prefix app name from message metadata
       const response = await this._s3.getObject({
         Bucket: 'dip-artifacts-storage',
         Key: key,

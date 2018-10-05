@@ -1,5 +1,5 @@
 const amqp = require('amqplib');
-const fs = require('fs').promises;
+const fs = require('promise-fs');
 
 
 const amqpBroker = process.env.MESSAGE_BROKER || 'amqp://localhost:5672';

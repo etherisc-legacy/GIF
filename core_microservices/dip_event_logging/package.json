@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "migrate": "DATABASE_URL=postgresql://${POSTGRES_USER:-postgresql}:${POSTGRES_PASSWORD:-postgresql}@${POSTGRES_SERVICE_HOST:-localhost}:${POSTGRES_SERVICE_PORT:-5432}/${POSTGRES_DB:-postgresql} node-pg-migrate up",
+    "migrate": "DATABASE_URL=postgresql://${POSTGRES_USER:-postgresql}:${POSTGRES_PASSWORD:-postgresql}@${POSTGRES_SERVICE_HOST:-localhost}:${POSTGRES_SERVICE_PORT:-5432}/${POSTGRES_DB:-postgresql} node-pg-migrate up --migrations-table dip_event_logging_migrations",
     "dev": "nodemon -L --inspect=0.0.0.0:9229 bootstrap.js",
     "prod": "node bootstrap.js"
   },
