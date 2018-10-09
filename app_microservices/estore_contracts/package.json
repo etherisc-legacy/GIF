@@ -1,0 +1,27 @@
+{
+  "name": "estore_contracts",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "truffle": "truffle",
+    "hint": "solhint \"contracts/**/*.sol\"",
+    "test": "truffle test",
+    "coverage": "solidity-coverage",
+    "prepare-verification": "truffle-flattener ./contracts/EStoreInsurance.sol > ./verification/EStoreInsurance.sol",
+    "deploy": "MNEMONIC=${MNEMONIC} INFURA_KEY=${INFURA_KEY} truffle migrate --network ${NETWORK}"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.2",
+    "install": "^0.12.1",
+    "moment": "^2.22.2",
+    "npm": "^6.4.1",
+    "openzeppelin-solidity": "^1.12.0",
+    "solhint": "^1.3.0",
+    "solidity-coverage": "^0.5.11",
+    "truffle": "^5.0.0-beta.1",
+    "truffle-flattener": "^1.2.9",
+    "truffle-hdwallet-provider": "^1.0.0-web3one.0"
+  }
+}
