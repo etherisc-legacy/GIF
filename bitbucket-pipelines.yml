@@ -8,9 +8,12 @@ pipelines:
       caches:
         - node
       services:
+        - docker
         - rabbitmq
         - postgres
       script:
+        # Start Minio service manually because it doesn't have entrypoint command
+        - docker run -d -e MINIO_ACCESS_KEY=accesskey -e MINIO_SECRET_KEY=secretkey -p 9000:9000 minio/minio server /data
         - npm install
         - npm run lint
         - npm run bootstrap
@@ -25,9 +28,12 @@ pipelines:
           caches:
             - node
           services:
+            - docker
             - rabbitmq
             - postgres
           script:
+            # Start Minio service manually because it doesn't have entrypoint command
+            - docker run -d -e MINIO_ACCESS_KEY=accesskey -e MINIO_SECRET_KEY=secretkey -p 9000:9000 minio/minio server /data
             - npm install
             - npm run lint
             - npm run bootstrap
@@ -79,7 +85,7 @@ pipelines:
 definitions:
   services:
     docker:
-      memory: 2048
+      memory: 1024
     rabbitmq:
       image: rabbitmq:3.7.7
       environment:

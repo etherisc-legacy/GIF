@@ -10,7 +10,7 @@
     "deploy:minikube": "echo 'Deploy to Minikube'; NODE_ENV=development ./bin/run deploy",
     "deploy:gke:secret": "echo Deploy secrets to GKE; ./bin/run deploySecret",
     "deploy:gke": "echo 'Deploy to GKE'; NODE_ENV=production ./bin/run deploy",
-    "bootstrap": "echo 'Install dependencies for packages'; lerna bootstrap",
+    "bootstrap": "echo 'Install dependencies for packages'; lerna bootstrap --hoist",
     "migrate": "echo 'Run database migrations for packages'; lerna run migrate --parallel",
     "dev": "echo 'Start packages in development mode'; lerna run dev --parallel",
     "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d",
