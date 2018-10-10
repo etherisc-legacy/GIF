@@ -124,7 +124,7 @@ Open up your terminal and browse to the location of your JSON credential file fr
 
 Go to your repository settings in Bitbucket and navigate to Pipelines > Environment variables. Create a new variable named GCLOUD_API_KEYFILE and paste the encoded service account credentials in it.
 
-Add another variable called GCLOUD_PROJECT and set the value to the key of your Google Cloud project that you created in the first step `your-project-name`.
+Add another variable called GCLOUD_PROJECT_ID and set the value to the key of your Google Cloud project that you created in the first step `your-project-name`.
 
 Add GCLOUD_CLUSTER, GCLOUD_ZONE variables to specify your GKE cluster.
 

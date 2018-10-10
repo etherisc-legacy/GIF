@@ -82,6 +82,8 @@ class GenericInsurance {
     await this._amqp.bindQueue(q.queue, shared.exhanges.policy, '#');
 
     await this._amqp.consume(q.queue, (message) => {
+      const content = JSON.parse(message.content.toString());
+
       console.log(`[READ]: ${message.fields.routingKey}: '${message.content.toString()}'`);
 
       this.send(message.properties.correlationId, {
@@ -92,16 +94,21 @@ class GenericInsurance {
 
       if (message.fields.routingKey === 'policy.state_changed.v1') {
         this._app.onLogSetState(message.properties.correlationId, {
+          policyId: content.policyId,
           state: JSON.parse(message.content.toString()).state,
         });
       }
 
       if (message.fields.routingKey === 'policy.card_charged.v1') {
-        this._app.onCardCharged(message.properties.correlationId, {});
+        this._app.onCardCharged(message.properties.correlationId, {
+          policyId: content.policyId,
+        });
       }
 
       if (message.fields.routingKey === 'policy.sertificate_issued.v1') {
-        this._app.onCertificateIssued(message.properties.correlationId, {});
+        this._app.onCertificateIssued(message.properties.correlationId, {
+          policyId: content.policyId,
+        });
       }
     }, { noAck: true });
 
@@ -178,10 +185,11 @@ class GenericInsurance {
 
   /**
    * Send card charding message to broker
+   * @param {string} correlationId
    * @param {string} policyId
    * @return {Promise<void>}
    */
-  async chargeCard(policyId) {
+  async chargeCard(correlationId, policyId) {
     const key = 'policy.charge_card.v1';
 
     // Todo: implement
@@ -192,7 +200,7 @@ class GenericInsurance {
       key,
       Buffer.from(JSON.stringify({ policyId })),
       {
-        correlationId: policyId,
+        correlationId,
         headers: {
           originatorName: process.env.npm_package_name,
           originatorVersion: process.env.npm_package_version,
@@ -203,10 +211,11 @@ class GenericInsurance {
 
   /**
    * Send fiat payout message to broker
+   * @param {string} correlationId
    * @param {string} policyId
    * @return {Promise<void>}
    */
-  async payout(policyId) {
+  async payout(correlationId, policyId) {
     const key = 'policy.payout.v1';
 
     // Todo: implement
@@ -217,7 +226,7 @@ class GenericInsurance {
       key,
       Buffer.from(JSON.stringify({ policyId })),
       {
-        correlationId: policyId,
+        correlationId,
         headers: {
           originatorName: process.env.npm_package_name,
           originatorVersion: process.env.npm_package_version,
@@ -228,10 +237,11 @@ class GenericInsurance {
 
   /**
    * Send certificate issuing message to broker
+   * @param {string} correlationId
    * @param {string} policyId
    * @return {Promise<void>}
    */
-  async issueCertificate(policyId) {
+  async issueCertificate(correlationId, policyId) {
     const key = 'policy.issue_certificate.v1';
 
     // Todo: implement
@@ -242,7 +252,7 @@ class GenericInsurance {
       key,
       Buffer.from(JSON.stringify({ policyId })),
       {
-        correlationId: policyId,
+        correlationId,
         headers: {
           originatorName: process.env.npm_package_name,
           originatorVersion: process.env.npm_package_version,

@@ -1,6 +1,7 @@
+const { bootstrap, isDockerHost } = require('@etherisc/microservice');
 const DipPolicyStorage = require('./DipPolicyStorage');
 
 
-const dipPolicyStorage = new DipPolicyStorage({ amqpBroker: process.env.MESSAGE_BROKER || 'amqp://localhost:5672' });
-
-dipPolicyStorage.listen();
+bootstrap(DipPolicyStorage, {
+  httpPort: isDockerHost() && !process.env.CI ? 3000 : 3010,
+});

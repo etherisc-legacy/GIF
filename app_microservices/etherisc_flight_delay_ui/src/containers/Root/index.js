@@ -104,7 +104,21 @@ class App extends Component {
     const { socket, form } = this.state;
 
     if (socket) {
-      socket.send(JSON.stringify({ type: 'apply', data: form }));
+      const message = {
+        customer: {
+          firstname: form.firstname,
+          lastname: form.lastname,
+          email: form.email,
+        },
+        policy: {
+          distributorId: '11111111-1111-1111-1111-111111111111',
+          from: form.from,
+          to: form.to,
+          date: form.date,
+        },
+      };
+
+      socket.send(JSON.stringify({ type: 'apply', data: message }));
     } else {
       this.setState({ logs: [{ from: 'etherisc_flight_delay_ui', msg: 'WS connection is not established' }] });
     }
