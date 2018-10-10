@@ -52,12 +52,12 @@ class DipEtheremClient {
    */
   async createTransaction(message) {
     // const { routingKey } = message.fields;
-    // const content = message.content.toString();
+    const content = JSON.parse(message.content.toString());
 
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.transaction_created.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId })), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.transaction_created.v1', Buffer.from(JSON.stringify({ policyId: content.policyId })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,
@@ -68,7 +68,7 @@ class DipEtheremClient {
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 0 })), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: content.policyId, state: 0 })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,
@@ -78,7 +78,7 @@ class DipEtheremClient {
 
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 1 })), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: content.policyId, state: 1 })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,
@@ -88,7 +88,7 @@ class DipEtheremClient {
 
     await new Promise(resolve => setTimeout(resolve, 10000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId, state: 3 })), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: content.policyId, state: 3 })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,

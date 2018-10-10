@@ -32,31 +32,31 @@ class FlightDelayInsurance {
 
   /**
    * Handle LogSetState event from contract
-   * @param {string} policyId
+   * @param {string} correlationId
    * @param {{}} payload
    * @return {Promise}
    */
-  onLogSetState(policyId, payload) {
+  onLogSetState(correlationId, payload) {
     // Applied
-    if (payload.state === 0) return this.onPolicyAppliedState(policyId, payload);
+    if (payload.state === 0) return this.onPolicyAppliedState(correlationId, payload);
 
     // Accepted
-    if (payload.state === 1) return this.onPolicyAcceptedState(policyId, payload);
+    if (payload.state === 1) return this.onPolicyAcceptedState(correlationId, payload);
 
     // Revoked
-    if (payload.state === 2) return this.onPolicyRevoked(policyId, payload);
+    if (payload.state === 2) return this.onPolicyRevoked(correlationId, payload);
 
     // PaidOut
-    if (payload.state === 3) return this.onPolicyPaidOutState(policyId, payload);
+    if (payload.state === 3) return this.onPolicyPaidOutState(correlationId, payload);
 
     // Expired
-    if (payload.state === 4) return this.onPolicyExpiredState(policyId, payload);
+    if (payload.state === 4) return this.onPolicyExpiredState(correlationId, payload);
 
     // Declined
-    if (payload.state === 5) return this.onPolicyDeclinedState(policyId, payload);
+    if (payload.state === 5) return this.onPolicyDeclinedState(correlationId, payload);
 
     // SendFailed
-    if (payload.state === 6) return this.onPolicySendFailedState(policyId, payload);
+    if (payload.state === 6) return this.onPolicySendFailedState(correlationId, payload);
 
     return null;
   }
@@ -67,68 +67,75 @@ class FlightDelayInsurance {
 
   /**
    * Handle applied policy state
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onPolicyAppliedState(policyId) {
+  onPolicyAppliedState(correlationId, payload) {
     // Policy applied
-    this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} applied` });
+    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} applied` });
   }
 
   /**
    * Handle accepted policy state
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onPolicyAcceptedState(policyId) {
+  onPolicyAcceptedState(correlationId, payload) {
     // Policy accepted
-    this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} underwritten by oracle` });
+    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} underwritten by oracle` });
 
-    this.dip.chargeCard(policyId);
+    this.dip.chargeCard(correlationId, payload.policyId);
   }
 
   /**
    * Handle revoked policy state
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onPolicyRevoked(policyId) {
+  onPolicyRevoked(correlationId, payload) {
     // Policy revoked
-    this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} revoked` });
+    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} revoked` });
   }
 
   /**
    * Handle paidOut policy state
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onPolicyPaidOutState(policyId) {
+  onPolicyPaidOutState(correlationId, payload) {
     // Policy paidout
-    this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} for payout` });
-    this.dip.payout(policyId);
+    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} for payout` });
+    this.dip.payout(correlationId, payload.policyId);
   }
 
   /**
    * Handle expired policy state
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onPolicyExpiredState(policyId) {
+  onPolicyExpiredState(correlationId, payload) {
     // Policy expired
-    this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} expired` });
+    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} expired` });
   }
 
   /**
    * Handle declined policy state
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onPolicyDeclinedState(policyId) {
+  onPolicyDeclinedState(correlationId, payload) {
     // Policy declined
-    this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} declined` });
+    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} declined` });
   }
 
   /**
    * Handle send failed policy state
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onPolicySendFailedState(policyId) {
+  onPolicySendFailedState(correlationId, payload) {
     // Policy send failed
-    this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} send failed` });
+    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} send failed` });
 
     // this.dip.notifyAdministrator(policyId, { msg: 'Send failed' });
   }
@@ -139,18 +146,20 @@ class FlightDelayInsurance {
 
   /**
    * On card charged event handler
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onCardCharged(policyId) {
-    this.dip.issueCertificate(policyId);
+  onCardCharged(correlationId, payload) {
+    this.dip.issueCertificate(correlationId, payload.policyId);
   }
 
   /**
    * On certificated issued event handler
-   * @param {string} policyId
+   * @param {string} correlationId
+   * @param {{}} payload
    */
-  onCertificateIssued(policyId) {
-    this.dip.send(policyId, { from: this.name, msg: `Policy ${policyId} accepted` });
+  onCertificateIssued(correlationId, payload) {
+    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} accepted` });
   }
 }
 

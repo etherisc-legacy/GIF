@@ -34,7 +34,7 @@ class DipMicroservice {
 
       this.app = new this.App({
         amqp: this.amqp,
-        db: this.db,
+        db: this.db.getConnection(),
         log: this.log,
         router: applicationRouter,
       });

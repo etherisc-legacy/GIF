@@ -22,12 +22,28 @@ module.exports = {
   triggers: {
     onUpdateTrigger: {
       up: table => `
-            CREATE TRIGGER ${table}_updated_at
+            CREATE TRIGGER ${table}_updated
             BEFORE UPDATE ON ${table}
             FOR EACH ROW
-            EXECUTE PROCEDURE update_updated_at()
+            EXECUTE PROCEDURE update_updated()
           `,
-      down: table => `DROP TRIGGER ${table}_updated_at on ${table}`,
+      down: table => `DROP TRIGGER ${table}_updated on ${table}`,
+    },
+  },
+  functions: {
+    update_updated: {
+      up: () => `
+        CREATE OR REPLACE FUNCTION update_updated()
+        RETURNS TRIGGER AS $$
+        BEGIN
+            NEW.updated = now();
+            RETURN NEW;  
+        END;
+        $$ language 'plpgsql';
+      `,
+      down: () => `
+        DROP FUNCTION IF EXISTS update_updated RESTRICT;
+      `,
     },
   },
 };

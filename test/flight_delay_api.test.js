@@ -31,12 +31,17 @@ describe('Etherisc Flight Delay API', () => {
     const messages = [];
 
     const form = {
-      firstname: 'firstname',
-      lastname: 'lastname',
-      email: 'test@test.com',
-      from: 'SFO',
-      to: 'SRH',
-      date: '2018-12-20',
+      customer: {
+        firstname: 'firstname',
+        lastname: 'lastname',
+        email: 'test@test.com',
+      },
+      policy: {
+        distributorId: '11111111-1111-1111-1111-111111111111',
+        from: 'SFO',
+        to: 'SRH',
+        date: '2018-12-20',
+      },
     };
 
     await new Promise((resolve) => {
@@ -46,7 +51,7 @@ describe('Etherisc Flight Delay API', () => {
           content: JSON.parse(message.content.toString()),
         };
 
-        console.log(data); // eslint-disable-line
+        console.log(data);
         messages.push(data);
       }, { noAck: true });
 

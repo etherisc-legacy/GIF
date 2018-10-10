@@ -15,6 +15,14 @@ class Database {
   }
 
   /**
+   * Get database connection
+   * @return {Knex}
+   */
+  getConnection() {
+    return this._connection;
+  }
+
+  /**
    * Create database connection
    * @return {Knex}
    */

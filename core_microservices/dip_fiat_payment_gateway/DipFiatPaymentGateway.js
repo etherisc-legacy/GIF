@@ -51,10 +51,11 @@ class DipFiatPaymentGateway {
    * @return {Promise<void>}
    */
   async chargeCard(message) {
-    // Todo: implement
+    const content = JSON.parse(message.content.toString());
+
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.card_charged.v1', Buffer.from(JSON.stringify({ policyId: message.properties.correlationId })), {
+    this._amqp.publish(shared.exhanges.policy, 'policy.card_charged.v1', Buffer.from(JSON.stringify({ policyId: content.policyId })), {
       correlationId: message.properties.correlationId,
       headers: {
         originatorName: process.env.npm_package_name,

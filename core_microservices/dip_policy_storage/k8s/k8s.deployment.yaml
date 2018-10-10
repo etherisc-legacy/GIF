@@ -15,10 +15,32 @@ spec:
         app: dip-policy-storage
     spec:
       containers:
-      - name: dip-policy-storage
-        image: <!--image-->
-        ports:
-        - containerPort: 3000
-        env:
-        - name: MESSAGE_BROKER
-          value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"
+        - name: dip-policy-storage
+          image: <!--image-->
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: MESSAGE_BROKER
+              value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"
+          envFrom:
+            - secretRef:
+                name: pg-connection
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            failureThreshold: 3
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 1
+            successThreshold: 1

@@ -30,8 +30,25 @@ function bootstrap(App, config = {}) {
   }
 }
 
+/**
+ * Create microservice instance
+ * @param {Class} App
+ * @param {{}} config
+ * @return {DipMicroservice}
+ */
+function fabric(App, config = {}) {
+  const ioConfig = {
+    db: knexfile,
+    ...config,
+  };
+
+  const ioDeps = ioModule(ioConfig);
+  return new DipMicroservice(App, ioDeps);
+}
+
 module.exports = {
   bootstrap,
+  fabric,
   isDockerHost,
   knexfile,
 };

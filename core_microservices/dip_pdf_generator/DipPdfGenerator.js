@@ -56,14 +56,14 @@ class DipPdfGenerator {
    */
   async issueCertificate(message) {
     // const { routingKey } = message.fields;
-    // const content = message.content.toString();
+    const content = JSON.parse(message.content.toString());
 
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     this._amqp.publish(
       shared.exhanges.policy, 'policy.certificate_issued.v1',
-      Buffer.from(JSON.stringify({ policyId: message.properties.correlationId })), {
+      Buffer.from(JSON.stringify({ policyId: content.policyId })), {
         correlationId: message.properties.correlationId,
         headers: {
           originatorName: process.env.npm_package_name,
