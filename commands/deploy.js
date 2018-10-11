@@ -124,6 +124,12 @@ class Deploy extends Command {
       }
 
       try {
+        await this.execute('gcloud compute firewall-rules create ganache --allow tcp:30045');
+      } catch (e) {
+        this.log.info('firewall-rule ganache already exists');
+      }
+
+      try {
         await this.execute('gcloud compute firewall-rules create pg --allow tcp:30032');
       } catch (e) {
         this.log.info('firewall rule pg already exists');
@@ -138,6 +144,7 @@ class Deploy extends Command {
       await this.execute('kubectl config use-context minikube');
       await this.execute('minikube addons enable ingress');
       await this.execute('echo "sudo mkdir /data/minio; sudo ln -s /data/minio /var/minio; exit" | minikube ssh');
+      await this.execute('echo "sudo mkdir /data/ganache; sudo ln -s /data/ganache /var/ganache; exit" | minikube ssh');
     }
 
     const groups = Object.keys(entities);
