@@ -19,6 +19,7 @@ class DipMicroservice {
     this.db = ioDeps.db;
     this.http = ioDeps.http;
     this.log = ioDeps.log;
+    this.config = ioDeps.config;
   }
 
   /**
@@ -35,7 +36,9 @@ class DipMicroservice {
       this.app = new this.App({
         amqp: this.amqp,
         db: this.db.getConnection(),
+        http: this.http,
         log: this.log,
+        config: this.config,
         router: applicationRouter,
       });
 

@@ -17,6 +17,6 @@ module.exports = (config) => {
   const amqp = new Amqp(MESSAGE_BROKER || 'amqp://localhost:5672', appName, appVersion);
 
   return {
-    amqp, db, http, log, appName, appVersion,
+    amqp, db, http, log, appName, appVersion, config,
   };
 };

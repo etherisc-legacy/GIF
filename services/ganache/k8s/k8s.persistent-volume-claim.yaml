@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ganache-pv-claim
+  labels:
+    app: ganache
+spec:
+  storageClassName: ganache
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi

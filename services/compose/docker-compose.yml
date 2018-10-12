@@ -37,3 +37,13 @@ services:
     - ./minio:/data
     ports:
     - "9000:9000"
+
+  Ganache:
+    container_name: dev_ganache
+    image: trufflesuite/ganache-cli
+    command: -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' -l 0x7A1200 -g 0x2540BE400 --debug -v -i 4447 -h 0.0.0.0 --db /data
+    restart: always
+    volumes:
+    - ./ganache:/data
+    ports:
+    - "8545:8545"

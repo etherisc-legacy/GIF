@@ -1,8 +1,43 @@
 const WebSocket = require('ws');
 const amqp = require('amqplib');
+const knex = require('knex');
 
+
+const tables = [
+  'dip_policy_storage_customer',
+  'dip_policy_storage_customer_extra',
+  'dip_policy_storage_distributor',
+  'dip_policy_storage_policy',
+  'dip_policy_storage_policy_extra',
+];
 
 describe('Etherisc Flight Delay API', () => {
+  before(async () => {
+    this.db = knex({
+      client: 'pg',
+      connection: {
+        host: process.env.DB_HOST || 'localhost',
+        user: process.env.DB_USER || 'postgresql',
+        password: process.env.DB_PASS || 'postgresql',
+        database: process.env.DB_DATABASE || 'postgresql',
+      },
+    });
+  });
+
+  beforeEach(async () => {
+    await Promise.all(tables.map(t => this.db.raw(`truncate ${t} cascade`)));
+    await this.db('dip_policy_storage_distributor').insert([
+      {
+        id: '11111111-1111-1111-1111-111111111111',
+        company: 'Etherisc',
+      },
+    ]);
+  });
+
+  after(async () => {
+    this.db.destroy();
+  });
+
   it('should establish WebSocket connection', (done) => {
     const ws = new WebSocket('ws://localhost:8080/api/ws');
 

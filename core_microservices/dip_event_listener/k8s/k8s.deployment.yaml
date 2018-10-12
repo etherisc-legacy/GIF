@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dip-event-listener
+  labels:
+    app: dip-event-listener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dip-event-listener
+  template:
+    metadata:
+      labels:
+        app: dip-event-listener
+    spec:
+      containers:
+      - name: dip-event-listener
+        image: <!--image-->
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MESSAGE_BROKER
+          value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"
+        envFrom:
+        - secretRef:
+            name: pg-connection
+        - secretRef:
+            name: chain

@@ -1,6 +1,7 @@
 const { fabric } = require('@etherisc/microservice');
 const _ = require('lodash');
 const DipPolicyStorage = require('../DipPolicyStorage');
+const tables = require('../knexfile').constants;
 
 
 describe('DipPolicyStorage microservice', () => {
@@ -16,13 +17,17 @@ describe('DipPolicyStorage microservice', () => {
   });
 
   beforeEach(async () => {
-    await this.db.migrate.rollback();
-    await this.db.migrate.latest();
+    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${tables[key]} cascade`)));
+    await this.db(tables.DISTRIBUTOR_TABLE).insert([
+      {
+        id: '11111111-1111-1111-1111-111111111111',
+        company: 'Etherisc',
+      },
+    ]);
   });
 
   after(async () => {
-    await this.db.migrate.rollback();
-    await this.db.migrate.latest();
+    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${tables[key]} cascade`)));
 
     this.microservice.amqp.shutdown();
     this.microservice.db.shutdown();

@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ganache
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ganache
+    spec:
+      containers:
+        - name: ganache
+          image: trufflesuite/ganache-cli
+          imagePullPolicy: "IfNotPresent"
+          args: ['-m', 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat', '-l', '0x7A1200', '-g', '0x2540BE400', '--debug', '-v', '-i', '4448', '-h', '0.0.0.0', '--db', '/data']
+          ports:
+            - containerPort: 8545
+          volumeMounts:
+            - mountPath: /data
+              name: storage
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: ganache-pv-claim
