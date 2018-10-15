@@ -9,6 +9,7 @@ RUN npm i lerna -g --loglevel notice
 COPY package*.json .
 ARG NPM_TOKEN
 RUN npm install --only=production --loglevel notice
+RUN rm .npmrc
 
 # Install app dependencies
 COPY microservices/test/ ./microservices/test/
