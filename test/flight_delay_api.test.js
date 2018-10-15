@@ -16,10 +16,10 @@ describe('Etherisc Flight Delay API', () => {
     this.db = knex({
       client: 'pg',
       connection: {
-        host: process.env.DB_HOST || 'localhost',
-        user: process.env.DB_USER || 'postgresql',
-        password: process.env.DB_PASS || 'postgresql',
-        database: process.env.DB_DATABASE || 'postgresql',
+        host: process.env.POSTGRES_SERVICE_HOST || 'localhost',
+        user: process.env.POSTGRES_USER || 'postgresql',
+        password: process.env.POSTGRES_PASSWORD || 'postgresql',
+        database: process.env.POSTGRES_DB || 'postgresql',
       },
     });
   });
