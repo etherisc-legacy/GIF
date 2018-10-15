@@ -7,7 +7,7 @@ describe('DipEventListener microservice', () => {
   before(async () => {
     this.microservice = fabric(DipEventListener, {
       httpPort: 4000,
-      rpcNode: process.env.RPC_NODE || 'ws://localhost:8545',
+      rpcNode: process.env.WS_PROVIDER || 'ws://localhost:8545',
       networkName: process.env.NETWORK_NAME || 'development',
     });
     await this.microservice.bootstrap();

@@ -90,7 +90,7 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 6. `npm install` to install package dependencies
 7. `npm run bootstrap` to install dependencies for Lerna packages
 8. `gcloud auth configure-docker --quiet` to authorize to Google Registry
-9. If you deploy first time run `npm run deploy:gke:secret <name>` to generate and deploy secrets for `minio` and `pg-connection`
+9. If you deploy first time run `npm run deploy:gke:secret <name>` to generate and deploy secrets for `minio`, `pg-connection` and `chain`
 10. `GCLOUD_PROJECT_ID=<project name> GCLOUD_CLUSTER=<cluster name> GCLOUD_ZONE=<cluster zone> NPM_TOKEN=<token> npm run deploy:gke` to deploy to GKE cluster
 
 ### D. Setup deployment to GKE clusters from Bitbucket Pipelines CI
@@ -104,7 +104,7 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 #### Create Kubernetes cluster
 1. In GCP dashboard navigate to Kubernetes Engine > Clusters
 2. Create new cluster
-3. If you deploy first time run `npm run deploy:gke:secret <name>` to generate and deploy secrets for `minio` and `pg-connection`
+3. If you deploy first time run `npm run deploy:gke:secret <name>` to generate and deploy secrets for `minio`, `pg-connection` and `chain`
 
 #### Create authorization credentials for Bitbucket
 Create an App Engine service account and API key. Bitbucket needs this information to deploy to App Engine.
