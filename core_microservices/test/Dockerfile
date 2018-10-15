@@ -7,6 +7,7 @@ RUN npm i lerna -g --loglevel notice
 
 # Install root-level dependencies
 COPY package*.json .
+ARG NPM_TOKEN
 RUN npm install --only=production --loglevel notice
 
 # Install app dependencies
