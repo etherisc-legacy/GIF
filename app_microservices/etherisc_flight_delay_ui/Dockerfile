@@ -5,6 +5,8 @@ COPY . .
 
 ARG NPM_TOKEN
 RUN npm install --only=production --loglevel notice
+RUN rm .npmrc
+
 RUN NODE_ENV=production npm run build
 
 FROM nginx:stable
