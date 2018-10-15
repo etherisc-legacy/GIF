@@ -163,7 +163,7 @@ class Deploy extends Command {
           this.log.info(`Start Docker build for ${element.imageName}`);
 
           if (PROD) {
-            await this.execute(`cd ${element.dockerfilePath}; docker build -t ${element.imageName} .`);
+            await this.execute(`cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
 
             this.log.info('Push image to GCR');
             await this.execute(`docker push ${element.imageName}`);
