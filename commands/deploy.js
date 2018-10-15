@@ -168,7 +168,7 @@ class Deploy extends Command {
             this.log.info('Push image to GCR');
             await this.execute(`docker push ${element.imageName}`);
           } else {
-            await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build -t ${element.imageName} .`);
+            await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
           }
         }
 
