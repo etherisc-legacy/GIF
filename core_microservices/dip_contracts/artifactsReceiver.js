@@ -20,7 +20,8 @@ const requestArtifacts = (message) => {
     contracts = content.list;
     if (contracts.length === 0) process.exit(0);
     contracts.forEach((contract) => {
-      ch.publish('POLICY', 'contract.get_artifact.v1', Buffer.from(JSON.stringify({ network, version, contract })), {
+      // TODO: Use @etherisc/microservice amqp io module
+      ch.publish('POLICY', 'contract.artifactRequest.1.0', Buffer.from(JSON.stringify({ network, version, contract })), {
         headers: {
           originatorName: process.env.npm_package_name,
           originatorVersion: process.env.npm_package_version,
@@ -57,11 +58,13 @@ const saveArtifact = async (message) => {
       ch = await conn.createChannel();
       await ch.assertExchange('POLICY', 'topic', { durable: true });
 
-      let getArtifactList = await ch.assertQueue('contract.get_artifact_list.v1', { exclusive: false });
+      let getArtifactList = await ch.assertQueue('contract.artifactListRequest.1.0', { exclusive: false });
       while (getArtifactList.consumerCount === 0) {
-        getArtifactList = await ch.assertQueue('contract.get_artifact_list.v1', { exclusive: false });
+        getArtifactList = await ch.assertQueue('contract.artifactListRequest.1.0', { exclusive: false });
         await new Promise(resolve => setTimeout(resolve, 1000));
       }
+
+      // TODO: Use @etherisc/microservice amqp io module
       ch.publish('POLICY', getArtifactList.queue, Buffer.from(JSON.stringify({ network, version })), {
         headers: {
           originatorName: process.env.npm_package_name,
@@ -69,12 +72,14 @@ const saveArtifact = async (message) => {
         },
       });
 
-      const artifactList = await ch.assertQueue('contract.artifact_list.v1', { exclusive: false });
-      await ch.bindQueue(artifactList.queue, 'POLICY', 'contract.artifact_list.v1');
+      // TODO: Use @etherisc/microservice amqp io module
+      const artifactList = await ch.assertQueue('contract.artifactList.1.0', { exclusive: false });
+      await ch.bindQueue(artifactList.queue, 'POLICY', 'contract.artifactList.1.0');
       await ch.consume(artifactList.queue, requestArtifacts, { noAck: true });
 
-      const artifact = await ch.assertQueue('contract.artifact.v1', { exclusive: false });
-      await ch.bindQueue(artifact.queue, 'POLICY', 'contract.artifact.v1');
+      // TODO: Use @etherisc/microservice amqp io module
+      const artifact = await ch.assertQueue('contract.artifact.1.0', { exclusive: false });
+      await ch.bindQueue(artifact.queue, 'POLICY', 'contract.artifact.1.0');
       await ch.consume(artifact.queue, saveArtifact, { noAck: true });
     } catch (e) {
       console.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));

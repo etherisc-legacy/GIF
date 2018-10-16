@@ -7,17 +7,19 @@
 
 Module         | % Stmts       | % Branch      | % Funcs       | % Lines
 -------------- | --------------| --------------| --------------| --------------
-@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.02% (2/99) | 0% (0/24) | 3.23% (1/31) | 2.33% (2/86)
-@etherisc/etherisc_flight_delay_ui.v0.1.1 | 33.33% (11/33) | 0% (0/4) | 28.57% (4/14) | 39.29% (11/28)
+estore_contracts.v1.0.0 | - | - | - | -
+@etherisc/etherisc_flight_delay_api.v0.1.1 | 1.98% (2/101) | 0% (0/28) | 3.23% (1/31) | 2.3% (2/87)
+@etherisc/etherisc_flight_delay_ui.v0.1.1 | 35% (14/40) | 0% (0/4) | 28.57% (4/14) | 38.89% (14/36)
+@etherisc/dip_artifacts_storage.v1.0.0 | - | - | - | -
+@etherisc/dip_contracts.v1.0.0 | - | - | - | -
 @etherisc/dip_ethereum_client.v0.1.1 | - | - | - | -
-dip_event_logging.v0.1.0 | - | - | - | -
+@etherisc/dip_event_listener.v0.1.0 | 36.3% (49/135) | 38.89% (7/18) | 40.74% (11/27) | 37.6% (47/125)
+@etherisc/dip_event_logging.v0.2.0 | 40.63% (13/32) | 75% (3/4) | 54.55% (6/11) | 40.63% (13/32)
 @etherisc/dip_fiat_payment_gateway.v0.1.1 | - | - | - | -
 @etherisc/dip_fiat_payout_gateway.v0.1.1 | - | - | - | -
 @etherisc/dip_pdf_generator.v1.0.1 | - | - | - | -
-@etherisc/dip_policy_storage.v0.1.1 | - | - | - | -
-@etherisc/test.v0.1.1 | - | - | - | -
-@etherisc/messages.v0.1.1 | - | - | - | -
-@etherisc/microservice.v0.1.1 | - | - | - | -
+@etherisc/dip_policy_storage.v0.1.1 | 51.28% (80/156) | 41.67% (5/12) | 41.46% (17/41) | 55.56% (80/144)
+@etherisc/microservice.v0.3.2 | - | - | - | -
 [endOfCoverageTable]: #
 
 

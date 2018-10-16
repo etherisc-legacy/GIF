@@ -40,13 +40,15 @@ class DipEtheremClient {
     await this._amqp.assertExchange(shared.exhanges.policy, 'topic', { durable: true });
 
     const q = await this._amqp.assertQueue('success_policies', { exclusive: false });
-    await this._amqp.bindQueue(q.queue, shared.exhanges.policy, `${shared.topic.policyCreationSuccess}.v1`);
+
+    // TODO: amqp io module
+    await this._amqp.bindQueue(q.queue, shared.exhanges.policy, '*.policyCreationSuccess.1.0');
 
     await this._amqp.consume(q.queue, this.createTransaction.bind(this), { noAck: true });
   }
 
   /**
-   * Handle successed policy creation message
+   * Handle successful policy creation message
    * @param {{}} message
    * @return {Promise<void>}
    */

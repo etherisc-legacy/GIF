@@ -1,6 +1,5 @@
 const amqplib = require('amqplib');
-const uuid = require('uuid/v1');
-
+const messageProcessor = require('./messages');
 
 /**
  * RabbitMQ client
@@ -11,11 +10,17 @@ class Amqp {
    * @param {string} connectionString
    * @param {string} appName
    * @param {string} appVersion
+   * @param {string} exchangeName
    */
-  constructor(connectionString, appName, appVersion) {
+  constructor(connectionString, appName, appVersion, exchangeName) {
     this.connectionString = connectionString;
+
     this.appName = appName;
     this.appVersion = appVersion;
+    this.exchangeName = exchangeName;
+
+    this.exchangeName = 'POLICY';
+    // TODO: use an universal exchange for all 'topic' platform messages or make an exchanges list
 
     this._connection = null;
     this._channel = null;
@@ -49,14 +54,6 @@ class Amqp {
    */
   closeChannel() {
     if (this._channel) this.channel.close();
-  }
-
-  /**
-   * Generate unique name for new queue
-   * @return {string}
-   */
-  generateUniqueQueueName() {
-    return `${this.appName}_${this.appVersion}_${uuid()}`;
   }
 
   /**
@@ -107,64 +104,76 @@ class Amqp {
 
   /**
    * Start listening to queue messages
-   * @param {string} exhange
-   * @param {string} topic
+   * @param {string} [sourceMicroservice = '*']
+   * @param {string} [messageType = '*']
+   * @param {string} [messageTypeVersion = '*.*']
    * @param {function} handler
    * @return {Promise<void>}
    */
-  async consume(exhange, topic, handler) {
-    if (!this._channel) throw new Error('Amqp channel does\'n exists');
+  async consume({
+    sourceMicroservice = '*', messageType = '*', messageTypeVersion = '*.*', handler,
+  }) {
+    if (!this._channel) throw new Error('Amqp channel doesn\'t exist');
+    await this._channel.assertExchange(this.exchangeName, 'topic', { durable: true });
 
-    await this._channel.assertExchange(exhange, 'topic', { durable: true });
-
-    const queueName = this.generateUniqueQueueName();
+    const queueName = `${this.appName}_${this.appVersion}_${sourceMicroservice}_${messageType}_${messageTypeVersion}`;
+    const topic = `${sourceMicroservice}.${messageType}.${messageTypeVersion}`;
 
     const queue = await this._channel.assertQueue(queueName, { exclusive: false });
-    await this._channel.bindQueue(queue.queue, exhange, topic);
+    await this._channel.bindQueue(queue.queue, this.exchangeName, topic);
 
-    const messageHandler = this.handleMessage(handler).bind(this);
+    const messageHandler = this.handleMessage({ messageType, messageTypeVersion, handler }).bind(this);
     await this._channel.consume(queue.queue, messageHandler, { noAck: true });
   }
 
   /**
    * Preprocess queue message and pass it to specified handler
-   * @param {function} handler
+   * @param {string} [messageType = '*']
+   * @param {string} [messageTypeVersion = '*.*']
+   * @param {Function} handler
    * @return {function(*): *}
    */
-  handleMessage(handler) {
+  handleMessage({ messageType = '*', messageTypeVersion = '*.*', handler }) {
     return (message) => {
-      const { routingKey } = message.fields;
-      const content = message.content.toString();
-      const { correlationId } = message.properties;
+      const { fields, properties } = message;
+      let content;
+
+      if (messageType === '*') {
+        content = JSON.parse(message.content.toString());
+      } else {
+        content = messageProcessor.unpack(message.content, messageType, messageTypeVersion);
+      }
 
       return handler({
         content,
-        routingKey,
-        correlationId,
+        fields,
+        properties,
       });
     };
   }
 
   /**
    *
-   * @param {string} exchange
-   * @param {string} topic
-   * @param {{}} message
+   * @param {string} messageType
+   * @param {string} [messageTypeVersion = latest]
+   * @param {{}} content
    * @param {string} correlationId
+   * @param {{}} customHeaders
    * @return {Promise<void>}
    */
-  async publish(exchange, topic, message, correlationId) {
-    if (!this._channel) throw new Error('Amqp channel does\'n exists');
+  async publish({
+    messageType, messageTypeVersion = 'latest', content, correlationId, customHeaders,
+  }) {
+    if (!this._channel) throw new Error('Amqp channel doesn\'t exist');
+    await this._channel.assertExchange(this.exchangeName, 'topic', { durable: true });
 
-    await this._channel.assertExchange(exchange, 'topic', { durable: true });
+    const specificMessageTypeVersion = messageProcessor.findMessageSchema(messageType, messageTypeVersion).version;
+    const topic = `${this.appName}.${messageType}.${specificMessageTypeVersion}`;
 
-    this._channel.publish(exchange, topic, Buffer.from(JSON.stringify(message)), {
-      correlationId,
-      headers: {
-        originatorName: this.appName,
-        originatorVersion: this.appVersion,
-      },
-    });
+    this._channel.publish(this.exchangeName,
+      topic,
+      messageProcessor.pack(content, messageType, specificMessageTypeVersion),
+      messageProcessor.headers(correlationId, customHeaders, this.appName, this.appVersion, messageType));
   }
 }
 

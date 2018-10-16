@@ -38,7 +38,7 @@ class DipEventListener {
       /* eslint-disable-next-line no-restricted-syntax */
       for (const i of addresses) {
         const event = await this.db.raw('SELECT "blockNumber" + 1 AS "nextBlock" FROM dip_event_listener_events WHERE "networkName" = ? AND address IN (?) ORDER BY "blockNumber" DESC LIMIT 1', [this.networkName, i.address]);
-        this.web3.eth.getPastLogs({ fromBlock: event.nextBlock, address: i.address })
+        this.web3.eth.getPastLogs({ fromBlock: event.nextBlock || 1, address: i.address })
           .then(events => events.forEach(this.handleEvent.bind(this)));
       }
     } catch (e) {
@@ -94,7 +94,7 @@ class DipEventListener {
    */
   async handleEvent(event) {
     try {
-      this.log.info({ event });
+      // this.log.info({ event });
       const result = await this.db.raw('SELECT abi, version FROM dip_event_listener_contracts WHERE "networkName" = ? AND address = lower(?)', [this.networkName, event.address]);
       if (!result.rows[0]) return;
       const abi = result.rows[0].abi
@@ -109,7 +109,11 @@ class DipEventListener {
         result.rows[0].version,
       ]);
       if (!rows[0]) return;
-      await this.amqp.publish('POLICY', 'event_listener.decoded_event.v1', rows[0], '');
+      await this.amqp.publish({
+        messageType: 'decodedEvent',
+        messageTypeVersion: '1.*',
+        content: rows[0],
+      });
     } catch (e) {
       this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
@@ -117,13 +121,25 @@ class DipEventListener {
 
   /**
    * Send existing events
+   * @param {Object} content
+   * @param {Object} fields
+   * @param {Object} properties
    * @return {void}
    */
-  async sendExistingEvents() {
+  async sendExistingEvents({ content, fields, properties }) {
     try {
       // filter by network, version, address, fromBlock and any other fields including eventArgs
       const event = await this.db.raw('SELECT * FROM dip_event_listener_events', []);
-      await this.amqp.publish('POLICY', 'event_listener.decoded_event.v1', event, '');
+
+      console.log('+++EVENT RESULT:');
+      console.log(event);
+
+      await this.amqp.publish({
+        messageType: 'decodedEvent',
+        messageTypeVersion: '1.*',
+        content: event,
+        correlationId: properties.correlationId,
+      });
     } catch (e) {
       this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
@@ -131,14 +147,21 @@ class DipEventListener {
 
   /**
    * Request artifacts
-   * @param {object} message
+   * @param {Object} content
+   * @param {Object} fields
+   * @param {Object} properties
    * @return {void}
    */
-  async requestArtifacts(message) {
+  async requestArtifacts({ content, fields, properties }) {
     try {
-      const { version, list } = JSON.parse(message.content.toString());
+      const { version, list } = content;
       list.forEach((contract) => {
-        this.amqp.publish('POLICY', 'contract.get_artifact.v1', { network: this.networkName, version, contract }, '');
+        this.amqp.publish({
+          messageType: 'artifactRequest',
+          messageTypeVersion: '1.*',
+          content: { network: this.networkName, version, contract },
+          correlationId: properties.correlationId,
+        });
       });
     } catch (e) {
       this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
@@ -147,12 +170,14 @@ class DipEventListener {
 
   /**
    * Save artifact
-   * @param {object} message
+   * @param {Object} content
+   * @param {Object} fields
+   * @param {Object} properties
    * @return {void}
    */
-  async saveArtifact(message) {
+  async saveArtifact({ content, fields, properties }) {
     try {
-      const { version, artifact } = JSON.parse(message.content.toString());
+      const { version, artifact } = content;
       const artifactObject = JSON.parse(artifact);
       const networkId = Object.keys(artifactObject.networks)[0];
       const { address } = artifactObject.networks[networkId];
@@ -191,14 +216,35 @@ class DipEventListener {
       contractsStream.on('end', this.watchEventsRealtime.bind(this));
       contractsStream.on('data', this.getPastEvents.bind(this));
 
-      await this.amqp.consume('POLICY', 'event_listener.get_existing_events.v1', this.sendExistingEvents.bind(this));
+      this.amqp.publish({
+        messageType: 'artifactListRequest',
+        messageTypeVersion: '1.*',
+        content: { network: this.networkName },
+      });
 
-      await this.amqp.publish('POLICY', 'contract.get_artifact_list.v1', { network: this.networkName }, '');
-      await this.amqp.consume('POLICY', 'contract.artifact_list.v1', this.requestArtifacts.bind(this));
+      this.amqp.consume({
+        messageType: 'existingEventsRequest',
+        messageTypeVersion: '1.*',
+        handler: this.sendExistingEvents.bind(this),
+      });
 
-      await this.amqp.consume('POLICY', 'contract.artifact.v1', this.saveArtifact.bind(this));
+      this.amqp.consume({
+        messageType: 'artifactList',
+        messageTypeVersion: '1.*',
+        handler: this.requestArtifacts.bind(this),
+      });
 
-      await this.amqp.consume('POLICY', 'contract.deployed.v1', this.saveArtifact.bind(this));
+      this.amqp.consume({
+        messageType: 'artifact',
+        messageTypeVersion: '1.*',
+        handler: this.saveArtifact.bind(this),
+      });
+
+      this.amqp.consume({
+        messageType: 'contractDeployment',
+        messageTypeVersion: '1.*',
+        handler: this.saveArtifact.bind(this),
+      });
     } catch (e) {
       const error = new Error(JSON.stringify({ message: e.message, stack: e.stack }));
       error.exit = true;

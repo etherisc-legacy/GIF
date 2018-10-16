@@ -1,4 +1,5 @@
 const { fabric } = require('@etherisc/microservice');
+const { deleteTestExchange } = require('@etherisc/microservice/test/helpers');
 const _ = require('lodash');
 const DipPolicyStorage = require('../DipPolicyStorage');
 const tables = require('../knexfile').constants;
@@ -6,7 +7,7 @@ const tables = require('../knexfile').constants;
 
 describe('DipPolicyStorage microservice', () => {
   before(async () => {
-    this.microservice = fabric(DipPolicyStorage, { httpPort: 4000 });
+    this.microservice = fabric(DipPolicyStorage, { httpPort: 4000, exchangeName: 'test_storage' });
     await this.microservice.bootstrap();
 
     this.amqp = this.microservice.amqp;
@@ -28,6 +29,7 @@ describe('DipPolicyStorage microservice', () => {
 
   after(async () => {
     await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${tables[key]} cascade`)));
+    deleteTestExchange(this.amqp, 'test_storage');
 
     this.microservice.amqp.shutdown();
     this.microservice.db.shutdown();
@@ -51,13 +53,15 @@ describe('DipPolicyStorage microservice', () => {
       },
     };
 
-    const message = {
-      content: JSON.stringify(data),
-      routingKey: 'policy.create.v1',
+    const fields = {
+      routingKey: 'policy.policyCreationRequest.1.0',
+    };
+
+    const properties = {
       correlationId: '1',
     };
 
-    await this.microservice.app.onPolicyCreateMessage(message);
+    await this.microservice.app.onPolicyCreateMessage({ content: data, fields, properties });
 
     const {
       Customer, Policy, CustomerExtra, PolicyExtra,

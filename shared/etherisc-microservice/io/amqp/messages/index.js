@@ -6,15 +6,24 @@ const types = require('./types');
 const validator = new Validator();
 
 /**
+ * Find the latest schema for type and version
+ * @param {string} type
+ * @param {string} version
+ * @return {{}}
+ */
+const findMessageSchema = (type, version) => {
+  const versionMatcher = types[type];
+  return versionMatcher(version || 'latest');
+};
+
+/**
  * Validate message against defined schema
  * @param {{}} object
  * @param {string} type
  * @param {string} version
  */
 const validate = (object, type, version) => {
-  const versionMatcher = types[type];
-  const schema = versionMatcher(version || 'latest');
-  validator.validate(object, schema);
+  validator.validate(object, findMessageSchema(type, version));
 };
 
 /**
@@ -31,7 +40,7 @@ const pack = (object, type, version) => {
 
 /**
  * Unpack message
- * @param {Bufer} buffer
+ * @param {Buffer} buffer
  * @param {string} type
  * @param {string} version
  * @return {*}
@@ -44,23 +53,26 @@ const unpack = (buffer, type, version) => {
 
 /**
  * Set message headers
- * @param {*} customValues
+ * @param {string} correlationId
+ * @param {{}} customValues
+ * @param {string} serviceName
+ * @param {string} serviceVersion
+ * @param {string} messageType
  * @return {{correlationId: string, headers: *}}
  */
-const headers = (customValues) => {
-  const serviceName = process.env.npm_package_name;
-  const serviceVersion = process.env.npm_package_version;
-  const correlationId = `${uuid()}-${serviceName}-${serviceVersion}-${process.hrtime()[0]}`;
+const headers = (correlationId, customValues, serviceName, serviceVersion, messageType) => {
+  const newCorrelationId = correlationId || `${uuid()}-${serviceName}-${serviceVersion}-${messageType}-${process.hrtime()[0]}`;
 
   return {
-    correlationId,
-    headers: Object.assign({
+    correlationId: newCorrelationId,
+    headers: {
+      ...customValues,
       originatorName: serviceName,
       originatorVersion: serviceVersion,
-    }, customValues || {}),
+    },
   };
 };
 
 module.exports = {
-  pack, unpack, validate, headers,
+  pack, unpack, validate, headers, findMessageSchema,
 };

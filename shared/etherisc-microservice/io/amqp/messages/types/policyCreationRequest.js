@@ -1,10 +1,10 @@
 const schemaVersions = {};
 
 schemaVersions['1.0'] = {
-  id: 'test',
+  id: 'policyCreationRequest',
   type: 'object',
   properties: {
-    text: { type: 'string' },
+    payload: { type: 'object' },
   },
 };
 
