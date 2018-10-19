@@ -49,7 +49,11 @@ class DipPolicyStorage {
    * @return {Promise<void>}
    */
   async bootstrap() {
-    this.amqp.consume('POLICY', 'policy.create.v1', this.onPolicyCreateMessage.bind(this));
+    this.amqp.consume({
+      messageType: 'policyCreationRequest',
+      messageVersion: '1.*',
+      handler: this.onPolicyCreateMessage.bind(this),
+    });
   }
 
   /**
@@ -140,34 +144,46 @@ class DipPolicyStorage {
    * @param {DipMessage} message
    * @return {*}
    */
-  async onPolicyCreateMessage(message) {
-    // Parse message content
-    const data = JSON.parse(message.content);
-
+  async onPolicyCreateMessage({ content, fields, properties }) {
     // Validate message
     const validate = ajv.compile(applyPolicyMsgSchema);
 
-    if (!validate(data)) {
-      await this.amqp.publish('POLICY', 'policy.creation_error.v1', { error: validate.errors }, data.correlationId);
+    if (!validate(content)) {
+      await this.amqp.publish({
+        messageType: 'policyCreationError',
+        messageVersion: '1.*',
+        content: { error: validate.errors },
+        correlationId: properties.correlationId,
+      });
       return;
     }
 
     // Check if distributor exists
-    const distributor = await this.getDistributor(data.policy.distributorId);
+    const distributor = await this.getDistributor(content.policy.distributorId);
 
     if (!distributor) {
-      await this.amqp.publish('POLICY', 'policy.creation_error.v1', { error: 'Distributor does not exists' }, data.correlationId);
+      await this.amqp.publish({
+        messageType: 'policyCreationError',
+        messageVersion: '1.*',
+        content: { error: 'Distributor does not exists' },
+        correlationId: properties.correlationId,
+      });
       return;
     }
 
     // Create customer if doesn't exists
-    const customerId = await this.createCustomerIfNotExists(data.customer);
+    const customerId = await this.createCustomerIfNotExists(content.customer);
 
     // Create new policy
-    const policyId = await this.createPolicy(customerId, data.policy);
+    const policyId = await this.createPolicy(customerId, content.policy);
 
     // Publish message about successful policy creation
-    await this.amqp.publish('POLICY', 'policy.creation_success.v1', { policyId }, message.correlationId);
+    await this.amqp.publish({
+      messageType: 'policyCreationSuccess',
+      messageVersion: '1.*',
+      content: { policyId },
+      correlationId: properties.correlationId,
+    });
   }
 }
 

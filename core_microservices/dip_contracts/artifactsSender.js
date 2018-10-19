@@ -11,11 +11,13 @@ const amqpBroker = process.env.MESSAGE_BROKER || 'amqp://localhost:5672';
       const network = process.env.NETWORK || 'development';
       const conn = await amqp.connect(amqpBroker);
       const ch = await conn.createChannel();
+
+      // TODO: Use @etherisc/microservice amqp io module
       await ch.assertExchange('POLICY', 'topic', { durable: true });
       const files = await fs.readdir('./build/contracts');
       const artifacts = await Promise.all(files.map(file => fs.readFile(`./build/contracts/${file}`, 'utf-8')));
       artifacts.forEach((artifact) => {
-        ch.publish('POLICY', 'contract.deployed.v1', Buffer.from(JSON.stringify({ network, version, artifact })), {
+        ch.publish('POLICY', 'contract.contractDeployment.1.0', Buffer.from(JSON.stringify({ network, version, artifact })), {
           headers: {
             originatorName: process.env.npm_package_name,
             originatorVersion: process.env.npm_package_version,

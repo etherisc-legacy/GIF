@@ -104,20 +104,20 @@ describe('Etherisc Flight Delay API', () => {
     await connection.close();
     ws.close();
 
-    messages[0].routingKey.should.be.deepEqual('policy.create.v1');
+    messages[0].routingKey.should.be.deepEqual('etherisc_flight_delay_api.policyCreationRequest.1.0');
     messages[0].content.should.be.deepEqual(form);
 
-    messages[1].routingKey.should.be.equal('policy.creation_success.v1');
+    messages[1].routingKey.should.be.equal('dip_policy_storage.policyCreationSuccess.1.0');
 
     const { policyId } = messages[1].content;
 
     messages.should.be.deepEqual([
       {
-        routingKey: 'policy.create.v1',
+        routingKey: 'etherisc_flight_delay_api.policyCreationRequest.1.0',
         content: form,
       },
       {
-        routingKey: 'policy.creation_success.v1',
+        routingKey: 'dip_policy_storage.policyCreationSuccess.1.0',
         content: { policyId },
       },
       {

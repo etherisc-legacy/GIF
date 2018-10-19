@@ -14,7 +14,7 @@ module.exports = (config) => {
   const appName = _.last(process.env.npm_package_name.split('/'));
   const appVersion = process.env.npm_package_version;
 
-  const amqp = new Amqp(MESSAGE_BROKER || 'amqp://localhost:5672', appName, appVersion);
+  const amqp = new Amqp(MESSAGE_BROKER || 'amqp://localhost:5672', appName, appVersion, config.exchangeName);
 
   return {
     amqp, db, http, log, appName, appVersion, config,

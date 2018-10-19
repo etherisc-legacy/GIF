@@ -84,8 +84,6 @@ class GenericInsurance {
     await this._amqp.consume(q.queue, (message) => {
       const content = JSON.parse(message.content.toString());
 
-      console.log(`[READ]: ${message.fields.routingKey}: '${message.content.toString()}'`);
-
       this.send(message.properties.correlationId, {
         from: `${message.properties.headers.originatorName}.v${message.properties.headers.originatorVersion}`,
         topic: message.fields.routingKey,
@@ -158,7 +156,7 @@ class GenericInsurance {
    * @param {{}} msg
    */
   send(connectionId, msg) {
-    if (!connectionId) return;
+    if (!connectionId || !this._connections[connectionId]) return;
     this._connections[connectionId].send(JSON.stringify(msg));
   }
 
@@ -169,12 +167,11 @@ class GenericInsurance {
    * @return {Promise<void>}
    */
   async createPolicy(clientId, payload) {
-    const key = `${shared.topic.policyCreate}.v1`;
-
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    await this._amqp.publish(shared.exhanges.policy, key, Buffer.from(JSON.stringify(payload)), {
+    // TODO: Use @etherisc/microservice io amqp module
+    await this._amqp.publish('POLICY', 'etherisc_flight_delay_api.policyCreationRequest.1.0', Buffer.from(JSON.stringify(payload)), {
       correlationId: clientId,
       headers: {
         originatorName: process.env.npm_package_name,

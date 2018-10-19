@@ -27,16 +27,19 @@ class DipArtifactsStorage {
 
     await this._amqp.assertExchange('POLICY', 'topic', { durable: true });
 
-    const deployed = await this._amqp.assertQueue('contract.deployed.v1', { exclusive: false });
-    await this._amqp.bindQueue(deployed.queue, 'POLICY', 'contract.deployed.v1');
+    // TODO: Use @etherisc/microservice amqp io module
+    const deployed = await this._amqp.assertQueue('contract.contractDeployed.1.0', { exclusive: false });
+    await this._amqp.bindQueue(deployed.queue, 'POLICY', 'contract.contractDeployed.1.0');
     await this._amqp.consume(deployed.queue, this.saveArtifact.bind(this), { noAck: true });
 
-    const getArtifact = await this._amqp.assertQueue('contract.get_artifact.v1', { exclusive: false });
-    await this._amqp.bindQueue(getArtifact.queue, 'POLICY', 'contract.get_artifact.v1');
+    // TODO: Use @etherisc/microservice amqp io module
+    const getArtifact = await this._amqp.assertQueue('contract.artifactRequest.1.0', { exclusive: false });
+    await this._amqp.bindQueue(getArtifact.queue, 'POLICY', 'contract.artifactRequest.1.0');
     await this._amqp.consume(getArtifact.queue, this.sendArtifact.bind(this), { noAck: true });
 
-    const getArtifactList = await this._amqp.assertQueue('contract.get_artifact_list.v1', { exclusive: false });
-    await this._amqp.bindQueue(getArtifactList.queue, 'POLICY', 'contract.get_artifact_list.v1');
+    // TODO: Use @etherisc/microservice amqp io module
+    const getArtifactList = await this._amqp.assertQueue('contract.artifactListRequest.1.0', { exclusive: false });
+    await this._amqp.bindQueue(getArtifactList.queue, 'POLICY', 'contract.artifactListRequest.1.0');
     await this._amqp.consume(getArtifactList.queue, this.sendArtifactList.bind(this), { noAck: true });
   }
 
@@ -92,8 +95,11 @@ class DipArtifactsStorage {
         Prefix: prefix,
       }).promise();
       const list = response.Contents.map(o => o.Key.replace(prefix, '').replace('.json', ''));
+
       const answer = { network: content.network, version: content.version, list };
-      await this._amqp.publish('POLICY', 'contract.artifact_list.v1', Buffer.from(JSON.stringify(answer)), {
+
+      // TODO: Use @etherisc/microservice amqp io module
+      await this._amqp.publish('POLICY', 'contract.artifactList.1.0', Buffer.from(JSON.stringify(answer)), {
         headers: {
           originatorName: process.env.npm_package_name,
           originatorVersion: process.env.npm_package_version,
@@ -122,7 +128,8 @@ class DipArtifactsStorage {
       const answer = {
         network, version, contract, artifact,
       };
-      await this._amqp.publish('POLICY', 'contract.artifact.v1', Buffer.from(JSON.stringify(answer)), {
+      // TODO: Use @etherisc/microservice amqp io module
+      await this._amqp.publish('POLICY', 'contract.artifact.1.0', Buffer.from(JSON.stringify(answer)), {
         headers: {
           originatorName: process.env.npm_package_name,
           originatorVersion: process.env.npm_package_version,

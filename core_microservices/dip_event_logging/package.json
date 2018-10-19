@@ -1,20 +1,26 @@
 {
   "name": "@etherisc/dip_event_logging",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "migrate": "DATABASE_URL=postgresql://${POSTGRES_USER:-postgresql}:${POSTGRES_PASSWORD:-postgresql}@${POSTGRES_SERVICE_HOST:-localhost}:${POSTGRES_SERVICE_PORT:-5432}/${POSTGRES_DB:-postgresql} node-pg-migrate up --migrations-table dip_event_logging_migrations",
+    "migrate": "knex migrate:latest",
     "dev": "nodemon -L --inspect=0.0.0.0:9229 bootstrap.js",
-    "prod": "node bootstrap.js"
+    "prod": "node bootstrap.js",
+    "test": "NODE_ENV=test mocha",
+    "coverage": "nyc mocha",
+    "check:coverage": "nyc --check-coverage --statements 70 --functions 70 --lines 70 --branches 70 mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "amqplib": "^0.5.2",
-    "node-pg-migrate": "^3.11.0",
-    "pg": "^7.4.3"
+    "@etherisc/microservice": "^0.4.0-alpha",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "should": "^13.2.3",
+    "should-sinon": "0.0.6",
+    "sinon": "^6.3.5"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"

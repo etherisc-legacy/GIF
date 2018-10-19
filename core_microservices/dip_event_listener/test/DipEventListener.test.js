@@ -1,5 +1,6 @@
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
+const { deleteTestExchange } = require('@etherisc/microservice/test/helpers');
 const DipEventListener = require('../DipEventListener');
 
 
@@ -9,6 +10,7 @@ describe('DipEventListener microservice', () => {
       httpPort: 4000,
       rpcNode: process.env.WS_PROVIDER || 'ws://localhost:8545',
       networkName: process.env.NETWORK_NAME || 'development',
+      exchangeName: 'test_listener',
     });
     await this.microservice.bootstrap();
 
@@ -26,6 +28,7 @@ describe('DipEventListener microservice', () => {
   });
 
   after(async () => {
+    deleteTestExchange(this.amqp, 'test_listener');
     await this.microservice.shutdown();
   });
 
@@ -34,10 +37,13 @@ describe('DipEventListener microservice', () => {
     sinon.replace(this.microservice.app.web3.eth, 'getBlock', sinon.fake.returns({ timestamp: 1539267039 }));
 
     return new Promise(async (resolve) => {
-      await this.amqp.consume('POLICY', 'event_listener.decoded_event.v1', (message) => {
-        const content = JSON.parse(message.content.toString());
-        content.eventArgs.value.should.be.equal('0');
-        resolve();
+      await this.amqp.consume({
+        messageType: 'decodedEvent',
+        messageVersion: '1.*',
+        handler: ({ content, fields, properties }) => {
+          content.eventArgs.value.should.be.equal('0');
+          resolve();
+        },
       });
 
       await this.microservice.app.handleEvent({
