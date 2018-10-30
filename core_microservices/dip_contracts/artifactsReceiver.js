@@ -1,11 +1,10 @@
-const amqp = require('amqplib');
 const fs = require('promise-fs');
+const { fabric } = require('@etherisc/microservice');
 
 
-const amqpBroker = process.env.MESSAGE_BROKER || 'amqp://localhost:5672';
 const version = process.env.npm_package_version;
 const network = process.env.NETWORK || 'development';
-let ch;
+const { amqp, log } = fabric();
 let contracts;
 
 /**
@@ -13,23 +12,21 @@ let contracts;
  * @param {object} message
  * @return {void}
  */
-const requestArtifacts = (message) => {
+const requestArtifacts = ({ content, fields, properties }) => {
   try {
-    const content = JSON.parse(message.content.toString());
     if (content.network !== network || content.version !== version) return;
     contracts = content.list;
     if (contracts.length === 0) process.exit(0);
     contracts.forEach((contract) => {
-      // TODO: Use @etherisc/microservice amqp io module
-      ch.publish('POLICY', 'contract.artifactRequest.1.0', Buffer.from(JSON.stringify({ network, version, contract })), {
-        headers: {
-          originatorName: process.env.npm_package_name,
-          originatorVersion: process.env.npm_package_version,
-        },
+      amqp.publish({
+        messageType: 'artifactRequest',
+        messageVersion: '1.*',
+        content: { network, version, contract },
+        correlationId: '',
       });
     });
   } catch (e) {
-    console.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+    log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
   }
 };
 
@@ -38,51 +35,47 @@ const requestArtifacts = (message) => {
  * @param {object} message
  * @return {void}
  */
-const saveArtifact = async (message) => {
+const saveArtifact = async ({ content, fields, properties }) => {
   try {
-    const content = JSON.parse(message.content.toString());
     if (content.network !== network || content.version !== version) return;
     const { contract, artifact } = content;
     await fs.writeFile(`./build/contracts/${contract}.json`, artifact);
     contracts = contracts.filter(e => e !== contract);
     if (contracts.length === 0) process.exit(0);
   } catch (e) {
-    console.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+    log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
   }
 };
 
 (
   async () => {
     try {
-      const conn = await amqp.connect(amqpBroker);
-      ch = await conn.createChannel();
-      await ch.assertExchange('POLICY', 'topic', { durable: true });
+      await amqp.bootstrap();
 
-      let getArtifactList = await ch.assertQueue('contract.artifactListRequest.1.0', { exclusive: false });
-      while (getArtifactList.consumerCount === 0) {
-        getArtifactList = await ch.assertQueue('contract.artifactListRequest.1.0', { exclusive: false });
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      }
-
-      // TODO: Use @etherisc/microservice amqp io module
-      ch.publish('POLICY', getArtifactList.queue, Buffer.from(JSON.stringify({ network, version })), {
-        headers: {
-          originatorName: process.env.npm_package_name,
-          originatorVersion: process.env.npm_package_version,
-        },
+      await amqp.publish({
+        messageType: 'artifactListRequest',
+        messageVersion: '1.*',
+        content: { network, version },
       });
 
-      // TODO: Use @etherisc/microservice amqp io module
-      const artifactList = await ch.assertQueue('contract.artifactList.1.0', { exclusive: false });
-      await ch.bindQueue(artifactList.queue, 'POLICY', 'contract.artifactList.1.0');
-      await ch.consume(artifactList.queue, requestArtifacts, { noAck: true });
+      amqp.consume({
+        messageType: 'artifactList',
+        messageVersion: '1.*',
+        handler: requestArtifacts,
+      });
 
-      // TODO: Use @etherisc/microservice amqp io module
-      const artifact = await ch.assertQueue('contract.artifact.1.0', { exclusive: false });
-      await ch.bindQueue(artifact.queue, 'POLICY', 'contract.artifact.1.0');
-      await ch.consume(artifact.queue, saveArtifact, { noAck: true });
+      amqp.consume({
+        messageType: 'artifact',
+        messageVersion: '1.*',
+        handler: saveArtifact,
+      });
+
+      setTimeout(() => {
+        log.error(new Error('Failed to receive artifacts in 30s'));
+        process.exit(1);
+      }, 30 * 1000);
     } catch (e) {
-      console.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
       process.exit(1);
     }
   }

@@ -1,6 +1,7 @@
+const { bootstrap, isDockerHost } = require('@etherisc/microservice');
 const DipFiatPaymentGateway = require('./DipFiatPaymentGateway');
 
 
-const dipFiatPaymentGateway = new DipFiatPaymentGateway({ amqpBroker: process.env.MESSAGE_BROKER || 'amqp://localhost:5672' });
-
-dipFiatPaymentGateway.listen();
+bootstrap(DipFiatPaymentGateway, {
+  httpPort: isDockerHost() && !process.env.CI ? 3000 : 3014,
+});

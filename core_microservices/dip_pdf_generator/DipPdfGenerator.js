@@ -40,7 +40,7 @@ class DipPdfGenerator {
     await this._amqp.assertExchange(shared.exhanges.policy, 'topic', { durable: true });
 
     const policyCreateQ = await this._amqp.assertQueue('pdf_q', { exclusive: false });
-    await this._amqp.bindQueue(policyCreateQ.queue, shared.exhanges.policy, 'policy.issue_certificate.v1');
+    await this._amqp.bindQueue(policyCreateQ.queue, shared.exhanges.policy, '*.issueCertificate.*.*');
 
     await this._amqp.consume(
       policyCreateQ.queue,
@@ -62,7 +62,7 @@ class DipPdfGenerator {
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     this._amqp.publish(
-      shared.exhanges.policy, 'policy.certificate_issued.v1',
+      shared.exhanges.policy, 'policy.certificateIssued.v1',
       Buffer.from(JSON.stringify({ policyId: content.policyId })), {
         correlationId: message.properties.correlationId,
         headers: {

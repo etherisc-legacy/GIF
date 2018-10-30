@@ -78,3 +78,38 @@ const policyCreationError = require('./policyCreationError');
 
 
 module.exports.policyCreationError = makeVersionMatcher(policyCreationError);
+
+const stateChanged = require('./stateChanged');
+
+
+module.exports.stateChanged = makeVersionMatcher(stateChanged);
+
+const transactionCreated = require('./transactionCreated');
+
+
+module.exports.transactionCreated = makeVersionMatcher(transactionCreated);
+
+const chargeCard = require('./chargeCard');
+
+
+module.exports.chargeCard = makeVersionMatcher(chargeCard);
+
+const issueCertificate = require('./issueCertificate');
+
+
+module.exports.issueCertificate = makeVersionMatcher(issueCertificate);
+
+const payout = require('./payout');
+
+
+module.exports.payout = makeVersionMatcher(payout);
+
+const paidOut = require('./paidOut');
+
+
+module.exports.paidOut = makeVersionMatcher(paidOut);
+
+const cardCharged = require('./cardCharged');
+
+
+module.exports.cardCharged = makeVersionMatcher(cardCharged);

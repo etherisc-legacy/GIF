@@ -1,101 +1,73 @@
-const amqp = require('amqplib');
-
-
-const shared = {
-  exhanges: {
-    policy: 'POLICY',
-  },
-  queues: {
-    policyLog: 'policy.log',
-    policyCreate: 'policy.create',
-  },
-  topic: {
-    policyCreate: 'policy.create',
-    policyCreationSuccess: 'policy.creation_success',
-  },
-};
-
 /**
  * DIP Ethereum Client microservice
  */
 class DipEtheremClient {
   /**
    * Constructor
-   * @param {string} amqpBroker
+   * @param {object} amqp
    */
-  constructor({ amqpBroker }) {
-    this._amqpBroker = amqpBroker;
-    this._amqp = null;
+  constructor({ amqp }) {
+    this._amqp = amqp;
   }
 
   /**
    * Bootstap and listen
    * @return {Promise<void>}
    */
-  async listen() {
-    const conn = await amqp.connect(this._amqpBroker);
-
-    this._amqp = await conn.createChannel();
-
-    await this._amqp.assertExchange(shared.exhanges.policy, 'topic', { durable: true });
-
-    const q = await this._amqp.assertQueue('success_policies', { exclusive: false });
-
-    // TODO: amqp io module
-    await this._amqp.bindQueue(q.queue, shared.exhanges.policy, '*.policyCreationSuccess.1.0');
-
-    await this._amqp.consume(q.queue, this.createTransaction.bind(this), { noAck: true });
+  async bootstrap() {
+    await this._amqp.consume({
+      messageType: 'policyCreationSuccess',
+      messageVersion: '1.*',
+      handler: this.createTransaction.bind(this),
+    });
   }
 
   /**
    * Handle successful policy creation message
-   * @param {{}} message
+   * @param {{}} content
+   * @param {{}} fields
+   * @param {{}} properties
    * @return {Promise<void>}
    */
-  async createTransaction(message) {
+  async createTransaction({ content, fields, properties }) {
     // const { routingKey } = message.fields;
-    const content = JSON.parse(message.content.toString());
 
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.transaction_created.v1', Buffer.from(JSON.stringify({ policyId: content.policyId })), {
-      correlationId: message.properties.correlationId,
-      headers: {
-        originatorName: process.env.npm_package_name,
-        originatorVersion: process.env.npm_package_version,
-      },
+    await this._amqp.publish({
+      messageType: 'transactionCreated',
+      messageVersion: '1.*',
+      content: { policyId: content.policyId },
+      correlationId: properties.correlationId,
     });
 
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: content.policyId, state: 0 })), {
-      correlationId: message.properties.correlationId,
-      headers: {
-        originatorName: process.env.npm_package_name,
-        originatorVersion: process.env.npm_package_version,
-      },
+    await this._amqp.publish({
+      messageType: 'stateChanged',
+      messageVersion: '1.*',
+      content: { policyId: content.policyId, state: 0 },
+      correlationId: properties.correlationId,
     });
 
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: content.policyId, state: 1 })), {
-      correlationId: message.properties.correlationId,
-      headers: {
-        originatorName: process.env.npm_package_name,
-        originatorVersion: process.env.npm_package_version,
-      },
+    await this._amqp.publish({
+      messageType: 'stateChanged',
+      messageVersion: '1.*',
+      content: { policyId: content.policyId, state: 1 },
+      correlationId: properties.correlationId,
     });
 
-    await new Promise(resolve => setTimeout(resolve, 10000));
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
-    this._amqp.publish(shared.exhanges.policy, 'policy.state_changed.v1', Buffer.from(JSON.stringify({ policyId: content.policyId, state: 3 })), {
-      correlationId: message.properties.correlationId,
-      headers: {
-        originatorName: process.env.npm_package_name,
-        originatorVersion: process.env.npm_package_version,
-      },
+    await this._amqp.publish({
+      messageType: 'stateChanged',
+      messageVersion: '1.*',
+      content: { policyId: content.policyId, state: 3 },
+      correlationId: properties.correlationId,
     });
   }
 }

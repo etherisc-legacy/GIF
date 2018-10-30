@@ -126,7 +126,7 @@ const config = {
     },
     proxy: {
       '/api/ws': {
-        target: 'ws://localhost:3000',
+        target: 'ws://localhost:4000',
         logLevel: 'debug',
         ws: true,
       },

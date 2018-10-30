@@ -11,7 +11,7 @@ module.exports = (config) => {
   const db = new Database(config.db);
   const http = new HttpApp(config.httpPort);
 
-  const appName = _.last(process.env.npm_package_name.split('/'));
+  const appName = _.last((process.env.npm_package_name || '').split('/'));
   const appVersion = process.env.npm_package_version;
 
   const amqp = new Amqp(MESSAGE_BROKER || 'amqp://localhost:5672', appName, appVersion, config.exchangeName);

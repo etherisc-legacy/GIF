@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "knex migrate:latest",
-    "dev": "forever -w --spinSleepTime 1000 bootstrap.js",
+    "dev": "node bootstrap.js",
     "prod": "WS_PROVIDER=${WS_PROVIDER:-ws://dip-rpc-node:8545} node bootstrap.js",
     "test": "NODE_ENV=test mocha",
     "coverage": "nyc mocha",
@@ -24,8 +24,5 @@
     "sinon": "^6.3.5",
     "web3": "^1.0.0-beta.36",
     "websocket": "^1.0.28"
-  },
-  "devDependencies": {
-    "forever": "^0.15.3"
   }
 }

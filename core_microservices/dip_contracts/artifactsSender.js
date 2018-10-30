@@ -1,32 +1,28 @@
-const amqp = require('amqplib');
 const fs = require('promise-fs');
+const { fabric } = require('@etherisc/microservice');
 
 
-const amqpBroker = process.env.MESSAGE_BROKER || 'amqp://localhost:5672';
+const version = process.env.npm_package_version;
+const network = process.env.NETWORK || 'development';
+const { amqp, log } = fabric();
 
 (
   async () => {
     try {
-      const version = process.env.npm_package_version;
-      const network = process.env.NETWORK || 'development';
-      const conn = await amqp.connect(amqpBroker);
-      const ch = await conn.createChannel();
-
-      // TODO: Use @etherisc/microservice amqp io module
-      await ch.assertExchange('POLICY', 'topic', { durable: true });
+      await amqp.bootstrap();
       const files = await fs.readdir('./build/contracts');
       const artifacts = await Promise.all(files.map(file => fs.readFile(`./build/contracts/${file}`, 'utf-8')));
       artifacts.forEach((artifact) => {
-        ch.publish('POLICY', 'contract.contractDeployment.1.0', Buffer.from(JSON.stringify({ network, version, artifact })), {
-          headers: {
-            originatorName: process.env.npm_package_name,
-            originatorVersion: process.env.npm_package_version,
-          },
+        amqp.publish({
+          messageType: 'contractDeployment',
+          messageVersion: '1.*',
+          content: { network, version, artifact },
+          correlationId: '',
         });
       });
-      console.log('Published content of build folder');
+      log.info('Published content of build folder');
     } catch (e) {
-      console.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
       process.exit(1);
     }
   }

@@ -1,35 +1,7 @@
 const WebSocket = require('ws');
 const uuid = require('uuid/v1');
-const amqp = require('amqplib');
 const http = require('http');
 
-
-const shared = {
-  exhanges: {
-    policy: 'POLICY',
-  },
-  queues: {
-    policyLog: 'policy.log',
-    policyCreate: 'policy.create',
-  },
-  topic: {
-    policyCreate: 'policy.create',
-    policyCreationSuccess: 'policy.creation_success',
-  },
-};
-
-/**
- * Logger
- */
-class Logger {
-  /**
-   * Constructor
-   */
-  constructor() {
-    this.info = console.log;
-    this.error = console.error;
-  }
-}
 
 /**
  * Generic Insurance application wrapper
@@ -37,33 +9,28 @@ class Logger {
 class GenericInsurance {
   /**
    * Constructor
-   * @param {{}} app
+   * @param {string} amqp
+   * @param {string} config
+   * @param {string} log
    */
-  constructor(app) {
-    const logger = new Logger();
-
-    this._app = app;
+  constructor({ amqp, config, log }) {
+    this._wsPort = config.wsPort;
+    this._app = config.app;
     this._app.dip = this;
-    this._app.log = logger;
+    this._app.log = log;
 
-    this.log = logger;
+    this.log = log;
 
     this._connections = {};
 
-    this._amqp = null;
+    this._amqp = amqp;
   }
 
   /**
    * Bootstrap and listen
-   * @param {string} amqpBroker
-   * @param {string} wsPort
    * @return {*}
    */
-  async listen({ amqpBroker, wsPort }) {
-    const conn = await amqp.connect(amqpBroker);
-
-    this._amqp = await conn.createChannel();
-
+  async bootstrap() {
     const server = http.createServer(((req, res) => {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.write('{"status":200}');
@@ -72,46 +39,41 @@ class GenericInsurance {
 
     const wss = new WebSocket.Server({ server });
 
-    server.listen(wsPort);
+    server.listen(this._wsPort);
 
     wss.on('connection', ws => this.register(ws));
 
-    await this._amqp.assertExchange(shared.exhanges.policy, 'topic', { durable: true });
-
-    const q = await this._amqp.assertQueue(shared.queues.policyLog, { exclusive: false });
-    await this._amqp.bindQueue(q.queue, shared.exhanges.policy, '#');
-
-    await this._amqp.consume(q.queue, (message) => {
-      const content = JSON.parse(message.content.toString());
-
-      this.send(message.properties.correlationId, {
-        from: `${message.properties.headers.originatorName}.v${message.properties.headers.originatorVersion}`,
-        topic: message.fields.routingKey,
-        msg: message.content.toString(),
-      });
-
-      if (message.fields.routingKey === 'policy.state_changed.v1') {
-        this._app.onLogSetState(message.properties.correlationId, {
-          policyId: content.policyId,
-          state: JSON.parse(message.content.toString()).state,
+    await this._amqp.consume({
+      messageType: '*',
+      messagetypeVersion: '#',
+      handler: ({ content, fields, properties }) => {
+        this.send(properties.correlationId, {
+          from: `${properties.headers.originatorName}.v${properties.headers.originatorVersion}`,
+          topic: fields.routingKey,
+          msg: JSON.stringify(content),
         });
-      }
+      },
+    });
 
-      if (message.fields.routingKey === 'policy.card_charged.v1') {
-        this._app.onCardCharged(message.properties.correlationId, {
-          policyId: content.policyId,
-        });
-      }
+    await this._amqp.consume({
+      messageType: 'stateChanged',
+      messageVersion: '1.*',
+      handler: this._app.onLogSetState.bind(this._app),
+    });
 
-      if (message.fields.routingKey === 'policy.sertificate_issued.v1') {
-        this._app.onCertificateIssued(message.properties.correlationId, {
-          policyId: content.policyId,
-        });
-      }
-    }, { noAck: true });
+    await this._amqp.consume({
+      messageType: 'cardCharged',
+      messageVersion: '1.*',
+      handler: this._app.onCardCharged.bind(this._app),
+    });
 
+    await this._amqp.consume({
+      messageType: 'certificateIssued',
+      messageVersion: '1.*',
+      handler: this._app.onCertificateIssued.bind(this._app),
+    });
 
-    this.log.info(`${this._app.name} listening at ws://localhost:${wsPort}/ws`);
+    this.log.info(`${this._app.name} listening at ws://localhost:${this._wsPort}/ws`);
   }
 
   /**
@@ -170,13 +132,11 @@ class GenericInsurance {
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // TODO: Use @etherisc/microservice io amqp module
-    await this._amqp.publish('POLICY', 'etherisc_flight_delay_api.policyCreationRequest.1.0', Buffer.from(JSON.stringify(payload)), {
+    await this._amqp.publish({
+      messageType: 'policyCreationRequest',
+      messageVersion: '1.*',
+      content: payload,
       correlationId: clientId,
-      headers: {
-        originatorName: process.env.npm_package_name,
-        originatorVersion: process.env.npm_package_version,
-      },
     });
   }
 
@@ -187,23 +147,15 @@ class GenericInsurance {
    * @return {Promise<void>}
    */
   async chargeCard(correlationId, policyId) {
-    const key = 'policy.charge_card.v1';
-
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    await this._amqp.publish(
-      shared.exhanges.policy,
-      key,
-      Buffer.from(JSON.stringify({ policyId })),
-      {
-        correlationId,
-        headers: {
-          originatorName: process.env.npm_package_name,
-          originatorVersion: process.env.npm_package_version,
-        },
-      },
-    );
+    await this._amqp.publish({
+      messageType: 'chargeCard',
+      messageVersion: '1.*',
+      content: { policyId },
+      correlationId,
+    });
   }
 
   /**
@@ -213,23 +165,15 @@ class GenericInsurance {
    * @return {Promise<void>}
    */
   async payout(correlationId, policyId) {
-    const key = 'policy.payout.v1';
-
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    await this._amqp.publish(
-      shared.exhanges.policy,
-      key,
-      Buffer.from(JSON.stringify({ policyId })),
-      {
-        correlationId,
-        headers: {
-          originatorName: process.env.npm_package_name,
-          originatorVersion: process.env.npm_package_version,
-        },
-      },
-    );
+    await this._amqp.publish({
+      messageType: 'payout',
+      messageVersion: '1.*',
+      content: { policyId },
+      correlationId,
+    });
   }
 
   /**
@@ -239,23 +183,15 @@ class GenericInsurance {
    * @return {Promise<void>}
    */
   async issueCertificate(correlationId, policyId) {
-    const key = 'policy.issue_certificate.v1';
-
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    await this._amqp.publish(
-      shared.exhanges.policy,
-      key,
-      Buffer.from(JSON.stringify({ policyId })),
-      {
-        correlationId,
-        headers: {
-          originatorName: process.env.npm_package_name,
-          originatorVersion: process.env.npm_package_version,
-        },
-      },
-    );
+    await this._amqp.publish({
+      messageType: 'issueCertificate',
+      messageVersion: '1.*',
+      content: { policyId },
+      correlationId,
+    });
   }
 }
 

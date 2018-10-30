@@ -1,6 +1,7 @@
+const { bootstrap, isDockerHost } = require('@etherisc/microservice');
 const DipEthereumClient = require('./DipEtheremClient');
 
 
-const dipEthereumClient = new DipEthereumClient({ amqpBroker: process.env.MESSAGE_BROKER || 'amqp://localhost:5672' });
-
-dipEthereumClient.listen();
+bootstrap(DipEthereumClient, {
+  httpPort: isDockerHost() && !process.env.CI ? 3000 : 3013,
+});

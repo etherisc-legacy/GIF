@@ -104,14 +104,9 @@ describe('Etherisc Flight Delay API', () => {
     await connection.close();
     ws.close();
 
-    messages[0].routingKey.should.be.deepEqual('etherisc_flight_delay_api.policyCreationRequest.1.0');
-    messages[0].content.should.be.deepEqual(form);
+    const { policyId } = messages.filter(m => m.routingKey === 'dip_policy_storage.policyCreationSuccess.1.0')[0].content;
 
-    messages[1].routingKey.should.be.equal('dip_policy_storage.policyCreationSuccess.1.0');
-
-    const { policyId } = messages[1].content;
-
-    messages.should.be.deepEqual([
+    messages.should.be.containDeepOrdered([
       {
         routingKey: 'etherisc_flight_delay_api.policyCreationRequest.1.0',
         content: form,
@@ -121,43 +116,43 @@ describe('Etherisc Flight Delay API', () => {
         content: { policyId },
       },
       {
-        routingKey: 'policy.transaction_created.v1',
+        routingKey: 'dip_ethereum_client.transactionCreated.1.0',
         content: { policyId },
       },
       {
-        routingKey: 'policy.state_changed.v1',
+        routingKey: 'dip_ethereum_client.stateChanged.1.0',
         content: { policyId, state: 0 },
       },
       {
-        routingKey: 'policy.state_changed.v1',
+        routingKey: 'dip_ethereum_client.stateChanged.1.0',
         content: { policyId, state: 1 },
       },
       {
-        routingKey: 'policy.charge_card.v1',
+        routingKey: 'etherisc_flight_delay_api.chargeCard.1.0',
         content: { policyId },
       },
       {
-        routingKey: 'policy.card_charged.v1',
+        routingKey: 'dip_fiat_payment_gateway.cardCharged.1.0',
         content: { policyId },
       },
       {
-        routingKey: 'policy.issue_certificate.v1',
+        routingKey: 'etherisc_flight_delay_api.issueCertificate.1.0',
         content: { policyId },
       },
       {
-        routingKey: 'policy.certificate_issued.v1',
+        routingKey: 'policy.certificateIssued.v1',
         content: { policyId },
       },
       {
-        routingKey: 'policy.state_changed.v1',
+        routingKey: 'dip_ethereum_client.stateChanged.1.0',
         content: { policyId, state: 3 },
       },
       {
-        routingKey: 'policy.payout.v1',
+        routingKey: 'etherisc_flight_delay_api.payout.1.0',
         content: { policyId },
       },
       {
-        routingKey: 'policy.paid_out.v1',
+        routingKey: 'dip_fiat_payout_gateway.paidOut.1.0',
         content: { policyId },
       },
     ]);
