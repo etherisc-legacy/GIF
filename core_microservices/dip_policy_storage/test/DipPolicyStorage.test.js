@@ -29,11 +29,9 @@ describe('DipPolicyStorage microservice', () => {
 
   after(async () => {
     await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${tables[key]} cascade`)));
-    deleteTestExchange(this.amqp, 'test_storage');
+    await deleteTestExchange(this.amqp, 'test_storage');
 
-    this.microservice.amqp.shutdown();
-    this.microservice.db.shutdown();
-    this.microservice.http.shutdown();
+    this.microservice.shutdown();
   });
 
   it('onPolicyCreateMessage should create policy and new customer if it does not exists', async () => {

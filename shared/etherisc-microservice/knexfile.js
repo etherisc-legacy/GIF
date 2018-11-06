@@ -23,12 +23,12 @@ module.exports = {
   triggers: {
     onUpdateTrigger: {
       up: table => `
-            CREATE TRIGGER ${table}_updated
+            CREATE TRIGGER ${table.replace('.', '_')}_updated
             BEFORE UPDATE ON ${table}
             FOR EACH ROW
             EXECUTE PROCEDURE update_updated()
           `,
-      down: table => `DROP TRIGGER ${table}_updated on ${table}`,
+      down: table => `DROP TRIGGER ${table.replace('.', '_')}_updated on ${table}`,
     },
   },
   functions: {
