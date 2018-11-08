@@ -5,9 +5,9 @@ class DipEventLogging {
   /**
   * Constructor
   * @param {Amqp} amqp
-  * @param {?} db
-  * @param {?} log
-  * @param {?} router
+  * @param {Object} db
+  * @param {Object} log
+  * @param {Object} router
   * */
   constructor({
     amqp, db, log, router,

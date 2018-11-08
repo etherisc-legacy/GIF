@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 224,
+  "end": 229,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 7,
+      "line": 8,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 224,
+    "end": 229,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 7,
+        "line": 8,
         "column": 0
       }
     },
@@ -31,7 +31,7 @@
       {
         "type": "ImportDeclaration",
         "start": 0,
-        "end": 60,
+        "end": 65,
         "loc": {
           "start": {
             "line": 1,
@@ -39,35 +39,170 @@
           },
           "end": {
             "line": 1,
+            "column": 65
+          }
+        },
+        "specifiers": [
+          {
+            "type": "ImportSpecifier",
+            "start": 9,
+            "end": 18,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 18
+              }
+            },
+            "imported": {
+              "type": "Identifier",
+              "start": 9,
+              "end": 18,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 9
+                },
+                "end": {
+                  "line": 1,
+                  "column": 18
+                },
+                "identifierName": "bootstrap"
+              },
+              "name": "bootstrap"
+            },
+            "local": {
+              "type": "Identifier",
+              "start": 9,
+              "end": 18,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 9
+                },
+                "end": {
+                  "line": 1,
+                  "column": 18
+                },
+                "identifierName": "bootstrap"
+              },
+              "name": "bootstrap"
+            }
+          },
+          {
+            "type": "ImportSpecifier",
+            "start": 20,
+            "end": 32,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 20
+              },
+              "end": {
+                "line": 1,
+                "column": 32
+              }
+            },
+            "imported": {
+              "type": "Identifier",
+              "start": 20,
+              "end": 32,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 20
+                },
+                "end": {
+                  "line": 1,
+                  "column": 32
+                },
+                "identifierName": "isDockerHost"
+              },
+              "name": "isDockerHost"
+            },
+            "local": {
+              "type": "Identifier",
+              "start": 20,
+              "end": 32,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 20
+                },
+                "end": {
+                  "line": 1,
+                  "column": 32
+                },
+                "identifierName": "isDockerHost"
+              },
+              "name": "isDockerHost"
+            }
+          }
+        ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 40,
+          "end": 64,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 40
+            },
+            "end": {
+              "line": 1,
+              "column": 64
+            }
+          },
+          "extra": {
+            "rawValue": "@etherisc/microservice",
+            "raw": "'@etherisc/microservice'"
+          },
+          "value": "@etherisc/microservice"
+        }
+      },
+      {
+        "type": "ImportDeclaration",
+        "start": 66,
+        "end": 126,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
             "column": 60
           }
         },
         "specifiers": [
           {
             "type": "ImportDefaultSpecifier",
-            "start": 7,
-            "end": 28,
+            "start": 73,
+            "end": 94,
             "loc": {
               "start": {
-                "line": 1,
+                "line": 2,
                 "column": 7
               },
               "end": {
-                "line": 1,
+                "line": 2,
                 "column": 28
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 7,
-              "end": 28,
+              "start": 73,
+              "end": 94,
               "loc": {
                 "start": {
-                  "line": 1,
+                  "line": 2,
                   "column": 7
                 },
                 "end": {
-                  "line": 1,
+                  "line": 2,
                   "column": 28
                 },
                 "identifierName": "DipFiatPaymentGateway"
@@ -78,15 +213,15 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 34,
-          "end": 59,
+          "start": 100,
+          "end": 125,
           "loc": {
             "start": {
-              "line": 1,
+              "line": 2,
               "column": 34
             },
             "end": {
-              "line": 1,
+              "line": 2,
               "column": 59
             }
           },
@@ -98,186 +233,235 @@
         }
       },
       {
-        "type": "VariableDeclaration",
-        "start": 63,
-        "end": 190,
+        "type": "ExpressionStatement",
+        "start": 129,
+        "end": 228,
         "loc": {
           "start": {
-            "line": 4,
+            "line": 5,
             "column": 0
           },
           "end": {
-            "line": 4,
-            "column": 127
+            "line": 7,
+            "column": 3
           }
         },
-        "declarations": [
-          {
-            "type": "VariableDeclarator",
-            "start": 69,
-            "end": 189,
+        "expression": {
+          "type": "CallExpression",
+          "start": 129,
+          "end": 227,
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 0
+            },
+            "end": {
+              "line": 7,
+              "column": 2
+            }
+          },
+          "callee": {
+            "type": "Identifier",
+            "start": 129,
+            "end": 138,
             "loc": {
               "start": {
-                "line": 4,
-                "column": 6
+                "line": 5,
+                "column": 0
               },
               "end": {
-                "line": 4,
-                "column": 126
-              }
-            },
-            "id": {
-              "type": "Identifier",
-              "start": 69,
-              "end": 90,
-              "loc": {
-                "start": {
-                  "line": 4,
-                  "column": 6
-                },
-                "end": {
-                  "line": 4,
-                  "column": 27
-                },
-                "identifierName": "dipFiatPaymentGateway"
+                "line": 5,
+                "column": 9
               },
-              "name": "dipFiatPaymentGateway"
+              "identifierName": "bootstrap"
             },
-            "init": {
-              "type": "NewExpression",
-              "start": 93,
-              "end": 189,
+            "name": "bootstrap"
+          },
+          "arguments": [
+            {
+              "type": "Identifier",
+              "start": 139,
+              "end": 160,
               "loc": {
                 "start": {
-                  "line": 4,
-                  "column": 30
+                  "line": 5,
+                  "column": 10
                 },
                 "end": {
-                  "line": 4,
-                  "column": 126
+                  "line": 5,
+                  "column": 31
+                },
+                "identifierName": "DipFiatPaymentGateway"
+              },
+              "name": "DipFiatPaymentGateway"
+            },
+            {
+              "type": "ObjectExpression",
+              "start": 162,
+              "end": 226,
+              "loc": {
+                "start": {
+                  "line": 5,
+                  "column": 33
+                },
+                "end": {
+                  "line": 7,
+                  "column": 1
                 }
               },
-              "callee": {
-                "type": "Identifier",
-                "start": 97,
-                "end": 118,
-                "loc": {
-                  "start": {
-                    "line": 4,
-                    "column": 34
-                  },
-                  "end": {
-                    "line": 4,
-                    "column": 55
-                  },
-                  "identifierName": "DipFiatPaymentGateway"
-                },
-                "name": "DipFiatPaymentGateway"
-              },
-              "arguments": [
+              "properties": [
                 {
-                  "type": "ObjectExpression",
-                  "start": 119,
-                  "end": 188,
+                  "type": "ObjectProperty",
+                  "start": 166,
+                  "end": 223,
                   "loc": {
                     "start": {
-                      "line": 4,
-                      "column": 56
+                      "line": 6,
+                      "column": 2
                     },
                     "end": {
-                      "line": 4,
-                      "column": 125
+                      "line": 6,
+                      "column": 59
                     }
                   },
-                  "properties": [
-                    {
-                      "type": "ObjectProperty",
-                      "start": 121,
-                      "end": 186,
+                  "method": false,
+                  "shorthand": false,
+                  "computed": false,
+                  "key": {
+                    "type": "Identifier",
+                    "start": 166,
+                    "end": 174,
+                    "loc": {
+                      "start": {
+                        "line": 6,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 10
+                      },
+                      "identifierName": "httpPort"
+                    },
+                    "name": "httpPort"
+                  },
+                  "value": {
+                    "type": "ConditionalExpression",
+                    "start": 176,
+                    "end": 223,
+                    "loc": {
+                      "start": {
+                        "line": 6,
+                        "column": 12
+                      },
+                      "end": {
+                        "line": 6,
+                        "column": 59
+                      }
+                    },
+                    "test": {
+                      "type": "LogicalExpression",
+                      "start": 176,
+                      "end": 209,
                       "loc": {
                         "start": {
-                          "line": 4,
-                          "column": 58
+                          "line": 6,
+                          "column": 12
                         },
                         "end": {
-                          "line": 4,
-                          "column": 123
+                          "line": 6,
+                          "column": 45
                         }
                       },
-                      "method": false,
-                      "shorthand": false,
-                      "computed": false,
-                      "key": {
-                        "type": "Identifier",
-                        "start": 121,
-                        "end": 131,
+                      "left": {
+                        "type": "CallExpression",
+                        "start": 176,
+                        "end": 190,
                         "loc": {
                           "start": {
-                            "line": 4,
-                            "column": 58
+                            "line": 6,
+                            "column": 12
                           },
                           "end": {
-                            "line": 4,
-                            "column": 68
-                          },
-                          "identifierName": "amqpBroker"
-                        },
-                        "name": "amqpBroker"
-                      },
-                      "value": {
-                        "type": "LogicalExpression",
-                        "start": 133,
-                        "end": 186,
-                        "loc": {
-                          "start": {
-                            "line": 4,
-                            "column": 70
-                          },
-                          "end": {
-                            "line": 4,
-                            "column": 123
+                            "line": 6,
+                            "column": 26
                           }
                         },
-                        "left": {
-                          "type": "MemberExpression",
-                          "start": 133,
-                          "end": 159,
+                        "callee": {
+                          "type": "Identifier",
+                          "start": 176,
+                          "end": 188,
                           "loc": {
                             "start": {
-                              "line": 4,
-                              "column": 70
+                              "line": 6,
+                              "column": 12
                             },
                             "end": {
-                              "line": 4,
-                              "column": 96
+                              "line": 6,
+                              "column": 24
+                            },
+                            "identifierName": "isDockerHost"
+                          },
+                          "name": "isDockerHost"
+                        },
+                        "arguments": []
+                      },
+                      "operator": "&&",
+                      "right": {
+                        "type": "UnaryExpression",
+                        "start": 194,
+                        "end": 209,
+                        "loc": {
+                          "start": {
+                            "line": 6,
+                            "column": 30
+                          },
+                          "end": {
+                            "line": 6,
+                            "column": 45
+                          }
+                        },
+                        "operator": "!",
+                        "prefix": true,
+                        "argument": {
+                          "type": "MemberExpression",
+                          "start": 195,
+                          "end": 209,
+                          "loc": {
+                            "start": {
+                              "line": 6,
+                              "column": 31
+                            },
+                            "end": {
+                              "line": 6,
+                              "column": 45
                             }
                           },
                           "object": {
                             "type": "MemberExpression",
-                            "start": 133,
-                            "end": 144,
+                            "start": 195,
+                            "end": 206,
                             "loc": {
                               "start": {
-                                "line": 4,
-                                "column": 70
+                                "line": 6,
+                                "column": 31
                               },
                               "end": {
-                                "line": 4,
-                                "column": 81
+                                "line": 6,
+                                "column": 42
                               }
                             },
                             "object": {
                               "type": "Identifier",
-                              "start": 133,
-                              "end": 140,
+                              "start": 195,
+                              "end": 202,
                               "loc": {
                                 "start": {
-                                  "line": 4,
-                                  "column": 70
+                                  "line": 6,
+                                  "column": 31
                                 },
                                 "end": {
-                                  "line": 4,
-                                  "column": 77
+                                  "line": 6,
+                                  "column": 38
                                 },
                                 "identifierName": "process"
                               },
@@ -285,16 +469,16 @@
                             },
                             "property": {
                               "type": "Identifier",
-                              "start": 141,
-                              "end": 144,
+                              "start": 203,
+                              "end": 206,
                               "loc": {
                                 "start": {
-                                  "line": 4,
-                                  "column": 78
+                                  "line": 6,
+                                  "column": 39
                                 },
                                 "end": {
-                                  "line": 4,
-                                  "column": 81
+                                  "line": 6,
+                                  "column": 42
                                 },
                                 "identifierName": "env"
                               },
@@ -304,133 +488,73 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 145,
-                            "end": 159,
+                            "start": 207,
+                            "end": 209,
                             "loc": {
                               "start": {
-                                "line": 4,
-                                "column": 82
+                                "line": 6,
+                                "column": 43
                               },
                               "end": {
-                                "line": 4,
-                                "column": 96
+                                "line": 6,
+                                "column": 45
                               },
-                              "identifierName": "MESSAGE_BROKER"
+                              "identifierName": "CI"
                             },
-                            "name": "MESSAGE_BROKER"
+                            "name": "CI"
                           },
                           "computed": false
                         },
-                        "operator": "||",
-                        "right": {
-                          "type": "StringLiteral",
-                          "start": 163,
-                          "end": 186,
-                          "loc": {
-                            "start": {
-                              "line": 4,
-                              "column": 100
-                            },
-                            "end": {
-                              "line": 4,
-                              "column": 123
-                            }
-                          },
-                          "extra": {
-                            "rawValue": "amqp://localhost:5672",
-                            "raw": "'amqp://localhost:5672'"
-                          },
-                          "value": "amqp://localhost:5672"
+                        "extra": {
+                          "parenthesizedArgument": false
                         }
                       }
+                    },
+                    "consequent": {
+                      "type": "NumericLiteral",
+                      "start": 212,
+                      "end": 216,
+                      "loc": {
+                        "start": {
+                          "line": 6,
+                          "column": 48
+                        },
+                        "end": {
+                          "line": 6,
+                          "column": 52
+                        }
+                      },
+                      "extra": {
+                        "rawValue": 3000,
+                        "raw": "3000"
+                      },
+                      "value": 3000
+                    },
+                    "alternate": {
+                      "type": "NumericLiteral",
+                      "start": 219,
+                      "end": 223,
+                      "loc": {
+                        "start": {
+                          "line": 6,
+                          "column": 55
+                        },
+                        "end": {
+                          "line": 6,
+                          "column": 59
+                        }
+                      },
+                      "extra": {
+                        "rawValue": 3014,
+                        "raw": "3014"
+                      },
+                      "value": 3014
                     }
-                  ]
+                  }
                 }
               ]
             }
-          }
-        ],
-        "kind": "const"
-      },
-      {
-        "type": "ExpressionStatement",
-        "start": 192,
-        "end": 223,
-        "loc": {
-          "start": {
-            "line": 6,
-            "column": 0
-          },
-          "end": {
-            "line": 6,
-            "column": 31
-          }
-        },
-        "expression": {
-          "type": "CallExpression",
-          "start": 192,
-          "end": 222,
-          "loc": {
-            "start": {
-              "line": 6,
-              "column": 0
-            },
-            "end": {
-              "line": 6,
-              "column": 30
-            }
-          },
-          "callee": {
-            "type": "MemberExpression",
-            "start": 192,
-            "end": 220,
-            "loc": {
-              "start": {
-                "line": 6,
-                "column": 0
-              },
-              "end": {
-                "line": 6,
-                "column": 28
-              }
-            },
-            "object": {
-              "type": "Identifier",
-              "start": 192,
-              "end": 213,
-              "loc": {
-                "start": {
-                  "line": 6,
-                  "column": 0
-                },
-                "end": {
-                  "line": 6,
-                  "column": 21
-                },
-                "identifierName": "dipFiatPaymentGateway"
-              },
-              "name": "dipFiatPaymentGateway"
-            },
-            "property": {
-              "type": "Identifier",
-              "start": 214,
-              "end": 220,
-              "loc": {
-                "start": {
-                  "line": 6,
-                  "column": 22
-                },
-                "end": {
-                  "line": 6,
-                  "column": 28
-                },
-                "identifierName": "listen"
-              },
-              "name": "listen"
-            },
-            "computed": false
-          },
-          "arguments": []
+          ]
         }
       }
     ],
@@ -468,6 +592,241 @@
     },
     {
       "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 7,
+      "end": 8,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 7
+        },
+        "end": {
+          "line": 1,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "bootstrap",
+      "start": 9,
+      "end": 18,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 9
+        },
+        "end": {
+          "line": 1,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 18,
+      "end": 19,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 18
+        },
+        "end": {
+          "line": 1,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "isDockerHost",
+      "start": 20,
+      "end": 32,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 20
+        },
+        "end": {
+          "line": 1,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 33,
+      "end": 34,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 33
+        },
+        "end": {
+          "line": 1,
+          "column": 34
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 35,
+      "end": 39,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 35
+        },
+        "end": {
+          "line": 1,
+          "column": 39
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "@etherisc/microservice",
+      "start": 40,
+      "end": 64,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 40
+        },
+        "end": {
+          "line": 1,
+          "column": 64
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 64,
+      "end": 65,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 64
+        },
+        "end": {
+          "line": 1,
+          "column": 65
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "import",
+        "keyword": "import",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "import",
+      "start": 66,
+      "end": 72,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
         "label": "name",
         "beforeExpr": false,
         "startsExpr": true,
@@ -479,15 +838,15 @@
         "binop": null
       },
       "value": "DipFiatPaymentGateway",
-      "start": 7,
-      "end": 28,
+      "start": 73,
+      "end": 94,
       "loc": {
         "start": {
-          "line": 1,
+          "line": 2,
           "column": 7
         },
         "end": {
-          "line": 1,
+          "line": 2,
           "column": 28
         }
       }
@@ -505,15 +864,15 @@
         "binop": null
       },
       "value": "from",
-      "start": 29,
-      "end": 33,
+      "start": 95,
+      "end": 99,
       "loc": {
         "start": {
-          "line": 1,
+          "line": 2,
           "column": 29
         },
         "end": {
-          "line": 1,
+          "line": 2,
           "column": 33
         }
       }
@@ -532,15 +891,15 @@
         "updateContext": null
       },
       "value": "./DipFiatPaymentGateway",
-      "start": 34,
-      "end": 59,
+      "start": 100,
+      "end": 125,
       "loc": {
         "start": {
-          "line": 1,
+          "line": 2,
           "column": 34
         },
         "end": {
-          "line": 1,
+          "line": 2,
           "column": 59
         }
       }
@@ -558,44 +917,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 59,
-      "end": 60,
+      "start": 125,
+      "end": 126,
       "loc": {
         "start": {
-          "line": 1,
+          "line": 2,
           "column": 59
         },
         "end": {
-          "line": 1,
+          "line": 2,
           "column": 60
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "const",
-        "keyword": "const",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "value": "const",
-      "start": 63,
-      "end": 68,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 0
-        },
-        "end": {
-          "line": 4,
-          "column": 5
         }
       }
     },
@@ -611,51 +942,23 @@
         "postfix": false,
         "binop": null
       },
-      "value": "dipFiatPaymentGateway",
-      "start": 69,
-      "end": 90,
+      "value": "bootstrap",
+      "start": 129,
+      "end": 138,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 6
+          "line": 5,
+          "column": 0
         },
         "end": {
-          "line": 4,
-          "column": 27
+          "line": 5,
+          "column": 9
         }
       }
     },
     {
       "type": {
-        "label": "=",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": true,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "value": "=",
-      "start": 91,
-      "end": 92,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 28
-        },
-        "end": {
-          "line": 4,
-          "column": 29
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "new",
-        "keyword": "new",
+        "label": "(",
         "beforeExpr": true,
         "startsExpr": true,
         "rightAssociative": false,
@@ -663,20 +966,18 @@
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": null,
-        "updateContext": null
+        "binop": null
       },
-      "value": "new",
-      "start": 93,
-      "end": 96,
+      "start": 138,
+      "end": 139,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 30
+          "line": 5,
+          "column": 9
         },
         "end": {
-          "line": 4,
-          "column": 33
+          "line": 5,
+          "column": 10
         }
       }
     },
@@ -693,41 +994,42 @@
         "binop": null
       },
       "value": "DipFiatPaymentGateway",
-      "start": 97,
-      "end": 118,
+      "start": 139,
+      "end": 160,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 34
+          "line": 5,
+          "column": 10
         },
         "end": {
-          "line": 4,
-          "column": 55
+          "line": 5,
+          "column": 31
         }
       }
     },
     {
       "type": {
-        "label": "(",
+        "label": ",",
         "beforeExpr": true,
-        "startsExpr": true,
+        "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": null
+        "binop": null,
+        "updateContext": null
       },
-      "start": 118,
-      "end": 119,
+      "start": 160,
+      "end": 161,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 55
+          "line": 5,
+          "column": 31
         },
         "end": {
-          "line": 4,
-          "column": 56
+          "line": 5,
+          "column": 32
         }
       }
     },
@@ -743,16 +1045,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 119,
-      "end": 120,
+      "start": 162,
+      "end": 163,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 56
+          "line": 5,
+          "column": 33
         },
         "end": {
-          "line": 4,
-          "column": 57
+          "line": 5,
+          "column": 34
         }
       }
     },
@@ -768,17 +1070,17 @@
         "postfix": false,
         "binop": null
       },
-      "value": "amqpBroker",
-      "start": 121,
-      "end": 131,
+      "value": "httpPort",
+      "start": 166,
+      "end": 174,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 58
+          "line": 6,
+          "column": 2
         },
         "end": {
-          "line": 4,
-          "column": 68
+          "line": 6,
+          "column": 10
         }
       }
     },
@@ -795,16 +1097,146 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 131,
-      "end": 132,
+      "start": 174,
+      "end": 175,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 68
+          "line": 6,
+          "column": 10
         },
         "end": {
-          "line": 4,
-          "column": 69
+          "line": 6,
+          "column": 11
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "isDockerHost",
+      "start": 176,
+      "end": 188,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 12
+        },
+        "end": {
+          "line": 6,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 188,
+      "end": 189,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 24
+        },
+        "end": {
+          "line": 6,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 189,
+      "end": 190,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 25
+        },
+        "end": {
+          "line": 6,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "&&",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": 2,
+        "updateContext": null
+      },
+      "value": "&&",
+      "start": 191,
+      "end": 193,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 27
+        },
+        "end": {
+          "line": 6,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "prefix",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": true,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "!",
+      "start": 194,
+      "end": 195,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 30
+        },
+        "end": {
+          "line": 6,
+          "column": 31
         }
       }
     },
@@ -821,16 +1253,16 @@
         "binop": null
       },
       "value": "process",
-      "start": 133,
-      "end": 140,
+      "start": 195,
+      "end": 202,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 70
+          "line": 6,
+          "column": 31
         },
         "end": {
-          "line": 4,
-          "column": 77
+          "line": 6,
+          "column": 38
         }
       }
     },
@@ -847,16 +1279,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 140,
-      "end": 141,
+      "start": 202,
+      "end": 203,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 77
+          "line": 6,
+          "column": 38
         },
         "end": {
-          "line": 4,
-          "column": 78
+          "line": 6,
+          "column": 39
         }
       }
     },
@@ -873,16 +1305,16 @@
         "binop": null
       },
       "value": "env",
-      "start": 141,
-      "end": 144,
+      "start": 203,
+      "end": 206,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 78
+          "line": 6,
+          "column": 39
         },
         "end": {
-          "line": 4,
-          "column": 81
+          "line": 6,
+          "column": 42
         }
       }
     },
@@ -899,16 +1331,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 144,
-      "end": 145,
+      "start": 206,
+      "end": 207,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 81
+          "line": 6,
+          "column": 42
         },
         "end": {
-          "line": 4,
-          "column": 82
+          "line": 6,
+          "column": 43
         }
       }
     },
@@ -924,23 +1356,23 @@
         "postfix": false,
         "binop": null
       },
-      "value": "MESSAGE_BROKER",
-      "start": 145,
-      "end": 159,
+      "value": "CI",
+      "start": 207,
+      "end": 209,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 82
+          "line": 6,
+          "column": 43
         },
         "end": {
-          "line": 4,
-          "column": 96
+          "line": 6,
+          "column": 45
         }
       }
     },
     {
       "type": {
-        "label": "||",
+        "label": "?",
         "beforeExpr": true,
         "startsExpr": false,
         "rightAssociative": false,
@@ -948,26 +1380,25 @@
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": 1,
+        "binop": null,
         "updateContext": null
       },
-      "value": "||",
-      "start": 160,
-      "end": 162,
+      "start": 210,
+      "end": 211,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 97
+          "line": 6,
+          "column": 46
         },
         "end": {
-          "line": 4,
-          "column": 99
+          "line": 6,
+          "column": 47
         }
       }
     },
     {
       "type": {
-        "label": "string",
+        "label": "num",
         "beforeExpr": false,
         "startsExpr": true,
         "rightAssociative": false,
@@ -978,17 +1409,96 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "amqp://localhost:5672",
-      "start": 163,
-      "end": 186,
+      "value": 3000,
+      "start": 212,
+      "end": 216,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 100
+          "line": 6,
+          "column": 48
         },
         "end": {
-          "line": 4,
-          "column": 123
+          "line": 6,
+          "column": 52
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ":",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 217,
+      "end": 218,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 53
+        },
+        "end": {
+          "line": 6,
+          "column": 54
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "num",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": 3014,
+      "start": 219,
+      "end": 223,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 55
+        },
+        "end": {
+          "line": 6,
+          "column": 59
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ",",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 223,
+      "end": 224,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 59
+        },
+        "end": {
+          "line": 6,
+          "column": 60
         }
       }
     },
@@ -1004,170 +1514,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 187,
-      "end": 188,
+      "start": 225,
+      "end": 226,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 124
-        },
-        "end": {
-          "line": 4,
-          "column": 125
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ")",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 188,
-      "end": 189,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 125
-        },
-        "end": {
-          "line": 4,
-          "column": 126
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ";",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 189,
-      "end": 190,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 126
-        },
-        "end": {
-          "line": 4,
-          "column": 127
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "dipFiatPaymentGateway",
-      "start": 192,
-      "end": 213,
-      "loc": {
-        "start": {
-          "line": 6,
+          "line": 7,
           "column": 0
         },
         "end": {
-          "line": 6,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ".",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 213,
-      "end": 214,
-      "loc": {
-        "start": {
-          "line": 6,
-          "column": 21
-        },
-        "end": {
-          "line": 6,
-          "column": 22
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "listen",
-      "start": 214,
-      "end": 220,
-      "loc": {
-        "start": {
-          "line": 6,
-          "column": 22
-        },
-        "end": {
-          "line": 6,
-          "column": 28
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "(",
-        "beforeExpr": true,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 220,
-      "end": 221,
-      "loc": {
-        "start": {
-          "line": 6,
-          "column": 28
-        },
-        "end": {
-          "line": 6,
-          "column": 29
+          "line": 7,
+          "column": 1
         }
       }
     },
@@ -1183,16 +1539,16 @@
         "postfix": false,
         "binop": null
       },
-      "start": 221,
-      "end": 222,
+      "start": 226,
+      "end": 227,
       "loc": {
         "start": {
-          "line": 6,
-          "column": 29
+          "line": 7,
+          "column": 1
         },
         "end": {
-          "line": 6,
-          "column": 30
+          "line": 7,
+          "column": 2
         }
       }
     },
@@ -1209,16 +1565,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 222,
-      "end": 223,
+      "start": 227,
+      "end": 228,
       "loc": {
         "start": {
-          "line": 6,
-          "column": 30
+          "line": 7,
+          "column": 2
         },
         "end": {
-          "line": 6,
-          "column": 31
+          "line": 7,
+          "column": 3
         }
       }
     },
@@ -1235,15 +1591,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 224,
-      "end": 224,
+      "start": 229,
+      "end": 229,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 8,
           "column": 0
         },
         "end": {
-          "line": 7,
+          "line": 8,
           "column": 0
         }
       }

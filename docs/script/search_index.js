@@ -1,128 +1,386 @@
 window.esdocSearchIndex = [
   [
-    "dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp",
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp",
     "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html",
-    "<span>Amqp</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/index.js</span>",
+    "<span>Amqp</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/index.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/root/index.js~app",
+    "@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/root/index.js~app",
     "class/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/Root/index.js~App.html",
-    "<span>App</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/Root/index.js</span>",
+    "<span>App</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/src/containers/Root/index.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/commands/collectcoverage.js~collectcoverage",
+    "@etherisc/dip-platform/dip-platform/commands/collectcoverage.js~collectcoverage",
     "class/dip-platform/commands/collectCoverage.js~CollectCoverage.html",
-    "<span>CollectCoverage</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/commands/collectCoverage.js</span>",
+    "<span>CollectCoverage</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/commands/collectCoverage.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/commands/deploy.js~deploy",
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/customer.js~customer",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Customer.js~Customer.html",
+    "<span>Customer</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/Customer.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/customerextra.js~customerextra",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/CustomerExtra.js~CustomerExtra.html",
+    "<span>CustomerExtra</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/CustomerExtra.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/db/index.js~database",
+    "class/dip-platform/shared/etherisc-microservice/io/db/index.js~Database.html",
+    "<span>Database</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/db/index.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/commands/deploy.js~deploy",
     "class/dip-platform/commands/deploy.js~Deploy.html",
-    "<span>Deploy</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/commands/deploy.js</span>",
+    "<span>Deploy</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/commands/deploy.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/core_microservices/dip_ethereum_client/dipetheremclient.js~dipetheremclient",
+    "@etherisc/dip-platform/dip-platform/commands/deploysecret.js~deploysecret",
+    "class/dip-platform/commands/deploySecret.js~DeploySecret.html",
+    "<span>DeploySecret</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/commands/deploySecret.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html",
+    "<span>DipArtifactsStorage</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_ethereum_client/dipetheremclient.js~dipetheremclient",
     "class/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient.html",
-    "<span>DipEtheremClient</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js</span>",
+    "<span>DipEtheremClient</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging",
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html",
+    "<span>DipEventListener</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_event_listener/DipEventListener.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging",
     "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html",
-    "<span>DipEventLogging</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js</span>",
+    "<span>DipEventLogging</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/core_microservices/dip_fiat_payment_gateway/dipfiatpaymentgateway.js~dipfiatpaymentgateway",
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_fiat_payment_gateway/dipfiatpaymentgateway.js~dipfiatpaymentgateway",
     "class/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway.html",
-    "<span>DipFiatPaymentGateway</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js</span>",
+    "<span>DipFiatPaymentGateway</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/core_microservices/dip_fiat_payout_gateway/dipfiatpayoutgateway.js~dipfiatpayoutgateway",
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_fiat_payout_gateway/dipfiatpayoutgateway.js~dipfiatpayoutgateway",
     "class/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway.html",
-    "<span>DipFiatPayoutGateway</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js</span>",
+    "<span>DipFiatPayoutGateway</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/shared/etherisc-microservice/index.js~dipmicroservice",
-    "class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html",
-    "<span>DipMicroservice</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/shared/etherisc-microservice/index.js</span>",
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html",
+    "<span>DipMicroservice</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/core_microservices/dip_pdf_generator/dippdfgenerator.js~dippdfgenerator",
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_pdf_generator/dippdfgenerator.js~dippdfgenerator",
     "class/dip-platform/core_microservices/dip_pdf_generator/DipPdfGenerator.js~DipPdfGenerator.html",
-    "<span>DipPdfGenerator</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/core_microservices/dip_pdf_generator/DipPdfGenerator.js</span>",
+    "<span>DipPdfGenerator</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_pdf_generator/DipPdfGenerator.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage",
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage",
     "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html",
-    "<span>DipPolicyStorage</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js</span>",
+    "<span>DipPolicyStorage</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/core_microservices/dip_policy_storage/dippolicystorage1.js~dippolicystorage",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html",
-    "<span>DipPolicyStorage</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js</span>",
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/distributor.js~distributor",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Distributor.js~Distributor.html",
+    "<span>Distributor</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/Distributor.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/flightdelayinsurance.js~flightdelayinsurance",
+    "@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/flightdelayinsurance.js~flightdelayinsurance",
     "class/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js~FlightDelayInsurance.html",
-    "<span>FlightDelayInsurance</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js</span>",
+    "<span>FlightDelayInsurance</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/genericinsurance.js~genericinsurance",
+    "@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/genericinsurance.js~genericinsurance",
     "class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html",
-    "<span>GenericInsurance</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js</span>",
+    "<span>GenericInsurance</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js</span>",
     "class"
   ],
   [
-    "dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/webpack.config.js~config",
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html",
+    "<span>HttpApp</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/index.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html",
+    "<span>K8sController</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/policy.js~policy",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Policy.js~Policy.html",
+    "<span>Policy</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/Policy.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/policyextra.js~policyextra",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/PolicyExtra.js~PolicyExtra.html",
+    "<span>PolicyExtra</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/PolicyExtra.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/s3/index.js~s3",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html",
+    "<span>S3</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/s3/index.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~artifact",
+    "variable/index.html#static-variable-artifact",
+    "<span>artifact</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~artifactlist",
+    "variable/index.html#static-variable-artifactList",
+    "<span>artifactList</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~artifactlistrequest",
+    "variable/index.html#static-variable-artifactListRequest",
+    "<span>artifactListRequest</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~artifactrequest",
+    "variable/index.html#static-variable-artifactRequest",
+    "<span>artifactRequest</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~cardcharged",
+    "variable/index.html#static-variable-cardCharged",
+    "<span>cardCharged</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~chargecard",
+    "variable/index.html#static-variable-chargeCard",
+    "<span>chargeCard</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/webpack.config.js~config",
     "variable/index.html#static-variable-config",
-    "<span>config</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/webpack.config.js</span>",
+    "<span>config</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/webpack.config.js</span>",
     "variable"
   ],
   [
-    "dip-platform/dip-platform/shared/etherisc-microservice/index.js~dipmicroservice",
-    "variable/index.html#static-variable-dipMicroservice",
-    "<span>dipMicroservice</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/shared/etherisc-microservice/index.js</span>",
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~contractdeployment",
+    "variable/index.html#static-variable-contractDeployment",
+    "<span>contractDeployment</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
     "variable"
   ],
   [
-    "dip-platform/dip-platform/shared/etherisc-microservice/io/http/exceptionhandler.js~exceptionhandler",
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~decodedevent",
+    "variable/index.html#static-variable-decodedEvent",
+    "<span>decodedEvent</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/exceptionhandler.js~exceptionhandler",
     "function/index.html#static-function-exceptionHandler",
-    "<span>exceptionHandler</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/shared/etherisc-microservice/io/http/exceptionHandler.js</span>",
+    "<span>exceptionHandler</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/exceptionHandler.js</span>",
     "function"
   ],
   [
-    "dip-platform/dip-platform/shared/etherisc-microservice/io/http/routes/healthcheck.js~healthcheck",
-    "function/index.html#static-function-healthCheck",
-    "<span>healthCheck</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/shared/etherisc-microservice/io/http/routes/healthCheck.js</span>",
-    "function"
-  ],
-  [
-    "dip-platform/dip-platform/shared/etherisc-microservice/io/module.js~module",
-    "function/index.html#static-function-module",
-    "<span>module</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/shared/etherisc-microservice/io/module.js</span>",
-    "function"
-  ],
-  [
-    "dip-platform/dip-platform/shared/etherisc-messages/types/test.js~schemaversions",
-    "variable/index.html#static-variable-schemaVersions",
-    "<span>schemaVersions</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/shared/etherisc-messages/types/test.js</span>",
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~existingeventsrequest",
+    "variable/index.html#static-variable-existingEventsRequest",
+    "<span>existingEventsRequest</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
     "variable"
   ],
   [
-    "dip-platform/dip-platform/shared/etherisc-messages/types/index.js~test",
-    "variable/index.html#static-variable-test",
-    "<span>test</span> <span class=\"search-result-import-path\">dip-platform/dip-platform/shared/etherisc-messages/types/index.js</span>",
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/router/index.js~index",
+    "function/index.html#static-function-index",
+    "<span>index</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/router/index.js</span>",
+    "function"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~issuecertificate",
+    "variable/index.html#static-variable-issueCertificate",
+    "<span>issueCertificate</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/module.js~module",
+    "function/index.html#static-function-module",
+    "<span>module</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/module.js</span>",
+    "function"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/module.js~module",
+    "function/index.html#static-function-module",
+    "<span>module</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/module.js</span>",
+    "function"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~paidout",
+    "variable/index.html#static-variable-paidOut",
+    "<span>paidOut</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~payout",
+    "variable/index.html#static-variable-payout",
+    "<span>payout</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~policycreationerror",
+    "variable/index.html#static-variable-policyCreationError",
+    "<span>policyCreationError</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~policycreationrequest",
+    "variable/index.html#static-variable-policyCreationRequest",
+    "<span>policyCreationRequest</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~policycreationsuccess",
+    "variable/index.html#static-variable-policyCreationSuccess",
+    "<span>policyCreationSuccess</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifact.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifact.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactlist.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactList.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactlistrequest.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactListRequest.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactrequest.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactRequest.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/cardcharged.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/cardCharged.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/chargecard.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/chargeCard.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/contractdeployment.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/contractDeployment.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/decodedevent.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/decodedEvent.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/existingeventsrequest.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/existingEventsRequest.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/issuecertificate.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/issueCertificate.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/paidout.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/paidOut.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/payout.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/payout.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policycreationerror.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationError.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policycreationrequest.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationRequest.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policycreationsuccess.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationSuccess.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/statechanged.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/stateChanged.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/transactioncreated.js~schemaversions",
+    "variable/index.html#static-variable-schemaVersions",
+    "<span>schemaVersions</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/transactionCreated.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~statechanged",
+    "variable/index.html#static-variable-stateChanged",
+    "<span>stateChanged</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~transactioncreated",
+    "variable/index.html#static-variable-transactionCreated",
+    "<span>transactionCreated</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
     "variable"
   ],
   [
@@ -408,6 +666,18 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
+    "dip-platform/app_microservices/estore_contracts/.solcover.js",
+    "file/dip-platform/app_microservices/estore_contracts/.solcover.js.html",
+    "dip-platform/app_microservices/estore_contracts/.solcover.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_contracts/truffle-config.js",
+    "file/dip-platform/app_microservices/estore_contracts/truffle-config.js.html",
+    "dip-platform/app_microservices/estore_contracts/truffle-config.js",
+    "file"
+  ],
+  [
     "dip-platform/app_microservices/etherisc_flight_delay_api/flightdelayinsurance.js",
     "file/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js.html",
     "dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js",
@@ -522,6 +792,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "dip-platform/app_microservices/etherisc_flight_delay_api/genericinsurance.js~genericinsurance#_wsport",
+    "class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html#instance-member-_wsPort",
+    "dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance#_wsPort",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/etherisc_flight_delay_api/genericinsurance.js~genericinsurance#bootstrap",
+    "class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html#instance-method-bootstrap",
+    "dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance#bootstrap",
+    "method"
+  ],
+  [
     "dip-platform/app_microservices/etherisc_flight_delay_api/genericinsurance.js~genericinsurance#chargecard",
     "class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html#instance-method-chargeCard",
     "dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance#chargeCard",
@@ -543,12 +825,6 @@ window.esdocSearchIndex = [
     "dip-platform/app_microservices/etherisc_flight_delay_api/genericinsurance.js~genericinsurance#issuecertificate",
     "class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html#instance-method-issueCertificate",
     "dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance#issueCertificate",
-    "method"
-  ],
-  [
-    "dip-platform/app_microservices/etherisc_flight_delay_api/genericinsurance.js~genericinsurance#listen",
-    "class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html#instance-method-listen",
-    "dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance#listen",
     "method"
   ],
   [
@@ -702,6 +978,102 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "dip-platform/commands/deploysecret.js",
+    "file/dip-platform/commands/deploySecret.js.html",
+    "dip-platform/commands/deploySecret.js",
+    "file"
+  ],
+  [
+    "dip-platform/commands/deploysecret.js~deploysecret#run",
+    "class/dip-platform/commands/deploySecret.js~DeploySecret.html#instance-method-run",
+    "dip-platform/commands/deploySecret.js~DeploySecret#run",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js",
+    "file/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js.html",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage#amqp",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html#instance-member-amqp",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage#amqp",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage#bootstrap",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html#instance-method-bootstrap",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage#config",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html#instance-member-config",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage#config",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage#constructor",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html#instance-constructor-constructor",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage#db",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html#instance-member-db",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage#db",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage#log",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html#instance-member-log",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage#log",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage#s3",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html#instance-member-s3",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage#s3",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/dipartifactsstorage.js~dipartifactsstorage#saveartifact",
+    "class/dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage.html#instance-method-saveArtifact",
+    "dip-platform/core_microservices/dip_artifacts_storage/DipArtifactsStorage.js~DipArtifactsStorage#saveArtifact",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/bootstrap.js",
+    "file/dip-platform/core_microservices/dip_artifacts_storage/bootstrap.js.html",
+    "dip-platform/core_microservices/dip_artifacts_storage/bootstrap.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_artifacts_storage/knexfile.js",
+    "file/dip-platform/core_microservices/dip_artifacts_storage/knexfile.js.html",
+    "dip-platform/core_microservices/dip_artifacts_storage/knexfile.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_contracts/artifactsreceiver.js",
+    "file/dip-platform/core_microservices/dip_contracts/artifactsReceiver.js.html",
+    "dip-platform/core_microservices/dip_contracts/artifactsReceiver.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_contracts/artifactssender.js",
+    "file/dip-platform/core_microservices/dip_contracts/artifactsSender.js.html",
+    "dip-platform/core_microservices/dip_contracts/artifactsSender.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_contracts/truffle.js",
+    "file/dip-platform/core_microservices/dip_contracts/truffle.js.html",
+    "dip-platform/core_microservices/dip_contracts/truffle.js",
+    "file"
+  ],
+  [
     "dip-platform/core_microservices/dip_ethereum_client/dipetheremclient.js",
     "file/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js.html",
     "dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js",
@@ -714,10 +1086,10 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "dip-platform/core_microservices/dip_ethereum_client/dipetheremclient.js~dipetheremclient#_amqpbroker",
-    "class/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient.html#instance-member-_amqpBroker",
-    "dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient#_amqpBroker",
-    "member"
+    "dip-platform/core_microservices/dip_ethereum_client/dipetheremclient.js~dipetheremclient#bootstrap",
+    "class/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient.html#instance-method-bootstrap",
+    "dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient#bootstrap",
+    "method"
   ],
   [
     "dip-platform/core_microservices/dip_ethereum_client/dipetheremclient.js~dipetheremclient#constructor",
@@ -732,15 +1104,135 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "dip-platform/core_microservices/dip_ethereum_client/dipetheremclient.js~dipetheremclient#listen",
-    "class/dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient.html#instance-method-listen",
-    "dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js~DipEtheremClient#listen",
-    "method"
-  ],
-  [
     "dip-platform/core_microservices/dip_ethereum_client/bootstrap.js",
     "file/dip-platform/core_microservices/dip_ethereum_client/bootstrap.js.html",
     "dip-platform/core_microservices/dip_ethereum_client/bootstrap.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js",
+    "file/dip-platform/core_microservices/dip_event_listener/DipEventListener.js.html",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#amqp",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-member-amqp",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#amqp",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#bootstrap",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-bootstrap",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#constructor",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-constructor-constructor",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#db",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-member-db",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#db",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#fromblock",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-member-fromBlock",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#fromBlock",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#getpastevents",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-getPastEvents",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#getPastEvents",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#handleevent",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-handleEvent",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#handleEvent",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#http",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-member-http",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#http",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#log",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-member-log",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#log",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#networkname",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-member-networkName",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#networkName",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#offset",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-member-offset",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#offset",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#ondata",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-onData",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#onData",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#onerror",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-onError",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#onError",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#requestartifacts",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-requestArtifacts",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#requestArtifacts",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#saveartifact",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-saveArtifact",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#saveArtifact",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#sendexistingevents",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-sendExistingEvents",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#sendExistingEvents",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#watcheventsrealtime",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-method-watchEventsRealtime",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#watchEventsRealtime",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/dipeventlistener.js~dipeventlistener#web3",
+    "class/dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener.html#instance-member-web3",
+    "dip-platform/core_microservices/dip_event_listener/DipEventListener.js~DipEventListener#web3",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/bootstrap.js",
+    "file/dip-platform/core_microservices/dip_event_listener/bootstrap.js.html",
+    "dip-platform/core_microservices/dip_event_listener/bootstrap.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_listener/knexfile.js",
+    "file/dip-platform/core_microservices/dip_event_listener/knexfile.js.html",
+    "dip-platform/core_microservices/dip_event_listener/knexfile.js",
     "file"
   ],
   [
@@ -756,16 +1248,22 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#_amqpbroker",
-    "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html#instance-member-_amqpBroker",
-    "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging#_amqpBroker",
+    "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#_db",
+    "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html#instance-member-_db",
+    "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging#_db",
     "member"
   ],
   [
-    "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#_pool",
-    "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html#instance-member-_pool",
-    "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging#_pool",
+    "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#_log",
+    "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html#instance-member-_log",
+    "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging#_log",
     "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#bootstrap",
+    "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html#instance-method-bootstrap",
+    "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging#bootstrap",
+    "method"
   ],
   [
     "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#constructor",
@@ -774,15 +1272,27 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#listen",
-    "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html#instance-method-listen",
-    "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging#listen",
+    "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#logmessage",
+    "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html#instance-method-logMessage",
+    "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging#logMessage",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_logging/dipeventlogging.js~dipeventlogging#savemessage",
+    "class/dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging.html#instance-method-saveMessage",
+    "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js~DipEventLogging#saveMessage",
     "method"
   ],
   [
     "dip-platform/core_microservices/dip_event_logging/bootstrap.js",
     "file/dip-platform/core_microservices/dip_event_logging/bootstrap.js.html",
     "dip-platform/core_microservices/dip_event_logging/bootstrap.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_event_logging/knexfile.js",
+    "file/dip-platform/core_microservices/dip_event_logging/knexfile.js.html",
+    "dip-platform/core_microservices/dip_event_logging/knexfile.js",
     "file"
   ],
   [
@@ -798,10 +1308,10 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "dip-platform/core_microservices/dip_fiat_payment_gateway/dipfiatpaymentgateway.js~dipfiatpaymentgateway#_amqpbroker",
-    "class/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway.html#instance-member-_amqpBroker",
-    "dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway#_amqpBroker",
-    "member"
+    "dip-platform/core_microservices/dip_fiat_payment_gateway/dipfiatpaymentgateway.js~dipfiatpaymentgateway#bootstrap",
+    "class/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway.html#instance-method-bootstrap",
+    "dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway#bootstrap",
+    "method"
   ],
   [
     "dip-platform/core_microservices/dip_fiat_payment_gateway/dipfiatpaymentgateway.js~dipfiatpaymentgateway#chargecard",
@@ -813,12 +1323,6 @@ window.esdocSearchIndex = [
     "dip-platform/core_microservices/dip_fiat_payment_gateway/dipfiatpaymentgateway.js~dipfiatpaymentgateway#constructor",
     "class/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway.html#instance-constructor-constructor",
     "dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway#constructor",
-    "method"
-  ],
-  [
-    "dip-platform/core_microservices/dip_fiat_payment_gateway/dipfiatpaymentgateway.js~dipfiatpaymentgateway#listen",
-    "class/dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway.html#instance-method-listen",
-    "dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js~DipFiatPaymentGateway#listen",
     "method"
   ],
   [
@@ -840,21 +1344,15 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "dip-platform/core_microservices/dip_fiat_payout_gateway/dipfiatpayoutgateway.js~dipfiatpayoutgateway#_amqpbroker",
-    "class/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway.html#instance-member-_amqpBroker",
-    "dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway#_amqpBroker",
-    "member"
+    "dip-platform/core_microservices/dip_fiat_payout_gateway/dipfiatpayoutgateway.js~dipfiatpayoutgateway#bootstrap",
+    "class/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway.html#instance-method-bootstrap",
+    "dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway#bootstrap",
+    "method"
   ],
   [
     "dip-platform/core_microservices/dip_fiat_payout_gateway/dipfiatpayoutgateway.js~dipfiatpayoutgateway#constructor",
     "class/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway.html#instance-constructor-constructor",
     "dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway#constructor",
-    "method"
-  ],
-  [
-    "dip-platform/core_microservices/dip_fiat_payout_gateway/dipfiatpayoutgateway.js~dipfiatpayoutgateway#listen",
-    "class/dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway.html#instance-method-listen",
-    "dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js~DipFiatPayoutGateway#listen",
     "method"
   ],
   [
@@ -918,16 +1416,16 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#_amqp",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-member-_amqp",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#_amqp",
+    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#amqp",
+    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-member-amqp",
+    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#amqp",
     "member"
   ],
   [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#_amqpbroker",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-member-_amqpBroker",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#_amqpBroker",
-    "member"
+    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#bootstrap",
+    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-method-bootstrap",
+    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#bootstrap",
+    "method"
   ],
   [
     "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#constructor",
@@ -936,57 +1434,39 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#listen",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-method-listen",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#listen",
+    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#createcustomerifnotexists",
+    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-method-createCustomerIfNotExists",
+    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#createCustomerIfNotExists",
     "method"
   ],
   [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#onpolicycreate",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-method-onPolicyCreate",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#onPolicyCreate",
+    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#createpolicy",
+    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-method-createPolicy",
+    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#createPolicy",
     "method"
   ],
   [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage1.js",
-    "file/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js.html",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js",
-    "file"
+    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#generatecustomerid",
+    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-method-generateCustomerId",
+    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#generateCustomerId",
+    "method"
   ],
   [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage1.js~dippolicystorage#_amqp",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html#instance-member-_amqp",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage#_amqp",
+    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#getdistributor",
+    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-method-getDistributor",
+    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#getDistributor",
+    "method"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#models",
+    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-member-models",
+    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#models",
     "member"
   ],
   [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage1.js~dippolicystorage#_amqpbroker",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html#instance-member-_amqpBroker",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage#_amqpBroker",
-    "member"
-  ],
-  [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage1.js~dippolicystorage#_router",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html#instance-member-_router",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage#_router",
-    "member"
-  ],
-  [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage1.js~dippolicystorage#bootstrap",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html#instance-method-bootstrap",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage#bootstrap",
-    "method"
-  ],
-  [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage1.js~dippolicystorage#constructor",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html#instance-constructor-constructor",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage#constructor",
-    "method"
-  ],
-  [
-    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage1.js~dippolicystorage#onpolicycreate",
-    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage.html#instance-method-onPolicyCreate",
-    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage1.js~DipPolicyStorage#onPolicyCreate",
+    "dip-platform/core_microservices/dip_policy_storage/dippolicystorage.js~dippolicystorage#onpolicycreatemessage",
+    "class/dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage.html#instance-method-onPolicyCreateMessage",
+    "dip-platform/core_microservices/dip_policy_storage/DipPolicyStorage.js~DipPolicyStorage#onPolicyCreateMessage",
     "method"
   ],
   [
@@ -996,27 +1476,93 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "dip-platform/core_microservices/dip_policy_storage/bootstrap1.js",
-    "file/dip-platform/core_microservices/dip_policy_storage/bootstrap1.js.html",
-    "dip-platform/core_microservices/dip_policy_storage/bootstrap1.js",
+    "dip-platform/core_microservices/dip_policy_storage/knexfile.js",
+    "file/dip-platform/core_microservices/dip_policy_storage/knexfile.js.html",
+    "dip-platform/core_microservices/dip_policy_storage/knexfile.js",
     "file"
   ],
   [
-    "dip-platform/shared/etherisc-messages/index.js",
-    "file/dip-platform/shared/etherisc-messages/index.js.html",
-    "dip-platform/shared/etherisc-messages/index.js",
+    "dip-platform/core_microservices/dip_policy_storage/models/customer.js",
+    "file/dip-platform/core_microservices/dip_policy_storage/models/Customer.js.html",
+    "dip-platform/core_microservices/dip_policy_storage/models/Customer.js",
     "file"
   ],
   [
-    "dip-platform/shared/etherisc-messages/types/index.js",
-    "file/dip-platform/shared/etherisc-messages/types/index.js.html",
-    "dip-platform/shared/etherisc-messages/types/index.js",
+    "dip-platform/core_microservices/dip_policy_storage/models/customer.js~customer.relationmappings",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Customer.js~Customer.html#static-get-relationMappings",
+    "dip-platform/core_microservices/dip_policy_storage/models/Customer.js~Customer.relationMappings",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/customer.js~customer.tablename",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Customer.js~Customer.html#static-get-tableName",
+    "dip-platform/core_microservices/dip_policy_storage/models/Customer.js~Customer.tableName",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/customerextra.js",
+    "file/dip-platform/core_microservices/dip_policy_storage/models/CustomerExtra.js.html",
+    "dip-platform/core_microservices/dip_policy_storage/models/CustomerExtra.js",
     "file"
   ],
   [
-    "dip-platform/shared/etherisc-messages/types/test.js",
-    "file/dip-platform/shared/etherisc-messages/types/test.js.html",
-    "dip-platform/shared/etherisc-messages/types/test.js",
+    "dip-platform/core_microservices/dip_policy_storage/models/customerextra.js~customerextra.tablename",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/CustomerExtra.js~CustomerExtra.html#static-get-tableName",
+    "dip-platform/core_microservices/dip_policy_storage/models/CustomerExtra.js~CustomerExtra.tableName",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/distributor.js",
+    "file/dip-platform/core_microservices/dip_policy_storage/models/Distributor.js.html",
+    "dip-platform/core_microservices/dip_policy_storage/models/Distributor.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/distributor.js~distributor.relationmappings",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Distributor.js~Distributor.html#static-get-relationMappings",
+    "dip-platform/core_microservices/dip_policy_storage/models/Distributor.js~Distributor.relationMappings",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/distributor.js~distributor.tablename",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Distributor.js~Distributor.html#static-get-tableName",
+    "dip-platform/core_microservices/dip_policy_storage/models/Distributor.js~Distributor.tableName",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/policy.js",
+    "file/dip-platform/core_microservices/dip_policy_storage/models/Policy.js.html",
+    "dip-platform/core_microservices/dip_policy_storage/models/Policy.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/policy.js~policy.relationmappings",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Policy.js~Policy.html#static-get-relationMappings",
+    "dip-platform/core_microservices/dip_policy_storage/models/Policy.js~Policy.relationMappings",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/policy.js~policy.tablename",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/Policy.js~Policy.html#static-get-tableName",
+    "dip-platform/core_microservices/dip_policy_storage/models/Policy.js~Policy.tableName",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/policyextra.js",
+    "file/dip-platform/core_microservices/dip_policy_storage/models/PolicyExtra.js.html",
+    "dip-platform/core_microservices/dip_policy_storage/models/PolicyExtra.js",
+    "file"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/policyextra.js~policyextra.tablename",
+    "class/dip-platform/core_microservices/dip_policy_storage/models/PolicyExtra.js~PolicyExtra.html#static-get-tableName",
+    "dip-platform/core_microservices/dip_policy_storage/models/PolicyExtra.js~PolicyExtra.tableName",
+    "member"
+  ],
+  [
+    "dip-platform/core_microservices/dip_policy_storage/models/module.js",
+    "file/dip-platform/core_microservices/dip_policy_storage/models/module.js.html",
+    "dip-platform/core_microservices/dip_policy_storage/models/module.js",
     "file"
   ],
   [
@@ -1026,52 +1572,340 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "dip-platform/shared/etherisc-microservice/index.js~dipmicroservice#app",
-    "class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html#instance-member-app",
-    "dip-platform/shared/etherisc-microservice/index.js~DipMicroservice#app",
-    "member"
-  ],
-  [
-    "dip-platform/shared/etherisc-microservice/index.js~dipmicroservice#bootstrap",
-    "class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html#instance-method-bootstrap",
-    "dip-platform/shared/etherisc-microservice/index.js~DipMicroservice#bootstrap",
-    "method"
-  ],
-  [
-    "dip-platform/shared/etherisc-microservice/index.js~dipmicroservice#config",
-    "class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html#instance-member-config",
-    "dip-platform/shared/etherisc-microservice/index.js~DipMicroservice#config",
-    "member"
-  ],
-  [
-    "dip-platform/shared/etherisc-microservice/index.js~dipmicroservice#constructor",
-    "class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html#instance-constructor-constructor",
-    "dip-platform/shared/etherisc-microservice/index.js~DipMicroservice#constructor",
-    "method"
-  ],
-  [
-    "dip-platform/shared/etherisc-microservice/index.js~dipmicroservice#io",
-    "class/dip-platform/shared/etherisc-microservice/index.js~DipMicroservice.html#instance-member-io",
-    "dip-platform/shared/etherisc-microservice/index.js~DipMicroservice#io",
-    "member"
-  ],
-  [
     "dip-platform/shared/etherisc-microservice/io/amqp/index.js",
     "file/dip-platform/shared/etherisc-microservice/io/amqp/index.js.html",
     "dip-platform/shared/etherisc-microservice/io/amqp/index.js",
     "file"
   ],
   [
-    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#connect",
-    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-connect",
-    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#connect",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#_channel",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-member-_channel",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#_channel",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#_connection",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-member-_connection",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#_connection",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#appname",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-member-appName",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#appName",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#appversion",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-member-appVersion",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#appVersion",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#bootstrap",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-bootstrap",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#channel",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-get-channel",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#channel",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#closechannel",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-closeChannel",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#closeChannel",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#closeconnection",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-closeConnection",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#closeConnection",
     "method"
   ],
   [
     "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#connection",
-    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-member-connection",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-get-connection",
     "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#connection",
     "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#connectionstring",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-member-connectionString",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#connectionString",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#constructor",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-constructor-constructor",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#consume",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-consume",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#consume",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#createchannel",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-createChannel",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#createChannel",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#createconnection",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-createConnection",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#createConnection",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#exchangename",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-member-exchangeName",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#exchangeName",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#handlemessage",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-handleMessage",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#handleMessage",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#publish",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-publish",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#publish",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~amqp#shutdown",
+    "class/dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp.html#instance-method-shutdown",
+    "dip-platform/shared/etherisc-microservice/io/amqp/index.js~Amqp#shutdown",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/index.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/index.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifact.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifact.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifact.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactlist.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactList.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactList.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactlistrequest.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactListRequest.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactListRequest.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactrequest.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactRequest.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/artifactRequest.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/cardcharged.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/cardCharged.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/cardCharged.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/chargecard.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/chargeCard.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/chargeCard.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/contractdeployment.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/contractDeployment.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/contractDeployment.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/decodedevent.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/decodedEvent.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/decodedEvent.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/existingeventsrequest.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/existingEventsRequest.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/existingEventsRequest.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/issuecertificate.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/issueCertificate.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/issueCertificate.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/paidout.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/paidOut.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/paidOut.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/payout.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/payout.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/payout.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policycreationerror.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationError.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationError.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policycreationrequest.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationRequest.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationRequest.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policycreationsuccess.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationSuccess.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/policyCreationSuccess.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/statechanged.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/stateChanged.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/stateChanged.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/transactioncreated.js",
+    "file/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/transactionCreated.js.html",
+    "dip-platform/shared/etherisc-microservice/io/amqp/messages/types/transactionCreated.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/db/index.js",
+    "file/dip-platform/shared/etherisc-microservice/io/db/index.js.html",
+    "dip-platform/shared/etherisc-microservice/io/db/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~database#_connection",
+    "class/dip-platform/shared/etherisc-microservice/io/db/index.js~Database.html#instance-member-_connection",
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~Database#_connection",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~database#bootstrap",
+    "class/dip-platform/shared/etherisc-microservice/io/db/index.js~Database.html#instance-method-bootstrap",
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~Database#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~database#constructor",
+    "class/dip-platform/shared/etherisc-microservice/io/db/index.js~Database.html#instance-constructor-constructor",
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~Database#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~database#createconnection",
+    "class/dip-platform/shared/etherisc-microservice/io/db/index.js~Database.html#instance-method-createConnection",
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~Database#createConnection",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~database#getconnection",
+    "class/dip-platform/shared/etherisc-microservice/io/db/index.js~Database.html#instance-method-getConnection",
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~Database#getConnection",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~database#options",
+    "class/dip-platform/shared/etherisc-microservice/io/db/index.js~Database.html#instance-member-options",
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~Database#options",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~database#shutdown",
+    "class/dip-platform/shared/etherisc-microservice/io/db/index.js~Database.html#instance-method-shutdown",
+    "dip-platform/shared/etherisc-microservice/io/db/index.js~Database#shutdown",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js",
+    "file/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js.html",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#constructor",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-constructor-constructor",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#health",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-method-health",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#health",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#live",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-method-live",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#live",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#ready",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-method-ready",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#ready",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#readystatus",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-member-readyStatus",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#readyStatus",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#setreadystatus",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-method-setReadyStatus",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#setReadyStatus",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#setshuttingdownstatus",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-method-setShuttingDownStatus",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#setShuttingDownStatus",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#shuttingdownstatus",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-member-shuttingDownStatus",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#shuttingDownStatus",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8scontroller.js~k8scontroller#version",
+    "class/dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController.html#instance-method-version",
+    "dip-platform/shared/etherisc-microservice/io/http/controllers/k8sController.js~K8sController#version",
+    "method"
   ],
   [
     "dip-platform/shared/etherisc-microservice/io/http/exceptionhandler.js",
@@ -1086,9 +1920,63 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "dip-platform/shared/etherisc-microservice/io/http/routes/healthcheck.js",
-    "file/dip-platform/shared/etherisc-microservice/io/http/routes/healthCheck.js.html",
-    "dip-platform/shared/etherisc-microservice/io/http/routes/healthCheck.js",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#_controllers",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-member-_controllers",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#_controllers",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#_port",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-member-_port",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#_port",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#_server",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-member-_server",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#_server",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#bootstrap",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-method-bootstrap",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#constructor",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-constructor-constructor",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#getshuttingdownstatus",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-method-getShuttingDownStatus",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#getShuttingDownStatus",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#setreadystatus",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-method-setReadyStatus",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#setReadyStatus",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#setshuttingdownstatus",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-method-setShuttingDownStatus",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#setShuttingDownStatus",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#shutdown",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-method-shutdown",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#shutdown",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/router/index.js",
+    "file/dip-platform/shared/etherisc-microservice/io/http/router/index.js.html",
+    "dip-platform/shared/etherisc-microservice/io/http/router/index.js",
     "file"
   ],
   [
@@ -1101,6 +1989,156 @@ window.esdocSearchIndex = [
     "dip-platform/shared/etherisc-microservice/io/module.js",
     "file/dip-platform/shared/etherisc-microservice/io/module.js.html",
     "dip-platform/shared/etherisc-microservice/io/module.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js",
+    "file/dip-platform/shared/etherisc-microservice/io/s3/index.js.html",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~s3#bootstrap",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html#instance-method-bootstrap",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~S3#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~s3#bucket",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html#instance-member-bucket",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~S3#bucket",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~s3#client",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html#instance-member-client",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~S3#client",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~s3#constructor",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html#instance-constructor-constructor",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~S3#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~s3#getartifacts",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html#instance-method-getArtifacts",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~S3#getArtifacts",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~s3#getlastversion",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html#instance-method-getLastVersion",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~S3#getLastVersion",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~s3#options",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html#instance-member-options",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~S3#options",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~s3#shutdown",
+    "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html#instance-method-shutdown",
+    "dip-platform/shared/etherisc-microservice/io/s3/index.js~S3#shutdown",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/knexfile.js",
+    "file/dip-platform/shared/etherisc-microservice/knexfile.js.html",
+    "dip-platform/shared/etherisc-microservice/knexfile.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js",
+    "file/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js.html",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#app",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-App",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#App",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#amqp",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-amqp",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#amqp",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#app",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-app",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#app",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#appname",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-appName",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#appName",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#appversion",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-appVersion",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#appVersion",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#bootstrap",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-method-bootstrap",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#config",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-config",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#config",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#constructor",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-constructor-constructor",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#db",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-db",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#db",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#http",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-http",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#http",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#log",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-log",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#log",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#s3",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-s3",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#s3",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#shutdown",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-method-shutdown",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#shutdown",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/utils.js",
+    "file/dip-platform/shared/etherisc-microservice/utils.js.html",
+    "dip-platform/shared/etherisc-microservice/utils.js",
     "file"
   ]
 ]

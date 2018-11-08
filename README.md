@@ -1,25 +1,25 @@
 # DIP Platform
 
 ###### Documentation
-![documentation-badge](https://img.shields.io/badge/Documentation-58.51%25%20%2879%2F135%29-yellow.svg)
+![documentation-badge](https://img.shields.io/badge/Documentation-55.27%25%20%28152%2F275%29-yellow.svg)
 
 ###### Test coverage summary
 
 Module         | % Stmts       | % Branch      | % Funcs       | % Lines
 -------------- | --------------| --------------| --------------| --------------
 estore_contracts.v1.0.0 | - | - | - | -
-@etherisc/etherisc_flight_delay_api.v0.1.1 | 1.98% (2/101) | 0% (0/28) | 3.23% (1/31) | 2.3% (2/87)
+@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.38% (2/84) | 0% (0/24) | 3.33% (1/30) | 2.86% (2/70)
 @etherisc/etherisc_flight_delay_ui.v0.1.1 | 35% (14/40) | 0% (0/4) | 28.57% (4/14) | 38.89% (14/36)
-@etherisc/dip_artifacts_storage.v1.0.0 | - | - | - | -
+@etherisc/dip_artifacts_storage.v1.0.0 | 33.33% (15/45) | 0% (0/4) | 27.27% (3/11) | 35.71% (15/42)
 @etherisc/dip_contracts.v1.0.0 | - | - | - | -
 @etherisc/dip_ethereum_client.v0.1.1 | - | - | - | -
-@etherisc/dip_event_listener.v0.1.0 | 36.3% (49/135) | 38.89% (7/18) | 40.74% (11/27) | 37.6% (47/125)
-@etherisc/dip_event_logging.v0.2.0 | 40.63% (13/32) | 75% (3/4) | 54.55% (6/11) | 40.63% (13/32)
+@etherisc/dip_event_listener.v0.1.0 | 40.74% (55/135) | 38.89% (7/18) | 41.38% (12/29) | 42.4% (53/125)
+@etherisc/dip_event_logging.v0.2.0 | 35.14% (13/37) | 37.5% (3/8) | 46.15% (6/13) | 37.14% (13/35)
 @etherisc/dip_fiat_payment_gateway.v0.1.1 | - | - | - | -
 @etherisc/dip_fiat_payout_gateway.v0.1.1 | - | - | - | -
 @etherisc/dip_pdf_generator.v1.0.1 | - | - | - | -
 @etherisc/dip_policy_storage.v0.1.1 | 51.28% (80/156) | 41.67% (5/12) | 41.46% (17/41) | 55.56% (80/144)
-@etherisc/microservice.v0.3.2 | - | - | - | -
+@etherisc/microservice.v0.4.1 | - | - | - | -
 [endOfCoverageTable]: #
 
 
