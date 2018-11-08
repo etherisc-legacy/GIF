@@ -1,43 +1,132 @@
 [
   {
-    "name": "GenericInsurance#listen",
-    "filePath": "dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js",
+    "name": "FlightDelayInsurance#onLogSetState",
+    "filePath": "dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js",
     "lines": [
       {
-        "lineNumber": 55,
+        "lineNumber": 32,
         "line": "  /**"
       },
       {
-        "lineNumber": 56,
-        "line": "   * Bootstrap and listen"
+        "lineNumber": 33,
+        "line": "   * Handle LogSetState event from contract"
       },
       {
-        "lineNumber": 57,
-        "line": "   * @param {string} amqpBroker"
+        "lineNumber": 34,
+        "line": "   * @param {{}} content"
       },
       {
-        "lineNumber": 58,
-        "line": "   * @param {string} wsPort"
+        "lineNumber": 35,
+        "line": "   * @param {{}} fields"
       },
       {
-        "lineNumber": 59,
-        "line": "   * @return {*}"
+        "lineNumber": 36,
+        "line": "   * @param {{}} properties"
       },
       {
-        "lineNumber": 60,
+        "lineNumber": 37,
+        "line": "   * @return {Promise}"
+      },
+      {
+        "lineNumber": 38,
         "line": "   */"
       },
       {
-        "lineNumber": 61,
-        "line": "  async listen({ amqpBroker, wsPort }) {"
+        "lineNumber": 39,
+        "line": "  onLogSetState({ content, fields, properties }) {"
       }
     ],
     "codeParams": [
       "*"
     ],
     "docParams": [
-      "amqpBroker",
-      "wsPort"
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "FlightDelayInsurance#onCardCharged",
+    "filePath": "dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js",
+    "lines": [
+      {
+        "lineNumber": 147,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 148,
+        "line": "   * On card charged event handler"
+      },
+      {
+        "lineNumber": 149,
+        "line": "   * @param {{}} content"
+      },
+      {
+        "lineNumber": 150,
+        "line": "   * @param {{}} fields"
+      },
+      {
+        "lineNumber": 151,
+        "line": "   * @param {{}} properties"
+      },
+      {
+        "lineNumber": 152,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 153,
+        "line": "  onCardCharged({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "FlightDelayInsurance#onCertificateIssued",
+    "filePath": "dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js",
+    "lines": [
+      {
+        "lineNumber": 157,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 158,
+        "line": "   * On certificated issued event handler"
+      },
+      {
+        "lineNumber": 159,
+        "line": "   * @param {{}} content"
+      },
+      {
+        "lineNumber": 160,
+        "line": "   * @param {{}} fields"
+      },
+      {
+        "lineNumber": 161,
+        "line": "   * @param {{}} properties"
+      },
+      {
+        "lineNumber": 162,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 163,
+        "line": "  onCertificateIssued({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
     ]
   },
   {
@@ -83,6 +172,532 @@
     "docParams": [
       "msg",
       "id"
+    ]
+  },
+  {
+    "name": "DipEtheremClient#createTransaction",
+    "filePath": "dip-platform/core_microservices/dip_ethereum_client/DipEtheremClient.js",
+    "lines": [
+      {
+        "lineNumber": 24,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 25,
+        "line": "   * Handle successful policy creation message"
+      },
+      {
+        "lineNumber": 26,
+        "line": "   * @param {{}} content"
+      },
+      {
+        "lineNumber": 27,
+        "line": "   * @param {{}} fields"
+      },
+      {
+        "lineNumber": 28,
+        "line": "   * @param {{}} properties"
+      },
+      {
+        "lineNumber": 29,
+        "line": "   * @return {Promise<void>}"
+      },
+      {
+        "lineNumber": 30,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 31,
+        "line": "  async createTransaction({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "DipEventListener#sendExistingEvents",
+    "filePath": "dip-platform/core_microservices/dip_event_listener/DipEventListener.js",
+    "lines": [
+      {
+        "lineNumber": 121,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 122,
+        "line": "   * Send existing events"
+      },
+      {
+        "lineNumber": 123,
+        "line": "   * @param {Object} content"
+      },
+      {
+        "lineNumber": 124,
+        "line": "   * @param {Object} fields"
+      },
+      {
+        "lineNumber": 125,
+        "line": "   * @param {Object} properties"
+      },
+      {
+        "lineNumber": 126,
+        "line": "   * @return {void}"
+      },
+      {
+        "lineNumber": 127,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 128,
+        "line": "  async sendExistingEvents({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "DipEventListener#requestArtifacts",
+    "filePath": "dip-platform/core_microservices/dip_event_listener/DipEventListener.js",
+    "lines": [
+      {
+        "lineNumber": 145,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 146,
+        "line": "   * Request artifacts"
+      },
+      {
+        "lineNumber": 147,
+        "line": "   * @param {Object} content"
+      },
+      {
+        "lineNumber": 148,
+        "line": "   * @param {Object} fields"
+      },
+      {
+        "lineNumber": 149,
+        "line": "   * @param {Object} properties"
+      },
+      {
+        "lineNumber": 150,
+        "line": "   * @return {void}"
+      },
+      {
+        "lineNumber": 151,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 152,
+        "line": "  async requestArtifacts({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "DipEventListener#saveArtifact",
+    "filePath": "dip-platform/core_microservices/dip_event_listener/DipEventListener.js",
+    "lines": [
+      {
+        "lineNumber": 168,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 169,
+        "line": "   * Save artifact"
+      },
+      {
+        "lineNumber": 170,
+        "line": "   * @param {Object} content"
+      },
+      {
+        "lineNumber": 171,
+        "line": "   * @param {Object} fields"
+      },
+      {
+        "lineNumber": 172,
+        "line": "   * @param {Object} properties"
+      },
+      {
+        "lineNumber": 173,
+        "line": "   * @return {void}"
+      },
+      {
+        "lineNumber": 174,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 175,
+        "line": "  async saveArtifact({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "DipEventLogging#logMessage",
+    "filePath": "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js",
+    "lines": [
+      {
+        "lineNumber": 19,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 20,
+        "line": "   * Log message"
+      },
+      {
+        "lineNumber": 21,
+        "line": "   * @param {Object} content"
+      },
+      {
+        "lineNumber": 22,
+        "line": "   * @param {Object} fields"
+      },
+      {
+        "lineNumber": 23,
+        "line": "   * @param {Object} properties"
+      },
+      {
+        "lineNumber": 24,
+        "line": "   * @param {Integer} id"
+      },
+      {
+        "lineNumber": 25,
+        "line": "   * @return {void}"
+      },
+      {
+        "lineNumber": 26,
+        "line": "   * */"
+      },
+      {
+        "lineNumber": 27,
+        "line": "  logMessage({"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties",
+      "id"
+    ]
+  },
+  {
+    "name": "DipEventLogging#saveMessage",
+    "filePath": "dip-platform/core_microservices/dip_event_logging/DipEventLogging.js",
+    "lines": [
+      {
+        "lineNumber": 40,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 41,
+        "line": "   * Save message to DB"
+      },
+      {
+        "lineNumber": 42,
+        "line": "   * @param {Object} content"
+      },
+      {
+        "lineNumber": 43,
+        "line": "   * @param {Object} fields"
+      },
+      {
+        "lineNumber": 44,
+        "line": "   * @param {Object} properties"
+      },
+      {
+        "lineNumber": 45,
+        "line": "   * @return {Integer} id"
+      },
+      {
+        "lineNumber": 46,
+        "line": "   * */"
+      },
+      {
+        "lineNumber": 47,
+        "line": "  async saveMessage({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "DipFiatPaymentGateway#chargeCard",
+    "filePath": "dip-platform/core_microservices/dip_fiat_payment_gateway/DipFiatPaymentGateway.js",
+    "lines": [
+      {
+        "lineNumber": 24,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 25,
+        "line": "   * Handle card charding message"
+      },
+      {
+        "lineNumber": 26,
+        "line": "   * @param {{}} content"
+      },
+      {
+        "lineNumber": 27,
+        "line": "   * @param {{}} fields"
+      },
+      {
+        "lineNumber": 28,
+        "line": "   * @param {{}} properties"
+      },
+      {
+        "lineNumber": 29,
+        "line": "   * @return {Promise<void>}"
+      },
+      {
+        "lineNumber": 30,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 31,
+        "line": "  async chargeCard({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "DipFiatPayoutGateway#payout",
+    "filePath": "dip-platform/core_microservices/dip_fiat_payout_gateway/DipFiatPayoutGateway.js",
+    "lines": [
+      {
+        "lineNumber": 24,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 25,
+        "line": "   * Handle payout event message"
+      },
+      {
+        "lineNumber": 26,
+        "line": "   * @param {{}} content"
+      },
+      {
+        "lineNumber": 27,
+        "line": "   * @param {{}} fields"
+      },
+      {
+        "lineNumber": 28,
+        "line": "   * @param {{}} properties"
+      },
+      {
+        "lineNumber": 29,
+        "line": "   * @return {Promise<void>}"
+      },
+      {
+        "lineNumber": 30,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 31,
+        "line": "  async payout({ content, fields, properties }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "content",
+      "fields",
+      "properties"
+    ]
+  },
+  {
+    "name": "Amqp#consume",
+    "filePath": "dip-platform/shared/etherisc-microservice/io/amqp/index.js",
+    "lines": [
+      {
+        "lineNumber": 104,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 105,
+        "line": "   * Start listening to queue messages"
+      },
+      {
+        "lineNumber": 106,
+        "line": "   * @param {string} [sourceMicroservice = '*']"
+      },
+      {
+        "lineNumber": 107,
+        "line": "   * @param {string} [messageType = '*']"
+      },
+      {
+        "lineNumber": 108,
+        "line": "   * @param {string} [messageTypeVersion = '*.*']"
+      },
+      {
+        "lineNumber": 109,
+        "line": "   * @param {function} handler"
+      },
+      {
+        "lineNumber": 110,
+        "line": "   * @return {Promise<void>}"
+      },
+      {
+        "lineNumber": 111,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 112,
+        "line": "  async consume({"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "sourceMicroservice",
+      "messageType",
+      "messageTypeVersion",
+      "handler"
+    ]
+  },
+  {
+    "name": "Amqp#handleMessage",
+    "filePath": "dip-platform/shared/etherisc-microservice/io/amqp/index.js",
+    "lines": [
+      {
+        "lineNumber": 128,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 129,
+        "line": "   * Preprocess queue message and pass it to specified handler"
+      },
+      {
+        "lineNumber": 130,
+        "line": "   * @param {string} [messageType = '*']"
+      },
+      {
+        "lineNumber": 131,
+        "line": "   * @param {string} [messageTypeVersion = '*.*']"
+      },
+      {
+        "lineNumber": 132,
+        "line": "   * @param {Function} handler"
+      },
+      {
+        "lineNumber": 133,
+        "line": "   * @return {Function}"
+      },
+      {
+        "lineNumber": 134,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 135,
+        "line": "  handleMessage({ messageType = '*', messageTypeVersion = '*.*', handler }) {"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "messageType",
+      "messageTypeVersion",
+      "handler"
+    ]
+  },
+  {
+    "name": "Amqp#publish",
+    "filePath": "dip-platform/shared/etherisc-microservice/io/amqp/index.js",
+    "lines": [
+      {
+        "lineNumber": 154,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 155,
+        "line": "   *"
+      },
+      {
+        "lineNumber": 156,
+        "line": "   * @param {string} messageType"
+      },
+      {
+        "lineNumber": 157,
+        "line": "   * @param {string} [messageTypeVersion = latest]"
+      },
+      {
+        "lineNumber": 158,
+        "line": "   * @param {{}} content"
+      },
+      {
+        "lineNumber": 159,
+        "line": "   * @param {string} correlationId"
+      },
+      {
+        "lineNumber": 160,
+        "line": "   * @param {{}} customHeaders"
+      },
+      {
+        "lineNumber": 161,
+        "line": "   * @return {Promise<void>}"
+      },
+      {
+        "lineNumber": 162,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 163,
+        "line": "  async publish({"
+      }
+    ],
+    "codeParams": [
+      "*"
+    ],
+    "docParams": [
+      "messageType",
+      "messageTypeVersion",
+      "content",
+      "correlationId",
+      "customHeaders"
     ]
   }
 ]

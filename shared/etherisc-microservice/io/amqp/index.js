@@ -131,7 +131,7 @@ class Amqp {
    * @param {string} [messageType = '*']
    * @param {string} [messageTypeVersion = '*.*']
    * @param {Function} handler
-   * @return {function(*): *}
+   * @return {Function}
    */
   handleMessage({ messageType = '*', messageTypeVersion = '*.*', handler }) {
     return (message) => {
