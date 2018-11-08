@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
-const { deleteTestExchange } = require('@etherisc/microservice/test/helpers');
+const { deleteTestExchange, deleteTestBucket } = require('@etherisc/microservice/test/helpers');
 const DipEventListener = require('../DipEventListener');
 
 
@@ -11,32 +11,33 @@ describe('DipEventListener microservice', () => {
       rpcNode: process.env.WS_PROVIDER || 'ws://localhost:8545',
       networkName: process.env.NETWORK_NAME || 'development',
       exchangeName: 'test_listener',
+      bucket: 'test-bucket',
     });
     await this.microservice.bootstrap();
 
     this.amqp = this.microservice.amqp;
     this.db = this.microservice.db.getConnection();
     this.http = this.microservice.http;
-
-    await new Promise(resolve => setTimeout(resolve, 500));
+    this.s3 = this.microservice.s3.client;
   });
 
   beforeEach(async () => {
     sinon.restore();
-    await this.db(`${this.microservice.db.options.prefix}_contracts`).truncate();
-    await this.db(`${this.microservice.db.options.prefix}_events`).truncate();
+    await this.db('event_listener.contracts').truncate();
+    await this.db('event_listener.events').truncate();
   });
 
   after(async () => {
-    deleteTestExchange(this.amqp, 'test_listener');
-    await this.microservice.shutdown();
+    await deleteTestExchange(this.amqp, 'test_listener');
+    await deleteTestBucket(this.s3, 'test-bucket');
+    this.microservice.shutdown();
   });
 
   it('handleEvent should publish decoded event', async () => {
-    await this.db.raw(`INSERT INTO ${this.microservice.db.options.prefix}_contracts ("networkName", version, address, abi) VALUES ('${this.microservice.app.networkName}', '1.0.0', '0x345ca3e014aaf5dca488057592ee47305d9b3e10', '[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"sender","type":"address"},{"indexed":true,"name":"value","type":"uint256"}],"name":"E1","type":"event"},{"constant":false,"inputs":[],"name":"AddEvent","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"Suicide","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')`);
+    await this.db.raw(`INSERT INTO event_listener.contracts (product, "networkName", version, address, abi) VALUES ('product', '${this.microservice.app.networkName}', '1.0.0', '0x345ca3e014aaf5dca488057592ee47305d9b3e10', '[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"sender","type":"address"},{"indexed":true,"name":"value","type":"uint256"}],"name":"E1","type":"event"},{"constant":false,"inputs":[],"name":"AddEvent","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"Suicide","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')`).catch(console.log).then(console.log);
     sinon.replace(this.microservice.app.web3.eth, 'getBlock', sinon.fake.returns({ timestamp: 1539267039 }));
 
-    return new Promise(async (resolve) => {
+    await new Promise(async (resolve) => {
       await this.amqp.consume({
         messageType: 'decodedEvent',
         messageVersion: '1.*',

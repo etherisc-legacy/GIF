@@ -23,8 +23,8 @@ describe('DipEventLogging microservice', () => {
   });
 
   after(async () => {
-    deleteTestExchange(this.amqp, 'test_logging');
-    await this.microservice.shutdown();
+    await deleteTestExchange(this.amqp, 'test_logging');
+    this.microservice.shutdown();
   });
 
   it('saves the AMQP messages to DB', async () => {

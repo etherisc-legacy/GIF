@@ -1,5 +1,6 @@
 image: node:9.10.0
-
+options:
+  size: 2x
 
 pipelines:
   default:
@@ -14,7 +15,7 @@ pipelines:
       script:
         # Start Minio service manually because it doesn't have entrypoint command
         - docker run -d -e MINIO_ACCESS_KEY=accesskey -e MINIO_SECRET_KEY=secretkey -p 9000:9000 minio/minio server /data
-        - docker run -d -p 8545:8545 trufflesuite/ganache-cli -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' -l 0x7A1200 -g 0x2540BE400 --debug -v -i 4447 -h 0.0.0.0 --db /data
+        - docker run -d -p 8545:8545 -v $(pwd)/ganache:/data trufflesuite/ganache-cli -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' -l 0x7A1200 -g 0x2540BE400 --debug -v -i 4447 -h 0.0.0.0 --db /data
         - npm install
         - npm run lint
         - npm run bootstrap
@@ -87,7 +88,7 @@ pipelines:
 definitions:
   services:
     docker:
-      memory: 1024
+      memory: 2048
     rabbitmq:
       image: rabbitmq:3.7.7
       environment:

@@ -20,6 +20,7 @@ class DipMicroservice {
     this.http = ioDeps.http;
     this.log = ioDeps.log;
     this.config = ioDeps.config;
+    this.s3 = ioDeps.s3;
   }
 
   /**
@@ -30,6 +31,7 @@ class DipMicroservice {
     try {
       await this.amqp.bootstrap();
       await this.db.bootstrap();
+      await this.s3.bootstrap(this.config.bucket);
 
       const applicationRouter = new Router();
 
@@ -40,6 +42,7 @@ class DipMicroservice {
         log: this.log,
         config: this.config,
         router: applicationRouter,
+        s3: this.s3,
       });
 
       await this.http.bootstrap(applicationRouter);
@@ -79,6 +82,7 @@ class DipMicroservice {
     this.amqp.shutdown();
     this.db.shutdown();
     this.http.shutdown();
+    this.s3.shutdown();
 
     process.exit();
   }
