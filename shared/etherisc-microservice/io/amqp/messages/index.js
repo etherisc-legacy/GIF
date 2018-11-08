@@ -13,6 +13,7 @@ const validator = new Validator();
  */
 const findMessageSchema = (type, version) => {
   const versionMatcher = types[type];
+  if (!versionMatcher) console.error(type, 'not found among known types');
   return versionMatcher(version || 'latest');
 };
 
@@ -64,6 +65,9 @@ const headers = (correlationId, customValues, serviceName, serviceVersion, messa
   const newCorrelationId = correlationId || `${uuid()}-${serviceName}-${serviceVersion}-${messageType}-${process.hrtime()[0]}`;
 
   return {
+    persistent: true,
+    deliveryMode: true,
+    mandatory: true,
     correlationId: newCorrelationId,
     headers: {
       ...customValues,

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "knex migrate:latest",
-    "dev": "nodemon -L --inspect=0.0.0.0:9229 bootstrap.js",
+    "dev": "node bootstrap.js",
     "prod": "node bootstrap.js",
     "test": "NODE_ENV=test mocha",
     "coverage": "nyc mocha",
@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@etherisc/microservice": "^0.4.0-alpha",
+    "knex": "^0.15.2",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
     "should": "^13.2.3",

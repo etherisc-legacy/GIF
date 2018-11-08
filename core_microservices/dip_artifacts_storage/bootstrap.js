@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+const { bootstrap, isDockerHost } = require('@etherisc/microservice');
 const DipArtifactsStorage = require('./DipArtifactsStorage');
 
 
@@ -10,20 +11,14 @@ const s3 = new AWS.S3({
   signatureVersion: 'v4',
 });
 
-const dipArtifactsStorage = new DipArtifactsStorage({
-  amqpBroker: process.env.MESSAGE_BROKER || 'amqp://localhost:5672',
-  s3,
-});
-
 s3.createBucket({ Bucket: 'dip-artifacts-storage' }).promise()
   .catch((e) => {
     console.error(e);
     if (e.code !== 'BucketAlreadyOwnedByYou') process.exit(1);
   })
   .then(async () => {
-    console.log('Running listener');
-    await dipArtifactsStorage.listen().catch((e) => {
-      console.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-      process.exit(1);
+    bootstrap(DipArtifactsStorage, {
+      httpPort: isDockerHost() && !process.env.CI ? 3000 : 3012,
+      s3,
     });
   });

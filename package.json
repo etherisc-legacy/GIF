@@ -13,7 +13,7 @@
     "bootstrap": "echo 'Install dependencies for packages'; lerna bootstrap --hoist",
     "lerna:clean": "echo 'Cleaning local /node_modules folders'; lerna clean",
     "migrate": "echo 'Run database migrations for packages'; lerna run migrate --concurrency 1",
-    "dev": "echo 'Start packages in development mode'; lerna run dev --parallel",
+    "dev": "echo 'Start packages in development mode'; lerna run dev --parallel --concurrency 100",
     "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d",
     "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",
     "dev:services:purge": "docker-compose -f ./services/compose/docker-compose.yml down -v; rm -rf ./services/compose/minio; rm -rf ./services/compose/postgresql; rm -rf ./services/compose/ganache",

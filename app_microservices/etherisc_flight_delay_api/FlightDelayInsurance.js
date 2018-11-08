@@ -32,31 +32,32 @@ class FlightDelayInsurance {
 
   /**
    * Handle LogSetState event from contract
-   * @param {string} correlationId
-   * @param {{}} payload
+   * @param {{}} content
+   * @param {{}} fields
+   * @param {{}} properties
    * @return {Promise}
    */
-  onLogSetState(correlationId, payload) {
+  onLogSetState({ content, fields, properties }) {
     // Applied
-    if (payload.state === 0) return this.onPolicyAppliedState(correlationId, payload);
+    if (content.state === 0) return this.onPolicyAppliedState(properties.correlationId, content);
 
     // Accepted
-    if (payload.state === 1) return this.onPolicyAcceptedState(correlationId, payload);
+    if (content.state === 1) return this.onPolicyAcceptedState(properties.correlationId, content);
 
     // Revoked
-    if (payload.state === 2) return this.onPolicyRevoked(correlationId, payload);
+    if (content.state === 2) return this.onPolicyRevoked(properties.correlationId, content);
 
     // PaidOut
-    if (payload.state === 3) return this.onPolicyPaidOutState(correlationId, payload);
+    if (content.state === 3) return this.onPolicyPaidOutState(properties.correlationId, content);
 
     // Expired
-    if (payload.state === 4) return this.onPolicyExpiredState(correlationId, payload);
+    if (content.state === 4) return this.onPolicyExpiredState(properties.correlationId, content);
 
     // Declined
-    if (payload.state === 5) return this.onPolicyDeclinedState(correlationId, payload);
+    if (content.state === 5) return this.onPolicyDeclinedState(properties.correlationId, content);
 
     // SendFailed
-    if (payload.state === 6) return this.onPolicySendFailedState(correlationId, payload);
+    if (content.state === 6) return this.onPolicySendFailedState(properties.correlationId, content);
 
     return null;
   }
@@ -146,20 +147,22 @@ class FlightDelayInsurance {
 
   /**
    * On card charged event handler
-   * @param {string} correlationId
-   * @param {{}} payload
+   * @param {{}} content
+   * @param {{}} fields
+   * @param {{}} properties
    */
-  onCardCharged(correlationId, payload) {
-    this.dip.issueCertificate(correlationId, payload.policyId);
+  onCardCharged({ content, fields, properties }) {
+    this.dip.issueCertificate(properties.correlationId, content.policyId);
   }
 
   /**
    * On certificated issued event handler
-   * @param {string} correlationId
-   * @param {{}} payload
+   * @param {{}} content
+   * @param {{}} fields
+   * @param {{}} properties
    */
-  onCertificateIssued(correlationId, payload) {
-    this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} accepted` });
+  onCertificateIssued({ content, fields, properties }) {
+    this.dip.send(properties.correlationId, { from: this.name, msg: `Policy ${content.policyId} accepted` });
   }
 }
 

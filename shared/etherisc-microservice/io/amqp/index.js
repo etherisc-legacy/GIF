@@ -119,7 +119,7 @@ class Amqp {
     const queueName = `${this.appName}_${this.appVersion}_${sourceMicroservice}_${messageType}_${messageTypeVersion}`;
     const topic = `${sourceMicroservice}.${messageType}.${messageTypeVersion}`;
 
-    const queue = await this._channel.assertQueue(queueName, { exclusive: false });
+    const queue = await this._channel.assertQueue(queueName, { exclusive: false, durable: true });
     await this._channel.bindQueue(queue.queue, this.exchangeName, topic);
 
     const messageHandler = this.handleMessage({ messageType, messageTypeVersion, handler }).bind(this);
@@ -170,7 +170,7 @@ class Amqp {
     const specificMessageTypeVersion = messageProcessor.findMessageSchema(messageType, messageTypeVersion).version;
     const topic = `${this.appName}.${messageType}.${specificMessageTypeVersion}`;
 
-    this._channel.publish(this.exchangeName,
+    await this._channel.publish(this.exchangeName,
       topic,
       messageProcessor.pack(content, messageType, specificMessageTypeVersion),
       messageProcessor.headers(correlationId, customHeaders, this.appName, this.appVersion, messageType));

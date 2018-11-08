@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 
-const prefix = _.last(process.env.npm_package_name.split('/'));
+const prefix = _.last((process.env.npm_package_name || '').split('/'));
 
 module.exports = {
   prefix,
