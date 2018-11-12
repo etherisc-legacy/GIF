@@ -1,11 +1,12 @@
-FROM node:latest AS build
+FROM node:9.10.0 AS build
 
 WORKDIR /app
 COPY . .
 
 ARG NPM_TOKEN
-RUN npm install --only=production --loglevel notice
-RUN rm .npmrc
+RUN echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+RUN npm update -g npm
+RUN npm ci
 
 RUN NODE_ENV=production npm run build
 
