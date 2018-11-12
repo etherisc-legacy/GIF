@@ -80,9 +80,7 @@ class App extends Component {
     socket.onopen = () => this.state.socket = socket;
     socket.onclose = () => this.pushLog(JSON.stringify({ app: 'UI', msg: 'WS connection closed' }));
     socket.onmessage = msg => this.pushLog(msg.data);
-    socket.onerror = (err) => {
-      console.log(err);
-    };
+    socket.onerror = console.log;
   }
 
   /**

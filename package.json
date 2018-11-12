@@ -10,22 +10,22 @@
     "deploy:minikube": "echo 'Deploy to Minikube'; NODE_ENV=development ./bin/run deploy",
     "deploy:gke:secret": "echo Deploy secrets to GKE; ./bin/run deploySecret",
     "deploy:gke": "echo 'Deploy to GKE'; NODE_ENV=production ./bin/run deploy",
-    "bootstrap": "echo 'Install dependencies for packages'; lerna bootstrap --hoist",
-    "lerna:clean": "echo 'Cleaning local /node_modules folders'; lerna clean",
-    "migrate": "echo 'Run database migrations for packages'; lerna run migrate --concurrency 1",
-    "dev": "echo 'Start packages in development mode'; lerna run dev --parallel --concurrency 100",
-    "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d",
+    "bootstrap": "echo 'Install dependencies for packages'; lerna bootstrap --concurrency 100 --progress",
+    "clean": "echo 'Cleaning local /node_modules folders'; lerna clean --concurrency 100 --progress",
+    "migrate": "echo 'Run database migrations for packages'; lerna run migrate --parallel --concurrency 100 --progress",
+    "migrate:test": "echo 'Run database migrations for packages'; NODE_ENV=test lerna run migrate --parallel --concurrency 100 --progress",
+    "dev": "echo 'Start packages in development mode'; lerna run dev --parallel --concurrency 100 --progress",
+    "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d --remove-orphans",
     "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",
     "dev:services:purge": "docker-compose -f ./services/compose/docker-compose.yml down -v; rm -rf ./services/compose/minio; rm -rf ./services/compose/postgresql; rm -rf ./services/compose/ganache",
-    "clean": "lerna clean",
     "lint": "echo 'Lint javascript files'; eslint --ext js .",
     "lint:fix": "echo 'Lint javascript files'; eslint --ext js --fix .",
     "docs": "echo 'Generage documentation'; esdoc",
     "test:e2e": "echo 'Run e2e tests'; NODE_ENV=test mocha",
-    "test": "echo 'Run tests for packages'; lerna run test --concurrency 1",
-    "coverage": "echo 'Run tests coverage for packages'; lerna run coverage",
+    "test": "echo 'Run tests for packages'; lerna run test --concurrency 1 --progress",
+    "coverage": "echo 'Run tests coverage for packages'; lerna run coverage --parallel --concurrency 100 --progress",
     "collect:coverage": "echo 'Collect tests coverage from packages in README.md'; ./bin/run collectCoverage",
-    "publish": "echo 'Publish updated packages to NPM'; lerna publish"
+    "publish": "echo 'Publish updated packages to NPM'; lerna publish --progress"
   },
   "files": [
     "*"
@@ -67,6 +67,7 @@
     "inquirer": "^6.2.0",
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
+    "pg": "^7.5.0",
     "uuid": "^3.3.2"
   }
 }

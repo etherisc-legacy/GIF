@@ -2,13 +2,17 @@ const uuid = require('uuid');
 const { fabric } = require('@etherisc/microservice');
 const { deleteTestExchange, deleteTestBucket } = require('@etherisc/microservice/test/helpers');
 const DipArtifactsStorage = require('../DipArtifactsStorage');
+const { schema } = require('../knexfile');
 
+
+const exchangeName = uuid();
 
 describe('DipArtifactsStorage microservice', () => {
   before(async () => {
     this.microservice = fabric(DipArtifactsStorage, {
       httpPort: 4000,
       bucket: uuid(),
+      exchangeName,
     });
     await this.microservice.bootstrap();
 
@@ -18,11 +22,11 @@ describe('DipArtifactsStorage microservice', () => {
   });
 
   beforeEach(async () => {
-    await this.db('artifacts_storage.artifacts').truncate();
+    await this.db(`${schema}.artifacts`).truncate();
   });
 
   after(async () => {
-    await deleteTestExchange(this.amqp, 'test_logging');
+    await deleteTestExchange(this.amqp, exchangeName);
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
     this.microservice.shutdown();
   });
@@ -58,9 +62,9 @@ describe('DipArtifactsStorage microservice', () => {
       },
     });
 
-    let result = await this.db.raw('SELECT * FROM artifacts_storage.artifacts');
+    let result = await this.db.raw(`SELECT * FROM ${schema}.artifacts`);
     while (result.rows.length === 0) {
-      result = await this.db.raw('SELECT * FROM artifacts_storage.artifacts');
+      result = await this.db.raw(`SELECT * FROM ${schema}.artifacts`);
     }
     result.rows[0].abi[0].name.should.be.equal('E1');
   });

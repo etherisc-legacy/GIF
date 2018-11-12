@@ -1,13 +1,17 @@
+const uuid = require('uuid');
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
 const { deleteTestExchange } = require('@etherisc/microservice/test/helpers');
 const DipEventLogging = require('../DipEventLogging');
+const { schema } = require('../knexfile');
 
+
+const exchangeName = uuid();
 
 describe('DipEventLogging microservice', () => {
   before(async () => {
     this.microservice = fabric(DipEventLogging, {
-      exchangeName: 'test_logging',
+      exchangeName,
     });
     await this.microservice.bootstrap();
 
@@ -19,11 +23,11 @@ describe('DipEventLogging microservice', () => {
 
   beforeEach(async () => {
     sinon.restore();
-    await this.db('event_logging.events').truncate();
+    await this.db(`${schema}.events`).truncate();
   });
 
   after(async () => {
-    await deleteTestExchange(this.amqp, 'test_logging');
+    await deleteTestExchange(this.amqp, exchangeName);
     this.microservice.shutdown();
   });
 
@@ -33,7 +37,7 @@ describe('DipEventLogging microservice', () => {
       content: { message: 'Test message' },
     });
     await new Promise(resolve => setTimeout(resolve, 100));
-    const eventCounts = await this.db('event_logging.events').count();
+    const eventCounts = await this.db(`${schema}.events`).count();
 
     eventCounts[0].count.should.be.equal('1');
   });

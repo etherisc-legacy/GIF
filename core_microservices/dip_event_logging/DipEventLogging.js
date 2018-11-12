@@ -1,3 +1,6 @@
+const { schema } = require('./knexfile');
+
+
 /**
  * DIP Event Logging microservice
  */
@@ -12,7 +15,7 @@ class DipEventLogging {
   constructor({
     amqp, db, log, router,
   }) {
-    this._db = db('event_logging.events');
+    this._db = db;
     this._amqp = amqp;
     this._log = log;
   }
@@ -46,7 +49,7 @@ class DipEventLogging {
    * @return {Integer} id
    * */
   async saveMessage({ content, fields, properties }) {
-    const idArray = await this._db.insert({ content, fields, properties }).returning('id');
+    const idArray = await this._db(`${schema}.events`).insert({ content, fields, properties }).returning('id');
     return idArray[0];
   }
 

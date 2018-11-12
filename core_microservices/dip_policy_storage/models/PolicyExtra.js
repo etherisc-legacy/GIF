@@ -1,5 +1,5 @@
 const { Model } = require('objection');
-const { constants } = require('../knexfile');
+const { constants, schema } = require('../knexfile');
 
 
 const { POLICY_EXTRA_TABLE } = constants;
@@ -13,7 +13,7 @@ class PolicyExtra extends Model {
    * @return {string}
    */
   static get tableName() {
-    return POLICY_EXTRA_TABLE;
+    return `${schema}.${POLICY_EXTRA_TABLE}`;
   }
 }
 

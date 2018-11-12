@@ -1,7 +1,7 @@
-const { triggers } = require('../knexfile');
+const { schema, triggers } = require('../knexfile');
 
 
-exports.up = db => db.schema.createTable('event_listener.contracts', (table) => {
+exports.up = db => db.schema.withSchema(schema).createTable('contracts', (table) => {
   table.increments();
   table.string('product').notNullable();
   table.string('networkName').notNullable();
@@ -12,6 +12,6 @@ exports.up = db => db.schema.createTable('event_listener.contracts', (table) => 
   table.timestamp('updated').notNullable().defaultTo(db.fn.now());
   table.unique(['product', 'networkName', 'address']);
 })
-  .then(() => db.raw(triggers.onUpdateTrigger.up('event_listener.contracts')));
+  .then(() => db.raw(triggers.onUpdateTrigger.up('contracts')));
 
-exports.down = db => db.schema.dropTable('event_listener.contracts');
+exports.down = db => db.schema.withSchema(schema).dropTable('contracts');
