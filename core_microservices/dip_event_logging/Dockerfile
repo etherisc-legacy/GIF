@@ -1,10 +1,11 @@
-FROM node:latest
+FROM node:9.10.0
 
 WORKDIR /app
 COPY . .
 
 ARG NPM_TOKEN
-RUN npm install --only=production --loglevel notice
-RUN rm .npmrc
+RUN echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+RUN npm update -g npm
+RUN npm ci
 
 CMD npm run migrate && npm run prod
