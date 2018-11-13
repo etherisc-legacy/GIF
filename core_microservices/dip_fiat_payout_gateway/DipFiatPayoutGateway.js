@@ -24,9 +24,10 @@ class DipFiatPayoutGateway {
 
   /**
    * Handle payout event message
-   * @param {{}} content
-   * @param {{}} fields
-   * @param {{}} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    * @return {Promise<void>}
    */
   async payout({ content, fields, properties }) {

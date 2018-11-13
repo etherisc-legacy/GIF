@@ -32,9 +32,10 @@ class FlightDelayInsurance {
 
   /**
    * Handle LogSetState event from contract
-   * @param {{}} content
-   * @param {{}} fields
-   * @param {{}} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    * @return {Promise}
    */
   onLogSetState({ content, fields, properties }) {
@@ -147,9 +148,10 @@ class FlightDelayInsurance {
 
   /**
    * On card charged event handler
-   * @param {{}} content
-   * @param {{}} fields
-   * @param {{}} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    */
   onCardCharged({ content, fields, properties }) {
     this.dip.issueCertificate(properties.correlationId, content.policyId);
@@ -157,9 +159,10 @@ class FlightDelayInsurance {
 
   /**
    * On certificated issued event handler
-   * @param {{}} content
-   * @param {{}} fields
-   * @param {{}} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    */
   onCertificateIssued({ content, fields, properties }) {
     this.dip.send(properties.correlationId, { from: this.name, msg: `Policy ${content.policyId} accepted` });

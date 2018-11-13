@@ -122,9 +122,10 @@ class DipEventListener {
 
   /**
    * Send existing events
-   * @param {Object} content
-   * @param {Object} fields
-   * @param {Object} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    * @return {void}
    */
   async sendExistingEvents({ content, fields, properties }) {
@@ -143,12 +144,12 @@ class DipEventListener {
     }
   }
 
-
   /**
    * Request artifacts
-   * @param {Object} content
-   * @param {Object} fields
-   * @param {Object} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    * @return {void}
    */
   async requestArtifacts({ content, fields, properties }) {
@@ -169,9 +170,10 @@ class DipEventListener {
 
   /**
    * Save artifact
-   * @param {Object} content
-   * @param {Object} fields
-   * @param {Object} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    * @return {void}
    */
   async saveArtifact({ content, fields, properties }) {

@@ -6,8 +6,9 @@ import {
 
 /**
  * Formatted log message component
- * @param {{}} msg
- * @param {numver} id
+ * @param {{}} params
+ * @param {{}} params.msg
+ * @param {integer} params.id
  * @return {*}
  * @constructor
  */

@@ -10,6 +10,9 @@ const exchangeName = uuid();
 describe('DipArtifactsStorage microservice', () => {
   before(async () => {
     this.microservice = fabric(DipArtifactsStorage, {
+      amqp: true,
+      db: true,
+      s3: true,
       httpPort: 4000,
       bucket: uuid(),
       exchangeName,

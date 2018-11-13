@@ -104,10 +104,11 @@ class Amqp {
 
   /**
    * Start listening to queue messages
-   * @param {string} [sourceMicroservice = '*']
-   * @param {string} [messageType = '*']
-   * @param {string} [messageTypeVersion = '*.*']
-   * @param {function} handler
+   * @param {{}} params
+   * @param {string} [params.sourceMicroservice = '*']
+   * @param {string} [params.messageType = '*']
+   * @param {string} [params.messageTypeVersion = '*.*']
+   * @param {function} params.handler
    * @return {Promise<void>}
    */
   async consume({
@@ -128,10 +129,11 @@ class Amqp {
 
   /**
    * Preprocess queue message and pass it to specified handler
-   * @param {string} [messageType = '*']
-   * @param {string} [messageTypeVersion = '*.*']
-   * @param {Function} handler
-   * @return {Function}
+   * @param {{}} params
+   * @param {string} [params.messageType = '*']
+   * @param {string} [params.messageTypeVersion = '*.*']
+   * @param {Function} params.handler
+   * @return {function}
    */
   handleMessage({ messageType = '*', messageTypeVersion = '*.*', handler }) {
     return (message) => {
@@ -153,12 +155,13 @@ class Amqp {
   }
 
   /**
-   *
-   * @param {string} messageType
-   * @param {string} [messageTypeVersion = latest]
-   * @param {{}} content
-   * @param {string} correlationId
-   * @param {{}} customHeaders
+   * Publish message to queue
+   * @param {{}} params
+   * @param {string} [params.messageType = 'latest']
+   * @param {string} params.messageTypeVersion
+   * @param {{}} params.content
+   * @param {string} params.correlationId
+   * @param {{}} params.customHeaders
    * @return {Promise<void>}
    */
   async publish({

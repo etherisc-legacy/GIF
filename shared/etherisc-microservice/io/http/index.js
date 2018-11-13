@@ -26,6 +26,22 @@ class HttpApp extends Koa {
   }
 
   /**
+   * Get instance of server
+   * @return {null|*}
+   */
+  get server() {
+    return this._server;
+  }
+
+  /**
+   * Get server port
+   * @return {number}
+   */
+  get port() {
+    return this._port;
+  }
+
+  /**
    * Shutdown http server
    */
   shutdown() {

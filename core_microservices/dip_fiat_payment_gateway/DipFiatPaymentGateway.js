@@ -23,10 +23,11 @@ class DipFiatPaymentGateway {
   }
 
   /**
-   * Handle card charding message
-   * @param {{}} content
-   * @param {{}} fields
-   * @param {{}} properties
+   * Handle card charging message
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    * @return {Promise<void>}
    */
   async chargeCard({ content, fields, properties }) {

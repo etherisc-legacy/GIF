@@ -1,0 +1,444 @@
+[
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x715018a6"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "risks",
+    "outputs": [
+      {
+        "name": "vendorCode",
+        "type": "bytes32"
+      },
+      {
+        "name": "product",
+        "type": "bytes32"
+      },
+      {
+        "name": "expiration",
+        "type": "uint256"
+      },
+      {
+        "name": "sumInsured",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x8993021b"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x8da5cb5b"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "claims",
+    "outputs": [
+      {
+        "name": "policyId",
+        "type": "uint256"
+      },
+      {
+        "name": "state",
+        "type": "uint8"
+      },
+      {
+        "name": "stateTime",
+        "type": "uint256"
+      },
+      {
+        "name": "stateMessage",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xa888c2cd"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "policies",
+    "outputs": [
+      {
+        "name": "customerExternalId",
+        "type": "bytes32"
+      },
+      {
+        "name": "riskId",
+        "type": "bytes32"
+      },
+      {
+        "name": "premium",
+        "type": "uint256"
+      },
+      {
+        "name": "expectedPayout",
+        "type": "uint256"
+      },
+      {
+        "name": "actualPayout",
+        "type": "uint256"
+      },
+      {
+        "name": "currency",
+        "type": "uint8"
+      },
+      {
+        "name": "state",
+        "type": "uint8"
+      },
+      {
+        "name": "stateTime",
+        "type": "uint256"
+      },
+      {
+        "name": "stateMessage",
+        "type": "bytes32"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xd3e89483"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xf2fde38b"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_policyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_state",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "name": "_stateTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_stateMessage",
+        "type": "bytes32"
+      }
+    ],
+    "name": "LogPolicySetState",
+    "type": "event",
+    "signature": "0xa0f11a743858f68e4c4fc054666c71c8a6c8b17e05a9924bff247a8fb60def3e"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "_claimId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_policyId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_state",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "name": "_stateTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "_stateMessage",
+        "type": "string"
+      }
+    ],
+    "name": "LogClaimSetState",
+    "type": "event",
+    "signature": "0x5f166a414ad4071321f3746ea9d4aab53d63fe06ba8d4058a4ab2c7b615c5886"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipRenounced",
+    "type": "event",
+    "signature": "0xf8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c64820"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event",
+    "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_vendorCode",
+        "type": "bytes32"
+      },
+      {
+        "name": "_product",
+        "type": "bytes32"
+      },
+      {
+        "name": "_premium",
+        "type": "uint256"
+      },
+      {
+        "name": "_sumInsured",
+        "type": "uint256"
+      },
+      {
+        "name": "_currency",
+        "type": "uint8"
+      },
+      {
+        "name": "_expiration",
+        "type": "uint256"
+      },
+      {
+        "name": "_customerExternalId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "newPolicy",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x31460e9d"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_policyId",
+        "type": "uint256"
+      }
+    ],
+    "name": "underwrite",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x6be60f8b"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_policyId",
+        "type": "uint256"
+      },
+      {
+        "name": "_reason",
+        "type": "bytes32"
+      }
+    ],
+    "name": "decline",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x6a498204"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_policyId",
+        "type": "uint256"
+      },
+      {
+        "name": "_reason",
+        "type": "string"
+      }
+    ],
+    "name": "newClaim",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xf9e4181d"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_policyId",
+        "type": "uint256"
+      }
+    ],
+    "name": "expire",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xbf81bf43"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_claimId",
+        "type": "uint256"
+      },
+      {
+        "name": "_reason",
+        "type": "string"
+      }
+    ],
+    "name": "rejectClaim",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x3577a5ad"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_claimId",
+        "type": "uint256"
+      },
+      {
+        "name": "_reason",
+        "type": "string"
+      }
+    ],
+    "name": "confirmClaim",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xeaf75b46"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_policyId",
+        "type": "uint256"
+      },
+      {
+        "name": "_proof",
+        "type": "bytes32"
+      }
+    ],
+    "name": "confirmPayout",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x9fd0457a"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getPoliciesCount",
+    "outputs": [
+      {
+        "name": "_count",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x965abf67"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getClaimsCount",
+    "outputs": [
+      {
+        "name": "_count",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x3ef8f2ba"
+  }
+]

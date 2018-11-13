@@ -11,6 +11,8 @@ const exchangeName = uuid();
 describe('DipEventLogging microservice', () => {
   before(async () => {
     this.microservice = fabric(DipEventLogging, {
+      amqp: true,
+      db: true,
       exchangeName,
     });
     await this.microservice.bootstrap();

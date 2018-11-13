@@ -64,7 +64,7 @@ contract Ownable {
   }
 }
 
-// File: contracts/EStoreInsurance.sol
+// File: contracts/BikesStoreInsurance.sol
 
 contract EStoreInsurance is Ownable {
 

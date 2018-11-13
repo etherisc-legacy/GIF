@@ -24,9 +24,10 @@ class DipEtheremClient {
 
   /**
    * Handle successful policy creation message
-   * @param {{}} content
-   * @param {{}} fields
-   * @param {{}} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    * @return {Promise<void>}
    */
   async createTransaction({ content, fields, properties }) {

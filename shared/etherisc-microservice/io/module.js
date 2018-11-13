@@ -1,9 +1,9 @@
-const _ = require('lodash');
 const Amqp = require('./amqp');
 const Database = require('./db');
 const HttpApp = require('./http');
 const log = require('./log');
 const S3 = require('./s3');
+const WebSocket = require('./websocket');
 
 
 const { MESSAGE_BROKER } = process.env;
@@ -16,15 +16,22 @@ module.exports = (config) => {
     s3ForcePathStyle: true,
     signatureVersion: 'v4',
   });
-  const db = new Database(config.db);
+
+  const db = new Database(config.knexfile);
   const http = new HttpApp(config.httpPort);
 
-  const appName = _.last((process.env.npm_package_name || '').split('/'));
-  const appVersion = process.env.npm_package_version;
+  /**
+   * Create WebSocket endpoint
+   * @param {Server} server
+   * @return {WebSocket}
+   */
+  const websocket = server => new WebSocket({ server, config, log });
 
-  const amqp = new Amqp(MESSAGE_BROKER || 'amqp://localhost:5672', appName, appVersion, config.exchangeName);
+  const { appName, appVersion, exchangeName } = config;
+
+  const amqp = new Amqp(MESSAGE_BROKER || 'amqp://localhost:5672', appName, appVersion, exchangeName);
 
   return {
-    amqp, db, http, log, s3, appName, appVersion, config,
+    amqp, db, http, log, s3, config, websocket,
   };
 };

@@ -1,3 +1,5 @@
+const isDockerHost = require('is-docker');
+
 /**
  * Throw error
  * @param {*} e
@@ -10,4 +12,8 @@ function throwError(e) {
   }
 }
 
-module.exports = { throwError };
+module.exports = {
+  throwError,
+  isDockerHost,
+  isKubernetesHost: () => isDockerHost() && !process.env.CI,
+};

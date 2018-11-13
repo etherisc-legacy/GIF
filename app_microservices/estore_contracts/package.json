@@ -8,7 +8,7 @@
     "test": "truffle test",
     "coverage": "solidity-coverage",
     "prepare-verification": "truffle-flattener ./contracts/EStoreInsurance.sol > ./verification/EStoreInsurance.sol",
-    "deploy": "MNEMONIC=${MNEMONIC} INFURA_KEY=${INFURA_KEY} truffle migrate --network ${NETWORK}"
+    "deploy": "MNEMONIC=${MNEMONIC} HTTP_PROVIDER=${HTTP_PROVIDER} truffle migrate --network ${NETWORK}"
   },
   "dependencies": {
     "chai": "^4.2.0",

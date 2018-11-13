@@ -12,10 +12,52 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/dashboard/config.js~claim_state",
+    "variable/index.html#static-variable-CLAIM_STATE",
+    "<span>CLAIM_STATE</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/config.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/checkout/form.js~cardform",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm.html",
+    "<span>CardForm</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/catalog/index.js~catalog",
+    "function/index.html#static-function-Catalog",
+    "<span>Catalog</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Catalog/index.js</span>",
+    "function"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/checkout/index.js~checkout",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout.html",
+    "<span>Checkout</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/claim/index.js~claim",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim.html",
+    "<span>Claim</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js</span>",
+    "class"
+  ],
+  [
     "@etherisc/dip-platform/dip-platform/commands/collectcoverage.js~collectcoverage",
     "class/dip-platform/commands/collectCoverage.js~CollectCoverage.html",
     "<span>CollectCoverage</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/commands/collectCoverage.js</span>",
     "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/components/confirmationdialog/index.js~confirmationdialog",
+    "class/dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog.html",
+    "<span>ConfirmationDialog</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/components/console/index.js~console",
+    "function/index.html#static-function-Console",
+    "<span>Console</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/components/Console/index.js</span>",
+    "function"
   ],
   [
     "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/customer.js~customer",
@@ -27,6 +69,12 @@ window.esdocSearchIndex = [
     "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/customerextra.js~customerextra",
     "class/dip-platform/core_microservices/dip_policy_storage/models/CustomerExtra.js~CustomerExtra.html",
     "<span>CustomerExtra</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/CustomerExtra.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js~dashboard",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.html",
+    "<span>Dashboard</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js</span>",
     "class"
   ],
   [
@@ -108,6 +156,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html",
+    "<span>EStoreInsurance</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_api/EStoreInsurance.js</span>",
+    "class"
+  ],
+  [
     "@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/flightdelayinsurance.js~flightdelayinsurance",
     "class/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js~FlightDelayInsurance.html",
     "<span>FlightDelayInsurance</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/FlightDelayInsurance.js</span>",
@@ -118,6 +172,24 @@ window.esdocSearchIndex = [
     "class/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js~GenericInsurance.html",
     "<span>GenericInsurance</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_api/GenericInsurance.js</span>",
     "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/services/genericinsurance/index.js~genericinsurance",
+    "class/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance.html",
+    "<span>GenericInsurance</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/root/global-styles.js~globalstyles",
+    "variable/index.html#static-variable-GlobalStyles",
+    "<span>GlobalStyles</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Root/global-styles.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/components/header/index.js~header",
+    "function/index.html#static-function-Header",
+    "<span>Header</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/components/Header/index.js</span>",
+    "function"
   ],
   [
     "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp",
@@ -132,6 +204,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/notfound/index.js~notfound",
+    "function/index.html#static-function-NotFound",
+    "<span>NotFound</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/NotFound/index.js</span>",
+    "function"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/dashboard/config.js~policy_state",
+    "variable/index.html#static-variable-POLICY_STATE",
+    "<span>POLICY_STATE</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/config.js</span>",
+    "variable"
+  ],
+  [
     "@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/policy.js~policy",
     "class/dip-platform/core_microservices/dip_policy_storage/models/Policy.js~Policy.html",
     "<span>Policy</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/core_microservices/dip_policy_storage/models/Policy.js</span>",
@@ -144,9 +228,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/root/index.js~root",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root.html",
+    "<span>Root</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js</span>",
+    "class"
+  ],
+  [
     "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/s3/index.js~s3",
     "class/dip-platform/shared/etherisc-microservice/io/s3/index.js~S3.html",
     "<span>S3</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/s3/index.js</span>",
+    "class"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html",
+    "<span>WebSocket</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/websocket/index.js</span>",
     "class"
   ],
   [
@@ -186,6 +282,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/webpack.config.js~config",
+    "variable/index.html#static-variable-config",
+    "<span>config</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/webpack.config.js</span>",
+    "variable"
+  ],
+  [
     "@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/webpack.config.js~config",
     "variable/index.html#static-variable-config",
     "<span>config</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/etherisc_flight_delay_ui/webpack.config.js</span>",
@@ -201,6 +303,12 @@ window.esdocSearchIndex = [
     "@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js~decodedevent",
     "variable/index.html#static-variable-decodedEvent",
     "<span>decodedEvent</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/shared/etherisc-microservice/io/amqp/messages/types/index.js</span>",
+    "variable"
+  ],
+  [
+    "@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/env.js~env",
+    "variable/index.html#static-variable-env",
+    "<span>env</span> <span class=\"search-result-import-path\">@etherisc/dip-platform/dip-platform/app_microservices/estore_ui/env.js</span>",
     "variable"
   ],
   [
@@ -666,6 +774,138 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js",
+    "file/dip-platform/app_microservices/estore_api/EStoreInsurance.js.html",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#bootstrap",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-bootstrap",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#confirmclaim",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-confirmClaim",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#confirmClaim",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#confirmpayout",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-confirmPayout",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#confirmPayout",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#constructor",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-constructor-constructor",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#contract",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-member-contract",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#contract",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#decline",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-decline",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#decline",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#expire",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-expire",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#expire",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#getclaims",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-getClaims",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#getClaims",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#getpolicies",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-getPolicies",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#getPolicies",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#gi",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-member-gi",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#gi",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#log",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-member-log",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#log",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#newclaim",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-newClaim",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#newClaim",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#newpolicy",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-newPolicy",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#newPolicy",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#oncontractevent",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-onContractEvent",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#onContractEvent",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#onlogclaimsetstate",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-onLogClaimSetState",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#onLogClaimSetState",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#onlogpolicysetstate",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-onLogPolicySetState",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#onLogPolicySetState",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#onwsmessage",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-onWsMessage",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#onWsMessage",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#rejectclaim",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-rejectClaim",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#rejectClaim",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#underwrite",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-method-underwrite",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#underwrite",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/estoreinsurance.js~estoreinsurance#websocket",
+    "class/dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance.html#instance-member-websocket",
+    "dip-platform/app_microservices/estore_api/EStoreInsurance.js~EStoreInsurance#websocket",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_api/bootstrap.js",
+    "file/dip-platform/app_microservices/estore_api/bootstrap.js.html",
+    "dip-platform/app_microservices/estore_api/bootstrap.js",
+    "file"
+  ],
+  [
     "dip-platform/app_microservices/estore_contracts/.solcover.js",
     "file/dip-platform/app_microservices/estore_contracts/.solcover.js.html",
     "dip-platform/app_microservices/estore_contracts/.solcover.js",
@@ -675,6 +915,312 @@ window.esdocSearchIndex = [
     "dip-platform/app_microservices/estore_contracts/truffle-config.js",
     "file/dip-platform/app_microservices/estore_contracts/truffle-config.js.html",
     "dip-platform/app_microservices/estore_contracts/truffle-config.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/env.js",
+    "file/dip-platform/app_microservices/estore_ui/env.js.html",
+    "dip-platform/app_microservices/estore_ui/env.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/internals/enzyme-setup.js",
+    "file/dip-platform/app_microservices/estore_ui/internals/enzyme-setup.js.html",
+    "dip-platform/app_microservices/estore_ui/internals/enzyme-setup.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/bootstrap/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/bootstrap/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/bootstrap/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/components/confirmationdialog/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/components/confirmationdialog/index.js~confirmationdialog#confirm",
+    "class/dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog.html#instance-member-confirm",
+    "dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog#confirm",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/components/confirmationdialog/index.js~confirmationdialog#render",
+    "class/dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog.html#instance-method-render",
+    "dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog#render",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/components/confirmationdialog/index.js~confirmationdialog#state",
+    "class/dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog.html#instance-member-state",
+    "dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog#state",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/components/confirmationdialog/index.js~confirmationdialog.proptypes",
+    "class/dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog.html#static-member-propTypes",
+    "dip-platform/app_microservices/estore_ui/src/components/ConfirmationDialog/index.js~ConfirmationDialog.propTypes",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/components/console/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/components/Console/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/components/Console/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/components/header/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/components/Header/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/components/Header/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/catalog/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/Catalog/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/Catalog/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/form.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/form.js~cardform#handlechange",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm.html#instance-member-handleChange",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm#handleChange",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/form.js~cardform#render",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm.html#instance-method-render",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm#render",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/form.js~cardform#state",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm.html#instance-member-state",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm#state",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/form.js~cardform#submit",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm.html#instance-member-submit",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm#submit",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/form.js~cardform.proptypes",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm.html#static-member-propTypes",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/form.js~CardForm.propTypes",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/index.js~checkout#gettotal",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout.html#instance-method-getTotal",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout#getTotal",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/index.js~checkout#handlesubmit",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout.html#instance-member-handleSubmit",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout#handleSubmit",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/index.js~checkout#render",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout.html#instance-method-render",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout#render",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/index.js~checkout#setinsurance",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout.html#instance-member-setInsurance",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout#setInsurance",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/index.js~checkout#state",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout.html#instance-member-state",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout#state",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/checkout/index.js~checkout.proptypes",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout.html#static-member-propTypes",
+    "dip-platform/app_microservices/estore_ui/src/containers/Checkout/index.js~Checkout.propTypes",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/claim/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/claim/index.js~claim#handlechange",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim.html#instance-member-handleChange",
+    "dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim#handleChange",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/claim/index.js~claim#handlesubmit",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim.html#instance-member-handleSubmit",
+    "dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim#handleSubmit",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/claim/index.js~claim#newclaim",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim.html#instance-member-newClaim",
+    "dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim#newClaim",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/claim/index.js~claim#render",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim.html#instance-method-render",
+    "dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim#render",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/claim/index.js~claim#state",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim.html#instance-member-state",
+    "dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim#state",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/claim/index.js~claim.proptypes",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim.html#static-member-propTypes",
+    "dip-platform/app_microservices/estore_ui/src/containers/Claim/index.js~Claim.propTypes",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/config.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/config.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/config.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js~dashboard#componentdidmount",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.html#instance-method-componentDidMount",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard#componentDidMount",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js~dashboard#loadclaims",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.html#instance-member-loadClaims",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard#loadClaims",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js~dashboard#loadpolicies",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.html#instance-member-loadPolicies",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard#loadPolicies",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js~dashboard#render",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.html#instance-method-render",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard#render",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js~dashboard#state",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.html#instance-member-state",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard#state",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js~dashboard#updateaftertransaction",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.html#instance-member-updateAfterTransaction",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard#updateAfterTransaction",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/dashboard/index.js~dashboard.proptypes",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.html#static-member-propTypes",
+    "dip-platform/app_microservices/estore_ui/src/containers/Dashboard/index.js~Dashboard.propTypes",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/notfound/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/NotFound/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/NotFound/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/root/global-styles.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/Root/global-styles.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/Root/global-styles.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/root/index.js",
+    "file/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js.html",
+    "dip-platform/app_microservices/estore_ui/src/containers/Root/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/root/index.js~root#componentdidmount",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root.html#instance-method-componentDidMount",
+    "dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root#componentDidMount",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/root/index.js~root#openws",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root.html#instance-member-openWs",
+    "dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root#openWs",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/root/index.js~root#pushlog",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root.html#instance-member-pushLog",
+    "dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root#pushLog",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/root/index.js~root#render",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root.html#instance-method-render",
+    "dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root#render",
+    "method"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/root/index.js~root#request",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root.html#instance-member-request",
+    "dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root#request",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/containers/root/index.js~root#state",
+    "class/dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root.html#instance-member-state",
+    "dip-platform/app_microservices/estore_ui/src/containers/Root/index.js~Root#state",
+    "member"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/src/root.js",
+    "file/dip-platform/app_microservices/estore_ui/src/root.js.html",
+    "dip-platform/app_microservices/estore_ui/src/root.js",
+    "file"
+  ],
+  [
+    "dip-platform/app_microservices/estore_ui/webpack.config.js",
+    "file/dip-platform/app_microservices/estore_ui/webpack.config.js.html",
+    "dip-platform/app_microservices/estore_ui/webpack.config.js",
     "file"
   ],
   [
@@ -1956,6 +2502,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#port",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-get-port",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#port",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#server",
+    "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-get-server",
+    "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#server",
+    "member"
+  ],
+  [
     "dip-platform/shared/etherisc-microservice/io/http/index.js~httpapp#setreadystatus",
     "class/dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp.html#instance-method-setReadyStatus",
     "dip-platform/shared/etherisc-microservice/io/http/index.js~HttpApp#setReadyStatus",
@@ -2046,6 +2604,84 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js",
+    "file/dip-platform/shared/etherisc-microservice/io/websocket/index.js.html",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#_config",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-member-_config",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#_config",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#_connections",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-member-_connections",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#_connections",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#_handlemessage",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-method-_handleMessage",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#_handleMessage",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#_handler",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-member-_handler",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#_handler",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#_log",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-member-_log",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#_log",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#_register",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-method-_register",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#_register",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#_server",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-member-_server",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#_server",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#_wss",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-member-_wss",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#_wss",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#bootstrap",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-method-bootstrap",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#bootstrap",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#constructor",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-constructor-constructor",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#send",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-method-send",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#send",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~websocket#sethandler",
+    "class/dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket.html#instance-method-setHandler",
+    "dip-platform/shared/etherisc-microservice/io/websocket/index.js~WebSocket#setHandler",
+    "method"
+  ],
+  [
     "dip-platform/shared/etherisc-microservice/knexfile.js",
     "file/dip-platform/shared/etherisc-microservice/knexfile.js.html",
     "dip-platform/shared/etherisc-microservice/knexfile.js",
@@ -2073,18 +2709,6 @@ window.esdocSearchIndex = [
     "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#app",
     "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-app",
     "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#app",
-    "member"
-  ],
-  [
-    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#appname",
-    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-appName",
-    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#appName",
-    "member"
-  ],
-  [
-    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#appversion",
-    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-appVersion",
-    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#appVersion",
     "member"
   ],
   [
@@ -2130,10 +2754,70 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#services",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-services",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#services",
+    "member"
+  ],
+  [
     "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#shutdown",
     "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-method-shutdown",
     "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#shutdown",
     "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/dipmicroservice/index.js~dipmicroservice#websocket",
+    "class/dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice.html#instance-member-websocket",
+    "dip-platform/shared/etherisc-microservice/services/DipMicroservice/index.js~DipMicroservice#websocket",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/genericinsurance/index.js",
+    "file/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js.html",
+    "dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/genericinsurance/index.js~genericinsurance#_amqp",
+    "class/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance.html#instance-member-_amqp",
+    "dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance#_amqp",
+    "member"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/genericinsurance/index.js~genericinsurance#chargecard",
+    "class/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance.html#instance-method-chargeCard",
+    "dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance#chargeCard",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/genericinsurance/index.js~genericinsurance#constructor",
+    "class/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance.html#instance-constructor-constructor",
+    "dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance#constructor",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/genericinsurance/index.js~genericinsurance#createpolicy",
+    "class/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance.html#instance-method-createPolicy",
+    "dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance#createPolicy",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/genericinsurance/index.js~genericinsurance#issuecertificate",
+    "class/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance.html#instance-method-issueCertificate",
+    "dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance#issueCertificate",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/genericinsurance/index.js~genericinsurance#payout",
+    "class/dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance.html#instance-method-payout",
+    "dip-platform/shared/etherisc-microservice/services/GenericInsurance/index.js~GenericInsurance#payout",
+    "method"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/services/module.js",
+    "file/dip-platform/shared/etherisc-microservice/services/module.js.html",
+    "dip-platform/shared/etherisc-microservice/services/module.js",
+    "file"
   ],
   [
     "dip-platform/shared/etherisc-microservice/utils.js",

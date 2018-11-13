@@ -1,28 +1,37 @@
+const getPort = require('get-port-sync');
 const _ = require('lodash');
-const isDockerHost = require('is-docker');
+const { isDockerHost, isKubernetesHost } = require('./utils');
 const knexfile = require('./knexfile');
 const ioModule = require('./io/module');
-const DipMicroservice = require('./services/DipMicroservice');
+const { DipMicroservice, GenericInsurance } = require('./services/module');
 
+
+const KUBERNETES_HTTP_PORT = 3000;
 
 /**
  * Start application
- * @param {class} App
+ * @param {Class} App
  * @param {{}} config
  */
 function bootstrap(App, config = { }) {
   const ioConfig = {
-    db: knexfile,
-    appName: _.last(process.env.npm_package_name.split('/')),
-    appVersion: process.env.npm_package_version,
-    exchangeName: 'POLICY',
+    knexfile,
+    appName: config.appName || _.last(process.env.npm_package_name.split('/')),
+    appVersion: config.appVersion || process.env.npm_package_version,
+    exchangeName: config.exchangeName || 'POLICY', // TODO: use an universal exchange for all 'topic' platform messages or make an exchanges list
     ...config,
   };
-  // TODO: use an universal exchange for all 'topic' platform messages or make an exchanges list
 
   try {
+    if (isKubernetesHost()) {
+      ioConfig.httpPort = KUBERNETES_HTTP_PORT;
+    } else {
+      ioConfig.httpPort = ioConfig.httpDevPort || getPort();
+    }
+
     const ioDeps = ioModule(ioConfig);
-    const microservice = new DipMicroservice(App, ioDeps);
+    const services = { GenericInsurance };
+    const microservice = new DipMicroservice(App, ioDeps, services);
 
     microservice.bootstrap().catch((err) => {
       ioDeps.log.error(err);
@@ -30,7 +39,8 @@ function bootstrap(App, config = { }) {
       if (err.exit) process.exit(1);
     });
   } catch (err) {
-    console.error(err); // eslint-disable-line no-console
+    console.error(err);
+
     if (err.exit) process.exit(1);
   }
 }
@@ -43,17 +53,22 @@ function bootstrap(App, config = { }) {
  */
 function fabric(App, config = {}) {
   const ioConfig = {
-    db: knexfile,
+    knexfile,
+    appName: config.appName || _.last(process.env.npm_package_name.split('/')),
+    appVersion: config.appVersion || process.env.npm_package_version,
+    exchangeName: config.exchangeName || 'POLICY', // TODO: use an universal exchange for all 'topic' platform messages or make an exchanges list
     ...config,
   };
 
   const ioDeps = ioModule(ioConfig);
-  return new DipMicroservice(App, ioDeps);
+  const services = { GenericInsurance };
+  return new DipMicroservice(App, ioDeps, services);
 }
 
 module.exports = {
   bootstrap,
   fabric,
   isDockerHost,
+  isKubernetesHost,
   knexfile,
 };

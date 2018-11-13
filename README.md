@@ -1,25 +1,28 @@
 # DIP Platform
 
 ###### Documentation
-![documentation-badge](https://img.shields.io/badge/Documentation-55.27%25%20%28152%2F275%29-yellow.svg)
+![documentation-badge](https://img.shields.io/badge/Documentation-53.3%25%20%28218%2F409%29-yellow.svg)
 
 ###### Test coverage summary
 
 Module         | % Stmts       | % Branch      | % Funcs       | % Lines
 -------------- | --------------| --------------| --------------| --------------
 estore_contracts.v1.0.0 | - | - | - | -
-@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.38% (2/84) | 0% (0/24) | 3.33% (1/30) | 2.86% (2/70)
-@etherisc/etherisc_flight_delay_ui.v0.1.1 | 35% (14/40) | 0% (0/4) | 28.57% (4/14) | 38.89% (14/36)
-@etherisc/dip_artifacts_storage.v1.0.0 | 33.33% (15/45) | 0% (0/4) | 27.27% (3/11) | 35.71% (15/42)
+@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.38% (2/84) | 0% (0/20) | 3.33% (1/30) | 2.86% (2/70)
+estore_ui.v1.0.0 | 1.92% (5/261) | 0% (0/81) | 2.33% (1/43) | 2.06% (5/243)
+@etherisc/etherisc_flight_delay_ui.v0.1.1 | 35.9% (14/39) | 0% (0/4) | 30.77% (4/13) | 40% (14/35)
+estore_api.v1.0.0 | 0% (0/135) | 0% (0/6) | 0% (0/29) | 0% (0/135)
+@etherisc/dip_artifacts_storage.v1.0.0 | 42.86% (18/42) | 100% (0/0) | 33.33% (3/9) | 47.37% (18/38)
 @etherisc/dip_contracts.v1.0.0 | - | - | - | -
 @etherisc/dip_ethereum_client.v0.1.1 | - | - | - | -
-@etherisc/dip_event_listener.v0.1.0 | 40.74% (55/135) | 38.89% (7/18) | 41.38% (12/29) | 42.4% (53/125)
-@etherisc/dip_event_logging.v0.2.0 | 35.14% (13/37) | 37.5% (3/8) | 46.15% (6/13) | 37.14% (13/35)
+@etherisc/dip_event_listener.v0.1.0 | 43.18% (57/132) | 42.86% (6/14) | 44.44% (12/27) | 45.9% (56/122)
+@etherisc/dip_event_logging.v0.2.0 | 45.71% (16/35) | 75% (3/4) | 54.55% (6/11) | 51.61% (16/31)
 @etherisc/dip_fiat_payment_gateway.v0.1.1 | - | - | - | -
 @etherisc/dip_fiat_payout_gateway.v0.1.1 | - | - | - | -
 @etherisc/dip_pdf_generator.v1.0.1 | - | - | - | -
-@etherisc/dip_policy_storage.v0.1.1 | 51.28% (80/156) | 41.67% (5/12) | 41.46% (17/41) | 55.56% (80/144)
-@etherisc/microservice.v0.4.1 | - | - | - | -
+@etherisc/dip_policy_storage.v0.1.1 | 50.97% (79/155) | 62.5% (5/8) | 41.46% (17/41) | 55.24% (79/143)
+postgresql-service.v1.0.0 | - | - | - | -
+@etherisc/microservice.v0.4.3 | - | - | - | -
 [endOfCoverageTable]: #
 
 
@@ -31,8 +34,8 @@ estore_contracts.v1.0.0 | - | - | - | -
 
 ### A. Setup local development environment
 1. Install [Docker](https://docs.docker.com/install/#supported-platforms).
-2. Install [NodeJS](https://nodejs.org/en/). NodeJs version should be >=6 && <10.
-3. `npm install` to install package dependencies
+2. Install [NodeJS](https://nodejs.org/en/). NodeJs version should be >= 11, npm >= 6.
+3. `npm ci` to install package dependencies
 4. `npm run bootstrap` to install dependencies for Lerna packages
 5. `npm run dev:services:run` to run Docker Compose with RabbitMQ and PostreSQL
 6. `npm run migrate` to run migrations.

@@ -7,20 +7,21 @@ const { throwError } = require('../../utils');
 class DipMicroservice {
   /**
    * Constructor
-   * @param {class} App
+   * @param {Class} App
    * @param {ioModule} ioDeps
+   * @param {{}} services
    */
-  constructor(App, ioDeps) {
+  constructor(App, ioDeps, services) {
     this.App = App;
 
-    this.appName = ioDeps.appName;
-    this.appVersion = ioDeps.appVersion;
     this.amqp = ioDeps.amqp;
     this.db = ioDeps.db;
     this.http = ioDeps.http;
     this.log = ioDeps.log;
     this.config = ioDeps.config;
     this.s3 = ioDeps.s3;
+    this.services = services;
+    this.websocket = ioDeps.websocket;
   }
 
   /**
@@ -29,33 +30,57 @@ class DipMicroservice {
    */
   async bootstrap() {
     try {
-      await this.amqp.bootstrap();
-      await this.db.bootstrap();
-      await this.s3.bootstrap(this.config.bucket);
+      const deps = {};
+
+      if (this.config.amqp || this.config.genericInsurance) {
+        await this.amqp.bootstrap();
+        deps.amqp = this.amqp;
+      }
+
+      if (this.config.db) {
+        await this.db.bootstrap();
+        deps.db = this.db.getConnection();
+      }
+
+      if (this.config.s3) {
+        await this.s3.bootstrap(this.config.bucket);
+        deps.s3 = this.s3;
+      }
+
+      if (this.config.genericInsurance) {
+        const { GenericInsurance } = this.services;
+        deps.genericInsurance = new GenericInsurance({ amqp: this.amqp });
+      }
 
       const applicationRouter = new Router();
 
+      await this.http.bootstrap(applicationRouter);
+
+      if (this.config.websocket || this.config.genericInsurance) {
+        const websocket = this.websocket(this.http.server);
+        await websocket.bootstrap();
+        deps.websocket = websocket;
+      }
+
       this.app = new this.App({
-        amqp: this.amqp,
-        db: this.db.getConnection(),
+        ...deps,
         http: this.http,
         log: this.log,
         config: this.config,
         router: applicationRouter,
-        s3: this.s3,
+        appName: this.config.appName,
+        appVersion: this.config.appVersion,
       });
-
-      await this.http.bootstrap(applicationRouter);
 
       await this.app.bootstrap();
 
       this.http.setReadyStatus(true);
 
-      this.log.info(`${this.appName}.v${this.appVersion} started`);
+      this.log.info(`${this.config.appName}.v${this.config.appVersion} listening on http://localhost:${this.http.port}`);
 
       ['SIGTERM', 'SIGHUP', 'SIGINT'].forEach((signal) => {
         process.on(signal, () => {
-          this.log.debug(`${signal} received, shutdown ${this.appName}.v${this.appVersion} microservice`);
+          this.log.debug(`${signal} received, shutdown ${this.config.appName}.v${this.config.appVersion} microservice`);
 
           this.shutdown();
         });
@@ -64,6 +89,7 @@ class DipMicroservice {
       throwError(e);
     }
   }
+
 
   /**
    * Shutdown application

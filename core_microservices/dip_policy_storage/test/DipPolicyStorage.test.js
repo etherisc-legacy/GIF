@@ -7,7 +7,12 @@ const { constants: tables, schema } = require('../knexfile');
 
 describe('DipPolicyStorage microservice', () => {
   before(async () => {
-    this.microservice = fabric(DipPolicyStorage, { httpPort: 4000, exchangeName: 'test_storage' });
+    this.microservice = fabric(DipPolicyStorage, {
+      db: true,
+      amqp: true,
+      httpPort: 4000,
+      exchangeName: 'test_storage',
+    });
     await this.microservice.bootstrap();
 
     this.amqp = this.microservice.amqp;

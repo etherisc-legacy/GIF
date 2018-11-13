@@ -22,10 +22,11 @@ class DipEventLogging {
 
   /**
    * Log message
-   * @param {Object} content
-   * @param {Object} fields
-   * @param {Object} properties
-   * @param {Integer} id
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
+   * @param {Integer} params.id
    * @return {void}
    * */
   logMessage({
@@ -43,9 +44,10 @@ class DipEventLogging {
 
   /**
    * Save message to DB
-   * @param {Object} content
-   * @param {Object} fields
-   * @param {Object} properties
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
    * @return {Integer} id
    * */
   async saveMessage({ content, fields, properties }) {

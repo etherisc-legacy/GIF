@@ -9,6 +9,9 @@ const { schema } = require('../knexfile');
 describe('DipEventListener microservice', () => {
   before(async () => {
     this.microservice = fabric(DipEventListener, {
+      amqp: true,
+      db: true,
+      s3: true,
       httpPort: 4000,
       rpcNode: process.env.WS_PROVIDER || 'ws://localhost:8545',
       networkName: process.env.NETWORK_NAME || 'development',

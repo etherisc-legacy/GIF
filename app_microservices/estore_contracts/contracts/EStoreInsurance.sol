@@ -118,10 +118,14 @@ contract EStoreInsurance is Ownable {
     }
 
     function newClaim(uint256 _policyId, string _reason) external onlyOwner {
+        Policy storage policy = policies[_policyId];
+        Risk storage risk = risks[policy.riskId];
+
+        require(policy.state == PolicyState.Accepted);
+        require(block.timestamp <= risk.expiration);
+
         uint256 _claimId = claims.length++;
-
         Claim storage claim = claims[_claimId];
-
         claim.policyId = _policyId;
 
         _setClaimState(_claimId, ClaimState.Applied, _reason);
@@ -158,7 +162,7 @@ contract EStoreInsurance is Ownable {
 
         policy.expectedPayout = risk.sumInsured;
 
-        _setPolicyState(claim.policyId, PolicyState.ForPayout, "Claim confirmed");
+        _setPolicyState(claim.policyId, PolicyState.ForPayout, "Claim is confirmed");
     }
 
     function confirmPayout(uint256 _policyId, bytes32 _proof) external onlyOwner {
@@ -168,6 +172,7 @@ contract EStoreInsurance is Ownable {
         _setPolicyState(_policyId, PolicyState.PaidOut, _proof);
 
         policy.actualPayout = policy.expectedPayout;
+        policy.expectedPayout = 0;
     }
 
     function getPoliciesCount() public constant returns (uint256 _count) {

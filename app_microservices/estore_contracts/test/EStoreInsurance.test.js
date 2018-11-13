@@ -209,7 +209,7 @@ contract('EStoreInsurance', (accounts) => {
 
     const policyRecord = await insurance.policies.call(policyId);
     policyRecord.state.toString().should.be.equal(PolicyState.ForPayout);
-    web3.utils.hexToUtf8(policyRecord.stateMessage).toString().should.be.equal('Claim confirmed');
+    web3.utils.hexToUtf8(policyRecord.stateMessage).toString().should.be.equal('Claim is confirmed');
 
     const riskRecord = await insurance.risks.call(policyRecord.riskId);
     policyRecord.expectedPayout.toString().should.be.equal(riskRecord.sumInsured.toString());
@@ -218,6 +218,11 @@ contract('EStoreInsurance', (accounts) => {
   it('payout could be confirmed with confirmPayout method', async () => {
     const policyId = '0';
     const proof = 'payment-id';
+
+    const policyRecordBefore = await insurance.policies.call(policyId);
+    const riskRecord = await insurance.risks.call(policyRecordBefore.riskId);
+    const sumInsured = riskRecord.sumInsured.toString();
+    policyRecordBefore.expectedPayout.toString().should.be.equal(sumInsured);
 
     const confirm = await insurance.confirmPayout(policyId, web3.utils.asciiToHex(proof));
 
@@ -233,7 +238,8 @@ contract('EStoreInsurance', (accounts) => {
     const policyRecord = await insurance.policies.call(policyId);
     policyRecord.state.toString().should.be.equal(PolicyState.PaidOut);
     web3.utils.hexToUtf8(policyRecord.stateMessage).toString().should.be.equal(proof);
-    policyRecord.actualPayout.toString().should.be.equal(policyRecord.expectedPayout.toString());
+    policyRecord.expectedPayout.toString().should.be.equal('0');
+    policyRecord.actualPayout.toString().should.be.equal(sumInsured);
   });
 
   it('policy could not be set to expired before expiration data', async () => {
