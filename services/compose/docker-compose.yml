@@ -13,7 +13,20 @@ services:
     - "5672:5672"
     - "15672:15672"
 
-  PostgreSql:
+  PostgreSqlTest:
+    container_name: test_postgresql
+    image: postgres:10.5
+    restart: always
+    environment:
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
+    volumes:
+    - ./postgresqltest:/var/lib/postgresql
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+    - "5432:5432"
+
+  PostgreSqlDev:
     container_name: dev_postgresql
     image: postgres:10.5
     restart: always
@@ -21,10 +34,10 @@ services:
       POSTGRES_USER: postgresql
       POSTGRES_PASSWORD: postgresql
     volumes:
-    - ./postgresql:/var/lib/postgresql
+    - ./postgresqldev:/var/lib/postgresql
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-    # 5432 is used because of impossibility to use another port in bitbucket
-    - "5432:5432"
+    - "5433:5432"
 
   Minio:
     container_name: dev_minio

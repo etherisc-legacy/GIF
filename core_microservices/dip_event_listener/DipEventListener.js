@@ -1,5 +1,6 @@
 const Web3 = require('web3');
 const { Readable } = require('stream');
+const { schema } = require('./knexfile');
 
 
 /**
@@ -37,7 +38,7 @@ class DipEventListener {
       const addresses = JSON.parse(buffer.toString());
       /* eslint-disable-next-line no-restricted-syntax */
       for (const i of addresses) {
-        const event = await this.db.raw('SELECT "blockNumber" + 1 AS "nextBlock" FROM event_listener.events WHERE "networkName" = ? AND address IN (?) ORDER BY "blockNumber" DESC LIMIT 1', [this.networkName, i.address]);
+        const event = await this.db.raw(`SELECT "blockNumber" + 1 AS "nextBlock" FROM ${schema}.events WHERE "networkName" = ? AND address IN (?) ORDER BY "blockNumber" DESC LIMIT 1`, [this.networkName, i.address]);
         this.web3.eth.getPastLogs({ fromBlock: event.nextBlock || 1, address: i.address })
           .then(events => events.forEach(this.handleEvent.bind(this)));
       }
@@ -54,7 +55,7 @@ class DipEventListener {
   async onData(event) {
     try {
       this.fromBlock = event.blockNumber;
-      const { rows } = await this.db.raw('SELECT EXISTS (SELECT 1 FROM event_listener.contracts WHERE "networkName" = ? AND address = lower(?))', [this.networkName, event.address]);
+      const { rows } = await this.db.raw(`SELECT EXISTS (SELECT 1 FROM ${schema}.contracts WHERE "networkName" = ? AND address = lower(?))`, [this.networkName, event.address]);
       if (rows[0].exists) this.handleEvent(event);
     } catch (e) {
       this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
@@ -94,7 +95,7 @@ class DipEventListener {
    */
   async handleEvent(event) {
     try {
-      const result = await this.db.raw('SELECT * FROM event_listener.contracts WHERE "networkName" = ? AND address = lower(?)', [this.networkName, event.address]);
+      const result = await this.db.raw(`SELECT * FROM ${schema}.contracts WHERE "networkName" = ? AND address = lower(?)`, [this.networkName, event.address]);
       if (!result.rows[0]) return;
       const abi = result.rows[0].abi
         .filter(i => i.type === 'event')
@@ -102,7 +103,7 @@ class DipEventListener {
         .filter(i => i.signature === event.topics[0]);
       const decodedEvent = this.web3.eth.abi.decodeLog(abi[0].inputs, event.data, event.topics.slice(1));
       const block = await this.web3.eth.getBlock(event.blockNumber);
-      const { rows } = await this.db.raw('INSERT INTO event_listener.events (address, topics, data, "blockNumber", "timeStamp", "logIndex", "transactionHash", "transactionIndex", "eventName", "eventArgs", "networkName", version, product) VALUES (?, ?, ?, ?, to_timestamp(?), ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT ("networkName", "transactionHash", "logIndex") DO NOTHING RETURNING *', [
+      const { rows } = await this.db.raw(`INSERT INTO ${schema}.events (address, topics, data, "blockNumber", "timeStamp", "logIndex", "transactionHash", "transactionIndex", "eventName", "eventArgs", "networkName", version, product) VALUES (?, ?, ?, ?, to_timestamp(?), ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT ("networkName", "transactionHash", "logIndex") DO NOTHING RETURNING *`, [
         event.address, JSON.stringify(event.topics), event.data, event.blockNumber, block.timestamp, event.logIndex,
         event.transactionHash, event.transactionIndex, abi[0].name, decodedEvent, this.networkName,
         result.rows[0].version,
@@ -129,7 +130,7 @@ class DipEventListener {
   async sendExistingEvents({ content, fields, properties }) {
     try {
       // todo: filter by network, version, address, fromBlock and any other fields including eventArgs
-      const event = await this.db.raw('SELECT * FROM event_listener.events', []);
+      const event = await this.db.raw(`SELECT * FROM ${schema}.events`, []);
 
       await this.amqp.publish({
         messageType: 'decodedEvent',
@@ -180,7 +181,7 @@ class DipEventListener {
       const networkId = Object.keys(artifactObject.networks)[0];
       const { address } = artifactObject.networks[networkId];
       const abi = JSON.stringify(artifactObject.abi);
-      await this.db.raw('INSERT INTO event_listener.contracts (product, "networkName", version, address, abi) VALUES (?, ?, ?, ?, ?) ON CONFLICT (product, "networkName", address) DO UPDATE SET version = excluded.version, abi = excluded.abi', [product, this.networkName, version, address, abi]);
+      await this.db.raw(`INSERT INTO ${schema}.contracts (product, "networkName", version, address, abi) VALUES (?, ?, ?, ?, ?) ON CONFLICT (product, "networkName", address) DO UPDATE SET version = excluded.version, abi = excluded.abi`, [product, this.networkName, version, address, abi]);
     } catch (e) {
       this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
@@ -199,7 +200,7 @@ class DipEventListener {
          * Reading stream
          */
         read() {
-          this.db.raw('SELECT address FROM event_listener.contracts WHERE "networkName" = ? ORDER BY id LIMIT 100 OFFSET ?', [this.networkName, this.offset])
+          this.db.raw(`SELECT address FROM ${schema}.contracts WHERE "networkName" = ? ORDER BY id LIMIT 100 OFFSET ?`, [this.networkName, this.offset])
             .then((contracts) => {
               if (contracts.rows.length === 0) return this.push(null);
               this.push(JSON.stringify(contracts.rows));

@@ -2,7 +2,7 @@ const { fabric } = require('@etherisc/microservice');
 const { deleteTestExchange } = require('@etherisc/microservice/test/helpers');
 const _ = require('lodash');
 const DipPolicyStorage = require('../DipPolicyStorage');
-const tables = require('../knexfile').constants;
+const { constants: tables, schema } = require('../knexfile');
 
 
 describe('DipPolicyStorage microservice', () => {
@@ -13,13 +13,11 @@ describe('DipPolicyStorage microservice', () => {
     this.amqp = this.microservice.amqp;
     this.db = this.microservice.db.getConnection();
     this.http = this.microservice.http;
-
-    await new Promise(resolve => setTimeout(resolve, 500));
   });
 
   beforeEach(async () => {
-    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${tables[key]} cascade`)));
-    await this.db(tables.DISTRIBUTOR_TABLE).insert([
+    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema}.${tables[key]} cascade`)));
+    await this.db(`${schema}.${tables.DISTRIBUTOR_TABLE}`).insert([
       {
         id: '11111111-1111-1111-1111-111111111111',
         company: 'Etherisc',
@@ -28,7 +26,7 @@ describe('DipPolicyStorage microservice', () => {
   });
 
   after(async () => {
-    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${tables[key]} cascade`)));
+    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema}.${tables[key]} cascade`)));
     await deleteTestExchange(this.amqp, 'test_storage');
 
     this.microservice.shutdown();

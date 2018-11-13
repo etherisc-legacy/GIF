@@ -1,5 +1,5 @@
 const { Model } = require('objection');
-const { constants } = require('../knexfile');
+const { constants, schema } = require('../knexfile');
 const Policy = require('./Policy');
 const CustomerExtra = require('./CustomerExtra');
 
@@ -17,7 +17,7 @@ class Customer extends Model {
    * @return {string}
    */
   static get tableName() {
-    return constants.CUSTOMER_TABLE;
+    return `${schema}.${constants.CUSTOMER_TABLE}`;
   }
 
   /**
@@ -30,16 +30,16 @@ class Customer extends Model {
         relation: Model.HasManyRelation,
         modelClass: CustomerExtra,
         join: {
-          from: `${CUSTOMER_TABLE}.id`,
-          to: `${CUSTOMER_EXTRA_TABLE}.customerId`,
+          from: `${schema}.${CUSTOMER_TABLE}.id`,
+          to: `${schema}.${CUSTOMER_EXTRA_TABLE}.customerId`,
         },
       },
       policies: {
         relation: Model.HasManyRelation,
         modelClass: Policy,
         join: {
-          from: `${CUSTOMER_TABLE}.id`,
-          to: `${POLICY_TABLE}.customerId`,
+          from: `${schema}.${CUSTOMER_TABLE}.id`,
+          to: `${schema}.${POLICY_TABLE}.customerId`,
         },
       },
     };

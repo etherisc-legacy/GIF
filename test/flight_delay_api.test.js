@@ -4,11 +4,11 @@ const knex = require('knex');
 
 
 const tables = [
-  'dip_policy_storage_customer',
-  'dip_policy_storage_customer_extra',
-  'dip_policy_storage_distributor',
-  'dip_policy_storage_policy',
-  'dip_policy_storage_policy_extra',
+  'dip_policy_storage.customer',
+  'dip_policy_storage.customer_extra',
+  'dip_policy_storage.distributor',
+  'dip_policy_storage.policy',
+  'dip_policy_storage.policy_extra',
 ];
 
 describe('Etherisc Flight Delay API', () => {
@@ -26,7 +26,7 @@ describe('Etherisc Flight Delay API', () => {
 
   beforeEach(async () => {
     await Promise.all(tables.map(t => this.db.raw(`truncate ${t} cascade`)));
-    await this.db('dip_policy_storage_distributor').insert([
+    await this.db('dip_policy_storage.distributor').insert([
       {
         id: '11111111-1111-1111-1111-111111111111',
         company: 'Etherisc',
@@ -86,7 +86,6 @@ describe('Etherisc Flight Delay API', () => {
           content: JSON.parse(message.content.toString()),
         };
 
-        console.log(data);
         messages.push(data);
       }, { noAck: true });
 

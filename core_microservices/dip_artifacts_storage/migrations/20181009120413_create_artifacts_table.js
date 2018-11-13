@@ -1,7 +1,7 @@
-const { triggers } = require('../knexfile');
+const { schema, triggers } = require('../knexfile');
 
 
-exports.up = (knex, Promise) => knex.schema.createTable('artifacts_storage.artifacts', (table) => {
+exports.up = (knex, Promise) => knex.schema.withSchema(schema).createTable('artifacts', (table) => {
   table.increments();
   table.string('product').notNullable();
   table.string('networkName').notNullable();
@@ -12,8 +12,6 @@ exports.up = (knex, Promise) => knex.schema.createTable('artifacts_storage.artif
   table.timestamp('updated').notNullable().defaultTo(knex.fn.now());
   table.unique(['networkName', 'address']);
 })
-  .then(() => knex.raw(triggers.onUpdateTrigger.up('artifacts_storage.artifacts')));
+  .then(() => knex.raw(triggers.onUpdateTrigger.up('artifacts')));
 
-exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('artifacts_storage.artifacts');
-};
+exports.down = (knex, Promise) => knex.schema.withSchema(schema).dropTable('artifacts');

@@ -13,7 +13,7 @@ const validator = new Validator();
  */
 const findMessageSchema = (type, version) => {
   const versionMatcher = types[type];
-  if (!versionMatcher) console.error(type, 'not found among known types');
+  if (!versionMatcher) console.error(type, 'not found among known types'); // eslint-disable-line no-console
   return versionMatcher(version || 'latest');
 };
 

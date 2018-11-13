@@ -30,7 +30,7 @@ function bootstrap(App, config = { }) {
       if (err.exit) process.exit(1);
     });
   } catch (err) {
-    console.error(err);
+    console.error(err); // eslint-disable-line no-console
     if (err.exit) process.exit(1);
   }
 }

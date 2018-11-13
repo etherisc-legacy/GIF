@@ -1,7 +1,9 @@
+const uuid = require('uuid');
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
 const { deleteTestExchange, deleteTestBucket } = require('@etherisc/microservice/test/helpers');
 const DipEventListener = require('../DipEventListener');
+const { schema } = require('../knexfile');
 
 
 describe('DipEventListener microservice', () => {
@@ -11,30 +13,30 @@ describe('DipEventListener microservice', () => {
       rpcNode: process.env.WS_PROVIDER || 'ws://localhost:8545',
       networkName: process.env.NETWORK_NAME || 'development',
       exchangeName: 'test_listener',
-      bucket: 'test-bucket',
+      bucket: uuid(),
     });
     await this.microservice.bootstrap();
 
     this.amqp = this.microservice.amqp;
     this.db = this.microservice.db.getConnection();
     this.http = this.microservice.http;
-    this.s3 = this.microservice.s3.client;
+    this.s3 = this.microservice.s3;
   });
 
   beforeEach(async () => {
     sinon.restore();
-    await this.db('event_listener.contracts').truncate();
-    await this.db('event_listener.events').truncate();
+    await this.db(`${schema}.contracts`).truncate();
+    await this.db(`${schema}.events`).truncate();
   });
 
   after(async () => {
-    await deleteTestExchange(this.amqp, 'test_listener');
-    await deleteTestBucket(this.s3, 'test-bucket');
+    await deleteTestExchange(this.amqp, 'test_listener'); // todo: use uuid
+    await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
     this.microservice.shutdown();
   });
 
   it('handleEvent should publish decoded event', async () => {
-    await this.db.raw(`INSERT INTO event_listener.contracts (product, "networkName", version, address, abi) VALUES ('product', '${this.microservice.app.networkName}', '1.0.0', '0x345ca3e014aaf5dca488057592ee47305d9b3e10', '[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"sender","type":"address"},{"indexed":true,"name":"value","type":"uint256"}],"name":"E1","type":"event"},{"constant":false,"inputs":[],"name":"AddEvent","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"Suicide","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')`).catch(console.log).then(console.log);
+    await this.db.raw(`INSERT INTO ${schema}.contracts (product, "networkName", version, address, abi) VALUES ('product', '${this.microservice.app.networkName}', '1.0.0', '0x345ca3e014aaf5dca488057592ee47305d9b3e10', '[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"sender","type":"address"},{"indexed":true,"name":"value","type":"uint256"}],"name":"E1","type":"event"},{"constant":false,"inputs":[],"name":"AddEvent","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"Suicide","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')`);
     sinon.replace(this.microservice.app.web3.eth, 'getBlock', sinon.fake.returns({ timestamp: 1539267039 }));
 
     await new Promise(async (resolve) => {

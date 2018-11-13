@@ -1,3 +1,6 @@
+const { schema } = require('./knexfile');
+
+
 /**
  * DIP Artifacts Storage microservice
  */
@@ -51,7 +54,7 @@ class DipArtifactsStorage {
 
       const parsedArtifact = JSON.parse(artifact);
       const { address } = parsedArtifact.networks[Object.keys(parsedArtifact.networks)[0]];
-      await this.db.raw('INSERT INTO artifacts_storage.artifacts (product, "networkName", version, address, abi) VALUES (?, ?, ?, ?, ?)', [
+      await this.db.raw(`INSERT INTO ${schema}.artifacts (product, "networkName", version, address, abi) VALUES (?, ?, ?, ?, ?)`, [
         product, network, version, address, JSON.stringify(parsedArtifact.abi),
       ]);
 
