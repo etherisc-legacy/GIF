@@ -1602,18 +1602,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "dip-platform/core_microservices/dip_contracts/artifactsreceiver.js",
-    "file/dip-platform/core_microservices/dip_contracts/artifactsReceiver.js.html",
-    "dip-platform/core_microservices/dip_contracts/artifactsReceiver.js",
-    "file"
-  ],
-  [
-    "dip-platform/core_microservices/dip_contracts/artifactssender.js",
-    "file/dip-platform/core_microservices/dip_contracts/artifactsSender.js.html",
-    "dip-platform/core_microservices/dip_contracts/artifactsSender.js",
-    "file"
-  ],
-  [
     "dip-platform/core_microservices/dip_contracts/truffle.js",
     "file/dip-platform/core_microservices/dip_contracts/truffle.js.html",
     "dip-platform/core_microservices/dip_contracts/truffle.js",
@@ -2109,6 +2097,18 @@ window.esdocSearchIndex = [
     "dip-platform/core_microservices/dip_policy_storage/models/module.js",
     "file/dip-platform/core_microservices/dip_policy_storage/models/module.js.html",
     "dip-platform/core_microservices/dip_policy_storage/models/module.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/bin/artifactsreceiver.js",
+    "file/dip-platform/shared/etherisc-microservice/bin/artifactsReceiver.js.html",
+    "dip-platform/shared/etherisc-microservice/bin/artifactsReceiver.js",
+    "file"
+  ],
+  [
+    "dip-platform/shared/etherisc-microservice/bin/artifactssender.js",
+    "file/dip-platform/shared/etherisc-microservice/bin/artifactsSender.js.html",
+    "dip-platform/shared/etherisc-microservice/bin/artifactsSender.js",
     "file"
   ],
   [

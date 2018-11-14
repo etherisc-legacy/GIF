@@ -2,13 +2,12 @@
   "name": "@etherisc/dip_contracts",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node artifactsReceiver.js && truffle migrate --reset --compile-all --verbose-rpc --network ${NETWORK:-development} && node artifactsSender.js",
-    "prod": "node artifactsReceiver.js && truffle migrate --verbose-rpc --network ${NETWORK:-development} && node artifactsSender.js",
-    "console": "truffle console --verbose-rpc"
+    "dev": "artifactsReceiver && truffle migrate --reset --compile-all --verbose-rpc --network ${NETWORK:-development} && artifactsSender",
+    "prod": "artifactsReceiver && truffle migrate --verbose-rpc --network ${NETWORK:-development} && artifactsSender",
+    "console": "artifactsReceiver && truffle console --verbose-rpc"
   },
   "dependencies": {
-    "@etherisc/microservice": "0.4.3",
-    "fs-extra": "^7.0.1",
+    "@etherisc/microservice": "0.4.4",
     "truffle": "^5.0.0-beta.1",
     "truffle-hdwallet-provider": "^1.0.0-web3one.0"
   }

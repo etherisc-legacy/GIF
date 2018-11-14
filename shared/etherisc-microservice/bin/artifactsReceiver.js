@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 const fs = require('fs-extra');
-const { fabric } = require('@etherisc/microservice');
+const { fabric } = require('../index');
 
 
 const product = process.env.npm_package_name;
