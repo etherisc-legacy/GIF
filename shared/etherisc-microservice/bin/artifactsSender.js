@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 const fs = require('fs-extra');
-const { fabric } = require('@etherisc/microservice');
+const { fabric } = require('../index');
 
 
 const product = process.env.npm_package_name;
@@ -13,16 +15,13 @@ const { amqp, log } = fabric();
       await amqp.bootstrap();
       const files = await fs.readdir('./build/contracts');
       const artifacts = await Promise.all(files.map(file => fs.readFile(`./build/contracts/${file}`, 'utf-8')));
-      artifacts.forEach((artifact) => {
-        amqp.publish({
-          messageType: 'contractDeployment',
-          messageVersion: '1.*',
-          content: {
-            product, network, version, artifact,
-          },
-          correlationId: '',
-        });
-      });
+      await Promise.all(artifacts.map(artifact => amqp.publish({
+        messageType: 'contractDeployment',
+        messageVersion: '1.*',
+        content: {
+          product, network, version, artifact,
+        },
+      })));
       log.info('Published content of build folder');
       process.exit(0);
     } catch (e) {

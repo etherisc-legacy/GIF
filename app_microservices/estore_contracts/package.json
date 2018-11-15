@@ -8,9 +8,10 @@
     "test": "truffle test",
     "coverage": "solidity-coverage",
     "prepare-verification": "truffle-flattener ./contracts/EStoreInsurance.sol > ./verification/EStoreInsurance.sol",
-    "deploy": "MNEMONIC=${MNEMONIC} HTTP_PROVIDER=${HTTP_PROVIDER} truffle migrate --network ${NETWORK}"
+    "deploy": "MNEMONIC=${MNEMONIC} HTTP_PROVIDER=${HTTP_PROVIDER} truffle migrate --network ${NETWORK} && artifactsSender"
   },
   "dependencies": {
+    "@etherisc/microservice": "0.4.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2",

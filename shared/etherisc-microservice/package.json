@@ -1,12 +1,17 @@
 {
   "name": "@etherisc/microservice",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "artifactsReceiver": "./bin/artifactsReceiver.js",
+    "artifactsSender": "./bin/artifactsSender.js"
+  },
   "dependencies": {
     "@echo-health/koa-prometheus-exporter": "^1.0.2",
     "amqplib": "^0.5.2",
     "aws-sdk": "^2.348.0",
+    "fs-extra": "^7.0.1",
     "get-port-sync": "^1.0.0",
     "is-docker": "^1.1.0",
     "jsonschema": "^1.2.4",

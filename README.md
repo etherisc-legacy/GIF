@@ -7,12 +7,12 @@
 
 Module         | % Stmts       | % Branch      | % Funcs       | % Lines
 -------------- | --------------| --------------| --------------| --------------
-estore_contracts.v1.0.0 | - | - | - | -
-@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.38% (2/84) | 0% (0/20) | 3.33% (1/30) | 2.86% (2/70)
-estore_ui.v1.0.0 | 1.92% (5/261) | 0% (0/81) | 2.33% (1/43) | 2.06% (5/243)
-@etherisc/etherisc_flight_delay_ui.v0.1.1 | 35.9% (14/39) | 0% (0/4) | 30.77% (4/13) | 40% (14/35)
 estore_api.v1.0.0 | 0% (0/135) | 0% (0/6) | 0% (0/29) | 0% (0/135)
-@etherisc/dip_artifacts_storage.v1.0.0 | 42.86% (18/42) | 100% (0/0) | 33.33% (3/9) | 47.37% (18/38)
+estore_contracts.v1.0.0 | - | - | - | -
+estore_ui.v1.0.0 | 1.92% (5/261) | 0% (0/81) | 2.33% (1/43) | 2.06% (5/243)
+@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.38% (2/84) | 0% (0/20) | 3.33% (1/30) | 2.86% (2/70)
+@etherisc/etherisc_flight_delay_ui.v0.1.1 | 35.9% (14/39) | 0% (0/4) | 30.77% (4/13) | 40% (14/35)
+@etherisc/dip_artifacts_storage.v1.0.0 | 43.18% (19/44) | 50% (1/2) | 33.33% (3/9) | 48.72% (19/39)
 @etherisc/dip_contracts.v1.0.0 | - | - | - | -
 @etherisc/dip_ethereum_client.v0.1.1 | - | - | - | -
 @etherisc/dip_event_listener.v0.1.0 | 43.18% (57/132) | 42.86% (6/14) | 44.44% (12/27) | 45.9% (56/122)

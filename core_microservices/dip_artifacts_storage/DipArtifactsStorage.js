@@ -53,6 +53,7 @@ class DipArtifactsStorage {
       }).promise();
 
       const parsedArtifact = JSON.parse(artifact);
+      if (Object.keys(parsedArtifact.networks).length < 1) return;
       const { address } = parsedArtifact.networks[Object.keys(parsedArtifact.networks)[0]];
       await this.db.raw(`INSERT INTO ${schema}.artifacts (product, "networkName", version, address, abi) VALUES (?, ?, ?, ?, ?)`, [
         product, network, version, address, JSON.stringify(parsedArtifact.abi),
