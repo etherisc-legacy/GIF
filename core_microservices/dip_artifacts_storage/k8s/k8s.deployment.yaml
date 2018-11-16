@@ -34,3 +34,6 @@ spec:
               key: MINIO_SECRET_KEY
         - name: AWS_ENDPOINT
           value: "http://$(MINIO_SERVICE_HOST):$(MINIO_SERVICE_PORT)"
+        envFrom:
+        - secretRef:
+            name: pg-connection

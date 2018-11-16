@@ -46,6 +46,13 @@ postgresql-service.v1.0.0 | - | - | - | -
 ### B. Setup local development e2e test environment
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Make sure `kubectl` is the latest version.
 2. Run Minikube:
+    `minikube cache add nginx:stable`
+
+    `minikube cache add postgres:10.5`
+
+    `minikube cache add node:9.10.0`
+
+    `minikube config set memory 4096`
 
     `minikube start` will start Minikube
     
@@ -57,7 +64,7 @@ postgresql-service.v1.0.0 | - | - | - | -
 
     Note that the IP is new each time you restart minikube. You can get it at any time by running `minikube ip`.
     Keep it handy for all other ports we'll potentially expose later on in the process.
-3. `npm install` to install package dependencies
+3. `npm ci` to install package dependencies
 
 4. `npm run bootstrap` to install dependencies for Lerna packages
 

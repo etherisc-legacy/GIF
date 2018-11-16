@@ -11,7 +11,7 @@ module.exports = {
       gasPrice: 10 * 1000000000,
     },
     dip_rpc: {
-      host: 'dip-rpc-node',
+      host: 'ganache',
       port: 8545,
       network_id: '4448',
       gas: 8000000,
