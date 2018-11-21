@@ -1,6 +1,10 @@
+const { bootstrap } = require('@etherisc/microservice');
 const DipPdfGenerator = require('./DipPdfGenerator');
 
 
-const dipPdfGenerator = new DipPdfGenerator({ amqpBroker: process.env.MESSAGE_BROKER || 'amqp://localhost:5672' });
-
-dipPdfGenerator.listen();
+bootstrap(DipPdfGenerator, {
+  amqp: true,
+  db: true,
+  s3: true,
+  bucket: 'dip-pdf-storage',
+});

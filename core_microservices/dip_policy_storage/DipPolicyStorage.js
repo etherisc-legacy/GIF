@@ -1,34 +1,7 @@
 const uuid = require('uuid/v1');
-const Ajv = require('ajv');
 const sha256 = require('js-sha256');
 const _ = require('lodash');
 const models = require('./models/module');
-
-
-const ajv = new Ajv();
-
-const applyPolicyMsgSchema = {
-  properties: {
-    customer: {
-      type: 'object',
-      properties: {
-        firstname: { type: 'string' },
-        lastname: { type: 'string' },
-        email: { type: 'string', format: 'email' },
-      },
-      required: ['firstname', 'lastname', 'email'],
-    },
-    policy: {
-      type: 'object',
-      properties: {
-        distributorId: { type: 'string' },
-      },
-      required: ['distributorId'],
-    },
-  },
-  required: ['customer', 'policy'],
-  additionalProperties: false,
-};
 
 /**
  * Dip Policy Storage
@@ -53,6 +26,11 @@ class DipPolicyStorage {
       messageType: 'policyCreationRequest',
       messageVersion: '1.*',
       handler: this.onPolicyCreateMessage.bind(this),
+    });
+    this.amqp.consume({
+      messageType: 'policyGetRequest',
+      messageVersion: '1.*',
+      handler: this.onPolicyGetMessage.bind(this),
     });
   }
 
@@ -145,19 +123,6 @@ class DipPolicyStorage {
    * @return {*}
    */
   async onPolicyCreateMessage({ content, fields, properties }) {
-    // Validate message
-    const validate = ajv.compile(applyPolicyMsgSchema);
-
-    if (!validate(content)) {
-      await this.amqp.publish({
-        messageType: 'policyCreationError',
-        messageVersion: '1.*',
-        content: { error: validate.errors },
-        correlationId: properties.correlationId,
-      });
-      return;
-    }
-
     // Check if distributor exists
     const distributor = await this.getDistributor(content.policy.distributorId);
 
@@ -182,6 +147,47 @@ class DipPolicyStorage {
       messageType: 'policyCreationSuccess',
       messageVersion: '1.*',
       content: { policyId },
+      correlationId: properties.correlationId,
+    });
+  }
+
+  /**
+   * Get policy message handler
+   * @param {DipMessage} message
+   * @return {*}
+   */
+  async onPolicyGetMessage({ content, fields, properties }) {
+    // Get models
+    const { Customer, Policy } = this.models;
+
+    const policy = await Policy.query().where('id', content.policyId).first();
+
+    if (!policy) {
+      await this.amqp.publish({
+        messageType: 'policyGetRequestError',
+        messageVersion: '1.*',
+        content: { error: 'Policy not found' },
+        correlationId: properties.correlationId,
+      });
+      return;
+    }
+
+    const customer = await Customer.query().where('id', policy.customerId).first();
+
+    await this.amqp.publish({
+      messageType: 'policyGetResponse',
+      messageVersion: '1.*',
+      content: {
+        id: policy.id,
+        customerId: policy.customerId,
+        distributorId: policy.distributorId,
+        extra: { ...policy.extra },
+        customer: {
+          firstname: customer.firstname,
+          lastname: customer.lastname,
+          email: customer.email,
+        },
+      },
       correlationId: properties.correlationId,
     });
   }

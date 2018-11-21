@@ -139,7 +139,11 @@ describe('Etherisc Flight Delay API', () => {
         content: { policyId },
       },
       {
-        routingKey: 'policy.certificateIssued.v1',
+        routingKey: 'dip_pdf_generator.policyGetRequest.1.0',
+        content: { policyId },
+      },
+      {
+        routingKey: 'dip_pdf_generator.certificateIssued.1.0',
         content: { policyId },
       },
       {

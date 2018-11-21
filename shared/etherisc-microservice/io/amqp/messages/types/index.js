@@ -99,6 +99,11 @@ const issueCertificate = require('./issueCertificate');
 
 module.exports.issueCertificate = makeVersionMatcher(issueCertificate);
 
+const certificateIssued = require('./certificateIssued');
+
+
+module.exports.certificateIssued = makeVersionMatcher(certificateIssued);
+
 const payout = require('./payout');
 
 
@@ -113,3 +118,18 @@ const cardCharged = require('./cardCharged');
 
 
 module.exports.cardCharged = makeVersionMatcher(cardCharged);
+
+const policyGetRequest = require('./policyGetRequest');
+
+
+module.exports.policyGetRequest = makeVersionMatcher(policyGetRequest);
+
+const policyGetResponse = require('./policyGetResponse');
+
+
+module.exports.policyGetResponse = makeVersionMatcher(policyGetResponse);
+
+const policyGetRequestError = require('./policyGetRequestError');
+
+
+module.exports.policyGetRequestError = makeVersionMatcher(policyGetRequestError);
