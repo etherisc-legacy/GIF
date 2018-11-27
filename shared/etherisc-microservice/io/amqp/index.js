@@ -173,10 +173,12 @@ class Amqp {
     const specificMessageTypeVersion = messageProcessor.findMessageSchema(messageType, messageTypeVersion).version;
     const topic = `${this.appName}.${messageType}.${specificMessageTypeVersion}`;
 
-    await this._channel.publish(this.exchangeName,
+    await this._channel.publish(
+      this.exchangeName,
       topic,
       messageProcessor.pack(content, messageType, specificMessageTypeVersion),
-      messageProcessor.headers(correlationId, customHeaders, this.appName, this.appVersion, messageType));
+      messageProcessor.headers(correlationId, customHeaders, this.appName, this.appVersion, messageType),
+    );
   }
 }
 

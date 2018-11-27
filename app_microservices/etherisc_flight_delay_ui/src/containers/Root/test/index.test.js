@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { TextInputField } from 'evergreen-ui';
 import App from '../index';
+import CardForm from '../cardForm';
 
 
 describe('<App/>', () => {
-  it('should have 6 input fields', () => {
+  it('should contain card form', () => {
     const renderedComponent = shallow(<App />);
-    expect(renderedComponent.find(TextInputField).length).toBe(6);
+    expect(renderedComponent.find(CardForm).length).toBe(1);
   });
 });

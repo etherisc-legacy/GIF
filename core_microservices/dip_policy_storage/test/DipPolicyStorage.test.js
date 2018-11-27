@@ -52,6 +52,13 @@ describe('DipPolicyStorage microservice', () => {
         price: '1000',
         currency: 'usd',
       },
+      payment: {
+        kind: 'fiat',
+        currency: 'usd',
+        premium: 1500,
+        provider: 'stripe',
+        sourceId: '123',
+      },
     };
 
     const fields = {
@@ -66,7 +73,7 @@ describe('DipPolicyStorage microservice', () => {
 
     const {
       Customer, Policy, CustomerExtra, PolicyExtra,
-    } = this.microservice.app.models;
+    } = this.microservice.app._models;
 
     // Check customer
     const customerId = this.microservice.app.generateCustomerId('firstname', 'lastname', 'email@email.com');

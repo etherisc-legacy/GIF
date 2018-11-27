@@ -86,7 +86,7 @@ class FlightDelayInsurance {
     // Policy accepted
     this.dip.send(correlationId, { from: this.name, msg: `Policy ${payload.policyId} underwritten by oracle` });
 
-    this.dip.chargeCard(correlationId, payload.policyId);
+    this.dip.processPayment(correlationId, payload.policyId);
   }
 
   /**
@@ -153,8 +153,10 @@ class FlightDelayInsurance {
    * @param {{}} params.fields
    * @param {{}} params.properties
    */
-  onCardCharged({ content, fields, properties }) {
-    this.dip.issueCertificate(properties.correlationId, content.policyId);
+  onPaymentProcessed({ content, fields, properties }) {
+    if (!content.error) {
+      this.dip.issueCertificate(properties.correlationId, content.policyId);
+    }
   }
 
   /**

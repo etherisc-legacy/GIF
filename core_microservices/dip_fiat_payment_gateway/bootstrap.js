@@ -1,7 +1,8 @@
 const { bootstrap } = require('@etherisc/microservice');
-const DipFiatPaymentGateway = require('./DipFiatPaymentGateway');
+const GifFiatPaymentGateway = require('./DipFiatPaymentGateway');
 
 
-bootstrap(DipFiatPaymentGateway, {
+bootstrap(GifFiatPaymentGateway, {
+  db: true,
   amqp: true,
 });

@@ -27,13 +27,13 @@ class GenericInsurance {
   }
 
   /**
-   * Send card charding message to broker
+   * Send process payment message to broker
    * @param {string} correlationId
    * @param {string} policyId
    */
-  chargeCard(correlationId, policyId) {
+  processPayment(correlationId, policyId) {
     this._amqp.publish({
-      messageType: 'chargeCard',
+      messageType: 'processPayment',
       messageVersion: '1.*',
       content: { policyId },
       correlationId,

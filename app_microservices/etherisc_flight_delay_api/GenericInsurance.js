@@ -62,9 +62,9 @@ class GenericInsurance {
     });
 
     await this._amqp.consume({
-      messageType: 'cardCharged',
+      messageType: 'processPaymentResult',
       messageVersion: '1.*',
-      handler: this._app.onCardCharged.bind(this._app),
+      handler: this._app.onPaymentProcessed.bind(this._app),
     });
 
     await this._amqp.consume({
@@ -141,17 +141,17 @@ class GenericInsurance {
   }
 
   /**
-   * Send card charding message to broker
+   * Send process payment message to broker
    * @param {string} correlationId
    * @param {string} policyId
    * @return {Promise<void>}
    */
-  async chargeCard(correlationId, policyId) {
+  async processPayment(correlationId, policyId) {
     // Todo: implement
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     await this._amqp.publish({
-      messageType: 'chargeCard',
+      messageType: 'processPayment',
       messageVersion: '1.*',
       content: { policyId },
       correlationId,

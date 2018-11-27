@@ -1,24 +1,18 @@
 const schemaVersions = {};
 
 schemaVersions['1.0'] = {
-  id: 'policyCreationRequest',
+  id: 'initializePayment',
   type: 'object',
   properties: {
+    policyId: { type: 'string' },
     customer: {
       type: 'object',
       properties: {
         firstname: { type: 'string' },
         lastname: { type: 'string' },
-        email: { type: 'string', format: 'email' },
+        email: { type: 'string' },
       },
       required: ['firstname', 'lastname', 'email'],
-    },
-    policy: {
-      type: 'object',
-      properties: {
-        distributorId: { type: 'string' },
-      },
-      required: ['distributorId'],
     },
     payment: {
       type: 'object',
@@ -52,8 +46,7 @@ schemaVersions['1.0'] = {
       required: ['kind', 'currency', 'premium', 'provider'],
     },
   },
-  required: ['customer', 'policy', 'payment'],
-  additionalProperties: false,
+  required: ['policyId', 'customer', 'payment'],
 };
 
 module.exports = schemaVersions;

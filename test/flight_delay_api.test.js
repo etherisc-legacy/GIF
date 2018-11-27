@@ -1,6 +1,7 @@
 const WebSocket = require('ws');
 const amqp = require('amqplib');
 const knex = require('knex');
+const stripe = require('stripe')('sk_test_55VxCBH8ygdTUGbta0jAiIJk');
 
 
 const tables = [
@@ -65,6 +66,16 @@ describe('Etherisc Flight Delay API', () => {
 
     const messages = [];
 
+    const source = await stripe.sources.create({
+      type: 'card',
+      card: {
+        number: '4242424242424242',
+        exp_month: 12,
+        exp_year: 2039,
+        cvc: '123',
+      },
+    });
+
     const form = {
       customer: {
         firstname: 'firstname',
@@ -77,6 +88,13 @@ describe('Etherisc Flight Delay API', () => {
         to: 'SRH',
         date: '2018-12-20',
       },
+      payment: {
+        kind: 'fiat',
+        currency: 'usd',
+        premium: 1500,
+        provider: 'stripe',
+        sourceId: source.id,
+      },
     };
 
     await new Promise((resolve) => {
@@ -85,6 +103,8 @@ describe('Etherisc Flight Delay API', () => {
           routingKey: message.fields.routingKey,
           content: JSON.parse(message.content.toString()),
         };
+
+        console.log(data);
 
         messages.push(data);
       }, { noAck: true });
@@ -104,11 +124,27 @@ describe('Etherisc Flight Delay API', () => {
     ws.close();
 
     const { policyId } = messages.filter(m => m.routingKey === 'dip_policy_storage.policyCreationSuccess.1.0')[0].content;
+    const { customerId } = messages.filter(m => m.routingKey === 'dip_policy_storage.initializePayment.1.0')[0].content.customer;
 
-    messages.should.be.containDeepOrdered([
+    const expected = [
       {
         routingKey: 'etherisc_flight_delay_api.policyCreationRequest.1.0',
         content: form,
+      },
+      {
+        routingKey: 'dip_policy_storage.initializePayment.1.0',
+        content: {
+          policyId,
+          customer: {
+            customerId,
+            ...form.customer,
+          },
+          payment: form.payment,
+        },
+      },
+      {
+        routingKey: 'dip_fiat_payment_gateway.initializePaymentResult.1.0',
+        content: { policyId },
       },
       {
         routingKey: 'dip_policy_storage.policyCreationSuccess.1.0',
@@ -127,11 +163,11 @@ describe('Etherisc Flight Delay API', () => {
         content: { policyId, state: 1 },
       },
       {
-        routingKey: 'etherisc_flight_delay_api.chargeCard.1.0',
+        routingKey: 'etherisc_flight_delay_api.processPayment.1.0',
         content: { policyId },
       },
       {
-        routingKey: 'dip_fiat_payment_gateway.cardCharged.1.0',
+        routingKey: 'dip_fiat_payment_gateway.processPaymentResult.1.0',
         content: { policyId },
       },
       {
@@ -158,6 +194,8 @@ describe('Etherisc Flight Delay API', () => {
         routingKey: 'dip_fiat_payout_gateway.paidOut.1.0',
         content: { policyId },
       },
-    ]);
+    ];
+
+    messages.should.be.containDeepOrdered(expected);
   }).timeout(25000);
 });

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Card, Text, Button, TextInputField,
-} from 'evergreen-ui';
+import { StripeProvider, Elements } from 'react-stripe-elements';
+import { Card, Text } from 'evergreen-ui';
+import CardForm from './cardForm';
 
 /**
  * Formatted log message component
@@ -44,7 +44,7 @@ const LogMessage = ({ msg, id }) => {
 };
 
 LogMessage.propTypes = {
-  msg: PropTypes.shape.isRequired,
+  msg: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 
@@ -61,14 +61,6 @@ class App extends Component {
     this.state = {
       socket: null,
       logs: [],
-      form: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        from: '',
-        to: '',
-        date: '',
-      },
     };
   }
 
@@ -95,25 +87,33 @@ class App extends Component {
 
   /**
    * Handle application form submit event
-   * @param {event} event
+   * @param {{}} data
    */
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    const { socket, form } = this.state;
+  handleSubmit = (data) => {
+    const { socket } = this.state;
+    const {
+      firstname, lastname, email, from, to, date, sourceId,
+    } = data;
 
     if (socket) {
       const message = {
         customer: {
-          firstname: form.firstname,
-          lastname: form.lastname,
-          email: form.email,
+          firstname,
+          lastname,
+          email,
         },
         policy: {
           distributorId: '11111111-1111-1111-1111-111111111111',
-          from: form.from,
-          to: form.to,
-          date: form.date,
+          from,
+          to,
+          date,
+        },
+        payment: {
+          kind: 'fiat',
+          currency: 'usd',
+          premium: 1500,
+          provider: 'stripe',
+          sourceId,
         },
       };
 
@@ -124,26 +124,11 @@ class App extends Component {
   };
 
   /**
-   * Handle application form field change
-   * @param {string} field
-   * @return {Function}
-   */
-  handleChange = field => (event) => {
-    const { form } = this.state;
-
-    this.setState({ form: { ...form, [field]: event.target.value } });
-  };
-
-  /**
    * Render component
    * @return {*}
    */
   render() {
-    const { logs, form } = this.state;
-
-    const {
-      firstname, lastname, email, from, to, date,
-    } = form;
+    const { logs } = this.state;
 
     const messages = logs.map((log, i) => (
       <LogMessage
@@ -167,51 +152,11 @@ class App extends Component {
           >
             <Text marginBottom={20}>Flight Delay Dapp UI</Text>
 
-            <form onSubmit={this.handleSubmit}>
-              <TextInputField
-                label="First name"
-                placeholder="Enter your first name"
-                value={firstname}
-                onChange={this.handleChange('firstname')}
-              />
-
-              <TextInputField
-                label="Last name"
-                placeholder="Enter your last name"
-                value={lastname}
-                onChange={this.handleChange('lastname')}
-              />
-
-              <TextInputField
-                label="Email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={this.handleChange('email')}
-              />
-
-              <TextInputField
-                label="From"
-                placeholder="Departure airport, e.g. SFO"
-                value={from}
-                onChange={this.handleChange('from')}
-              />
-
-              <TextInputField
-                label="To"
-                placeholder="Arrival airport, e.g. ZRH"
-                value={to}
-                onChange={this.handleChange('to')}
-              />
-
-              <TextInputField
-                label="Date of departure"
-                placeholder="Enter date of departure, e.g. 2018-09-01"
-                value={date}
-                onChange={this.handleChange('date')}
-              />
-
-              <Button appearance="green" float="right" type="submit">Apply</Button>
-            </form>
+            <StripeProvider apiKey="pk_test_G9CSTZTnASdZHyAlAGlstS6c">
+              <Elements>
+                <CardForm handleSubmit={this.handleSubmit} />
+              </Elements>
+            </StripeProvider>
           </Card>
 
           <Card

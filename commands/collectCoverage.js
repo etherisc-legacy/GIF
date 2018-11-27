@@ -39,7 +39,7 @@ Module         | % Stmts       | % Branch      | % Funcs       | % Lines
 
     const footer = '[endOfCoverageTable]: #';
 
-    files.forEach((file) => {
+    files.sort().forEach((file) => {
       const packageJson = require(path.join(process.cwd(), file));
       const name = `${packageJson.name}.v${packageJson.version}`;
 

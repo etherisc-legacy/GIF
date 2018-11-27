@@ -7,7 +7,7 @@
     "url": "https://bitbucket.org/etherisc/dip-platform"
   },
   "scripts": {
-    "dev": "nodemon bootstrap.js",
+    "dev": "node bootstrap.js",
     "prod": "node bootstrap.js",
     "test": "NODE_ENV=test mocha",
     "coverage": "nyc mocha",
@@ -15,18 +15,19 @@
   },
   "devDependencies": {
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.4",
+    "nodemon": "^1.18.7",
     "nyc": "^13.1.0",
     "should": "^13.2.3",
     "should-sinon": "^0.0.6",
     "sinon": "^7.0.0"
   },
   "dependencies": {
-    "@etherisc/microservice": "^0.4.1",
+    "@etherisc/microservice": "0.4.6",
     "knex": "^0.15.2",
     "moment": "^2.22.2",
     "pg": "^7.6.1",
-    "truffle-hdwallet-provider": "^1.0.0-web3one.1",
-    "web3": "^1.0.0-beta.36"
+    "truffle-hdwallet-provider": "^1.0.0-web3one.2",
+    "web3": "^1.0.0-beta.36",
+    "websocket": "git://github.com/frozeman/WebSocket-Node.git#browserifyCompatible"
   }
 }

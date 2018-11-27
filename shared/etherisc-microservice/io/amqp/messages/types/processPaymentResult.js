@@ -1,7 +1,7 @@
 const schemaVersions = {};
 
 schemaVersions['1.0'] = {
-  id: 'cardCharged',
+  id: 'processPaymentResult',
   type: 'object',
   properties: {
     policyId: { type: 'string' },

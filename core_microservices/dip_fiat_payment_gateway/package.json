@@ -2,12 +2,21 @@
   "name": "@etherisc/dip_fiat_payment_gateway",
   "version": "0.1.1",
   "description": "",
-  "main": "index.js",
+  "main": "bootstrap.js",
   "scripts": {
-    "dev": "node ./bootstrap.js",
-    "prod": "node ./bootstrap.js"
+    "start": "node ./bootstrap.js",
+    "dev": "nodemon ./bootstrap.js",
+    "prod": "node ./bootstrap.js",
+    "migrate": "knex migrate:latest",
+    "create:migration": "knex migrate:make"
   },
   "dependencies": {
-    "@etherisc/microservice": "0.4.4"
+    "@etherisc/microservice": "0.4.6",
+    "knex": "^0.15.2",
+    "lodash": "^4.17.11",
+    "nodemon": "^1.18.7",
+    "objection": "^1.4.0",
+    "pg": "^7.6.1",
+    "stripe": "^6.15.2"
   }
 }
