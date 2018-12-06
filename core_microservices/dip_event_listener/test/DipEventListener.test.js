@@ -1,7 +1,7 @@
 const uuid = require('uuid');
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
-const { deleteTestExchange, deleteTestBucket } = require('@etherisc/microservice/test/helpers');
+const { deleteTestBucket } = require('@etherisc/microservice/test/helpers');
 const DipEventListener = require('../DipEventListener');
 const { schema } = require('../knexfile');
 
@@ -13,9 +13,9 @@ describe('DipEventListener microservice', () => {
       db: true,
       s3: true,
       httpPort: 4000,
+      messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
       rpcNode: process.env.WS_PROVIDER || 'ws://localhost:8545',
       networkName: process.env.NETWORK_NAME || 'development',
-      exchangeName: 'test_listener',
       bucket: uuid(),
     });
     await this.microservice.bootstrap();
@@ -33,7 +33,6 @@ describe('DipEventListener microservice', () => {
   });
 
   after(async () => {
-    await deleteTestExchange(this.amqp, 'test_listener'); // todo: use uuid
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
     this.microservice.shutdown();
   });

@@ -21,7 +21,7 @@ spec:
         - containerPort: 3000
         env:
         - name: MESSAGE_BROKER
-          value: "amqp:$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)"
+          value: "amqp://platform:guest@$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)/trusted"
         envFrom:
         - secretRef:
             name: pg-connection

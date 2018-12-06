@@ -11,6 +11,6 @@ exports.up = db => db.schema.withSchema(schema).createTable(CUSTOMER_TABLE, (tab
   table.timestamp('created').notNullable().defaultTo(db.fn.now());
   table.timestamp('updated').notNullable().defaultTo(db.fn.now());
 })
-  .then(() => db.raw(triggers.onUpdateTrigger.up(CUSTOMER_TABLE)));
+  .then(() => db.raw(triggers.onUpdateTrigger.up(`${schema}.${CUSTOMER_TABLE}`)));
 
 exports.down = db => db.schema.withSchema(schema).dropTable(CUSTOMER_TABLE);

@@ -5,11 +5,11 @@ const stripe = require('stripe')('sk_test_55VxCBH8ygdTUGbta0jAiIJk');
 
 
 const tables = [
-  'dip_policy_storage.customer',
-  'dip_policy_storage.customer_extra',
-  'dip_policy_storage.distributor',
-  'dip_policy_storage.policy',
-  'dip_policy_storage.policy_extra',
+  'policy_storage.customer',
+  'policy_storage.customer_extra',
+  'policy_storage.distributor',
+  'policy_storage.policy',
+  'policy_storage.policy_extra',
 ];
 
 describe('Etherisc Flight Delay API', () => {
@@ -27,7 +27,7 @@ describe('Etherisc Flight Delay API', () => {
 
   beforeEach(async () => {
     await Promise.all(tables.map(t => this.db.raw(`truncate ${t} cascade`)));
-    await this.db('dip_policy_storage.distributor').insert([
+    await this.db('policy_storage.distributor').insert([
       {
         id: '11111111-1111-1111-1111-111111111111',
         company: 'Etherisc',
@@ -56,13 +56,11 @@ describe('Etherisc Flight Delay API', () => {
     const ws = new WebSocket('ws://localhost:8080/api/ws');
     await new Promise(resolve => ws.on('open', resolve));
 
-    const connection = await amqp.connect('amqp://localhost:5672');
+    const connection = await amqp.connect('amqp://platform:guest@localhost:5672/trusted'); // TODO: connect through ENV vars
     const channel = await connection.createChannel();
 
-    await channel.assertExchange('POLICY', 'topic', { durable: true });
-
-    const q = await channel.assertQueue('test_queue', { exclusive: false });
-    await channel.bindQueue(q.queue, 'POLICY', '#');
+    const q = await channel.assertQueue('platform_test_queue', { exclusive: false }); // TODO: use amqp from microservice lib
+    await channel.bindQueue(q.queue, 'EXCHANGE', '#');
 
     const messages = [];
 

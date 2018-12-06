@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
     "dev": "node ./bootstrap.js",
     "prod": "node ./bootstrap.js",
     "test": "NODE_ENV=test mocha",
@@ -14,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@etherisc/microservice": "0.4.6",
+    "@etherisc/microservice": "0.4.6-ds2",
     "knex": "^0.15.2",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",

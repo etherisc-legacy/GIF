@@ -1,5 +1,5 @@
 const { Model } = require('objection');
-const { constants, schema } = require('../knexfile');
+const { schema, constants } = require('../knexfile');
 const Policy = require('./Policy');
 const CustomerExtra = require('./CustomerExtra');
 
@@ -17,7 +17,7 @@ class Customer extends Model {
    * @return {string}
    */
   static get tableName() {
-    return `${schema}.${constants.CUSTOMER_TABLE}`;
+    return `${schema}.${CUSTOMER_TABLE}`;
   }
 
   /**

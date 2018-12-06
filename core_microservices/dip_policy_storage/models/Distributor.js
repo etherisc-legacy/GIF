@@ -1,5 +1,5 @@
 const { Model } = require('objection');
-const { constants, schema } = require('../knexfile');
+const { schema, constants } = require('../knexfile');
 const Policy = require('./Policy');
 
 

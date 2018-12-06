@@ -1,4 +1,4 @@
-FROM node:9.10.0 AS build
+FROM node:11.2.0 AS build
 
 WORKDIR /app
 COPY . .

@@ -1,7 +1,9 @@
-const { schema, triggers } = require('../knexfile');
+const { schema, triggers, constants } = require('../knexfile');
 
 
-exports.up = db => db.schema.withSchema(schema).createTable('events', (table) => {
+const { EVENTS_TABLE } = constants;
+
+exports.up = db => db.schema.withSchema(schema).createTable(EVENTS_TABLE, (table) => {
   table.increments();
   table.string('address', 42).notNullable();
   table.json('topics').notNullable();
@@ -20,6 +22,6 @@ exports.up = db => db.schema.withSchema(schema).createTable('events', (table) =>
   table.timestamp('updated').notNullable().defaultTo(db.fn.now());
   table.unique(['networkName', 'transactionHash', 'logIndex']);
 })
-  .then(() => db.raw(triggers.onUpdateTrigger.up('events')));
+  .then(() => db.raw(triggers.onUpdateTrigger.up(`${schema}.${EVENTS_TABLE}`)));
 
-exports.down = db => db.schema.withSchema(schema).dropTable('events');
+exports.down = db => db.schema.withSchema(schema).dropTable(EVENTS_TABLE);

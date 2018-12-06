@@ -27,9 +27,13 @@ module.exports = (config) => {
    */
   const websocket = server => new WebSocket({ server, config, log });
 
-  const { appName, appVersion, exchangeName } = config;
+  const { appName, appVersion } = config;
 
-  const amqp = new Amqp(MESSAGE_BROKER || 'amqp://localhost:5672', appName, appVersion, exchangeName);
+  const amqp = new Amqp(
+    config.messageBroker || MESSAGE_BROKER || 'amqp://platform:guest@localhost:5672/trusted',
+    appName,
+    appVersion,
+  );
 
   return {
     amqp, db, http, log, s3, config, websocket,

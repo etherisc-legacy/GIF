@@ -9,7 +9,7 @@ exports.up = db => db.schema.withSchema(schema).createTable(DISTRIBUTOR_TABLE, (
   table.timestamp('created').notNullable().defaultTo(db.fn.now());
   table.timestamp('updated').notNullable().defaultTo(db.fn.now());
 })
-  .then(() => db.raw(triggers.onUpdateTrigger.up(DISTRIBUTOR_TABLE)))
+  .then(() => db.raw(triggers.onUpdateTrigger.up(`${schema}.${DISTRIBUTOR_TABLE}`)))
   .then(() => db(`${schema}.${DISTRIBUTOR_TABLE}`).insert([
     {
       id: '11111111-1111-1111-1111-111111111111',

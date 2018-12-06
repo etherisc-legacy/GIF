@@ -1,10 +1,10 @@
 const _ = require('lodash');
 
 
-const schema = _.last((process.env.npm_package_name || '').split('/'));
+const prefix = _.last((process.env.npm_package_name || '').split('/')).replace('dip_', '');
 
 module.exports = {
-  schema,
+  prefix,
   client: 'pg',
   connection: {
     host: process.env.POSTGRES_SERVICE_HOST || 'localhost',
@@ -18,32 +18,52 @@ module.exports = {
     max: 5,
   },
   migrations: {
-    schemaName: schema,
+    tableName: `${prefix}_migrations`,
   },
   triggers: {
     onUpdateTrigger: {
       up: table => `
-            CREATE TRIGGER ${table}_updated
-            BEFORE UPDATE ON ${schema}.${table}
+            CREATE TRIGGER ${table.replace('.', '_')}_updated
+            BEFORE UPDATE ON ${table}
             FOR EACH ROW
-            EXECUTE PROCEDURE ${schema}.update_updated()
+            EXECUTE PROCEDURE update_updated()
           `,
-      down: table => `DROP TRIGGER ${table}_updated on ${schema}.${table}`,
+      down: table => `DROP TRIGGER ${table.replace('.', '_')}_updated on ${table}`,
     },
   },
   functions: {
+    schema: {
+      up: () => `
+        CREATE SCHEMA IF NOT EXISTS ${prefix}
+      `,
+      down: () => `
+        DROP SCHEMA IF EXISTS ${prefix} CASCADE
+      `,
+    },
     update_updated: {
       up: () => `
-        CREATE OR REPLACE FUNCTION ${schema}.update_updated()
+        BEGIN;
+
+        SELECT pg_advisory_xact_lock(1);
+        
+        CREATE OR REPLACE FUNCTION update_updated()
         RETURNS TRIGGER AS $$
         BEGIN
             NEW.updated = now();
             RETURN NEW;  
         END;
         $$ language 'plpgsql';
+        
+        COMMIT;
       `,
       down: () => `
-        DROP FUNCTION IF EXISTS ${schema}.update_updated RESTRICT;
+        BEGIN;
+
+        SELECT pg_advisory_xact_lock(1);
+      
+        DROP FUNCTION IF EXISTS update_updated RESTRICT;
+        
+        COMMIT;
       `,
     },
   },

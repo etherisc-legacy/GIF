@@ -18,7 +18,6 @@ function bootstrap(App, config = { }) {
     knexfile,
     appName: config.appName || _.last(process.env.npm_package_name.split('/')),
     appVersion: config.appVersion || process.env.npm_package_version,
-    exchangeName: config.exchangeName || 'POLICY', // TODO: use an universal exchange for all 'topic' platform messages or make an exchanges list
     ...config,
   };
 
@@ -56,7 +55,6 @@ function fabric(App, config = {}) {
     knexfile,
     appName: config.appName || _.last(process.env.npm_package_name.split('/')),
     appVersion: config.appVersion || process.env.npm_package_version,
-    exchangeName: config.exchangeName || 'POLICY', // TODO: use an universal exchange for all 'topic' platform messages or make an exchanges list
     ...config,
   };
 

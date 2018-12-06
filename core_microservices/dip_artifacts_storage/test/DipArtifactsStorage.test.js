@@ -1,11 +1,9 @@
 const uuid = require('uuid');
 const { fabric } = require('@etherisc/microservice');
-const { deleteTestExchange, deleteTestBucket } = require('@etherisc/microservice/test/helpers');
+const { deleteTestBucket } = require('@etherisc/microservice/test/helpers');
 const DipArtifactsStorage = require('../DipArtifactsStorage');
 const { schema } = require('../knexfile');
 
-
-const exchangeName = uuid();
 
 describe('DipArtifactsStorage microservice', () => {
   before(async () => {
@@ -15,7 +13,7 @@ describe('DipArtifactsStorage microservice', () => {
       s3: true,
       httpPort: 4000,
       bucket: uuid(),
-      exchangeName,
+      messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
     });
     await this.microservice.bootstrap();
 
@@ -29,7 +27,6 @@ describe('DipArtifactsStorage microservice', () => {
   });
 
   after(async () => {
-    await deleteTestExchange(this.amqp, exchangeName);
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
     this.microservice.shutdown();
   });

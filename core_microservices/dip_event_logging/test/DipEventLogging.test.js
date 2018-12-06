@@ -1,19 +1,15 @@
-const uuid = require('uuid');
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
-const { deleteTestExchange } = require('@etherisc/microservice/test/helpers');
 const DipEventLogging = require('../DipEventLogging');
 const { schema } = require('../knexfile');
 
-
-const exchangeName = uuid();
 
 describe('DipEventLogging microservice', () => {
   before(async () => {
     this.microservice = fabric(DipEventLogging, {
       amqp: true,
       db: true,
-      exchangeName,
+      messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
     });
     await this.microservice.bootstrap();
 
@@ -29,7 +25,6 @@ describe('DipEventLogging microservice', () => {
   });
 
   after(async () => {
-    await deleteTestExchange(this.amqp, exchangeName);
     this.microservice.shutdown();
   });
 
@@ -40,7 +35,6 @@ describe('DipEventLogging microservice', () => {
     });
     await new Promise(resolve => setTimeout(resolve, 100));
     const eventCounts = await this.db(`${schema}.events`).count();
-
     eventCounts[0].count.should.be.equal('1');
   });
 });

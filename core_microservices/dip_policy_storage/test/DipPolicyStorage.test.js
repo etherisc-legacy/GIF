@@ -1,5 +1,4 @@
 const { fabric } = require('@etherisc/microservice');
-const { deleteTestExchange } = require('@etherisc/microservice/test/helpers');
 const _ = require('lodash');
 const DipPolicyStorage = require('../DipPolicyStorage');
 const { constants: tables, schema } = require('../knexfile');
@@ -11,7 +10,7 @@ describe('DipPolicyStorage microservice', () => {
       db: true,
       amqp: true,
       httpPort: 4000,
-      exchangeName: 'test_storage',
+      messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
     });
     await this.microservice.bootstrap();
 
@@ -32,7 +31,6 @@ describe('DipPolicyStorage microservice', () => {
 
   after(async () => {
     await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema}.${tables[key]} cascade`)));
-    await deleteTestExchange(this.amqp, 'test_storage');
 
     this.microservice.shutdown();
   });

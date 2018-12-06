@@ -11,6 +11,6 @@ exports.up = db => db.schema.withSchema(schema).createTable(POLICY_EXTRA_TABLE, 
   table.timestamp('created').notNullable().defaultTo(db.fn.now());
   table.timestamp('updated').notNullable().defaultTo(db.fn.now());
 })
-  .then(() => db.raw(triggers.onUpdateTrigger.up(POLICY_EXTRA_TABLE)));
+  .then(() => db.raw(triggers.onUpdateTrigger.up(`${schema}.${POLICY_EXTRA_TABLE}`)));
 
 exports.down = db => db.schema.withSchema(schema).dropTable(POLICY_EXTRA_TABLE);

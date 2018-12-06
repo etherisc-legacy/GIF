@@ -1,7 +1,9 @@
-const { schema } = require('../knexfile');
+const { constants } = require('../knexfile');
 
 
-exports.up = db => db.schema.withSchema(schema).createTable('events', (table) => {
+const { EVENT_TABLE } = constants;
+
+exports.up = db => db.schema.createTable(EVENT_TABLE, (table) => {
   table.increments('id').unsigned().primary();
 
   table.dateTime('created_at').notNull().defaultTo(db.fn.now());
@@ -11,4 +13,4 @@ exports.up = db => db.schema.withSchema(schema).createTable('events', (table) =>
   table.json('content').defaultTo('{}').notNullable();
 });
 
-exports.down = db => db.schema.withSchema(schema).dropTable('events');
+exports.down = db => db.schema.dropTable(EVENT_TABLE);

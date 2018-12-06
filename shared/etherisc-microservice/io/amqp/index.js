@@ -10,17 +10,13 @@ class Amqp {
    * @param {string} connectionString
    * @param {string} appName
    * @param {string} appVersion
-   * @param {string} exchangeName
    */
-  constructor(connectionString, appName, appVersion, exchangeName) {
+  constructor(connectionString, appName, appVersion) {
     this.connectionString = connectionString;
 
     this.appName = appName;
     this.appVersion = appVersion;
-    this.exchangeName = exchangeName;
-
-    this.exchangeName = 'POLICY';
-    // TODO: use an universal exchange for all 'topic' platform messages or make an exchanges list
+    this.exchangeName = 'EXCHANGE';
 
     this._connection = null;
     this._channel = null;
@@ -115,16 +111,18 @@ class Amqp {
     sourceMicroservice = '*', messageType = '*', messageTypeVersion = '*.*', handler,
   }) {
     if (!this._channel) throw new Error('Amqp channel doesn\'t exist');
-    await this._channel.assertExchange(this.exchangeName, 'topic', { durable: true });
 
-    const queueName = `${this.appName}_${this.appVersion}_${sourceMicroservice}_${messageType}_${messageTypeVersion}`;
+    // await this._channel.assertExchange(this.exchangeName, 'topic', { durable: true });
+    // TODO: check Exchange existence
+
+    const queueName = `platform_${this.appName}_${this.appVersion}_${sourceMicroservice}_${messageType}_${messageTypeVersion}`;
     const topic = `${sourceMicroservice}.${messageType}.${messageTypeVersion}`;
 
-    const queue = await this._channel.assertQueue(queueName, { exclusive: false, durable: true });
-    await this._channel.bindQueue(queue.queue, this.exchangeName, topic);
+    await this._channel.assertQueue(queueName, { exclusive: false, durable: true });
+    await this._channel.bindQueue(queueName, this.exchangeName, topic);
 
     const messageHandler = this.handleMessage({ messageType, messageTypeVersion, handler }).bind(this);
-    await this._channel.consume(queue.queue, messageHandler, { noAck: true });
+    await this._channel.consume(queueName, messageHandler, { noAck: true });
   }
 
   /**
@@ -168,7 +166,8 @@ class Amqp {
     messageType, messageTypeVersion = 'latest', content, correlationId, customHeaders,
   }) {
     if (!this._channel) throw new Error('Amqp channel doesn\'t exist');
-    await this._channel.assertExchange(this.exchangeName, 'topic', { durable: true });
+    // await this._channel.assertExchange(this.exchangeName, 'topic', { durable: true });
+    // TODO: check Exchange existence
 
     const specificMessageTypeVersion = messageProcessor.findMessageSchema(messageType, messageTypeVersion).version;
     const topic = `${this.appName}.${messageType}.${specificMessageTypeVersion}`;
