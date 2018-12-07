@@ -1,7 +1,5 @@
 const Web3 = require('web3');
-const { Readable } = require('stream');
-const { schema } = require('./knexfile');
-
+const models = require('./models');
 
 /**
  * DIP Event Listener microservice
@@ -20,30 +18,110 @@ class DipEventListener {
       amqp, db, log, http, config,
     },
   ) {
-    this.amqp = amqp;
-    this.db = db;
-    this.log = log;
-    this.http = http;
-    this.web3 = new Web3(config.rpcNode);
-    this.networkName = config.networkName;
+    this._amqp = amqp;
+    this._db = db;
+    this._models = models(db);
+    this._log = log;
+    this._http = http;
+    this._web3 = new Web3(config.rpcNode);
+    this._networkName = config.networkName;
+  }
+
+  /**
+   * Bootstrap and listen
+   * @return {void}
+   */
+  async bootstrap() {
+    try {
+      this.fromBlock = await this._web3.eth.getBlockNumber();
+
+      await this.checkPastEvents();
+
+      this.watchEventsRealtime();
+
+      await this._amqp.consume({
+        messageType: 'existingEventsRequest',
+        messageTypeVersion: '1.*',
+        handler: this.sendExistingEvents.bind(this),
+      });
+
+      await this._amqp.consume({
+        messageType: 'artifact',
+        messageTypeVersion: '1.*',
+        handler: this.saveArtifact.bind(this),
+      });
+
+      await this._amqp.consume({
+        messageType: 'contractDeployment',
+        messageTypeVersion: '1.*',
+        handler: this.saveArtifact.bind(this),
+      });
+    } catch (e) {
+      const error = new Error(JSON.stringify({ message: e.message, stack: e.stack }));
+      error.exit = true;
+      this._log.error(error);
+      throw error;
+    }
+  }
+
+  /**
+   * Check past events
+   */
+  async checkPastEvents() {
+    try {
+      const { Contract } = this._models;
+      let offset = 0;
+      let addresses = [];
+
+      do {
+        addresses = await Contract.query()
+          .select('address')
+          .where('networkName', this._networkName)
+          .limit(1000)
+          .offset(offset);
+
+        if (addresses.length === 0) {
+          return;
+        }
+
+        offset += 1000;
+
+        await this.getPastEvents(addresses);
+      } while (addresses.length > 0);
+    } catch (e) {
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+    }
   }
 
   /**
    * Get past events
-   * @param {buffer} buffer
+   * @param {[]} addresses
    * @return {void}
    */
-  async getPastEvents(buffer) {
+  async getPastEvents(addresses) {
     try {
-      const addresses = JSON.parse(buffer.toString());
-      /* eslint-disable-next-line no-restricted-syntax */
-      for (const i of addresses) {
-        const event = await this.db.raw(`SELECT "blockNumber" + 1 AS "nextBlock" FROM ${schema}.events WHERE "networkName" = ? AND address IN (?) ORDER BY "blockNumber" DESC LIMIT 1`, [this.networkName, i.address]);
-        this.web3.eth.getPastLogs({ fromBlock: event.nextBlock || 1, address: i.address })
-          .then(events => events.forEach(this.handleEvent.bind(this)));
+      const { Event } = this._models;
+
+      for (let i = 0, l = addresses.length; i < l; i += 1) {
+        const { address } = addresses[i];
+
+        const [lastevent] = await Event.query()
+          .select('blockNumber')
+          .where({ networkName: this._networkName, address: address.toLowerCase() })
+          .orderBy('blockNumber', 'DESC')
+          .limit(1);
+
+        const events = await this._web3.eth.getPastLogs({
+          fromBlock: lastevent && lastevent.blockNumber ? lastevent.blockNumber + 1 : 0,
+          address,
+        });
+
+        for (let j = 0, k = events.length; j < k; j += 1) {
+          await this.handleEvent(events[j]);
+        }
       }
     } catch (e) {
-      this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
   }
 
@@ -55,10 +133,16 @@ class DipEventListener {
   async onData(event) {
     try {
       this.fromBlock = event.blockNumber;
-      const { rows } = await this.db.raw(`SELECT EXISTS (SELECT 1 FROM ${schema}.contracts WHERE "networkName" = ? AND address = lower(?))`, [this.networkName, event.address]);
-      if (rows[0].exists) this.handleEvent(event);
+      const { Contract } = this._models;
+      const contracts = await Contract.query().where({
+        address: event.address.toLowerCase(),
+        networkName: this._networkName,
+      });
+      if (contracts.length > 0) {
+        this.handleEvent(event);
+      }
     } catch (e) {
-      this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
   }
 
@@ -67,25 +151,40 @@ class DipEventListener {
    * @param {error} e
    * @return {void}
    */
-  async onError(e) {
-    const error = new Error(JSON.stringify({ message: e.message, stack: e.stack }));
-    error.exit = true;
-    this.log.error(error);
-    throw error;
+  onError(e) {
+    this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+    this.reconnect();
   }
 
   /**
    * Watch events realtime
    * @return {void}
    */
-  async watchEventsRealtime() {
+  watchEventsRealtime() {
     try {
-      this.web3.eth.subscribe('logs', { fromBlock: this.fromBlock })
+      this._web3.eth.subscribe('logs', { fromBlock: this.fromBlock }, (e) => {
+        if (!e) {
+          return;
+        }
+        this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+        this.reconnect();
+      })
         .on('data', this.onData.bind(this))
         .on('error', this.onError.bind(this));
     } catch (e) {
-      this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      this.reconnect();
     }
+  }
+
+  /**
+   * Try to reconnect every 10 seconds
+   */
+  reconnect() {
+    setTimeout(async () => {
+      await this.checkPastEvents();
+      this.watchEventsRealtime();
+    }, 1000 * 10 /* 10 sec */);
   }
 
   /**
@@ -95,28 +194,50 @@ class DipEventListener {
    */
   async handleEvent(event) {
     try {
-      const result = await this.db.raw(`SELECT * FROM ${schema}.contracts WHERE "networkName" = ? AND address = lower(?)`, [this.networkName, event.address]);
-      if (!result.rows[0]) return;
-      const abi = result.rows[0].abi
+      const { Contract, Event } = this._models;
+      const contract = await Contract.query().where({
+        networkName: this._networkName,
+        address: event.address.toLowerCase(),
+      }).first();
+      if (!contract) {
+        return;
+      }
+      const abi = contract.abi
         .filter(i => i.type === 'event')
-        .map(i => Object.assign(i, { signature: this.web3.eth.abi.encodeEventSignature(i) }))
+        .map(i => Object.assign(i, { signature: this._web3.eth.abi.encodeEventSignature(i) }))
         .filter(i => i.signature === event.topics[0]);
-      const decodedEvent = this.web3.eth.abi.decodeLog(abi[0].inputs, event.data, event.topics.slice(1));
-      const block = await this.web3.eth.getBlock(event.blockNumber);
-      const { rows } = await this.db.raw(`INSERT INTO ${schema}.events (address, topics, data, "blockNumber", "timeStamp", "logIndex", "transactionHash", "transactionIndex", "eventName", "eventArgs", "networkName", version, product) VALUES (?, ?, ?, ?, to_timestamp(?), ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT ("networkName", "transactionHash", "logIndex") DO NOTHING RETURNING *`, [
-        event.address, JSON.stringify(event.topics), event.data, event.blockNumber, block.timestamp, event.logIndex,
-        event.transactionHash, event.transactionIndex, abi[0].name, decodedEvent, this.networkName,
-        result.rows[0].version,
-        result.rows[0].product,
-      ]);
-      if (!rows[0]) return;
-      await this.amqp.publish({
+      const decodedEvent = this._web3.eth.abi.decodeLog(abi[0].inputs, event.data, event.topics.slice(1));
+      const block = await this._web3.eth.getBlock(event.blockNumber);
+      await Event.query().upsertGraph({
+        networkName: this._networkName,
+        transactionHash: event.transactionHash,
+        logIndex: event.logIndex,
+        address: event.address.toLowerCase(),
+        topics: JSON.stringify(event.topics),
+        data: event.data,
+        blockNumber: event.blockNumber,
+        timeStamp: Event.raw('to_timestamp(?)', block.timestamp),
+        transactionIndex: event.transactionIndex,
+        eventName: abi[0].name,
+        eventArgs: decodedEvent,
+        version: contract.version,
+        product: contract.product,
+      });
+      const eventModel = await Event.query().where({
+        networkName: this._networkName,
+        transactionHash: event.transactionHash,
+        logIndex: event.logIndex,
+      }).first();
+      if (!eventModel) {
+        return;
+      }
+      await this._amqp.publish({
         messageType: 'decodedEvent',
         messageTypeVersion: '1.*',
-        content: rows[0],
+        content: eventModel,
       });
     } catch (e) {
-      this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
   }
 
@@ -130,17 +251,20 @@ class DipEventListener {
    */
   async sendExistingEvents({ content, fields, properties }) {
     try {
-      // todo: filter by network, version, address, fromBlock and any other fields including eventArgs
-      const event = await this.db.raw(`SELECT * FROM ${schema}.events`, []);
+      // const event = await this.db.raw(`SELECT * FROM ${schema}.events`, []);
+      const { Event } = this._models;
 
-      await this.amqp.publish({
+      // todo: filter by network, version, address, fromBlock and any other fields including eventArgs
+      const events = await Event.query().select();
+
+      await this._amqp.publish({
         messageType: 'decodedEvent',
         messageTypeVersion: '1.*',
-        content: event,
+        content: events,
         correlationId: properties.correlationId,
       });
     } catch (e) {
-      this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
   }
 
@@ -156,15 +280,15 @@ class DipEventListener {
     try {
       const { version, list } = content;
       list.forEach((contract) => {
-        this.amqp.publish({
+        this._amqp.publish({
           messageType: 'artifactRequest',
           messageTypeVersion: '1.*',
-          content: { network: this.networkName, version, contract },
+          content: { network: contract.networkName, version, contract },
           correlationId: properties.correlationId,
         });
       });
     } catch (e) {
-      this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
   }
 
@@ -178,73 +302,25 @@ class DipEventListener {
    */
   async saveArtifact({ content, fields, properties }) {
     try {
-      const { product, version, artifact } = content;
+      const {
+        product, network, version, artifact,
+      } = content;
       const artifactObject = JSON.parse(artifact);
       const networkId = Object.keys(artifactObject.networks)[0];
       const { address } = artifactObject.networks[networkId];
       const abi = JSON.stringify(artifactObject.abi);
-      await this.db.raw(`INSERT INTO ${schema}.contracts (product, "networkName", version, address, abi) VALUES (?, ?, ?, ?, ?) ON CONFLICT (product, "networkName", address) DO UPDATE SET version = excluded.version, abi = excluded.abi`, [product, this.networkName, version, address, abi]);
+      const { Contract } = this._models;
+
+      await Contract.query()
+        .upsertGraph({
+          product,
+          networkName: network,
+          version,
+          address: address.toLowerCase(),
+          abi,
+        });
     } catch (e) {
-      this.log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-    }
-  }
-
-  /**
-   * Bootstrap and listen
-   * @return {void}
-   */
-  async bootstrap() {
-    try {
-      this.fromBlock = await this.web3.eth.getBlockNumber();
-
-      const contractsStream = new Readable({
-        /**
-         * Reading stream
-         */
-        read() {
-          this.db.raw(`SELECT address FROM ${schema}.contracts WHERE "networkName" = ? ORDER BY id LIMIT 100 OFFSET ?`, [this.networkName, this.offset])
-            .then((contracts) => {
-              if (contracts.rows.length === 0) return this.push(null);
-              this.push(JSON.stringify(contracts.rows));
-              this.offset += 100;
-              return true;
-            });
-        },
-      });
-      contractsStream.offset = 0;
-      contractsStream.db = this.db;
-      contractsStream.networkName = this.networkName;
-      contractsStream.on('end', this.watchEventsRealtime.bind(this));
-      contractsStream.on('data', this.getPastEvents.bind(this));
-
-      await this.amqp.consume({
-        messageType: 'existingEventsRequest',
-        messageTypeVersion: '1.*',
-        handler: this.sendExistingEvents.bind(this),
-      });
-
-      await this.amqp.consume({
-        messageType: 'artifactList',
-        messageTypeVersion: '1.*',
-        handler: this.requestArtifacts.bind(this),
-      });
-
-      await this.amqp.consume({
-        messageType: 'artifact',
-        messageTypeVersion: '1.*',
-        handler: this.saveArtifact.bind(this),
-      });
-
-      await this.amqp.consume({
-        messageType: 'contractDeployment',
-        messageTypeVersion: '1.*',
-        handler: this.saveArtifact.bind(this),
-      });
-    } catch (e) {
-      const error = new Error(JSON.stringify({ message: e.message, stack: e.stack }));
-      error.exit = true;
-      this.log.error(error);
-      throw error;
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
   }
 }
