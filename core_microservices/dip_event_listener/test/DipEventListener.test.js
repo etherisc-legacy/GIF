@@ -42,7 +42,7 @@ describe('DipEventListener microservice', () => {
 
   it('handleEvent should publish decoded event', async () => {
     await this.db.raw(`INSERT INTO ${schema}.contracts (product, "networkName", version, address, abi) VALUES ('product', 'development', '1.0.0', '0x345ca3e014aaf5dca488057592ee47305d9b3e10', '[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"sender","type":"address"},{"indexed":true,"name":"value","type":"uint256"}],"name":"E1","type":"event"},{"constant":false,"inputs":[],"name":"AddEvent","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"Suicide","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')`);
-    sinon.replace(this.microservice.app._web3.eth, 'getBlock', sinon.fake.returns({ timestamp: 1539267039 }));
+    sinon.replace(this.microservice.app._web3.eth, 'getBlock', sinon.fake.returns(Promise.resolve({ timestamp: 1539267039 })));
 
     await new Promise(async (resolve) => {
       sinon.replace(this.amqp, 'publish', (e) => {
@@ -86,7 +86,8 @@ describe('DipEventListener microservice', () => {
       id: 'log_79204e1d',
     };
     await this.db.raw(`INSERT INTO ${schema}.contracts (product, "networkName", version, address, abi) VALUES ('product', 'development', '1.0.0', '0x345ca3e014aaf5dca488057592ee47305d9b3e10', '[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"sender","type":"address"},{"indexed":true,"name":"value","type":"uint256"}],"name":"E1","type":"event"},{"constant":false,"inputs":[],"name":"AddEvent","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"Suicide","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]')`);
-    sinon.replace(this.microservice.app._web3.eth, 'getPastLogs', sinon.fake.returns([fakeEvent]));
+    sinon.replace(this.microservice.app._web3.eth, 'getBlock', sinon.fake.returns(Promise.resolve({ timestamp: 1539267039 })));
+    sinon.replace(this.microservice.app._web3.eth, 'getPastLogs', sinon.fake.returns(Promise.resolve([fakeEvent])));
 
     await new Promise(async (resolve) => {
       sinon.replace(this.amqp, 'publish', (e) => {

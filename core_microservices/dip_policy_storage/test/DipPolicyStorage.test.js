@@ -97,7 +97,7 @@ describe('DipPolicyStorage microservice', () => {
     const policy = await Policy.query();
 
     policy.length.should.be.equal(1);
-    _.omit(policy[0], ['created', 'updated', 'id']).should.be.deepEqual({
+    _.omit(policy[0], ['created', 'updated', 'id', 'creationId']).should.be.deepEqual({
       customerId,
       distributorId: data.policy.distributorId,
     });

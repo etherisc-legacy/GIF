@@ -4,6 +4,7 @@ schemaVersions['1.0'] = {
   id: 'policyCreationRequest',
   type: 'object',
   properties: {
+    creationId: { type: 'string' },
     customer: {
       type: 'object',
       properties: {

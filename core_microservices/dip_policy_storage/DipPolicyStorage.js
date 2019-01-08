@@ -86,10 +86,11 @@ class DipPolicyStorage {
   /**
    * Create new policy
    * @param {string} customerId
+   * @param {string} creationId
    * @param {{}} policy
    * @return {string}
    */
-  async createPolicy(customerId, policy) {
+  async createPolicy(customerId, creationId, policy) {
     // Generate policy id
     const policyId = uuid();
 
@@ -99,6 +100,7 @@ class DipPolicyStorage {
     await Policy.query().insertGraph({
       id: policyId,
       customerId,
+      creationId,
       ..._.pick(policy, ['distributorId']),
 
       extra: [
@@ -132,12 +134,13 @@ class DipPolicyStorage {
   async onPolicyCreateMessage({ content, fields, properties }) {
     // Check if distributor exists
     const distributor = await this.getDistributor(content.policy.distributorId);
+    const { creationId } = content;
 
     if (!distributor) {
       await this._amqp.publish({
         messageType: 'policyCreationError',
         messageVersion: '1.*',
-        content: { error: 'Distributor does not exists' },
+        content: { creationId, customerId: null, error: 'Distributor does not exists' },
         correlationId: properties.correlationId,
       });
       return;
@@ -147,7 +150,7 @@ class DipPolicyStorage {
     const customerId = await this.createCustomerIfNotExists(content.customer);
 
     // Create new policy
-    const policyId = await this.createPolicy(customerId, content.policy);
+    const policyId = await this.createPolicy(customerId, creationId, content.policy);
 
     // Send payment details to payment gateway
     await this._amqp.publish({
@@ -175,18 +178,22 @@ class DipPolicyStorage {
    */
   async onInitializePaymentResult({ content, fields, properties }) {
     const { policyId, error } = content;
+    const { Policy } = this._models;
+
+    const { creationId, customerId } = await Policy.query()
+      .select('creationId', 'customerId')
+      .where({ id: policyId })
+      .first();
 
     if (error) {
-      const { Policy } = this._models;
-
       await Policy.query()
         .delete()
-        .where({ policyId });
+        .where({ id: policyId });
 
       await this._amqp.publish({
         messageType: 'policyCreationError',
         messageVersion: '1.*',
-        content: { error },
+        content: { creationId, customerId, error },
         correlationId: properties.correlationId,
       });
     } else {
@@ -194,7 +201,7 @@ class DipPolicyStorage {
       await this._amqp.publish({
         messageType: 'policyCreationSuccess',
         messageVersion: '1.*',
-        content: { policyId },
+        content: { creationId, customerId, policyId },
         correlationId: properties.correlationId,
       });
     }

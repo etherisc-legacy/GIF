@@ -1,0 +1,18 @@
+.notPrintable {
+  display: block !important;
+}
+
+.printable {
+  display: none !important;
+}
+
+
+@media print {
+  .notPrintable {
+    display: none !important;
+  }
+
+  .printable {
+    display: block !important;
+  }
+}

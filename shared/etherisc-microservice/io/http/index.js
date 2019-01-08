@@ -2,6 +2,7 @@ const Koa = require('koa');
 const Logger = require('koa-logger');
 const Cors = require('kcors');
 const BodyParser = require('koa-bodyparser');
+const Respond = require('koa-respond');
 const prometheus = require('@echo-health/koa-prometheus-exporter');
 const exceptionHandler = require('./exceptionHandler');
 const router = require('./router');
@@ -115,6 +116,7 @@ class HttpApp extends Koa {
       .use(new Logger())
       .use(new Cors())
       .use(new BodyParser())
+      .use(new Respond())
       .use(appRouter.routes())
       .use(coreRouter.routes())
       .use(prometheus.httpMetricMiddleware())
