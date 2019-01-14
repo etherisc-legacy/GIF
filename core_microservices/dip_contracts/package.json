@@ -3,11 +3,24 @@
   "version": "1.0.0",
   "scripts": {
     "prod": "artifactsReceiver && truffle migrate --verbose-rpc --network ${NETWORK:-development} && artifactsSender",
-    "console": "artifactsReceiver && truffle console --verbose-rpc"
+    "console": "artifactsReceiver && truffle console --verbose-rpc",
+    "migrate": "echo 'Deploy contracts'; truffle migrate",
+    "test": "echo 'Test contracts'; truffle test",
+    "bridge": "ethereum-bridge -H localhost:8545 -a 6 --dev"
   },
   "dependencies": {
     "@etherisc/microservice": "0.4.8-ds2",
-    "truffle": "^5.0.0-beta.1",
+    "bn-chai": "^1.0.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "ethereum-bridge": "0.6.0",
+    "bitcore-mnemonic": "1.5.0",
+    "bitcore-lib": "0.15.0",
+    "truffle": "^5.0.0-beta.2",
     "truffle-hdwallet-provider": "^1.0.0-web3one.2"
+  },
+  "peerDependenciew": {
+    "bitcore-mnemonic": "1.5.0",
+    "bitcore-lib": "0.15.0"
   }
 }

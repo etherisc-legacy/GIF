@@ -20,6 +20,7 @@ pipelines:
         - chmod +x /usr/local/bin/docker-compose
         - npm run dev:services:run
         - npm run bootstrap
+        - docker logs dev_ethereum_bridge
         - npm run migrate:test && npm run test
         - npm run migrate && npm run dev & (./node_modules/.bin/wait-on http://localhost:8080 && npm run test:e2e)
 
