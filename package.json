@@ -7,9 +7,10 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "deploy:minikube": "echo 'Deploy to Minikube'; NODE_ENV=development ./bin/run deploy",
+    "deploy:minikube": "echo 'Deploy to Minikube'; DEPLOY_DESTINATION=minikube ./bin/run deploy",
+    "deploy:docker": "echo 'Deploy to Docker-for-Desktop Kubernetes'; DEPLOY_DESTINATION=docker ./bin/run deploy",
     "deploy:gke:secret": "echo Deploy secrets to GKE; ./bin/run deploySecret",
-    "deploy:gke": "echo 'Deploy to GKE'; NODE_ENV=production ./bin/run deploy",
+    "deploy:gke": "echo 'Deploy to GKE'; DEPLOY_DESTINATION=gke ./bin/run deploy",
     "bootstrap": "./bin/bootstrap.sh && lerna link",
     "bootstrap:update": "./bin/update_locks.sh ",
     "clean": "echo 'Cleaning local /node_modules folders'; lerna clean --concurrency 100 --progress",
@@ -69,6 +70,7 @@
     "inquirer": "^6.2.0",
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
+    "moment": "^2.22.2",
     "pg": "^7.5.0",
     "stripe": "^6.15.0",
     "uuid": "^3.3.2"

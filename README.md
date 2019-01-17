@@ -70,6 +70,14 @@ postgresql-service.v1.0.0 | - | - | - | -
 
 5. `NPM_TOKEN=<token> npm run deploy:minikube` to deploy to Minikube. To get the token sign in to npm and create token of type Publish on `https://www.npmjs.com/settings/etherisc_user/tokens/create`.
 
+#### B-2. If you are a Mac user and have Docker for Mac 17.12 CE Edge and higher, or 18.06 Stable and higher. 
+1. Configure [Kubernetes for Docker](https://docs.docker.com/docker-for-mac/#kubernetes)
+2. `npm ci` to install package dependencies
+3. `npm run bootstrap` to install dependencies for Lerna packages
+4. `NPM_TOKEN=<token> npm run deploy:docker` 
+
+You can set an environment variable KEEP_DEPLOY_FILES to a truthy value for the deploy script to keep the generated kubectl files in the /temp/deploy folder.
+
 #### Notes
 - By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
 

@@ -22,6 +22,8 @@ spec:
         envFrom:
         - secretRef:
             name: payment
+        - secretRef:
+            name: pg-connection
         env:
         - name: MESSAGE_BROKER
           value: "amqp://platform:guest@$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)/trusted"

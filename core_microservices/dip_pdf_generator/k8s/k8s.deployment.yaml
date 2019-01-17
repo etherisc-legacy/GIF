@@ -19,6 +19,21 @@ spec:
         image: <!--image-->
         ports:
         - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: pg-connection
         env:
         - name: MESSAGE_BROKER
           value: "amqp://platform:guest@$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)/trusted"
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: MINIO_ACCESS_KEY
+        - name: AWS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: MINIO_SECRET_KEY
+        - name: AWS_ENDPOINT
+          value: "http://$(MINIO_SERVICE_HOST):$(MINIO_SERVICE_PORT)"

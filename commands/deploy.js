@@ -6,9 +6,11 @@ const { exec, execSync } = require('child_process');
 const glob = require('fast-glob');
 const yaml = require('js-yaml');
 const crypto = require('crypto');
+const moment = require('moment');
 
 
-const PROD = process.env.NODE_ENV === 'production';
+const DESTINATION = process.env.DEPLOY_DESTINATION;
+const PROD = DESTINATION === 'gke';
 
 /**
  * Deploy to k8s command
@@ -52,13 +54,26 @@ class Deploy extends Command {
 
     this.constructor.checkEnvironmentVariables();
 
+    this.timestamp('START CONFIGURATION');
     await this.configureDeploy();
+    this.timestamp('FINISHED CONFIGURATION');
 
     const entities = await this.collectConfigurationFiles();
 
     await this.buildConfigMaps();
 
+    this.timestamp('START DEPLOYMENT');
     await this.deploy(entities);
+    this.timestamp('FINISHED DEPLOYMENT');
+  }
+
+  /**
+   * Log with a timestamp
+   * @param {string} message
+   * @return {undefined}
+   */
+  timestamp(message) {
+    this.log.info(`========= ${moment().format('LTS')} - ${message}`);
   }
 
   /**
@@ -155,10 +170,18 @@ class Deploy extends Command {
    * @return {Promise<undefined>}
    */
   async configureDeploy() {
-    if (PROD) {
-      await this.configureK8sDeploy();
-    } else {
-      await this.configureMinikubeDeploy();
+    switch (DESTINATION) {
+      case 'gke':
+        await this.configureK8sDeploy();
+        break;
+      case 'minikube':
+        await this.configureMinikubeDeploy();
+        break;
+      case 'docker':
+        await this.configureDockerDeploy();
+        break;
+      default:
+        throw new Error('Acceptable DEPLOY_DESTINATION values are: gke, minikube, docker');
     }
   }
 
@@ -213,6 +236,14 @@ class Deploy extends Command {
   }
 
   /**
+   * Set kubectl context to standalone Kubernetes deploying with local Docker
+   * @return {Promise<undefined>}
+   */
+  async configureDockerDeploy() {
+    await this.execute('kubectl config use-context docker-for-desktop');
+  }
+
+  /**
    * Run deploy scripts
    * @param {Object} entities
    * @return {Promise<undefined>}
@@ -228,6 +259,8 @@ class Deploy extends Command {
     const groups = Object.keys(entities);
     groups.sort((first, second) => groupPriority.indexOf(first) - groupPriority.indexOf(second));
 
+    await this.execute('mkdir -p temp/deploy');
+
     for (let groupIndex = 0; groupIndex < groups.length; groupIndex += 1) {
       const group = groups[groupIndex];
 
@@ -238,28 +271,44 @@ class Deploy extends Command {
 
         this.log.info(`${EOL}Apply ${group} ${element.config.metadata.name}`);
 
-        if (element.dockerfilePath) {
-          this.log.info(`Start Docker build for ${element.imageName}`);
+        if (element.dockerfilePath) { await this.packageDockerContainer(element); }
 
-          if (PROD) {
-            await this.execute(`cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
-
-            this.log.info('Push image to GCR');
-            await this.execute(`docker push ${element.imageName}`);
-          } else {
-            await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
-          }
-        }
-
-        const file = path.join(process.cwd(), `tempfile-${group}-${element.config.metadata.name}.yaml`);
+        const file = path.join(process.cwd(), `temp/deploy/${group}-${element.config.metadata.name}.yaml`);
 
         fs.writeFileSync(file, yaml.safeDump(element.config));
 
         if (group === 'Job') await this.execute(`kubectl delete -f ${file} --ignore-not-found=true`);
+        this.timestamp(`Start Application of ${file}`);
         await this.execute(`kubectl apply -f ${file}`);
-        fs.unlinkSync(file);
+        this.timestamp(`Finished Application of ${file}`);
+        if (!process.env.KEEP_DEPLOY_FILES) { fs.unlinkSync(file); }
       }
     }
+  }
+
+  /**
+   * Read configuration element to find and execure docker build instructions
+   * @param {Object} element
+   * @return {Promise<void>}
+   */
+  async packageDockerContainer(element) {
+    this.timestamp(`Start Docker build for ${element.imageName}`);
+    switch (DESTINATION) {
+      case 'gke':
+        await this.execute(`cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
+        this.log.info('Push image to GCR');
+        await this.execute(`docker push ${element.imageName}`);
+        break;
+      case 'minikube':
+        await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
+        break;
+      case 'docker':
+        await this.execute(`cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
+        break;
+      default:
+        break;
+    }
+    this.timestamp(`Finished Docker build for ${element.imageName}`);
   }
 
   /**
