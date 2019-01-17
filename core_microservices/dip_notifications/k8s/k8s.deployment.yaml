@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dip-notifications
+  labels:
+    app: dip-notifications
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dip-notifications
+  template:
+    metadata:
+      labels:
+        app: dip-notifications
+    spec:
+      containers:
+      - name: dip-notifications
+        image: <!--image-->
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MESSAGE_BROKER
+          value: "amqp://platform:guest@$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)/trusted"
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: MINIO_ACCESS_KEY
+        - name: AWS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: MINIO_SECRET_KEY
+        - name: AWS_ENDPOINT
+          value: "http://$(MINIO_SERVICE_HOST):$(MINIO_SERVICE_PORT)"
+        envFrom:
+        - secretRef:
+            name: pg-connection
+        - secretRef:
+            name: notifications
