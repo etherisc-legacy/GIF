@@ -1,0 +1,24 @@
+{
+  "name": "@etherisc/gif",
+  "description": "Etherisc Generic Insurance Framework",
+  "private": true,
+  "engines": {
+    "node": "11.2.0",
+    "npm": "6.4.1"
+  },
+  "scripts": {
+    "bootstrap": "echo 'Install dependencies'; ./bin/bootstrap.sh && lerna link",
+    "lint": "echo 'Lint javascript files'; eslint --ext js .",
+    "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d --remove-orphans",
+    "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",
+    "dev:services:purge": "docker-compose -f ./services/compose/docker-compose.yml down -v; rm -rf ./services/compose/ganache"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.12.4"
+  }
+}

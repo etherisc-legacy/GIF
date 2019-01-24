@@ -1,0 +1,72 @@
+pragma solidity 0.5.2;
+pragma experimental ABIEncoderV2;
+
+import "./IPolicy.sol";
+
+
+interface IPolicyController {
+
+    function createPolicyFlow(uint256 _insuranceApplicationId)
+    external returns (uint256 _metadataId);
+
+    function setPolicyFlowState(uint256 _insuranceApplicationId, uint256 _metadataId, IPolicy.PolicyFlowState _state)
+    external;
+
+    function createApplication(
+        uint256 _insuranceApplicationId,
+        uint256 _metadataId,
+        bytes32 _customerExternalId,
+        uint256 _premium,
+        uint256 _currency,
+        uint256[] calldata _payoutOptions
+    ) external returns (uint256 _applicationId);
+
+    function setApplicationState(
+        uint256 _insuranceApplicationId,
+        uint256 _applicationId,
+        IPolicy.ApplicationState _state
+    ) external;
+
+    function getApplicationData(uint256 _insuranceApplicationId, uint256 _applicationId)
+    external view returns (
+        uint256 _metadataId,
+        bytes32 _customerExternalId,
+        uint256 _premium,
+        uint256 _currency,
+        IPolicy.ApplicationState _state
+    );
+
+    function getPayoutOptions(uint256 _insuranceApplicationId, uint256 _applicationId)
+    external view returns (uint256[] memory _payoutOptions);
+
+    function getPremium(uint256 _insuranceApplicationId, uint256 _applicationId)
+    external view returns (uint256 _premium);
+
+
+    function createPolicy(uint256 _insuranceApplicationId, uint256 _metadataId)
+    external returns (uint256 _policyId);
+
+    function setPolicyState(uint256 _insuranceApplicationId, uint256 _policyId, IPolicy.PolicyState _state)
+    external;
+
+    function createClaim(
+        uint256 _insuranceApplicationId,
+        uint256 _policyId,
+        bytes32 _data
+    ) external returns (uint256 _claimId);
+
+    function setClaimState(uint256 _insuranceApplicationId, uint256 _claimId, IPolicy.ClaimState _state)
+    external;
+
+    function createPayout(
+        uint256 _insuranceApplicationId,
+        uint256 _claimId,
+        uint256 _amount
+    ) external returns (uint256 _payoutId);
+
+    function payOut(uint256 _insuranceApplicationId, uint256 _payoutId, uint256 _amount)
+    external returns (uint256 _remainder);
+
+    function setPayoutState(uint256 _insuranceApplicationId, uint256 _payoutId, IPolicy.PayoutState _state)
+    external;
+}

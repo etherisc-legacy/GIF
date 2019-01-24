@@ -1,0 +1,55 @@
+{
+  "name": "etherisc-gif-contracts",
+  "version": "1.0.0",
+  "description": "Etherisc Generic Insurance Framework smart contracts",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "settings": {
+    "solc": "0.5.2"
+  },
+  "files": [
+    "*"
+  ],
+  "oclif": {
+    "commands": "./bin/commands"
+  },
+  "scripts": {
+    "compile": "echo 'Compile contracts'; truffle compile",
+    "migrate": "echo 'Deploy contracts'; truffle migrate",
+    "migrate:reset": "echo 'Deploy contracts'; truffle migrate --reset",
+    "test": "echo 'Test contracts'; truffle test",
+    "console": "echo 'Open truffle console'; truffle console",
+    "develop": "echo 'Open truffle console for development network'; truffle develop",
+    "debug": "echo 'Start truffle debugger'; truffle debug",
+    "coverage": "echo 'Run coverage'; solidity-coverage",
+    "open-coverage": "echo 'Open coverage report'; opn ./coverage/index.html",
+    "lint": "echo 'Lint contracts'; solhint \"contracts/**/*.sol\"",
+    "docs": "echo 'Generage documentation'; rimraf ./docs/* && SOLC_ARGS='openzeppelin-solidity=$(pwd)/node_modules/openzeppelin-solidity' solidity-docgen . ./contracts .",
+    "docs-serve": "echo 'Start documentation website'; (cd website; npm start)",
+    "update-solc-version": "echo 'Update solc compiler version'; ./bin/command updateSolcVersiongit+https://github.com/kandrianov/openzeppelin-solidity.git#release-v2.1.0-solc-0.5",
+    "clean": "echo 'Clean repository'; rimraf build coverage"
+  },
+  "dependencies": {
+    "@oclif/command": "^1.5.8",
+    "@oclif/errors": "^1.2.2",
+    "abi-decoder": "^1.2.0",
+    "bn-chai": "^1.0.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eth-decoder": "0.0.1-beta.1",
+    "ethereum-event-logs": "^1.3.0",
+    "fast-glob": "^2.2.6",
+    "fs-jetpack": "^2.2.1",
+    "moment": "^2.24.0",
+    "openzeppelin-solidity": "^2.1.2",
+    "opn-cli": "^4.0.0",
+    "rimraf": "^2.6.3",
+    "solhint": "^1.5.0",
+    "solidity-coverage": "git+https://github.com/kandrianov/solidity-coverage.git",
+    "solidity-docgen": "^0.1.0",
+    "truffle": "^5.0.2",
+    "truffle-hdwallet-provider": "^1.0.2"
+  }
+}
