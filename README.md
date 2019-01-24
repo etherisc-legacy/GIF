@@ -87,12 +87,12 @@ Action is a building block of a policy flow. Actions are controlled by PolicyFlo
 `Modules` are system objects which exist specifically to service and maintain Etherisc platform needs.
 Here is the list of modules:
 
-	* Policy module (manages applications, policies, claims, payouts and metadata objects)
-	* Access module (defines permissions between contracts and actors)
-	* Ledger module (bookkeeper for insurance operations, aggregates premiums, payouts, expenses etc.)
-	* Registry module (registers sets of core contracts which are used in policy flow lifecycle in release groups)
-	* License module (manages insurance applications)
-	* Query module (manages queries to oracles and delivers responses from them).
+   * **Policy module** (manages applications, policies, claims, payouts and metadata objects)
+   * **Access module** (defines permissions between contracts and actors)
+   * **Ledger module** (bookkeeper for insurance operations, aggregates premiums, payouts, expenses etc.)
+   * **Registry module** (registers sets of core contracts which are used in policy flow lifecycle in release groups)
+   * **License module** (manages insurance applications)
+   * **Query module** (manages queries to oracles and delivers responses from them).
  
 ##  License Module
 
