@@ -59,18 +59,20 @@ const unpack = (buffer, type, version) => {
  * @param {string} serviceName
  * @param {string} serviceVersion
  * @param {string} messageType
+ * @param {string} messageTypeVersion
  * @return {{correlationId: string, headers: *}}
  */
-const headers = (correlationId, customValues, serviceName, serviceVersion, messageType) => {
+const headers = (correlationId, customValues, serviceName, serviceVersion, messageType, messageTypeVersion) => {
   const newCorrelationId = correlationId || `${uuid()}-${serviceName}-${serviceVersion}-${messageType}-${process.hrtime()[0]}`;
 
   return {
     persistent: true,
-    deliveryMode: true,
     mandatory: true,
     correlationId: newCorrelationId,
     headers: {
       ...customValues,
+      messageType,
+      messageTypeVersion,
       originatorName: serviceName,
       originatorVersion: serviceVersion,
     },

@@ -1,5 +1,5 @@
 {
-  "name": "cancun-ui",
+  "name": "fdd.web",
   "version": "1.0.0",
   "release": "1.0.0",
   "private": true,
@@ -14,11 +14,7 @@
     "clean": "rimraf build",
     "lint": "eslint src",
     "test": "jest",
-    "webpack": "webpack",
-    "deploy-test": "NODE_ENV=staging CHAIN=ropsten EDITION=suggest_demo npm run build && scp -r build/* ubuntu@18.195.153.27:/var/www/hosts/fdd-test",
-    "deploy-production": "NODE_ENV=production CHAIN=mainnet EDITION=suggest_demo npm run build && scp -r build/* ubuntu@18.195.133.38:/var/www/hosts/fdd",
-    "deploy-production-cffdd": "NODE_ENV=production CHAIN=mainnet USE_CUSTOMIZATION_CONFIG=true FD_ADDRESS_RESOLVER_DEV='0xa2e4fb662ba999a1e1bac839340c4d34e36e5d19' STRIPE_PKEY='pk_live_wZdDLC58PnMKkOD9pbDzl8PA' npm run build && scp -r build/* ubuntu@18.195.133.38:/var/www/hosts/cf",
-    "deploy-test-tokensummit": "NODE_ENV=staging USE_CUSTOMIZATION_CONFIG=true FD_ADDRESS_RESOLVER_DEV='0xa2E4FB662BA999A1E1bAc839340c4d34E36e5D19' npm run build && scp -r build/* ubuntu@18.195.153.27:/var/www/hosts/fdd-test"
+    "webpack": "webpack"
   },
   "dependencies": {
     "active-event-stack": "^1.0.0",
@@ -56,6 +52,7 @@
     "i18next": "^11.2.3",
     "i18next-browser-languagedetector": "^2.2.0",
     "i18next-xhr-backend": "^1.5.1",
+    "inline-style-prefixer": "^3.0.7",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^21.2.1",
     "json-loader": "^0.5.4",

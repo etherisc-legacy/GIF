@@ -20,8 +20,6 @@ spec:
         ports:
         - containerPort: 3000
         env:
-        - name: MESSAGE_BROKER
-          value: "amqp://platform:guest@$(RABBITMQ_SERVICE_HOST):$(RABBITMQ_SERVICE_PORT_AMQP)/trusted"
         - name: AWS_ACCESS_KEY
           valueFrom:
             secretKeyRef:
@@ -34,6 +32,22 @@ spec:
               key: MINIO_SECRET_KEY
         - name: AWS_ENDPOINT
           value: "http://$(MINIO_SERVICE_HOST):$(MINIO_SERVICE_PORT)"
+        - name: AMQP_MODE
+          value: core
+        - name: AMQP_HOST
+          value: "$(RABBITMQ_SERVICE_HOST)"
+        - name: AMQP_PORT
+          value: "$(RABBITMQ_SERVICE_PORT_AMQP)"
+        - name: AMQP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-credentials
+              key: AMQP_PLATFORM_USERNAME
+        - name: AMQP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-credentials
+              key: AMQP_PLATFORM_PASSWORD
         envFrom:
         - secretRef:
             name: pg-connection

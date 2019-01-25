@@ -29,7 +29,7 @@ class TemplateResolver {
       // check if the file exists
       await this.s3.headObject(opts).promise();
       tmplString = await this.s3.getObject(opts).promise();
-    } catch {
+    } catch (error) {
       // if the file doesn't exist
       tmplString = await this.s3.getObject({
         Bucket: this.config.bucket,

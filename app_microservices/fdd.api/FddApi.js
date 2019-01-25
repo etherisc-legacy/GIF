@@ -1,4 +1,3 @@
-const dotenv = require('dotenv');
 const EventEmitter = require('events');
 const FlightStatsClient = require('./flightstats/flightStatsClient');
 const registerRoutes = require('./routes');
@@ -22,7 +21,8 @@ class FddApi {
     this._log = log;
     this._messageBus = new EventEmitter();
     this._models = models(db);
-    const config = dotenv.load().parsed;
+    const config = process.env;
+
     const flightStatsClient = new FlightStatsClient({ ...config });
     const servicesDeps = services({ config, flightStatsClient, log });
     registerRoutes({

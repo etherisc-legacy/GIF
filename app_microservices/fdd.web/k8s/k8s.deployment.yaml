@@ -20,7 +20,8 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: API_HOST
-          value: "$(FDDAPI_SERVICE_HOST)"
-        - name: API_PORT
-          value: "$(FDDAPI_SERVICE_PORT_HTTP)"
+        - name: STRIPE_PKEY
+          valueFrom:
+            secretKeyRef:
+              name: payment
+              key: STRIPE_PUBLIC_KEY

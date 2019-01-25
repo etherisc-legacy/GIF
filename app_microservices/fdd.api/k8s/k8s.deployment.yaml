@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fddapi
+  labels:
+    app: fddapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fddapi
+  template:
+    metadata:
+      labels:
+        app: fddapi
+    spec:
+      containers:
+      - name: fddapi
+        image: <!--image-->
+        ports:
+        - containerPort: 3000
+        envFrom:
+          - secretRef:
+              name: pg-connection
+          - secretRef:
+              name: fdd
+        env:
+        - name: AMQP_MODE
+          value: product
+        - name: AMQP_HOST
+          value: "$(RABBITMQ_SERVICE_HOST)"
+        - name: AMQP_PORT
+          value: "$(RABBITMQ_SERVICE_PORT_AMQP)"
+        - name: AMQP_USERNAME
+          value: "$(AMQP_FDD_USERNAME)"
+        - name: AMQP_PASSWORD
+          value: "$(AMQP_FDD_PASSWORD)"
+        - name: FLIGHT_STATS_DOMAIN
+          value: api.flightstats.com

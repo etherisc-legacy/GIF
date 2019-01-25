@@ -16,6 +16,7 @@
     "clean": "echo 'Cleaning local /node_modules folders'; lerna clean --concurrency 100 --progress",
     "migrate": "echo 'Run database migrations for packages'; lerna run migrate",
     "migrate:test": "echo 'Run database migrations for packages'; NODE_ENV=test lerna run migrate",
+    "seed": "lerna run seed",
     "dev": "echo 'Start packages in development mode'; lerna run dev --parallel --concurrency 100 --progress",
     "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d --remove-orphans",
     "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",

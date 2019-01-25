@@ -7,10 +7,13 @@ const glob = require('fast-glob');
 const yaml = require('js-yaml');
 const crypto = require('crypto');
 const moment = require('moment');
+const inquirer = require('inquirer');
 
 
 const DESTINATION = process.env.DEPLOY_DESTINATION;
 const PROD = DESTINATION === 'gke';
+
+const imageRegex = /<!--image-->/;
 
 /**
  * Deploy to k8s command
@@ -58,6 +61,15 @@ class Deploy extends Command {
     await this.configureDeploy();
     this.timestamp('FINISHED CONFIGURATION');
 
+    this.optionsPrompt = await inquirer.prompt([
+      {
+        type: 'confirm', name: 'setSecrets', message: 'Set Secret variables? (default: N)', default: false,
+      },
+      {
+        type: 'confirm', name: 'keepConfigs', message: 'Keep config files for debug? (default: N)', default: false,
+      },
+    ]);
+
     const entities = await this.collectConfigurationFiles();
 
     await this.buildConfigMaps();
@@ -73,7 +85,7 @@ class Deploy extends Command {
    * @return {undefined}
    */
   timestamp(message) {
-    this.log.info(`========= ${moment().format('LTS')} - ${message}`);
+    this.log.info(`==== ${moment().format('LTS')} - ${message}`);
   }
 
   /**
@@ -98,7 +110,6 @@ class Deploy extends Command {
       '**/k8s*.yaml',
       '!**/node_modules/**',
     ];
-    if (PROD) { patterns.push('!**/secrets/**'); }
 
     const files = await glob(patterns);
 
@@ -111,8 +122,6 @@ class Deploy extends Command {
       list.forEach((listElement) => {
         let element = listElement;
         const entity = {};
-
-        const imageRegex = /<!--image-->/;
 
         if (imageRegex.test(JSON.stringify(element))) {
           const filePathParts = file.split('/');
@@ -266,48 +275,90 @@ class Deploy extends Command {
 
       this.log.info(`${EOL}${groupIndex + 1}. ${group}`);
 
-      for (let elementIndex = 0; elementIndex < entities[group].length; elementIndex += 1) {
-        const element = entities[group][elementIndex];
+      for (let entityIndex = 0; entityIndex < entities[group].length; entityIndex += 1) {
+        const entity = entities[group][entityIndex];
 
-        this.log.info(`${EOL}Apply ${group} ${element.config.metadata.name}`);
+        if (group === 'Secret') {
+          entity.config = await this.promptSecrets(entity.config);
+        }
 
-        if (element.dockerfilePath) { await this.packageDockerContainer(element); }
+        if (entity.config) {
+          this.log.info(`${EOL}Apply ${group} ${entity.config.metadata.name}`);
 
-        const file = path.join(process.cwd(), `temp/deploy/${group}-${element.config.metadata.name}.yaml`);
+          if (entity.dockerfilePath) { await this.packageDockerContainer(entity); }
 
-        fs.writeFileSync(file, yaml.safeDump(element.config));
+          const file = path.join(process.cwd(), `temp/deploy/${group}-${entity.config.metadata.name}.yaml`);
 
-        if (group === 'Job') await this.execute(`kubectl delete -f ${file} --ignore-not-found=true`);
-        this.timestamp(`Start Application of ${file}`);
-        await this.execute(`kubectl apply -f ${file}`);
-        this.timestamp(`Finished Application of ${file}`);
-        if (!process.env.KEEP_DEPLOY_FILES) { fs.unlinkSync(file); }
+          fs.writeFileSync(file, yaml.safeDump(entity.config));
+
+          if (group === 'Job') await this.execute(`kubectl delete -f ${file} --ignore-not-found=true`);
+
+          this.timestamp(`Start Application of ${file}`);
+
+          await this.execute(`kubectl apply -f ${file}`);
+
+          this.timestamp(`Finished Application of ${file}`);
+          if (!this.optionsPrompt.keepConfigs) { fs.unlinkSync(file); }
+        }
       }
     }
   }
 
   /**
-   * Read configuration element to find and execure docker build instructions
+   * Modify default secret storage values for deployment
+   * @param {Object} entityConfig
+   * @return {Object}
+   */
+  async promptSecrets(entityConfig) {
+    let modifiedSecrets = entityConfig;
+    const { setSecrets } = this.optionsPrompt;
+    const defaultUpdate = !PROD;
+
+    const options = setSecrets && await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'update',
+        message: `Update ${entityConfig.metadata.name} values? (default: ${defaultUpdate ? 'Y' : 'N'})`,
+        default: defaultUpdate,
+      },
+    ]);
+
+    if (setSecrets && options.update) {
+      const questions = Object.keys(entityConfig.data).map(name => ({
+        name,
+        type: 'input',
+        message: name,
+        default: process.env[name] || Buffer.from(entityConfig.data[name], 'base64').toString('utf-8'),
+      }));
+      const answers = await inquirer.prompt(questions);
+      modifiedSecrets.data = Object.keys(answers).reduce((data, name) => Object.assign(data, { [name]: Buffer.from(answers[name]).toString('base64') }), {});
+    } else {
+      modifiedSecrets = null;
+    }
+
+    return modifiedSecrets;
+  }
+
+  /**
+   * Read configuration element to find and execute docker build instructions
    * @param {Object} element
    * @return {Promise<void>}
    */
   async packageDockerContainer(element) {
+    // TODO: Skip packaging if container exists
     this.timestamp(`Start Docker build for ${element.imageName}`);
-    switch (DESTINATION) {
-      case 'gke':
-        await this.execute(`cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
-        this.log.info('Push image to GCR');
-        await this.execute(`docker push ${element.imageName}`);
-        break;
-      case 'minikube':
-        await this.execute(`eval $(minikube docker-env); cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
-        break;
-      case 'docker':
-        await this.execute(`cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
-        break;
-      default:
-        break;
+
+    if (DESTINATION === 'minikube') {
+      await this.execute('eval $(minikube docker-env);');
     }
+
+    await this.execute(`cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
+
+    if (DESTINATION === 'gke') {
+      this.log.info('Push image to GCR');
+      await this.execute(`docker push ${element.imageName}`);
+    }
+
     this.timestamp(`Finished Docker build for ${element.imageName}`);
   }
 

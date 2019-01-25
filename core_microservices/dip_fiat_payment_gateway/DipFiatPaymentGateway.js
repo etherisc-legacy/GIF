@@ -16,10 +16,12 @@ class DipFiatPaymentGateway {
    * @param {{}} params
    * @param {{}} params.db
    * @param {{}} params.amqp
+   * @param {{}} params.log
    */
-  constructor({ db, amqp }) {
+  constructor({ db, amqp, log }) {
     this._models = models(db);
     this._amqp = amqp;
+    this._log = log;
 
     this.providers = {};
   }
@@ -109,7 +111,7 @@ class DipFiatPaymentGateway {
         correlationId,
       });
     } catch (error) {
-      this.onError(policyId, 'initializePaymentRequest', error.message, correlationId);
+      this.onError(policyId, 'initializePaymentResult', error.message, correlationId);
     }
   }
 

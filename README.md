@@ -38,7 +38,7 @@ postgresql-service.v1.0.0 | - | - | - | -
 3. `npm ci` to install package dependencies
 4. `npm run bootstrap` to install dependencies for Lerna packages
 5. `npm run dev:services:run` to run Docker Compose with RabbitMQ and PostreSQL
-6. `npm run migrate` to run migrations.
+6. `npm run migrate` to run migrations. Optionally, you can run `npm run seed` to fill the databases with test data, where applicable.
 7. `npm run dev` to start applications.
 8. `npm login` login into npm account with access to @etherisc organization private packages.
 9. `npm run publish` to update NPM packages
@@ -76,7 +76,8 @@ postgresql-service.v1.0.0 | - | - | - | -
 3. `npm run bootstrap` to install dependencies for Lerna packages
 4. `NPM_TOKEN=<token> npm run deploy:docker` 
 
-You can set an environment variable KEEP_DEPLOY_FILES to a truthy value for the deploy script to keep the generated kubectl files in the /temp/deploy folder.
+The deploy script will prompt you for values you'd like your environment to have configured in Secrets. 
+Some of them have default values pre-configured.
 
 #### Notes
 - By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
@@ -110,7 +111,6 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 6. `npm install` to install package dependencies
 7. `npm run bootstrap` to install dependencies for Lerna packages
 8. `gcloud auth configure-docker --quiet` to authorize to Google Registry
-9. If you deploy first time run `npm run deploy:gke:secret <name>` to generate and deploy secrets for `minio`, `pg-connection` and `chain`
 10. `GCLOUD_PROJECT_ID=<project name> GCLOUD_CLUSTER=<cluster name> GCLOUD_ZONE=<cluster zone> NPM_TOKEN=<token> npm run deploy:gke` to deploy to GKE cluster.  To get the token sign in to npm and create token of type Publish on `https://www.npmjs.com/settings/etherisc_user/tokens/create`.
 
 ### D. Setup deployment to GKE clusters from Bitbucket Pipelines CI

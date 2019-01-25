@@ -1,3 +1,7 @@
+upstream fddapi {
+    server fddapi:3000;
+}
+
 server {
   listen 80;
   server_name _;
@@ -7,5 +11,9 @@ server {
 
   location / {
     try_files $uri $uri/ = 404;
+  }
+
+  location /api {
+    proxy_pass http://fddapi/api;
   }
 }

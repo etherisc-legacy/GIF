@@ -14,7 +14,7 @@
       "tags": "platform"
     },
     {
-      "name": "product",
+      "name": "fdd",
       "password_hash": "ch1/PW2SO2i0eGhHcukXtZSVa34OZ7wn82B4TlkH2cf6qcTw",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
       "tags": "product"
@@ -54,21 +54,21 @@
       "user": "platform",
       "vhost": "public",
       "configure": ".*",
-      "write": "^$",
+      "write": "platform_.*",
       "read": ".*"
     },
     {
-      "user": "product",
+      "user": "fdd",
       "vhost": "trusted",
-      "configure": "product_.*",
-      "write": "^$",
-      "read": "product_.*"
+      "configure": "fdd_.*",
+      "write": "fdd_.*",
+      "read": "^[EXCHANGE|fdd_.*]"
     },
     {
-      "user": "product",
+      "user": "fdd",
       "vhost": "public",
       "configure": "^$",
-      "write": ".*",
+      "write": "EXCHANGE",
       "read": "^$"
     }
   ],

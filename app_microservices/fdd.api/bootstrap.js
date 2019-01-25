@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { bootstrap } = require('@etherisc/microservice');
 const FddApi = require('./FddApi');
 
