@@ -225,3 +225,15 @@ Check [FlightDelay example](core/gif-contracts/contracts/examples/FlightDelayMan
 10.	Call function confirmPayout.
     Payout confirmation with payoutId and payoutAmount.
 
+# Getting Started ( Installation instructions )
+1.  Install `node` [version 11.2 or higher](https://nodejs.org/en/download/current/). 
+2.  In the project root, run 
+    > npm install
+3.  Run 
+    > npm run bootstrap
+4.  Navigate to `/core/gif-contracts`
+5.  Install and start [Ganache](https://truffleframework.com/docs/ganache/quickstart).
+6.  Run
+    > npm run migrate
+7.  Run to open the console
+    > npm run develop
