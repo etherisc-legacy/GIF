@@ -186,6 +186,7 @@ function* reqApplyForPolicyFiat(action) {
       amount: application.policy.premium * 100,
       currency: PAYMENT_TYPES[Number(application.policy.currency)],
       stripeSourceId: source.id,
+      payouts: application.policy.payouts,
     };
 
     if (couponCode) {

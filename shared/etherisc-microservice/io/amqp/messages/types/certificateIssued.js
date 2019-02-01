@@ -5,6 +5,10 @@ schemaVersions['1.0'] = {
   type: 'object',
   properties: {
     policyId: { type: 'string' },
+    bucket: { type: 'string' },
+    path: { type: 'string' },
+    type: { type: 'string' },
+    name: { type: 'string' },
   },
 };
 

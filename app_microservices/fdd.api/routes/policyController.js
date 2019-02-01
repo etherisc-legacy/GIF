@@ -1,4 +1,6 @@
 const uuid = require('uuid');
+const moment = require('moment');
+const _ = require('lodash');
 
 
 const applyPolicySchema = {
@@ -18,9 +20,19 @@ const applyPolicySchema = {
     stripeSourceId: { type: 'string' },
     couponCode: { type: 'string' },
     txHash: { type: 'string' },
+    payouts: {
+      type: 'object',
+      properties: {
+        p1: { type: 'string' },
+        p2: { type: 'string' },
+        p3: { type: 'string' },
+        p4: { type: 'string' },
+        p5: { type: 'string' },
+      },
+    },
   },
   required: ['firstName', 'lastName', 'email', 'carrier', 'flightNumber', 'departsAt', 'arrivesAt', 'origin',
-    'destination', 'amount', 'currency'],
+    'destination', 'amount', 'currency', 'payouts'],
   dependencies: {
     ethereumAccountId: {
       properties: { currency: { type: 'string', enum: ['eth'] } },
@@ -66,15 +78,17 @@ const policyPayoutsSchema = {
 
 module.exports = ({
   router,
-  messageBus,
   ajv,
-  amqp,
   db,
   log,
+  gif,
+  signer,
 }) => {
   router.post('/api/policies', async (ctx) => {
     const { body } = ctx.request;
     const validate = ajv.compile(applyPolicySchema);
+
+    log.info(body);
 
     if (!validate(body)) {
       ctx.badRequest({ error: validate.errors });
@@ -82,66 +96,96 @@ module.exports = ({
     }
 
     try {
-      const theCreationId = uuid();
+      const customer = {
+        firstname: body.firstName,
+        lastname: body.lastName,
+        email: body.email,
+      };
 
-      await amqp.publish({
-        messageType: 'policyCreationRequest',
-        messageVersion: '1.*',
-        content: {
-          creationId: theCreationId,
-          customer: {
-            firstname: body.firstName,
-            lastname: body.lastName,
-            email: body.email,
-          },
-          policy: {
-            distributorId: '11111111-1111-1111-1111-111111111111',
-            carrier: body.carrier,
-            departsAt: body.departsAt,
-            arrivesAt: body.arrivesAt,
-            origin: body.origin,
-            destination: body.destination,
-            flightNumber: body.flightNumber,
-          },
-          payment: {
-            kind: 'fiat',
-            premium: body.amount,
-            currency: body.currency,
-            provider: 'stripe',
-            sourceId: body.stripeSourceId,
-          },
-        },
+      const policy = {
+        distributorId: '11111111-1111-1111-1111-111111111111',
+        carrier: body.carrier,
+        departsAt: body.departsAt,
+        arrivesAt: body.arrivesAt,
+        origin: body.origin,
+        destination: body.destination,
+        flightNumber: body.flightNumber,
+      };
+
+      const payment = {
+        kind: 'fiat',
+        premium: body.amount,
+        currency: body.currency,
+        provider: 'stripe',
+        sourceId: body.stripeSourceId,
+      };
+
+      const { payouts } = body;
+
+      const { policyId, customerId } = await gif.policyCreationRequest({
+        creationId: uuid(),
+        customer,
+        policy,
+        payment,
       });
 
-      await new Promise((resolve) => {
-        // eslint-disable-next-line require-jsdoc
-        function onPolicyCreationSuccess({ creationId, policyId, customerId }) {
-          if (creationId !== theCreationId) { return; }
-          // eslint-disable-next-line no-use-before-define
-          removeListeners();
-          ctx.ok({ customerId, policyToken: 1, txHash: '12345' });
-          resolve();
-        }
+      const { Policy, Customer } = db;
 
-        // eslint-disable-next-line require-jsdoc
-        function onPolicyCreationError({ creationId, error }) {
-          if (creationId !== theCreationId) { return; }
-          // eslint-disable-next-line no-use-before-define
-          removeListeners();
-          ctx.badRequest(error);
-          resolve();
-        }
+      // Check if customer exists
+      const customerExists = await Customer.query().where('id', customerId).first();
 
-        // eslint-disable-next-line require-jsdoc
-        function removeListeners() {
-          messageBus.removeListener('policyCreationSuccess', onPolicyCreationSuccess);
-          messageBus.removeListener('policyCreationError', onPolicyCreationError);
-        }
+      // Create customer if it doesn't exists
+      if (!customerExists) {
+        await Customer.query().insertGraph({
+          id: customerId,
+          ..._.pick(customer, ['firstname', 'lastname', 'email']),
+          extra: [
+            ..._.map(
+              _.toPairs(_.omit(customer, ['firstname', 'lastname', 'email'])),
+              ([field, value]) => ({ field, value }),
+            ),
+          ],
+        });
+      }
 
-        messageBus.on('policyCreationSuccess', onPolicyCreationSuccess);
-        messageBus.on('policyCreationError', onPolicyCreationError);
+      await Policy.query().insertGraph({
+        id: policyId,
+        customerId,
+        ..._.pick(policy, ['distributorId']),
+        extra: [
+          ..._.map(
+            _.toPairs(_.omit(policy, ['distributorId'])),
+            ([field, value]) => ({ field, value }),
+          ),
+        ],
       });
+
+      const application = {
+        carrierFlightNumber: signer.utils.asciiToHex(`${policy.carrier}/${policy.flightNumber}`),
+        yearMonthDay: signer.utils.asciiToHex(moment(policy.departsAt).format('YYYY/MM/DD')),
+        departureTime: moment(policy.departsAt).unix(),
+        arrivalTime: moment(policy.arrivesAt).unix(),
+        premium: payment.premium,
+        currency: signer.utils.asciiToHex('EUR'), // payment.currency,
+        payoutOptions: [
+          Number((Number(payouts.p1) * 100).toFixed(0)),
+          Number((Number(payouts.p2) * 100).toFixed(0)),
+          Number((Number(payouts.p3) * 100).toFixed(0)),
+          Number((Number(payouts.p4) * 100).toFixed(0)),
+          Number((Number(payouts.p5) * 100).toFixed(0)),
+        ],
+        customerExternalId: signer.utils.padRight(signer.utils.utf8ToHex(policyId), 34).substr(0, 34),
+      };
+
+      log.info(application);
+
+      const { transactionHash } = await gif.applyForPolicy(application);
+
+      await gif.issueCertificate(policyId);
+
+      ctx.ok({ customerId, policyToken: policyId, txHash: transactionHash });
     } catch (error) {
+      log.error(error);
       ctx.badRequest(error);
     }
   });

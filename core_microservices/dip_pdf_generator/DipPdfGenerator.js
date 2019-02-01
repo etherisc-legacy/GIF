@@ -129,7 +129,11 @@ class DipPdfGenerator {
     await this.amqp.publish({
       messageType: 'certificateIssued',
       messageVersion: '1.*',
-      content: { policyId: policy.id },
+      content: {
+        policyId: policy.id,
+        bucket: this.config.bucket,
+        path: `pdf/certificate-${policy.id}.pdf`,
+      },
       correlationId: properties.correlationId,
     });
   }

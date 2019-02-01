@@ -5,7 +5,7 @@ const USE_CUSTOMIZATION_CONFIG = true; // process.env.USE_CUSTOMIZATION_CONFIG =
 let {
   FD_ADDRESS_RESOLVER_DEV='0xD6fe6b2A3733548Ca6dB41CA7F85268312dEcB2A',
   STRIPE_PKEY,
-  CHAIN = 'ropsten',
+  CHAIN = 'kovan',
 } = process.env;
 
 /**

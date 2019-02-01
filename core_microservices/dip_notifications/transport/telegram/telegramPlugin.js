@@ -6,9 +6,10 @@ const TelegramBot = require('telegrambot');
 class TelegramPlugin {
   /**
    * constructor
+   * @param {{}} s3
    * @param {{}} opts
    */
-  constructor({ BOT_TOKEN }) {
+  constructor(s3, { BOT_TOKEN }) {
     this.transportName = 'telegram';
     this.api = new TelegramBot(BOT_TOKEN);
   }

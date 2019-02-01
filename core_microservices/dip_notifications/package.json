@@ -9,7 +9,7 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "knex": "knex",
-    "test": "mocha",
+    "test": "NODE_ENV=test mocha",
     "coverage": "nyc mocha",
     "check:coverage": "nyc --check-coverage --statements 70 --functions 70 --lines 70 --branches 70 mocha"
   },

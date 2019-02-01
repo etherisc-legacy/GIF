@@ -1,19 +1,13 @@
-// const PolicyService = require('./policyService');
-// const VersionService = require('./versionService');
-// const CustomerService = require('./customerService');
 const FlightService = require('./flightService');
+const GifService = require('./gifService');
 
 
 module.exports = (deps) => {
-  // const policyService = new PolicyService({ ...ioDeps, ...modelDeps });
-  // const customerService = new CustomerService({ ...ioDeps, ...modelDeps });
-  // const versionService = new VersionService({ ...ioDeps, ...modelDeps });
   const flightService = new FlightService({ ...deps });
+  const gifService = new GifService({ ...deps });
 
   return {
-    // policyService,
-    // versionService,
-    // customerService,
+    gif: gifService,
     flightService,
   };
 };

@@ -18,14 +18,14 @@ class DipNotifications {
   }) {
     this._amqp = amqp;
     this._models = models(db);
-    const options = dotenv.config();
+    const options = dotenv.config().parsed;
     this._templateResolver = new TemplateResolver(s3, config);
     this._notificationsService = new NotificationsService({
       templateResolver: this._templateResolver,
       options: { ...options },
       plugins: [
-        new SmtpPlugin({ ...options }),
-        new TelegramPlugin({ ...options }),
+        new SmtpPlugin(s3, { ...options }),
+        new TelegramPlugin(s3, { ...options }),
       ],
     });
   }

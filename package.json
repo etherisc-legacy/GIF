@@ -20,7 +20,7 @@
     "dev": "echo 'Start packages in development mode'; lerna run dev --parallel --concurrency 100 --progress",
     "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d --remove-orphans",
     "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",
-    "dev:services:purge": "docker-compose -f ./services/compose/docker-compose.yml down -v; rm -rf ./services/compose/minio; rm -rf ./services/compose/postgresqldev; rm -rf ./services/compose/postgresqltest; rm -rf ./services/compose/ganache",
+    "dev:services:purge": "echo 'Kill & purge dockerized services'; docker-compose -f ./services/compose/docker-compose.yml down -v; rm -rf ./services/compose/minio; rm -rf ./services/compose/postgresqldev; rm -rf ./services/compose/postgresqltest; rm -rf ./services/compose/dev_ganache",
     "lint": "echo 'Lint javascript files'; eslint --ext js .",
     "lint:fix": "echo 'Lint javascript files'; eslint --ext js --fix .",
     "docs": "echo 'Generage documentation'; esdoc",

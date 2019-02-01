@@ -63,19 +63,19 @@ services:
   Ganache:
     container_name: dev_ganache
     image: trufflesuite/ganache-cli
-    command: -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' -l 0x7A1200 -g 0x2540BE400 --debug -v -i 4447 -h 0.0.0.0 --db /data
+    command: --mnemonic 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' --debug --verbose --networkId 7777 --db /data
     restart: always
     volumes:
-    - ./ganache:/data
+    - ./dev_ganache:/data
     ports:
     - "8545:8545"
 
   EthereumBridge:
     container_name: dev_ethereum_bridge
     image: cryptomental/ethereum-bridge
-    command: -H ganache:8545 -a 9 --dev --disable-price
+    command: -H dev_ganache:8545 -a 9 --dev
     restart: always
     links:
-    - "Ganache:ganache"
+    - "Ganache:dev_ganache"
     depends_on:
     - Ganache

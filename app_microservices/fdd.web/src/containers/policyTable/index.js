@@ -177,7 +177,7 @@ class PolicyTable extends Component {
                 <strong>{t('Currency')}:</strong>
               </div>
               <div className="payment-type__items">
-                {CustomConfig.policyTable.supportsEth !== false &&
+                {/* {CustomConfig.policyTable.supportsEth !== false &&
                   <div>
                     <label htmlFor="eth">
                       <Field id="eth" name="currency" onChange={v => this.selectCurrency(v)} component="input"
@@ -185,8 +185,8 @@ class PolicyTable extends Component {
                       <span>ETH</span>
                     </label>
                   </div>
-                }
-                {CustomConfig.policyTable.disabledEth &&
+                } */}
+                {/* {CustomConfig.policyTable.disabledEth &&
                 <div className={styles.disabled}>
                   <label htmlFor="eth">
                     <Field id="eth" name="currency" onChange={v => this.selectCurrency(v)} component="input"
@@ -195,7 +195,7 @@ class PolicyTable extends Component {
                     <div className={styles.small}>(back soon!)</div>
                   </label>
                 </div>
-                }
+                } */}
                 <div>
                   <label htmlFor="eur">
                     <Field id="eur" name="currency" onChange={v => this.selectCurrency(v)} component="input"
@@ -263,20 +263,20 @@ class PolicyTable extends Component {
                 </tr>
                 <tr className="policy-row">
                   <td>{t('Delay in minutes')}</td>
-                  <td>15 - 29</td>
-                  <td>30 - 44</td>
+                  {/* <td>15 - 29</td>
+                  <td>30 - 44</td> */}
                   <td>45+</td>
                   <td>{t('Cancelled')}</td>
                   <td>{t('Diverted')}</td>
                 </tr>
                 <tr className="policy-row">
                   <td>{t('Payout')}</td>
-                  <td>
+                  {/* <td>
                     {payouts && payouts.p1}<span dangerouslySetInnerHTML={{__html: curCode}} />
                   </td>
                   <td>
                     {payouts && payouts.p2}<span dangerouslySetInnerHTML={{__html: curCode}} />
-                  </td>
+                  </td> */}
                   <td>
                     {payouts && payouts.p3}<span dangerouslySetInnerHTML={{__html: curCode}} />
                   </td>

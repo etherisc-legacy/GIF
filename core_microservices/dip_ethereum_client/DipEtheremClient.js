@@ -33,43 +33,44 @@ class DipEtheremClient {
   async createTransaction({ content, fields, properties }) {
     // const { routingKey } = message.fields;
 
-    // Todo: implement
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    await this._amqp.publish({
-      messageType: 'transactionCreated',
-      messageVersion: '1.*',
-      content: { policyId: content.policyId },
-      correlationId: properties.correlationId,
-    });
-
-    // Todo: implement
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    await this._amqp.publish({
-      messageType: 'stateChanged',
-      messageVersion: '1.*',
-      content: { policyId: content.policyId, state: 0 },
-      correlationId: properties.correlationId,
-    });
-
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    await this._amqp.publish({
-      messageType: 'stateChanged',
-      messageVersion: '1.*',
-      content: { policyId: content.policyId, state: 1 },
-      correlationId: properties.correlationId,
-    });
-
-    await new Promise(resolve => setTimeout(resolve, 5000));
-
-    await this._amqp.publish({
-      messageType: 'stateChanged',
-      messageVersion: '1.*',
-      content: { policyId: content.policyId, state: 3 },
-      correlationId: properties.correlationId,
-    });
+    console.log('create transaction');
+    // // Todo: implement
+    // await new Promise(resolve => setTimeout(resolve, 1000));
+    //
+    // await this._amqp.publish({
+    //   messageType: 'transactionCreated',
+    //   messageVersion: '1.*',
+    //   content: { policyId: content.policyId },
+    //   correlationId: properties.correlationId,
+    // });
+    //
+    // // Todo: implement
+    // await new Promise(resolve => setTimeout(resolve, 1000));
+    //
+    // await this._amqp.publish({
+    //   messageType: 'stateChanged',
+    //   messageVersion: '1.*',
+    //   content: { policyId: content.policyId, state: 0 },
+    //   correlationId: properties.correlationId,
+    // });
+    //
+    // await new Promise(resolve => setTimeout(resolve, 3000));
+    //
+    // await this._amqp.publish({
+    //   messageType: 'stateChanged',
+    //   messageVersion: '1.*',
+    //   content: { policyId: content.policyId, state: 1 },
+    //   correlationId: properties.correlationId,
+    // });
+    //
+    // await new Promise(resolve => setTimeout(resolve, 5000));
+    //
+    // await this._amqp.publish({
+    //   messageType: 'stateChanged',
+    //   messageVersion: '1.*',
+    //   content: { policyId: content.policyId, state: 3 },
+    //   correlationId: properties.correlationId,
+    // });
   }
 }
 
