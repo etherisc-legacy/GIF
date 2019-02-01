@@ -188,10 +188,10 @@ describe('Etherisc Flight Delay API', () => {
         routingKey: 'etherisc_flight_delay_api.payout.1.0',
         content: { policyId },
       },
-      {
-        routingKey: 'dip_fiat_payout_gateway.paidOut.1.0',
-        content: { policyId },
-      },
+      // {
+      //   routingKey: 'dip_fiat_payout_gateway.paidOut.1.0',
+      //   content: { policyId },
+      // },
     ];
 
     messages.should.be.containDeepOrdered(expected);
