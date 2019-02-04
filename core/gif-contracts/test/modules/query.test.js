@@ -46,40 +46,60 @@ contract('Query module', () => {
   /* activateOracle */
   it('activateOracle switch Oracle in active state', async () => {});
   it('activateOracle should be restricted to calls only from DAOService', async () => {});
+  it('should throw if Oracle does not exists', async () => {});
+  it('should throw if Oracle is in active state', async () => {});
 
   /* deactivateOracle */
   it('deactivateOracle should switch Oracle in inactive state', async () => {});
   it('deactivateOracle should be restricted to calls only from DAOService', async () => {});
+  it('should throw if Oracle does not exists', async () => {});
+  it('should throw if Oracle is not in active state', async () => {});
+  it('should throw if Oracle is assigned to OracleTypes', async () => {});
 
   /* removeOracle */
   it('removeOracle should remove Oracle record', async () => {});
   it('removeOracle should be restricted to calls only from DAOService', async () => {});
+  it('should throw if Oracle does not exists', async () => {});
+  it('should throw if Oracle is not in active state', async () => {});
+  it('should throw if Oracle is assigned to OracleTypes', async () => {});
 
   /* Oracle-OracleType */
 
   /* proposeOracleToType */
   it('proposeOracleToType should create Oracle to OracleType proposal record ', async () => {});
   it('proposeOracleToType should be restricted to calls only from OracleOwnerService', async () => {});
+  it('proposeOracleToType should throw if called is not Oracle owner', async () => {});
+  it('proposeOracleToType should throw if Oracle does not exists', async () => {});
+  it('proposeOracleToType should throw if OracleType does not exists', async () => {});
 
   /* revokeOracleToTypeProposal */
   it('revokeOracleToTypeProposal should remove Oracle to OracleType proposal record', async () => {});
   it('revokeOracleToTypeProposal should be restricted to calls only from OracleOwnerService', async () => {});
+  it('proposeOracleToType should throw if called is not Oracle owner', async () => {});
+  it('proposeOracleToType should throw if Oracle does not exists', async () => {});
+  it('proposeOracleToType should throw if OracleType does not exists', async () => {});
 
   /* assignOracleToOracleType */
   it('assignOracleToOracleType should bind Oracle to OracleType', async () => {});
   it('assignOracleToOracleType should be restricted to calls only from DAOService', async () => {});
+  it('assignOracleToOracleType should throw if OracleType doest not exits', async () => {});
 
   /* removeOracleFromOracleType */
   it('removeOracleFromOracleType should remove Oracle from OracleType', async () => {});
   it('removeOracleFromOracleType should be restricted to calls only from DAOService', async () => {});
+  it('removeOracleFromOracleType should throw if Oracle does not assigned to OracleType', async () => {});
 
   /* Request */
 
   /* 1->1 request */
   it('request should take product request and send it to oracle', async () => {});
   it('request should be restricted to calls only from ProductService', async () => {});
+  it('proposeOracleToType should throw if Oracle does not exists', async () => {});
+  it('proposeOracleToType should throw if OracleType does not exists', async () => {});
+  it('request should throw if responsible oracle does not assigned to OracleType', async () => {});
 
   /* Respond */
   it('respond should take oracle response and send it to product', async () => {});
   it('respond should be restricted to calls only from OracleService', async () => {});
+  it('should throw if responder is not responsible Oracle', async () => {});
 });
