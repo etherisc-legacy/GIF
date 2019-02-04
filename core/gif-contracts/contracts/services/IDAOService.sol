@@ -15,4 +15,6 @@ interface IDAOService {
     function pauseInsuranceApplication(uint256 _applicationId) external;
 
     function unpauseInsuranceApplication(uint256 _applicationId) external;
+
+    function assignOracleToOracleType(bytes32 _oracleTypeName, uint256 _oracleId) external;
 }

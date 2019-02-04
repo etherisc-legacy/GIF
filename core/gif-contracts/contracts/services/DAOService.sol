@@ -94,6 +94,10 @@ contract DAOService is WithRegistry {
         query().activateOracle(_oracleId);
     }
 
+    function assignOracleToOracleType(bytes32 _oracleTypeName, uint256 _oracleId) external {
+        query().assignOracleToOracleType(_oracleTypeName, _oracleId);
+    }
+
     /* Lookup */
     function license() internal view returns (ILicenseController) {
         return ILicenseController(registry.getContract("License"));
