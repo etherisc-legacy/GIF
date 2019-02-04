@@ -36,10 +36,10 @@ contract OracleOwnerService is WithRegistry {
         );
     }
 
-    function proposeOracleToType(
-        bytes32 _oracleTypeName,
-        uint256 _oracleId
-    ) external returns (uint256 _proposalId) {
+    function proposeOracleToType(bytes32 _oracleTypeName, uint256 _oracleId)
+        external
+        returns (uint256 _proposalId)
+    {
         // todo: oracle owner should be approved
         _proposalId = query().proposeOracleToType(
             msg.sender,

@@ -16,5 +16,8 @@ interface IDAOService {
 
     function unpauseProduct(uint256 _productId) external;
 
-    function assignOracleToOracleType(bytes32 _oracleTypeName, uint256 _oracleId) external;
+    function assignOracleToOracleType(
+        bytes32 _oracleTypeName,
+        uint256 _oracleId
+    ) external;
 }

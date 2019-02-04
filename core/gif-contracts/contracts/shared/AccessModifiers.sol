@@ -2,10 +2,7 @@ pragma solidity 0.5.2;
 
 contract AccessModifiers {
     modifier onlyDAO() {
-        require(
-            msg.sender == getService("DAO"),
-            "ERROR::NOT_DAO_SERVICE"
-        );
+        require(msg.sender == getService("DAO"), "ERROR::NOT_DAO_SERVICE");
         _;
     }
 
@@ -22,10 +19,7 @@ contract AccessModifiers {
     }
 
     modifier onlyOracle() {
-        require(
-            msg.sender == getService("OracleService"),
-            "ERROR::NOT_ORACLE"
-        );
+        require(msg.sender == getService("OracleService"), "ERROR::NOT_ORACLE");
         _;
     }
 
