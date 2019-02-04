@@ -226,7 +226,7 @@ Check [FlightDelay example](core/gif-contracts/contracts/examples/FlightDelayMan
     Payout confirmation with payoutId and payoutAmount.
 
 # Getting Started ( Installation instructions )
-1.  Install `node` [version 11.2 or higher](https://nodejs.org/en/download/current/). 
+1.  Install `Node.js`. Node.js version should be 8.12.0 or higher, npm version should be 6.4.1 or higher. [Download](https://nodejs.org/en/download/current/). 
 2.  In the project root, run 
     > npm install
 3.  Run 
