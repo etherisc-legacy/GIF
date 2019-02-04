@@ -21,11 +21,11 @@ contract PolicyFlowDefault is WithRegistry {
             msg.sender
         );
 
-        uint256 _matadataId = policy().createPolicyFlow(productId);
+        uint256 metadataId = policy().createPolicyFlow(productId);
 
         uint256 applicationId = policy().createApplication(
             productId,
-            _matadataId,
+            metadataId,
             _customerExternalId,
             _premium,
             _currency,

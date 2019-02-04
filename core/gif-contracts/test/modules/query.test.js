@@ -74,6 +74,8 @@ contract('Query module', () => {
   it('removeOracleFromOracleType should be restricted to calls only from DAOService', async () => {});
 
   /* Request */
+
+  /* 1->1 request */
   it('request should take product request and send it to oracle', async () => {});
   it('request should be restricted to calls only from ProductService', async () => {});
 

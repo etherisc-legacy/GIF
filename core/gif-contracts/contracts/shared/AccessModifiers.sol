@@ -16,7 +16,7 @@ contract AccessModifiers {
         // Allow only ProductService (it delegates to PolicyFlow)
         require(
             msg.sender == getContract("ProductService"),
-            "ERROR::NOT_FRONT_CONTROLLER"
+            "ERROR::NOT_PRODUCT_SERVICE"
         );
         _;
     }
