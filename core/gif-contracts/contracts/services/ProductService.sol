@@ -4,8 +4,8 @@ import "../shared/WithRegistry.sol";
 import "../shared/Delegator.sol";
 import "../modules/license/ILicenseController.sol";
 
-contract InsuranceProductService is WithRegistry, Delegator {
-    bytes32 public constant NAME = "InsuranceProductService";
+contract ProductService is WithRegistry, Delegator {
+    bytes32 public constant NAME = "ProductService";
 
     constructor(address _registry) public WithRegistry(_registry) {}
 

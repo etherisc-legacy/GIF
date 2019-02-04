@@ -13,9 +13,9 @@ contract AccessModifiers {
         // Allow only from delegator
         require(address(this) == getContract(_module), "ERROR::NOT_ON_STORAGE");
 
-        // Allow only InsuranceProductService (it delegates to PolicyFlow)
+        // Allow only ProductService (it delegates to PolicyFlow)
         require(
-            msg.sender == getContract("InsuranceProductService"),
+            msg.sender == getContract("ProductService"),
             "ERROR::NOT_FRONT_CONTROLLER"
         );
         _;

@@ -1,20 +1,20 @@
 pragma solidity 0.5.2;
 
 import "./shared/RBAC.sol";
-import "./services/IInsuranceProductService.sol";
+import "./services/IProductService.sol";
 
-contract InsuranceProduct is RBAC {
+contract Product is RBAC {
     bool public developmentMode = false;
     bool public maintenanceMode = false;
 
-    IInsuranceProductService public productService;
+    IProductService public productService;
 
     constructor(
-        address _insuranceProductService,
+        address _productService,
         bytes32 _name,
         bytes32 _policyFlow
     ) internal {
-        productService = IInsuranceProductService(_insuranceProductService);
+        productService = IProductService(_productService);
         register(_name, _policyFlow);
     }
 
@@ -26,10 +26,10 @@ contract InsuranceProduct is RBAC {
         maintenanceMode = !maintenanceMode;
     }
 
-    function register(bytes32 _insuranceProductName, bytes32 _policyFlow)
+    function register(bytes32 _productName, bytes32 _policyFlow)
         internal
     {
-        productService.register(_insuranceProductName, _policyFlow);
+        productService.register(_productName, _policyFlow);
     }
 
     function newApplication(

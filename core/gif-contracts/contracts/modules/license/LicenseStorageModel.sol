@@ -9,23 +9,23 @@ contract LicenseStorageModel {
 
     event LogRegistrationDeclined(uint256 registrationId);
 
-    event LogNewInsuranceProductApproved(
+    event LogNewProductApproved(
         bytes32 name,
         address addr,
         uint256 id
     );
 
-    event LogInsuranceProductDisapproved(
+    event LogProductDisapproved(
         bytes32 name,
         address addr,
         uint256 id
     );
 
-    event LogInsuranceProductReapproved(bytes32 name, address addr, uint256 id);
+    event LogProductReapproved(bytes32 name, address addr, uint256 id);
 
-    event LogInsuranceProductPaused(bytes32 name, address addr, uint256 id);
+    event LogProductPaused(bytes32 name, address addr, uint256 id);
 
-    event LogInsuranceProductUnpaused(bytes32 name, address addr, uint256 id);
+    event LogProductUnpaused(bytes32 name, address addr, uint256 id);
 
     struct Registration {
         bytes32 name;
@@ -35,7 +35,7 @@ contract LicenseStorageModel {
         bool declined;
     }
 
-    struct InsuranceProduct {
+    struct Product {
         bytes32 name;
         address addr;
         bytes32 policyFlow;
@@ -52,12 +52,12 @@ contract LicenseStorageModel {
     Registration[] public registrations;
 
     /**
-     * @dev Insurance products
+     * @dev Products
      */
-    InsuranceProduct[] public insuranceProducts;
+    Product[] public products;
 
     /**
-     * @dev Get insurance product id by contract's address
+     * @dev Get product id by contract's address
      */
-    mapping(address => uint256) public insuranceProductIdByAddress;
+    mapping(address => uint256) public productIdByAddress;
 }

@@ -14,29 +14,29 @@ contract DAOService is WithRegistry {
     /* License */
     function approveRegistration(uint256 _registrationId)
         external
-        returns (uint256 _insuranceProductId)
+        returns (uint256 _productId)
     {
-        _insuranceProductId = license().approveRegistration(_registrationId);
+        _productId = license().approveRegistration(_registrationId);
     }
 
     function declineRegistration(uint256 _registrationId) external {
         license().declineRegistration(_registrationId);
     }
 
-    function disapproveInsuranceProduct(uint256 _insuranceProductId) external {
-        license().disapproveInsuranceProduct(_insuranceProductId);
+    function disapproveProduct(uint256 _productId) external {
+        license().disapproveProduct(_productId);
     }
 
-    function reapproveInsuranceProduct(uint256 _insuranceProductId) external {
-        license().reapproveInsuranceProduct(_insuranceProductId);
+    function reapproveProduct(uint256 _productId) external {
+        license().reapproveProduct(_productId);
     }
 
-    function pauseInsuranceProduct(uint256 _insuranceProductId) external {
-        license().pauseInsuranceProduct(_insuranceProductId);
+    function pauseProduct(uint256 _productId) external {
+        license().pauseProduct(_productId);
     }
 
-    function unpauseInsuranceProduct(uint256 _insuranceProductId) external {
-        license().unpauseInsuranceProduct(_insuranceProductId);
+    function unpauseProduct(uint256 _productId) external {
+        license().unpauseProduct(_productId);
     }
 
     /* Access */

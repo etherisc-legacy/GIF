@@ -1,6 +1,204 @@
 pragma solidity 0.5.2;
 
-import "../../Product.sol";
+// File: /Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/RBAC.sol
+
+contract RBAC {
+    mapping(bytes32 => uint256) public roles;
+    bytes32[] public rolesKeys;
+
+    mapping(address => uint256) public permissions;
+
+    modifier onlyWithRole(bytes32 _role) {
+        require(hasRole(msg.sender, _role));
+        _;
+    }
+
+    function createRole(bytes32 _role) public {
+        require(roles[_role] == 0);
+        // todo: check overflow
+        roles[_role] = 1 << rolesKeys.length;
+        rolesKeys.push(_role);
+    }
+
+    function addRoleToAccount(address _address, bytes32 _role) public {
+        require(roles[_role] != 0);
+
+        permissions[_address] = permissions[_address] | roles[_role];
+    }
+
+    function cleanRolesForAccount(address _address) public {
+        delete permissions[_address];
+    }
+
+    function hasRole(address _address, bytes32 _role)
+        public
+        view
+        returns (bool _hasRole)
+    {
+        _hasRole = (permissions[_address] & roles[_role]) > 0;
+    }
+}
+
+// File: /Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/services/IProductService.sol
+
+interface IProductService {
+    function register(bytes32 _productName, bytes32 _policyFlow)
+        external
+        returns (uint256 _registrationId);
+
+    function newApplication(
+        bytes32 _customerExternalId,
+        uint256 _premium,
+        bytes32 _currency,
+        uint256[] calldata _payoutOptions
+    ) external returns (uint256 _applicationId);
+
+    function underwrite(uint256 applicationId)
+        external
+        returns (uint256 _policyId);
+
+    function decline(uint256 _applicationId) external;
+
+    function newClaim(uint256 _policyId) external returns (uint256 _claimId);
+
+    function confirmClaim(uint256 _claimId, uint256 _sum)
+        external
+        returns (uint256 _payoutId);
+
+    function declineClaim(uint256 _claimId) external;
+
+    function expire(uint256 _policyId) external;
+
+    function payout(uint256 _payoutId, uint256 _sum)
+        external
+        returns (uint256 _remainder);
+
+    function getPayoutOptions(uint256 _applicationId)
+        external
+        returns (uint256[] memory _payoutOptions);
+
+    function getPremium(uint256 _applicationId)
+        external
+        returns (uint256 _premium);
+
+    function request(
+        bytes calldata _input,
+        string calldata _callbackMethodName,
+        address _callabackContractAddress,
+        bytes32 _oracleTypeName,
+        uint256 _responsibleOracleId
+    ) external returns (uint256 _requestId);
+}
+
+// File: /Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/Product.sol
+
+contract Product is RBAC {
+    bool public developmentMode = false;
+    bool public maintenanceMode = false;
+
+    IProductService public productService;
+
+    constructor(
+        address _productService,
+        bytes32 _name,
+        bytes32 _policyFlow
+    ) internal {
+        productService = IProductService(_productService);
+        register(_name, _policyFlow);
+    }
+
+    function toggleDevelopmentMode() internal {
+        developmentMode = !developmentMode;
+    }
+
+    function toggleMaintenanceMode() internal {
+        maintenanceMode = !maintenanceMode;
+    }
+
+    function register(bytes32 _productName, bytes32 _policyFlow)
+        internal
+    {
+        productService.register(_productName, _policyFlow);
+    }
+
+    function newApplication(
+        bytes32 _customerExternalId,
+        uint256 _premium,
+        bytes32 _currency,
+        uint256[] memory _payoutOptions
+    ) internal returns (uint256 _applicationId) {
+        _applicationId = productService.newApplication(
+            _customerExternalId,
+            _premium,
+            _currency,
+            _payoutOptions
+        );
+    }
+
+    function underwrite(uint256 _applicationId)
+        internal
+        returns (uint256 _policyId)
+    {
+        _policyId = productService.underwrite(_applicationId);
+    }
+
+    function decline(uint256 _applicationId) internal {
+        productService.decline(_applicationId);
+    }
+
+    function newClaim(uint256 _policyId) internal returns (uint256 _claimId) {
+        _claimId = productService.newClaim(_policyId);
+    }
+
+    function confirmClaim(uint256 _claimId, uint256 _amount)
+        internal
+        returns (uint256 _payoutId)
+    {
+        _payoutId = productService.confirmClaim(_claimId, _amount);
+    }
+
+    function expire(uint256 _policyId) internal {
+        productService.expire(_policyId);
+    }
+
+    function payout(uint256 _payoutId, uint256 _amount)
+        internal
+        returns (uint256 _remainder)
+    {
+        _remainder = productService.payout(_payoutId, _amount);
+    }
+
+    function getPayoutOptions(uint256 _applicationId)
+        internal
+        returns (uint256[] memory _payoutOptions)
+    {
+        _payoutOptions = productService.getPayoutOptions(_applicationId);
+    }
+
+    function getPremium(uint256 _applicationId)
+        internal
+        returns (uint256 _premium)
+    {
+        _premium = productService.getPremium(_applicationId);
+    }
+
+    function request(
+        bytes memory _input,
+        string memory _callbackMethodName,
+        bytes32 _oracleTypeName,
+        uint256 _responsibleOracleId
+    ) internal returns (uint256 _requestId) {
+        _requestId = productService.request(
+            _input,
+            _callbackMethodName,
+            address(this),
+            _oracleTypeName,
+            _responsibleOracleId
+        );
+    }
+}
+
+// File: contracts/examples/FlightDelayOraclize/FlightDelayOraclize.sol
 
 contract FlightDelayOraclize is Product {
     event LogRequestFlightStatistics(

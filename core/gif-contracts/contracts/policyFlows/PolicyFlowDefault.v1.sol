@@ -17,14 +17,14 @@ contract PolicyFlowDefault is WithRegistry {
         bytes32 _currency,
         uint256[] calldata _payoutOptions
     ) external returns (uint256 _applicationId) {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
-        uint256 _matadataId = policy().createPolicyFlow(insuranceProductId);
+        uint256 _matadataId = policy().createPolicyFlow(productId);
 
         uint256 applicationId = policy().createApplication(
-            insuranceProductId,
+            productId,
             _matadataId,
             _customerExternalId,
             _premium,
@@ -36,12 +36,12 @@ contract PolicyFlowDefault is WithRegistry {
     }
 
     function newClaim(uint256 _policyId) external returns (uint256 _claimId) {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
         uint256 claimId = policy().createClaim(
-            insuranceProductId,
+            productId,
             _policyId,
             ""
         );
@@ -53,18 +53,18 @@ contract PolicyFlowDefault is WithRegistry {
         external
         returns (uint256 _payoutId)
     {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
         policy().setClaimState(
-            insuranceProductId,
+            productId,
             _claimId,
             IPolicy.ClaimState.Confirmed
         );
 
         uint256 payoutId = policy().createPayout(
-            insuranceProductId,
+            productId,
             _claimId,
             _sum
         );
@@ -73,36 +73,36 @@ contract PolicyFlowDefault is WithRegistry {
     }
 
     function declineClaim(uint256 _claimId) external {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
         policy().setClaimState(
-            insuranceProductId,
+            productId,
             _claimId,
             IPolicy.ClaimState.Declined
         );
     }
 
     function decline(uint256 _applicationId) external {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
         policy().setApplicationState(
-            insuranceProductId,
+            productId,
             _applicationId,
             IPolicy.ApplicationState.Declined
         );
     }
 
     function expire(uint256 _policyId) external {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
         policy().setPolicyState(
-            insuranceProductId,
+            productId,
             _policyId,
             IPolicy.PolicyState.Expired
         );
@@ -112,40 +112,40 @@ contract PolicyFlowDefault is WithRegistry {
         external
         returns (uint256 _remainder)
     {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
-        _remainder = policy().payOut(insuranceProductId, _payoutId, _amount);
+        _remainder = policy().payOut(productId, _payoutId, _amount);
     }
 
-    function register(bytes32 _insuranceProductName, bytes32 _policyFlow)
+    function register(bytes32 _productName, bytes32 _policyFlow)
         external
     {
-        license().register(_insuranceProductName, msg.sender, _policyFlow);
+        license().register(_productName, msg.sender, _policyFlow);
     }
 
     function underwrite(uint256 _applicationId)
         external
         returns (uint256 _policyId)
     {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
         policy().setApplicationState(
-            insuranceProductId,
+            productId,
             _applicationId,
             IPolicy.ApplicationState.Underwritten
         );
 
         (uint256 metadataId, , , , ) = policy().getApplicationData(
-            insuranceProductId,
+            productId,
             _applicationId
         );
 
         uint256 policyId = policy().createPolicy(
-            insuranceProductId,
+            productId,
             metadataId
         );
 
@@ -173,12 +173,12 @@ contract PolicyFlowDefault is WithRegistry {
         view
         returns (uint256[] memory _payoutOptions)
     {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
         _payoutOptions = policy().getPayoutOptions(
-            insuranceProductId,
+            productId,
             _applicationId
         );
     }
@@ -188,11 +188,11 @@ contract PolicyFlowDefault is WithRegistry {
         view
         returns (uint256 _premium)
     {
-        uint256 insuranceProductId = license().getInsuranceProductId(
+        uint256 productId = license().getProductId(
             msg.sender
         );
 
-        _premium = policy().getPremium(insuranceProductId, _applicationId);
+        _premium = policy().getPremium(productId, _applicationId);
     }
 
     function license() internal view returns (ILicenseController) {

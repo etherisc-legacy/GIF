@@ -9,22 +9,22 @@ interface ILicenseController {
 
     function approveRegistration(uint256 _registrationId)
         external
-        returns (uint256 _insuranceProductId);
+        returns (uint256 _productId);
 
-    function disapproveInsuranceProduct(uint256 _insuranceProductId) external;
+    function disapproveProduct(uint256 _productId) external;
 
-    function reapproveInsuranceProduct(uint256 _insuranceProductId) external;
+    function reapproveProduct(uint256 _productId) external;
 
-    function pauseInsuranceProduct(uint256 _insuranceProductId) external;
+    function pauseProduct(uint256 _productId) external;
 
-    function unpauseInsuranceProduct(uint256 _insuranceProductId) external;
+    function unpauseProduct(uint256 _productId) external;
 
-    function isApprovedInsuranceProduct(address _addr)
+    function isApprovedProduct(address _addr)
         external
         view
         returns (bool _approved);
 
-    function isPausedInsuranceProduct(address _addr)
+    function isPausedProduct(address _addr)
         external
         view
         returns (bool _paused);
@@ -36,8 +36,8 @@ interface ILicenseController {
         view
         returns (bool _authorized, address _policyFlow);
 
-    function getInsuranceProductId(address _addr)
+    function getProductId(address _addr)
         external
         view
-        returns (uint256 _insuranceProductId);
+        returns (uint256 _productId);
 }
