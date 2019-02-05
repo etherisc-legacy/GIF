@@ -1,8 +1,8 @@
 pragma solidity 0.5.2;
 
-import "../../InsuranceProduct.sol";
+import "../../Product.sol";
 
-contract FlightDelayManual is InsuranceProduct {
+contract FlightDelayManual is Product {
     event LogRequestFlightStatistics(
         uint256 requestId,
         bytes32 carrierFlightNumber,
@@ -68,7 +68,7 @@ contract FlightDelayManual is InsuranceProduct {
 
     constructor(address _productController)
         public
-        InsuranceProduct(_productController, NAME, POLICY_FLOW)
+        Product(_productController, NAME, POLICY_FLOW)
     {}
 
     function applyForPolicy(

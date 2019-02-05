@@ -42,13 +42,19 @@ module.exports = async (deployer) => {
     '(bytes32 carrierFlightNumber)',
     '(uint256[6] statistics)',
     'FlightRatings oracle',
-    web3utils.bytes(32, 'EUR'),
   );
 
   // Propose FlightRatingsOracle as oracle
-  await oracleOwnerService.proposeOracle(flightRatingsOracle.address, 'FlightRatings oracle', 1);
+  await oracleOwnerService.proposeOracle(flightRatingsOracle.address, 'FlightRatings oracle');
 
   // Activate FlightRatings type and oracle
   await daoService.activateOracleType(web3utils.bytes(32, 'FlightRatings'));
-  await daoService.activateOracle(0);
+
+  const oracleId = 0;
+  await daoService.activateOracle(oracleId);
+
+  // Propose FlightRatingsOracle to FlightRatings oracle type
+  await oracleOwnerService.proposeOracleToType(web3utils.bytes(32, 'FlightRatings'), oracleId);
+  const proposalId = 0;
+  await daoService.assignOracleToOracleType(web3utils.bytes(32, 'FlightRatings'), proposalId);
 };

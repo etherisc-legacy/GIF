@@ -9,7 +9,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     constructor(address _registry) public WithRegistry(_registry) {}
 
     /**
-     * @dev Register new application
+     * @dev Register new product
      */
     function register(bytes32 _name, address _addr, bytes32 _policyFlow)
         external
@@ -28,7 +28,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     }
 
     /**
-     * @dev Decline new application registration
+     * @dev Decline new product registration
      */
     function declineRegistration(uint256 _registrationId) external onlyDAO {
         require(
@@ -43,142 +43,142 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     }
 
     /**
-     * @dev Approve registration and create new insurance application
+     * @dev Approve registration and create new product
      */
     function approveRegistration(uint256 _registrationId)
         external
         onlyDAO
-        returns (uint256 _insuranceProductId)
+        returns (uint256 _productId)
     {
         require(
             registrations.length > _registrationId,
             "ERROR_INVALID_REGISTRATION_ID"
         ); // todo: check overflow
 
-        _insuranceProductId = insuranceProducts.length++;
+        _productId = products.length++;
 
-        InsuranceProduct storage newProduct = insuranceProducts[_insuranceProductId];
+        Product storage newProduct = products[_productId];
         newProduct.name = registrations[_registrationId].name;
         newProduct.addr = registrations[_registrationId].addr;
         newProduct.policyFlow = registrations[_registrationId].policyFlow;
         newProduct.release = registrations[_registrationId].release;
         newProduct.approved = true;
 
-        insuranceProductIdByAddress[newProduct.addr] = _insuranceProductId;
+        productIdByAddress[newProduct.addr] = _productId;
 
         // create new erc721 token
 
-        emit LogNewInsuranceProductApproved(
+        emit LogNewProductApproved(
             newProduct.name,
             newProduct.addr,
-            _insuranceProductId
+            _productId
         );
     }
 
     /**
-     * @dev Disapprove insurance application once it was approved
+     * @dev Disapprove product once it was approved
      */
-    function disapproveInsuranceProduct(uint256 _insuranceProductId)
+    function disapproveProduct(uint256 _productId)
         external
         onlyDAO
     {
-        InsuranceProduct storage product = insuranceProducts[_insuranceProductId];
+        Product storage product = products[_productId];
 
         require(product.approved == true, "ERROR_INVALID_APPROVE_STATUS");
 
         product.approved = false;
 
-        emit LogInsuranceProductDisapproved(
+        emit LogProductDisapproved(
             product.name,
             product.addr,
-            _insuranceProductId
+            _productId
         );
     }
 
     /**
      * @dev Reapprove product once it was disapproved
      */
-    function reapproveInsuranceProduct(uint256 _insuranceProductId)
+    function reapproveProduct(uint256 _productId)
         external
         onlyDAO
     {
-        InsuranceProduct storage product = insuranceProducts[_insuranceProductId];
+        Product storage product = products[_productId];
 
         require(product.approved == false, "ERROR_INVALID_APPROVE_STATUS");
 
         product.approved = true;
 
-        emit LogInsuranceProductReapproved(
+        emit LogProductReapproved(
             product.name,
             product.addr,
-            _insuranceProductId
+            _productId
         );
     }
 
     /**
-     * @dev Pause insurance product
+     * @dev Pause product
      */
-    function pauseInsuranceProduct(uint256 _insuranceProductId)
+    function pauseProduct(uint256 _productId)
         external
         onlyDAO
     {
-        InsuranceProduct storage product = insuranceProducts[_insuranceProductId];
+        Product storage product = products[_productId];
 
         require(product.paused == false, "ERROR_INVALID_PAUSED_STATUS");
 
         product.paused = true;
 
-        emit LogInsuranceProductPaused(
+        emit LogProductPaused(
             product.name,
             product.addr,
-            _insuranceProductId
+            _productId
         );
     }
 
     /**
-     * @dev Unpause insurance product
+     * @dev Unpause product
      */
-    function unpauseInsuranceProduct(uint256 _insuranceProductId)
+    function unpauseProduct(uint256 _productId)
         external
         onlyDAO
     {
-        InsuranceProduct storage product = insuranceProducts[_insuranceProductId];
+        Product storage product = products[_productId];
 
         require(product.paused == true, "ERROR_INVALID_PAUSED_STATUS");
 
         product.paused = false;
 
-        emit LogInsuranceProductUnpaused(
+        emit LogProductUnpaused(
             product.name,
             product.addr,
-            _insuranceProductId
+            _productId
         );
     }
 
     /**
-     * @dev Check if contract is approved insurance product
+     * @dev Check if contract is approved product
      */
-    function isApprovedInsuranceProduct(address _addr)
+    function isApprovedProduct(address _addr)
         public
         view
         returns (bool _approved)
     {
-        _approved = insuranceProducts[insuranceProductIdByAddress[_addr]].approved == true;
+        _approved = products[productIdByAddress[_addr]].approved == true;
     }
 
     /**
-     * @dev Check if contract is paused insurance application
+     * @dev Check if contract is paused product
      */
-    function isPausedInsuranceProduct(address _addr)
+    function isPausedProduct(address _addr)
         public
         view
         returns (bool _paused)
     {
-        _paused = insuranceProducts[insuranceProductIdByAddress[_addr]].paused == true;
+        _paused = products[productIdByAddress[_addr]].paused == true;
     }
 
     function isValidCall(address _addr) public view returns (bool _valid) {
-        _valid = isApprovedInsuranceProduct(_addr) && !isPausedInsuranceProduct(
+        _valid = isApprovedProduct(_addr) && !isPausedProduct(
             _addr
         );
     }
@@ -190,16 +190,16 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     {
         _authorized = isValidCall(_sender);
         _policyFlow = getContractInRelease(
-            insuranceProducts[insuranceProductIdByAddress[_sender]].release,
-            insuranceProducts[insuranceProductIdByAddress[_sender]].policyFlow
+            products[productIdByAddress[_sender]].release,
+            products[productIdByAddress[_sender]].policyFlow
         );
     }
 
-    function getInsuranceProductId(address _addr)
+    function getProductId(address _addr)
         public
         view
-        returns (uint256 _insuranceProductId)
+        returns (uint256 _productId)
     {
-        _insuranceProductId = insuranceProductIdByAddress[_addr];
+        _productId = productIdByAddress[_addr];
     }
 }
