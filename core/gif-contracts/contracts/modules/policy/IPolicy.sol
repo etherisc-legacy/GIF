@@ -3,59 +3,59 @@ pragma solidity 0.5.2;
 interface IPolicy {
     // Events
     event LogNewMetadata(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         PolicyFlowState state
     );
 
     event LogMetadataStateChanged(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         PolicyFlowState state
     );
 
     event LogNewApplication(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         uint256 applicationId
     );
 
     event LogApplicationStateChanged(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         uint256 applicationId,
         ApplicationState state
     );
 
     event LogNewPolicy(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId
     );
 
     event LogPolicyStateChanged(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         PolicyState state
     );
 
     event LogNewClaim(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         ClaimState state
     );
 
     event LogClaimStateChanged(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         ClaimState state
     );
 
     event LogNewPayout(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         uint256 claimId,
@@ -64,7 +64,7 @@ interface IPolicy {
     );
 
     event LogPayoutStateChanged(
-        uint256 insuranceProductId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         uint256 claimId,

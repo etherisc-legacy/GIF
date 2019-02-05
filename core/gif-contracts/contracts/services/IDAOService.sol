@@ -8,11 +8,16 @@ interface IDAOService {
         external
         returns (uint256 _applicationId);
 
-    function disapproveInsuranceApplication(uint256 _applicationId) external;
+    function disapproveProduct(uint256 _productId) external;
 
-    function reapproveInsuranceApplication(uint256 _applicationId) external;
+    function reapproveProduct(uint256 _productId) external;
 
-    function pauseInsuranceApplication(uint256 _applicationId) external;
+    function pauseProduct(uint256 _productId) external;
 
-    function unpauseInsuranceApplication(uint256 _applicationId) external;
+    function unpauseProduct(uint256 _productId) external;
+
+    function assignOracleToOracleType(
+        bytes32 _oracleTypeName,
+        uint256 _oracleId
+    ) external;
 }

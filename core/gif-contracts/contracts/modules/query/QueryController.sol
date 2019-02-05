@@ -7,44 +7,31 @@ import "../../shared/ModuleController.sol";
 contract QueryController is QueryStorageModel, ModuleController {
     constructor(address _registry) public WithRegistry(_registry) {}
 
-    /* OracleTypesRegistry */
     function proposeOracleType(
         bytes32 _oracleTypeName,
         string calldata _inputFormat,
         string calldata _callbackFormat,
-        string calldata _description,
-        bytes32 _currency
+        string calldata _description
     ) external onlyOracleOwner {
         require(
-            !oracleTypes[_oracleTypeName].initialized,
-            "ERROR::ORACLE_TYPE_INITIALIZED"
+            oracleTypes[_oracleTypeName].initialized == false,
+            "ERROR::ORACLE_TYPE_ALREADY_INITIALIZED"
         );
-
-        // todo: check currency existence
 
         oracleTypes[_oracleTypeName] = OracleType(
             _inputFormat,
             _callbackFormat,
             _description,
-            _currency,
             OracleTypeState.Inactive,
             true
         );
 
-        emit LogOracleTypeProposed(
-            _oracleTypeName,
-            _inputFormat,
-            _callbackFormat,
-            _description,
-            _currency
-        );
+        emit LogOracleTypeProposed(_oracleTypeName, _inputFormat, _callbackFormat, _description);
     }
 
     function activateOracleType(bytes32 _oracleTypeName) external onlyDAO {
-        require(
-            oracleTypes[_oracleTypeName].initialized,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
-        );
+        require(oracleTypes[_oracleTypeName].initialized == true, "ERROR::ORACLE_TYPE_NOT_INITIALIZED");
+        require(oracleTypes[_oracleTypeName].state != OracleTypeState.Active, "ERROR::ORACLE_TYPE_ACTIVE");
 
         oracleTypes[_oracleTypeName].state = OracleTypeState.Active;
 
@@ -52,14 +39,9 @@ contract QueryController is QueryStorageModel, ModuleController {
     }
 
     function deactivateOracleType(bytes32 _oracleTypeName) external onlyDAO {
-        require(
-            oracleTypes[_oracleTypeName].initialized,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
-        );
-        require(
-            assignedOracles[_oracleTypeName].length == 0,
-            "ERROR::ORACLE_TYPE_HAS_ACTIVE_ORACLES"
-        );
+        require(oracleTypes[_oracleTypeName].initialized == true, "ERROR::ORACLE_TYPE_NOT_INITIALIZED");
+        require(oracleTypes[_oracleTypeName].state == OracleTypeState.Active, "ERROR::ORACLE_TYPE_NOT_ACTIVE");
+        require(assignedOraclesIds[_oracleTypeName].length == 0, "ERROR::ORACLE_TYPE_HAS_ACTIVE_ORACLES");
 
         oracleTypes[_oracleTypeName].state = OracleTypeState.Inactive;
 
@@ -67,59 +49,44 @@ contract QueryController is QueryStorageModel, ModuleController {
     }
 
     function removeOracleType(bytes32 _oracleTypeName) external onlyDAO {
-        require(
-            oracleTypes[_oracleTypeName].initialized,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
-        );
-        require(
-            assignedOracles[_oracleTypeName].length == 0,
-            "ERROR::ORACLE_TYPE_HAS_ACTIVE_ORACLES"
-        );
+        require(oracleTypes[_oracleTypeName].initialized == true, "ERROR::ORACLE_TYPE_NOT_INITIALIZED");
+        require(oracleTypes[_oracleTypeName].state == OracleTypeState.Active, "ERROR::ORACLE_TYPE_NOT_ACTIVE");
+        require(assignedOraclesIds[_oracleTypeName].length == 0, "ERROR::ORACLE_TYPE_HAS_ACTIVE_ORACLES");
 
         delete oracleTypes[_oracleTypeName];
 
-        emit LogOracleTypeRemoved(_oracleTypeName);
+        emit LogOracleTypeDeactivated(_oracleTypeName);
     }
 
-    /* OracleRegistry */
-    function proposeOracle(
-        address _oracleContract,
-        string calldata _description,
-        uint256 _responseDeadline
-    ) external onlyOracleOwner returns (uint256 _oracleId) {
-        // todo: check if exists
-        //require(oracles[oraclesIndexes[_oracleContract]].oracleContract == address(0), "ERROR::ORACLE_EXISTS");
+    function proposeOracle(address _sender, address _oracleContract, string calldata _description)
+    external onlyOracleOwner returns (uint256 _oracleId) {
+        require(oracleIdByAddress[_oracleContract] == 0, "ERROR::ORACLE_EXISTS");
 
-        _oracleId = oracles.length++;
+        _oracleId = oracleIdIncrement++;
 
-        oracles[_oracleId] = Oracle(
-            _oracleContract,
-            _description,
-            _responseDeadline,
-            OracleState.Inactive
-        );
-        oraclesIndexes[_oracleContract] = _oracleId;
+        oracles[_oracleId] = Oracle(_sender, _oracleContract, _description, OracleState.Inactive);
+        oracleIdByAddress[_oracleContract] = _oracleId;
 
-        emit LogOracleProposed(_oracleContract, _description, _responseDeadline);
+        emit LogOracleProposed(_oracleContract, _description);
     }
 
-    function updateOracleContract(address _oracleContract, uint256 _oracleId)
-        external
-        onlyOracleOwner
-    {
+    function updateOracleContract(address _sender, address _newOracleContract, uint256 _oracleId)
+    external onlyOracleOwner {
+        require(oracleIdByAddress[_newOracleContract] == 0, "ERROR::ORACLE_EXISTS");
+        require(oracles[_oracleId].oracleOwner == _sender, "ERROR::NOT_ORACLE_OWNER");
+
         address prevContract = oracles[_oracleId].oracleContract;
 
-        require(prevContract != address(0), "ERROR::ORACLE_NOT_EXISTS");
+        oracleIdByAddress[oracles[_oracleId].oracleContract] = 0;
+        oracles[_oracleId].oracleContract = _newOracleContract;
+        oracleIdByAddress[_newOracleContract] = _oracleId;
 
-        // todo: check if oracle builder is owner
-
-        oracles[_oracleId].oracleContract = _oracleContract;
-
-        emit LogOracleContractUpdated(_oracleId, prevContract, _oracleContract);
+        emit LogOracleContractUpdated(_oracleId, prevContract, _newOracleContract);
     }
 
     function activateOracle(uint256 _oracleId) external onlyDAO {
-        // todo: validate
+        require(oracles[_oracleId].oracleContract != address(0), "ERROR::ORACLE_NOT_EXISTS");
+        require(oracles[_oracleId].state != OracleState.Active, "ERROR::ORACLE_IS_ACTIVE");
 
         oracles[_oracleId].state = OracleState.Active;
 
@@ -127,7 +94,9 @@ contract QueryController is QueryStorageModel, ModuleController {
     }
 
     function deactivateOracle(uint256 _oracleId) external onlyDAO {
-        // todo: validate
+        require(oracles[_oracleId].oracleContract != address(0), "ERROR::ORACLE_NOT_EXISTS");
+        require(oracles[_oracleId].state == OracleState.Active, "ERROR::ORACLE_NOT_ACTIVE");
+        require(assignedOracleTypes[_oracleId].length != 0, "ERROR::ORACLE_ASSIGNED_TO_ORACLE_TYPES");
 
         oracles[_oracleId].state = OracleState.Inactive;
 
@@ -135,57 +104,68 @@ contract QueryController is QueryStorageModel, ModuleController {
     }
 
     function removeOracle(uint256 _oracleId) external onlyDAO {
-        // todo: validate
-        // todo: remove from oracle types
+        require(oracles[_oracleId].oracleContract != address(0), "ERROR::ORACLE_NOT_EXISTS");
+        require(oracles[_oracleId].state != OracleState.Active, "ERROR::ORACLE_NOT_ACTIVE");
+        require(assignedOracleTypes[_oracleId].length != 0, "ERROR::ORACLE_ASSIGNED_TO_ORACLE_TYPES");
 
-        oraclesIndexes[oracles[_oracleId].oracleContract] = 0;
+        delete oracleIdByAddress[oracles[_oracleId].oracleContract];
         delete oracles[_oracleId];
+        delete assignedOracleTypes[_oracleId];
 
         emit LogOracleRemoved(_oracleId);
     }
 
     function proposeOracleToType(
-        uint256 _oracleId,
-        uint256 _oracleTypeId,
-        uint256 _price
-    ) external onlyOracleOwner {
-        // todo: validate
-        // todo: implement
+        address _sender,
+        bytes32 _oracleTypeName,
+        uint256 _oracleId
+    ) external onlyOracleOwner returns (uint256 _proposalId) {
+        require(oracles[_oracleId].oracleOwner == _sender, "ERROR::NOT_ORACLE_OWNER");
+        require(oracles[_oracleId].oracleContract != address(0), "ERROR::ORACLE_NOT_EXISTS");
+        require(oracleTypes[_oracleTypeName].initialized == true, "ERROR::ORACLE_TYPE_NOT_INITIALIZED");
+        require(assignedOracles[_oracleTypeName][_oracleId] != true, "ERROR::ORACLE_ASSIGNED");
 
-        emit LogOracleProposedToType(_oracleId, _oracleTypeId, _price);
+        _proposalId = proposedOracleIds[_oracleTypeName].length++;
+        proposedOracleIds[_oracleTypeName][_proposalId] = _oracleId;
+
+        emit LogOracleProposedToType(_oracleTypeName, _oracleId, _proposalId);
     }
 
-    // only oracle builder
-    function updateOraclePriceInType(
-        uint256 _oracleId,
-        uint256 _oracleTypeId,
-        uint256 _price
-    ) external onlyOracleOwner {
-        // todo: implement
+    function revokeOracleToTypeProposal(address _sender, bytes32 _oracleTypeName, uint256 _proposalId)
+    external onlyOracleOwner {
+        uint256 oracleId = proposedOracleIds[_oracleTypeName][_proposalId];
 
-        emit LogOraclePriceUpdatedInType(_oracleId, _oracleTypeId, _price);
+        require(oracles[oracleId].oracleOwner == _sender, "ERROR::NOT_ORACLE_OWNER");
+        require(oracles[oracleId].oracleContract != address(0), "ERROR::ORACLE_NOT_EXISTS");
+        require(oracleTypes[_oracleTypeName].initialized == true, "ERROR::ORACLE_TYPE_NOT_INITIALIZED");
+
+        emit LogOracleToTypeProposalRevoked(_oracleTypeName, oracleId, _proposalId);
     }
 
-    function assignOracleToOracleType(uint256 _oracleId, uint256 _oracleTypeId)
-        external
-        onlyDAO
-    {
-        // todo: implement
+    function assignOracleToOracleType(bytes32 _oracleTypeName, uint256 _proposalId) external onlyDAO {
+        require(oracleTypes[_oracleTypeName].initialized == true, "ERROR::ORACLE_TYPE_NOT_INITIALIZED");
 
-        emit LogOracleAssignedToOracleType(_oracleId, _oracleTypeId);
+        uint256 oracleId = proposedOracleIds[_oracleTypeName][_proposalId];
+
+        require(oracles[oracleId].oracleContract != address(0), "ERROR::ORACLE_NOT_EXISTS");
+        require(assignedOracles[_oracleTypeName][oracleId] != true, "ERROR::ORACLE_ASSIGNED");
+
+        assignedOracles[_oracleTypeName][oracleId] = true;
+        assignedOraclesIds[_oracleTypeName].push(oracleId);
+
+        emit LogOracleAssignedToOracleType(_oracleTypeName, oracleId);
     }
 
-    function removeOracleFromOracleType(
-        uint256 _oracleId,
-        uint256 _oracleTypeId
-    ) external onlyDAO {
-        // todo: implement
+    function removeOracleFromOracleType(bytes32 _oracleTypeName, uint256 _oracleId) external onlyDAO {
+        require(assignedOracles[_oracleTypeName][_oracleId] == true, "ERROR::ORACLE_NOT_ASSIGNED");
 
-        emit LogOracleRemovedFromOracleType(_oracleId, _oracleTypeId);
+        assignedOracles[_oracleTypeName][_oracleId] = false;
+
+        emit LogOracleRemovedFromOracleType(_oracleTypeName, _oracleId);
     }
 
     /* Oracle Request */
-    // only product, 1->1
+    // 1->1
     function request(
         bytes calldata _input,
         string calldata _callbackMethodName,
@@ -202,14 +182,10 @@ contract QueryController is QueryStorageModel, ModuleController {
         req.callbackMethodName = _callbackMethodName;
         req.callbackContractAddress = _callabackContractAddress;
         req.oracleTypeName = _oracleTypeName;
-        req.requestType = OracleRequestType.Direct;
         req.responsibleOracleId = _responsibleOracleId;
         req.createdAt = block.timestamp;
 
-        IOracle(oracles[_responsibleOracleId].oracleContract).request(
-            _requestId,
-            _input
-        );
+        IOracle(oracles[_responsibleOracleId].oracleContract).request(_requestId, _input);
 
         emit LogOracleRequested(_requestId, _responsibleOracleId);
     }
@@ -242,4 +218,5 @@ contract QueryController is QueryStorageModel, ModuleController {
 
         emit LogOracleResponded(_requestId, _responseId, _responder, status);
     }
+
 }
