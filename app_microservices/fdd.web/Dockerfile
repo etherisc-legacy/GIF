@@ -6,7 +6,7 @@ COPY . .
 RUN npm update -g npm
 RUN npm ci
 
-RUN NODE_ENV=production npm run build
+RUN NODE_ENV=production EDITION=demo npm run build
 
 FROM nginx:stable
 
