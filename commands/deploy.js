@@ -352,7 +352,17 @@ class Deploy extends Command {
       await this.execute('eval $(minikube docker-env);');
     }
 
-    await this.execute(`cd ${element.dockerfilePath}; docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`);
+    try {
+      await this.execute(
+        `docker inspect --format='Last build time: {{.Metadata.LastTagTime}}' --type=image ${element.imageName}`,
+      );
+    } catch (error) {
+      this.log.info('Error on image detection; building a new one');
+      await this.execute(
+        `cd ${element.dockerfilePath}; 
+         docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`,
+      );
+    }
 
     if (DESTINATION === 'gke') {
       this.log.info('Push image to GCR');

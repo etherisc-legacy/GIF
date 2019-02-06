@@ -46,15 +46,15 @@ postgresql-service.v1.0.0 | - | - | - | -
 ### B. Setup local development e2e test environment
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Make sure `kubectl` is the latest version.
 2. Run Minikube:
-    `minikube cache add nginx:stable`
+    `minikube start` will start Minikube. You may want to configure it for better performance:
+    
+        `minikube cache add nginx:stable`
 
-    `minikube cache add postgres:10.5`
+        `minikube cache add postgres:10.5`
 
-    `minikube cache add node:9.10.0`
+        `minikube cache add node:11.2.0`
 
-    `minikube config set memory 4096`
-
-    `minikube start` will start Minikube
+        `minikube config set memory 4096`
     
     `minikube ip` will return local Minikube IP
     
@@ -70,19 +70,10 @@ postgresql-service.v1.0.0 | - | - | - | -
 
 5. `NPM_TOKEN=<token> npm run deploy:minikube` to deploy to Minikube. To get the token sign in to npm and create token of type Publish on `https://www.npmjs.com/settings/etherisc_user/tokens/create`.
 
-#### B-2. If you are a Mac user and have Docker for Mac 17.12 CE Edge and higher, or 18.06 Stable and higher. 
-1. Configure [Kubernetes for Docker](https://docs.docker.com/docker-for-mac/#kubernetes)
-2. `npm ci` to install package dependencies
-3. `npm run bootstrap` to install dependencies for Lerna packages
-4. `NPM_TOKEN=<token> npm run deploy:docker` 
-
-The deploy script will prompt you for values you'd like your environment to have configured in Secrets. 
-Some of them have default values pre-configured.
-
 #### Notes
 - By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
 
-- `etherisc_flight_delay_ui` is available on `<minikubeip>:80`.
+- `fdd.web` is available on `<minikubeip>:80`.
 
 - `postgresql` is available on `<minikubeip>:30032`. Connections string `postgresql://dipadmin:dippassword@postgres:5432/dip`.
 
@@ -100,14 +91,26 @@ But to forward the ports so deployment port interfaces are available from your l
 `kubectl port-forward deployment/< DEPLOYMENT NAME> 8080:8080 8081:8081`
 
 Final param is a list of space-delimetered port pairs going local:minikube.
-    
+
+#### B-2. Deploy to Minikube bundled with the local docker (alternative to setting up Minikube).
+If you are a Mac user and have Docker for Mac 17.12 CE Edge and higher, or 18.06 Stable and higher. 
+1. Configure [Kubernetes for Docker](https://docs.docker.com/docker-for-mac/#kubernetes)
+2. `npm ci` to install package dependencies
+3. `npm run bootstrap` to install dependencies for Lerna packages
+4. `NPM_TOKEN=<token> npm run deploy:docker` 
+
+The deploy script will prompt you for values you'd like your environment to have configured in Secrets. 
+Some of them have default values pre-configured.
+
+#### Notes
+- All the notes for minikube deployment apply, but in case of local docker setup, <minikubeip> will need to be replaced with `localhost`
     
 ### C. Setup local development environment for deployment to GKE clusters
 1. Install and set up [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 2. Install and initialize [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstarts)
 3. Create account / login to [Google Cloud Platform Console](https://console.cloud.google.com)
 4. In GCP dashboard navigate to Kubernetes Engine > Clusters and create new cluster
-5. Click "connect" button and run proposed command
+5. In the description of the newly created cluster, find and click the "connect" button and run the generated command in the local console you are going to use for deploy.
 6. `npm install` to install package dependencies
 7. `npm run bootstrap` to install dependencies for Lerna packages
 8. `gcloud auth configure-docker --quiet` to authorize to Google Registry
@@ -124,7 +127,7 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 #### Create Kubernetes cluster
 1. In GCP dashboard navigate to Kubernetes Engine > Clusters
 2. Create new cluster
-3. If you deploy first time run `npm run deploy:gke:secret <name>` to generate and deploy secrets for `minio`, `pg-connection` and `chain`
+3. If you deploy first time, answer `Y` when the deployment script asks you whether you want to `Set Secret variables?` in general, as well as each specific set of secrets later on.
 
 #### Create authorization credentials for Bitbucket
 Create an App Engine service account and API key. Bitbucket needs this information to deploy to App Engine.
