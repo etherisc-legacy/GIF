@@ -2,6 +2,14 @@ const uuid = require('uuid');
 const moment = require('moment');
 const _ = require('lodash');
 
+/**
+ * To money format
+ * @param {*} value
+ * @return {string}
+ */
+function toMoney(value) {
+  return Number((Number(value) * 100).toFixed(0));
+}
 
 const applyPolicySchema = {
   properties: {
@@ -157,6 +165,11 @@ module.exports = ({
             _.toPairs(_.omit(policy, ['distributorId'])),
             ([field, value]) => ({ field, value }),
           ),
+          { field: 'premium', value: payment.premium },
+          { field: 'currency', value: payment.currency },
+          { field: 'payout3', value: toMoney(payouts.p3) },
+          { field: 'payout4', value: toMoney(payouts.p4) },
+          { field: 'payout5', value: toMoney(payouts.p5) },
         ],
       });
 
@@ -167,13 +180,7 @@ module.exports = ({
         arrivalTime: moment(policy.arrivesAt).unix(),
         premium: payment.premium,
         currency: signer.utils.asciiToHex('EUR'), // payment.currency,
-        payoutOptions: [
-          Number((Number(payouts.p1) * 100).toFixed(0)),
-          Number((Number(payouts.p2) * 100).toFixed(0)),
-          Number((Number(payouts.p3) * 100).toFixed(0)),
-          Number((Number(payouts.p4) * 100).toFixed(0)),
-          Number((Number(payouts.p5) * 100).toFixed(0)),
-        ],
+        payoutOptions: [0, 0, toMoney(payouts.p3), toMoney(payouts.p4), toMoney(payouts.p5)],
         customerExternalId: signer.utils.padRight(signer.utils.utf8ToHex(policyId), 34).substr(0, 34),
       };
 
@@ -224,25 +231,73 @@ module.exports = ({
   });
 
   router.get('/api/policies/:id', async (ctx) => {
-    // const id = ctx.params.id
+    const { id } = ctx.params;
 
-    // const certificate = await policyService.getPolicy(id)
+    const [policy, extra] = await Promise.all([
+      db.Policy.query().where('id', id).first(),
+      db.PolicyExtra.query().where('policyId', id).then(rows => _.fromPairs(_.map(rows, r => [r.field, r.value]))),
+    ]);
 
-    // if (!certificate) {
-    //   ctx.notFound()
-    //   return
-    // }
+    const customer = await db.Customer.query().where('id', policy.customerId).first();
 
-    // ctx.body = certificate
+    ctx.body = {
+      policyHolder:
+      {
+        firstname: customer.firstname,
+        lastname: customer.lastname,
+        email: customer.email,
+      },
+      number: policy.id,
+      flight: {
+        carrier: extra.carrier,
+        flightNumber: extra.flightNumber,
+        origin: extra.origin,
+        destination: extra.destination,
+        departsAt: extra.departsAt,
+        arrivesAt: extra.arrivesAt,
+      },
+      policyStartDate: policy.created, // 'February 03, 2019 15:50 GMT (Greenwich Mean Time)',
+      policyExpireDate: extra.arrivesAt, // 'February 12, 2019 08:50 (local time at destination)',
+      premium: {
+        amount: extra.premium / 100,
+        currency: extra.currency,
+      },
+      compensation: {
+        d45: extra.payout3 / 100,
+        can: extra.payout4 / 100,
+        div: extra.payout5 / 100,
+      },
+    };
     ctx.ok();
   });
 
   router.get('/api/customers/:id/policies', async (ctx) => {
     const customerId = ctx.params.id;
 
-    const policies = await db.Policy.query().where({ customerId });
+    const policies = await db.Policy.query()
+      .where({ customerId });
 
-    ctx.ok(policies);
+    let extra = await db.PolicyExtra.query()
+      .where('policyId', 'in', _.map(policies, p => p.id));
+
+    extra = _.groupBy(extra, 'policyId');
+
+    for (let i = 0, l = policies.length; i < l; i += 1) {
+      policies[i].extra = _.fromPairs(_.map(extra[policies[i].id], e => [e.field, e.value]));
+    }
+
+    ctx.ok(_.map(policies, p => ({
+      id: p.id,
+      carrier: p.extra.carrier,
+      flightNumber: p.extra.flightNumber,
+      origin: p.extra.origin,
+      destination: p.extra.destination,
+      departsAt: p.extra.departsAt,
+      arrivesAt: p.extra.arrivesAt,
+      amount: p.extra.premium / 100,
+      currency: p.extra.currency,
+      status: '1',
+    })));
   });
 
   router.post('/api/policies/payouts', async (ctx) => {

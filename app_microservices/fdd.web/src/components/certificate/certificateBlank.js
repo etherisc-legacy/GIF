@@ -107,16 +107,16 @@ const CertificateBlank = ({certificate, t}) => (
               <tbody>
                 <tr>
                   <td className={styles.wrap}>{t('Delay in minutes')}</td>
-                  <td>15-29</td>
-                  <td>30-44</td>
+                  {/* <td>15-29</td>
+                  <td>30-44</td> */}
                   <td>45+</td>
                   <td className={styles.wrap}>{t('Cancelled')}</td>
                   <td className={styles.wrap}>{t('Diverted')}</td>
                 </tr>
                 <tr>
                   <td>{t('Payout')}</td>
-                  <td>{certificate.compensation.d15}</td>
-                  <td>{certificate.compensation.d30}</td>
+                  {/* <td>{certificate.compensation.d15}</td>
+                  <td>{certificate.compensation.d30}</td> */}
                   <td>{certificate.compensation.d45}</td>
                   <td>{certificate.compensation.can}</td>
                   <td>{certificate.compensation.div}</td>

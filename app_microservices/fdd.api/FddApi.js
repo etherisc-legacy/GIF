@@ -108,6 +108,11 @@ class FddApi {
           props: { from: 'policies@etherisc.com' },
           events: ['policy_issued'],
         },
+        {
+          name: 'telegram',
+          props: { chatId: -319007131 },
+          events: ['policy_issued'],
+        },
       ],
       templates: [],
     });
@@ -142,7 +147,7 @@ class FddApi {
       const customer = await Customer.query().where('id', policy.customerId).first();
       await this._gif.sendNotification({
         type: 'policy_issued',
-        data: { customer },
+        data: { customer, policy },
         props: {
           recipient: customer.email,
           subject: 'Insurance Policy has been issued',
