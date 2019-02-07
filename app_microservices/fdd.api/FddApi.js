@@ -215,6 +215,11 @@ class FddApi {
    */
   async handleDecodedEvent({ content, fields, properties }) {
     if (content.eventName === 'LogNewPolicy') {
+      const { applicationId: contractAppicationId, policyId: contractPolicyId } = content.eventArgs;
+      const { Policy } = this._db;
+      await Policy.query()
+        .update({ contractPolicyId })
+        .where({ contractAppicationId });
       this._log.info('decodedEvent', content);
     }
     this._messageBus.emit('decodedEvent', content, fields, properties);

@@ -194,9 +194,13 @@ module.exports = ({
       const transactionResult = await gif.applyForPolicy(application);
 
       const { transactionHash } = transactionResult;
-      const { applicationId } = transactionResult.events.LogNewApplication.returnValues;
+      const { applicationId: contractAppicationId } = transactionResult.events.LogNewApplication.returnValues;
 
-      await gif.applyForPolicySuccess({ policyId, contractAppicationId: applicationId });
+      await gif.applyForPolicySuccess({ policyId, contractAppicationId });
+
+      await Policy.query()
+        .update({ contractAppicationId })
+        .where('id', policyId);
 
       ctx.ok({ customerId, policyToken: policyId, txHash: transactionHash });
     } catch (error) {
