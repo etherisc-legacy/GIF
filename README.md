@@ -71,7 +71,7 @@ postgresql-service.v1.0.0 | - | - | - | -
 5. `NPM_TOKEN=<token> npm run deploy:minikube` to deploy to Minikube. To get the token sign in to npm and create token of type Publish on `https://www.npmjs.com/settings/etherisc_user/tokens/create`.
 
 #### Notes
-- By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `guest/guest`.
+- By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `admin/guest`.
 
 - `fdd.web` is available on `<minikubeip>:80`.
 
