@@ -76,6 +76,18 @@ class GIFService {
   }
 
   /**
+   * Send notifications
+   * @param {*} content
+   */
+  async setupCertificateTemplate(content) {
+    await this._amqp.publish({
+      messageType: 'pdfTemplatesUpdate',
+      messageVersion: '1.*',
+      content,
+    });
+  }
+
+  /**
    * Apply For Policy
    * @param {object} application
    * @return {Promise<*>}

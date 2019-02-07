@@ -1,4 +1,6 @@
+const fs = require('fs');
 const Web3 = require('web3');
+const _ = require('lodash');
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const EventEmitter = require('events');
 const FlightStatsClient = require('./flightstats/flightStatsClient');
@@ -108,7 +110,19 @@ class FddApi {
           events: ['policy_issued'],
         },
       ],
-      templates: [],
+      templates: [
+        {
+          name: 'policy_issued',
+          transport: 'smtp',
+          template: fs.readFileSync('./templates/policy_issued_letter.html', 'utf8'),
+        },
+      ],
+    });
+    await this._gif.setupCertificateTemplate({
+      templates: [{
+        name: 'certificate',
+        body: fs.readFileSync('./templates/policy_certificate.html', 'utf8'),
+      }],
     });
   }
 
@@ -133,15 +147,17 @@ class FddApi {
     this._log.info('certificateIssued', content);
 
     const { policyId, bucket, path } = content;
-    const { Customer, Policy } = this._db;
+    const { Customer, Policy, PolicyExtra } = this._db;
 
     const policy = await Policy.query().where('id', policyId).first();
+    const extra = await PolicyExtra.query().where('policyId', policyId)
+      .then(rows => _.fromPairs(_.map(rows, r => [r.field, r.value])));
 
     if (policy) {
       const customer = await Customer.query().where('id', policy.customerId).first();
       await this._gif.sendNotification({
         type: 'policy_issued',
-        data: { customer, policy },
+        data: { customer, policy, policyExtra: extra },
         props: {
           recipient: customer.email,
           subject: 'Insurance Policy has been issued',

@@ -58,7 +58,7 @@ class DipPdfGenerator {
    * @return {Promise<void>}
    */
   async updateTemplates({ content, fields, properties }) {
-    const { templates } = JSON.parse(content.toString());
+    const { templates } = content;
 
     for (let i = 0, l = templates.length; i < l; i += 1) {
       const tmpl = templates[i];

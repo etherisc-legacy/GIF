@@ -110,16 +110,6 @@ module.exports = ({
         email: body.email,
       };
 
-      const policy = {
-        distributorId: '11111111-1111-1111-1111-111111111111',
-        carrier: body.carrier,
-        departsAt: body.departsAt,
-        arrivesAt: body.arrivesAt,
-        origin: body.origin,
-        destination: body.destination,
-        flightNumber: body.flightNumber,
-      };
-
       const payment = {
         kind: 'fiat',
         premium: body.amount,
@@ -129,6 +119,27 @@ module.exports = ({
       };
 
       const { payouts } = body;
+
+      const policyStartDate = `${moment(Date.now()).utc().format('MMMM DD, YYYY HH:mm')} GMT (Greenwich Mean Time)`;
+      const policyExpireDate = `${moment(body.arrivesAt).utcOffset(moment.parseZone(body.arrivesAt).utcOffset()).add(24, 'hours').format('MMMM DD, YYYY HH:mm')} (local time at destination)`;
+
+      const policy = {
+        distributorId: '11111111-1111-1111-1111-111111111111',
+        carrier: body.carrier,
+        departsAt: body.departsAt,
+        arrivesAt: body.arrivesAt,
+        origin: body.origin,
+        destination: body.destination,
+        flightNumber: body.flightNumber,
+        premium: payment.premium,
+        currency: payment.currency,
+        payout3: toMoney(payouts.p3),
+        payout4: toMoney(payouts.p4),
+        payout5: toMoney(payouts.p5),
+        policyStartDate,
+        policyExpireDate,
+      };
+
 
       const { policyId, customerId } = await gif.policyCreationRequest({
         creationId: uuid(),
@@ -156,6 +167,7 @@ module.exports = ({
         });
       }
 
+
       await Policy.query().insertGraph({
         id: policyId,
         customerId,
@@ -165,11 +177,6 @@ module.exports = ({
             _.toPairs(_.omit(policy, ['distributorId'])),
             ([field, value]) => ({ field, value }),
           ),
-          { field: 'premium', value: payment.premium },
-          { field: 'currency', value: payment.currency },
-          { field: 'payout3', value: toMoney(payouts.p3) },
-          { field: 'payout4', value: toMoney(payouts.p4) },
-          { field: 'payout5', value: toMoney(payouts.p5) },
         ],
       });
 
@@ -256,8 +263,8 @@ module.exports = ({
         departsAt: extra.departsAt,
         arrivesAt: extra.arrivesAt,
       },
-      policyStartDate: policy.created, // 'February 03, 2019 15:50 GMT (Greenwich Mean Time)',
-      policyExpireDate: extra.arrivesAt, // 'February 12, 2019 08:50 (local time at destination)',
+      policyStartDate: extra.policyStartDate,
+      policyExpireDate: extra.policyExpireDate,
       premium: {
         amount: extra.premium / 100,
         currency: extra.currency,

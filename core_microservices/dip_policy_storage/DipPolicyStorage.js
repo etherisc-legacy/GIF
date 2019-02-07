@@ -214,9 +214,12 @@ class DipPolicyStorage {
    */
   async onPolicyGetMessage({ content, fields, properties }) {
     // Get models
-    const { Customer, Policy } = this._models;
+    const { Customer, Policy, PolicyExtra } = this._models;
+    const { policyId } = content;
 
-    const policy = await Policy.query().where('id', content.policyId).first();
+    const policy = await Policy.query().where('id', policyId).first();
+    const extra = await PolicyExtra.query().where('policyId', policyId)
+      .then(rows => _.fromPairs(_.map(rows, r => [r.field, r.value])));
 
     if (!policy) {
       await this._amqp.publish({
@@ -237,7 +240,7 @@ class DipPolicyStorage {
         id: policy.id,
         customerId: policy.customerId,
         distributorId: policy.distributorId,
-        extra: { ...policy.extra },
+        extra,
         customer: {
           firstname: customer.firstname,
           lastname: customer.lastname,
