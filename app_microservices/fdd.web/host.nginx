@@ -9,11 +9,11 @@ server {
   root /var/www/ui;
   index index.html;
 
-  location / {
-    try_files $uri $uri/ = 404;
-  }
-
   location /api {
     proxy_pass http://fddapi/api;
+  }
+
+  location / {
+    try_files $uri /index.html = 404;
   }
 }

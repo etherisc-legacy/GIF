@@ -111,6 +111,10 @@ class Deploy extends Command {
       '!**/node_modules/**',
     ];
 
+    if (PROD) {
+      patterns.push('!**/k8s/ganache/**');
+    }
+
     const files = await glob(patterns);
 
     const entities = {};
