@@ -1,0 +1,3886 @@
+{
+  "contractName": "IQuery",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "inputFormat",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "callbackFormat",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "description",
+          "type": "string"
+        }
+      ],
+      "name": "LogOracleTypeProposed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleTypeName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogOracleTypeActivated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleTypeName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogOracleTypeDeactivated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleTypeName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogOracleTypeRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleContract",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "description",
+          "type": "string"
+        }
+      ],
+      "name": "LogOracleProposed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "prevContract",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "nextContract",
+          "type": "address"
+        }
+      ],
+      "name": "LogOracleContractUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOracleActivated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOracleDeactivated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOracleRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "proposalId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOracleProposedToType",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "oracleTypeId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOraclePriceUpdatedInType",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "proposalId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOracleToTypeProposalRevoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOracleAssignedToOracleType",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOracleRemovedFromOracleType",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "responsibleOracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogOracleRequested",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "responseId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "responder",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "name": "LogOracleResponded",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820fbe1cb8723e0744a71944fb9641e6fd663cea9801b3564ae5d95d665cd9381320029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820fbe1cb8723e0744a71944fb9641e6fd663cea9801b3564ae5d95d665cd9381320029",
+  "sourceMap": "24:2529:35:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:2529:35;;;;;;;",
+  "deployedSourceMap": "24:2529:35:-;;;;;",
+  "source": "pragma solidity 0.5.2;\n\ninterface IQuery {\n    enum OracleTypeState {Inactive, Active}\n\n    enum OracleState {Inactive, Active}\n\n    struct OracleType {\n        string inputFormat; // e.g. '(uint256 longitude,uint256 latitude)'\n        string callbackFormat; // e.g. '(uint256 longitude,uint256 latitude)'\n        string description;\n        OracleTypeState state;\n        bool initialized;\n    }\n\n    struct Oracle {\n        address oracleOwner;\n        address oracleContract;\n        string description;\n        OracleState state;\n    }\n\n    struct OracleRequest {\n        bytes data;\n        string callbackMethodName;\n        address callbackContractAddress;\n        bytes32 oracleTypeName;\n        uint256 responsibleOracleId;\n        uint256 createdAt;\n    }\n\n    struct OracleResponse {\n        uint256 requestId;\n        address responder;\n        uint256 createdAt;\n        bool status;\n    }\n\n    /* Logs */\n    event LogOracleTypeProposed(\n        bytes32 oracleTypeName,\n        string inputFormat,\n        string callbackFormat,\n        string description\n    );\n\n    event LogOracleTypeActivated(\n        bytes32 oracleTypeName\n    );\n\n    event LogOracleTypeDeactivated(\n        bytes32 oracleTypeName\n    );\n\n    event LogOracleTypeRemoved(\n        bytes32 oracleTypeName\n    );\n\n    event LogOracleProposed(\n        address oracleContract,\n        string description\n    );\n\n    event LogOracleContractUpdated(\n        uint256 oracleId,\n        address prevContract,\n        address nextContract\n    );\n\n    event LogOracleActivated(\n        uint256 oracleId\n    );\n\n    event LogOracleDeactivated(\n        uint256 oracleId\n    );\n\n    event LogOracleRemoved(\n        uint256 oracleId\n    );\n\n    event LogOracleProposedToType(\n        bytes32 oracleTypeName,\n        uint256 oracleId,\n        uint256 proposalId\n    );\n\n    event LogOraclePriceUpdatedInType(\n        uint256 oracleId,\n        uint256 oracleTypeId,\n        uint256 price\n    );\n\n    event LogOracleToTypeProposalRevoked(\n        bytes32 oracleTypeName,\n        uint256 oracleId,\n        uint256 proposalId\n    );\n\n    event LogOracleAssignedToOracleType(\n        bytes32 oracleTypeName,\n        uint256 oracleId\n    );\n\n    event LogOracleRemovedFromOracleType(\n        bytes32 oracleTypeName,\n        uint256 oracleId\n    );\n\n    event LogOracleRequested(\n        uint256 requestId,\n        uint256 responsibleOracleId\n    );\n\n    event LogOracleResponded(\n        uint256 requestId,\n        uint256 responseId,\n        address responder,\n        bool status\n    );\n}\n",
+  "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQuery.sol",
+  "ast": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQuery.sol",
+    "exportedSymbols": {
+      "IQuery": [
+        13356
+      ]
+    },
+    "id": 13357,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13207,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:35"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 13356,
+        "linearizedBaseContracts": [
+          13356
+        ],
+        "name": "IQuery",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "IQuery.OracleTypeState",
+            "id": 13210,
+            "members": [
+              {
+                "id": 13208,
+                "name": "Inactive",
+                "nodeType": "EnumValue",
+                "src": "69:8:35"
+              },
+              {
+                "id": 13209,
+                "name": "Active",
+                "nodeType": "EnumValue",
+                "src": "79:6:35"
+              }
+            ],
+            "name": "OracleTypeState",
+            "nodeType": "EnumDefinition",
+            "src": "47:39:35"
+          },
+          {
+            "canonicalName": "IQuery.OracleState",
+            "id": 13213,
+            "members": [
+              {
+                "id": 13211,
+                "name": "Inactive",
+                "nodeType": "EnumValue",
+                "src": "110:8:35"
+              },
+              {
+                "id": 13212,
+                "name": "Active",
+                "nodeType": "EnumValue",
+                "src": "120:6:35"
+              }
+            ],
+            "name": "OracleState",
+            "nodeType": "EnumDefinition",
+            "src": "92:35:35"
+          },
+          {
+            "canonicalName": "IQuery.OracleType",
+            "id": 13224,
+            "members": [
+              {
+                "constant": false,
+                "id": 13215,
+                "name": "inputFormat",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "161:18:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13214,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "161:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13217,
+                "name": "callbackFormat",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "236:21:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13216,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "236:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13219,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "314:18:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13218,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "314:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13221,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "342:21:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_OracleTypeState_$13210",
+                  "typeString": "enum IQuery.OracleTypeState"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 13220,
+                  "name": "OracleTypeState",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 13210,
+                  "src": "342:15:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OracleTypeState_$13210",
+                    "typeString": "enum IQuery.OracleTypeState"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13223,
+                "name": "initialized",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "373:16:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 13222,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "373:4:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "OracleType",
+            "nodeType": "StructDefinition",
+            "scope": 13356,
+            "src": "133:263:35",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IQuery.Oracle",
+            "id": 13233,
+            "members": [
+              {
+                "constant": false,
+                "id": 13226,
+                "name": "oracleOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 13233,
+                "src": "426:19:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 13225,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "426:7:35",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13228,
+                "name": "oracleContract",
+                "nodeType": "VariableDeclaration",
+                "scope": 13233,
+                "src": "455:22:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 13227,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "455:7:35",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13230,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 13233,
+                "src": "487:18:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13229,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "487:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13232,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 13233,
+                "src": "515:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_OracleState_$13213",
+                  "typeString": "enum IQuery.OracleState"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 13231,
+                  "name": "OracleState",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 13213,
+                  "src": "515:11:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OracleState_$13213",
+                    "typeString": "enum IQuery.OracleState"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Oracle",
+            "nodeType": "StructDefinition",
+            "scope": 13356,
+            "src": "402:137:35",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IQuery.OracleRequest",
+            "id": 13246,
+            "members": [
+              {
+                "constant": false,
+                "id": 13235,
+                "name": "data",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "576:10:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 13234,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "576:5:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13237,
+                "name": "callbackMethodName",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "596:25:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13236,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "596:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13239,
+                "name": "callbackContractAddress",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "631:31:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 13238,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "631:7:35",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13241,
+                "name": "oracleTypeName",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "672:22:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 13240,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "672:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13243,
+                "name": "responsibleOracleId",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "704:27:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13242,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "704:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13245,
+                "name": "createdAt",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "741:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13244,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "741:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "OracleRequest",
+            "nodeType": "StructDefinition",
+            "scope": 13356,
+            "src": "545:220:35",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IQuery.OracleResponse",
+            "id": 13255,
+            "members": [
+              {
+                "constant": false,
+                "id": 13248,
+                "name": "requestId",
+                "nodeType": "VariableDeclaration",
+                "scope": 13255,
+                "src": "803:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13247,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "803:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13250,
+                "name": "responder",
+                "nodeType": "VariableDeclaration",
+                "scope": 13255,
+                "src": "830:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 13249,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "830:7:35",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13252,
+                "name": "createdAt",
+                "nodeType": "VariableDeclaration",
+                "scope": 13255,
+                "src": "857:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13251,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "857:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13254,
+                "name": "status",
+                "nodeType": "VariableDeclaration",
+                "scope": 13255,
+                "src": "884:11:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 13253,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "884:4:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "OracleResponse",
+            "nodeType": "StructDefinition",
+            "scope": 13356,
+            "src": "771:131:35",
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13265,
+            "name": "LogOracleTypeProposed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13264,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13257,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13265,
+                  "src": "960:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13256,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "960:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13259,
+                  "indexed": false,
+                  "name": "inputFormat",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13265,
+                  "src": "992:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13258,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "992:6:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13261,
+                  "indexed": false,
+                  "name": "callbackFormat",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13265,
+                  "src": "1020:21:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13260,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1020:6:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13263,
+                  "indexed": false,
+                  "name": "description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13265,
+                  "src": "1051:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13262,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1051:6:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "950:125:35"
+            },
+            "src": "923:153:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13269,
+            "name": "LogOracleTypeActivated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13268,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13267,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13269,
+                  "src": "1120:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13266,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1120:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1110:38:35"
+            },
+            "src": "1082:67:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13273,
+            "name": "LogOracleTypeDeactivated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13272,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13271,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13273,
+                  "src": "1195:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13270,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1195:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1185:38:35"
+            },
+            "src": "1155:69:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13277,
+            "name": "LogOracleTypeRemoved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13276,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13275,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13277,
+                  "src": "1266:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13274,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1266:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1256:38:35"
+            },
+            "src": "1230:65:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13283,
+            "name": "LogOracleProposed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13282,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13279,
+                  "indexed": false,
+                  "name": "oracleContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13283,
+                  "src": "1334:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13278,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1334:7:35",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13281,
+                  "indexed": false,
+                  "name": "description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13283,
+                  "src": "1366:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13280,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1366:6:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1324:66:35"
+            },
+            "src": "1301:90:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13291,
+            "name": "LogOracleContractUpdated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13290,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13285,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13291,
+                  "src": "1437:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13284,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1437:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13287,
+                  "indexed": false,
+                  "name": "prevContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13291,
+                  "src": "1463:20:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13286,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1463:7:35",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13289,
+                  "indexed": false,
+                  "name": "nextContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13291,
+                  "src": "1493:20:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13288,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1493:7:35",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1427:92:35"
+            },
+            "src": "1397:123:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13295,
+            "name": "LogOracleActivated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13294,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13293,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13295,
+                  "src": "1560:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13292,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1560:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1550:32:35"
+            },
+            "src": "1526:57:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13299,
+            "name": "LogOracleDeactivated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13298,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13297,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13299,
+                  "src": "1625:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13296,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1625:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1615:32:35"
+            },
+            "src": "1589:59:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13303,
+            "name": "LogOracleRemoved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13302,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13301,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13303,
+                  "src": "1686:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13300,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1686:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1676:32:35"
+            },
+            "src": "1654:55:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13311,
+            "name": "LogOracleProposedToType",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13310,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13305,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13311,
+                  "src": "1754:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13304,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1754:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13307,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13311,
+                  "src": "1786:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13306,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1786:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13309,
+                  "indexed": false,
+                  "name": "proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13311,
+                  "src": "1812:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13308,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1812:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1744:92:35"
+            },
+            "src": "1715:122:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13319,
+            "name": "LogOraclePriceUpdatedInType",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13318,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13313,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13319,
+                  "src": "1886:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13312,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1886:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13315,
+                  "indexed": false,
+                  "name": "oracleTypeId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13319,
+                  "src": "1912:20:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13314,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1912:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13317,
+                  "indexed": false,
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13319,
+                  "src": "1942:13:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13316,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1942:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1876:85:35"
+            },
+            "src": "1843:119:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13327,
+            "name": "LogOracleToTypeProposalRevoked",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13326,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13321,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13327,
+                  "src": "2014:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13320,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2014:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13323,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13327,
+                  "src": "2046:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13322,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2046:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13325,
+                  "indexed": false,
+                  "name": "proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13327,
+                  "src": "2072:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13324,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2072:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2004:92:35"
+            },
+            "src": "1968:129:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13333,
+            "name": "LogOracleAssignedToOracleType",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13332,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13329,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13333,
+                  "src": "2148:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13328,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2148:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13331,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13333,
+                  "src": "2180:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13330,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2180:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2138:64:35"
+            },
+            "src": "2103:100:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13339,
+            "name": "LogOracleRemovedFromOracleType",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13338,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13335,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13339,
+                  "src": "2255:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13334,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2255:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13337,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13339,
+                  "src": "2287:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13336,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2287:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2245:64:35"
+            },
+            "src": "2209:101:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13345,
+            "name": "LogOracleRequested",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13344,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13341,
+                  "indexed": false,
+                  "name": "requestId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13345,
+                  "src": "2350:17:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13340,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2350:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13343,
+                  "indexed": false,
+                  "name": "responsibleOracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13345,
+                  "src": "2377:27:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13342,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2377:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2340:70:35"
+            },
+            "src": "2316:95:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13355,
+            "name": "LogOracleResponded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13354,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13347,
+                  "indexed": false,
+                  "name": "requestId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13355,
+                  "src": "2451:17:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13346,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2451:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13349,
+                  "indexed": false,
+                  "name": "responseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13355,
+                  "src": "2478:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13348,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2478:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13351,
+                  "indexed": false,
+                  "name": "responder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13355,
+                  "src": "2506:17:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13350,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2506:7:35",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13353,
+                  "indexed": false,
+                  "name": "status",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13355,
+                  "src": "2533:11:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 13352,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2533:4:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2441:109:35"
+            },
+            "src": "2417:134:35"
+          }
+        ],
+        "scope": 13357,
+        "src": "24:2529:35"
+      }
+    ],
+    "src": "0:2554:35"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQuery.sol",
+    "exportedSymbols": {
+      "IQuery": [
+        13356
+      ]
+    },
+    "id": 13357,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13207,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:35"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 13356,
+        "linearizedBaseContracts": [
+          13356
+        ],
+        "name": "IQuery",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "IQuery.OracleTypeState",
+            "id": 13210,
+            "members": [
+              {
+                "id": 13208,
+                "name": "Inactive",
+                "nodeType": "EnumValue",
+                "src": "69:8:35"
+              },
+              {
+                "id": 13209,
+                "name": "Active",
+                "nodeType": "EnumValue",
+                "src": "79:6:35"
+              }
+            ],
+            "name": "OracleTypeState",
+            "nodeType": "EnumDefinition",
+            "src": "47:39:35"
+          },
+          {
+            "canonicalName": "IQuery.OracleState",
+            "id": 13213,
+            "members": [
+              {
+                "id": 13211,
+                "name": "Inactive",
+                "nodeType": "EnumValue",
+                "src": "110:8:35"
+              },
+              {
+                "id": 13212,
+                "name": "Active",
+                "nodeType": "EnumValue",
+                "src": "120:6:35"
+              }
+            ],
+            "name": "OracleState",
+            "nodeType": "EnumDefinition",
+            "src": "92:35:35"
+          },
+          {
+            "canonicalName": "IQuery.OracleType",
+            "id": 13224,
+            "members": [
+              {
+                "constant": false,
+                "id": 13215,
+                "name": "inputFormat",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "161:18:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13214,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "161:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13217,
+                "name": "callbackFormat",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "236:21:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13216,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "236:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13219,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "314:18:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13218,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "314:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13221,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "342:21:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_OracleTypeState_$13210",
+                  "typeString": "enum IQuery.OracleTypeState"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 13220,
+                  "name": "OracleTypeState",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 13210,
+                  "src": "342:15:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OracleTypeState_$13210",
+                    "typeString": "enum IQuery.OracleTypeState"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13223,
+                "name": "initialized",
+                "nodeType": "VariableDeclaration",
+                "scope": 13224,
+                "src": "373:16:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 13222,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "373:4:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "OracleType",
+            "nodeType": "StructDefinition",
+            "scope": 13356,
+            "src": "133:263:35",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IQuery.Oracle",
+            "id": 13233,
+            "members": [
+              {
+                "constant": false,
+                "id": 13226,
+                "name": "oracleOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 13233,
+                "src": "426:19:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 13225,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "426:7:35",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13228,
+                "name": "oracleContract",
+                "nodeType": "VariableDeclaration",
+                "scope": 13233,
+                "src": "455:22:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 13227,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "455:7:35",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13230,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 13233,
+                "src": "487:18:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13229,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "487:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13232,
+                "name": "state",
+                "nodeType": "VariableDeclaration",
+                "scope": 13233,
+                "src": "515:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_OracleState_$13213",
+                  "typeString": "enum IQuery.OracleState"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 13231,
+                  "name": "OracleState",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 13213,
+                  "src": "515:11:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OracleState_$13213",
+                    "typeString": "enum IQuery.OracleState"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Oracle",
+            "nodeType": "StructDefinition",
+            "scope": 13356,
+            "src": "402:137:35",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IQuery.OracleRequest",
+            "id": 13246,
+            "members": [
+              {
+                "constant": false,
+                "id": 13235,
+                "name": "data",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "576:10:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 13234,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "576:5:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13237,
+                "name": "callbackMethodName",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "596:25:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 13236,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "596:6:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13239,
+                "name": "callbackContractAddress",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "631:31:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 13238,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "631:7:35",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13241,
+                "name": "oracleTypeName",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "672:22:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 13240,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "672:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13243,
+                "name": "responsibleOracleId",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "704:27:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13242,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "704:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13245,
+                "name": "createdAt",
+                "nodeType": "VariableDeclaration",
+                "scope": 13246,
+                "src": "741:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13244,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "741:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "OracleRequest",
+            "nodeType": "StructDefinition",
+            "scope": 13356,
+            "src": "545:220:35",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IQuery.OracleResponse",
+            "id": 13255,
+            "members": [
+              {
+                "constant": false,
+                "id": 13248,
+                "name": "requestId",
+                "nodeType": "VariableDeclaration",
+                "scope": 13255,
+                "src": "803:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13247,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "803:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13250,
+                "name": "responder",
+                "nodeType": "VariableDeclaration",
+                "scope": 13255,
+                "src": "830:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 13249,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "830:7:35",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13252,
+                "name": "createdAt",
+                "nodeType": "VariableDeclaration",
+                "scope": 13255,
+                "src": "857:17:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 13251,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "857:7:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13254,
+                "name": "status",
+                "nodeType": "VariableDeclaration",
+                "scope": 13255,
+                "src": "884:11:35",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 13253,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "884:4:35",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "OracleResponse",
+            "nodeType": "StructDefinition",
+            "scope": 13356,
+            "src": "771:131:35",
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13265,
+            "name": "LogOracleTypeProposed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13264,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13257,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13265,
+                  "src": "960:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13256,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "960:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13259,
+                  "indexed": false,
+                  "name": "inputFormat",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13265,
+                  "src": "992:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13258,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "992:6:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13261,
+                  "indexed": false,
+                  "name": "callbackFormat",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13265,
+                  "src": "1020:21:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13260,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1020:6:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13263,
+                  "indexed": false,
+                  "name": "description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13265,
+                  "src": "1051:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13262,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1051:6:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "950:125:35"
+            },
+            "src": "923:153:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13269,
+            "name": "LogOracleTypeActivated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13268,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13267,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13269,
+                  "src": "1120:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13266,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1120:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1110:38:35"
+            },
+            "src": "1082:67:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13273,
+            "name": "LogOracleTypeDeactivated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13272,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13271,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13273,
+                  "src": "1195:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13270,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1195:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1185:38:35"
+            },
+            "src": "1155:69:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13277,
+            "name": "LogOracleTypeRemoved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13276,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13275,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13277,
+                  "src": "1266:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13274,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1266:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1256:38:35"
+            },
+            "src": "1230:65:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13283,
+            "name": "LogOracleProposed",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13282,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13279,
+                  "indexed": false,
+                  "name": "oracleContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13283,
+                  "src": "1334:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13278,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1334:7:35",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13281,
+                  "indexed": false,
+                  "name": "description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13283,
+                  "src": "1366:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13280,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1366:6:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1324:66:35"
+            },
+            "src": "1301:90:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13291,
+            "name": "LogOracleContractUpdated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13290,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13285,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13291,
+                  "src": "1437:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13284,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1437:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13287,
+                  "indexed": false,
+                  "name": "prevContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13291,
+                  "src": "1463:20:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13286,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1463:7:35",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13289,
+                  "indexed": false,
+                  "name": "nextContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13291,
+                  "src": "1493:20:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13288,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1493:7:35",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1427:92:35"
+            },
+            "src": "1397:123:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13295,
+            "name": "LogOracleActivated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13294,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13293,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13295,
+                  "src": "1560:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13292,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1560:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1550:32:35"
+            },
+            "src": "1526:57:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13299,
+            "name": "LogOracleDeactivated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13298,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13297,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13299,
+                  "src": "1625:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13296,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1625:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1615:32:35"
+            },
+            "src": "1589:59:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13303,
+            "name": "LogOracleRemoved",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13302,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13301,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13303,
+                  "src": "1686:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13300,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1686:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1676:32:35"
+            },
+            "src": "1654:55:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13311,
+            "name": "LogOracleProposedToType",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13310,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13305,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13311,
+                  "src": "1754:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13304,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1754:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13307,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13311,
+                  "src": "1786:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13306,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1786:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13309,
+                  "indexed": false,
+                  "name": "proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13311,
+                  "src": "1812:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13308,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1812:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1744:92:35"
+            },
+            "src": "1715:122:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13319,
+            "name": "LogOraclePriceUpdatedInType",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13318,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13313,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13319,
+                  "src": "1886:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13312,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1886:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13315,
+                  "indexed": false,
+                  "name": "oracleTypeId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13319,
+                  "src": "1912:20:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13314,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1912:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13317,
+                  "indexed": false,
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13319,
+                  "src": "1942:13:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13316,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1942:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1876:85:35"
+            },
+            "src": "1843:119:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13327,
+            "name": "LogOracleToTypeProposalRevoked",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13326,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13321,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13327,
+                  "src": "2014:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13320,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2014:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13323,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13327,
+                  "src": "2046:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13322,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2046:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13325,
+                  "indexed": false,
+                  "name": "proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13327,
+                  "src": "2072:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13324,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2072:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2004:92:35"
+            },
+            "src": "1968:129:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13333,
+            "name": "LogOracleAssignedToOracleType",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13332,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13329,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13333,
+                  "src": "2148:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13328,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2148:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13331,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13333,
+                  "src": "2180:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13330,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2180:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2138:64:35"
+            },
+            "src": "2103:100:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13339,
+            "name": "LogOracleRemovedFromOracleType",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13338,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13335,
+                  "indexed": false,
+                  "name": "oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13339,
+                  "src": "2255:22:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13334,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2255:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13337,
+                  "indexed": false,
+                  "name": "oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13339,
+                  "src": "2287:16:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13336,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2287:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2245:64:35"
+            },
+            "src": "2209:101:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13345,
+            "name": "LogOracleRequested",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13344,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13341,
+                  "indexed": false,
+                  "name": "requestId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13345,
+                  "src": "2350:17:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13340,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2350:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13343,
+                  "indexed": false,
+                  "name": "responsibleOracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13345,
+                  "src": "2377:27:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13342,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2377:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2340:70:35"
+            },
+            "src": "2316:95:35"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 13355,
+            "name": "LogOracleResponded",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 13354,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13347,
+                  "indexed": false,
+                  "name": "requestId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13355,
+                  "src": "2451:17:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13346,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2451:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13349,
+                  "indexed": false,
+                  "name": "responseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13355,
+                  "src": "2478:18:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13348,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2478:7:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13351,
+                  "indexed": false,
+                  "name": "responder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13355,
+                  "src": "2506:17:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13350,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2506:7:35",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13353,
+                  "indexed": false,
+                  "name": "status",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13355,
+                  "src": "2533:11:35",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 13352,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2533:4:35",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2441:109:35"
+            },
+            "src": "2417:134:35"
+          }
+        ],
+        "scope": 13357,
+        "src": "24:2529:35"
+      }
+    ],
+    "src": "0:2554:35"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-02-07T14:02:02.359Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

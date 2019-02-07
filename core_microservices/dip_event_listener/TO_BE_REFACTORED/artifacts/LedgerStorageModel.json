@@ -1,0 +1,702 @@
+{
+  "contractName": "LedgerStorageModel",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "currencyIndexes",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "currencies",
+      "outputs": [
+        {
+          "name": "code",
+          "type": "bytes32"
+        },
+        {
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "name": "erc20",
+          "type": "bool"
+        },
+        {
+          "name": "erc721",
+          "type": "bool"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "ledgerIndexes",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ledgers",
+      "outputs": [
+        {
+          "name": "premium",
+          "type": "int256"
+        },
+        {
+          "name": "riskFund",
+          "type": "int256"
+        },
+        {
+          "name": "payout",
+          "type": "int256"
+        },
+        {
+          "name": "reward",
+          "type": "int256"
+        },
+        {
+          "name": "oracleCosts",
+          "type": "int256"
+        },
+        {
+          "name": "balance",
+          "type": "int256"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50610364806100206000396000f3fe608060405234801561001057600080fd5b5060043610610069576000357c010000000000000000000000000000000000000000000000000000000090048063022f9aba1461006e578063370adc95146100b05780635e07271a146101465780636e57e87114610192575b600080fd5b61009a6004803603602081101561008457600080fd5b810190808035906020019092919050505061020c565b6040518082815260200191505060405180910390f35b6100dc600480360360208110156100c657600080fd5b810190808035906020019092919050505061022f565b604051808681526020018573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018415151515815260200183151515158152602001821515151581526020019550505050505060405180910390f35b61017c6004803603604081101561015c57600080fd5b8101908080359060200190929190803590602001909291905050506102ac565b6040518082815260200191505060405180910390f35b6101c8600480360360408110156101a857600080fd5b8101908080359060200190929190803590602001909291905050506102dc565b604051808881526020018781526020018681526020018581526020018481526020018381526020018215151515815260200197505050505050505060405180910390f35b60018181548110151561021b57fe5b906000526020600020016000915090505481565b60006020528060005260406000206000915090508060000154908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160149054906101000a900460ff16908060010160159054906101000a900460ff16908060010160169054906101000a900460ff16905085565b6003602052816000526040600020818154811015156102c757fe5b90600052602060002001600091509150505481565b6002602052816000526040600020602052806000526040600020600091509150508060000154908060010154908060020154908060030154908060040154908060050154908060060160009054906101000a900460ff1690508756fea165627a7a72305820334650a5cda7864376c3c8916130fc97c4bb4f7e81a1271e5c2410b4d6bc29290029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610069576000357c010000000000000000000000000000000000000000000000000000000090048063022f9aba1461006e578063370adc95146100b05780635e07271a146101465780636e57e87114610192575b600080fd5b61009a6004803603602081101561008457600080fd5b810190808035906020019092919050505061020c565b6040518082815260200191505060405180910390f35b6100dc600480360360208110156100c657600080fd5b810190808035906020019092919050505061022f565b604051808681526020018573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018415151515815260200183151515158152602001821515151581526020019550505050505060405180910390f35b61017c6004803603604081101561015c57600080fd5b8101908080359060200190929190803590602001909291905050506102ac565b6040518082815260200191505060405180910390f35b6101c8600480360360408110156101a857600080fd5b8101908080359060200190929190803590602001909291905050506102dc565b604051808881526020018781526020018681526020018581526020018481526020018381526020018215151515815260200197505050505050505060405180910390f35b60018181548110151561021b57fe5b906000526020600020016000915090505481565b60006020528060005260406000206000915090508060000154908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160149054906101000a900460ff16908060010160159054906101000a900460ff16908060010160169054906101000a900460ff16905085565b6003602052816000526040600020818154811015156102c757fe5b90600052602060002001600091509150505481565b6002602052816000526040600020602052806000526040600020600091509150508060000154908060010154908060020154908060030154908060040154908060050154908060060160009054906101000a900460ff1690508756fea165627a7a72305820334650a5cda7864376c3c8916130fc97c4bb4f7e81a1271e5c2410b4d6bc29290029",
+  "sourceMap": "49:256:21:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:256:21;;;;;;;",
+  "deployedSourceMap": "49:256:21:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:256:21;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;146:32;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;146:32:21;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;94:46;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;94:46:21;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;252:50;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;252:50:21;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;185:61;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;185:61:21;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;146:32;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;94:46::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;252:50::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;185:61::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity 0.5.2;\n\nimport \"./ILedger.sol\";\n\ncontract LedgerStorageModel is ILedger {\n    mapping(bytes32 => Currency) public currencies;\n    bytes32[] public currencyIndexes;\n\n    mapping(uint256 => mapping(bytes32 => Ledger)) public ledgers;\n    mapping(uint256 => bytes32[]) public ledgerIndexes;\n}\n",
+  "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/ledger/LedgerStorageModel.sol",
+  "ast": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/ledger/LedgerStorageModel.sol",
+    "exportedSymbols": {
+      "LedgerStorageModel": [
+        11189
+      ]
+    },
+    "id": 11190,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11167,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:21"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/ledger/ILedger.sol",
+        "file": "./ILedger.sol",
+        "id": 11168,
+        "nodeType": "ImportDirective",
+        "scope": 11190,
+        "sourceUnit": 11118,
+        "src": "24:23:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 11169,
+              "name": "ILedger",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11117,
+              "src": "80:7:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ILedger_$11117",
+                "typeString": "contract ILedger"
+              }
+            },
+            "id": 11170,
+            "nodeType": "InheritanceSpecifier",
+            "src": "80:7:21"
+          }
+        ],
+        "contractDependencies": [
+          11117
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 11189,
+        "linearizedBaseContracts": [
+          11189,
+          11117
+        ],
+        "name": "LedgerStorageModel",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 11174,
+            "name": "currencies",
+            "nodeType": "VariableDeclaration",
+            "scope": 11189,
+            "src": "94:46:21",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Currency_$11116_storage_$",
+              "typeString": "mapping(bytes32 => struct ILedger.Currency)"
+            },
+            "typeName": {
+              "id": 11173,
+              "keyType": {
+                "id": 11171,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "102:7:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "94:28:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Currency_$11116_storage_$",
+                "typeString": "mapping(bytes32 => struct ILedger.Currency)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 11172,
+                "name": "Currency",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 11116,
+                "src": "113:8:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Currency_$11116_storage_ptr",
+                  "typeString": "struct ILedger.Currency"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11177,
+            "name": "currencyIndexes",
+            "nodeType": "VariableDeclaration",
+            "scope": 11189,
+            "src": "146:32:21",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_bytes32_$dyn_storage",
+              "typeString": "bytes32[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 11175,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "146:7:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "id": 11176,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "146:9:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                "typeString": "bytes32[]"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11183,
+            "name": "ledgers",
+            "nodeType": "VariableDeclaration",
+            "scope": 11189,
+            "src": "185:61:21",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_bytes32_$_t_struct$_Ledger_$11105_storage_$_$",
+              "typeString": "mapping(uint256 => mapping(bytes32 => struct ILedger.Ledger))"
+            },
+            "typeName": {
+              "id": 11182,
+              "keyType": {
+                "id": 11178,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "193:7:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "185:46:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_bytes32_$_t_struct$_Ledger_$11105_storage_$_$",
+                "typeString": "mapping(uint256 => mapping(bytes32 => struct ILedger.Ledger))"
+              },
+              "valueType": {
+                "id": 11181,
+                "keyType": {
+                  "id": 11179,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "212:7:21",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "204:26:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Ledger_$11105_storage_$",
+                  "typeString": "mapping(bytes32 => struct ILedger.Ledger)"
+                },
+                "valueType": {
+                  "contractScope": null,
+                  "id": 11180,
+                  "name": "Ledger",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 11105,
+                  "src": "223:6:21",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Ledger_$11105_storage_ptr",
+                    "typeString": "struct ILedger.Ledger"
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11188,
+            "name": "ledgerIndexes",
+            "nodeType": "VariableDeclaration",
+            "scope": 11189,
+            "src": "252:50:21",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_bytes32_$dyn_storage_$",
+              "typeString": "mapping(uint256 => bytes32[])"
+            },
+            "typeName": {
+              "id": 11187,
+              "keyType": {
+                "id": 11184,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "260:7:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "252:29:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_bytes32_$dyn_storage_$",
+                "typeString": "mapping(uint256 => bytes32[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "id": 11185,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "271:7:21",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "id": 11186,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "271:9:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                  "typeString": "bytes32[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 11190,
+        "src": "49:256:21"
+      }
+    ],
+    "src": "0:306:21"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/ledger/LedgerStorageModel.sol",
+    "exportedSymbols": {
+      "LedgerStorageModel": [
+        11189
+      ]
+    },
+    "id": 11190,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11167,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:21"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/ledger/ILedger.sol",
+        "file": "./ILedger.sol",
+        "id": 11168,
+        "nodeType": "ImportDirective",
+        "scope": 11190,
+        "sourceUnit": 11118,
+        "src": "24:23:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 11169,
+              "name": "ILedger",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11117,
+              "src": "80:7:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ILedger_$11117",
+                "typeString": "contract ILedger"
+              }
+            },
+            "id": 11170,
+            "nodeType": "InheritanceSpecifier",
+            "src": "80:7:21"
+          }
+        ],
+        "contractDependencies": [
+          11117
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 11189,
+        "linearizedBaseContracts": [
+          11189,
+          11117
+        ],
+        "name": "LedgerStorageModel",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 11174,
+            "name": "currencies",
+            "nodeType": "VariableDeclaration",
+            "scope": 11189,
+            "src": "94:46:21",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Currency_$11116_storage_$",
+              "typeString": "mapping(bytes32 => struct ILedger.Currency)"
+            },
+            "typeName": {
+              "id": 11173,
+              "keyType": {
+                "id": 11171,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "102:7:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "94:28:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Currency_$11116_storage_$",
+                "typeString": "mapping(bytes32 => struct ILedger.Currency)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 11172,
+                "name": "Currency",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 11116,
+                "src": "113:8:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Currency_$11116_storage_ptr",
+                  "typeString": "struct ILedger.Currency"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11177,
+            "name": "currencyIndexes",
+            "nodeType": "VariableDeclaration",
+            "scope": 11189,
+            "src": "146:32:21",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_bytes32_$dyn_storage",
+              "typeString": "bytes32[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 11175,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "146:7:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "id": 11176,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "146:9:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                "typeString": "bytes32[]"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11183,
+            "name": "ledgers",
+            "nodeType": "VariableDeclaration",
+            "scope": 11189,
+            "src": "185:61:21",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_bytes32_$_t_struct$_Ledger_$11105_storage_$_$",
+              "typeString": "mapping(uint256 => mapping(bytes32 => struct ILedger.Ledger))"
+            },
+            "typeName": {
+              "id": 11182,
+              "keyType": {
+                "id": 11178,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "193:7:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "185:46:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_bytes32_$_t_struct$_Ledger_$11105_storage_$_$",
+                "typeString": "mapping(uint256 => mapping(bytes32 => struct ILedger.Ledger))"
+              },
+              "valueType": {
+                "id": 11181,
+                "keyType": {
+                  "id": 11179,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "212:7:21",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "204:26:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Ledger_$11105_storage_$",
+                  "typeString": "mapping(bytes32 => struct ILedger.Ledger)"
+                },
+                "valueType": {
+                  "contractScope": null,
+                  "id": 11180,
+                  "name": "Ledger",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 11105,
+                  "src": "223:6:21",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Ledger_$11105_storage_ptr",
+                    "typeString": "struct ILedger.Ledger"
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 11188,
+            "name": "ledgerIndexes",
+            "nodeType": "VariableDeclaration",
+            "scope": 11189,
+            "src": "252:50:21",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_bytes32_$dyn_storage_$",
+              "typeString": "mapping(uint256 => bytes32[])"
+            },
+            "typeName": {
+              "id": 11187,
+              "keyType": {
+                "id": 11184,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "260:7:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "252:29:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_bytes32_$dyn_storage_$",
+                "typeString": "mapping(uint256 => bytes32[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "id": 11185,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "271:7:21",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "id": 11186,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "271:9:21",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                  "typeString": "bytes32[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 11190,
+        "src": "49:256:21"
+      }
+    ],
+    "src": "0:306:21"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-02-07T14:02:02.345Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

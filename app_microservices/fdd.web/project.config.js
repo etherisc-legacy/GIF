@@ -5,7 +5,7 @@ const USE_CUSTOMIZATION_CONFIG = true; // process.env.USE_CUSTOMIZATION_CONFIG =
 let {
   FD_ADDRESS_RESOLVER_DEV='0xD6fe6b2A3733548Ca6dB41CA7F85268312dEcB2A',
   STRIPE_PKEY,
-  CHAIN = 'kovan',
+  CHAIN = 'rinkeby',
 } = process.env;
 
 /**
@@ -15,6 +15,7 @@ let {
 const getNetworkId = (networkLabel) => {
   if (networkLabel === 'mainnet') return '1';
   if (networkLabel === 'ropsten') return '3';
+  if (networkLabel === 'rinkeby') return '4';
   if (networkLabel === 'kovan') return '42';
 
   throw new Error('Unknown network label');

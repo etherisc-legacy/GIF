@@ -1,0 +1,386 @@
+{
+  "contractName": "BaseModuleController",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "delegator",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060e38061001f6000396000f3fe6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063ce9b793014604a575b600080fd5b60506092565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea165627a7a72305820e24744b33a086da37e9540dbb292c155724c3288bfe95493b339809c69d6e0b10029",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063ce9b793014604a575b600080fd5b60506092565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea165627a7a72305820e24744b33a086da37e9540dbb292c155724c3288bfe95493b339809c69d6e0b10029",
+  "sourceMap": "24:157:59:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:157:59;;;;;;;",
+  "deployedSourceMap": "24:157:59:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:157:59;;;;;;;;;;;;;;;;;;;;60:24;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity 0.5.2;\n\ncontract BaseModuleController {\n    address public delegator;\n\n    function _assignStorage(address _storage) internal {\n        delegator = _storage;\n    }\n}\n",
+  "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/BaseModuleController.sol",
+  "ast": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/BaseModuleController.sol",
+    "exportedSymbols": {
+      "BaseModuleController": [
+        16198
+      ]
+    },
+    "id": 16199,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 16185,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:59"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 16198,
+        "linearizedBaseContracts": [
+          16198
+        ],
+        "name": "BaseModuleController",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 16187,
+            "name": "delegator",
+            "nodeType": "VariableDeclaration",
+            "scope": 16198,
+            "src": "60:24:59",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 16186,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "60:7:59",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 16196,
+              "nodeType": "Block",
+              "src": "142:37:59",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 16194,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 16192,
+                      "name": "delegator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16187,
+                      "src": "152:9:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 16193,
+                      "name": "_storage",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16189,
+                      "src": "164:8:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "152:20:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 16195,
+                  "nodeType": "ExpressionStatement",
+                  "src": "152:20:59"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 16197,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_assignStorage",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 16190,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16189,
+                  "name": "_storage",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 16197,
+                  "src": "115:16:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16188,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "115:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "114:18:59"
+            },
+            "returnParameters": {
+              "id": 16191,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "142:0:59"
+            },
+            "scope": 16198,
+            "src": "91:88:59",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 16199,
+        "src": "24:157:59"
+      }
+    ],
+    "src": "0:182:59"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/BaseModuleController.sol",
+    "exportedSymbols": {
+      "BaseModuleController": [
+        16198
+      ]
+    },
+    "id": 16199,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 16185,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:59"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 16198,
+        "linearizedBaseContracts": [
+          16198
+        ],
+        "name": "BaseModuleController",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 16187,
+            "name": "delegator",
+            "nodeType": "VariableDeclaration",
+            "scope": 16198,
+            "src": "60:24:59",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 16186,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "60:7:59",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 16196,
+              "nodeType": "Block",
+              "src": "142:37:59",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 16194,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 16192,
+                      "name": "delegator",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16187,
+                      "src": "152:9:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 16193,
+                      "name": "_storage",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 16189,
+                      "src": "164:8:59",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "152:20:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 16195,
+                  "nodeType": "ExpressionStatement",
+                  "src": "152:20:59"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 16197,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_assignStorage",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 16190,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16189,
+                  "name": "_storage",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 16197,
+                  "src": "115:16:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16188,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "115:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "114:18:59"
+            },
+            "returnParameters": {
+              "id": 16191,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "142:0:59"
+            },
+            "scope": 16198,
+            "src": "91:88:59",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 16199,
+        "src": "24:157:59"
+      }
+    ],
+    "src": "0:182:59"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-02-07T14:02:02.380Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

@@ -30,7 +30,8 @@ interface IPolicy {
     event LogNewPolicy(
         uint256 productId,
         uint256 metadataId,
-        uint256 policyId
+        uint256 policyId,
+        uint256 applicationId
     );
 
     event LogPolicyStateChanged(

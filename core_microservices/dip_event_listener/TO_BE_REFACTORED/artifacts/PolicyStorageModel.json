@@ -1,0 +1,1261 @@
+{
+  "contractName": "PolicyStorageModel",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "payouts",
+      "outputs": [
+        {
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "name": "claimId",
+          "type": "uint256"
+        },
+        {
+          "name": "expectedAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "actualAmount",
+          "type": "uint256"
+        },
+        {
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "name": "stateMessage",
+          "type": "bytes32"
+        },
+        {
+          "name": "createdAt",
+          "type": "uint256"
+        },
+        {
+          "name": "updatedAt",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "applications",
+      "outputs": [
+        {
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "name": "customerExternalId",
+          "type": "bytes32"
+        },
+        {
+          "name": "premium",
+          "type": "uint256"
+        },
+        {
+          "name": "currency",
+          "type": "bytes32"
+        },
+        {
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "name": "stateMessage",
+          "type": "bytes32"
+        },
+        {
+          "name": "createdAt",
+          "type": "uint256"
+        },
+        {
+          "name": "updatedAt",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "metadata",
+      "outputs": [
+        {
+          "name": "applicationId",
+          "type": "uint256"
+        },
+        {
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "name": "hasPolicy",
+          "type": "bool"
+        },
+        {
+          "name": "hasApplication",
+          "type": "bool"
+        },
+        {
+          "name": "tokenContract",
+          "type": "address"
+        },
+        {
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "name": "registryContract",
+          "type": "uint256"
+        },
+        {
+          "name": "release",
+          "type": "uint256"
+        },
+        {
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "name": "stateMessage",
+          "type": "bytes32"
+        },
+        {
+          "name": "createdAt",
+          "type": "uint256"
+        },
+        {
+          "name": "updatedAt",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "policies",
+      "outputs": [
+        {
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "name": "stateMessage",
+          "type": "bytes32"
+        },
+        {
+          "name": "createdAt",
+          "type": "uint256"
+        },
+        {
+          "name": "updatedAt",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "claims",
+      "outputs": [
+        {
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "name": "data",
+          "type": "bytes32"
+        },
+        {
+          "name": "state",
+          "type": "uint8"
+        },
+        {
+          "name": "stateMessage",
+          "type": "bytes32"
+        },
+        {
+          "name": "createdAt",
+          "type": "uint256"
+        },
+        {
+          "name": "updatedAt",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogNewMetadata",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogMetadataStateChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "applicationId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogNewApplication",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "applicationId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogApplicationStateChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "applicationId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogNewPolicy",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogPolicyStateChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogNewClaim",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogClaimStateChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "claimId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogNewPayout",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "claimId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogPayoutStateChanged",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506105f2806100206000396000f3fe608060405234801561001057600080fd5b5060043610610074576000357c010000000000000000000000000000000000000000000000000000000090048063304de873146100795780637a870b6314610104578063a0b7992b1461018f578063c2a0fa481461026a578063f894160e146102e0575b600080fd5b6100af6004803603604081101561008f57600080fd5b81019080803590602001909291908035906020019092919050505061035d565b604051808981526020018881526020018781526020018681526020018560018111156100d757fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b61013a6004803603604081101561011a57600080fd5b8101908080359060200190929190803590602001909291905050506103ce565b6040518089815260200188815260200187815260200186815260200185600381111561016257fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b6101c5600480360360408110156101a557600080fd5b81019080803590602001909291908035906020019092919050505061043f565b604051808d81526020018c81526020018b1515151581526020018a1515151581526020018973ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200188815260200187815260200186815260200185600281111561023957fe5b60ff1681526020018481526020018381526020018281526020019c5050505050505050505050505060405180910390f35b6102a06004803603604081101561028057600080fd5b810190808035906020019092919080359060200190929190505050610502565b604051808681526020018560018111156102b657fe5b60ff1681526020018481526020018381526020018281526020019550505050505060405180910390f35b610316600480360360408110156102f657600080fd5b810190808035906020019092919080359060200190929190505050610561565b6040518087815260200186815260200185600281111561033257fe5b60ff168152602001848152602001838152602001828152602001965050505050505060405180910390f35b60046020528160005260406000208181548110151561037857fe5b9060005260206000209060080201600091509150508060000154908060010154908060020154908060030154908060040160009054906101000a900460ff16908060050154908060060154908060070154905088565b6001602052816000526040600020818154811015156103e957fe5b9060005260206000209060090201600091509150508060000154908060010154908060020154908060030154908060050160009054906101000a900460ff16908060060154908060070154908060080154905088565b60006020528160005260406000208181548110151561045a57fe5b90600052602060002090600c0201600091509150508060000154908060010154908060040160009054906101000a900460ff16908060040160019054906101000a900460ff16908060040160029054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060050154908060060154908060070154908060080160009054906101000a900460ff169080600901549080600a01549080600b015490508c565b60026020528160005260406000208181548110151561051d57fe5b9060005260206000209060050201600091509150508060000154908060010160009054906101000a900460ff16908060020154908060030154908060040154905085565b60036020528160005260406000208181548110151561057c57fe5b9060005260206000209060060201600091509150508060000154908060010154908060020160009054906101000a900460ff1690806003015490806004015490806005015490508656fea165627a7a723058203ea9542997f98b3525898b80b6df9ff6cca18ee2630d12e0f9b277685d42ea050029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610074576000357c010000000000000000000000000000000000000000000000000000000090048063304de873146100795780637a870b6314610104578063a0b7992b1461018f578063c2a0fa481461026a578063f894160e146102e0575b600080fd5b6100af6004803603604081101561008f57600080fd5b81019080803590602001909291908035906020019092919050505061035d565b604051808981526020018881526020018781526020018681526020018560018111156100d757fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b61013a6004803603604081101561011a57600080fd5b8101908080359060200190929190803590602001909291905050506103ce565b6040518089815260200188815260200187815260200186815260200185600381111561016257fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b6101c5600480360360408110156101a557600080fd5b81019080803590602001909291908035906020019092919050505061043f565b604051808d81526020018c81526020018b1515151581526020018a1515151581526020018973ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200188815260200187815260200186815260200185600281111561023957fe5b60ff1681526020018481526020018381526020018281526020019c5050505050505050505050505060405180910390f35b6102a06004803603604081101561028057600080fd5b810190808035906020019092919080359060200190929190505050610502565b604051808681526020018560018111156102b657fe5b60ff1681526020018481526020018381526020018281526020019550505050505060405180910390f35b610316600480360360408110156102f657600080fd5b810190808035906020019092919080359060200190929190505050610561565b6040518087815260200186815260200185600281111561033257fe5b60ff168152602001848152602001838152602001828152602001965050505050505060405180910390f35b60046020528160005260406000208181548110151561037857fe5b9060005260206000209060080201600091509150508060000154908060010154908060020154908060030154908060040160009054906101000a900460ff16908060050154908060060154908060070154905088565b6001602052816000526040600020818154811015156103e957fe5b9060005260206000209060090201600091509150508060000154908060010154908060020154908060030154908060050160009054906101000a900460ff16908060060154908060070154908060080154905088565b60006020528160005260406000208181548110151561045a57fe5b90600052602060002090600c0201600091509150508060000154908060010154908060040160009054906101000a900460ff16908060040160019054906101000a900460ff16908060040160029054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060050154908060060154908060070154908060080160009054906101000a900460ff169080600901549080600a01549080600b015490508c565b60026020528160005260406000208181548110151561051d57fe5b9060005260206000209060050201600091509150508060000154908060010160009054906101000a900460ff16908060020154908060030154908060040154905085565b60036020528160005260406000208181548110151561057c57fe5b9060005260206000209060060201600091509150508060000154908060010154908060020160009054906101000a900460ff1690806003015490806004015490806005015490508656fea165627a7a723058203ea9542997f98b3525898b80b6df9ff6cca18ee2630d12e0f9b277685d42ea050029",
+  "sourceMap": "49:303:33:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:303:33;;;;;;;",
+  "deployedSourceMap": "49:303:33:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:303:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;306:43;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;306:43:33;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;147:53;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;147:53:33;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;94:46;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;94:46:33;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;207:44;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;207:44:33;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;258:41;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;258:41:33;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;306:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;147:53::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;94:46::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;207:44::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;258:41::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity 0.5.2;\n\nimport \"./IPolicy.sol\";\n\ncontract PolicyStorageModel is IPolicy {\n    mapping(uint256 => Metadata[]) public metadata;\n\n    mapping(uint256 => Application[]) public applications;\n\n    mapping(uint256 => Policy[]) public policies;\n\n    mapping(uint256 => Claim[]) public claims;\n\n    mapping(uint256 => Payout[]) public payouts;\n}\n",
+  "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/PolicyStorageModel.sol",
+  "ast": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/PolicyStorageModel.sol",
+    "exportedSymbols": {
+      "PolicyStorageModel": [
+        13202
+      ]
+    },
+    "id": 13203,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13173,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:33"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/IPolicy.sol",
+        "file": "./IPolicy.sol",
+        "id": 13174,
+        "nodeType": "ImportDirective",
+        "scope": 13203,
+        "sourceUnit": 12057,
+        "src": "24:23:33",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 13175,
+              "name": "IPolicy",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 12056,
+              "src": "80:7:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IPolicy_$12056",
+                "typeString": "contract IPolicy"
+              }
+            },
+            "id": 13176,
+            "nodeType": "InheritanceSpecifier",
+            "src": "80:7:33"
+          }
+        ],
+        "contractDependencies": [
+          12056
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 13202,
+        "linearizedBaseContracts": [
+          13202,
+          12056
+        ],
+        "name": "PolicyStorageModel",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 13181,
+            "name": "metadata",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "94:46:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$11994_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
+            },
+            "typeName": {
+              "id": 13180,
+              "keyType": {
+                "id": 13177,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "102:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "94:30:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$11994_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13178,
+                  "name": "Metadata",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 11994,
+                  "src": "113:8:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Metadata_$11994_storage_ptr",
+                    "typeString": "struct IPolicy.Metadata"
+                  }
+                },
+                "id": 13179,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "113:10:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Metadata_$11994_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Metadata[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 13186,
+            "name": "applications",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "147:53:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12014_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Application[])"
+            },
+            "typeName": {
+              "id": 13185,
+              "keyType": {
+                "id": 13182,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "155:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "147:33:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12014_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Application[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13183,
+                  "name": "Application",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 12014,
+                  "src": "166:11:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Application_$12014_storage_ptr",
+                    "typeString": "struct IPolicy.Application"
+                  }
+                },
+                "id": 13184,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "166:13:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Application_$12014_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Application[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 13191,
+            "name": "policies",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "207:44:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12025_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
+            },
+            "typeName": {
+              "id": 13190,
+              "keyType": {
+                "id": 13187,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "215:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "207:28:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12025_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13188,
+                  "name": "Policy",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 12025,
+                  "src": "226:6:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Policy_$12025_storage_ptr",
+                    "typeString": "struct IPolicy.Policy"
+                  }
+                },
+                "id": 13189,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "226:8:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Policy_$12025_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Policy[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 13196,
+            "name": "claims",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "258:41:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12038_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
+            },
+            "typeName": {
+              "id": 13195,
+              "keyType": {
+                "id": 13192,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "266:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "258:27:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12038_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13193,
+                  "name": "Claim",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 12038,
+                  "src": "277:5:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Claim_$12038_storage_ptr",
+                    "typeString": "struct IPolicy.Claim"
+                  }
+                },
+                "id": 13194,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "277:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Claim_$12038_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Claim[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 13201,
+            "name": "payouts",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "306:43:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12055_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
+            },
+            "typeName": {
+              "id": 13200,
+              "keyType": {
+                "id": 13197,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "314:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "306:28:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12055_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13198,
+                  "name": "Payout",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 12055,
+                  "src": "325:6:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Payout_$12055_storage_ptr",
+                    "typeString": "struct IPolicy.Payout"
+                  }
+                },
+                "id": 13199,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "325:8:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Payout_$12055_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Payout[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 13203,
+        "src": "49:303:33"
+      }
+    ],
+    "src": "0:353:33"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/PolicyStorageModel.sol",
+    "exportedSymbols": {
+      "PolicyStorageModel": [
+        13202
+      ]
+    },
+    "id": 13203,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13173,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:33"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/IPolicy.sol",
+        "file": "./IPolicy.sol",
+        "id": 13174,
+        "nodeType": "ImportDirective",
+        "scope": 13203,
+        "sourceUnit": 12057,
+        "src": "24:23:33",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 13175,
+              "name": "IPolicy",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 12056,
+              "src": "80:7:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IPolicy_$12056",
+                "typeString": "contract IPolicy"
+              }
+            },
+            "id": 13176,
+            "nodeType": "InheritanceSpecifier",
+            "src": "80:7:33"
+          }
+        ],
+        "contractDependencies": [
+          12056
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 13202,
+        "linearizedBaseContracts": [
+          13202,
+          12056
+        ],
+        "name": "PolicyStorageModel",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 13181,
+            "name": "metadata",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "94:46:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$11994_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
+            },
+            "typeName": {
+              "id": 13180,
+              "keyType": {
+                "id": 13177,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "102:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "94:30:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$11994_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13178,
+                  "name": "Metadata",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 11994,
+                  "src": "113:8:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Metadata_$11994_storage_ptr",
+                    "typeString": "struct IPolicy.Metadata"
+                  }
+                },
+                "id": 13179,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "113:10:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Metadata_$11994_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Metadata[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 13186,
+            "name": "applications",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "147:53:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12014_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Application[])"
+            },
+            "typeName": {
+              "id": 13185,
+              "keyType": {
+                "id": 13182,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "155:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "147:33:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12014_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Application[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13183,
+                  "name": "Application",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 12014,
+                  "src": "166:11:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Application_$12014_storage_ptr",
+                    "typeString": "struct IPolicy.Application"
+                  }
+                },
+                "id": 13184,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "166:13:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Application_$12014_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Application[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 13191,
+            "name": "policies",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "207:44:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12025_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
+            },
+            "typeName": {
+              "id": 13190,
+              "keyType": {
+                "id": 13187,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "215:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "207:28:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12025_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13188,
+                  "name": "Policy",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 12025,
+                  "src": "226:6:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Policy_$12025_storage_ptr",
+                    "typeString": "struct IPolicy.Policy"
+                  }
+                },
+                "id": 13189,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "226:8:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Policy_$12025_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Policy[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 13196,
+            "name": "claims",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "258:41:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12038_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
+            },
+            "typeName": {
+              "id": 13195,
+              "keyType": {
+                "id": 13192,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "266:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "258:27:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12038_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13193,
+                  "name": "Claim",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 12038,
+                  "src": "277:5:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Claim_$12038_storage_ptr",
+                    "typeString": "struct IPolicy.Claim"
+                  }
+                },
+                "id": 13194,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "277:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Claim_$12038_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Claim[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 13201,
+            "name": "payouts",
+            "nodeType": "VariableDeclaration",
+            "scope": 13202,
+            "src": "306:43:33",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12055_storage_$dyn_storage_$",
+              "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
+            },
+            "typeName": {
+              "id": 13200,
+              "keyType": {
+                "id": 13197,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "314:7:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "306:28:33",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12055_storage_$dyn_storage_$",
+                "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "contractScope": null,
+                  "id": 13198,
+                  "name": "Payout",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 12055,
+                  "src": "325:6:33",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Payout_$12055_storage_ptr",
+                    "typeString": "struct IPolicy.Payout"
+                  }
+                },
+                "id": 13199,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "325:8:33",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_Payout_$12055_storage_$dyn_storage_ptr",
+                  "typeString": "struct IPolicy.Payout[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 13203,
+        "src": "49:303:33"
+      }
+    ],
+    "src": "0:353:33"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-02-07T14:02:02.359Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

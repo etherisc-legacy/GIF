@@ -8,13 +8,10 @@ const models = require('./models/module');
 const artifacts = require('./FlightDelayOraclize.json');
 
 
-const MNEMONIC = 'salt spring grid similar fly damage sad taxi fan decline vital mention moon upgrade coyote';
-const CONTRACT = '0x077d59D10A2b4bED6640f8dAe71fF8afF4636F0E';
-const ACCOUNT = '0xad1Ef51c732746c0F71DdA1420590acbc5B03C8f';
-const HTTP_PROVIDER = 'https://kovan.infura.io/1reQ7FJQ1zs0QGExhlZ8';
-const WS_PROVIDER = 'wss://kovan.infura.io/ws';
-
-const watcher = new Web3(new Web3.providers.WebsocketProvider(WS_PROVIDER));
+const MNEMONIC = 'way web chapter satisfy solid future avoid push insane viable dizzy conduct fork fantasy asthma';
+const CONTRACT = '0xbE5CcF932177F4Bf1FDE7385A85e1e05C293d26A';
+const ACCOUNT = '0x5E391721c8f61C4F1E58A74d1a2f02428e922CDE';
+const HTTP_PROVIDER = 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
 const signer = new Web3(new HDWalletProvider(MNEMONIC, HTTP_PROVIDER));
 
 
@@ -39,6 +36,7 @@ class FddApi {
 
     this._contract = new signer.eth.Contract(artifacts.abi, CONTRACT, {
       gasPrice: 10 * (10 ** 9),
+      gas: 3000000,
       from: ACCOUNT,
     });
 
@@ -64,15 +62,6 @@ class FddApi {
    * @return {void}
    */
   async bootstrap() {
-    watcher.eth.subscribe('logs', { address: [CONTRACT] }, (e) => {
-      if (!e) {
-        return;
-      }
-      this._log.info(e);
-    })
-      .on('data', log => this._log.info(log))
-      .on('error', e => this._log.error(e));
-
     await this._amqp.consume({
       messageType: 'stateChanged',
       messageVersion: '1.*',
@@ -97,6 +86,11 @@ class FddApi {
       messageType: 'policyGetResponse',
       messageVersion: '1.*',
       handler: this.policyGetResponse.bind(this),
+    });
+    await this._amqp.consume({
+      messageType: 'decodedEvent',
+      messageVersion: '1.*',
+      handler: this.handleDecodedEvent.bind(this),
     });
 
     await new Promise(resolve => setTimeout(resolve, 20 * 1000));
@@ -195,6 +189,19 @@ class FddApi {
   async policyGetResponse({ content, fields, properties }) {
     this._log.info('policyGetResponse', content);
     this._messageBus.emit('policyGetResponse', content, fields, properties);
+  }
+
+  /**
+   * get policy response
+   * @param {{}} content
+   * @param {{}} fields
+   * @param {{}} properties
+   */
+  async handleDecodedEvent({ content, fields, properties }) {
+    if (content.eventName === 'LogNewPolicy') {
+      this._log.info('decodedEvent', content);
+    }
+    this._messageBus.emit('decodedEvent', content, fields, properties);
   }
 }
 

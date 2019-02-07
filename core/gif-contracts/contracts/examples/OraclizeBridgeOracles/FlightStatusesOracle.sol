@@ -35,7 +35,7 @@ contract FlightStatusesOracle is Oracle, usingOraclize {
     string constant ORACLIZE_STATUS_BASE_URL = "[URL] json(https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/";
     string constant ORACLIZE_STATUS_QUERY = "utc=true).flightStatuses[0]['status','delays','operationalTimes']";
 
-    uint256 public oraclizeGas = 1000000;
+    uint256 public oraclizeGas = 1500000;
 
     mapping(bytes32 => uint256) public requests;
 

@@ -7,9 +7,9 @@ module.exports = async (deployer) => {
   const productService = await ProductService.deployed();
   const daoService = await DAOService.deployed();
 
-  await deployer.deploy(FlightDelayManual, productService.address);
+  await deployer.deploy(FlightDelayManual, productService.address, { gas: 3000000 });
   const registrationId = 0;
 
   // Approve insurance product
-  await daoService.approveRegistration(registrationId);
+  await daoService.approveRegistration(registrationId, { gas: 200000 });
 };

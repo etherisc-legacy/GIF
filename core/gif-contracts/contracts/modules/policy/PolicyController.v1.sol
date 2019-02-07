@@ -112,7 +112,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         metadatum.hasPolicy = true;
         metadatum.updatedAt = block.timestamp;
 
-        emit LogNewPolicy(_productId, _metadataId, _policyId);
+        emit LogNewPolicy(_productId, _metadataId, _policyId, metadatum.applicationId);
     }
 
     function setPolicyState(

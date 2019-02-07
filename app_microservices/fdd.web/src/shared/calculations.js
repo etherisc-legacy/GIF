@@ -16,10 +16,10 @@ export const calculatePayouts = (stats) => (premium, currency) => {
   const can = stats.cancelled / stats.observations;
   const div = stats.diverted / stats.observations;
 
-  const weightPattern = CustomConfig.payoutCalc.weightPattern || [10, 20, 30, 50, 50];
+  const weightPattern = CustomConfig.payoutCalc.weightPattern || [0, 0, 30, 50, 50];
 
-  const reserved1 = 0.02;
-  const reserved2 = 0.01;
+  const reserved1 = 0;
+  const reserved2 = 0;
 
   let weight = (d15 * weightPattern[0]) +
     (d30 * weightPattern[1]) +

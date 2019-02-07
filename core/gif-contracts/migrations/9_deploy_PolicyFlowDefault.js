@@ -7,10 +7,10 @@ module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
-  await deployer.deploy(PolicyFlowDefault, registry.address);
+  await deployer.deploy(PolicyFlowDefault, registry.address, { gas: 3000000 });
 
   const policyFlowDefault = await PolicyFlowDefault.deployed();
   const policyFlowDefaultName = await policyFlowDefault.NAME.call();
 
-  await registry.register(policyFlowDefaultName, policyFlowDefault.address);
+  await registry.register(policyFlowDefaultName, policyFlowDefault.address, { gas: 100000 });
 };

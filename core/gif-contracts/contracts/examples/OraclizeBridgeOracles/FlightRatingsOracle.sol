@@ -30,7 +30,7 @@ contract FlightRatingsOracle is Oracle, usingOraclize {
     string constant ORACLIZE_RATINGS_BASE_URL = "[URL] json(https://api.flightstats.com/flex/ratings/rest/v1/json/flight/";
     string constant ORACLIZE_RATINGS_QUERY = ").ratings[0]['observations','late15','late30','late45','cancelled','diverted']";
 
-    uint256 public oraclizeGas = 1000000;
+    uint256 public oraclizeGas = 1500000;
 
     mapping(bytes32 => uint256) public requests;
 

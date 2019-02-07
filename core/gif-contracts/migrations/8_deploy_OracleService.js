@@ -7,10 +7,10 @@ module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
-  await deployer.deploy(OracleService, registry.address);
+  await deployer.deploy(OracleService, registry.address, { gas: 1000000 });
 
   const oracleService = await OracleService.deployed();
   const oracleServiceName = await oracleService.NAME.call();
 
-  await registry.registerService(oracleServiceName, oracleService.address);
+  await registry.registerService(oracleServiceName, oracleService.address, { gas: 100000 });
 };

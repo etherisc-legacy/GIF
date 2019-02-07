@@ -1,5 +1,6 @@
 const Web3 = require('web3');
 const models = require('./models');
+const tempSaveArtifacts = require('./TO_BE_REFACTORED/tempSaveArtifacts');
 
 /**
  * DIP Event Listener microservice
@@ -23,7 +24,7 @@ class DipEventListener {
     this._models = models(db);
     this._log = log;
     this._http = http;
-    this._web3 = new Web3(config.rpcNode);
+    this._web3 = new Web3(new Web3.providers.WebsocketProvider(config.rpcNode));
     this._networkName = config.networkName;
   }
 
@@ -33,6 +34,29 @@ class DipEventListener {
    */
   async bootstrap() {
     try {
+      /* TO_BE_REFACTORED */
+      const { Contract } = this._models;
+
+      const knownContracts = await tempSaveArtifacts(this._web3);
+
+      for (let i = 0; i < knownContracts.length; i += 1) {
+        await Contract.query().delete().where({
+          product: knownContracts[i].contractName,
+          networkName: this._networkName,
+          version: '1.0.0',
+        });
+
+        await Contract.query()
+          .upsertGraph({
+            product: knownContracts[i].contractName,
+            networkName: this._networkName,
+            version: '1.0.0',
+            address: knownContracts[i].address.toLowerCase(),
+            abi: JSON.stringify(knownContracts[i].abi),
+          });
+      }
+
+      /* TO_BE_REFACTORED */
       this.fromBlock = await this._web3.eth.getBlockNumber();
 
       await this.checkPastEvents();
@@ -111,8 +135,11 @@ class DipEventListener {
           .orderBy('blockNumber', 'DESC')
           .limit(1);
 
+        const fromBlock = lastevent && lastevent.blockNumber ? lastevent.blockNumber + 1 : 0;
+        const fromBlockHex = (fromBlock + 0x10000).toString(16).substr(-4).toUpperCase();
+
         const events = await this._web3.eth.getPastLogs({
-          fromBlock: lastevent && lastevent.blockNumber ? lastevent.blockNumber + 1 : 0,
+          fromBlock: fromBlockHex,
           address,
         });
 
@@ -207,7 +234,19 @@ class DipEventListener {
         .map(i => Object.assign(i, { signature: this._web3.eth.abi.encodeEventSignature(i) }))
         .filter(i => i.signature === event.topics[0]);
       const decodedEvent = this._web3.eth.abi.decodeLog(abi[0].inputs, event.data, event.topics.slice(1));
-      const block = await this._web3.eth.getBlock(event.blockNumber);
+      // const block = await this._web3.eth.getBlock(event.blockNumber);
+
+      // TODO: TEMPORARY FIX
+      const existsEvent = await Event.query().where({
+        networkName: this._networkName,
+        transactionHash: event.transactionHash,
+        logIndex: event.logIndex,
+      }).first();
+
+      if (existsEvent) {
+        return;
+      }
+
       await Event.query().upsertGraph({
         networkName: this._networkName,
         transactionHash: event.transactionHash,
@@ -216,7 +255,8 @@ class DipEventListener {
         topics: JSON.stringify(event.topics),
         data: event.data,
         blockNumber: event.blockNumber,
-        timeStamp: Event.raw('to_timestamp(?)', block.timestamp),
+        // timeStamp: Event.raw('to_timestamp(?)', block.timeStamp),
+        timeStamp: Event.raw('to_timestamp(?)', 1549531779), // todo: get block timestamp!
         transactionIndex: event.transactionIndex,
         eventName: abi[0].name,
         eventArgs: decodedEvent,

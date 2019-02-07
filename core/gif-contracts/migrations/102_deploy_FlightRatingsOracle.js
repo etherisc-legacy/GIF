@@ -24,16 +24,17 @@ module.exports = async (deployer) => {
   const flightRatingsOracle = await deployer.deploy(
     FlightRatingsOracle, oracleService.address, encryptedQueryReq.data.result, {
       value: 1 * (10 ** 18),
+      gas: 4000000,
     },
   );
 
-  const prodUrl = await flightRatingsOracle.getOraclizeUrl.call(web3utils.bytes(32, 'AA/100'));
+  const prodUrl = await flightRatingsOracle.getOraclizeUrl.call(web3utils.bytes(32, 'AA/100'), { gas: 200000 });
   console.log('Oraclize production url:', prodUrl);
 
   /* UNCOMMENT IF YOU WANT IN TEST MODE */
-  await flightRatingsOracle.setTestMode(true);
-  const testUrl = await flightRatingsOracle.getOraclizeUrl.call(web3utils.bytes(32, 'AA/100'));
-  console.log('Oraclize test url:', testUrl);
+  // await flightRatingsOracle.setTestMode(true);
+  // const testUrl = await flightRatingsOracle.getOraclizeUrl.call(web3utils.bytes(32, 'AA/100'));
+  // console.log('Oraclize test url:', testUrl);
   /* UNCOMMENT IF YOU WANT IN TEST MODE */
 
   // Propose FlightRatings oracle type
@@ -42,19 +43,20 @@ module.exports = async (deployer) => {
     '(bytes32 carrierFlightNumber)',
     '(uint256[6] statistics)',
     'FlightRatings oracle',
+    { gas: 200000 },
   );
 
   // Propose FlightRatingsOracle as oracle
-  await oracleOwnerService.proposeOracle(flightRatingsOracle.address, 'FlightRatings oracle');
+  await oracleOwnerService.proposeOracle(flightRatingsOracle.address, 'FlightRatings oracle', { gas: 200000 });
 
   // Activate FlightRatings type and oracle
-  await daoService.activateOracleType(web3utils.bytes(32, 'FlightRatings'));
+  await daoService.activateOracleType(web3utils.bytes(32, 'FlightRatings'), { gas: 200000 });
 
   const oracleId = 0;
-  await daoService.activateOracle(oracleId);
+  await daoService.activateOracle(oracleId, { gas: 200000 });
 
   // Propose FlightRatingsOracle to FlightRatings oracle type
-  await oracleOwnerService.proposeOracleToType(web3utils.bytes(32, 'FlightRatings'), oracleId);
+  await oracleOwnerService.proposeOracleToType(web3utils.bytes(32, 'FlightRatings'), oracleId, { gas: 200000 });
   const proposalId = 0;
-  await daoService.assignOracleToOracleType(web3utils.bytes(32, 'FlightRatings'), proposalId);
+  await daoService.assignOracleToOracleType(web3utils.bytes(32, 'FlightRatings'), proposalId, { gas: 200000 });
 };

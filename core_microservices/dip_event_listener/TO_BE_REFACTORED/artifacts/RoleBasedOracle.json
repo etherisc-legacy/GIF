@@ -1,0 +1,681 @@
+{
+  "contractName": "RoleBasedOracle",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "permissions",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "rolesKeys",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "roles",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_address",
+          "type": "address"
+        },
+        {
+          "name": "_role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "name": "_hasRole",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_address",
+          "type": "address"
+        },
+        {
+          "name": "_role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "addRoleToAccount",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "createRole",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "oracleService",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "cleanRolesForAccount",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_oracleController",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "request",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_requestId",
+          "type": "uint256"
+        },
+        {
+          "name": "_input",
+          "type": "bytes"
+        }
+      ],
+      "name": "request",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "underwrite",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.5.2;\n\nimport \"../../Oracle.sol\";\n\ncontract RoleBasedOracle is Oracle {\n    constructor(address _oracleController) public Oracle(_oracleController) {}\n\n    function request() external {}\n\n    function underwrite() external {}\n}\n",
+  "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/examples/RoleBasedOracle/RoleBasedOracle.sol",
+  "ast": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/examples/RoleBasedOracle/RoleBasedOracle.sol",
+    "exportedSymbols": {
+      "RoleBasedOracle": [
+        10906
+      ]
+    },
+    "id": 10907,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 10885,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:11"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/Oracle.sol",
+        "file": "../../Oracle.sol",
+        "id": 10886,
+        "nodeType": "ImportDirective",
+        "scope": 10907,
+        "sourceUnit": 106,
+        "src": "24:26:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10887,
+              "name": "Oracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 105,
+              "src": "80:6:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Oracle_$105",
+                "typeString": "contract Oracle"
+              }
+            },
+            "id": 10888,
+            "nodeType": "InheritanceSpecifier",
+            "src": "80:6:11"
+          }
+        ],
+        "contractDependencies": [
+          9,
+          105,
+          16425
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 10906,
+        "linearizedBaseContracts": [
+          10906,
+          105,
+          16425,
+          9
+        ],
+        "name": "RoleBasedOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 10896,
+              "nodeType": "Block",
+              "src": "165:2:11",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 10897,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 10893,
+                    "name": "_oracleController",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 10890,
+                    "src": "146:17:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 10894,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 10892,
+                  "name": "Oracle",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 105,
+                  "src": "139:6:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_Oracle_$105_$",
+                    "typeString": "type(contract Oracle)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "139:25:11"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10891,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10890,
+                  "name": "_oracleController",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10897,
+                  "src": "105:25:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 10889,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "105:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "104:27:11"
+            },
+            "returnParameters": {
+              "id": 10895,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "165:0:11"
+            },
+            "scope": 10906,
+            "src": "93:74:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 10900,
+              "nodeType": "Block",
+              "src": "201:2:11",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 10901,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "request",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10898,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "189:2:11"
+            },
+            "returnParameters": {
+              "id": 10899,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:0:11"
+            },
+            "scope": 10906,
+            "src": "173:30:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 10904,
+              "nodeType": "Block",
+              "src": "240:2:11",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 10905,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underwrite",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10902,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "228:2:11"
+            },
+            "returnParameters": {
+              "id": 10903,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "240:0:11"
+            },
+            "scope": 10906,
+            "src": "209:33:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 10907,
+        "src": "52:192:11"
+      }
+    ],
+    "src": "0:245:11"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/examples/RoleBasedOracle/RoleBasedOracle.sol",
+    "exportedSymbols": {
+      "RoleBasedOracle": [
+        10906
+      ]
+    },
+    "id": 10907,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 10885,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:11"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/Oracle.sol",
+        "file": "../../Oracle.sol",
+        "id": 10886,
+        "nodeType": "ImportDirective",
+        "scope": 10907,
+        "sourceUnit": 106,
+        "src": "24:26:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10887,
+              "name": "Oracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 105,
+              "src": "80:6:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Oracle_$105",
+                "typeString": "contract Oracle"
+              }
+            },
+            "id": 10888,
+            "nodeType": "InheritanceSpecifier",
+            "src": "80:6:11"
+          }
+        ],
+        "contractDependencies": [
+          9,
+          105,
+          16425
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 10906,
+        "linearizedBaseContracts": [
+          10906,
+          105,
+          16425,
+          9
+        ],
+        "name": "RoleBasedOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 10896,
+              "nodeType": "Block",
+              "src": "165:2:11",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 10897,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 10893,
+                    "name": "_oracleController",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 10890,
+                    "src": "146:17:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 10894,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 10892,
+                  "name": "Oracle",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 105,
+                  "src": "139:6:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_Oracle_$105_$",
+                    "typeString": "type(contract Oracle)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "139:25:11"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10891,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 10890,
+                  "name": "_oracleController",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 10897,
+                  "src": "105:25:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 10889,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "105:7:11",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "104:27:11"
+            },
+            "returnParameters": {
+              "id": 10895,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "165:0:11"
+            },
+            "scope": 10906,
+            "src": "93:74:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 10900,
+              "nodeType": "Block",
+              "src": "201:2:11",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 10901,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "request",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10898,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "189:2:11"
+            },
+            "returnParameters": {
+              "id": 10899,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:0:11"
+            },
+            "scope": 10906,
+            "src": "173:30:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 10904,
+              "nodeType": "Block",
+              "src": "240:2:11",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 10905,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "underwrite",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 10902,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "228:2:11"
+            },
+            "returnParameters": {
+              "id": 10903,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "240:0:11"
+            },
+            "scope": 10906,
+            "src": "209:33:11",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 10907,
+        "src": "52:192:11"
+      }
+    ],
+    "src": "0:245:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-02-07T14:02:02.344Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

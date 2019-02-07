@@ -1,0 +1,3272 @@
+{
+  "contractName": "IQueryController",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "name": "_inputFormat",
+          "type": "string"
+        },
+        {
+          "name": "_callbackFormat",
+          "type": "string"
+        },
+        {
+          "name": "_description",
+          "type": "string"
+        }
+      ],
+      "name": "proposeOracleType",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "activateOracleType",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "deactivateOracleType",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "removeOracleType",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_sender",
+          "type": "address"
+        },
+        {
+          "name": "_oracleContract",
+          "type": "address"
+        },
+        {
+          "name": "_description",
+          "type": "string"
+        }
+      ],
+      "name": "proposeOracle",
+      "outputs": [
+        {
+          "name": "_oracleId",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_sender",
+          "type": "address"
+        },
+        {
+          "name": "_newOracleContract",
+          "type": "address"
+        },
+        {
+          "name": "_oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateOracleContract",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "activateOracle",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "deactivateOracle",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "removeOracle",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_sender",
+          "type": "address"
+        },
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "name": "_oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "proposeOracleToType",
+      "outputs": [
+        {
+          "name": "_proposalId",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_sender",
+          "type": "address"
+        },
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "name": "_proposalId",
+          "type": "uint256"
+        }
+      ],
+      "name": "revokeOracleToTypeProposal",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "name": "_proposalId",
+          "type": "uint256"
+        }
+      ],
+      "name": "assignOracleToOracleType",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "name": "_oracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "removeOracleFromOracleType",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_input",
+          "type": "bytes"
+        },
+        {
+          "name": "_callbackMethodName",
+          "type": "string"
+        },
+        {
+          "name": "_callabackContractAddress",
+          "type": "address"
+        },
+        {
+          "name": "_oracleTypeName",
+          "type": "bytes32"
+        },
+        {
+          "name": "_responsibleOracleId",
+          "type": "uint256"
+        }
+      ],
+      "name": "request",
+      "outputs": [
+        {
+          "name": "_requestId",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_requestId",
+          "type": "uint256"
+        },
+        {
+          "name": "_responder",
+          "type": "address"
+        },
+        {
+          "name": "_data",
+          "type": "bytes"
+        }
+      ],
+      "name": "respond",
+      "outputs": [
+        {
+          "name": "_responseId",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity 0.5.2;\n\nimport \"./IQuery.sol\";\n\ninterface IQueryController {\n\n    function proposeOracleType(\n        bytes32 _oracleTypeName,\n        string calldata _inputFormat,\n        string calldata _callbackFormat,\n        string calldata _description\n    ) external;\n\n    function activateOracleType(bytes32 _oracleTypeName) external;\n\n    function deactivateOracleType(bytes32 _oracleTypeName) external;\n\n    function removeOracleType(bytes32 _oracleTypeName) external;\n\n    function proposeOracle(address _sender, address _oracleContract, string calldata _description)\n    external returns (uint256 _oracleId);\n\n    function updateOracleContract(address _sender, address _newOracleContract, uint256 _oracleId)\n    external;\n\n    function activateOracle(uint256 _oracleId) external;\n\n    function deactivateOracle(uint256 _oracleId) external;\n\n    function removeOracle(uint256 _oracleId) external;\n\n    function proposeOracleToType(\n        address _sender,\n        bytes32 _oracleTypeName,\n        uint256 _oracleId\n    ) external returns (uint256 _proposalId);\n\n    function revokeOracleToTypeProposal(address _sender, bytes32 _oracleTypeName, uint256 _proposalId) external;\n\n    function assignOracleToOracleType(bytes32 _oracleTypeName, uint256 _proposalId) external;\n\n    function removeOracleFromOracleType(bytes32 _oracleTypeName, uint256 _oracleId) external;\n\n    function request(\n        bytes calldata _input,\n        string calldata _callbackMethodName,\n        address _callabackContractAddress,\n        bytes32 _oracleTypeName,\n        uint256 _responsibleOracleId\n    ) external returns (uint256 _requestId);\n\n    function respond(\n        uint256 _requestId,\n        address _responder,\n        bytes calldata _data\n    ) external returns (uint256 _responseId);\n}\n",
+  "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQueryController.sol",
+  "ast": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQueryController.sol",
+    "exportedSymbols": {
+      "IQueryController": [
+        13481
+      ]
+    },
+    "id": 13482,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13358,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:36"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQuery.sol",
+        "file": "./IQuery.sol",
+        "id": 13359,
+        "nodeType": "ImportDirective",
+        "scope": 13482,
+        "sourceUnit": 13357,
+        "src": "24:22:36",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 13481,
+        "linearizedBaseContracts": [
+          13481
+        ],
+        "name": "IQueryController",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13370,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "proposeOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13368,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13361,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13370,
+                  "src": "118:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13360,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "118:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13363,
+                  "name": "_inputFormat",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13370,
+                  "src": "151:28:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13362,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "151:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13365,
+                  "name": "_callbackFormat",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13370,
+                  "src": "189:31:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13364,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "189:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13367,
+                  "name": "_description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13370,
+                  "src": "230:28:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13366,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "230:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "108:156:36"
+            },
+            "returnParameters": {
+              "id": 13369,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "273:0:36"
+            },
+            "scope": 13481,
+            "src": "82:192:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13375,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "activateOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13373,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13372,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13375,
+                  "src": "308:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13371,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "308:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "307:25:36"
+            },
+            "returnParameters": {
+              "id": 13374,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "341:0:36"
+            },
+            "scope": 13481,
+            "src": "280:62:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13380,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "deactivateOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13378,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13377,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13380,
+                  "src": "378:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13376,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "378:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "377:25:36"
+            },
+            "returnParameters": {
+              "id": 13379,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "411:0:36"
+            },
+            "scope": 13481,
+            "src": "348:64:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13385,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13383,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13382,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13385,
+                  "src": "444:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13381,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "444:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "443:25:36"
+            },
+            "returnParameters": {
+              "id": 13384,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "477:0:36"
+            },
+            "scope": 13481,
+            "src": "418:60:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13396,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "proposeOracle",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13392,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13387,
+                  "name": "_sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13396,
+                  "src": "507:15:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13386,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "507:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13389,
+                  "name": "_oracleContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13396,
+                  "src": "524:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13388,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "524:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13391,
+                  "name": "_description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13396,
+                  "src": "549:28:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13390,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "549:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "506:72:36"
+            },
+            "returnParameters": {
+              "id": 13395,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13394,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13396,
+                  "src": "601:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13393,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "601:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "600:19:36"
+            },
+            "scope": 13481,
+            "src": "484:136:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13405,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "updateOracleContract",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13403,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13398,
+                  "name": "_sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13405,
+                  "src": "656:15:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13397,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "656:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13400,
+                  "name": "_newOracleContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13405,
+                  "src": "673:26:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13399,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "673:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13402,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13405,
+                  "src": "701:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13401,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "701:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "655:64:36"
+            },
+            "returnParameters": {
+              "id": 13404,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "732:0:36"
+            },
+            "scope": 13481,
+            "src": "626:107:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13410,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "activateOracle",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13408,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13407,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13410,
+                  "src": "763:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13406,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "763:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "762:19:36"
+            },
+            "returnParameters": {
+              "id": 13409,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "790:0:36"
+            },
+            "scope": 13481,
+            "src": "739:52:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13415,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "deactivateOracle",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13413,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13412,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13415,
+                  "src": "823:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13411,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "823:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "822:19:36"
+            },
+            "returnParameters": {
+              "id": 13414,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "850:0:36"
+            },
+            "scope": 13481,
+            "src": "797:54:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13420,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeOracle",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13418,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13417,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13420,
+                  "src": "879:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13416,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "879:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "878:19:36"
+            },
+            "returnParameters": {
+              "id": 13419,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "906:0:36"
+            },
+            "scope": 13481,
+            "src": "857:50:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13431,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "proposeOracleToType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13427,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13422,
+                  "name": "_sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13431,
+                  "src": "951:15:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13421,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "951:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13424,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13431,
+                  "src": "976:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13423,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "976:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13426,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13431,
+                  "src": "1009:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13425,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1009:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "941:91:36"
+            },
+            "returnParameters": {
+              "id": 13430,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13429,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13431,
+                  "src": "1051:19:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13428,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1051:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1050:21:36"
+            },
+            "scope": 13481,
+            "src": "913:159:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13440,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "revokeOracleToTypeProposal",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13438,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13433,
+                  "name": "_sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13440,
+                  "src": "1114:15:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13432,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1114:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13435,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13440,
+                  "src": "1131:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13434,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1131:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13437,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13440,
+                  "src": "1156:19:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13436,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1156:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1113:63:36"
+            },
+            "returnParameters": {
+              "id": 13439,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1185:0:36"
+            },
+            "scope": 13481,
+            "src": "1078:108:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13447,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "assignOracleToOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13445,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13442,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13447,
+                  "src": "1226:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13441,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1226:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13444,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13447,
+                  "src": "1251:19:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13443,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1251:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1225:46:36"
+            },
+            "returnParameters": {
+              "id": 13446,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1280:0:36"
+            },
+            "scope": 13481,
+            "src": "1192:89:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13454,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeOracleFromOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13452,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13449,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13454,
+                  "src": "1323:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13448,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1323:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13451,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13454,
+                  "src": "1348:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13450,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1348:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1322:44:36"
+            },
+            "returnParameters": {
+              "id": 13453,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1375:0:36"
+            },
+            "scope": 13481,
+            "src": "1287:89:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13469,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "request",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13465,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13456,
+                  "name": "_input",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1408:21:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 13455,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1408:5:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13458,
+                  "name": "_callbackMethodName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1439:35:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13457,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1439:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13460,
+                  "name": "_callabackContractAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1484:33:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13459,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1484:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13462,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1527:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13461,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1527:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13464,
+                  "name": "_responsibleOracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1560:28:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13463,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1560:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1398:196:36"
+            },
+            "returnParameters": {
+              "id": 13468,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13467,
+                  "name": "_requestId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1613:18:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13466,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1613:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1612:20:36"
+            },
+            "scope": 13481,
+            "src": "1382:251:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13480,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "respond",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13476,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13471,
+                  "name": "_requestId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13480,
+                  "src": "1665:18:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13470,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1665:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13473,
+                  "name": "_responder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13480,
+                  "src": "1693:18:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13472,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1693:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13475,
+                  "name": "_data",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13480,
+                  "src": "1721:20:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 13474,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1721:5:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1655:92:36"
+            },
+            "returnParameters": {
+              "id": 13479,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13478,
+                  "name": "_responseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13480,
+                  "src": "1766:19:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13477,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1766:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1765:21:36"
+            },
+            "scope": 13481,
+            "src": "1639:148:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 13482,
+        "src": "48:1741:36"
+      }
+    ],
+    "src": "0:1790:36"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQueryController.sol",
+    "exportedSymbols": {
+      "IQueryController": [
+        13481
+      ]
+    },
+    "id": 13482,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13358,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:36"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQuery.sol",
+        "file": "./IQuery.sol",
+        "id": 13359,
+        "nodeType": "ImportDirective",
+        "scope": 13482,
+        "sourceUnit": 13357,
+        "src": "24:22:36",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 13481,
+        "linearizedBaseContracts": [
+          13481
+        ],
+        "name": "IQueryController",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13370,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "proposeOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13368,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13361,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13370,
+                  "src": "118:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13360,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "118:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13363,
+                  "name": "_inputFormat",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13370,
+                  "src": "151:28:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13362,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "151:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13365,
+                  "name": "_callbackFormat",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13370,
+                  "src": "189:31:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13364,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "189:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13367,
+                  "name": "_description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13370,
+                  "src": "230:28:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13366,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "230:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "108:156:36"
+            },
+            "returnParameters": {
+              "id": 13369,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "273:0:36"
+            },
+            "scope": 13481,
+            "src": "82:192:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13375,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "activateOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13373,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13372,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13375,
+                  "src": "308:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13371,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "308:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "307:25:36"
+            },
+            "returnParameters": {
+              "id": 13374,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "341:0:36"
+            },
+            "scope": 13481,
+            "src": "280:62:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13380,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "deactivateOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13378,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13377,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13380,
+                  "src": "378:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13376,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "378:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "377:25:36"
+            },
+            "returnParameters": {
+              "id": 13379,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "411:0:36"
+            },
+            "scope": 13481,
+            "src": "348:64:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13385,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13383,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13382,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13385,
+                  "src": "444:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13381,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "444:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "443:25:36"
+            },
+            "returnParameters": {
+              "id": 13384,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "477:0:36"
+            },
+            "scope": 13481,
+            "src": "418:60:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13396,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "proposeOracle",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13392,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13387,
+                  "name": "_sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13396,
+                  "src": "507:15:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13386,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "507:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13389,
+                  "name": "_oracleContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13396,
+                  "src": "524:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13388,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "524:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13391,
+                  "name": "_description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13396,
+                  "src": "549:28:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13390,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "549:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "506:72:36"
+            },
+            "returnParameters": {
+              "id": 13395,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13394,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13396,
+                  "src": "601:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13393,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "601:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "600:19:36"
+            },
+            "scope": 13481,
+            "src": "484:136:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13405,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "updateOracleContract",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13403,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13398,
+                  "name": "_sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13405,
+                  "src": "656:15:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13397,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "656:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13400,
+                  "name": "_newOracleContract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13405,
+                  "src": "673:26:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13399,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "673:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13402,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13405,
+                  "src": "701:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13401,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "701:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "655:64:36"
+            },
+            "returnParameters": {
+              "id": 13404,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "732:0:36"
+            },
+            "scope": 13481,
+            "src": "626:107:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13410,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "activateOracle",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13408,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13407,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13410,
+                  "src": "763:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13406,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "763:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "762:19:36"
+            },
+            "returnParameters": {
+              "id": 13409,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "790:0:36"
+            },
+            "scope": 13481,
+            "src": "739:52:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13415,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "deactivateOracle",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13413,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13412,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13415,
+                  "src": "823:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13411,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "823:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "822:19:36"
+            },
+            "returnParameters": {
+              "id": 13414,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "850:0:36"
+            },
+            "scope": 13481,
+            "src": "797:54:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13420,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeOracle",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13418,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13417,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13420,
+                  "src": "879:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13416,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "879:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "878:19:36"
+            },
+            "returnParameters": {
+              "id": 13419,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "906:0:36"
+            },
+            "scope": 13481,
+            "src": "857:50:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13431,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "proposeOracleToType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13427,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13422,
+                  "name": "_sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13431,
+                  "src": "951:15:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13421,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "951:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13424,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13431,
+                  "src": "976:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13423,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "976:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13426,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13431,
+                  "src": "1009:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13425,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1009:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "941:91:36"
+            },
+            "returnParameters": {
+              "id": 13430,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13429,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13431,
+                  "src": "1051:19:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13428,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1051:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1050:21:36"
+            },
+            "scope": 13481,
+            "src": "913:159:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13440,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "revokeOracleToTypeProposal",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13438,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13433,
+                  "name": "_sender",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13440,
+                  "src": "1114:15:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13432,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1114:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13435,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13440,
+                  "src": "1131:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13434,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1131:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13437,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13440,
+                  "src": "1156:19:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13436,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1156:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1113:63:36"
+            },
+            "returnParameters": {
+              "id": 13439,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1185:0:36"
+            },
+            "scope": 13481,
+            "src": "1078:108:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13447,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "assignOracleToOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13445,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13442,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13447,
+                  "src": "1226:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13441,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1226:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13444,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13447,
+                  "src": "1251:19:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13443,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1251:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1225:46:36"
+            },
+            "returnParameters": {
+              "id": 13446,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1280:0:36"
+            },
+            "scope": 13481,
+            "src": "1192:89:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13454,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeOracleFromOracleType",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13452,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13449,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13454,
+                  "src": "1323:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13448,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1323:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13451,
+                  "name": "_oracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13454,
+                  "src": "1348:17:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13450,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1348:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1322:44:36"
+            },
+            "returnParameters": {
+              "id": 13453,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1375:0:36"
+            },
+            "scope": 13481,
+            "src": "1287:89:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13469,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "request",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13465,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13456,
+                  "name": "_input",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1408:21:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 13455,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1408:5:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13458,
+                  "name": "_callbackMethodName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1439:35:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 13457,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1439:6:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13460,
+                  "name": "_callabackContractAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1484:33:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13459,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1484:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13462,
+                  "name": "_oracleTypeName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1527:23:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13461,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1527:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13464,
+                  "name": "_responsibleOracleId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1560:28:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13463,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1560:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1398:196:36"
+            },
+            "returnParameters": {
+              "id": 13468,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13467,
+                  "name": "_requestId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13469,
+                  "src": "1613:18:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13466,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1613:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1612:20:36"
+            },
+            "scope": 13481,
+            "src": "1382:251:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 13480,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "respond",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13476,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13471,
+                  "name": "_requestId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13480,
+                  "src": "1665:18:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13470,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1665:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13473,
+                  "name": "_responder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13480,
+                  "src": "1693:18:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13472,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1693:7:36",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 13475,
+                  "name": "_data",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13480,
+                  "src": "1721:20:36",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 13474,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1721:5:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1655:92:36"
+            },
+            "returnParameters": {
+              "id": 13479,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13478,
+                  "name": "_responseId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13480,
+                  "src": "1766:19:36",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 13477,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1766:7:36",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1765:21:36"
+            },
+            "scope": 13481,
+            "src": "1639:148:36",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 13482,
+        "src": "48:1741:36"
+      }
+    ],
+    "src": "0:1790:36"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-02-07T14:02:02.359Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

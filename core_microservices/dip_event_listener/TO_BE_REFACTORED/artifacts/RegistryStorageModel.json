@@ -1,0 +1,801 @@
+{
+  "contractName": "RegistryStorageModel",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "contracts",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "release",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "contractNames",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxContracts",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "controllers",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "release",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "contractName",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "contractAddress",
+          "type": "address"
+        }
+      ],
+      "name": "LogContractRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "release",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "contractName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogContractDeregistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "interfaceId",
+          "type": "bytes4"
+        },
+        {
+          "indexed": false,
+          "name": "contractName",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogInterfaceIdRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "release",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogReleasePrepared",
+      "type": "event"
+    }
+  ],
+  "bytecode": "0x6080604052606460015534801561001557600080fd5b506102c4806100256000396000f3fe608060405234801561001057600080fd5b5060043610610074576000357c010000000000000000000000000000000000000000000000000000000090048063184c68be1461007957806386d1a69f146100f1578063aefed5d11461010f578063b739fcba1461015b578063fbae406a14610179575b600080fd5b6100af6004803603604081101561008f57600080fd5b8101908080359060200190929190803590602001909291905050506101e7565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100f9610229565b6040518082815260200191505060405180910390f35b6101456004803603604081101561012557600080fd5b81019080803590602001909291908035906020019092919050505061022f565b6040518082815260200191505060405180910390f35b61016361025f565b6040518082815260200191505060405180910390f35b6101a56004803603602081101561018f57600080fd5b8101908080359060200190929190505050610265565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60026020528160005260406000206020528060005260406000206000915091509054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60005481565b60036020528160005260406000208181548110151561024a57fe5b90600052602060002001600091509150505481565b60015481565b60046020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea165627a7a72305820fec70b87f1a8d01ea0338c45dbf2a5803631f0de3f092b1bdb226318ebe386c90029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610074576000357c010000000000000000000000000000000000000000000000000000000090048063184c68be1461007957806386d1a69f146100f1578063aefed5d11461010f578063b739fcba1461015b578063fbae406a14610179575b600080fd5b6100af6004803603604081101561008f57600080fd5b8101908080359060200190929190803590602001909291905050506101e7565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100f9610229565b6040518082815260200191505060405180910390f35b6101456004803603604081101561012557600080fd5b81019080803590602001909291908035906020019092919050505061022f565b6040518082815260200191505060405180910390f35b61016361025f565b6040518082815260200191505060405180910390f35b6101a56004803603602081101561018f57600080fd5b8101908080359060200190929190505050610265565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60026020528160005260406000206020528060005260406000206000915091509054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60005481565b60036020528160005260406000208181548110151561024a57fe5b90600052602060002001600091509150505481565b60015481565b60046020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea165627a7a72305820fec70b87f1a8d01ea0338c45dbf2a5803631f0de3f092b1bdb226318ebe386c90029",
+  "sourceMap": "51:527:45:-;;;272:3;242:33;;51:527;8:9:-1;5:2;;;30:1;27;20:12;5:2;51:527:45;;;;;;;",
+  "deployedSourceMap": "51:527:45:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;51:527:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;334:64;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;334:64:45;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;144:22;;;:::i;:::-;;;;;;;;;;;;;;;;;;;439:50;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;439:50:45;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;242:33;;;:::i;:::-;;;;;;;;;;;;;;;;;;;529:46;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;529:46:45;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;334:64;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;144:22::-;;;;:::o;439:50::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;242:33::-;;;;:::o;529:46::-;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity 0.5.2;\n\nimport \"./IRegistry.sol\";\n\ncontract RegistryStorageModel is IRegistry {\n    /**\n     * @dev Current release\n     */\n    uint256 public release;\n\n    /**\n     * @dev  Save number of items to iterate through\n     */\n    uint256 public maxContracts = 100;\n\n    // release => contract name => contract address\n    mapping(uint256 => mapping(bytes32 => address)) public contracts;\n    // release => contract name []\n    mapping(uint256 => bytes32[]) public contractNames;\n    // controller name => address\n    mapping(bytes32 => address) public controllers;\n}\n",
+  "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/RegistryStorageModel.sol",
+  "ast": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/RegistryStorageModel.sol",
+    "exportedSymbols": {
+      "RegistryStorageModel": [
+        14938
+      ]
+    },
+    "id": 14939,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 14914,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:45"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
+        "file": "./IRegistry.sol",
+        "id": 14915,
+        "nodeType": "ImportDirective",
+        "scope": 14939,
+        "sourceUnit": 14450,
+        "src": "24:25:45",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 14916,
+              "name": "IRegistry",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 14449,
+              "src": "84:9:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IRegistry_$14449",
+                "typeString": "contract IRegistry"
+              }
+            },
+            "id": 14917,
+            "nodeType": "InheritanceSpecifier",
+            "src": "84:9:45"
+          }
+        ],
+        "contractDependencies": [
+          14449
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 14938,
+        "linearizedBaseContracts": [
+          14938,
+          14449
+        ],
+        "name": "RegistryStorageModel",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 14919,
+            "name": "release",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "144:22:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 14918,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "144:7:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 14922,
+            "name": "maxContracts",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "242:33:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 14920,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "242:7:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "313030",
+              "id": 14921,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "272:3:45",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_100_by_1",
+                "typeString": "int_const 100"
+              },
+              "value": "100"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 14928,
+            "name": "contracts",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "334:64:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_bytes32_$_t_address_$_$",
+              "typeString": "mapping(uint256 => mapping(bytes32 => address))"
+            },
+            "typeName": {
+              "id": 14927,
+              "keyType": {
+                "id": 14923,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "342:7:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "334:47:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_bytes32_$_t_address_$_$",
+                "typeString": "mapping(uint256 => mapping(bytes32 => address))"
+              },
+              "valueType": {
+                "id": 14926,
+                "keyType": {
+                  "id": 14924,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "361:7:45",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "353:27:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_address_$",
+                  "typeString": "mapping(bytes32 => address)"
+                },
+                "valueType": {
+                  "id": 14925,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "372:7:45",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 14933,
+            "name": "contractNames",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "439:50:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_bytes32_$dyn_storage_$",
+              "typeString": "mapping(uint256 => bytes32[])"
+            },
+            "typeName": {
+              "id": 14932,
+              "keyType": {
+                "id": 14929,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "447:7:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "439:29:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_bytes32_$dyn_storage_$",
+                "typeString": "mapping(uint256 => bytes32[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "id": 14930,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "458:7:45",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "id": 14931,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "458:9:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                  "typeString": "bytes32[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 14937,
+            "name": "controllers",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "529:46:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_address_$",
+              "typeString": "mapping(bytes32 => address)"
+            },
+            "typeName": {
+              "id": 14936,
+              "keyType": {
+                "id": 14934,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "537:7:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "529:27:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_address_$",
+                "typeString": "mapping(bytes32 => address)"
+              },
+              "valueType": {
+                "id": 14935,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "548:7:45",
+                "stateMutability": "nonpayable",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 14939,
+        "src": "51:527:45"
+      }
+    ],
+    "src": "0:579:45"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/RegistryStorageModel.sol",
+    "exportedSymbols": {
+      "RegistryStorageModel": [
+        14938
+      ]
+    },
+    "id": 14939,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 14914,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:45"
+      },
+      {
+        "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
+        "file": "./IRegistry.sol",
+        "id": 14915,
+        "nodeType": "ImportDirective",
+        "scope": 14939,
+        "sourceUnit": 14450,
+        "src": "24:25:45",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 14916,
+              "name": "IRegistry",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 14449,
+              "src": "84:9:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IRegistry_$14449",
+                "typeString": "contract IRegistry"
+              }
+            },
+            "id": 14917,
+            "nodeType": "InheritanceSpecifier",
+            "src": "84:9:45"
+          }
+        ],
+        "contractDependencies": [
+          14449
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 14938,
+        "linearizedBaseContracts": [
+          14938,
+          14449
+        ],
+        "name": "RegistryStorageModel",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 14919,
+            "name": "release",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "144:22:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 14918,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "144:7:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 14922,
+            "name": "maxContracts",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "242:33:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 14920,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "242:7:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "313030",
+              "id": 14921,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "272:3:45",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_100_by_1",
+                "typeString": "int_const 100"
+              },
+              "value": "100"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 14928,
+            "name": "contracts",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "334:64:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_bytes32_$_t_address_$_$",
+              "typeString": "mapping(uint256 => mapping(bytes32 => address))"
+            },
+            "typeName": {
+              "id": 14927,
+              "keyType": {
+                "id": 14923,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "342:7:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "334:47:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_mapping$_t_bytes32_$_t_address_$_$",
+                "typeString": "mapping(uint256 => mapping(bytes32 => address))"
+              },
+              "valueType": {
+                "id": 14926,
+                "keyType": {
+                  "id": 14924,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "361:7:45",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "353:27:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_address_$",
+                  "typeString": "mapping(bytes32 => address)"
+                },
+                "valueType": {
+                  "id": 14925,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "372:7:45",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 14933,
+            "name": "contractNames",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "439:50:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_bytes32_$dyn_storage_$",
+              "typeString": "mapping(uint256 => bytes32[])"
+            },
+            "typeName": {
+              "id": 14932,
+              "keyType": {
+                "id": 14929,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "447:7:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "439:29:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_bytes32_$dyn_storage_$",
+                "typeString": "mapping(uint256 => bytes32[])"
+              },
+              "valueType": {
+                "baseType": {
+                  "id": 14930,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "458:7:45",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "id": 14931,
+                "length": null,
+                "nodeType": "ArrayTypeName",
+                "src": "458:9:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                  "typeString": "bytes32[]"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 14937,
+            "name": "controllers",
+            "nodeType": "VariableDeclaration",
+            "scope": 14938,
+            "src": "529:46:45",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_address_$",
+              "typeString": "mapping(bytes32 => address)"
+            },
+            "typeName": {
+              "id": 14936,
+              "keyType": {
+                "id": 14934,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "537:7:45",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "529:27:45",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_address_$",
+                "typeString": "mapping(bytes32 => address)"
+              },
+              "valueType": {
+                "id": 14935,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "548:7:45",
+                "stateMutability": "nonpayable",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 14939,
+        "src": "51:527:45"
+      }
+    ],
+    "src": "0:579:45"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-02-07T14:02:02.374Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

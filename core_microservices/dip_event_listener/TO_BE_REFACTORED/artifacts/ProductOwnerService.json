@@ -1,0 +1,204 @@
+{
+  "contractName": "ProductOwnerService",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "NAME",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b5060b68061001e6000396000f3fe6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063a3f4df7e14604a575b600080fd5b60506066565b6040518082815260200191505060405180910390f35b7f50726f647563744f776e657253657276696365000000000000000000000000008156fea165627a7a72305820b07cff37fb4a775095051fd42ae1e05e9c31fce0eb0f398bad4a3d6d87cb57630029",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063a3f4df7e14604a575b600080fd5b60506066565b6040518082815260200191505060405180910390f35b7f50726f647563744f776e657253657276696365000000000000000000000000008156fea165627a7a72305820b07cff37fb4a775095051fd42ae1e05e9c31fce0eb0f398bad4a3d6d87cb57630029",
+  "sourceMap": "24:90:56:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:90:56;;;;;;;",
+  "deployedSourceMap": "24:90:56:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:90:56;;;;;;;;;;;;;;;;;;;;59:52;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity 0.5.2;\n\ncontract ProductOwnerService {\n    bytes32 public constant NAME = \"ProductOwnerService\";\n}\n",
+  "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/services/ProductOwnerService.sol",
+  "ast": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/services/ProductOwnerService.sol",
+    "exportedSymbols": {
+      "ProductOwnerService": [
+        15992
+      ]
+    },
+    "id": 15993,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 15988,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:56"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 15992,
+        "linearizedBaseContracts": [
+          15992
+        ],
+        "name": "ProductOwnerService",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "id": 15991,
+            "name": "NAME",
+            "nodeType": "VariableDeclaration",
+            "scope": 15992,
+            "src": "59:52:56",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 15989,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "59:7:56",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "50726f647563744f776e657253657276696365",
+              "id": 15990,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "string",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "90:21:56",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_stringliteral_04eb0524cc50da1dbdab34d277395549b73a25ea653ed26ebf24218d5fe70e69",
+                "typeString": "literal_string \"ProductOwnerService\""
+              },
+              "value": "ProductOwnerService"
+            },
+            "visibility": "public"
+          }
+        ],
+        "scope": 15993,
+        "src": "24:90:56"
+      }
+    ],
+    "src": "0:115:56"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/services/ProductOwnerService.sol",
+    "exportedSymbols": {
+      "ProductOwnerService": [
+        15992
+      ]
+    },
+    "id": 15993,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 15988,
+        "literals": [
+          "solidity",
+          "0.5",
+          ".2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:22:56"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 15992,
+        "linearizedBaseContracts": [
+          15992
+        ],
+        "name": "ProductOwnerService",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "id": 15991,
+            "name": "NAME",
+            "nodeType": "VariableDeclaration",
+            "scope": 15992,
+            "src": "59:52:56",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 15989,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "59:7:56",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "50726f647563744f776e657253657276696365",
+              "id": 15990,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "string",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "90:21:56",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_stringliteral_04eb0524cc50da1dbdab34d277395549b73a25ea653ed26ebf24218d5fe70e69",
+                "typeString": "literal_string \"ProductOwnerService\""
+              },
+              "value": "ProductOwnerService"
+            },
+            "visibility": "public"
+          }
+        ],
+        "scope": 15993,
+        "src": "24:90:56"
+      }
+    ],
+    "src": "0:115:56"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-02-07T14:02:02.379Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
