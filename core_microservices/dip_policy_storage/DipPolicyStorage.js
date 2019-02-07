@@ -22,22 +22,30 @@ class DipPolicyStorage {
    * @return {Promise<void>}
    */
   async bootstrap() {
-    this._amqp.consume({
+    await this._amqp.consume({
       messageType: 'policyCreationRequest',
       messageVersion: '1.*',
       handler: this.onPolicyCreateMessage.bind(this),
     });
-
-    this._amqp.consume({
+    await this._amqp.consume({
       messageType: 'initializePaymentResult',
       messageVersion: '1.*',
       handler: this.onInitializePaymentResult.bind(this),
     });
-
-    this._amqp.consume({
+    await this._amqp.consume({
       messageType: 'policyGetRequest',
       messageVersion: '1.*',
       handler: this.onPolicyGetMessage.bind(this),
+    });
+    await this._amqp.consume({
+      messageType: 'decodedEvent',
+      messageVersion: '1.*',
+      handler: this.handleDecodedEvent.bind(this),
+    });
+    await this._amqp.consume({
+      messageType: 'applyForPolicySuccess',
+      messageVersion: '1.*',
+      handler: this.handleApplyForPolicySuccess.bind(this),
     });
   }
 
@@ -249,6 +257,49 @@ class DipPolicyStorage {
       },
       correlationId: properties.correlationId,
     });
+  }
+
+  /**
+   * Handle contact event
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
+   * @return {Promise<void>}
+   */
+  async handleApplyForPolicySuccess({ content, fields, properties }) {
+    const { contractAppicationId, policyId } = content;
+    const { Policy } = this._models;
+    await Policy.query()
+      .update({ contractAppicationId })
+      .where('id', policyId);
+  }
+
+  /**
+   * Handle contact event
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
+   * @return {Promise<void>}
+   */
+  async handleDecodedEvent({ content, fields, properties }) {
+    if (content.eventName === 'LogNewPolicy') {
+      const { applicationId: contractAppicationId, policyId: contractPolicyId } = content.eventArgs;
+      await this.newPolicyCreated(contractAppicationId, contractPolicyId);
+    }
+  }
+
+  /**
+   * New policy created handler
+   * @param {*} contractAppicationId
+   * @param {*} contractPolicyId
+   */
+  async newPolicyCreated(contractAppicationId, contractPolicyId) {
+    const { Policy } = this._models;
+    await Policy.query()
+      .update({ contractPolicyId })
+      .where({ contractAppicationId });
   }
 }
 

@@ -255,7 +255,7 @@ class DipEventListener {
         topics: JSON.stringify(event.topics),
         data: event.data,
         blockNumber: event.blockNumber,
-        // timeStamp: Event.raw('to_timestamp(?)', block.timeStamp),
+        // timeStamp: Event.raw('to_timestamp(?)', event.timeStamp),
         timeStamp: Event.raw('to_timestamp(?)', 1549531779), // todo: get block timestamp!
         transactionIndex: event.transactionIndex,
         eventName: abi[0].name,

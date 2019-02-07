@@ -2,6 +2,28 @@
   "contractName": "FlightDelayOraclize",
   "abi": [
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "metadataId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "applicationId",
+          "type": "uint256"
+        }
+      ],
+      "name": "LogNewApplication",
+      "type": "event"
+    },
+    {
       "constant": true,
       "inputs": [
         {

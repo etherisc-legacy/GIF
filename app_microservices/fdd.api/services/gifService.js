@@ -106,6 +106,19 @@ class GIFService {
   }
 
   /**
+   * Apply For Policy Result
+   * @param {object} content
+   * @return {Promise<*>}
+   */
+  async applyForPolicySuccess(content) {
+    await this._amqp.publish({
+      messageType: 'applyForPolicySuccess',
+      messageVersion: '1.*',
+      content,
+    });
+  }
+
+  /**
    * Handle request like message
    * @param {*} successEvent
    * @param {*} errorEvent
