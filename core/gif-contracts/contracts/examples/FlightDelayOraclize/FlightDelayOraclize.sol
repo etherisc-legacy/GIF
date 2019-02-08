@@ -260,8 +260,8 @@ contract FlightDelayOraclize is Product {
         }
     }
 
-    function confirmPayout(uint256 _payoutId, uint256 _sum) external {
-        payout(_payoutId, _sum);
+    function confirmPayout(uint256 _payoutId, uint256 _amount) external {
+        payout(_payoutId, _amount);
     }
 
     function calculatePayouts(uint256 _premium, uint256[6] memory _statistics)

@@ -59,7 +59,7 @@ module.exports = {
       version: settings.solc,
       settings: {
         optimizer: {
-          enabled: false,
+          enabled: true,
           runs: 200,
         },
         evmVersion: 'byzantium', // -> constantinople
