@@ -1,6 +1,6 @@
 {
   "name": "estore_contracts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "truffle": "truffle",
@@ -11,7 +11,7 @@
     "deploy": "MNEMONIC=${MNEMONIC} HTTP_PROVIDER=${HTTP_PROVIDER} truffle migrate --network ${NETWORK} && artifactsSender"
   },
   "dependencies": {
-    "@etherisc/microservice": "0.4.9-ds1",
+    "@etherisc/microservice": "^0.4.9",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2",

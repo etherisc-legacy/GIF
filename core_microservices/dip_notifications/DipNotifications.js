@@ -1,4 +1,3 @@
-const dotenv = require('dotenv');
 const path = require('path');
 const TemplateResolver = require('./TemplateResolver');
 const models = require('./models/module');
@@ -18,7 +17,7 @@ class DipNotifications {
   }) {
     this._amqp = amqp;
     this._models = models(db);
-    const options = dotenv.config().parsed;
+    const options = process.env;
     this._templateResolver = new TemplateResolver(s3, config);
     this._notificationsService = new NotificationsService({
       templateResolver: this._templateResolver,
