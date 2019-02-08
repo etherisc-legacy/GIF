@@ -188,14 +188,19 @@ module.exports = ({
         premium: payment.premium,
         currency: signer.utils.asciiToHex('EUR'), // payment.currency,
         payoutOptions: [0, 0, toMoney(payouts.p3), toMoney(payouts.p4), toMoney(payouts.p5)],
-        customerExternalId: signer.utils.padRight(signer.utils.utf8ToHex(policyId), 34).substr(0, 34),
+        customerExternalId: signer.utils.padRight(signer.utils.utf8ToHex(customerId), 34).substr(0, 34),
       };
 
-      log.info(application);
+      const transactionResult = await gif.applyForPolicy(application);
 
-      const { transactionHash } = await gif.applyForPolicy(application);
+      const { transactionHash } = transactionResult;
+      const { applicationId: contractAppicationId } = transactionResult.events.LogNewApplication.returnValues;
 
-      await gif.issueCertificate(policyId);
+      await gif.applyForPolicySuccess({ policyId, contractAppicationId });
+
+      await Policy.query()
+        .update({ contractAppicationId })
+        .where('id', policyId);
 
       ctx.ok({ customerId, policyToken: policyId, txHash: transactionHash });
     } catch (error) {
