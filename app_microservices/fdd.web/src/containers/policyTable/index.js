@@ -206,14 +206,14 @@ class PolicyTable extends Component {
                 <div>
                   <label htmlFor="usd">
                     <Field id="usd" name="currency" onChange={v => this.selectCurrency(v)} component="input"
-                           type="radio" value="2" />
+                           type="radio" value="2" disabled="true" />
                     <span>USD</span>
                   </label>
                 </div>
                 <div>
                   <label htmlFor="gbp">
                     <Field id="gbp" name="currency" onChange={v => this.selectCurrency(v)} component="input"
-                           type="radio" value="3" />
+                           type="radio" value="3" disabled="true" />
                     <span>GBP</span>
                   </label>
                 </div>

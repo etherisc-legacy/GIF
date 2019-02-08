@@ -1,4 +1,5 @@
 const uuid = require('uuid');
+const { utils } = require('web3');
 const moment = require('moment');
 const _ = require('lodash');
 
@@ -90,7 +91,6 @@ module.exports = ({
   db,
   log,
   gif,
-  signer,
 }) => {
   router.post('/api/policies', async (ctx) => {
     const { body } = ctx.request;
@@ -140,7 +140,6 @@ module.exports = ({
         policyExpireDate,
       };
 
-
       const { policyId, customerId } = await gif.policyCreationRequest({
         creationId: uuid(),
         customer,
@@ -148,7 +147,7 @@ module.exports = ({
         payment,
       });
 
-      const { Policy, Customer } = db;
+      const { Policy, Customer, PolicyExtra } = db;
 
       // Check if customer exists
       const customerExists = await Customer.query().where('id', customerId).first();
@@ -181,28 +180,36 @@ module.exports = ({
       });
 
       const application = {
-        carrierFlightNumber: signer.utils.asciiToHex(`${policy.carrier}/${policy.flightNumber}`),
-        yearMonthDay: signer.utils.asciiToHex(moment(policy.departsAt).format('YYYY/MM/DD')),
+        carrierFlightNumber: utils.asciiToHex(`${policy.carrier}/${policy.flightNumber}`),
+        yearMonthDay: utils.asciiToHex(moment(policy.departsAt).format('YYYY/MM/DD')),
         departureTime: moment(policy.departsAt).unix(),
         arrivalTime: moment(policy.arrivesAt).unix(),
         premium: payment.premium,
-        currency: signer.utils.asciiToHex('EUR'), // payment.currency,
+        currency: utils.asciiToHex('EUR'), // payment.currency,
         payoutOptions: [0, 0, toMoney(payouts.p3), toMoney(payouts.p4), toMoney(payouts.p5)],
-        customerExternalId: signer.utils.padRight(signer.utils.utf8ToHex(customerId), 34).substr(0, 34),
+        customerExternalId: utils.padRight(utils.utf8ToHex(customerId), 34).substr(0, 34),
       };
 
-      const transactionResult = await gif.applyForPolicy(application);
+      try {
+        const transactionResult = await gif.applyForPolicy(application);
 
-      const { transactionHash } = transactionResult;
-      const { applicationId: contractAppicationId } = transactionResult.events.LogNewApplication.returnValues;
+        const { transactionHash } = transactionResult;
+        const { applicationId: contractAppicationId } = transactionResult.events.LogNewApplication.returnValues;
 
-      await gif.applyForPolicySuccess({ policyId, contractAppicationId });
+        await gif.applyForPolicySuccess({ policyId, contractAppicationId });
 
-      await Policy.query()
-        .update({ contractAppicationId })
-        .where('id', policyId);
+        await Policy.query()
+          .update({ contractAppicationId })
+          .where('id', policyId);
 
-      ctx.ok({ customerId, policyToken: policyId, txHash: transactionHash });
+        ctx.ok({ customerId, policyToken: policyId, txHash: transactionHash });
+      } catch (error) {
+        await PolicyExtra.query().delete().where('policyId', policyId);
+        await Policy.query().delete().where('id', policyId);
+        await gif.applyForPolicyError({ policyId });
+        log.error(error);
+        ctx.badRequest(error);
+      }
     } catch (error) {
       log.error(error);
       ctx.badRequest(error);
@@ -250,6 +257,11 @@ module.exports = ({
       db.PolicyExtra.query().where('policyId', id).then(rows => _.fromPairs(_.map(rows, r => [r.field, r.value]))),
     ]);
 
+    if (!policy) {
+      ctx.status = 404;
+      return;
+    }
+
     const customer = await db.Customer.query().where('id', policy.customerId).first();
 
     ctx.body = {
@@ -265,8 +277,8 @@ module.exports = ({
         flightNumber: extra.flightNumber,
         origin: extra.origin,
         destination: extra.destination,
-        departsAt: extra.departsAt,
-        arrivesAt: extra.arrivesAt,
+        departsAt: `${moment(extra.departsAt).utcOffset(moment.parseZone(extra.departsAt).utcOffset()).format('MMMM DD, YYYY HH:mm')} (local time)`,
+        arrivesAt: `${moment(extra.arrivesAt).utcOffset(moment.parseZone(extra.arrivesAt).utcOffset()).format('MMMM DD, YYYY HH:mm')} (local time)`,
       },
       policyStartDate: extra.policyStartDate,
       policyExpireDate: extra.policyExpireDate,

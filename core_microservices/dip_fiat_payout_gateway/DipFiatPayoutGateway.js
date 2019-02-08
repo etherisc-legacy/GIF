@@ -79,6 +79,7 @@ class DipFiatPayoutGateway {
       payoutAmount,
       currency,
       provider,
+      contractPayoutId,
     } = content;
 
     if (!this.providers.has(provider)) {
@@ -98,6 +99,7 @@ class DipFiatPayoutGateway {
       payoutAmount,
       currency,
       provider,
+      contractPayoutId,
     });
 
     await this._amqp.publish({
@@ -177,7 +179,11 @@ class DipFiatPayoutGateway {
       await this._amqp.publish({
         messageType: 'paidOut',
         messageVersion: '1.*',
-        content: { policyId: policy.id },
+        content: {
+          policyId: policy.id,
+          amount: payout.payoutAmount,
+          contractPayoutId: payout.contractPayoutId,
+        },
         correlationId: properties.correlationId,
       });
     } catch (error) {

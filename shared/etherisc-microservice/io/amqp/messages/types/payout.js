@@ -8,6 +8,7 @@ schemaVersions['1.0'] = {
     payoutAmount: { type: 'number' },
     cyrrency: { type: 'string' },
     provider: { type: 'string' },
+    contractPayoutId: { type: 'number' },
   },
   required: ['policyId', 'payoutAmount', 'cyrrency', 'provider'],
 };

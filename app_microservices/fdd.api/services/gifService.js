@@ -40,6 +40,18 @@ class GIFService {
   }
 
   /**
+   * Make Payout
+   * @param {{}} content
+   */
+  async makePayout(content) {
+    await this._amqp.publish({
+      messageType: 'payout',
+      messageVersion: '1.*',
+      content,
+    });
+  }
+
+  /**
    * Issue Certificate
    * @param {*} policyId
    */
@@ -93,7 +105,7 @@ class GIFService {
    * @return {Promise<*>}
    */
   applyForPolicy(application) {
-    return this._contract.methods.applyForPolicy(
+    return this._contract().methods.applyForPolicy(
       application.carrierFlightNumber,
       application.yearMonthDay,
       application.departureTime,
@@ -103,6 +115,16 @@ class GIFService {
       application.payoutOptions,
       application.customerExternalId,
     ).send();
+  }
+
+  /**
+   * Apply For Policy
+   * @param {number} payoutId
+   * @param {number} sum
+   * @return {Promise<*>}
+   */
+  confirmPayout(payoutId, sum) {
+    return this._contract().methods.confirmPayout(payoutId, sum).send();
   }
 
   /**
