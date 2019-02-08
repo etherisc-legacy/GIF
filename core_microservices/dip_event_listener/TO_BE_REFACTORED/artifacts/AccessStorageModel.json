@@ -61,38 +61,38 @@
   ],
   "bytecode": "0x608060405234801561001057600080fd5b506101be806100206000396000f3fe608060405234801561001057600080fd5b506004361061005e576000357c01000000000000000000000000000000000000000000000000000000009004806301e88208146100635780632cf88d9e146100bb57806395356651146100fd575b600080fd5b6100a56004803603602081101561007957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061013f565b6040518082815260200191505060405180910390f35b6100e7600480360360208110156100d157600080fd5b8101908080359060200190929190505050610157565b6040518082815260200191505060405180910390f35b6101296004803603602081101561011357600080fd5b810190808035906020019092919050505061017a565b6040518082815260200191505060405180910390f35b60026020528060005260406000206000915090505481565b60018181548110151561016657fe5b906000526020600020016000915090505481565b6000602052806000526040600020600091509050548156fea165627a7a72305820e54498ba58ce92614253ed4667de8a85d453b49135cab9441b551e127e379e620029",
   "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061005e576000357c01000000000000000000000000000000000000000000000000000000009004806301e88208146100635780632cf88d9e146100bb57806395356651146100fd575b600080fd5b6100a56004803603602081101561007957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061013f565b6040518082815260200191505060405180910390f35b6100e7600480360360208110156100d157600080fd5b8101908080359060200190929190505050610157565b6040518082815260200191505060405180910390f35b6101296004803603602081101561011357600080fd5b810190808035906020019092919050505061017a565b6040518082815260200191505060405180910390f35b60026020528060005260406000206000915090505481565b60018181548110151561016657fe5b906000526020600020016000915090505481565b6000602052806000526040600020600091509050548156fea165627a7a72305820e54498ba58ce92614253ed4667de8a85d453b49135cab9441b551e127e379e620029",
-  "sourceMap": "49:173:14:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:173:14;;;;;;;",
-  "deployedSourceMap": "49:173:14:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:173:14;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;173:46;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;173:46:14;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;140:26;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;140:26:14;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;94:40;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;94:40:14;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;173:46;;;;;;;;;;;;;;;;;:::o;140:26::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;94:40::-;;;;;;;;;;;;;;;;;:::o",
+  "sourceMap": "49:173:15:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:173:15;;;;;;;",
+  "deployedSourceMap": "49:173:15:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:173:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;173:46;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;173:46:15;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;140:26;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;140:26:15;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;94:40;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;94:40:15;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;173:46;;;;;;;;;;;;;;;;;:::o;140:26::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;94:40::-;;;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity 0.5.2;\n\nimport \"./IAccess.sol\";\n\ncontract AccessStorageModel is IAccess {\n    mapping(bytes32 => uint256) public roles;\n    bytes32[] public rolesKeys;\n\n    mapping(address => uint256) public permissions;\n}\n",
   "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/AccessStorageModel.sol",
   "ast": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/AccessStorageModel.sol",
     "exportedSymbols": {
       "AccessStorageModel": [
-        11056
+        11150
       ]
     },
-    "id": 11057,
+    "id": 11151,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11041,
+        "id": 11135,
         "literals": [
           "solidity",
           "0.5",
           ".2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:14"
+        "src": "0:22:15"
       },
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/IAccess.sol",
         "file": "./IAccess.sol",
-        "id": 11042,
+        "id": 11136,
         "nodeType": "ImportDirective",
-        "scope": 11057,
-        "sourceUnit": 11060,
-        "src": "24:23:14",
+        "scope": 11151,
+        "sourceUnit": 11154,
+        "src": "24:23:15",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -102,42 +102,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11043,
+              "id": 11137,
               "name": "IAccess",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11059,
-              "src": "80:7:14",
+              "referencedDeclaration": 11153,
+              "src": "80:7:15",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IAccess_$11059",
+                "typeIdentifier": "t_contract$_IAccess_$11153",
                 "typeString": "contract IAccess"
               }
             },
-            "id": 11044,
+            "id": 11138,
             "nodeType": "InheritanceSpecifier",
-            "src": "80:7:14"
+            "src": "80:7:15"
           }
         ],
         "contractDependencies": [
-          11059
+          11153
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11056,
+        "id": 11150,
         "linearizedBaseContracts": [
-          11056,
-          11059
+          11150,
+          11153
         ],
         "name": "AccessStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 11048,
+            "id": 11142,
             "name": "roles",
             "nodeType": "VariableDeclaration",
-            "scope": 11056,
-            "src": "94:40:14",
+            "scope": 11150,
+            "src": "94:40:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -145,28 +145,28 @@
               "typeString": "mapping(bytes32 => uint256)"
             },
             "typeName": {
-              "id": 11047,
+              "id": 11141,
               "keyType": {
-                "id": 11045,
+                "id": 11139,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
-                "src": "102:7:14",
+                "src": "102:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes32",
                   "typeString": "bytes32"
                 }
               },
               "nodeType": "Mapping",
-              "src": "94:27:14",
+              "src": "94:27:15",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_bytes32_$_t_uint256_$",
                 "typeString": "mapping(bytes32 => uint256)"
               },
               "valueType": {
-                "id": 11046,
+                "id": 11140,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "113:7:14",
+                "src": "113:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
@@ -178,11 +178,11 @@
           },
           {
             "constant": false,
-            "id": 11051,
+            "id": 11145,
             "name": "rolesKeys",
             "nodeType": "VariableDeclaration",
-            "scope": 11056,
-            "src": "140:26:14",
+            "scope": 11150,
+            "src": "140:26:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -191,19 +191,19 @@
             },
             "typeName": {
               "baseType": {
-                "id": 11049,
+                "id": 11143,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
-                "src": "140:7:14",
+                "src": "140:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes32",
                   "typeString": "bytes32"
                 }
               },
-              "id": 11050,
+              "id": 11144,
               "length": null,
               "nodeType": "ArrayTypeName",
-              "src": "140:9:14",
+              "src": "140:9:15",
               "typeDescriptions": {
                 "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
                 "typeString": "bytes32[]"
@@ -214,11 +214,11 @@
           },
           {
             "constant": false,
-            "id": 11055,
+            "id": 11149,
             "name": "permissions",
             "nodeType": "VariableDeclaration",
-            "scope": 11056,
-            "src": "173:46:14",
+            "scope": 11150,
+            "src": "173:46:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -226,28 +226,28 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 11054,
+              "id": 11148,
               "keyType": {
-                "id": 11052,
+                "id": 11146,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "181:7:14",
+                "src": "181:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
                   "typeString": "address"
                 }
               },
               "nodeType": "Mapping",
-              "src": "173:27:14",
+              "src": "173:27:15",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 11053,
+                "id": 11147,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "192:7:14",
+                "src": "192:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
@@ -258,40 +258,40 @@
             "visibility": "public"
           }
         ],
-        "scope": 11057,
-        "src": "49:173:14"
+        "scope": 11151,
+        "src": "49:173:15"
       }
     ],
-    "src": "0:223:14"
+    "src": "0:223:15"
   },
   "legacyAST": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/AccessStorageModel.sol",
     "exportedSymbols": {
       "AccessStorageModel": [
-        11056
+        11150
       ]
     },
-    "id": 11057,
+    "id": 11151,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11041,
+        "id": 11135,
         "literals": [
           "solidity",
           "0.5",
           ".2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:14"
+        "src": "0:22:15"
       },
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/IAccess.sol",
         "file": "./IAccess.sol",
-        "id": 11042,
+        "id": 11136,
         "nodeType": "ImportDirective",
-        "scope": 11057,
-        "sourceUnit": 11060,
-        "src": "24:23:14",
+        "scope": 11151,
+        "sourceUnit": 11154,
+        "src": "24:23:15",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -301,42 +301,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11043,
+              "id": 11137,
               "name": "IAccess",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11059,
-              "src": "80:7:14",
+              "referencedDeclaration": 11153,
+              "src": "80:7:15",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IAccess_$11059",
+                "typeIdentifier": "t_contract$_IAccess_$11153",
                 "typeString": "contract IAccess"
               }
             },
-            "id": 11044,
+            "id": 11138,
             "nodeType": "InheritanceSpecifier",
-            "src": "80:7:14"
+            "src": "80:7:15"
           }
         ],
         "contractDependencies": [
-          11059
+          11153
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11056,
+        "id": 11150,
         "linearizedBaseContracts": [
-          11056,
-          11059
+          11150,
+          11153
         ],
         "name": "AccessStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 11048,
+            "id": 11142,
             "name": "roles",
             "nodeType": "VariableDeclaration",
-            "scope": 11056,
-            "src": "94:40:14",
+            "scope": 11150,
+            "src": "94:40:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -344,28 +344,28 @@
               "typeString": "mapping(bytes32 => uint256)"
             },
             "typeName": {
-              "id": 11047,
+              "id": 11141,
               "keyType": {
-                "id": 11045,
+                "id": 11139,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
-                "src": "102:7:14",
+                "src": "102:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes32",
                   "typeString": "bytes32"
                 }
               },
               "nodeType": "Mapping",
-              "src": "94:27:14",
+              "src": "94:27:15",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_bytes32_$_t_uint256_$",
                 "typeString": "mapping(bytes32 => uint256)"
               },
               "valueType": {
-                "id": 11046,
+                "id": 11140,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "113:7:14",
+                "src": "113:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
@@ -377,11 +377,11 @@
           },
           {
             "constant": false,
-            "id": 11051,
+            "id": 11145,
             "name": "rolesKeys",
             "nodeType": "VariableDeclaration",
-            "scope": 11056,
-            "src": "140:26:14",
+            "scope": 11150,
+            "src": "140:26:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -390,19 +390,19 @@
             },
             "typeName": {
               "baseType": {
-                "id": 11049,
+                "id": 11143,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
-                "src": "140:7:14",
+                "src": "140:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes32",
                   "typeString": "bytes32"
                 }
               },
-              "id": 11050,
+              "id": 11144,
               "length": null,
               "nodeType": "ArrayTypeName",
-              "src": "140:9:14",
+              "src": "140:9:15",
               "typeDescriptions": {
                 "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
                 "typeString": "bytes32[]"
@@ -413,11 +413,11 @@
           },
           {
             "constant": false,
-            "id": 11055,
+            "id": 11149,
             "name": "permissions",
             "nodeType": "VariableDeclaration",
-            "scope": 11056,
-            "src": "173:46:14",
+            "scope": 11150,
+            "src": "173:46:15",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -425,28 +425,28 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 11054,
+              "id": 11148,
               "keyType": {
-                "id": 11052,
+                "id": 11146,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "181:7:14",
+                "src": "181:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
                   "typeString": "address"
                 }
               },
               "nodeType": "Mapping",
-              "src": "173:27:14",
+              "src": "173:27:15",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 11053,
+                "id": 11147,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
-                "src": "192:7:14",
+                "src": "192:7:15",
                 "typeDescriptions": {
                   "typeIdentifier": "t_uint256",
                   "typeString": "uint256"
@@ -457,11 +457,11 @@
             "visibility": "public"
           }
         ],
-        "scope": 11057,
-        "src": "49:173:14"
+        "scope": 11151,
+        "src": "49:173:15"
       }
     ],
-    "src": "0:223:14"
+    "src": "0:223:15"
   },
   "compiler": {
     "name": "solc",
@@ -469,7 +469,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-07T14:02:02.345Z",
+  "updatedAt": "2019-02-08T13:16:56.029Z",
   "devdoc": {
     "methods": {}
   },

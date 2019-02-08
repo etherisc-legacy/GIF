@@ -204,6 +204,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
         emit LogNewPayout(
             _productId,
+            _payoutId,
             claim.metadataId,
             metadatum.policyId,
             _claimId,

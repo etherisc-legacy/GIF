@@ -48,7 +48,7 @@ module.exports = async (deployer) => {
     '(uint256 time,bytes32 carrierFlightNumber,bytes32 departureYearMonthDay)',
     '(bytes1 status,int256 delay)',
     'FlightStatuses oracle',
-    { gas: 200000 },
+    { gas: 400000 },
   );
 
   // Propose FlightStatusesOracle as oracle

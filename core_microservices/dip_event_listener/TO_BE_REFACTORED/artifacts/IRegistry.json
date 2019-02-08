@@ -72,29 +72,29 @@
   ],
   "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820775fa13e95ceb5320cd9c6953773724a18a2e8f830c0726a39177d9c6457c6f60029",
   "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820775fa13e95ceb5320cd9c6953773724a18a2e8f830c0726a39177d9c6457c6f60029",
-  "sourceMap": "24:352:41:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:352:41;;;;;;;",
-  "deployedSourceMap": "24:352:41:-;;;;;",
+  "sourceMap": "24:352:42:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:352:42;;;;;;;",
+  "deployedSourceMap": "24:352:42:-;;;;;",
   "source": "pragma solidity 0.5.2;\n\ninterface IRegistry {\n    event LogContractRegistered(\n        uint256 release,\n        bytes32 contractName,\n        address contractAddress\n    );\n\n    event LogContractDeregistered(uint256 release, bytes32 contractName);\n\n    event LogInterfaceIdRegistered(bytes4 interfaceId, bytes32 contractName);\n\n    event LogReleasePrepared(uint256 release);\n}\n",
   "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
   "ast": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
     "exportedSymbols": {
       "IRegistry": [
-        14449
+        14546
       ]
     },
-    "id": 14450,
+    "id": 14547,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 14424,
+        "id": 14521,
         "literals": [
           "solidity",
           "0.5",
           ".2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:41"
+        "src": "0:22:42"
       },
       {
         "baseContracts": [],
@@ -102,9 +102,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 14449,
+        "id": 14546,
         "linearizedBaseContracts": [
-          14449
+          14546
         ],
         "name": "IRegistry",
         "nodeType": "ContractDefinition",
@@ -112,21 +112,21 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14432,
+            "id": 14529,
             "name": "LogContractRegistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14431,
+              "id": 14528,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14426,
+                  "id": 14523,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14432,
-                  "src": "87:15:41",
+                  "scope": 14529,
+                  "src": "87:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -134,10 +134,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14425,
+                    "id": 14522,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "87:7:41",
+                    "src": "87:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -148,12 +148,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 14428,
+                  "id": 14525,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14432,
-                  "src": "112:20:41",
+                  "scope": 14529,
+                  "src": "112:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -161,10 +161,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14427,
+                    "id": 14524,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "112:7:41",
+                    "src": "112:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -175,12 +175,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 14430,
+                  "id": 14527,
                   "indexed": false,
                   "name": "contractAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14432,
-                  "src": "142:23:41",
+                  "scope": 14529,
+                  "src": "142:23:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -188,10 +188,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 14429,
+                    "id": 14526,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "142:7:41",
+                    "src": "142:7:42",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -202,28 +202,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "77:94:41"
+              "src": "77:94:42"
             },
-            "src": "50:122:41"
+            "src": "50:122:42"
           },
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14438,
+            "id": 14535,
             "name": "LogContractDeregistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14437,
+              "id": 14534,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14434,
+                  "id": 14531,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14438,
-                  "src": "208:15:41",
+                  "scope": 14535,
+                  "src": "208:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -231,10 +231,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14433,
+                    "id": 14530,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "208:7:41",
+                    "src": "208:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -245,12 +245,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 14436,
+                  "id": 14533,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14438,
-                  "src": "225:20:41",
+                  "scope": 14535,
+                  "src": "225:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -258,10 +258,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14435,
+                    "id": 14532,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "225:7:41",
+                    "src": "225:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -271,28 +271,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "207:39:41"
+              "src": "207:39:42"
             },
-            "src": "178:69:41"
+            "src": "178:69:42"
           },
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14444,
+            "id": 14541,
             "name": "LogInterfaceIdRegistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14443,
+              "id": 14540,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14440,
+                  "id": 14537,
                   "indexed": false,
                   "name": "interfaceId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14444,
-                  "src": "284:18:41",
+                  "scope": 14541,
+                  "src": "284:18:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -300,10 +300,10 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 14439,
+                    "id": 14536,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
-                    "src": "284:6:41",
+                    "src": "284:6:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes4",
                       "typeString": "bytes4"
@@ -314,12 +314,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 14442,
+                  "id": 14539,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14444,
-                  "src": "304:20:41",
+                  "scope": 14541,
+                  "src": "304:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -327,10 +327,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14441,
+                    "id": 14538,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "304:7:41",
+                    "src": "304:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -340,28 +340,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "283:42:41"
+              "src": "283:42:42"
             },
-            "src": "253:73:41"
+            "src": "253:73:42"
           },
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14448,
+            "id": 14545,
             "name": "LogReleasePrepared",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14447,
+              "id": 14544,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14446,
+                  "id": 14543,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14448,
-                  "src": "357:15:41",
+                  "scope": 14545,
+                  "src": "357:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -369,10 +369,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14445,
+                    "id": 14542,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "357:7:41",
+                    "src": "357:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -382,36 +382,36 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "356:17:41"
+              "src": "356:17:42"
             },
-            "src": "332:42:41"
+            "src": "332:42:42"
           }
         ],
-        "scope": 14450,
-        "src": "24:352:41"
+        "scope": 14547,
+        "src": "24:352:42"
       }
     ],
-    "src": "0:377:41"
+    "src": "0:377:42"
   },
   "legacyAST": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
     "exportedSymbols": {
       "IRegistry": [
-        14449
+        14546
       ]
     },
-    "id": 14450,
+    "id": 14547,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 14424,
+        "id": 14521,
         "literals": [
           "solidity",
           "0.5",
           ".2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:41"
+        "src": "0:22:42"
       },
       {
         "baseContracts": [],
@@ -419,9 +419,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 14449,
+        "id": 14546,
         "linearizedBaseContracts": [
-          14449
+          14546
         ],
         "name": "IRegistry",
         "nodeType": "ContractDefinition",
@@ -429,21 +429,21 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14432,
+            "id": 14529,
             "name": "LogContractRegistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14431,
+              "id": 14528,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14426,
+                  "id": 14523,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14432,
-                  "src": "87:15:41",
+                  "scope": 14529,
+                  "src": "87:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -451,10 +451,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14425,
+                    "id": 14522,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "87:7:41",
+                    "src": "87:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -465,12 +465,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 14428,
+                  "id": 14525,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14432,
-                  "src": "112:20:41",
+                  "scope": 14529,
+                  "src": "112:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -478,10 +478,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14427,
+                    "id": 14524,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "112:7:41",
+                    "src": "112:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -492,12 +492,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 14430,
+                  "id": 14527,
                   "indexed": false,
                   "name": "contractAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14432,
-                  "src": "142:23:41",
+                  "scope": 14529,
+                  "src": "142:23:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -505,10 +505,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 14429,
+                    "id": 14526,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "142:7:41",
+                    "src": "142:7:42",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -519,28 +519,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "77:94:41"
+              "src": "77:94:42"
             },
-            "src": "50:122:41"
+            "src": "50:122:42"
           },
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14438,
+            "id": 14535,
             "name": "LogContractDeregistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14437,
+              "id": 14534,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14434,
+                  "id": 14531,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14438,
-                  "src": "208:15:41",
+                  "scope": 14535,
+                  "src": "208:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -548,10 +548,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14433,
+                    "id": 14530,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "208:7:41",
+                    "src": "208:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -562,12 +562,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 14436,
+                  "id": 14533,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14438,
-                  "src": "225:20:41",
+                  "scope": 14535,
+                  "src": "225:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -575,10 +575,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14435,
+                    "id": 14532,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "225:7:41",
+                    "src": "225:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -588,28 +588,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "207:39:41"
+              "src": "207:39:42"
             },
-            "src": "178:69:41"
+            "src": "178:69:42"
           },
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14444,
+            "id": 14541,
             "name": "LogInterfaceIdRegistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14443,
+              "id": 14540,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14440,
+                  "id": 14537,
                   "indexed": false,
                   "name": "interfaceId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14444,
-                  "src": "284:18:41",
+                  "scope": 14541,
+                  "src": "284:18:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -617,10 +617,10 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 14439,
+                    "id": 14536,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
-                    "src": "284:6:41",
+                    "src": "284:6:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes4",
                       "typeString": "bytes4"
@@ -631,12 +631,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 14442,
+                  "id": 14539,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14444,
-                  "src": "304:20:41",
+                  "scope": 14541,
+                  "src": "304:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -644,10 +644,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14441,
+                    "id": 14538,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "304:7:41",
+                    "src": "304:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -657,28 +657,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "283:42:41"
+              "src": "283:42:42"
             },
-            "src": "253:73:41"
+            "src": "253:73:42"
           },
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14448,
+            "id": 14545,
             "name": "LogReleasePrepared",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14447,
+              "id": 14544,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14446,
+                  "id": 14543,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14448,
-                  "src": "357:15:41",
+                  "scope": 14545,
+                  "src": "357:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -686,10 +686,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14445,
+                    "id": 14542,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "357:7:41",
+                    "src": "357:7:42",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -699,16 +699,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "356:17:41"
+              "src": "356:17:42"
             },
-            "src": "332:42:41"
+            "src": "332:42:42"
           }
         ],
-        "scope": 14450,
-        "src": "24:352:41"
+        "scope": 14547,
+        "src": "24:352:42"
       }
     ],
-    "src": "0:377:41"
+    "src": "0:377:42"
   },
   "compiler": {
     "name": "solc",
@@ -716,7 +716,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-07T14:02:02.372Z",
+  "updatedAt": "2019-02-08T13:16:56.056Z",
   "devdoc": {
     "methods": {}
   },

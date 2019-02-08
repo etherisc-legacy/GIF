@@ -16,7 +16,7 @@ contract FlightDelayOraclize is Product {
         uint256 arrivalTime
     );
 
-    event LogRequestPayout(uint256 claimId, uint256 payoutId, uint256 amount);
+    event LogRequestPayout(uint256 policyId, uint256 claimId, uint256 payoutId, uint256 amount);
 
     event LogUnprocessableStatus(uint256 requestId, uint256 policyId);
 
@@ -301,7 +301,7 @@ contract FlightDelayOraclize is Product {
             uint256 claimId = newClaim(_policyId);
             uint256 payoutId = confirmClaim(claimId, _payoutAmount);
 
-            emit LogRequestPayout(claimId, payoutId, _payoutAmount);
+            emit LogRequestPayout(_policyId, claimId, payoutId, _payoutAmount);
         }
     }
 }

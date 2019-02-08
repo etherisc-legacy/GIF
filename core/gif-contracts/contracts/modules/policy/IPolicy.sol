@@ -57,6 +57,7 @@ interface IPolicy {
 
     event LogNewPayout(
         uint256 productId,
+        uint256 payoutId,
         uint256 metadataId,
         uint256 policyId,
         uint256 claimId,
