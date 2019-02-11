@@ -70,8 +70,8 @@
       "type": "event"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820775fa13e95ceb5320cd9c6953773724a18a2e8f830c0726a39177d9c6457c6f60029",
-  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820775fa13e95ceb5320cd9c6953773724a18a2e8f830c0726a39177d9c6457c6f60029",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a723058205e2432367e733d9ec3664e4d638da02cd0a500076ed3d83d1f267ac5676c301a0029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a723058205e2432367e733d9ec3664e4d638da02cd0a500076ed3d83d1f267ac5676c301a0029",
   "sourceMap": "24:352:42:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:352:42;;;;;;;",
   "deployedSourceMap": "24:352:42:-;;;;;",
   "source": "pragma solidity 0.5.2;\n\ninterface IRegistry {\n    event LogContractRegistered(\n        uint256 release,\n        bytes32 contractName,\n        address contractAddress\n    );\n\n    event LogContractDeregistered(uint256 release, bytes32 contractName);\n\n    event LogInterfaceIdRegistered(bytes4 interfaceId, bytes32 contractName);\n\n    event LogReleasePrepared(uint256 release);\n}\n",
@@ -80,14 +80,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
     "exportedSymbols": {
       "IRegistry": [
-        14546
+        14761
       ]
     },
-    "id": 14547,
+    "id": 14762,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 14521,
+        "id": 14736,
         "literals": [
           "solidity",
           "0.5",
@@ -102,9 +102,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 14546,
+        "id": 14761,
         "linearizedBaseContracts": [
-          14546
+          14761
         ],
         "name": "IRegistry",
         "nodeType": "ContractDefinition",
@@ -112,20 +112,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14529,
+            "id": 14744,
             "name": "LogContractRegistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14528,
+              "id": 14743,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14523,
+                  "id": 14738,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14529,
+                  "scope": 14744,
                   "src": "87:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -134,7 +134,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14522,
+                    "id": 14737,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "87:7:42",
@@ -148,11 +148,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 14525,
+                  "id": 14740,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14529,
+                  "scope": 14744,
                   "src": "112:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -161,7 +161,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14524,
+                    "id": 14739,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "112:7:42",
@@ -175,11 +175,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 14527,
+                  "id": 14742,
                   "indexed": false,
                   "name": "contractAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14529,
+                  "scope": 14744,
                   "src": "142:23:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -188,7 +188,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 14526,
+                    "id": 14741,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "142:7:42",
@@ -209,20 +209,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14535,
+            "id": 14750,
             "name": "LogContractDeregistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14534,
+              "id": 14749,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14531,
+                  "id": 14746,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14535,
+                  "scope": 14750,
                   "src": "208:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -231,7 +231,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14530,
+                    "id": 14745,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "208:7:42",
@@ -245,11 +245,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 14533,
+                  "id": 14748,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14535,
+                  "scope": 14750,
                   "src": "225:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -258,7 +258,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14532,
+                    "id": 14747,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "225:7:42",
@@ -278,20 +278,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14541,
+            "id": 14756,
             "name": "LogInterfaceIdRegistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14540,
+              "id": 14755,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14537,
+                  "id": 14752,
                   "indexed": false,
                   "name": "interfaceId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14541,
+                  "scope": 14756,
                   "src": "284:18:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -300,7 +300,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 14536,
+                    "id": 14751,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "284:6:42",
@@ -314,11 +314,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 14539,
+                  "id": 14754,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14541,
+                  "scope": 14756,
                   "src": "304:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -327,7 +327,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14538,
+                    "id": 14753,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "304:7:42",
@@ -347,20 +347,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14545,
+            "id": 14760,
             "name": "LogReleasePrepared",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14544,
+              "id": 14759,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14543,
+                  "id": 14758,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14545,
+                  "scope": 14760,
                   "src": "357:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -369,7 +369,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14542,
+                    "id": 14757,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "357:7:42",
@@ -387,7 +387,7 @@
             "src": "332:42:42"
           }
         ],
-        "scope": 14547,
+        "scope": 14762,
         "src": "24:352:42"
       }
     ],
@@ -397,14 +397,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
     "exportedSymbols": {
       "IRegistry": [
-        14546
+        14761
       ]
     },
-    "id": 14547,
+    "id": 14762,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 14521,
+        "id": 14736,
         "literals": [
           "solidity",
           "0.5",
@@ -419,9 +419,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 14546,
+        "id": 14761,
         "linearizedBaseContracts": [
-          14546
+          14761
         ],
         "name": "IRegistry",
         "nodeType": "ContractDefinition",
@@ -429,20 +429,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14529,
+            "id": 14744,
             "name": "LogContractRegistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14528,
+              "id": 14743,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14523,
+                  "id": 14738,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14529,
+                  "scope": 14744,
                   "src": "87:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -451,7 +451,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14522,
+                    "id": 14737,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "87:7:42",
@@ -465,11 +465,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 14525,
+                  "id": 14740,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14529,
+                  "scope": 14744,
                   "src": "112:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -478,7 +478,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14524,
+                    "id": 14739,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "112:7:42",
@@ -492,11 +492,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 14527,
+                  "id": 14742,
                   "indexed": false,
                   "name": "contractAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14529,
+                  "scope": 14744,
                   "src": "142:23:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -505,7 +505,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 14526,
+                    "id": 14741,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "142:7:42",
@@ -526,20 +526,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14535,
+            "id": 14750,
             "name": "LogContractDeregistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14534,
+              "id": 14749,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14531,
+                  "id": 14746,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14535,
+                  "scope": 14750,
                   "src": "208:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -548,7 +548,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14530,
+                    "id": 14745,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "208:7:42",
@@ -562,11 +562,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 14533,
+                  "id": 14748,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14535,
+                  "scope": 14750,
                   "src": "225:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -575,7 +575,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14532,
+                    "id": 14747,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "225:7:42",
@@ -595,20 +595,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14541,
+            "id": 14756,
             "name": "LogInterfaceIdRegistered",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14540,
+              "id": 14755,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14537,
+                  "id": 14752,
                   "indexed": false,
                   "name": "interfaceId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14541,
+                  "scope": 14756,
                   "src": "284:18:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -617,7 +617,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 14536,
+                    "id": 14751,
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "284:6:42",
@@ -631,11 +631,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 14539,
+                  "id": 14754,
                   "indexed": false,
                   "name": "contractName",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14541,
+                  "scope": 14756,
                   "src": "304:20:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -644,7 +644,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 14538,
+                    "id": 14753,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "304:7:42",
@@ -664,20 +664,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 14545,
+            "id": 14760,
             "name": "LogReleasePrepared",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 14544,
+              "id": 14759,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 14543,
+                  "id": 14758,
                   "indexed": false,
                   "name": "release",
                   "nodeType": "VariableDeclaration",
-                  "scope": 14545,
+                  "scope": 14760,
                   "src": "357:15:42",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -686,7 +686,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 14542,
+                    "id": 14757,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "357:7:42",
@@ -704,7 +704,7 @@
             "src": "332:42:42"
           }
         ],
-        "scope": 14547,
+        "scope": 14762,
         "src": "24:352:42"
       }
     ],
@@ -716,7 +716,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-08T13:16:56.056Z",
+  "updatedAt": "2019-02-11T09:37:08.250Z",
   "devdoc": {
     "methods": {}
   },
