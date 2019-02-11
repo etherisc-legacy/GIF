@@ -299,7 +299,7 @@ class FddApi {
     const { contractPayoutId, amount, policyId } = content;
     await this._gif.confirmPayout(contractPayoutId, amount);
     await this._gif.sendNotification({
-      name: 'claim_paid_out',
+      type: 'claim_paid_out',
       data: { policy: { id: policyId } },
       props: {},
     });
@@ -314,7 +314,7 @@ class FddApi {
   async handlePayoutError({ content, fields, properties }) {
     const { policyId, error } = content;
     await this._gif.sendNotification({
-      name: 'policy_error',
+      type: 'policy_error',
       data: { policy: { id: policyId }, error },
       props: {},
     });
