@@ -36,10 +36,13 @@ async function tempSaveArtifacts(web3) {
     if (networks.length) {
       const { contractName, abi } = artifact;
 
+      const { address, transactionHash } = artifact.networks[networks[0]];
+
       knownContracts.push({
         contractName,
         networkId: networks[0],
-        address: artifact.networks[networks[0]].address,
+        address,
+        transactionHash,
         abi,
       });
     }

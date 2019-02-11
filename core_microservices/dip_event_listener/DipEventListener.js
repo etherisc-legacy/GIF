@@ -1,6 +1,7 @@
 const Web3 = require('web3');
-const models = require('./models');
+const retry = require('async-retry');
 const tempSaveArtifacts = require('./TO_BE_REFACTORED/tempSaveArtifacts');
+const models = require('./models');
 
 /**
  * DIP Event Listener microservice
@@ -11,21 +12,28 @@ class DipEventListener {
    * @param {object} amqp
    * @param {object} db
    * @param {object} log
-   * @param {object} http
    * @param {object} config
    */
   constructor(
     {
-      amqp, db, log, http, config,
+      amqp, db, log, config,
     },
   ) {
     this._amqp = amqp;
-    this._db = db;
     this._models = models(db);
     this._log = log;
-    this._http = http;
-    this._web3 = new Web3(new Web3.providers.WebsocketProvider(config.rpcNode));
+    this._config = config;
     this._networkName = config.networkName;
+
+    this.setWeb3();
+  }
+
+  /**
+   * Initialize web3
+   * @return {void}
+   */
+  setWeb3() {
+    this._web3 = new Web3(new Web3.providers.WebsocketProvider(this._config.rpcNode));
   }
 
   /**
@@ -35,6 +43,8 @@ class DipEventListener {
   async bootstrap() {
     try {
       /* TO_BE_REFACTORED */
+      this._log.info('Saving artifacts');
+
       const { Contract } = this._models;
 
       const knownContracts = await tempSaveArtifacts(this._web3);
@@ -46,6 +56,8 @@ class DipEventListener {
           version: '1.0.0',
         });
 
+        const { blockNumber } = await this._web3.eth.getTransaction(knownContracts[i].transactionHash);
+
         await Contract.query()
           .upsertGraph({
             product: knownContracts[i].contractName,
@@ -53,15 +65,18 @@ class DipEventListener {
             version: '1.0.0',
             address: knownContracts[i].address.toLowerCase(),
             abi: JSON.stringify(knownContracts[i].abi),
+            transactionHash: knownContracts[i].transactionHash,
+            blockNumber,
           });
       }
 
+      this._log.info('Artifacts saved');
       /* TO_BE_REFACTORED */
-      this.fromBlock = await this._web3.eth.getBlockNumber();
 
-      await this.checkPastEvents();
-
-      this.watchEventsRealtime();
+      await retry(this.watchEvents.bind(this), {
+        retries: 10,
+        onRetry: () => this._log.info('Try to reconnect'),
+      });
 
       await this._amqp.consume({
         messageType: 'existingEventsRequest',
@@ -123,11 +138,15 @@ class DipEventListener {
    * @return {void}
    */
   async getPastEvents(addresses) {
+    this._log.info('Get past events');
+
     try {
-      const { Event } = this._models;
+      const { Event, Contract } = this._models;
 
       for (let i = 0, l = addresses.length; i < l; i += 1) {
         const { address } = addresses[i];
+
+        let fromBlock;
 
         const [lastevent] = await Event.query()
           .select('blockNumber')
@@ -135,11 +154,22 @@ class DipEventListener {
           .orderBy('blockNumber', 'DESC')
           .limit(1);
 
-        const fromBlock = lastevent && lastevent.blockNumber ? lastevent.blockNumber + 1 : 0;
-        const fromBlockHex = (fromBlock + 0x10000).toString(16).substr(-4).toUpperCase();
+        if (lastevent && lastevent.blockNumber) {
+          fromBlock = lastevent.blockNumber + 1;
+        } else {
+          const [contract] = await Contract.query()
+            .select('blockNumber')
+            .where({ networkName: this._networkName, address: address.toLowerCase() })
+            .orderBy('blockNumber', 'DESC')
+            .limit(1);
+
+          fromBlock = contract && contract.blockNumber ? contract.blockNumber : 0;
+        }
+
+        this._log.info(`Get past logs for ${address} from ${fromBlock} block`);
 
         const events = await this._web3.eth.getPastLogs({
-          fromBlock: fromBlockHex,
+          fromBlock: this._web3.utils.toHex(fromBlock),
           address,
         });
 
@@ -184,34 +214,22 @@ class DipEventListener {
   }
 
   /**
-   * Watch events realtime
+   * Watch events
    * @return {void}
    */
-  watchEventsRealtime() {
-    try {
-      this._web3.eth.subscribe('logs', { fromBlock: this.fromBlock }, (e) => {
-        if (!e) {
-          return;
-        }
-        this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-        this.reconnect();
-      })
-        .on('data', this.onData.bind(this))
-        .on('error', this.onError.bind(this));
-    } catch (e) {
-      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-      this.reconnect();
-    }
-  }
+  async watchEvents() {
+    this.setWeb3();
+    const fromBlock = await this._web3.eth.getBlockNumber();
 
-  /**
-   * Try to reconnect every 10 seconds
-   */
-  reconnect() {
-    setTimeout(async () => {
-      await this.checkPastEvents();
-      this.watchEventsRealtime();
-    }, 1000 * 10 /* 10 sec */);
+    await this.checkPastEvents();
+
+    this._web3.eth.subscribe('logs', { fromBlock }, (e) => {
+      if (!e) return;
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      throw new Error(e);
+    })
+      .on('data', this.onData.bind(this))
+      .on('error', this.onError.bind(this));
   }
 
   /**
@@ -280,6 +298,7 @@ class DipEventListener {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
   }
+
 
   /**
    * Send existing events

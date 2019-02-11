@@ -6,6 +6,7 @@
   "scripts": {
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
+    "create:migration": "knex migrate:make",
     "dev": "node bootstrap.js",
     "prod": "WS_PROVIDER=${WS_PROVIDER:-ws://dip-rpc-node:8545} node bootstrap.js",
     "test": "NODE_ENV=test mocha",
@@ -17,6 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@etherisc/microservice": "^0.4.10",
+    "async-retry": "^1.2.3",
     "fs-jetpack": "^2.2.1",
     "knex": "^0.15.2",
     "lodash": "^4.17.11",
