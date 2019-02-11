@@ -18,7 +18,7 @@ const HTTP_PROVIDER = 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
  * Signer factory
  * @return {{}}
  */
-const signer = () => new Web3(new HDWalletProvider(MNEMONIC, HTTP_PROVIDER));
+const signer = () => new Web3(new HDWalletProvider(MNEMONIC, HTTP_PROVIDER, 0, 1, false));
 
 
 /** */
