@@ -186,7 +186,7 @@ class PolicyTable extends Component {
                     </label>
                   </div>
                 } */}
-                {/* {CustomConfig.policyTable.disabledEth &&
+                {CustomConfig.policyTable.disabledEth &&
                 <div className={styles.disabled}>
                   <label htmlFor="eth">
                     <Field id="eth" name="currency" onChange={v => this.selectCurrency(v)} component="input"
@@ -195,7 +195,7 @@ class PolicyTable extends Component {
                     <div className={styles.small}>(back soon!)</div>
                   </label>
                 </div>
-                } */}
+                }
                 <div>
                   <label htmlFor="eur">
                     <Field id="eur" name="currency" onChange={v => this.selectCurrency(v)} component="input"
@@ -203,18 +203,20 @@ class PolicyTable extends Component {
                     <span>EUR</span>
                   </label>
                 </div>
-                <div>
+                <div className={styles.disabled}>
                   <label htmlFor="usd">
                     <Field id="usd" name="currency" onChange={v => this.selectCurrency(v)} component="input"
-                           type="radio" value="2" disabled="true" />
+                           type="radio" value="2" disabled />
                     <span>USD</span>
+                    <div className={styles.small}>(back soon!)</div>
                   </label>
                 </div>
-                <div>
+                <div className={styles.disabled}>
                   <label htmlFor="gbp">
                     <Field id="gbp" name="currency" onChange={v => this.selectCurrency(v)} component="input"
-                           type="radio" value="3" disabled="true" />
+                           type="radio" value="3" disabled />
                     <span>GBP</span>
+                    <div className={styles.small}>(back soon!)</div>
                   </label>
                 </div>
               </div>

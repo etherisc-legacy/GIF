@@ -1,4 +1,5 @@
 const handlebars = require('handlebars');
+const moment = require('moment');
 
 /**
  * Template resolver
@@ -12,6 +13,11 @@ class TemplateResolver {
   constructor(config, s3) {
     this.config = config;
     this.s3 = s3.client;
+
+    handlebars.registerHelper({
+      date: value => `${moment(value).utcOffset(moment.parseZone(value).utcOffset()).format('MMMM DD, YYYY HH:mm')} (local time)`,
+      money: value => Number((Number(value) / 100).toFixed(0)),
+    });
   }
 
   /**

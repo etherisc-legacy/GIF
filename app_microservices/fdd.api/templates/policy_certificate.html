@@ -52,12 +52,12 @@
 
           <tr>
             <td>From/When:</td>
-            <td>{{policy.extra.origin}} {{policy.extra.departsAt}}</td>
+            <td>{{policy.extra.origin}} {{date policy.extra.departsAt}}</td>
           </tr>
 
           <tr>
             <td>To/When:</td>
-            <td>{{policy.extra.destination}} {{policy.extra.arrivesAt}}</td>
+            <td>{{policy.extra.destination}} {{date policy.extra.arrivesAt}}</td>
           </tr>
 
           <tr>
@@ -73,14 +73,14 @@
           <tr>
             <td>Premium Amount:</td>
             <td>
-              <p>Total, <span class="currency">{{policy.extra.currency}}</span>: {{policy.extra.premium}}</p>
+              <p>Total, <span class="currency">{{policy.extra.currency}}</span>: {{money policy.extra.premium}}</p>
             </td>
           </tr>
 
           <tr>
             <td>Compensation</td>
             <td>
-              <p><b>Payouts for premium {{policy.extra.premium}}, {{policy.extra.currency}}</b></p>
+              <p><b>Payouts for premium {{money policy.extra.premium}}, {{policy.extra.currency}}</b></p>
               <table>
                 <tbody>
                   <tr>
@@ -95,9 +95,9 @@
                     <td>Payout</td>
                     <!--<td>{{policy.certificate.compensation.d15}}</td>-->
                     <!--<td>{{policy.certificate.compensation.d30}}</td>-->
-                    <td>{{policy.extra.payout3}}</td>
-                    <td>{{policy.extra.payout4}}</td>
-                    <td>{{policy.extra.payout5}}</td>
+                    <td>{{money policy.extra.payout3}}</td>
+                    <td>{{money policy.extra.payout4}}</td>
+                    <td>{{money policy.extra.payout5}}</td>
                   </tr>
                 </tbody>
               </table>
