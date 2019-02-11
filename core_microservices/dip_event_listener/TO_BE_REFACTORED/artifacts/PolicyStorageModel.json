@@ -526,26 +526,95 @@
       ],
       "name": "LogPayoutStateChanged",
       "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "payoutId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogPayoutCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "productId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "policyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "payoutId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "remainder",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "state",
+          "type": "uint8"
+        }
+      ],
+      "name": "LogPartialPayout",
+      "type": "event"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b506105f2806100206000396000f3fe608060405234801561001057600080fd5b5060043610610074576000357c010000000000000000000000000000000000000000000000000000000090048063304de873146100795780637a870b6314610104578063a0b7992b1461018f578063c2a0fa481461026a578063f894160e146102e0575b600080fd5b6100af6004803603604081101561008f57600080fd5b81019080803590602001909291908035906020019092919050505061035d565b604051808981526020018881526020018781526020018681526020018560018111156100d757fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b61013a6004803603604081101561011a57600080fd5b8101908080359060200190929190803590602001909291905050506103ce565b6040518089815260200188815260200187815260200186815260200185600381111561016257fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b6101c5600480360360408110156101a557600080fd5b81019080803590602001909291908035906020019092919050505061043f565b604051808d81526020018c81526020018b1515151581526020018a1515151581526020018973ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200188815260200187815260200186815260200185600281111561023957fe5b60ff1681526020018481526020018381526020018281526020019c5050505050505050505050505060405180910390f35b6102a06004803603604081101561028057600080fd5b810190808035906020019092919080359060200190929190505050610502565b604051808681526020018560018111156102b657fe5b60ff1681526020018481526020018381526020018281526020019550505050505060405180910390f35b610316600480360360408110156102f657600080fd5b810190808035906020019092919080359060200190929190505050610561565b6040518087815260200186815260200185600281111561033257fe5b60ff168152602001848152602001838152602001828152602001965050505050505060405180910390f35b60046020528160005260406000208181548110151561037857fe5b9060005260206000209060080201600091509150508060000154908060010154908060020154908060030154908060040160009054906101000a900460ff16908060050154908060060154908060070154905088565b6001602052816000526040600020818154811015156103e957fe5b9060005260206000209060090201600091509150508060000154908060010154908060020154908060030154908060050160009054906101000a900460ff16908060060154908060070154908060080154905088565b60006020528160005260406000208181548110151561045a57fe5b90600052602060002090600c0201600091509150508060000154908060010154908060040160009054906101000a900460ff16908060040160019054906101000a900460ff16908060040160029054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060050154908060060154908060070154908060080160009054906101000a900460ff169080600901549080600a01549080600b015490508c565b60026020528160005260406000208181548110151561051d57fe5b9060005260206000209060050201600091509150508060000154908060010160009054906101000a900460ff16908060020154908060030154908060040154905085565b60036020528160005260406000208181548110151561057c57fe5b9060005260206000209060060201600091509150508060000154908060010154908060020160009054906101000a900460ff1690806003015490806004015490806005015490508656fea165627a7a72305820069dfc0689993296ca37aa9373066d91fbff32c9b256f3f4d0d2824879f3c29e0029",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610074576000357c010000000000000000000000000000000000000000000000000000000090048063304de873146100795780637a870b6314610104578063a0b7992b1461018f578063c2a0fa481461026a578063f894160e146102e0575b600080fd5b6100af6004803603604081101561008f57600080fd5b81019080803590602001909291908035906020019092919050505061035d565b604051808981526020018881526020018781526020018681526020018560018111156100d757fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b61013a6004803603604081101561011a57600080fd5b8101908080359060200190929190803590602001909291905050506103ce565b6040518089815260200188815260200187815260200186815260200185600381111561016257fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b6101c5600480360360408110156101a557600080fd5b81019080803590602001909291908035906020019092919050505061043f565b604051808d81526020018c81526020018b1515151581526020018a1515151581526020018973ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200188815260200187815260200186815260200185600281111561023957fe5b60ff1681526020018481526020018381526020018281526020019c5050505050505050505050505060405180910390f35b6102a06004803603604081101561028057600080fd5b810190808035906020019092919080359060200190929190505050610502565b604051808681526020018560018111156102b657fe5b60ff1681526020018481526020018381526020018281526020019550505050505060405180910390f35b610316600480360360408110156102f657600080fd5b810190808035906020019092919080359060200190929190505050610561565b6040518087815260200186815260200185600281111561033257fe5b60ff168152602001848152602001838152602001828152602001965050505050505060405180910390f35b60046020528160005260406000208181548110151561037857fe5b9060005260206000209060080201600091509150508060000154908060010154908060020154908060030154908060040160009054906101000a900460ff16908060050154908060060154908060070154905088565b6001602052816000526040600020818154811015156103e957fe5b9060005260206000209060090201600091509150508060000154908060010154908060020154908060030154908060050160009054906101000a900460ff16908060060154908060070154908060080154905088565b60006020528160005260406000208181548110151561045a57fe5b90600052602060002090600c0201600091509150508060000154908060010154908060040160009054906101000a900460ff16908060040160019054906101000a900460ff16908060040160029054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060050154908060060154908060070154908060080160009054906101000a900460ff169080600901549080600a01549080600b015490508c565b60026020528160005260406000208181548110151561051d57fe5b9060005260206000209060050201600091509150508060000154908060010160009054906101000a900460ff16908060020154908060030154908060040154905085565b60036020528160005260406000208181548110151561057c57fe5b9060005260206000209060060201600091509150508060000154908060010154908060020160009054906101000a900460ff1690806003015490806004015490806005015490508656fea165627a7a72305820069dfc0689993296ca37aa9373066d91fbff32c9b256f3f4d0d2824879f3c29e0029",
+  "bytecode": "0x608060405234801561001057600080fd5b5061050a806100206000396000f3fe608060405234801561001057600080fd5b5060043610610073577c01000000000000000000000000000000000000000000000000000000006000350463304de87381146100785780637a870b63146100f0578063a0b7992b1461013b578063c2a0fa4814610203578063f894160e14610266575b600080fd5b61009b6004803603604081101561008e57600080fd5b50803590602001356102d0565b604051808981526020018881526020018781526020018681526020018560018111156100c357fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b6101136004803603604081101561010657600080fd5b5080359060200135610335565b604051808981526020018881526020018781526020018681526020018560038111156100c357fe5b61015e6004803603604081101561015157600080fd5b508035906020013561039a565b604051808d81526020018c81526020018b1515151581526020018a1515151581526020018973ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018881526020018781526020018681526020018560028111156101d257fe5b60ff1681526020018481526020018381526020018281526020019c5050505050505050505050505060405180910390f35b6102266004803603604081101561021957600080fd5b5080359060200135610437565b6040518086815260200185600181111561023c57fe5b60ff1681526020018481526020018381526020018281526020019550505050505060405180910390f35b6102896004803603604081101561027c57600080fd5b5080359060200135610488565b604051808781526020018681526020018560028111156102a557fe5b60ff168152602001848152602001838152602001828152602001965050505050505060405180910390f35b6004602052816000526040600020818154811015156102eb57fe5b6000918252602090912060089091020180546001820154600283015460038401546004850154600586015460068701546007909701549598509396509194909360ff909216929188565b60016020528160005260406000208181548110151561035057fe5b6000918252602090912060099091020180546001820154600283015460038401546005850154600686015460078701546008909701549598509396509194909360ff909216929188565b6000602052816000526040600020818154811015156103b557fe5b60009182526020909120600c9091020180546001820154600483015460058401546006850154600786015460088701546009880154600a890154600b90990154979a5095985060ff8086169861010087048216986201000090970473ffffffffffffffffffffffffffffffffffffffff1697959694959394919092169291908c565b60026020528160005260406000208181548110151561045257fe5b60009182526020909120600590910201805460018201546002830154600384015460049094015492955060ff9091169350919085565b6003602052816000526040600020818154811015156104a357fe5b600091825260209091206006909102018054600182015460028301546003840154600485015460059095015493965091945060ff169290918656fea165627a7a723058201b7f48b2e1410277d31a5cd0fd066a52d7ac7808d4614878b53bc0a3cf383b200029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610073577c01000000000000000000000000000000000000000000000000000000006000350463304de87381146100785780637a870b63146100f0578063a0b7992b1461013b578063c2a0fa4814610203578063f894160e14610266575b600080fd5b61009b6004803603604081101561008e57600080fd5b50803590602001356102d0565b604051808981526020018881526020018781526020018681526020018560018111156100c357fe5b60ff1681526020018481526020018381526020018281526020019850505050505050505060405180910390f35b6101136004803603604081101561010657600080fd5b5080359060200135610335565b604051808981526020018881526020018781526020018681526020018560038111156100c357fe5b61015e6004803603604081101561015157600080fd5b508035906020013561039a565b604051808d81526020018c81526020018b1515151581526020018a1515151581526020018973ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018881526020018781526020018681526020018560028111156101d257fe5b60ff1681526020018481526020018381526020018281526020019c5050505050505050505050505060405180910390f35b6102266004803603604081101561021957600080fd5b5080359060200135610437565b6040518086815260200185600181111561023c57fe5b60ff1681526020018481526020018381526020018281526020019550505050505060405180910390f35b6102896004803603604081101561027c57600080fd5b5080359060200135610488565b604051808781526020018681526020018560028111156102a557fe5b60ff168152602001848152602001838152602001828152602001965050505050505060405180910390f35b6004602052816000526040600020818154811015156102eb57fe5b6000918252602090912060089091020180546001820154600283015460038401546004850154600586015460068701546007909701549598509396509194909360ff909216929188565b60016020528160005260406000208181548110151561035057fe5b6000918252602090912060099091020180546001820154600283015460038401546005850154600686015460078701546008909701549598509396509194909360ff909216929188565b6000602052816000526040600020818154811015156103b557fe5b60009182526020909120600c9091020180546001820154600483015460058401546006850154600786015460088701546009880154600a890154600b90990154979a5095985060ff8086169861010087048216986201000090970473ffffffffffffffffffffffffffffffffffffffff1697959694959394919092169291908c565b60026020528160005260406000208181548110151561045257fe5b60009182526020909120600590910201805460018201546002830154600384015460049094015492955060ff9091169350919085565b6003602052816000526040600020818154811015156104a357fe5b600091825260209091206006909102018054600182015460028301546003840154600485015460059095015493965091945060ff169290918656fea165627a7a723058201b7f48b2e1410277d31a5cd0fd066a52d7ac7808d4614878b53bc0a3cf383b200029",
   "sourceMap": "49:303:34:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:303:34;;;;;;;",
-  "deployedSourceMap": "49:303:34:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:303:34;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;306:43;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;306:43:34;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;147:53;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;147:53:34;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;94:46;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;94:46:34;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;207:44;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;207:44:34;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;258:41;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;258:41:34;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;306:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;147:53::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;94:46::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;207:44::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;258:41::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "deployedSourceMap": "49:303:34:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:303:34;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;306:43;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;306:43:34;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;147:53;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;147:53:34;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;94:46;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;94:46:34;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;207:44;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;207:44:34;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;258:41;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;258:41:34;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;306:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;306:43:34;;-1:-1:-1;306:43:34;;;;;;;;;;;:::o;147:53::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;147:53:34;;-1:-1:-1;147:53:34;;;;;;;;;;;:::o;94:46::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;94:46:34;;-1:-1:-1;94:46:34;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;207:44::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;207:44:34;;;;;-1:-1:-1;207:44:34;;;:::o;258:41::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;258:41:34;;-1:-1:-1;258:41:34;;;;;;:::o",
   "source": "pragma solidity 0.5.2;\n\nimport \"./IPolicy.sol\";\n\ncontract PolicyStorageModel is IPolicy {\n    mapping(uint256 => Metadata[]) public metadata;\n\n    mapping(uint256 => Application[]) public applications;\n\n    mapping(uint256 => Policy[]) public policies;\n\n    mapping(uint256 => Claim[]) public claims;\n\n    mapping(uint256 => Payout[]) public payouts;\n}\n",
   "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/PolicyStorageModel.sol",
   "ast": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/PolicyStorageModel.sol",
     "exportedSymbols": {
       "PolicyStorageModel": [
-        13299
+        13514
       ]
     },
-    "id": 13300,
+    "id": 13515,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 13270,
+        "id": 13485,
         "literals": [
           "solidity",
           "0.5",
@@ -557,10 +626,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/IPolicy.sol",
         "file": "./IPolicy.sol",
-        "id": 13271,
+        "id": 13486,
         "nodeType": "ImportDirective",
-        "scope": 13300,
-        "sourceUnit": 12153,
+        "scope": 13515,
+        "sourceUnit": 12217,
         "src": "24:23:34",
         "symbolAliases": [],
         "unitAlias": ""
@@ -571,52 +640,52 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 13272,
+              "id": 13487,
               "name": "IPolicy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 12152,
+              "referencedDeclaration": 12216,
               "src": "80:7:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IPolicy_$12152",
+                "typeIdentifier": "t_contract$_IPolicy_$12216",
                 "typeString": "contract IPolicy"
               }
             },
-            "id": 13273,
+            "id": 13488,
             "nodeType": "InheritanceSpecifier",
             "src": "80:7:34"
           }
         ],
         "contractDependencies": [
-          12152
+          12216
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 13299,
+        "id": 13514,
         "linearizedBaseContracts": [
-          13299,
-          12152
+          13514,
+          12216
         ],
         "name": "PolicyStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 13278,
+            "id": 13493,
             "name": "metadata",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "94:46:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12090_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12154_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
             },
             "typeName": {
-              "id": 13277,
+              "id": 13492,
               "keyType": {
-                "id": 13274,
+                "id": 13489,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "102:7:34",
@@ -628,28 +697,28 @@
               "nodeType": "Mapping",
               "src": "94:30:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12090_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12154_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13275,
+                  "id": 13490,
                   "name": "Metadata",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12090,
+                  "referencedDeclaration": 12154,
                   "src": "113:8:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Metadata_$12090_storage_ptr",
+                    "typeIdentifier": "t_struct$_Metadata_$12154_storage_ptr",
                     "typeString": "struct IPolicy.Metadata"
                   }
                 },
-                "id": 13276,
+                "id": 13491,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "113:10:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Metadata_$12090_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Metadata_$12154_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Metadata[]"
                 }
               }
@@ -659,21 +728,21 @@
           },
           {
             "constant": false,
-            "id": 13283,
+            "id": 13498,
             "name": "applications",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "147:53:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12110_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12174_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Application[])"
             },
             "typeName": {
-              "id": 13282,
+              "id": 13497,
               "keyType": {
-                "id": 13279,
+                "id": 13494,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "155:7:34",
@@ -685,28 +754,28 @@
               "nodeType": "Mapping",
               "src": "147:33:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12110_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12174_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Application[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13280,
+                  "id": 13495,
                   "name": "Application",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12110,
+                  "referencedDeclaration": 12174,
                   "src": "166:11:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Application_$12110_storage_ptr",
+                    "typeIdentifier": "t_struct$_Application_$12174_storage_ptr",
                     "typeString": "struct IPolicy.Application"
                   }
                 },
-                "id": 13281,
+                "id": 13496,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "166:13:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Application_$12110_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Application_$12174_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Application[]"
                 }
               }
@@ -716,21 +785,21 @@
           },
           {
             "constant": false,
-            "id": 13288,
+            "id": 13503,
             "name": "policies",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "207:44:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12121_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12185_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
             },
             "typeName": {
-              "id": 13287,
+              "id": 13502,
               "keyType": {
-                "id": 13284,
+                "id": 13499,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "215:7:34",
@@ -742,28 +811,28 @@
               "nodeType": "Mapping",
               "src": "207:28:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12121_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12185_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13285,
+                  "id": 13500,
                   "name": "Policy",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12121,
+                  "referencedDeclaration": 12185,
                   "src": "226:6:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Policy_$12121_storage_ptr",
+                    "typeIdentifier": "t_struct$_Policy_$12185_storage_ptr",
                     "typeString": "struct IPolicy.Policy"
                   }
                 },
-                "id": 13286,
+                "id": 13501,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "226:8:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Policy_$12121_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Policy_$12185_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Policy[]"
                 }
               }
@@ -773,21 +842,21 @@
           },
           {
             "constant": false,
-            "id": 13293,
+            "id": 13508,
             "name": "claims",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "258:41:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12134_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12198_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
             },
             "typeName": {
-              "id": 13292,
+              "id": 13507,
               "keyType": {
-                "id": 13289,
+                "id": 13504,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "266:7:34",
@@ -799,28 +868,28 @@
               "nodeType": "Mapping",
               "src": "258:27:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12134_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12198_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13290,
+                  "id": 13505,
                   "name": "Claim",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12134,
+                  "referencedDeclaration": 12198,
                   "src": "277:5:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Claim_$12134_storage_ptr",
+                    "typeIdentifier": "t_struct$_Claim_$12198_storage_ptr",
                     "typeString": "struct IPolicy.Claim"
                   }
                 },
-                "id": 13291,
+                "id": 13506,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "277:7:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Claim_$12134_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Claim_$12198_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Claim[]"
                 }
               }
@@ -830,21 +899,21 @@
           },
           {
             "constant": false,
-            "id": 13298,
+            "id": 13513,
             "name": "payouts",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "306:43:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12151_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12215_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
             },
             "typeName": {
-              "id": 13297,
+              "id": 13512,
               "keyType": {
-                "id": 13294,
+                "id": 13509,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "314:7:34",
@@ -856,28 +925,28 @@
               "nodeType": "Mapping",
               "src": "306:28:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12151_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12215_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13295,
+                  "id": 13510,
                   "name": "Payout",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12151,
+                  "referencedDeclaration": 12215,
                   "src": "325:6:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Payout_$12151_storage_ptr",
+                    "typeIdentifier": "t_struct$_Payout_$12215_storage_ptr",
                     "typeString": "struct IPolicy.Payout"
                   }
                 },
-                "id": 13296,
+                "id": 13511,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "325:8:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Payout_$12151_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Payout_$12215_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Payout[]"
                 }
               }
@@ -886,7 +955,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 13300,
+        "scope": 13515,
         "src": "49:303:34"
       }
     ],
@@ -896,14 +965,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/PolicyStorageModel.sol",
     "exportedSymbols": {
       "PolicyStorageModel": [
-        13299
+        13514
       ]
     },
-    "id": 13300,
+    "id": 13515,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 13270,
+        "id": 13485,
         "literals": [
           "solidity",
           "0.5",
@@ -915,10 +984,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/IPolicy.sol",
         "file": "./IPolicy.sol",
-        "id": 13271,
+        "id": 13486,
         "nodeType": "ImportDirective",
-        "scope": 13300,
-        "sourceUnit": 12153,
+        "scope": 13515,
+        "sourceUnit": 12217,
         "src": "24:23:34",
         "symbolAliases": [],
         "unitAlias": ""
@@ -929,52 +998,52 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 13272,
+              "id": 13487,
               "name": "IPolicy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 12152,
+              "referencedDeclaration": 12216,
               "src": "80:7:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IPolicy_$12152",
+                "typeIdentifier": "t_contract$_IPolicy_$12216",
                 "typeString": "contract IPolicy"
               }
             },
-            "id": 13273,
+            "id": 13488,
             "nodeType": "InheritanceSpecifier",
             "src": "80:7:34"
           }
         ],
         "contractDependencies": [
-          12152
+          12216
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 13299,
+        "id": 13514,
         "linearizedBaseContracts": [
-          13299,
-          12152
+          13514,
+          12216
         ],
         "name": "PolicyStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 13278,
+            "id": 13493,
             "name": "metadata",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "94:46:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12090_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12154_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
             },
             "typeName": {
-              "id": 13277,
+              "id": 13492,
               "keyType": {
-                "id": 13274,
+                "id": 13489,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "102:7:34",
@@ -986,28 +1055,28 @@
               "nodeType": "Mapping",
               "src": "94:30:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12090_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12154_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13275,
+                  "id": 13490,
                   "name": "Metadata",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12090,
+                  "referencedDeclaration": 12154,
                   "src": "113:8:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Metadata_$12090_storage_ptr",
+                    "typeIdentifier": "t_struct$_Metadata_$12154_storage_ptr",
                     "typeString": "struct IPolicy.Metadata"
                   }
                 },
-                "id": 13276,
+                "id": 13491,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "113:10:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Metadata_$12090_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Metadata_$12154_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Metadata[]"
                 }
               }
@@ -1017,21 +1086,21 @@
           },
           {
             "constant": false,
-            "id": 13283,
+            "id": 13498,
             "name": "applications",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "147:53:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12110_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12174_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Application[])"
             },
             "typeName": {
-              "id": 13282,
+              "id": 13497,
               "keyType": {
-                "id": 13279,
+                "id": 13494,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "155:7:34",
@@ -1043,28 +1112,28 @@
               "nodeType": "Mapping",
               "src": "147:33:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12110_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12174_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Application[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13280,
+                  "id": 13495,
                   "name": "Application",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12110,
+                  "referencedDeclaration": 12174,
                   "src": "166:11:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Application_$12110_storage_ptr",
+                    "typeIdentifier": "t_struct$_Application_$12174_storage_ptr",
                     "typeString": "struct IPolicy.Application"
                   }
                 },
-                "id": 13281,
+                "id": 13496,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "166:13:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Application_$12110_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Application_$12174_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Application[]"
                 }
               }
@@ -1074,21 +1143,21 @@
           },
           {
             "constant": false,
-            "id": 13288,
+            "id": 13503,
             "name": "policies",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "207:44:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12121_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12185_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
             },
             "typeName": {
-              "id": 13287,
+              "id": 13502,
               "keyType": {
-                "id": 13284,
+                "id": 13499,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "215:7:34",
@@ -1100,28 +1169,28 @@
               "nodeType": "Mapping",
               "src": "207:28:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12121_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12185_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13285,
+                  "id": 13500,
                   "name": "Policy",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12121,
+                  "referencedDeclaration": 12185,
                   "src": "226:6:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Policy_$12121_storage_ptr",
+                    "typeIdentifier": "t_struct$_Policy_$12185_storage_ptr",
                     "typeString": "struct IPolicy.Policy"
                   }
                 },
-                "id": 13286,
+                "id": 13501,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "226:8:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Policy_$12121_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Policy_$12185_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Policy[]"
                 }
               }
@@ -1131,21 +1200,21 @@
           },
           {
             "constant": false,
-            "id": 13293,
+            "id": 13508,
             "name": "claims",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "258:41:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12134_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12198_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
             },
             "typeName": {
-              "id": 13292,
+              "id": 13507,
               "keyType": {
-                "id": 13289,
+                "id": 13504,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "266:7:34",
@@ -1157,28 +1226,28 @@
               "nodeType": "Mapping",
               "src": "258:27:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12134_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12198_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13290,
+                  "id": 13505,
                   "name": "Claim",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12134,
+                  "referencedDeclaration": 12198,
                   "src": "277:5:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Claim_$12134_storage_ptr",
+                    "typeIdentifier": "t_struct$_Claim_$12198_storage_ptr",
                     "typeString": "struct IPolicy.Claim"
                   }
                 },
-                "id": 13291,
+                "id": 13506,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "277:7:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Claim_$12134_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Claim_$12198_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Claim[]"
                 }
               }
@@ -1188,21 +1257,21 @@
           },
           {
             "constant": false,
-            "id": 13298,
+            "id": 13513,
             "name": "payouts",
             "nodeType": "VariableDeclaration",
-            "scope": 13299,
+            "scope": 13514,
             "src": "306:43:34",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12151_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12215_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
             },
             "typeName": {
-              "id": 13297,
+              "id": 13512,
               "keyType": {
-                "id": 13294,
+                "id": 13509,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "314:7:34",
@@ -1214,28 +1283,28 @@
               "nodeType": "Mapping",
               "src": "306:28:34",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12151_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12215_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13295,
+                  "id": 13510,
                   "name": "Payout",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12151,
+                  "referencedDeclaration": 12215,
                   "src": "325:6:34",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Payout_$12151_storage_ptr",
+                    "typeIdentifier": "t_struct$_Payout_$12215_storage_ptr",
                     "typeString": "struct IPolicy.Payout"
                   }
                 },
-                "id": 13296,
+                "id": 13511,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "325:8:34",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Payout_$12151_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Payout_$12215_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Payout[]"
                 }
               }
@@ -1244,7 +1313,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 13300,
+        "scope": 13515,
         "src": "49:303:34"
       }
     ],
@@ -1256,7 +1325,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-08T13:16:56.043Z",
+  "updatedAt": "2019-02-11T09:37:08.245Z",
   "devdoc": {
     "methods": {}
   },

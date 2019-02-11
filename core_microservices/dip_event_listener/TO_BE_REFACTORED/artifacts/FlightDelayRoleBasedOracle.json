@@ -30,24 +30,24 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b50610100806100206000396000f3fe6080604052348015600f57600080fd5b5060043610604f576000357c01000000000000000000000000000000000000000000000000000000009004806309128d83146054578063a3f4df7e146070575b600080fd5b605a608c565b6040518082815260200191505060405180910390f35b607660b0565b6040518082815260200191505060405180910390f35b7f506f6c696379466c6f7744656661756c7400000000000000000000000000000081565b7f466c6967687444656c6179526f6c6542617365644f7261636c650000000000008156fea165627a7a72305820df03a36ba1a325fc7b1f25ee98667762d53237ed12d50ce3a2a6dd6a035de7370029",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b5060043610604f576000357c01000000000000000000000000000000000000000000000000000000009004806309128d83146054578063a3f4df7e146070575b600080fd5b605a608c565b6040518082815260200191505060405180910390f35b607660b0565b6040518082815260200191505060405180910390f35b7f506f6c696379466c6f7744656661756c7400000000000000000000000000000081565b7f466c6967687444656c6179526f6c6542617365644f7261636c650000000000008156fea165627a7a72305820df03a36ba1a325fc7b1f25ee98667762d53237ed12d50ce3a2a6dd6a035de7370029",
+  "bytecode": "0x608060405234801561001057600080fd5b5060e58061001f6000396000f3fe6080604052348015600f57600080fd5b5060043610604e577c0100000000000000000000000000000000000000000000000000000000600035046309128d8381146053578063a3f4df7e14606b575b600080fd5b60596071565b60408051918252519081900360200190f35b60596095565b7f506f6c696379466c6f7744656661756c7400000000000000000000000000000081565b7f466c6967687444656c6179526f6c6542617365644f7261636c650000000000008156fea165627a7a723058200f93e38e37be8860d281005c5d2b35ff4bf3d72a2e3f4536b6070356b5098b460029",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b5060043610604e577c0100000000000000000000000000000000000000000000000000000000600035046309128d8381146053578063a3f4df7e14606b575b600080fd5b60596071565b60408051918252519081900360200190f35b60596095565b7f506f6c696379466c6f7744656661756c7400000000000000000000000000000081565b7f466c6967687444656c6179526f6c6542617365644f7261636c650000000000008156fea165627a7a723058200f93e38e37be8860d281005c5d2b35ff4bf3d72a2e3f4536b6070356b5098b460029",
   "sourceMap": "24:167:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:167:6;;;;;;;",
-  "deployedSourceMap": "24:167:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:167:6;;;;;;;;;;;;;;;;;;;;;;;;;131:57;;;:::i;:::-;;;;;;;;;;;;;;;;;;;66:59;;;:::i;:::-;;;;;;;;;;;;;;;;;;;131:57;;;:::o;66:59::-;;;:::o",
+  "deployedSourceMap": "24:167:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:167:6;;;;;;;;;;;;;;;;;;;;;;;;131:57;;;:::i;:::-;;;;;;;;;;;;;;;;66:59;;;:::i;131:57::-;;;:::o;66:59::-;;;:::o",
   "source": "pragma solidity 0.5.2;\n\ncontract FlightDelayRoleBasedOracle {\n    bytes32 public constant NAME = \"FlightDelayRoleBasedOracle\";\n    bytes32 public constant POLICY_FLOW = \"PolicyFlowDefault\";\n}\n",
   "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/examples/FlightDelayRoleBasedOracle/FlightDelayRoleBasedOracle.sol",
   "ast": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/examples/FlightDelayRoleBasedOracle/FlightDelayRoleBasedOracle.sol",
     "exportedSymbols": {
       "FlightDelayRoleBasedOracle": [
-        1931
+        1969
       ]
     },
-    "id": 1932,
+    "id": 1970,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1924,
+        "id": 1962,
         "literals": [
           "solidity",
           "0.5",
@@ -62,19 +62,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1931,
+        "id": 1969,
         "linearizedBaseContracts": [
-          1931
+          1969
         ],
         "name": "FlightDelayRoleBasedOracle",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 1927,
+            "id": 1965,
             "name": "NAME",
             "nodeType": "VariableDeclaration",
-            "scope": 1931,
+            "scope": 1969,
             "src": "66:59:6",
             "stateVariable": true,
             "storageLocation": "default",
@@ -83,7 +83,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 1925,
+              "id": 1963,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "66:7:6",
@@ -95,7 +95,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "466c6967687444656c6179526f6c6542617365644f7261636c65",
-              "id": 1926,
+              "id": 1964,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -114,10 +114,10 @@
           },
           {
             "constant": true,
-            "id": 1930,
+            "id": 1968,
             "name": "POLICY_FLOW",
             "nodeType": "VariableDeclaration",
-            "scope": 1931,
+            "scope": 1969,
             "src": "131:57:6",
             "stateVariable": true,
             "storageLocation": "default",
@@ -126,7 +126,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 1928,
+              "id": 1966,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "131:7:6",
@@ -138,7 +138,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "506f6c696379466c6f7744656661756c74",
-              "id": 1929,
+              "id": 1967,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -156,7 +156,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 1932,
+        "scope": 1970,
         "src": "24:167:6"
       }
     ],
@@ -166,14 +166,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/examples/FlightDelayRoleBasedOracle/FlightDelayRoleBasedOracle.sol",
     "exportedSymbols": {
       "FlightDelayRoleBasedOracle": [
-        1931
+        1969
       ]
     },
-    "id": 1932,
+    "id": 1970,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1924,
+        "id": 1962,
         "literals": [
           "solidity",
           "0.5",
@@ -188,19 +188,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1931,
+        "id": 1969,
         "linearizedBaseContracts": [
-          1931
+          1969
         ],
         "name": "FlightDelayRoleBasedOracle",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 1927,
+            "id": 1965,
             "name": "NAME",
             "nodeType": "VariableDeclaration",
-            "scope": 1931,
+            "scope": 1969,
             "src": "66:59:6",
             "stateVariable": true,
             "storageLocation": "default",
@@ -209,7 +209,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 1925,
+              "id": 1963,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "66:7:6",
@@ -221,7 +221,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "466c6967687444656c6179526f6c6542617365644f7261636c65",
-              "id": 1926,
+              "id": 1964,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -240,10 +240,10 @@
           },
           {
             "constant": true,
-            "id": 1930,
+            "id": 1968,
             "name": "POLICY_FLOW",
             "nodeType": "VariableDeclaration",
-            "scope": 1931,
+            "scope": 1969,
             "src": "131:57:6",
             "stateVariable": true,
             "storageLocation": "default",
@@ -252,7 +252,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 1928,
+              "id": 1966,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "131:7:6",
@@ -264,7 +264,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "506f6c696379466c6f7744656661756c74",
-              "id": 1929,
+              "id": 1967,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -282,7 +282,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 1932,
+        "scope": 1970,
         "src": "24:167:6"
       }
     ],
@@ -294,7 +294,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-08T13:16:55.680Z",
+  "updatedAt": "2019-02-11T09:37:07.871Z",
   "devdoc": {
     "methods": {}
   },

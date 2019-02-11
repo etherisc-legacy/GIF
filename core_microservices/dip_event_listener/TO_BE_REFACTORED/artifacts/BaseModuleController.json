@@ -16,24 +16,24 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b5060e38061001f6000396000f3fe6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063ce9b793014604a575b600080fd5b60506092565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea165627a7a72305820e24744b33a086da37e9540dbb292c155724c3288bfe95493b339809c69d6e0b10029",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b50600436106045576000357c010000000000000000000000000000000000000000000000000000000090048063ce9b793014604a575b600080fd5b60506092565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea165627a7a72305820e24744b33a086da37e9540dbb292c155724c3288bfe95493b339809c69d6e0b10029",
+  "bytecode": "0x608060405234801561001057600080fd5b5060c08061001f6000396000f3fe6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463ce9b793081146049575b600080fd5b604f6078565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b60005473ffffffffffffffffffffffffffffffffffffffff168156fea165627a7a723058201b10da8851503aca9ebfdbcea66e5ce42e4c282f92de22d173f642e5087a07340029",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b50600436106044577c01000000000000000000000000000000000000000000000000000000006000350463ce9b793081146049575b600080fd5b604f6078565b6040805173ffffffffffffffffffffffffffffffffffffffff9092168252519081900360200190f35b60005473ffffffffffffffffffffffffffffffffffffffff168156fea165627a7a723058201b10da8851503aca9ebfdbcea66e5ce42e4c282f92de22d173f642e5087a07340029",
   "sourceMap": "24:157:60:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:157:60;;;;;;;",
-  "deployedSourceMap": "24:157:60:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:157:60;;;;;;;;;;;;;;;;;;;;60:24;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "deployedSourceMap": "24:157:60:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:157:60;;;;;;;;;;;;;;;;;;;60:24;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity 0.5.2;\n\ncontract BaseModuleController {\n    address public delegator;\n\n    function _assignStorage(address _storage) internal {\n        delegator = _storage;\n    }\n}\n",
   "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/BaseModuleController.sol",
   "ast": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/BaseModuleController.sol",
     "exportedSymbols": {
       "BaseModuleController": [
-        16295
+        16580
       ]
     },
-    "id": 16296,
+    "id": 16581,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 16282,
+        "id": 16567,
         "literals": [
           "solidity",
           "0.5",
@@ -48,19 +48,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 16295,
+        "id": 16580,
         "linearizedBaseContracts": [
-          16295
+          16580
         ],
         "name": "BaseModuleController",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 16284,
+            "id": 16569,
             "name": "delegator",
             "nodeType": "VariableDeclaration",
-            "scope": 16295,
+            "scope": 16580,
             "src": "60:24:60",
             "stateVariable": true,
             "storageLocation": "default",
@@ -69,7 +69,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 16283,
+              "id": 16568,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "60:7:60",
@@ -84,25 +84,25 @@
           },
           {
             "body": {
-              "id": 16293,
+              "id": 16578,
               "nodeType": "Block",
               "src": "142:37:60",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 16291,
+                    "id": 16576,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 16289,
+                      "id": 16574,
                       "name": "delegator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 16284,
+                      "referencedDeclaration": 16569,
                       "src": "152:9:60",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -113,11 +113,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 16290,
+                      "id": 16575,
                       "name": "_storage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 16286,
+                      "referencedDeclaration": 16571,
                       "src": "164:8:60",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -130,29 +130,29 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 16292,
+                  "id": 16577,
                   "nodeType": "ExpressionStatement",
                   "src": "152:20:60"
                 }
               ]
             },
             "documentation": null,
-            "id": 16294,
+            "id": 16579,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_assignStorage",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 16287,
+              "id": 16572,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 16286,
+                  "id": 16571,
                   "name": "_storage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 16294,
+                  "scope": 16579,
                   "src": "115:16:60",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -161,7 +161,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 16285,
+                    "id": 16570,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "115:7:60",
@@ -178,19 +178,19 @@
               "src": "114:18:60"
             },
             "returnParameters": {
-              "id": 16288,
+              "id": 16573,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "142:0:60"
             },
-            "scope": 16295,
+            "scope": 16580,
             "src": "91:88:60",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 16296,
+        "scope": 16581,
         "src": "24:157:60"
       }
     ],
@@ -200,14 +200,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/BaseModuleController.sol",
     "exportedSymbols": {
       "BaseModuleController": [
-        16295
+        16580
       ]
     },
-    "id": 16296,
+    "id": 16581,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 16282,
+        "id": 16567,
         "literals": [
           "solidity",
           "0.5",
@@ -222,19 +222,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 16295,
+        "id": 16580,
         "linearizedBaseContracts": [
-          16295
+          16580
         ],
         "name": "BaseModuleController",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 16284,
+            "id": 16569,
             "name": "delegator",
             "nodeType": "VariableDeclaration",
-            "scope": 16295,
+            "scope": 16580,
             "src": "60:24:60",
             "stateVariable": true,
             "storageLocation": "default",
@@ -243,7 +243,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 16283,
+              "id": 16568,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "60:7:60",
@@ -258,25 +258,25 @@
           },
           {
             "body": {
-              "id": 16293,
+              "id": 16578,
               "nodeType": "Block",
               "src": "142:37:60",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 16291,
+                    "id": 16576,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 16289,
+                      "id": 16574,
                       "name": "delegator",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 16284,
+                      "referencedDeclaration": 16569,
                       "src": "152:9:60",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -287,11 +287,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 16290,
+                      "id": 16575,
                       "name": "_storage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 16286,
+                      "referencedDeclaration": 16571,
                       "src": "164:8:60",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -304,29 +304,29 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 16292,
+                  "id": 16577,
                   "nodeType": "ExpressionStatement",
                   "src": "152:20:60"
                 }
               ]
             },
             "documentation": null,
-            "id": 16294,
+            "id": 16579,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_assignStorage",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 16287,
+              "id": 16572,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 16286,
+                  "id": 16571,
                   "name": "_storage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 16294,
+                  "scope": 16579,
                   "src": "115:16:60",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -335,7 +335,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 16285,
+                    "id": 16570,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "115:7:60",
@@ -352,19 +352,19 @@
               "src": "114:18:60"
             },
             "returnParameters": {
-              "id": 16288,
+              "id": 16573,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "142:0:60"
             },
-            "scope": 16295,
+            "scope": 16580,
             "src": "91:88:60",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 16296,
+        "scope": 16581,
         "src": "24:157:60"
       }
     ],
@@ -376,7 +376,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-08T13:16:56.064Z",
+  "updatedAt": "2019-02-11T09:37:08.266Z",
   "devdoc": {
     "methods": {}
   },
