@@ -47,6 +47,11 @@ class DipPolicyStorage {
       messageVersion: '1.*',
       handler: this.handleApplyForPolicySuccess.bind(this),
     });
+    await this._amqp.consume({
+      messageType: 'applyForPolicyError',
+      messageVersion: '1.*',
+      handler: this.handleApplyForPolicyError.bind(this),
+    });
   }
 
   /**
@@ -273,6 +278,21 @@ class DipPolicyStorage {
     await Policy.query()
       .update({ contractAppicationId })
       .where('id', policyId);
+  }
+
+  /**
+   * Handle contact event
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
+   * @return {Promise<void>}
+   */
+  async handleApplyForPolicyError({ content, fields, properties }) {
+    const { policyId } = content;
+    const { Policy, PolicyExtra } = this._models;
+    await PolicyExtra.query().delete().where('policyId', policyId);
+    await Policy.query().delete().where('id', policyId);
   }
 
   /**
