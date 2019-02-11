@@ -2,7 +2,7 @@ pragma solidity 0.5.2;
 
 import "../shared/WithRegistry.sol";
 import "../modules/policy/IPolicy.sol";
-import "../modules/policy/IPolicyController.v1.sol";
+import "../modules/policy/IPolicyController.sol";
 import "../modules/license/ILicenseController.sol";
 import "../modules/query/IQueryController.sol";
 
@@ -33,6 +33,54 @@ contract PolicyFlowDefault is WithRegistry {
         _applicationId = applicationId;
     }
 
+    function underwrite(uint256 _applicationId)
+        external
+        returns (uint256 _policyId)
+    {
+        uint256 productId = license().getProductId(msg.sender);
+
+        require(
+            policy().getApplicationState(
+                productId,
+                _applicationId
+            ) == IPolicy.ApplicationState.Applied,
+            "ERROR::INVALID_APPLICATION_STATE"
+        );
+
+        policy().setApplicationState(
+            productId,
+            _applicationId,
+            IPolicy.ApplicationState.Underwritten
+        );
+
+        (uint256 metadataId, , , , ) = policy().getApplicationData(
+            productId,
+            _applicationId
+        );
+
+        uint256 policyId = policy().createPolicy(productId, metadataId);
+
+        _policyId = policyId;
+    }
+
+    function decline(uint256 _applicationId) external {
+        uint256 productId = license().getProductId(msg.sender);
+
+        require(
+            policy().getApplicationState(
+                productId,
+                _applicationId
+            ) == IPolicy.ApplicationState.Applied,
+            "ERROR::INVALID_APPLICATION_STATE"
+        );
+
+        policy().setApplicationState(
+            productId,
+            _applicationId,
+            IPolicy.ApplicationState.Declined
+        );
+    }
+
     function newClaim(uint256 _policyId) external returns (uint256 _claimId) {
         uint256 productId = license().getProductId(msg.sender);
 
@@ -46,6 +94,14 @@ contract PolicyFlowDefault is WithRegistry {
         returns (uint256 _payoutId)
     {
         uint256 productId = license().getProductId(msg.sender);
+
+        require(
+            policy().getClaimState(
+                productId,
+                _claimId
+            ) == IPolicy.ClaimState.Applied,
+            "ERROR::INVALID_CLAIM_STATE"
+        );
 
         policy().setClaimState(
             productId,
@@ -61,6 +117,14 @@ contract PolicyFlowDefault is WithRegistry {
     function declineClaim(uint256 _claimId) external {
         uint256 productId = license().getProductId(msg.sender);
 
+        require(
+            policy().getClaimState(
+                productId,
+                _claimId
+            ) == IPolicy.ClaimState.Applied,
+            "ERROR::INVALID_CLAIM_STATE"
+        );
+
         policy().setClaimState(
             productId,
             _claimId,
@@ -68,18 +132,16 @@ contract PolicyFlowDefault is WithRegistry {
         );
     }
 
-    function decline(uint256 _applicationId) external {
-        uint256 productId = license().getProductId(msg.sender);
-
-        policy().setApplicationState(
-            productId,
-            _applicationId,
-            IPolicy.ApplicationState.Declined
-        );
-    }
-
     function expire(uint256 _policyId) external {
         uint256 productId = license().getProductId(msg.sender);
+
+        require(
+            policy().getPolicyState(
+                productId,
+                _policyId
+            ) == IPolicy.PolicyState.Active,
+            "ERROR::INVALID_POLICY_STATE"
+        );
 
         policy().setPolicyState(
             productId,
@@ -99,28 +161,6 @@ contract PolicyFlowDefault is WithRegistry {
 
     function register(bytes32 _productName, bytes32 _policyFlow) external {
         license().register(_productName, msg.sender, _policyFlow);
-    }
-
-    function underwrite(uint256 _applicationId)
-        external
-        returns (uint256 _policyId)
-    {
-        uint256 productId = license().getProductId(msg.sender);
-
-        policy().setApplicationState(
-            productId,
-            _applicationId,
-            IPolicy.ApplicationState.Underwritten
-        );
-
-        (uint256 metadataId, , , , ) = policy().getApplicationData(
-            productId,
-            _applicationId
-        );
-
-        uint256 policyId = policy().createPolicy(productId, metadataId);
-
-        _policyId = policyId;
     }
 
     function request(

@@ -1,3 +1,6 @@
+const { info } = require('../io/logger');
+
+
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
 const Query = artifacts.require('modules/query/Query.sol');
@@ -16,10 +19,17 @@ module.exports = async (deployer) => {
   const queryController = await QueryController.deployed();
 
   // Bind storage & controller contracts
-  await queryStorage.assignController(queryController.address, { gas: 100000 });
-  await queryController.assignStorage(queryStorage.address, { gas: 100000 });
+  info('Assign controller to storage');
+  await queryStorage.assignController(queryController.address, { gas: 100000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
-  // Register License module in Registry
+  info('Assign storage to controller');
+  await queryController.assignStorage(queryStorage.address, { gas: 100000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
   const queryStorageName = await queryStorage.NAME.call();
-  await registry.register(queryStorageName, queryStorage.address, { gas: 100000 });
+
+  info('Register License module in Registry');
+  await registry.register(queryStorageName, queryStorage.address, { gas: 100000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 };

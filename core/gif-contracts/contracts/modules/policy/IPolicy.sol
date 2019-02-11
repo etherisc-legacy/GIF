@@ -73,6 +73,23 @@ interface IPolicy {
         PayoutState state
     );
 
+    event LogPayoutCompleted(
+        uint256 productId,
+        uint256 policyId,
+        uint256 payoutId,
+        uint256 amount,
+        PayoutState state
+    );
+
+    event LogPartialPayout(
+        uint256 productId,
+        uint256 policyId,
+        uint256 payoutId,
+        uint256 amount,
+        uint256 remainder,
+        PayoutState state
+    );
+
     // Statuses
     enum PolicyFlowState {Started, Paused, Finished}
 

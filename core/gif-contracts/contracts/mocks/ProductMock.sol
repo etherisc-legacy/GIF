@@ -3,13 +3,12 @@ pragma solidity 0.5.2;
 import "../Product.sol";
 
 contract ProductMock is Product {
-
-    bytes32 constant public NAME = "ProductMock";
-    bytes32 constant public POLICY_FLOW = "PolicyFlowDefault";
+    bytes32 public constant NAME = "ProductMock";
+    bytes32 public constant POLICY_FLOW = "PolicyFlowDefault";
 
     constructor(address _productController)
-    public
-    Product(_productController, NAME, POLICY_FLOW)
+        public
+        Product(_productController, NAME, POLICY_FLOW)
     {}
 
     function applyForPolicy(
@@ -37,20 +36,11 @@ contract ProductMock is Product {
         decline(_applicationId);
     }
 
-    function newClaimTx(uint256 _policyId) external {
+    function newClaimTx(uint256 _policyId) external {}
 
-    }
+    function confirmClaimTx(uint256 _policyId) external {}
 
-    function confirmClaimTx(uint256 _policyId) external {
+    function expireTx(uint256 _policyId) external {}
 
-    }
-
-    function expireTx(uint256 _policyId) external {
-
-    }
-
-    function payoutTx(uint256 _payoutId, uint256 _amount) external {
-
-    }
+    function payoutTx(uint256 _payoutId, uint256 _amount) external {}
 }
-

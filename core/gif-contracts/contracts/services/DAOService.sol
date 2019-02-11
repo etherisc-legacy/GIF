@@ -2,7 +2,7 @@ pragma solidity 0.5.2;
 
 import "../modules/license/ILicenseController.sol";
 import "../modules/access/IAccessController.sol";
-import "../modules/registry/IRegistryController.v1.sol";
+import "../modules/registry/IRegistryController.sol";
 import "../modules/query/IQueryController.sol";
 import "../shared/WithRegistry.sol";
 

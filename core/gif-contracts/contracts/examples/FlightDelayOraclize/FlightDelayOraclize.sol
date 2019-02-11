@@ -16,7 +16,12 @@ contract FlightDelayOraclize is Product {
         uint256 arrivalTime
     );
 
-    event LogRequestPayout(uint256 policyId, uint256 claimId, uint256 payoutId, uint256 amount);
+    event LogRequestPayout(
+        uint256 policyId,
+        uint256 claimId,
+        uint256 payoutId,
+        uint256 amount
+    );
 
     event LogUnprocessableStatus(uint256 requestId, uint256 policyId);
 
@@ -194,8 +199,10 @@ contract FlightDelayOraclize is Product {
 
         if (risks[riskId].premiumMultiplier == 0) {
             // It's the first policy for this risk, we accept any premium
-            risks[riskId].cumulatedWeightedPremium = premium * 10000;
+            risks[riskId].cumulatedWeightedPremium = premium * 100000 / weight;
             risks[riskId].premiumMultiplier = 100000 / weight;
+        } else {
+            risks[riskId].cumulatedWeightedPremium = risks[riskId].cumulatedWeightedPremium + premium * risks[riskId].premiumMultiplier;
         }
 
         risks[riskId].weight = weight;
@@ -233,7 +240,6 @@ contract FlightDelayOraclize is Product {
         uint256 policyId = requests[_requestId].policyId;
         uint256 applicationId = requests[_requestId].applicationId;
         uint256[] memory payoutOptions = getPayoutOptions(applicationId);
-
 
         if (status != "L" && status != "A" && status != "C" && status != "D") {
             emit LogUnprocessableStatus(_requestId, policyId);

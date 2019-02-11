@@ -181,8 +181,10 @@ contract FlightDelayManual is Product {
 
         if (risks[riskId].premiumMultiplier == 0) {
             // it's the first policy for this risk, we accept any premium
-            risks[riskId].cumulatedWeightedPremium = premium * 10000;
+            risks[riskId].cumulatedWeightedPremium = premium * 100000;
             risks[riskId].premiumMultiplier = 100000 / weight;
+        }else {
+            risks[riskId].cumulatedWeightedPremium = risks[riskId].cumulatedWeightedPremium + premium * risks[riskId].premiumMultiplier;
         }
 
         risks[riskId].weight = weight;

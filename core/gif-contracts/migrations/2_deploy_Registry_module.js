@@ -1,3 +1,6 @@
+const { info } = require('../io/logger');
+
+
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
 
@@ -11,6 +14,7 @@ module.exports = async (deployer) => {
 
   const registryStorage = await Registry.deployed();
 
-  // Bind storage & controller contracts
-  await registryController.assignStorage(registryStorage.address, { gas: 100000 });
+  info('Assign controller to storage');
+  await registryController.assignStorage(registryStorage.address, { gas: 100000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 };

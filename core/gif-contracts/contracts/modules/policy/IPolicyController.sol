@@ -39,11 +39,9 @@ interface IPolicyController {
         IPolicy.PolicyState _state
     ) external;
 
-    function createClaim(
-        uint256 _productId,
-        uint256 _policyId,
-        bytes32 _data
-    ) external returns (uint256 _claimId);
+    function createClaim(uint256 _productId, uint256 _policyId, bytes32 _data)
+        external
+        returns (uint256 _claimId);
 
     function setClaimState(
         uint256 _productId,
@@ -51,17 +49,13 @@ interface IPolicyController {
         IPolicy.ClaimState _state
     ) external;
 
-    function createPayout(
-        uint256 _productId,
-        uint256 _claimId,
-        uint256 _amount
-    ) external returns (uint256 _payoutId);
+    function createPayout(uint256 _productId, uint256 _claimId, uint256 _amount)
+        external
+        returns (uint256 _payoutId);
 
-    function payOut(
-        uint256 _productId,
-        uint256 _payoutId,
-        uint256 _amount
-    ) external returns (uint256 _remainder);
+    function payOut(uint256 _productId, uint256 _payoutId, uint256 _amount)
+        external
+        returns (uint256 _remainder);
 
     function setPayoutState(
         uint256 _productId,
@@ -69,10 +63,7 @@ interface IPolicyController {
         IPolicy.PayoutState _state
     ) external;
 
-    function getApplicationData(
-        uint256 _productId,
-        uint256 _applicationId
-    )
+    function getApplicationData(uint256 _productId, uint256 _applicationId)
         external
         view
         returns (
@@ -83,13 +74,33 @@ interface IPolicyController {
         IPolicy.ApplicationState _state
     );
 
-    function getPayoutOptions(
-        uint256 _productId,
-        uint256 _applicationId
-    ) external view returns (uint256[] memory _payoutOptions);
+    function getPayoutOptions(uint256 _productId, uint256 _applicationId)
+        external
+        view
+        returns (uint256[] memory _payoutOptions);
 
     function getPremium(uint256 _productId, uint256 _applicationId)
         external
         view
         returns (uint256 _premium);
+
+    function getApplicationState(uint256 _productId, uint256 _applicationId)
+        external
+        view
+        returns (IPolicy.ApplicationState _state);
+
+    function getPolicyState(uint256 _productId, uint256 _policyId)
+        external
+        view
+        returns (IPolicy.PolicyState _state);
+
+    function getClaimState(uint256 _productId, uint256 _claimId)
+        external
+        view
+        returns (IPolicy.ClaimState _state);
+
+    function getPayoutState(uint256 _productId, uint256 _payoutId)
+        external
+        view
+        returns (IPolicy.PayoutState _state);
 }

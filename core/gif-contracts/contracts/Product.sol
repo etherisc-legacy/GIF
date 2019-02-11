@@ -9,11 +9,9 @@ contract Product is RBAC {
 
     IProductService public productService;
 
-    constructor(
-        address _productService,
-        bytes32 _name,
-        bytes32 _policyFlow
-    ) internal {
+    constructor(address _productService, bytes32 _name, bytes32 _policyFlow)
+        internal
+    {
         productService = IProductService(_productService);
         register(_name, _policyFlow);
     }
@@ -26,9 +24,7 @@ contract Product is RBAC {
         maintenanceMode = !maintenanceMode;
     }
 
-    function register(bytes32 _productName, bytes32 _policyFlow)
-        internal
-    {
+    function register(bytes32 _productName, bytes32 _policyFlow) internal {
         productService.register(_productName, _policyFlow);
     }
 

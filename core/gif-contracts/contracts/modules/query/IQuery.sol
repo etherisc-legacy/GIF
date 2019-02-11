@@ -44,22 +44,13 @@ interface IQuery {
         string description
     );
 
-    event LogOracleTypeActivated(
-        bytes32 oracleTypeName
-    );
+    event LogOracleTypeActivated(bytes32 oracleTypeName);
 
-    event LogOracleTypeDeactivated(
-        bytes32 oracleTypeName
-    );
+    event LogOracleTypeDeactivated(bytes32 oracleTypeName);
 
-    event LogOracleTypeRemoved(
-        bytes32 oracleTypeName
-    );
+    event LogOracleTypeRemoved(bytes32 oracleTypeName);
 
-    event LogOracleProposed(
-        address oracleContract,
-        string description
-    );
+    event LogOracleProposed(address oracleContract, string description);
 
     event LogOracleContractUpdated(
         uint256 oracleId,
@@ -67,17 +58,11 @@ interface IQuery {
         address nextContract
     );
 
-    event LogOracleActivated(
-        uint256 oracleId
-    );
+    event LogOracleActivated(uint256 oracleId);
 
-    event LogOracleDeactivated(
-        uint256 oracleId
-    );
+    event LogOracleDeactivated(uint256 oracleId);
 
-    event LogOracleRemoved(
-        uint256 oracleId
-    );
+    event LogOracleRemoved(uint256 oracleId);
 
     event LogOracleProposedToType(
         bytes32 oracleTypeName,
@@ -107,10 +92,7 @@ interface IQuery {
         uint256 oracleId
     );
 
-    event LogOracleRequested(
-        uint256 requestId,
-        uint256 responsibleOracleId
-    );
+    event LogOracleRequested(uint256 requestId, uint256 responsibleOracleId);
 
     event LogOracleResponded(
         uint256 requestId,

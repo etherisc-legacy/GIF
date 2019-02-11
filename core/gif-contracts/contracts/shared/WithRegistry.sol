@@ -1,6 +1,6 @@
 pragma solidity 0.5.2;
 
-import "../modules/registry/IRegistryController.v1.sol";
+import "../modules/registry/IRegistryController.sol";
 import "./AccessModifiers.sol";
 
 contract WithRegistry is AccessModifiers {

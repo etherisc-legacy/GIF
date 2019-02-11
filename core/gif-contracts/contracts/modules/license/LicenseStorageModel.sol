@@ -9,17 +9,9 @@ contract LicenseStorageModel {
 
     event LogRegistrationDeclined(uint256 registrationId);
 
-    event LogNewProductApproved(
-        bytes32 name,
-        address addr,
-        uint256 id
-    );
+    event LogNewProductApproved(bytes32 name, address addr, uint256 id);
 
-    event LogProductDisapproved(
-        bytes32 name,
-        address addr,
-        uint256 id
-    );
+    event LogProductDisapproved(bytes32 name, address addr, uint256 id);
 
     event LogProductReapproved(bytes32 name, address addr, uint256 id);
 

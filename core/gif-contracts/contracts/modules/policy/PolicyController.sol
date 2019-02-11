@@ -23,11 +23,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         metadatum.createdAt = block.timestamp;
         metadatum.updatedAt = block.timestamp;
 
-        emit LogNewMetadata(
-            _productId,
-            _metadataId,
-            PolicyFlowState.Started
-        );
+        emit LogNewMetadata(_productId, _metadataId, PolicyFlowState.Started);
     }
 
     function setPolicyFlowState(
@@ -69,11 +65,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         metadatum.hasApplication = true;
         metadatum.updatedAt = block.timestamp;
 
-        emit LogNewApplication(
-            _productId,
-            _metadataId,
-            _applicationId
-        );
+        emit LogNewApplication(_productId, _metadataId, _applicationId);
     }
 
     function setApplicationState(
@@ -112,7 +104,12 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         metadatum.hasPolicy = true;
         metadatum.updatedAt = block.timestamp;
 
-        emit LogNewPolicy(_productId, _metadataId, _policyId, metadatum.applicationId);
+        emit LogNewPolicy(
+            _productId,
+            _metadataId,
+            _policyId,
+            metadatum.applicationId
+        );
     }
 
     function setPolicyState(
@@ -133,11 +130,11 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     /* Claim */
-    function createClaim(
-        uint256 _productId,
-        uint256 _policyId,
-        bytes32 _data
-    ) external onlyPolicyFlow("Policy") returns (uint256 _claimId) {
+    function createClaim(uint256 _productId, uint256 _policyId, bytes32 _data)
+        external
+        onlyPolicyFlow("Policy")
+        returns (uint256 _claimId)
+    {
         Policy storage policy = policies[_productId][_policyId];
 
         _claimId = claims[_productId].length++;
@@ -181,11 +178,11 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     /* Payout */
-    function createPayout(
-        uint256 _productId,
-        uint256 _claimId,
-        uint256 _amount
-    ) external onlyPolicyFlow("Policy") returns (uint256 _payoutId) {
+    function createPayout(uint256 _productId, uint256 _claimId, uint256 _amount)
+        external
+        onlyPolicyFlow("Policy")
+        returns (uint256 _payoutId)
+    {
         Claim storage claim = claims[_productId][_claimId];
 
         _payoutId = payouts[_productId].length++;
@@ -213,14 +210,20 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         );
     }
 
-    function payOut(
-        uint256 _productId,
-        uint256 _payoutId,
-        uint256 _amount
-    ) external onlyPolicyFlow("Policy") returns (uint256 _remainder) {
+    function payOut(uint256 _productId, uint256 _payoutId, uint256 _amount)
+        external
+        onlyPolicyFlow("Policy")
+        returns (uint256 _remainder)
+    {
         Payout storage payout = payouts[_productId][_payoutId];
+        Metadata storage metadatum = metadata[_productId][payout.metadataId];
 
         uint256 actualAmount = payout.actualAmount.add(_amount);
+
+        require(
+            payout.state == PayoutState.Expected,
+            "ERROR::PAYOUT_COMPLETED"
+        );
 
         // Check if actual payout amount is no more than expected
         require(
@@ -236,12 +239,29 @@ contract PolicyController is PolicyStorageModel, ModuleController {
             payout.updatedAt = block.timestamp;
 
             _remainder = 0;
+
+            emit LogPayoutCompleted(
+                _productId,
+                metadatum.policyId,
+                _payoutId,
+                actualAmount,
+                payout.state
+            );
         } else {
             // Partial
             payout.actualAmount = actualAmount;
             payout.updatedAt = block.timestamp;
 
             _remainder = payout.expectedAmount.sub(payout.actualAmount);
+
+            emit LogPartialPayout(
+                _productId,
+                metadatum.policyId,
+                _payoutId,
+                actualAmount,
+                _remainder,
+                payout.state
+            );
         }
     }
 
@@ -266,10 +286,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     /* Views */
-    function getApplicationData(
-        uint256 _productId,
-        uint256 _applicationId
-    )
+    function getApplicationData(uint256 _productId, uint256 _applicationId)
         external
         view
         returns (
@@ -287,10 +304,11 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         _state = applications[_productId][_applicationId].state;
     }
 
-    function getPayoutOptions(
-        uint256 _productId,
-        uint256 _applicationId
-    ) external view returns (uint256[] memory _payoutOptions) {
+    function getPayoutOptions(uint256 _productId, uint256 _applicationId)
+        external
+        view
+        returns (uint256[] memory _payoutOptions)
+    {
         _payoutOptions = applications[_productId][_applicationId].payoutOptions;
     }
 
@@ -300,5 +318,37 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         returns (uint256 _premium)
     {
         _premium = applications[_productId][_applicationId].premium;
+    }
+
+    function getApplicationState(uint256 _productId, uint256 _applicationId)
+        external
+        view
+        returns (ApplicationState _state)
+    {
+        _state = applications[_productId][_applicationId].state;
+    }
+
+    function getPolicyState(uint256 _productId, uint256 _policyId)
+        external
+        view
+        returns (PolicyState _state)
+    {
+        _state = policies[_productId][_policyId].state;
+    }
+
+    function getClaimState(uint256 _productId, uint256 _claimId)
+        external
+        view
+        returns (ClaimState _state)
+    {
+        _state = claims[_productId][_claimId].state;
+    }
+
+    function getPayoutState(uint256 _productId, uint256 _payoutId)
+        external
+        view
+        returns (PayoutState _state)
+    {
+        _state = payouts[_productId][_payoutId].state;
     }
 }

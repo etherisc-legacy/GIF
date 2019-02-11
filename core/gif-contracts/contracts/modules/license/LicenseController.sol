@@ -78,81 +78,53 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     /**
      * @dev Disapprove product once it was approved
      */
-    function disapproveProduct(uint256 _productId)
-        external
-        onlyDAO
-    {
+    function disapproveProduct(uint256 _productId) external onlyDAO {
         Product storage product = products[_productId];
 
         require(product.approved == true, "ERROR_INVALID_APPROVE_STATUS");
 
         product.approved = false;
 
-        emit LogProductDisapproved(
-            product.name,
-            product.addr,
-            _productId
-        );
+        emit LogProductDisapproved(product.name, product.addr, _productId);
     }
 
     /**
      * @dev Reapprove product once it was disapproved
      */
-    function reapproveProduct(uint256 _productId)
-        external
-        onlyDAO
-    {
+    function reapproveProduct(uint256 _productId) external onlyDAO {
         Product storage product = products[_productId];
 
         require(product.approved == false, "ERROR_INVALID_APPROVE_STATUS");
 
         product.approved = true;
 
-        emit LogProductReapproved(
-            product.name,
-            product.addr,
-            _productId
-        );
+        emit LogProductReapproved(product.name, product.addr, _productId);
     }
 
     /**
      * @dev Pause product
      */
-    function pauseProduct(uint256 _productId)
-        external
-        onlyDAO
-    {
+    function pauseProduct(uint256 _productId) external onlyDAO {
         Product storage product = products[_productId];
 
         require(product.paused == false, "ERROR_INVALID_PAUSED_STATUS");
 
         product.paused = true;
 
-        emit LogProductPaused(
-            product.name,
-            product.addr,
-            _productId
-        );
+        emit LogProductPaused(product.name, product.addr, _productId);
     }
 
     /**
      * @dev Unpause product
      */
-    function unpauseProduct(uint256 _productId)
-        external
-        onlyDAO
-    {
+    function unpauseProduct(uint256 _productId) external onlyDAO {
         Product storage product = products[_productId];
 
         require(product.paused == true, "ERROR_INVALID_PAUSED_STATUS");
 
         product.paused = false;
 
-        emit LogProductUnpaused(
-            product.name,
-            product.addr,
-            _productId
-        );
+        emit LogProductUnpaused(product.name, product.addr, _productId);
     }
 
     /**
@@ -169,18 +141,12 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     /**
      * @dev Check if contract is paused product
      */
-    function isPausedProduct(address _addr)
-        public
-        view
-        returns (bool _paused)
-    {
+    function isPausedProduct(address _addr) public view returns (bool _paused) {
         _paused = products[productIdByAddress[_addr]].paused == true;
     }
 
     function isValidCall(address _addr) public view returns (bool _valid) {
-        _valid = isApprovedProduct(_addr) && !isPausedProduct(
-            _addr
-        );
+        _valid = isApprovedProduct(_addr) && !isPausedProduct(_addr);
     }
 
     function authorize(address _sender)
