@@ -66,9 +66,7 @@ postgresql-service.v1.0.0 | - | - | - | -
     Keep it handy for all other ports we'll potentially expose later on in the process.
 3. `npm ci` to install package dependencies
 
-4. `npm run bootstrap` to install dependencies for Lerna packages
-
-5. `NPM_TOKEN=<token> npm run deploy:minikube` to deploy to Minikube. To get the token sign in to npm and create token of type Publish on `https://www.npmjs.com/settings/etherisc_user/tokens/create`.
+4. `NPM_TOKEN=<token> npm run deploy:minikube` to deploy to Minikube. To get the token sign in to npm and create token of type Publish on `https://www.npmjs.com/settings/etherisc_user/tokens/create`.
 
 #### Notes
 - By navigating to a `<minikubeip>:31672` in your browser you can open RabbitMQ's management plugin. The default administrative credentials are `admin/guest`.
@@ -96,8 +94,7 @@ Final param is a list of space-delimetered port pairs going local:minikube.
 If you are a Mac user and have Docker for Mac 17.12 CE Edge and higher, or 18.06 Stable and higher. 
 1. Configure [Kubernetes for Docker](https://docs.docker.com/docker-for-mac/#kubernetes)
 2. `npm ci` to install package dependencies
-3. `npm run bootstrap` to install dependencies for Lerna packages
-4. `NPM_TOKEN=<token> npm run deploy:docker` 
+3. `NPM_TOKEN=<token> npm run deploy:docker` 
 
 The deploy script will prompt you for values you'd like your environment to have configured in Secrets. 
 Some of them have default values pre-configured.
@@ -112,9 +109,8 @@ Some of them have default values pre-configured.
 4. In GCP dashboard navigate to Kubernetes Engine > Clusters and create new cluster
 5. In the description of the newly created cluster, find and click the "connect" button and run the generated command in the local console you are going to use for deploy.
 6. `npm install` to install package dependencies
-7. `npm run bootstrap` to install dependencies for Lerna packages
-8. `gcloud auth configure-docker --quiet` to authorize to Google Registry
-10. `GCLOUD_PROJECT_ID=<project name> GCLOUD_CLUSTER=<cluster name> GCLOUD_ZONE=<cluster zone> NPM_TOKEN=<token> npm run deploy:gke` to deploy to GKE cluster.  To get the token sign in to npm and create token of type Publish on `https://www.npmjs.com/settings/etherisc_user/tokens/create`.
+7. `gcloud auth configure-docker --quiet` to authorize to Google Registry
+8. `GCLOUD_PROJECT_ID=<project name> GCLOUD_CLUSTER=<cluster name> GCLOUD_ZONE=<cluster zone> NPM_TOKEN=<token> npm run deploy:gke` to deploy to GKE cluster.  To get the token sign in to npm and create token of type Publish on `https://www.npmjs.com/settings/etherisc_user/tokens/create`.
 
 ### D. Setup deployment to GKE clusters from Bitbucket Pipelines CI
 
