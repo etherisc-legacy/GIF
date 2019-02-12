@@ -85,6 +85,12 @@ class DipPdfGenerator {
   async issueCertificate({ content, fields, properties }) {
     const { policyId } = content;
 
+    const exists = await this.exists(policyId);
+
+    if (exists) {
+      return;
+    }
+
     await this.amqp.publish({
       messageType: 'policyGetRequest',
       messageVersion: '1.*',
@@ -100,6 +106,13 @@ class DipPdfGenerator {
    */
   async policyGetResponse({ content, fields, properties }) {
     const policy = content;
+
+    const exists = await this.exists(policy.id);
+
+    if (exists) {
+      return;
+    }
+
     const template = await this.templateResolver.getTemplate(policy);
 
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
@@ -136,6 +149,22 @@ class DipPdfGenerator {
       },
       correlationId: properties.correlationId,
     });
+  }
+
+  /**
+   * Check if the certeficate already exists
+   * @param {*} policyId
+   */
+  async exists(policyId) {
+    try {
+      await this.s3.headObject({
+        Bucket: this.config.bucket,
+        Key: `pdf/certificate-${policyId}.pdf`, // `pdf/${product}/${templateName}-${policy.id}.pdf`,
+      }).promise();
+      return true;
+    } catch (err) {
+      return false;
+    }
   }
 }
 

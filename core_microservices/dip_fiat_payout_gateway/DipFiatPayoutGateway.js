@@ -11,9 +11,11 @@ class DipFiatPayoutGateway {
    * Constructor
    * @param {object} amqp
    * @param {object} db
+   * @param {object} log
    */
-  constructor({ amqp, db }) {
+  constructor({ amqp, db, log }) {
     this._amqp = amqp;
+    this._log = log;
     this._models = models(db);
     this.providers = new Map();
   }

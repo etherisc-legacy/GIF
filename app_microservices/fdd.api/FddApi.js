@@ -275,7 +275,7 @@ class FddApi {
 
     const policy = await Policy.query().where({ contractPolicyId }).first();
 
-    if (policy && state === 0) {
+    if (policy && state === '0') {
       const { currency } = await PolicyExtra.query().where('policyId', policy.id)
         .then(rows => _.fromPairs(_.map(rows, r => [r.field, r.value])));
       await this._gif.makePayout({

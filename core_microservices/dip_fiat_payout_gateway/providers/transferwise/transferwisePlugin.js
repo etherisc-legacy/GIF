@@ -28,8 +28,8 @@ class TransferwisePlugin {
     currency,
     amount,
   }) {
-    const account = await this.transferwiseClient.createAccount(name, currency, email);
-    const quote = await this.transferwiseClient.createQuote(currency, amount);
+    const quote = await this.transferwiseClient.createQuote(String(currency).toUpperCase(), amount);
+    const account = await this.transferwiseClient.createAccount(name, String(currency).toUpperCase(), email);
     const transfer = await this.transferwiseClient.makeTransfer(account.id, quote.id, uuid());
     return transfer;
   }
@@ -39,7 +39,8 @@ class TransferwisePlugin {
    * @param {*} transfer
    */
   async processPayout({ id }) {
-    await this.transferwiseClient.fundTransfer(id);
+    const response = await this.transferwiseClient.fundTransfer(id);
+    return response;
   }
 }
 
