@@ -31,7 +31,7 @@ contract FlightStatusesOracle is Oracle, usingOraclize {
     string private encryptedQuery;
 
     // flight status api is v2, see https://developer.flightstats.com/api-docs/flightstatus/v2/flight
-    string constant ORACLIZE_STATUS_BASE_URL_TEST = "[URL] json(https://flightstats-test-cdgworpses.now.sh/flex/flightstatus/rest/v2/json/flight/status/";
+    string constant ORACLIZE_STATUS_BASE_URL_TEST = "[URL] json(https://flight-delay-testing-api-zxxtusurtb.now.sh/flex/flightstatus/rest/v2/json/flight/status/";
     string constant ORACLIZE_STATUS_BASE_URL = "[URL] json(https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/";
     string constant ORACLIZE_STATUS_QUERY = "utc=true).flightStatuses[0]['status','delays','operationalTimes']";
 

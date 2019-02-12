@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import searchMock from './searchMock';
 import CustomConfig from './../../shared/customConfig';
 
 export async function healthCheck() {
@@ -30,6 +31,8 @@ export async function getReservation(reservationCode, firstname, lastname) {
 }
 
 export async function searchFlights(origin, destination, date) {
+  if (localStorage.getItem('TEST')) return searchMock(origin, destination, date);
+
   const url = '/api/flights/search';
   const response = await fetch(url, {
     method: 'POST',
@@ -64,7 +67,8 @@ export async function getAirports() {
 }
 
 export async function getFlightRating(carrier, flightNumber) {
-  const url = `/api/flights/rating/${carrier}/${flightNumber}`;
+  const mode = localStorage.getItem('TEST') ? '?mode=test' : '';
+  const url = `/api/flights/rating/${carrier}/${flightNumber}${mode}`;
   const response = await fetch(url, {
     credentials: 'include',
   });

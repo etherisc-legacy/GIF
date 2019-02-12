@@ -34,7 +34,7 @@ contract FlightDelayManual is Product {
     // E.g. 10 EUR = 1000 (1000 cents)
     uint256 public constant MIN_PREMIUM = 1500;
     uint256 public constant MAX_PREMIUM = 29000;
-    uint256 public constant MAX_PAYOUT = 30000;
+    uint256 public constant MAX_PAYOUT = 150000;
 
     bytes32[1] public currencies = [bytes32("EUR")];
 

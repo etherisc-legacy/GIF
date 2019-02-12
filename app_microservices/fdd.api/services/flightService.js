@@ -41,12 +41,13 @@ class FlightService {
    * Get flight rating
    * @param {*} carrier
    * @param {*} flightNumber
+   * @param {*} testMode
    * @return {{}}
    */
-  async getFlightRating(carrier, flightNumber) {
+  async getFlightRating(carrier, flightNumber, testMode) {
     const { flightStatsClient } = this;
 
-    const ratings = await flightStatsClient.getFlightRating(carrier, flightNumber);
+    const ratings = await flightStatsClient.getFlightRating(carrier, flightNumber, testMode);
 
     return (ratings && ratings[0]) ? ratings[0] : null;
   }

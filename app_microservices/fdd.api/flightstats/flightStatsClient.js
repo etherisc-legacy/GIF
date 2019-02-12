@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 
 
 const BASE_URL = 'https://api.flightstats.com/flex';
+const BASE_URL_TEST = 'https://flight-delay-testing-api-zxxtusurtb.now.sh/flex';
 const FLIGHT_SCHEDULES_URL = `${BASE_URL}/schedules/rest/v1/json`;
 
 /**
@@ -41,14 +42,15 @@ class FlightStatsClient {
    * Get flight rating
    * @param {*} carrier
    * @param {*} flightNumber
+   * @param {*} testMode
    */
-  async getFlightRating(carrier, flightNumber) {
+  async getFlightRating(carrier, flightNumber, testMode) {
     const { FLIGHT_STATS_ID, FLIGHT_STATS_KEY } = this;
 
-    const url = `${BASE_URL}/ratings/rest/v1/json/flight/${carrier}/${flightNumber}?`;
-    const query = `appId=${FLIGHT_STATS_ID}&appKey=${FLIGHT_STATS_KEY}`;
+    const url = `${testMode ? BASE_URL_TEST : BASE_URL}/ratings/rest/v1/json/flight/${carrier}/${flightNumber}`;
+    const query = `?appId=${FLIGHT_STATS_ID}&appKey=${FLIGHT_STATS_KEY}`;
 
-    const response = await fetch(url + query);
+    const response = await fetch(testMode ? url + query : url);
     const data = await response.json();
 
     return data.ratings;

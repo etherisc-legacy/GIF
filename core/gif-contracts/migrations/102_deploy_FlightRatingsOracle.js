@@ -32,12 +32,12 @@ module.exports = async (deployer) => {
   info('Oraclize production url: %s\n', prodUrl);
 
   /* UNCOMMENT IF YOU WANT IN TEST MODE */
-  // info('Set test mode');
-  // await flightRatingsOracle.setTestMode(true, { gas: 200000 })
-  //   .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
-  //
-  // const testUrl = await flightRatingsOracle.getOraclizeUrl.call(web3utils.bytes(32, 'AA/100'), { gas: 200000 });
-  // info('Oraclize test url: %s', testUrl);
+  info('Set test mode');
+  await flightRatingsOracle.setTestMode(true, { gas: 200000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
+  const testUrl = await flightRatingsOracle.getOraclizeUrl.call(web3utils.bytes(32, 'AA/100'), { gas: 200000 });
+  info('Oraclize test url: %s', testUrl);
   /* UNCOMMENT IF YOU WANT IN TEST MODE */
 
   info('Propose OracleType');

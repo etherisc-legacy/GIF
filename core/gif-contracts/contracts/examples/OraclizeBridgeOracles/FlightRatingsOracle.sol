@@ -26,7 +26,7 @@ contract FlightRatingsOracle is Oracle, usingOraclize {
     string private encryptedQuery;
 
     // Ratings api: https://developer.flightstats.com/api-docs/ratings/v1
-    string constant ORACLIZE_RATINGS_BASE_URL_TEST = "[URL] json(https://flightstats-test-cdgworpses.now.sh/flex/ratings/rest/v1/json/flight/";
+    string constant ORACLIZE_RATINGS_BASE_URL_TEST = "[URL] json(https://flight-delay-testing-api-zxxtusurtb.now.sh/flex/ratings/rest/v1/json/flight/";
     string constant ORACLIZE_RATINGS_BASE_URL = "[URL] json(https://api.flightstats.com/flex/ratings/rest/v1/json/flight/";
     string constant ORACLIZE_RATINGS_QUERY = ").ratings[0]['observations','late15','late30','late45','cancelled','diverted']";
 

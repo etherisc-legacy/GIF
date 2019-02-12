@@ -43,8 +43,10 @@ module.exports = ({
       return;
     }
 
+    const testMode = Boolean(ctx.query.mode);
+
     const { carrier, flightNumber } = ctx.params;
-    const rating = await flightService.getFlightRating(carrier, flightNumber);
+    const rating = await flightService.getFlightRating(carrier, flightNumber, testMode);
 
     if (rating) {
       ctx.ok(rating);

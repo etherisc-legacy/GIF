@@ -58,6 +58,7 @@ class Flight extends Component {
       >
         <div className={styles.icon}><Plane /></div>
         <div>
+          {flight.description && <div>{flight.description}</div>}
           <div>{moment(flight.departureTime).utcOffset(moment.parseZone(flight.departureTime).utcOffset()).format('HH:mm YYYY-MM-DD ')} {flight.origin}-{flight.destination} {codeshares ? '' : `${flight.carrier}${flight.flightNumber}`}</div>
           <div>
             {t('Arrives at')}:
