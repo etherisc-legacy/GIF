@@ -120,12 +120,12 @@ class DipFiatPayoutGateway {
    */
   async policyGetResponse({ content, fields, properties }) {
     const policy = content;
+    const { Payout } = this._models;
+    let payout = null;
 
     try {
-      const { Payout } = this._models;
-
       // find payout and update status
-      const payout = await transaction(Payout.knex(), async (trx) => {
+      payout = await transaction(Payout.knex(), async (trx) => {
         let p = await Payout.query(trx).where({
           policyId: policy.id,
           status: 'new',
@@ -143,7 +143,12 @@ class DipFiatPayoutGateway {
       if (!payout) { // payout not found
         return;
       }
+    } catch (e) {
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      return;
+    }
 
+    try {
       if (!this.providers.has(payout.provider)) { // payout plugin not found
         await this._onError(
           policy.id,
@@ -186,8 +191,9 @@ class DipFiatPayoutGateway {
         },
         correlationId: properties.correlationId,
       });
-    } catch (error) {
-      await this._onError(policy.id, 'payoutError', error.toString(), properties.correlationId);
+    } catch (e) {
+      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+      await this._onError(policy.id, 'payoutError', e.toString(), properties.correlationId);
     }
   }
 }

@@ -4,6 +4,8 @@ const DipFiatPayoutGateway = require('../DipFiatPayoutGateway');
 const { schema, constants } = require('../knexfile');
 
 
+const POLICY_ID = '82c0754a-6714-435b-84e1-74b6936240eb';
+
 describe('DipFiatPayoutGateway microservice', () => {
   before(async () => {
     this.microservice = fabric(DipFiatPayoutGateway, {
@@ -30,7 +32,7 @@ describe('DipFiatPayoutGateway microservice', () => {
 
   it('should create new payout and send policyGetRequest message', async () => {
     const payoutMsg = {
-      policyId: 1,
+      policyId: POLICY_ID,
       payoutAmount: 100,
       currency: 'EUR',
       provider: 'transferwise',
@@ -44,7 +46,7 @@ describe('DipFiatPayoutGateway microservice', () => {
       } = msg;
 
       messageType.should.be.equal('policyGetRequest');
-      content.policyId.should.be.equal(1);
+      content.policyId.should.be.equal(POLICY_ID);
       correlationId.should.be.equal(0);
 
       return Promise.resolve();
@@ -55,7 +57,7 @@ describe('DipFiatPayoutGateway microservice', () => {
 
   it('should send payoutError message', async () => {
     const payoutMsg = {
-      policyId: 1,
+      policyId: POLICY_ID,
       payoutAmount: 100,
       currency: 'EUR',
       provider: 'not_valid_provider',
@@ -69,7 +71,7 @@ describe('DipFiatPayoutGateway microservice', () => {
       } = msg;
 
       messageType.should.be.equal('payoutError');
-      content.policyId.should.be.equal(1);
+      content.policyId.should.be.equal(POLICY_ID);
       content.error.should.be.equal('Payout provider not_valid_provider not found');
       correlationId.should.be.equal(0);
 
@@ -81,7 +83,7 @@ describe('DipFiatPayoutGateway microservice', () => {
 
   it('should do payout', async () => {
     const payoutMsg = {
-      policyId: 1,
+      policyId: POLICY_ID,
       payoutAmount: 100,
       currency: 'EUR',
       provider: 'transferwise',
@@ -95,13 +97,13 @@ describe('DipFiatPayoutGateway microservice', () => {
       } = msg;
 
       if (messageType === 'paidOut') {
-        content.policyId.should.be.equal(1);
+        content.policyId.should.be.equal(POLICY_ID);
         correlationId.should.be.equal(0);
         return;
       }
 
       messageType.should.be.equal('policyGetRequest');
-      content.policyId.should.be.equal(1);
+      content.policyId.should.be.equal(POLICY_ID);
       correlationId.should.be.equal(0);
 
       const policyGetResponseMsg = {
