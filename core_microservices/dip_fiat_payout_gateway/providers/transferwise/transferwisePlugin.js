@@ -9,9 +9,10 @@ class TransferwisePlugin {
   /**
    * Constructor
    * @param {object} config
+   * @param {object} log
    */
-  constructor(config) {
-    this.transferwiseClient = new TransferwiseClient(config);
+  constructor(config, log) {
+    this.transferwiseClient = new TransferwiseClient(config, log);
   }
 
   /**
@@ -28,8 +29,13 @@ class TransferwisePlugin {
     currency,
     amount,
   }) {
-    const quote = await this.transferwiseClient.createQuote(String(currency).toUpperCase(), amount);
-    const account = await this.transferwiseClient.createAccount(name, String(currency).toUpperCase(), email);
+    await this.transferwiseClient.refreshAccessToken();
+
+    const [account, quote] = await Promise.all([
+      this.transferwiseClient.createAccount(name, currency, email),
+      this.transferwiseClient.createQuote(currency, amount),
+    ]);
+
     const transfer = await this.transferwiseClient.makeTransfer(account.id, quote.id, uuid());
     return transfer;
   }

@@ -29,7 +29,9 @@ class DipFiatPayoutGateway {
       profileId: process.env.TRANSFERWISE_PROFILE_ID,
       url: process.env.TRANSFERWISE_API_URL,
       token: process.env.TRANSFERWISE_API_TOKEN,
-    }));
+      login: process.env.TRANSFERWISE_LOGIN,
+      password: process.env.TRANSFERWISE_PASSWORD,
+    }, this._log));
     await this._amqp.consume({
       messageType: 'payout',
       messageVersion: '1.*',
