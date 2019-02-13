@@ -5,7 +5,7 @@ import "../modules/license/ILicenseController.sol";
 import "../modules/registry/IRegistryController.v1.sol";
 
 
-contract DAOController is WithRegistry {
+contract DAOService is WithRegistry {
 
     bytes32 public constant NAME = "DAO";
 

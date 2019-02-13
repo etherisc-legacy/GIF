@@ -5,7 +5,7 @@ import "../shared/Delegator.sol";
 import "../modules/license/ILicenseController.sol";
 
 
-contract ProductController is WithRegistry, Delegator {
+contract ProductService is WithRegistry, Delegator {
 
     bytes32 public constant NAME = "ProductController";
 

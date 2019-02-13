@@ -1,7 +1,7 @@
 pragma solidity 0.5.2;
 
 
-interface IProductController {
+interface IProductService {
 
     function register(bytes32 _insuranceApplicationName, bytes32 _policyFlow)
     external returns (uint256 _registrationId);

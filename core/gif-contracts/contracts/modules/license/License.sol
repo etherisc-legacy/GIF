@@ -4,7 +4,7 @@ import "./LicenseStorageModel.sol";
 import "../../shared/ModuleStorage.sol";
 
 
-contract License is LicenceStorageModel, ModuleStorage {
+contract License is LicenseStorageModel, ModuleStorage {
 
     bytes32 public constant NAME = "License";
 

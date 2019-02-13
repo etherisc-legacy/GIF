@@ -9,15 +9,15 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
 
     constructor() public {
         // Init
-        controllers["DAO"] = msg.sender;
+        services["DAO"] = msg.sender;
     }
 
     function assignStorage(address _storage) external onlyDAO {
         _assignStorage(_storage);
     }
 
-    function registerController(bytes32 _name, address _addr) external onlyDAO {
-        controllers[_name] = _addr;
+    function registerService(bytes32 _name, address _addr) external onlyDAO {
+        services[_name] = _addr;
     }
 
     /**
@@ -115,8 +115,8 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         _addr = getContractInRelease(release, _contractName);
     }
 
-    function getController(bytes32 _contractName) public view returns (address _addr) {
-        _addr = controllers[_contractName];
+    function getService(bytes32 _contractName) public view returns (address _addr) {
+        _addr = services[_contractName];
     }
 
     function getRelease() external view returns (uint256 _release) {

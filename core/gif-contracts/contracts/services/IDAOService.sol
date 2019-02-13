@@ -1,7 +1,7 @@
 pragma solidity 0.5.2;
 
 
-interface IDAOController {
+interface IDAOService {
 
     function approveRegistration(uint256 _registrationId) external returns (uint256 _applicationId);
 

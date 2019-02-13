@@ -16,8 +16,8 @@ contract WithRegistry is AccessModifiers {
         registry = IRegistryController(_registry);
     }
 
-    function getController(bytes32 _contractName) public view returns (address _addr) {
-        _addr = registry.getController(_contractName);
+    function getService(bytes32 _contractName) public view returns (address _addr) {
+        _addr = registry.getService(_contractName);
     }
 
     function getContract(bytes32 _contractName) public view returns (address _addr) {

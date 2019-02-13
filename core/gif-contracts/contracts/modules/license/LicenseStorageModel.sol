@@ -1,7 +1,7 @@
 pragma solidity 0.5.2;
 
 
-contract LicenceStorageModel {
+contract LicenseStorageModel {
     event LogNewRegistration(
         uint256 registrationId,
         bytes32 name,

@@ -8,13 +8,13 @@ contract Registry is RegistryStorageModel, BaseModuleStorage {
 
     constructor(address _controller) public {
         // Init
-        controllers["DAO"] = msg.sender;
+        services["DAO"] = msg.sender;
         _assignController(_controller);
     }
 
     function assignController(address _controller) external {
         // todo: use onlyDAO modifier
-        require(msg.sender == controllers["DAO"], "ERROR::NOT_AUTHORIZED");
+        require(msg.sender == services["DAO"], "ERROR::NOT_AUTHORIZED");
         _assignController(_controller);
     }
 }

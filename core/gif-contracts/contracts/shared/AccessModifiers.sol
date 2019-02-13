@@ -4,7 +4,7 @@ pragma solidity 0.5.2;
 contract AccessModifiers {
 
     modifier onlyDAO() {
-        require(msg.sender == getController("DAO"), "ERROR::NOT_DAO_CONTROLLER");
+        require(msg.sender == getService("DAO"), "ERROR::NOT_DAO_SERVICE");
         _;
     }
 
@@ -19,5 +19,5 @@ contract AccessModifiers {
 
     function getContract(bytes32 _contractName) public view returns (address _addr);
 
-    function getController(bytes32 _contractName) public view returns (address _addr);
+    function getService(bytes32 _contractName) public view returns (address _addr);
 }

@@ -7,7 +7,7 @@ interface IRegistryController {
 
     function register(bytes32 _contractName, address _contractAddress) external;
 
-    function registerController(bytes32 _name, address _addr) external;
+    function registerService(bytes32 _name, address _addr) external;
 
     function deregisterInRelease(uint256 _release, bytes32 _contractName) external;
 
@@ -20,7 +20,7 @@ interface IRegistryController {
 
     function getContract(bytes32 _contractName) external view returns (address _contractAddress);
 
-    function getController(bytes32 _contractName) external view returns (address _contractAddress);
+    function getService(bytes32 _contractName) external view returns (address _contractAddress);
 
     function getRelease() external view returns (uint256 _release);
 }

@@ -19,6 +19,6 @@ contract RegistryStorageModel is IRegistry {
     // release => contract name []
     mapping (uint256 => bytes32[]) public contractNames;
 
-    // controller name => address
-    mapping (bytes32 => address) public controllers;
+    // service name => address
+    mapping (bytes32 => address) public services;
 }
