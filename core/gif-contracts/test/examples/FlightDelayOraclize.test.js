@@ -12,11 +12,11 @@ contract('FlightDelayOraclize', () => {
 
     await FlightStatusesOracle.deployed();
 
-    const payouts = await fdd.calculatePayouts.call(2000, [64, 2, 0, 5, 0, 2]);
+    const payouts = await fdd.calculatePayouts.call(2000, [61, 5, 1, 4, 0, 0]);
     const payoutOptions = payouts._payoutOptions.map(el => el.toString());
 
     const application = {
-      carrierFlightNumber: web3utils.bytes(32, 'AA/100'),
+      carrierFlightNumber: web3utils.bytes(32, 'AF/24'),
       yearMonthDay: web3utils.bytes(32, moment().add(1, 'day').format('YYYY/MM/DD')),
       departureTime: moment().add(2, 'day').unix(),
       arrivalTime: moment().add(3, 'days').unix(),

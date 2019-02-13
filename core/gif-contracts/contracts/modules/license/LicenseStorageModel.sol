@@ -52,4 +52,30 @@ contract LicenseStorageModel {
      * @dev Get product id by contract's address
      */
     mapping(address => uint256) public productIdByAddress;
+
+    //    event LogNewProduct(uint256 productId, bytes32 name, address addr);
+    //
+    //    event LogProductApproved(bytes32 name, address addr, uint256 id);
+    //
+    //    event LogProductDisapproved(bytes32 name, address addr, uint256 id);
+    //
+    //    event LogProductPaused(bytes32 name, address addr, uint256 id);
+    //
+    //    event LogProductUnpaused(bytes32 name, address addr, uint256 id);
+    //
+    //    struct Product {
+    //        bytes32 name;
+    //        address addr;
+    //        bytes32 policyFlow;
+    //        uint256 release; // core release
+    //        // uint256 product release
+    //        address policyToken;
+    //        bool approved;
+    //        bool paused;
+    //    }
+    //
+    //    mapping(uint256 => Product) public products;
+    //    mapping(address => uint256) public productIdByAddress;
+    //    uint256 public productIdIncrement;
+
 }

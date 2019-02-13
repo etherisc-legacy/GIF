@@ -105,36 +105,41 @@ contract FlightStatusesOracle is Oracle, usingOraclize {
         } else if (status != "L" && status != "A" && status != "C" && status != "D") {
             // Unprocessable status;
             respond(requestId, abi.encode(status, -1));
-        }
+        } else {
+            slResult = _result.toSlice();
+            bool arrived = slResult.contains("actualGateArrival".toSlice());
 
-        slResult = _result.toSlice();
-        bool arrived = slResult.contains("actualGateArrival".toSlice());
+            if (status == "A" || (status == "L" && !arrived)) {
+                // flight still active or not at gate
+                respond(requestId, abi.encode(bytes1("A"), -1));
+            } else if (status == "L" && arrived) {
+                strings.slice memory aG = "\"arrivalGateDelayMinutes\": ".toSlice(
 
-        if (status == "A" || (status == "L" && !arrived)) {
-            // flight still active or not at gate
-            respond(requestId, abi.encode(bytes1("A"), -1));
-        } else if (status == "L" && arrived) {
-            strings.slice memory aG = "\"arrivalGateDelayMinutes\": ".toSlice();
-
-            uint256 delayInMinutes;
-
-            if (slResult.contains(aG)) {
-                slResult.find(aG).beyond(aG);
-                slResult.until(
-                    slResult.copy().find("\"".toSlice()).beyond("\"".toSlice())
                 );
-                // truffle bug, replace by "}" as soon as it is fixed.
-                slResult.until(slResult.copy().find("\x7D".toSlice()));
-                slResult.until(slResult.copy().find(",".toSlice()));
-                delayInMinutes = parseInt(slResult.toString());
+
+                uint256 delayInMinutes;
+
+                if (slResult.contains(aG)) {
+                    slResult.find(aG).beyond(aG);
+                    slResult.until(
+                        slResult.copy().find("\"".toSlice()).beyond(
+                            "\"".toSlice()
+                        )
+                    );
+                    // truffle bug, replace by "}" as soon as it is fixed.
+                    slResult.until(slResult.copy().find("\x7D".toSlice()));
+                    slResult.until(slResult.copy().find(",".toSlice()));
+                    delayInMinutes = parseInt(slResult.toString());
+                } else {
+                    delayInMinutes = 0;
+                }
+
+                respond(requestId, abi.encode(status, delayInMinutes));
             } else {
-                delayInMinutes = 0;
+                // no delay info
+                respond(requestId, abi.encode(status, -1));
             }
 
-            respond(requestId, abi.encode(status, delayInMinutes));
-        } else {
-            // no delay info
-            respond(requestId, abi.encode(status, -1));
         }
 
         emit OraclizeResponded(requestId, _queryId, _result, _proof);
