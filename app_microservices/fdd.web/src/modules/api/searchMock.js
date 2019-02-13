@@ -39,7 +39,7 @@ const searchMock = (origin, destination, date) => ([
     "destination": destination,
     "arrivalTime": moment(date).add(1, 'day').format('YYYY-MM-DDTHH:MM:SSZ'),
     "departureTime": moment(date).format('YYYY-MM-DDTHH:MM:SSZ'),
-    "description": "Test case: > 30 <= 45min. delay"
+    "description": "Test case: > 45min. delay"
   },
   {
     "id": "f5",
