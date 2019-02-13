@@ -30,7 +30,7 @@ schemaVersions['1.0'] = {
       },
     },
   },
-  required: ['trasports', 'templates'],
+  required: ['transports', 'templates'],
 };
 
 module.exports = schemaVersions;

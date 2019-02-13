@@ -24,7 +24,10 @@ const findMessageSchema = (type, version) => {
  * @param {string} version
  */
 const validate = (object, type, version) => {
-  validator.validate(object, findMessageSchema(type, version));
+  const result = validator.validate(object, findMessageSchema(type, version));
+  if (!result.valid) {
+    throw new Error(`Wrong schema format for message type '${type}' v${version} : ${result.errors}`);
+  }
 };
 
 /**
@@ -35,8 +38,9 @@ const validate = (object, type, version) => {
  * @return {Buffer}
  */
 const pack = (object, type, version) => {
-  validate(object, type, version);
-  return Buffer.from(JSON.stringify(object));
+  const payload = JSON.stringify(object);
+  validate(JSON.parse(payload), type, version);
+  return Buffer.from(payload);
 };
 
 /**

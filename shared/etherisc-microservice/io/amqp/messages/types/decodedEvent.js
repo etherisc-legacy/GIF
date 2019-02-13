@@ -11,10 +11,10 @@ schemaVersions['1.0'] = {
     networkName: { type: 'string' },
     version: { type: 'string' },
 
-    topics: { type: 'object' },
+    topics: { type: 'array' },
     eventArgs: { type: 'object' },
 
-    blockNumber: { type: 'number' }, // TODO: check if pack/unpack handles BigNumber properly
+    blockNumber: { type: 'string' },
     logIndex: { type: 'number' },
     transactionIndex: { type: 'number' },
 
