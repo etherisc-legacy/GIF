@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const btoa = require('btoa');
 
 
 const SRC_CURRENCY = process.env.TRANSFERWISE_SRC_CURRENCY;
@@ -9,16 +10,25 @@ const SRC_CURRENCY = process.env.TRANSFERWISE_SRC_CURRENCY;
 class TransferwiseClient {
   /**
    * Сonstructor
-   * @param {*} param0
+   * @param {*} config
+   * @param {*} log
    */
   constructor({
     profileId,
     url,
     token,
-  }) {
+    login,
+    password,
+  }, log) {
     this.profileId = profileId;
     this.url = url;
-    this.accessToken = token;
+    this.login = login;
+    this.password = password;
+    this.token = token;
+
+    this.log = log;
+
+    this.refreshAccessToken();
   }
 
   /**
@@ -114,6 +124,33 @@ class TransferwiseClient {
     });
 
     return response.json();
+  }
+
+  /**
+   * Get Access Token
+   */
+  async getAccessToken() {
+    const data = `grant_type=refresh_token&refresh_token=${this.token}`;
+    const response = await fetch(`${this.url}/oauth/token`, {
+      method: 'POST',
+      body: data,
+      headers: {
+        Authorization: `Basic ${btoa(`${this.login}':'${this.password}`)}`,
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+    });
+    const json = await response.json();
+
+    return json.access_token;
+  }
+
+  /**
+   * Refresh Access Token
+   */
+  refreshAccessToken() {
+    this.accessToken = this
+      .getAccessToken()
+      .catch(e => this.log.error(e));
   }
 }
 
