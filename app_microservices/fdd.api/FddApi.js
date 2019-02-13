@@ -281,7 +281,7 @@ class FddApi {
       await this._gif.makePayout({
         provider: 'transferwise',
         currency,
-        payoutAmount: amount,
+        payoutAmount: Number(amount),
         policyId: policy.id,
         contractPayoutId,
       });

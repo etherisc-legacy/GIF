@@ -170,12 +170,13 @@ class DipFiatPayoutGateway {
         const transfer = await provider.initializePayout({
           name: `${policy.customer.firstname} ${policy.customer.lastname}`,
           email: policy.customer.email,
-          currency: payout.currency,
+          currency: String(payout.currency).toUpperCase(),
           amount: payout.payoutAmount,
         });
 
         // Process Payout
-        await provider.processPayout(transfer);
+        const result = await provider.processPayout(transfer);
+        this._log.info('Transferwise result:', result);
       } catch (error) {
         // update payout status to failed
         await payout.$query().update({ status: 'failed' });

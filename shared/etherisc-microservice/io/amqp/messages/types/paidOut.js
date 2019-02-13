@@ -6,7 +6,7 @@ schemaVersions['1.0'] = {
   properties: {
     policyId: { type: 'string' },
     amount: { type: 'number' },
-    contractPolicyId: { type: 'number' },
+    contractPolicyId: { type: 'string' },
   },
   required: ['policyId'],
 };

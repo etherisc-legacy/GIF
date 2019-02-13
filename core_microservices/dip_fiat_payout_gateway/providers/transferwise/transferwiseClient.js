@@ -135,7 +135,7 @@ class TransferwiseClient {
       method: 'POST',
       body: data,
       headers: {
-        Authorization: `Basic ${btoa(`${this.login}':'${this.password}`)}`,
+        Authorization: `Basic ${btoa(`${this.login}:${this.password}`)}`,
         'content-type': 'application/x-www-form-urlencoded',
       },
     });
