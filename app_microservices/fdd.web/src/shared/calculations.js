@@ -2,8 +2,12 @@ import { MAX_PAYOUTS } from './constants';
 
 import CustomConfig from './customConfig';
 
-const getPayout = (premium, reserved1, reserved2, weight, max) => pattern =>
-  Math.min(Number(((premium * (1 - reserved1) * (1 - reserved2)) * pattern) / weight), max).toFixed(2);
+const getPayout = (premium, reserved1, reserved2, w, maxPayout) => pattern => {
+  const weight = Math.floor(w * 10000) / 10000;
+  const premiumAmount = premium * (1 - reserved1) * (1 - reserved2);
+  const value = Math.min(Number((premiumAmount * pattern) / weight), maxPayout);
+  return (Math.floor(value * 100)/100).toFixed(2);
+}
 
 export const calculatePayouts = (stats) => (premium, currency) => {
   if (!premium || premium <= 0 || isNaN(Number(premium))) {
@@ -28,7 +32,7 @@ export const calculatePayouts = (stats) => (premium, currency) => {
     (can * weightPattern[4]);
 
   if (weight === 0) {
-    weight = 2;
+    weight = 10;
   }
 
   const maxPayouts = CustomConfig.payoutCalc.maxPayouts || MAX_PAYOUTS;
