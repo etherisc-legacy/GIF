@@ -50,7 +50,7 @@ class FlightStatsClient {
     const url = `${testMode ? BASE_URL_TEST : BASE_URL}/ratings/rest/v1/json/flight/${carrier}/${flightNumber}`;
     const query = `?appId=${FLIGHT_STATS_ID}&appKey=${FLIGHT_STATS_KEY}`;
 
-    const response = await fetch(testMode ? url + query : url);
+    const response = await fetch(testMode ? url : url + query);
     const data = await response.json();
 
     return data.ratings;
