@@ -88,6 +88,7 @@ class DipPdfGenerator {
     const exists = await this.exists(policyId);
 
     if (exists) {
+      this.log.info(`Certificate already exists ${policyId}`);
       return;
     }
 
@@ -157,14 +158,14 @@ class DipPdfGenerator {
    */
   async exists(policyId) {
     try {
-      await this.s3.headObject({
+      await this.s3.getObject({
         Bucket: this.config.bucket,
         Key: `pdf/certificate-${policyId}.pdf`, // `pdf/${product}/${templateName}-${policy.id}.pdf`,
       }).promise();
-      return true;
     } catch (err) {
       return false;
     }
+    return true;
   }
 }
 
