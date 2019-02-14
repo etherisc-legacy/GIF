@@ -14,37 +14,3 @@ module.exports = (web3, artifacts) => {
     bytes,
   };
 };
-
-// const { LogDecoder, TxDecoder } = require('eth-decoder').default;
-//
-//
-// module.exports = (artifacts) => {
-//   const abi = [
-//     artifacts.require('modules/license/License.sol').abi,
-//   ];
-//
-//   const logDecoder = new LogDecoder(abi);
-//   const txDecoder = new TxDecoder(abi);
-//
-//   return { logDecoder, txDecoder };
-// };
-
-// const abiDecoder = require('abi-decoder');
-//
-//
-// module.exports = (artifacts) => {
-//   abiDecoder.addABI(artifacts.require('modules/license/License.sol').abi);
-//
-//   return abiDecoder;
-// }
-
-// const { parseLog } = require('ethereum-event-logs');
-//
-//
-// module.exports = (artifacts) => {
-//   const abi = [
-//     artifacts.require('modules/license/License.sol').abi,
-//   ];
-//
-//   return logs => parseLog(logs, [...abi]);
-// }

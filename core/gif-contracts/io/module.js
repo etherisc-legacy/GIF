@@ -1,4 +1,5 @@
 const web3utilsIO = require('./web3utils');
+const logger = require('./logger');
 
 
 module.exports = (web3, artifacts) => {
@@ -6,5 +7,6 @@ module.exports = (web3, artifacts) => {
 
   return {
     web3utils,
+    logger,
   };
 };
