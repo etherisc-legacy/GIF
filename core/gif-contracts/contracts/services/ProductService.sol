@@ -4,10 +4,8 @@ import "../shared/WithRegistry.sol";
 import "../shared/Delegator.sol";
 import "../modules/license/ILicenseController.sol";
 
-
 contract ProductService is WithRegistry, Delegator {
-
-    bytes32 public constant NAME = "ProductController";
+    bytes32 public constant NAME = "ProductService";
 
     constructor(address _registry) public WithRegistry(_registry) {}
 
@@ -20,7 +18,10 @@ contract ProductService is WithRegistry, Delegator {
         _delegate(policyFlow);
     }
 
-    function register(bytes32 _name, bytes32 _policyFlow) external returns (uint256 _registrationId) {
+    function register(bytes32 _name, bytes32 _policyFlow)
+        external
+        returns (uint256 _registrationId)
+    {
         _registrationId = license().register(_name, msg.sender, _policyFlow);
     }
 

@@ -1,8 +1,6 @@
 pragma solidity 0.5.2;
 
-
 contract AccessModifiers {
-
     modifier onlyDAO() {
         require(msg.sender == getService("DAO"), "ERROR::NOT_DAO_SERVICE");
         _;
@@ -12,12 +10,42 @@ contract AccessModifiers {
         // Allow only from delegator
         require(address(this) == getContract(_module), "ERROR::NOT_ON_STORAGE");
 
-        // Allow only FrontController (it delegates to PolicyFlow)
-        require(msg.sender == getContract("ProductController"), "ERROR::NOT_FRONT_CONTROLLER");
+        // Allow only ProductService (it delegates to PolicyFlow)
+        require(
+            msg.sender == getContract("ProductService"),
+            "ERROR::NOT_PRODUCT_SERVICE"
+        );
         _;
     }
 
-    function getContract(bytes32 _contractName) public view returns (address _addr);
+    modifier onlyOracle() {
+        require(msg.sender == getService("OracleService"), "ERROR::NOT_ORACLE");
+        _;
+    }
 
-    function getService(bytes32 _contractName) public view returns (address _addr);
+    modifier onlyOracleOwner() {
+        require(
+            msg.sender == getService("OracleOwnerService"),
+            "ERROR::NOT_ORACLE_OWNER"
+        );
+        _;
+    }
+
+    modifier onlyProductOwner() {
+        require(
+            msg.sender == getService("ProductOwnerService"),
+            "ERROR::NOT_PRODUCT_OWNER"
+        );
+        _;
+    }
+
+    function getContract(bytes32 _contractName)
+        public
+        view
+        returns (address _addr);
+
+    function getService(bytes32 _contractName)
+        public
+        view
+        returns (address _addr);
 }
