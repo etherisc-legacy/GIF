@@ -26,6 +26,7 @@ class DipNotifications {
         new SmtpPlugin(s3, { ...options }),
         new TelegramPlugin(s3, { ...options }),
       ],
+      log,
     });
   }
 

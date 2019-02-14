@@ -111,6 +111,7 @@ class DipPdfGenerator {
     const exists = await this.exists(policy.id);
 
     if (exists) {
+      this.log.info(`Certificate already exists ${policy.id}`);
       return;
     }
 
@@ -131,14 +132,17 @@ class DipPdfGenerator {
         right: '2.54cm',
       },
     });
+    this.log.info(`Certificate for ${policy.id} generated`);
 
+    const fileKey = `pdf/certificate-${policy.id}.pdf`;
     await this.s3.putObject({
       Bucket: this.config.bucket,
       ACL: 'public-read',
-      Key: `pdf/certificate-${policy.id}.pdf`, // `pdf/${product}/${templateName}-${policy.id}.pdf`,
+      Key: fileKey, // `pdf/${product}/${templateName}-${policy.id}.pdf`,
       Body: pdf,
       ContentType: 'binary',
     }).promise();
+    this.log.info(`Certificate for ${policy.id} successfully stored at ${fileKey}`);
 
     await this.amqp.publish({
       messageType: 'certificateIssued',

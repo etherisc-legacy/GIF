@@ -7,15 +7,21 @@ const _ = require('lodash');
 class NotificationsService {
   /**
    * constructor
-   * @param {{}} opts
+   * @param {TemplateResolver} templateResolver
+   * @param {{}} options
    * @param {[]} plugins
+   * @param {Object} log
    */
   constructor({
-    templateResolver, options, plugins,
+    templateResolver,
+    options,
+    plugins,
+    log,
   }) {
     this.templateResolver = templateResolver;
     this.options = options;
     this.plugins = plugins;
+    this.log = log;
   }
 
   /**
@@ -33,6 +39,7 @@ class NotificationsService {
         const plugin = _.find(this.plugins, ['transportName', transport.name]);
         const template = await this.templateResolver.getTemplate(productId, transport.name, type);
         await plugin.send({ ...message.props, ...transport.props }, template(data));
+        this.log.info(`Notification sent: ${type} on ${transport.name} for ${productId}`);
       }
     }
   }
