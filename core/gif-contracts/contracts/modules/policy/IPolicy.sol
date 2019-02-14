@@ -1,62 +1,63 @@
 pragma solidity 0.5.2;
 
-
 interface IPolicy {
     // Events
     event LogNewMetadata(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
         PolicyFlowState state
     );
 
     event LogMetadataStateChanged(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
         PolicyFlowState state
     );
 
     event LogNewApplication(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
         uint256 applicationId
     );
 
     event LogApplicationStateChanged(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
         uint256 applicationId,
         ApplicationState state
     );
 
     event LogNewPolicy(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
-        uint256 policyId
+        uint256 policyId,
+        uint256 applicationId
     );
 
     event LogPolicyStateChanged(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         PolicyState state
     );
 
     event LogNewClaim(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         ClaimState state
     );
 
     event LogClaimStateChanged(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         ClaimState state
     );
 
     event LogNewPayout(
-        uint256 insuranceApplicationId,
+        uint256 productId,
+        uint256 payoutId,
         uint256 metadataId,
         uint256 policyId,
         uint256 claimId,
@@ -65,23 +66,40 @@ interface IPolicy {
     );
 
     event LogPayoutStateChanged(
-        uint256 insuranceApplicationId,
+        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         uint256 claimId,
         PayoutState state
     );
 
+    event LogPayoutCompleted(
+        uint256 productId,
+        uint256 policyId,
+        uint256 payoutId,
+        uint256 amount,
+        PayoutState state
+    );
+
+    event LogPartialPayout(
+        uint256 productId,
+        uint256 policyId,
+        uint256 payoutId,
+        uint256 amount,
+        uint256 remainder,
+        PayoutState state
+    );
+
     // Statuses
-    enum PolicyFlowState { Started, Paused, Finished }
+    enum PolicyFlowState {Started, Paused, Finished}
 
-    enum ApplicationState { Applied, Revoked, Underwritten, Declined }
+    enum ApplicationState {Applied, Revoked, Underwritten, Declined}
 
-    enum PolicyState { Active, Expired }
+    enum PolicyState {Active, Expired}
 
-    enum ClaimState { Applied, Confirmed, Declined }
+    enum ClaimState {Applied, Confirmed, Declined}
 
-    enum PayoutState { Expected, PaidOut }
+    enum PayoutState {Expected, PaidOut}
 
     // Objects
     struct Metadata {
@@ -92,19 +110,15 @@ interface IPolicy {
         uint256[] payoutIds;
         bool hasPolicy;
         bool hasApplication;
-
         // ERC721 token
         address tokenContract;
         uint256 tokenId;
-
         // Core
         uint256 registryContract;
         uint256 release;
-
         // State
         PolicyFlowState state;
         bytes32 stateMessage;
-
         // Datetime
         uint256 createdAt;
         uint256 updatedAt;
@@ -115,23 +129,18 @@ interface IPolicy {
 
     struct Application {
         uint256 metadataId;
-
         // Customer
         bytes32 customerExternalId;
-
         // Premium
         uint256 premium;
-        uint256 currency;
-
+        bytes32 currency;
         // Proof
 
         // Payout
         uint256[] payoutOptions;
-
         // State
         ApplicationState state;
         bytes32 stateMessage;
-
         // Datetime
         uint256 createdAt;
         uint256 updatedAt;
@@ -139,11 +148,9 @@ interface IPolicy {
 
     struct Policy {
         uint256 metadataId;
-
         // State
         PolicyState state;
         bytes32 stateMessage;
-
         // Datetime
         uint256 createdAt;
         uint256 updatedAt;
@@ -151,14 +158,11 @@ interface IPolicy {
 
     struct Claim {
         uint256 metadataId;
-
         // Data
         bytes32 data;
-
         // State
         ClaimState state;
         bytes32 stateMessage;
-
         // Proof
 
         // Datetime
@@ -169,15 +173,12 @@ interface IPolicy {
     struct Payout {
         uint256 metadataId;
         uint256 claimId;
-
         // Amounts
         uint256 expectedAmount;
         uint256 actualAmount;
-
         // State
         PayoutState state;
         bytes32 stateMessage;
-
         // Proof
 
         // Datetime

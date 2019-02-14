@@ -1,15 +1,13 @@
 pragma solidity 0.5.2;
 
 import "./RegistryStorageModel.sol";
-import "../../shared/AccessModifiers.sol";
 import "../../shared/BaseModuleController.sol";
-
+import "../../shared/AccessModifiers.sol";
 
 contract RegistryController is RegistryStorageModel, BaseModuleController, AccessModifiers {
-
     constructor() public {
         // Init
-        services["DAO"] = msg.sender;
+        controllers["DAO"] = msg.sender;
     }
 
     function assignStorage(address _storage) external onlyDAO {
@@ -17,15 +15,25 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     }
 
     function registerService(bytes32 _name, address _addr) external onlyDAO {
-        services[_name] = _addr;
+        controllers[_name] = _addr;
+    }
+
+    function getRelease() external view returns (uint256 _release) {
+        _release = release;
     }
 
     /**
      * @dev Register contract in certain release
      */
-    function registerInRelease(uint256 _release, bytes32 _contractName, address _contractAddress)
-    public onlyDAO {
-        require(contractNames[_release].length <= maxContracts, "ERROR::MAX_CONTRACTS_LIMIT");
+    function registerInRelease(
+        uint256 _release,
+        bytes32 _contractName,
+        address _contractAddress
+    ) public onlyDAO {
+        require(
+            contractNames[_release].length <= maxContracts,
+            "ERROR::MAX_CONTRACTS_LIMIT"
+        );
 
         if (contracts[_release][_contractName] == address(0)) {
             contractNames[_release].push(_contractName);
@@ -40,7 +48,9 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
      * @dev Register contract in the latest release
      */
     function register(bytes32 _contractName, address _contractAddress)
-    public onlyDAO {
+        public
+        onlyDAO
+    {
         registerInRelease(release, _contractName, _contractAddress);
     }
 
@@ -48,7 +58,9 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
      * @dev Deregister contract in certain release
      */
     function deregisterInRelease(uint256 _release, bytes32 _contractName)
-    public onlyDAO {
+        public
+        onlyDAO
+    {
         uint256 indexToDelete;
         uint256 countContracts = contractNames[_release].length;
 
@@ -73,16 +85,14 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     /**
      * @dev Deregister contract in the latest release
      */
-    function deregister(bytes32 _contractName)
-    public onlyDAO {
+    function deregister(bytes32 _contractName) public onlyDAO {
         deregisterInRelease(release, _contractName);
     }
 
     /**
      * @dev Create new release, copy contracts from previous release
      */
-    function prepareRelease()
-    public onlyDAO returns (uint256 _release) {
+    function prepareRelease() public onlyDAO returns (uint256 _release) {
         uint256 countContracts = contractNames[release].length;
 
         require(countContracts > 0, "ERROR::EMPTY_RELEASE");
@@ -92,7 +102,11 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         // todo: think about how to avoid this loop
         for (uint256 i = 0; i < countContracts; i++) {
             bytes32 contractName = contractNames[release][i];
-            registerInRelease(nextRelease, contractName, contracts[release][contractName]);
+            registerInRelease(
+                nextRelease,
+                contractName,
+                contracts[release][contractName]
+            );
         }
 
         release = nextRelease;
@@ -104,22 +118,30 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     /**
      * @dev Get contract's address in certain release
      */
-    function getContractInRelease(uint256 _release, bytes32 _contractName) public view returns (address _addr) {
+    function getContractInRelease(uint256 _release, bytes32 _contractName)
+        public
+        view
+        returns (address _addr)
+    {
         _addr = contracts[_release][_contractName];
     }
 
     /**
      * @dev Get contract's address in the latest release
      */
-    function getContract(bytes32 _contractName) public view returns (address _addr) {
+    function getContract(bytes32 _contractName)
+        public
+        view
+        returns (address _addr)
+    {
         _addr = getContractInRelease(release, _contractName);
     }
 
-    function getService(bytes32 _contractName) public view returns (address _addr) {
-        _addr = services[_contractName];
-    }
-
-    function getRelease() external view returns (uint256 _release) {
-        _release = release;
+    function getService(bytes32 _contractName)
+        public
+        view
+        returns (address _addr)
+    {
+        _addr = controllers[_contractName];
     }
 }

@@ -1,12 +1,10 @@
 pragma solidity 0.5.2;
 
-
 contract RBAC {
-
-    mapping (bytes32 => uint256) public roles;
+    mapping(bytes32 => uint256) public roles;
     bytes32[] public rolesKeys;
 
-    mapping (address => uint256) public permissions;
+    mapping(address => uint256) public permissions;
 
     modifier onlyWithRole(bytes32 _role) {
         require(hasRole(msg.sender, _role));
@@ -30,7 +28,11 @@ contract RBAC {
         delete permissions[_address];
     }
 
-    function hasRole(address _address, bytes32 _role) public view returns (bool _hasRole) {
+    function hasRole(address _address, bytes32 _role)
+        public
+        view
+        returns (bool _hasRole)
+    {
         _hasRole = (permissions[_address] & roles[_role]) > 0;
     }
 }

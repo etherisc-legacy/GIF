@@ -1,11 +1,9 @@
 pragma solidity 0.5.2;
 
-import "../modules/registry/IRegistryController.v1.sol";
+import "../modules/registry/IRegistryController.sol";
 import "./AccessModifiers.sol";
 
-
 contract WithRegistry is AccessModifiers {
-
     IRegistryController public registry;
 
     constructor(address _registry) internal {
@@ -16,15 +14,27 @@ contract WithRegistry is AccessModifiers {
         registry = IRegistryController(_registry);
     }
 
-    function getService(bytes32 _contractName) public view returns (address _addr) {
+    function getService(bytes32 _contractName)
+        public
+        view
+        returns (address _addr)
+    {
         _addr = registry.getService(_contractName);
     }
 
-    function getContract(bytes32 _contractName) public view returns (address _addr) {
+    function getContract(bytes32 _contractName)
+        public
+        view
+        returns (address _addr)
+    {
         _addr = registry.getContract(_contractName);
     }
 
-    function getContractInRelease(uint256 _release, bytes32 _contractName) internal view returns (address _addr) {
+    function getContractInRelease(uint256 _release, bytes32 _contractName)
+        internal
+        view
+        returns (address _addr)
+    {
         _addr = registry.getContractInRelease(_release, _contractName);
     }
 

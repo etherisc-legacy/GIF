@@ -1,6 +1,5 @@
 pragma solidity 0.5.2;
 
-
 contract LicenseStorageModel {
     event LogNewRegistration(
         uint256 registrationId,
@@ -8,39 +7,17 @@ contract LicenseStorageModel {
         address addr
     );
 
-    event LogRegistrationDeclined(
-        uint256 registrationId
-    );
+    event LogRegistrationDeclined(uint256 registrationId);
 
-    event LogNewApplicationApproved(
-        bytes32 name,
-        address addr,
-        uint256 id
-    );
+    event LogNewProductApproved(bytes32 name, address addr, uint256 id);
 
-    event LogApplicationDisapproved(
-        bytes32 name,
-        address addr,
-        uint256 id
-    );
+    event LogProductDisapproved(bytes32 name, address addr, uint256 id);
 
-    event LogApplicationReapproved(
-        bytes32 name,
-        address addr,
-        uint256 id
-    );
+    event LogProductReapproved(bytes32 name, address addr, uint256 id);
 
-    event LogApplicationPaused(
-        bytes32 name,
-        address addr,
-        uint256 id
-    );
+    event LogProductPaused(bytes32 name, address addr, uint256 id);
 
-    event LogApplicationUnpaused(
-        bytes32 name,
-        address addr,
-        uint256 id
-    );
+    event LogProductUnpaused(bytes32 name, address addr, uint256 id);
 
     struct Registration {
         bytes32 name;
@@ -50,7 +27,7 @@ contract LicenseStorageModel {
         bool declined;
     }
 
-    struct InsuranceApplication {
+    struct Product {
         bytes32 name;
         address addr;
         bytes32 policyFlow;
@@ -67,12 +44,12 @@ contract LicenseStorageModel {
     Registration[] public registrations;
 
     /**
-     * @dev Applications array
+     * @dev Products
      */
-    InsuranceApplication[] public insuranceApplications;
+    Product[] public products;
 
     /**
-     * @dev Get application id by contract's address
+     * @dev Get product id by contract's address
      */
-    mapping (address => uint256) public insuranceApplicationIdByAddress;
+    mapping(address => uint256) public productIdByAddress;
 }
