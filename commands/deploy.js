@@ -382,7 +382,7 @@ class Deploy extends Command {
    * @return {string}
    */
   static hashFolderState(dockerFilePath) {
-    const commitHash = execSync('git rev-parse HEAD').toString().trim();
+    const commitHash = execSync(`git log -n 1 --pretty=format:%H -- ${dockerFilePath}`).toString().trim();
     const localDiff = execSync(`git diff ${dockerFilePath}`).toString().trim();
 
     return `${commitHash}${crypto.createHash('md5').update(localDiff).digest('hex')}`;
