@@ -47,6 +47,8 @@ contract FlightStatusesOracle is Oracle, usingOraclize {
         encryptedQuery = _encryptedQuery;
     }
 
+    function() external payable {}
+
     function setTestMode(bool _testMode) external {
         // todo: set permissions
         testMode = _testMode;

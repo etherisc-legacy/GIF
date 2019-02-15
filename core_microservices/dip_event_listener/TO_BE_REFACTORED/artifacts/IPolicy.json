@@ -356,14 +356,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/IPolicy.sol",
     "exportedSymbols": {
       "IPolicy": [
-        12217
+        12225
       ]
     },
-    "id": 12218,
+    "id": 12226,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11977,
+        "id": 11985,
         "literals": [
           "solidity",
           "0.5",
@@ -378,9 +378,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 12217,
+        "id": 12225,
         "linearizedBaseContracts": [
-          12217
+          12225
         ],
         "name": "IPolicy",
         "nodeType": "ContractDefinition",
@@ -388,106 +388,8 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 11985,
-            "name": "LogNewMetadata",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 11984,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 11979,
-                  "indexed": false,
-                  "name": "productId",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 11985,
-                  "src": "92:17:30",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 11978,
-                    "name": "uint256",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "92:7:30",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 11981,
-                  "indexed": false,
-                  "name": "metadataId",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 11985,
-                  "src": "119:18:30",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 11980,
-                    "name": "uint256",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "119:7:30",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 11983,
-                  "indexed": false,
-                  "name": "state",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 11985,
-                  "src": "147:21:30",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
-                    "typeString": "enum IPolicy.PolicyFlowState"
-                  },
-                  "typeName": {
-                    "contractScope": null,
-                    "id": 11982,
-                    "name": "PolicyFlowState",
-                    "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12109,
-                    "src": "147:15:30",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
-                      "typeString": "enum IPolicy.PolicyFlowState"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "82:92:30"
-            },
-            "src": "62:113:30"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
             "id": 11993,
-            "name": "LogMetadataStateChanged",
+            "name": "LogNewMetadata",
             "nodeType": "EventDefinition",
             "parameters": {
               "id": 11992,
@@ -500,7 +402,7 @@
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
                   "scope": 11993,
-                  "src": "220:17:30",
+                  "src": "92:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -511,7 +413,7 @@
                     "id": 11986,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "220:7:30",
+                    "src": "92:7:30",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -527,7 +429,7 @@
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
                   "scope": 11993,
-                  "src": "247:18:30",
+                  "src": "119:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -538,7 +440,7 @@
                     "id": 11988,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "247:7:30",
+                    "src": "119:7:30",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -554,11 +456,11 @@
                   "name": "state",
                   "nodeType": "VariableDeclaration",
                   "scope": 11993,
-                  "src": "275:21:30",
+                  "src": "147:21:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
+                    "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
                     "typeString": "enum IPolicy.PolicyFlowState"
                   },
                   "typeName": {
@@ -566,10 +468,10 @@
                     "id": 11990,
                     "name": "PolicyFlowState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12109,
-                    "src": "275:15:30",
+                    "referencedDeclaration": 12117,
+                    "src": "147:15:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
+                      "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
                       "typeString": "enum IPolicy.PolicyFlowState"
                     }
                   },
@@ -577,15 +479,15 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "210:92:30"
+              "src": "82:92:30"
             },
-            "src": "181:122:30"
+            "src": "62:113:30"
           },
           {
             "anonymous": false,
             "documentation": null,
             "id": 12001,
-            "name": "LogNewApplication",
+            "name": "LogMetadataStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
               "id": 12000,
@@ -598,7 +500,7 @@
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
                   "scope": 12001,
-                  "src": "342:17:30",
+                  "src": "220:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -609,7 +511,7 @@
                     "id": 11994,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "342:7:30",
+                    "src": "220:7:30",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -625,7 +527,7 @@
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
                   "scope": 12001,
-                  "src": "369:18:30",
+                  "src": "247:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -634,6 +536,104 @@
                   },
                   "typeName": {
                     "id": 11996,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "247:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11999,
+                  "indexed": false,
+                  "name": "state",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12001,
+                  "src": "275:21:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
+                    "typeString": "enum IPolicy.PolicyFlowState"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11998,
+                    "name": "PolicyFlowState",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 12117,
+                    "src": "275:15:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
+                      "typeString": "enum IPolicy.PolicyFlowState"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "210:92:30"
+            },
+            "src": "181:122:30"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 12009,
+            "name": "LogNewApplication",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 12008,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12003,
+                  "indexed": false,
+                  "name": "productId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12009,
+                  "src": "342:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12002,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "342:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12005,
+                  "indexed": false,
+                  "name": "metadataId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12009,
+                  "src": "369:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12004,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "369:7:30",
@@ -647,11 +647,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11999,
+                  "id": 12007,
                   "indexed": false,
                   "name": "applicationId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12001,
+                  "scope": 12009,
                   "src": "397:21:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -660,7 +660,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11998,
+                    "id": 12006,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "397:7:30",
@@ -680,20 +680,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12011,
+            "id": 12019,
             "name": "LogApplicationStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12010,
+              "id": 12018,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12003,
+                  "id": 12011,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12011,
+                  "scope": 12019,
                   "src": "473:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -702,7 +702,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12002,
+                    "id": 12010,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "473:7:30",
@@ -716,11 +716,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12005,
+                  "id": 12013,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12011,
+                  "scope": 12019,
                   "src": "500:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -729,7 +729,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12004,
+                    "id": 12012,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "500:7:30",
@@ -743,11 +743,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12007,
+                  "id": 12015,
                   "indexed": false,
                   "name": "applicationId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12011,
+                  "scope": 12019,
                   "src": "528:21:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -756,7 +756,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12006,
+                    "id": 12014,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "528:7:30",
@@ -770,27 +770,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12009,
+                  "id": 12017,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12011,
+                  "scope": 12019,
                   "src": "559:22:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ApplicationState_$12114",
+                    "typeIdentifier": "t_enum$_ApplicationState_$12122",
                     "typeString": "enum IPolicy.ApplicationState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12008,
+                    "id": 12016,
                     "name": "ApplicationState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12114,
+                    "referencedDeclaration": 12122,
                     "src": "559:16:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_ApplicationState_$12114",
+                      "typeIdentifier": "t_enum$_ApplicationState_$12122",
                       "typeString": "enum IPolicy.ApplicationState"
                     }
                   },
@@ -805,20 +805,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12021,
+            "id": 12029,
             "name": "LogNewPolicy",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12020,
+              "id": 12028,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12013,
+                  "id": 12021,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12021,
+                  "scope": 12029,
                   "src": "622:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -827,7 +827,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12012,
+                    "id": 12020,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "622:7:30",
@@ -841,11 +841,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12015,
+                  "id": 12023,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12021,
+                  "scope": 12029,
                   "src": "649:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -854,7 +854,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12014,
+                    "id": 12022,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "649:7:30",
@@ -868,11 +868,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12017,
+                  "id": 12025,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12021,
+                  "scope": 12029,
                   "src": "677:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -881,7 +881,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12016,
+                    "id": 12024,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "677:7:30",
@@ -895,11 +895,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12019,
+                  "id": 12027,
                   "indexed": false,
                   "name": "applicationId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12021,
+                  "scope": 12029,
                   "src": "703:21:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -908,7 +908,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12018,
+                    "id": 12026,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "703:7:30",
@@ -928,20 +928,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12031,
+            "id": 12039,
             "name": "LogPolicyStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12030,
+              "id": 12038,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12023,
+                  "id": 12031,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12031,
+                  "scope": 12039,
                   "src": "774:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -950,7 +950,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12022,
+                    "id": 12030,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "774:7:30",
@@ -964,11 +964,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12025,
+                  "id": 12033,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12031,
+                  "scope": 12039,
                   "src": "801:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -977,7 +977,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12024,
+                    "id": 12032,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "801:7:30",
@@ -991,11 +991,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12027,
+                  "id": 12035,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12031,
+                  "scope": 12039,
                   "src": "829:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1004,7 +1004,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12026,
+                    "id": 12034,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "829:7:30",
@@ -1018,27 +1018,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12029,
+                  "id": 12037,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12031,
+                  "scope": 12039,
                   "src": "855:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyState_$12117",
+                    "typeIdentifier": "t_enum$_PolicyState_$12125",
                     "typeString": "enum IPolicy.PolicyState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12028,
+                    "id": 12036,
                     "name": "PolicyState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12117,
+                    "referencedDeclaration": 12125,
                     "src": "855:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PolicyState_$12117",
+                      "typeIdentifier": "t_enum$_PolicyState_$12125",
                       "typeString": "enum IPolicy.PolicyState"
                     }
                   },
@@ -1053,20 +1053,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12041,
+            "id": 12049,
             "name": "LogNewClaim",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12040,
+              "id": 12048,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12033,
+                  "id": 12041,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12041,
+                  "scope": 12049,
                   "src": "912:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1075,7 +1075,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12032,
+                    "id": 12040,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "912:7:30",
@@ -1089,11 +1089,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12035,
+                  "id": 12043,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12041,
+                  "scope": 12049,
                   "src": "939:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1102,7 +1102,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12034,
+                    "id": 12042,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "939:7:30",
@@ -1116,11 +1116,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12037,
+                  "id": 12045,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12041,
+                  "scope": 12049,
                   "src": "967:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1129,7 +1129,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12036,
+                    "id": 12044,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "967:7:30",
@@ -1143,27 +1143,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12039,
+                  "id": 12047,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12041,
+                  "scope": 12049,
                   "src": "993:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ClaimState_$12121",
+                    "typeIdentifier": "t_enum$_ClaimState_$12129",
                     "typeString": "enum IPolicy.ClaimState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12038,
+                    "id": 12046,
                     "name": "ClaimState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12121,
+                    "referencedDeclaration": 12129,
                     "src": "993:10:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_ClaimState_$12121",
+                      "typeIdentifier": "t_enum$_ClaimState_$12129",
                       "typeString": "enum IPolicy.ClaimState"
                     }
                   },
@@ -1178,20 +1178,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12051,
+            "id": 12059,
             "name": "LogClaimStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12050,
+              "id": 12058,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12043,
+                  "id": 12051,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12051,
+                  "scope": 12059,
                   "src": "1058:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1200,7 +1200,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12042,
+                    "id": 12050,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1058:7:30",
@@ -1214,11 +1214,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12045,
+                  "id": 12053,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12051,
+                  "scope": 12059,
                   "src": "1085:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1227,7 +1227,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12044,
+                    "id": 12052,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1085:7:30",
@@ -1241,11 +1241,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12047,
+                  "id": 12055,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12051,
+                  "scope": 12059,
                   "src": "1113:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1254,7 +1254,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12046,
+                    "id": 12054,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1113:7:30",
@@ -1268,27 +1268,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12049,
+                  "id": 12057,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12051,
+                  "scope": 12059,
                   "src": "1139:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ClaimState_$12121",
+                    "typeIdentifier": "t_enum$_ClaimState_$12129",
                     "typeString": "enum IPolicy.ClaimState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12048,
+                    "id": 12056,
                     "name": "ClaimState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12121,
+                    "referencedDeclaration": 12129,
                     "src": "1139:10:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_ClaimState_$12121",
+                      "typeIdentifier": "t_enum$_ClaimState_$12129",
                       "typeString": "enum IPolicy.ClaimState"
                     }
                   },
@@ -1303,20 +1303,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12067,
+            "id": 12075,
             "name": "LogNewPayout",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12066,
+              "id": 12074,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12053,
+                  "id": 12061,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1196:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1325,7 +1325,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12052,
+                    "id": 12060,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1196:7:30",
@@ -1339,11 +1339,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12055,
+                  "id": 12063,
                   "indexed": false,
                   "name": "payoutId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1223:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1352,7 +1352,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12054,
+                    "id": 12062,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1223:7:30",
@@ -1366,11 +1366,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12057,
+                  "id": 12065,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1249:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1379,7 +1379,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12056,
+                    "id": 12064,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1249:7:30",
@@ -1393,11 +1393,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12059,
+                  "id": 12067,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1277:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1406,7 +1406,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12058,
+                    "id": 12066,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1277:7:30",
@@ -1420,11 +1420,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12061,
+                  "id": 12069,
                   "indexed": false,
                   "name": "claimId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1303:15:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1433,7 +1433,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12060,
+                    "id": 12068,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1303:7:30",
@@ -1447,11 +1447,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12063,
+                  "id": 12071,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1328:14:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1460,7 +1460,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12062,
+                    "id": 12070,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1328:7:30",
@@ -1474,27 +1474,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12065,
+                  "id": 12073,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1352:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12064,
+                    "id": 12072,
                     "name": "PayoutState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12124,
+                    "referencedDeclaration": 12132,
                     "src": "1352:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PayoutState_$12124",
+                      "typeIdentifier": "t_enum$_PayoutState_$12132",
                       "typeString": "enum IPolicy.PayoutState"
                     }
                   },
@@ -1509,20 +1509,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12079,
+            "id": 12087,
             "name": "LogPayoutStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12078,
+              "id": 12086,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12069,
+                  "id": 12077,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1419:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1531,7 +1531,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12068,
+                    "id": 12076,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1419:7:30",
@@ -1545,11 +1545,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12071,
+                  "id": 12079,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1446:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1558,7 +1558,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12070,
+                    "id": 12078,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1446:7:30",
@@ -1572,11 +1572,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12073,
+                  "id": 12081,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1474:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1585,7 +1585,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12072,
+                    "id": 12080,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1474:7:30",
@@ -1599,11 +1599,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12075,
+                  "id": 12083,
                   "indexed": false,
                   "name": "claimId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1500:15:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1612,7 +1612,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12074,
+                    "id": 12082,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1500:7:30",
@@ -1626,27 +1626,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12077,
+                  "id": 12085,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1525:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12076,
+                    "id": 12084,
                     "name": "PayoutState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12124,
+                    "referencedDeclaration": 12132,
                     "src": "1525:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PayoutState_$12124",
+                      "typeIdentifier": "t_enum$_PayoutState_$12132",
                       "typeString": "enum IPolicy.PayoutState"
                     }
                   },
@@ -1661,20 +1661,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12091,
+            "id": 12099,
             "name": "LogPayoutCompleted",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12090,
+              "id": 12098,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12081,
+                  "id": 12089,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1589:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1683,7 +1683,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12080,
+                    "id": 12088,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1589:7:30",
@@ -1697,11 +1697,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12083,
+                  "id": 12091,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1616:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1710,7 +1710,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12082,
+                    "id": 12090,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1616:7:30",
@@ -1724,11 +1724,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12085,
+                  "id": 12093,
                   "indexed": false,
                   "name": "payoutId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1642:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1737,7 +1737,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12084,
+                    "id": 12092,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1642:7:30",
@@ -1751,11 +1751,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12087,
+                  "id": 12095,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1668:14:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1764,7 +1764,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12086,
+                    "id": 12094,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1668:7:30",
@@ -1778,27 +1778,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12089,
+                  "id": 12097,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1692:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12088,
+                    "id": 12096,
                     "name": "PayoutState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12124,
+                    "referencedDeclaration": 12132,
                     "src": "1692:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PayoutState_$12124",
+                      "typeIdentifier": "t_enum$_PayoutState_$12132",
                       "typeString": "enum IPolicy.PayoutState"
                     }
                   },
@@ -1813,20 +1813,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12105,
+            "id": 12113,
             "name": "LogPartialPayout",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12104,
+              "id": 12112,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12093,
+                  "id": 12101,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1754:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1835,7 +1835,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12092,
+                    "id": 12100,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1754:7:30",
@@ -1849,11 +1849,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12095,
+                  "id": 12103,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1781:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1862,7 +1862,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12094,
+                    "id": 12102,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1781:7:30",
@@ -1876,11 +1876,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12097,
+                  "id": 12105,
                   "indexed": false,
                   "name": "payoutId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1807:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1889,7 +1889,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12096,
+                    "id": 12104,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1807:7:30",
@@ -1903,11 +1903,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12099,
+                  "id": 12107,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1833:14:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1916,7 +1916,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12098,
+                    "id": 12106,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1833:7:30",
@@ -1930,11 +1930,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12101,
+                  "id": 12109,
                   "indexed": false,
                   "name": "remainder",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1857:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1943,7 +1943,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12100,
+                    "id": 12108,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1857:7:30",
@@ -1957,27 +1957,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12103,
+                  "id": 12111,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1884:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12102,
+                    "id": 12110,
                     "name": "PayoutState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12124,
+                    "referencedDeclaration": 12132,
                     "src": "1884:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PayoutState_$12124",
+                      "typeIdentifier": "t_enum$_PayoutState_$12132",
                       "typeString": "enum IPolicy.PayoutState"
                     }
                   },
@@ -1991,22 +1991,22 @@
           },
           {
             "canonicalName": "IPolicy.PolicyFlowState",
-            "id": 12109,
+            "id": 12117,
             "members": [
               {
-                "id": 12106,
+                "id": 12114,
                 "name": "Started",
                 "nodeType": "EnumValue",
                 "src": "1952:7:30"
               },
               {
-                "id": 12107,
+                "id": 12115,
                 "name": "Paused",
                 "nodeType": "EnumValue",
                 "src": "1961:6:30"
               },
               {
-                "id": 12108,
+                "id": 12116,
                 "name": "Finished",
                 "nodeType": "EnumValue",
                 "src": "1969:8:30"
@@ -2018,28 +2018,28 @@
           },
           {
             "canonicalName": "IPolicy.ApplicationState",
-            "id": 12114,
+            "id": 12122,
             "members": [
               {
-                "id": 12110,
+                "id": 12118,
                 "name": "Applied",
                 "nodeType": "EnumValue",
                 "src": "2007:7:30"
               },
               {
-                "id": 12111,
+                "id": 12119,
                 "name": "Revoked",
                 "nodeType": "EnumValue",
                 "src": "2016:7:30"
               },
               {
-                "id": 12112,
+                "id": 12120,
                 "name": "Underwritten",
                 "nodeType": "EnumValue",
                 "src": "2025:12:30"
               },
               {
-                "id": 12113,
+                "id": 12121,
                 "name": "Declined",
                 "nodeType": "EnumValue",
                 "src": "2039:8:30"
@@ -2051,16 +2051,16 @@
           },
           {
             "canonicalName": "IPolicy.PolicyState",
-            "id": 12117,
+            "id": 12125,
             "members": [
               {
-                "id": 12115,
+                "id": 12123,
                 "name": "Active",
                 "nodeType": "EnumValue",
                 "src": "2072:6:30"
               },
               {
-                "id": 12116,
+                "id": 12124,
                 "name": "Expired",
                 "nodeType": "EnumValue",
                 "src": "2080:7:30"
@@ -2072,22 +2072,22 @@
           },
           {
             "canonicalName": "IPolicy.ClaimState",
-            "id": 12121,
+            "id": 12129,
             "members": [
               {
-                "id": 12118,
+                "id": 12126,
                 "name": "Applied",
                 "nodeType": "EnumValue",
                 "src": "2111:7:30"
               },
               {
-                "id": 12119,
+                "id": 12127,
                 "name": "Confirmed",
                 "nodeType": "EnumValue",
                 "src": "2120:9:30"
               },
               {
-                "id": 12120,
+                "id": 12128,
                 "name": "Declined",
                 "nodeType": "EnumValue",
                 "src": "2131:8:30"
@@ -2099,16 +2099,16 @@
           },
           {
             "canonicalName": "IPolicy.PayoutState",
-            "id": 12124,
+            "id": 12132,
             "members": [
               {
-                "id": 12122,
+                "id": 12130,
                 "name": "Expected",
                 "nodeType": "EnumValue",
                 "src": "2164:8:30"
               },
               {
-                "id": 12123,
+                "id": 12131,
                 "name": "PaidOut",
                 "nodeType": "EnumValue",
                 "src": "2174:7:30"
@@ -2120,14 +2120,14 @@
           },
           {
             "canonicalName": "IPolicy.Metadata",
-            "id": 12155,
+            "id": 12163,
             "members": [
               {
                 "constant": false,
-                "id": 12126,
+                "id": 12134,
                 "name": "applicationId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2247:21:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2136,7 +2136,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12125,
+                  "id": 12133,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2247:7:30",
@@ -2150,10 +2150,10 @@
               },
               {
                 "constant": false,
-                "id": 12128,
+                "id": 12136,
                 "name": "policyId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2278:16:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2162,7 +2162,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12127,
+                  "id": 12135,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2278:7:30",
@@ -2176,10 +2176,10 @@
               },
               {
                 "constant": false,
-                "id": 12131,
+                "id": 12139,
                 "name": "claimIds",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2304:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2189,7 +2189,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 12129,
+                    "id": 12137,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2304:7:30",
@@ -2198,7 +2198,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12130,
+                  "id": 12138,
                   "length": null,
                   "nodeType": "ArrayTypeName",
                   "src": "2304:9:30",
@@ -2212,10 +2212,10 @@
               },
               {
                 "constant": false,
-                "id": 12134,
+                "id": 12142,
                 "name": "payoutIds",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2332:19:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2225,7 +2225,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 12132,
+                    "id": 12140,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2332:7:30",
@@ -2234,7 +2234,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12133,
+                  "id": 12141,
                   "length": null,
                   "nodeType": "ArrayTypeName",
                   "src": "2332:9:30",
@@ -2248,10 +2248,10 @@
               },
               {
                 "constant": false,
-                "id": 12136,
+                "id": 12144,
                 "name": "hasPolicy",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2361:14:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2260,7 +2260,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 12135,
+                  "id": 12143,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "2361:4:30",
@@ -2274,10 +2274,10 @@
               },
               {
                 "constant": false,
-                "id": 12138,
+                "id": 12146,
                 "name": "hasApplication",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2385:19:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2286,7 +2286,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 12137,
+                  "id": 12145,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "2385:4:30",
@@ -2300,10 +2300,10 @@
               },
               {
                 "constant": false,
-                "id": 12140,
+                "id": 12148,
                 "name": "tokenContract",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2438:21:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2312,7 +2312,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 12139,
+                  "id": 12147,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "2438:7:30",
@@ -2327,10 +2327,10 @@
               },
               {
                 "constant": false,
-                "id": 12142,
+                "id": 12150,
                 "name": "tokenId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2469:15:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2339,7 +2339,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12141,
+                  "id": 12149,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2469:7:30",
@@ -2353,10 +2353,10 @@
               },
               {
                 "constant": false,
-                "id": 12144,
+                "id": 12152,
                 "name": "registryContract",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2510:24:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2365,7 +2365,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12143,
+                  "id": 12151,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2510:7:30",
@@ -2379,10 +2379,10 @@
               },
               {
                 "constant": false,
-                "id": 12146,
+                "id": 12154,
                 "name": "release",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2544:15:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2391,7 +2391,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12145,
+                  "id": 12153,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2544:7:30",
@@ -2405,26 +2405,26 @@
               },
               {
                 "constant": false,
-                "id": 12148,
+                "id": 12156,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2586:21:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
+                  "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
                   "typeString": "enum IPolicy.PolicyFlowState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12147,
+                  "id": 12155,
                   "name": "PolicyFlowState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12109,
+                  "referencedDeclaration": 12117,
                   "src": "2586:15:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
+                    "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
                     "typeString": "enum IPolicy.PolicyFlowState"
                   }
                 },
@@ -2433,10 +2433,10 @@
               },
               {
                 "constant": false,
-                "id": 12150,
+                "id": 12158,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2617:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2445,7 +2445,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12149,
+                  "id": 12157,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "2617:7:30",
@@ -2459,10 +2459,10 @@
               },
               {
                 "constant": false,
-                "id": 12152,
+                "id": 12160,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2667:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2471,7 +2471,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12151,
+                  "id": 12159,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2667:7:30",
@@ -2485,10 +2485,10 @@
               },
               {
                 "constant": false,
-                "id": 12154,
+                "id": 12162,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2694:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2497,7 +2497,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12153,
+                  "id": 12161,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2694:7:30",
@@ -2512,20 +2512,20 @@
             ],
             "name": "Metadata",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "2203:563:30",
             "visibility": "public"
           },
           {
             "canonicalName": "IPolicy.Application",
-            "id": 12175,
+            "id": 12183,
             "members": [
               {
                 "constant": false,
-                "id": 12157,
+                "id": 12165,
                 "name": "metadataId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2801:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2534,7 +2534,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12156,
+                  "id": 12164,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2801:7:30",
@@ -2548,10 +2548,10 @@
               },
               {
                 "constant": false,
-                "id": 12159,
+                "id": 12167,
                 "name": "customerExternalId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2849:26:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2560,7 +2560,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12158,
+                  "id": 12166,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "2849:7:30",
@@ -2574,10 +2574,10 @@
               },
               {
                 "constant": false,
-                "id": 12161,
+                "id": 12169,
                 "name": "premium",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2904:15:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2586,7 +2586,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12160,
+                  "id": 12168,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2904:7:30",
@@ -2600,10 +2600,10 @@
               },
               {
                 "constant": false,
-                "id": 12163,
+                "id": 12171,
                 "name": "currency",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2929:16:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2612,7 +2612,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12162,
+                  "id": 12170,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "2929:7:30",
@@ -2626,10 +2626,10 @@
               },
               {
                 "constant": false,
-                "id": 12166,
+                "id": 12174,
                 "name": "payoutOptions",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2991:23:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2639,7 +2639,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 12164,
+                    "id": 12172,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2991:7:30",
@@ -2648,7 +2648,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12165,
+                  "id": 12173,
                   "length": null,
                   "nodeType": "ArrayTypeName",
                   "src": "2991:9:30",
@@ -2662,26 +2662,26 @@
               },
               {
                 "constant": false,
-                "id": 12168,
+                "id": 12176,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "3041:22:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_ApplicationState_$12114",
+                  "typeIdentifier": "t_enum$_ApplicationState_$12122",
                   "typeString": "enum IPolicy.ApplicationState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12167,
+                  "id": 12175,
                   "name": "ApplicationState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12114,
+                  "referencedDeclaration": 12122,
                   "src": "3041:16:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ApplicationState_$12114",
+                    "typeIdentifier": "t_enum$_ApplicationState_$12122",
                     "typeString": "enum IPolicy.ApplicationState"
                   }
                 },
@@ -2690,10 +2690,10 @@
               },
               {
                 "constant": false,
-                "id": 12170,
+                "id": 12178,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "3073:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2702,7 +2702,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12169,
+                  "id": 12177,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3073:7:30",
@@ -2716,10 +2716,10 @@
               },
               {
                 "constant": false,
-                "id": 12172,
+                "id": 12180,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "3123:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2728,7 +2728,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12171,
+                  "id": 12179,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3123:7:30",
@@ -2742,10 +2742,10 @@
               },
               {
                 "constant": false,
-                "id": 12174,
+                "id": 12182,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "3150:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2754,7 +2754,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12173,
+                  "id": 12181,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3150:7:30",
@@ -2769,20 +2769,20 @@
             ],
             "name": "Application",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "2772:402:30",
             "visibility": "public"
           },
           {
             "canonicalName": "IPolicy.Policy",
-            "id": 12186,
+            "id": 12194,
             "members": [
               {
                 "constant": false,
-                "id": 12177,
+                "id": 12185,
                 "name": "metadataId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3204:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2791,7 +2791,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12176,
+                  "id": 12184,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3204:7:30",
@@ -2805,26 +2805,26 @@
               },
               {
                 "constant": false,
-                "id": 12179,
+                "id": 12187,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3249:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_PolicyState_$12117",
+                  "typeIdentifier": "t_enum$_PolicyState_$12125",
                   "typeString": "enum IPolicy.PolicyState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12178,
+                  "id": 12186,
                   "name": "PolicyState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12117,
+                  "referencedDeclaration": 12125,
                   "src": "3249:11:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyState_$12117",
+                    "typeIdentifier": "t_enum$_PolicyState_$12125",
                     "typeString": "enum IPolicy.PolicyState"
                   }
                 },
@@ -2833,10 +2833,10 @@
               },
               {
                 "constant": false,
-                "id": 12181,
+                "id": 12189,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3276:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2845,7 +2845,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12180,
+                  "id": 12188,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3276:7:30",
@@ -2859,10 +2859,10 @@
               },
               {
                 "constant": false,
-                "id": 12183,
+                "id": 12191,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3326:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2871,7 +2871,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12182,
+                  "id": 12190,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3326:7:30",
@@ -2885,10 +2885,10 @@
               },
               {
                 "constant": false,
-                "id": 12185,
+                "id": 12193,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3353:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2897,7 +2897,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12184,
+                  "id": 12192,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3353:7:30",
@@ -2912,20 +2912,20 @@
             ],
             "name": "Policy",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "3180:197:30",
             "visibility": "public"
           },
           {
             "canonicalName": "IPolicy.Claim",
-            "id": 12199,
+            "id": 12207,
             "members": [
               {
                 "constant": false,
-                "id": 12188,
+                "id": 12196,
                 "name": "metadataId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3406:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2934,7 +2934,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12187,
+                  "id": 12195,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3406:7:30",
@@ -2948,10 +2948,10 @@
               },
               {
                 "constant": false,
-                "id": 12190,
+                "id": 12198,
                 "name": "data",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3450:12:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -2960,7 +2960,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12189,
+                  "id": 12197,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3450:7:30",
@@ -2974,26 +2974,26 @@
               },
               {
                 "constant": false,
-                "id": 12192,
+                "id": 12200,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3489:16:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_ClaimState_$12121",
+                  "typeIdentifier": "t_enum$_ClaimState_$12129",
                   "typeString": "enum IPolicy.ClaimState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12191,
+                  "id": 12199,
                   "name": "ClaimState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12121,
+                  "referencedDeclaration": 12129,
                   "src": "3489:10:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ClaimState_$12121",
+                    "typeIdentifier": "t_enum$_ClaimState_$12129",
                     "typeString": "enum IPolicy.ClaimState"
                   }
                 },
@@ -3002,10 +3002,10 @@
               },
               {
                 "constant": false,
-                "id": 12194,
+                "id": 12202,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3515:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3014,7 +3014,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12193,
+                  "id": 12201,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3515:7:30",
@@ -3028,10 +3028,10 @@
               },
               {
                 "constant": false,
-                "id": 12196,
+                "id": 12204,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3583:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3040,7 +3040,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12195,
+                  "id": 12203,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3583:7:30",
@@ -3054,10 +3054,10 @@
               },
               {
                 "constant": false,
-                "id": 12198,
+                "id": 12206,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3610:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3066,7 +3066,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12197,
+                  "id": 12205,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3610:7:30",
@@ -3081,20 +3081,20 @@
             ],
             "name": "Claim",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "3383:251:30",
             "visibility": "public"
           },
           {
             "canonicalName": "IPolicy.Payout",
-            "id": 12216,
+            "id": 12224,
             "members": [
               {
                 "constant": false,
-                "id": 12201,
+                "id": 12209,
                 "name": "metadataId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3664:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3103,7 +3103,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12200,
+                  "id": 12208,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3664:7:30",
@@ -3117,10 +3117,10 @@
               },
               {
                 "constant": false,
-                "id": 12203,
+                "id": 12211,
                 "name": "claimId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3692:15:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3129,7 +3129,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12202,
+                  "id": 12210,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3692:7:30",
@@ -3143,10 +3143,10 @@
               },
               {
                 "constant": false,
-                "id": 12205,
+                "id": 12213,
                 "name": "expectedAmount",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3736:22:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3155,7 +3155,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12204,
+                  "id": 12212,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3736:7:30",
@@ -3169,10 +3169,10 @@
               },
               {
                 "constant": false,
-                "id": 12207,
+                "id": 12215,
                 "name": "actualAmount",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3768:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3181,7 +3181,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12206,
+                  "id": 12214,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3768:7:30",
@@ -3195,26 +3195,26 @@
               },
               {
                 "constant": false,
-                "id": 12209,
+                "id": 12217,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3815:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_PayoutState_$12124",
+                  "typeIdentifier": "t_enum$_PayoutState_$12132",
                   "typeString": "enum IPolicy.PayoutState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12208,
+                  "id": 12216,
                   "name": "PayoutState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12124,
+                  "referencedDeclaration": 12132,
                   "src": "3815:11:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   }
                 },
@@ -3223,10 +3223,10 @@
               },
               {
                 "constant": false,
-                "id": 12211,
+                "id": 12219,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3842:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3235,7 +3235,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12210,
+                  "id": 12218,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3842:7:30",
@@ -3249,10 +3249,10 @@
               },
               {
                 "constant": false,
-                "id": 12213,
+                "id": 12221,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3910:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3261,7 +3261,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12212,
+                  "id": 12220,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3910:7:30",
@@ -3275,10 +3275,10 @@
               },
               {
                 "constant": false,
-                "id": 12215,
+                "id": 12223,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3937:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -3287,7 +3287,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12214,
+                  "id": 12222,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3937:7:30",
@@ -3302,12 +3302,12 @@
             ],
             "name": "Payout",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "3640:321:30",
             "visibility": "public"
           }
         ],
-        "scope": 12218,
+        "scope": 12226,
         "src": "24:3939:30"
       }
     ],
@@ -3317,14 +3317,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/IPolicy.sol",
     "exportedSymbols": {
       "IPolicy": [
-        12217
+        12225
       ]
     },
-    "id": 12218,
+    "id": 12226,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11977,
+        "id": 11985,
         "literals": [
           "solidity",
           "0.5",
@@ -3339,9 +3339,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 12217,
+        "id": 12225,
         "linearizedBaseContracts": [
-          12217
+          12225
         ],
         "name": "IPolicy",
         "nodeType": "ContractDefinition",
@@ -3349,106 +3349,8 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 11985,
-            "name": "LogNewMetadata",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 11984,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 11979,
-                  "indexed": false,
-                  "name": "productId",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 11985,
-                  "src": "92:17:30",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 11978,
-                    "name": "uint256",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "92:7:30",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 11981,
-                  "indexed": false,
-                  "name": "metadataId",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 11985,
-                  "src": "119:18:30",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 11980,
-                    "name": "uint256",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "119:7:30",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 11983,
-                  "indexed": false,
-                  "name": "state",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 11985,
-                  "src": "147:21:30",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
-                    "typeString": "enum IPolicy.PolicyFlowState"
-                  },
-                  "typeName": {
-                    "contractScope": null,
-                    "id": 11982,
-                    "name": "PolicyFlowState",
-                    "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12109,
-                    "src": "147:15:30",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
-                      "typeString": "enum IPolicy.PolicyFlowState"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "82:92:30"
-            },
-            "src": "62:113:30"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
             "id": 11993,
-            "name": "LogMetadataStateChanged",
+            "name": "LogNewMetadata",
             "nodeType": "EventDefinition",
             "parameters": {
               "id": 11992,
@@ -3461,7 +3363,7 @@
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
                   "scope": 11993,
-                  "src": "220:17:30",
+                  "src": "92:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3472,7 +3374,7 @@
                     "id": 11986,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "220:7:30",
+                    "src": "92:7:30",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3488,7 +3390,7 @@
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
                   "scope": 11993,
-                  "src": "247:18:30",
+                  "src": "119:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3499,7 +3401,7 @@
                     "id": 11988,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "247:7:30",
+                    "src": "119:7:30",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3515,11 +3417,11 @@
                   "name": "state",
                   "nodeType": "VariableDeclaration",
                   "scope": 11993,
-                  "src": "275:21:30",
+                  "src": "147:21:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
+                    "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
                     "typeString": "enum IPolicy.PolicyFlowState"
                   },
                   "typeName": {
@@ -3527,10 +3429,10 @@
                     "id": 11990,
                     "name": "PolicyFlowState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12109,
-                    "src": "275:15:30",
+                    "referencedDeclaration": 12117,
+                    "src": "147:15:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
+                      "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
                       "typeString": "enum IPolicy.PolicyFlowState"
                     }
                   },
@@ -3538,15 +3440,15 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "210:92:30"
+              "src": "82:92:30"
             },
-            "src": "181:122:30"
+            "src": "62:113:30"
           },
           {
             "anonymous": false,
             "documentation": null,
             "id": 12001,
-            "name": "LogNewApplication",
+            "name": "LogMetadataStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
               "id": 12000,
@@ -3559,7 +3461,7 @@
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
                   "scope": 12001,
-                  "src": "342:17:30",
+                  "src": "220:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3570,7 +3472,7 @@
                     "id": 11994,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "342:7:30",
+                    "src": "220:7:30",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3586,7 +3488,7 @@
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
                   "scope": 12001,
-                  "src": "369:18:30",
+                  "src": "247:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3595,6 +3497,104 @@
                   },
                   "typeName": {
                     "id": 11996,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "247:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 11999,
+                  "indexed": false,
+                  "name": "state",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12001,
+                  "src": "275:21:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
+                    "typeString": "enum IPolicy.PolicyFlowState"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11998,
+                    "name": "PolicyFlowState",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 12117,
+                    "src": "275:15:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
+                      "typeString": "enum IPolicy.PolicyFlowState"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "210:92:30"
+            },
+            "src": "181:122:30"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 12009,
+            "name": "LogNewApplication",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 12008,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12003,
+                  "indexed": false,
+                  "name": "productId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12009,
+                  "src": "342:17:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12002,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "342:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 12005,
+                  "indexed": false,
+                  "name": "metadataId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12009,
+                  "src": "369:18:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12004,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "369:7:30",
@@ -3608,11 +3608,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 11999,
+                  "id": 12007,
                   "indexed": false,
                   "name": "applicationId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12001,
+                  "scope": 12009,
                   "src": "397:21:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3621,7 +3621,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 11998,
+                    "id": 12006,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "397:7:30",
@@ -3641,20 +3641,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12011,
+            "id": 12019,
             "name": "LogApplicationStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12010,
+              "id": 12018,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12003,
+                  "id": 12011,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12011,
+                  "scope": 12019,
                   "src": "473:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3663,7 +3663,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12002,
+                    "id": 12010,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "473:7:30",
@@ -3677,11 +3677,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12005,
+                  "id": 12013,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12011,
+                  "scope": 12019,
                   "src": "500:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3690,7 +3690,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12004,
+                    "id": 12012,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "500:7:30",
@@ -3704,11 +3704,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12007,
+                  "id": 12015,
                   "indexed": false,
                   "name": "applicationId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12011,
+                  "scope": 12019,
                   "src": "528:21:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3717,7 +3717,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12006,
+                    "id": 12014,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "528:7:30",
@@ -3731,27 +3731,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12009,
+                  "id": 12017,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12011,
+                  "scope": 12019,
                   "src": "559:22:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ApplicationState_$12114",
+                    "typeIdentifier": "t_enum$_ApplicationState_$12122",
                     "typeString": "enum IPolicy.ApplicationState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12008,
+                    "id": 12016,
                     "name": "ApplicationState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12114,
+                    "referencedDeclaration": 12122,
                     "src": "559:16:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_ApplicationState_$12114",
+                      "typeIdentifier": "t_enum$_ApplicationState_$12122",
                       "typeString": "enum IPolicy.ApplicationState"
                     }
                   },
@@ -3766,20 +3766,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12021,
+            "id": 12029,
             "name": "LogNewPolicy",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12020,
+              "id": 12028,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12013,
+                  "id": 12021,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12021,
+                  "scope": 12029,
                   "src": "622:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3788,7 +3788,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12012,
+                    "id": 12020,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "622:7:30",
@@ -3802,11 +3802,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12015,
+                  "id": 12023,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12021,
+                  "scope": 12029,
                   "src": "649:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3815,7 +3815,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12014,
+                    "id": 12022,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "649:7:30",
@@ -3829,11 +3829,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12017,
+                  "id": 12025,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12021,
+                  "scope": 12029,
                   "src": "677:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3842,7 +3842,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12016,
+                    "id": 12024,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "677:7:30",
@@ -3856,11 +3856,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12019,
+                  "id": 12027,
                   "indexed": false,
                   "name": "applicationId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12021,
+                  "scope": 12029,
                   "src": "703:21:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3869,7 +3869,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12018,
+                    "id": 12026,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "703:7:30",
@@ -3889,20 +3889,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12031,
+            "id": 12039,
             "name": "LogPolicyStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12030,
+              "id": 12038,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12023,
+                  "id": 12031,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12031,
+                  "scope": 12039,
                   "src": "774:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3911,7 +3911,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12022,
+                    "id": 12030,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "774:7:30",
@@ -3925,11 +3925,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12025,
+                  "id": 12033,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12031,
+                  "scope": 12039,
                   "src": "801:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3938,7 +3938,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12024,
+                    "id": 12032,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "801:7:30",
@@ -3952,11 +3952,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12027,
+                  "id": 12035,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12031,
+                  "scope": 12039,
                   "src": "829:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3965,7 +3965,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12026,
+                    "id": 12034,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "829:7:30",
@@ -3979,27 +3979,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12029,
+                  "id": 12037,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12031,
+                  "scope": 12039,
                   "src": "855:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyState_$12117",
+                    "typeIdentifier": "t_enum$_PolicyState_$12125",
                     "typeString": "enum IPolicy.PolicyState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12028,
+                    "id": 12036,
                     "name": "PolicyState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12117,
+                    "referencedDeclaration": 12125,
                     "src": "855:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PolicyState_$12117",
+                      "typeIdentifier": "t_enum$_PolicyState_$12125",
                       "typeString": "enum IPolicy.PolicyState"
                     }
                   },
@@ -4014,20 +4014,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12041,
+            "id": 12049,
             "name": "LogNewClaim",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12040,
+              "id": 12048,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12033,
+                  "id": 12041,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12041,
+                  "scope": 12049,
                   "src": "912:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4036,7 +4036,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12032,
+                    "id": 12040,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "912:7:30",
@@ -4050,11 +4050,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12035,
+                  "id": 12043,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12041,
+                  "scope": 12049,
                   "src": "939:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4063,7 +4063,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12034,
+                    "id": 12042,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "939:7:30",
@@ -4077,11 +4077,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12037,
+                  "id": 12045,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12041,
+                  "scope": 12049,
                   "src": "967:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4090,7 +4090,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12036,
+                    "id": 12044,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "967:7:30",
@@ -4104,27 +4104,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12039,
+                  "id": 12047,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12041,
+                  "scope": 12049,
                   "src": "993:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ClaimState_$12121",
+                    "typeIdentifier": "t_enum$_ClaimState_$12129",
                     "typeString": "enum IPolicy.ClaimState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12038,
+                    "id": 12046,
                     "name": "ClaimState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12121,
+                    "referencedDeclaration": 12129,
                     "src": "993:10:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_ClaimState_$12121",
+                      "typeIdentifier": "t_enum$_ClaimState_$12129",
                       "typeString": "enum IPolicy.ClaimState"
                     }
                   },
@@ -4139,20 +4139,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12051,
+            "id": 12059,
             "name": "LogClaimStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12050,
+              "id": 12058,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12043,
+                  "id": 12051,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12051,
+                  "scope": 12059,
                   "src": "1058:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4161,7 +4161,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12042,
+                    "id": 12050,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1058:7:30",
@@ -4175,11 +4175,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12045,
+                  "id": 12053,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12051,
+                  "scope": 12059,
                   "src": "1085:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4188,7 +4188,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12044,
+                    "id": 12052,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1085:7:30",
@@ -4202,11 +4202,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12047,
+                  "id": 12055,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12051,
+                  "scope": 12059,
                   "src": "1113:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4215,7 +4215,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12046,
+                    "id": 12054,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1113:7:30",
@@ -4229,27 +4229,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12049,
+                  "id": 12057,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12051,
+                  "scope": 12059,
                   "src": "1139:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ClaimState_$12121",
+                    "typeIdentifier": "t_enum$_ClaimState_$12129",
                     "typeString": "enum IPolicy.ClaimState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12048,
+                    "id": 12056,
                     "name": "ClaimState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12121,
+                    "referencedDeclaration": 12129,
                     "src": "1139:10:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_ClaimState_$12121",
+                      "typeIdentifier": "t_enum$_ClaimState_$12129",
                       "typeString": "enum IPolicy.ClaimState"
                     }
                   },
@@ -4264,20 +4264,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12067,
+            "id": 12075,
             "name": "LogNewPayout",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12066,
+              "id": 12074,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12053,
+                  "id": 12061,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1196:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4286,7 +4286,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12052,
+                    "id": 12060,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1196:7:30",
@@ -4300,11 +4300,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12055,
+                  "id": 12063,
                   "indexed": false,
                   "name": "payoutId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1223:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4313,7 +4313,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12054,
+                    "id": 12062,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1223:7:30",
@@ -4327,11 +4327,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12057,
+                  "id": 12065,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1249:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4340,7 +4340,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12056,
+                    "id": 12064,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1249:7:30",
@@ -4354,11 +4354,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12059,
+                  "id": 12067,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1277:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4367,7 +4367,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12058,
+                    "id": 12066,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1277:7:30",
@@ -4381,11 +4381,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12061,
+                  "id": 12069,
                   "indexed": false,
                   "name": "claimId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1303:15:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4394,7 +4394,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12060,
+                    "id": 12068,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1303:7:30",
@@ -4408,11 +4408,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12063,
+                  "id": 12071,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1328:14:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4421,7 +4421,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12062,
+                    "id": 12070,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1328:7:30",
@@ -4435,27 +4435,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12065,
+                  "id": 12073,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12067,
+                  "scope": 12075,
                   "src": "1352:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12064,
+                    "id": 12072,
                     "name": "PayoutState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12124,
+                    "referencedDeclaration": 12132,
                     "src": "1352:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PayoutState_$12124",
+                      "typeIdentifier": "t_enum$_PayoutState_$12132",
                       "typeString": "enum IPolicy.PayoutState"
                     }
                   },
@@ -4470,20 +4470,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12079,
+            "id": 12087,
             "name": "LogPayoutStateChanged",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12078,
+              "id": 12086,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12069,
+                  "id": 12077,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1419:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4492,7 +4492,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12068,
+                    "id": 12076,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1419:7:30",
@@ -4506,11 +4506,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12071,
+                  "id": 12079,
                   "indexed": false,
                   "name": "metadataId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1446:18:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4519,7 +4519,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12070,
+                    "id": 12078,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1446:7:30",
@@ -4533,11 +4533,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12073,
+                  "id": 12081,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1474:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4546,7 +4546,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12072,
+                    "id": 12080,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1474:7:30",
@@ -4560,11 +4560,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12075,
+                  "id": 12083,
                   "indexed": false,
                   "name": "claimId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1500:15:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4573,7 +4573,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12074,
+                    "id": 12082,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1500:7:30",
@@ -4587,27 +4587,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12077,
+                  "id": 12085,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12079,
+                  "scope": 12087,
                   "src": "1525:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12076,
+                    "id": 12084,
                     "name": "PayoutState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12124,
+                    "referencedDeclaration": 12132,
                     "src": "1525:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PayoutState_$12124",
+                      "typeIdentifier": "t_enum$_PayoutState_$12132",
                       "typeString": "enum IPolicy.PayoutState"
                     }
                   },
@@ -4622,20 +4622,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12091,
+            "id": 12099,
             "name": "LogPayoutCompleted",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12090,
+              "id": 12098,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12081,
+                  "id": 12089,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1589:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4644,7 +4644,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12080,
+                    "id": 12088,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1589:7:30",
@@ -4658,11 +4658,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12083,
+                  "id": 12091,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1616:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4671,7 +4671,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12082,
+                    "id": 12090,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1616:7:30",
@@ -4685,11 +4685,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12085,
+                  "id": 12093,
                   "indexed": false,
                   "name": "payoutId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1642:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4698,7 +4698,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12084,
+                    "id": 12092,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1642:7:30",
@@ -4712,11 +4712,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12087,
+                  "id": 12095,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1668:14:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4725,7 +4725,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12086,
+                    "id": 12094,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1668:7:30",
@@ -4739,27 +4739,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12089,
+                  "id": 12097,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12091,
+                  "scope": 12099,
                   "src": "1692:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12088,
+                    "id": 12096,
                     "name": "PayoutState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12124,
+                    "referencedDeclaration": 12132,
                     "src": "1692:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PayoutState_$12124",
+                      "typeIdentifier": "t_enum$_PayoutState_$12132",
                       "typeString": "enum IPolicy.PayoutState"
                     }
                   },
@@ -4774,20 +4774,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 12105,
+            "id": 12113,
             "name": "LogPartialPayout",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12104,
+              "id": 12112,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 12093,
+                  "id": 12101,
                   "indexed": false,
                   "name": "productId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1754:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4796,7 +4796,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12092,
+                    "id": 12100,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1754:7:30",
@@ -4810,11 +4810,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12095,
+                  "id": 12103,
                   "indexed": false,
                   "name": "policyId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1781:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4823,7 +4823,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12094,
+                    "id": 12102,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1781:7:30",
@@ -4837,11 +4837,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12097,
+                  "id": 12105,
                   "indexed": false,
                   "name": "payoutId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1807:16:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4850,7 +4850,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12096,
+                    "id": 12104,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1807:7:30",
@@ -4864,11 +4864,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12099,
+                  "id": 12107,
                   "indexed": false,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1833:14:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4877,7 +4877,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12098,
+                    "id": 12106,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1833:7:30",
@@ -4891,11 +4891,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 12101,
+                  "id": 12109,
                   "indexed": false,
                   "name": "remainder",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1857:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -4904,7 +4904,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 12100,
+                    "id": 12108,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "1857:7:30",
@@ -4918,27 +4918,27 @@
                 },
                 {
                   "constant": false,
-                  "id": 12103,
+                  "id": 12111,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 12105,
+                  "scope": 12113,
                   "src": "1884:17:30",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 12102,
+                    "id": 12110,
                     "name": "PayoutState",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 12124,
+                    "referencedDeclaration": 12132,
                     "src": "1884:11:30",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_PayoutState_$12124",
+                      "typeIdentifier": "t_enum$_PayoutState_$12132",
                       "typeString": "enum IPolicy.PayoutState"
                     }
                   },
@@ -4952,22 +4952,22 @@
           },
           {
             "canonicalName": "IPolicy.PolicyFlowState",
-            "id": 12109,
+            "id": 12117,
             "members": [
               {
-                "id": 12106,
+                "id": 12114,
                 "name": "Started",
                 "nodeType": "EnumValue",
                 "src": "1952:7:30"
               },
               {
-                "id": 12107,
+                "id": 12115,
                 "name": "Paused",
                 "nodeType": "EnumValue",
                 "src": "1961:6:30"
               },
               {
-                "id": 12108,
+                "id": 12116,
                 "name": "Finished",
                 "nodeType": "EnumValue",
                 "src": "1969:8:30"
@@ -4979,28 +4979,28 @@
           },
           {
             "canonicalName": "IPolicy.ApplicationState",
-            "id": 12114,
+            "id": 12122,
             "members": [
               {
-                "id": 12110,
+                "id": 12118,
                 "name": "Applied",
                 "nodeType": "EnumValue",
                 "src": "2007:7:30"
               },
               {
-                "id": 12111,
+                "id": 12119,
                 "name": "Revoked",
                 "nodeType": "EnumValue",
                 "src": "2016:7:30"
               },
               {
-                "id": 12112,
+                "id": 12120,
                 "name": "Underwritten",
                 "nodeType": "EnumValue",
                 "src": "2025:12:30"
               },
               {
-                "id": 12113,
+                "id": 12121,
                 "name": "Declined",
                 "nodeType": "EnumValue",
                 "src": "2039:8:30"
@@ -5012,16 +5012,16 @@
           },
           {
             "canonicalName": "IPolicy.PolicyState",
-            "id": 12117,
+            "id": 12125,
             "members": [
               {
-                "id": 12115,
+                "id": 12123,
                 "name": "Active",
                 "nodeType": "EnumValue",
                 "src": "2072:6:30"
               },
               {
-                "id": 12116,
+                "id": 12124,
                 "name": "Expired",
                 "nodeType": "EnumValue",
                 "src": "2080:7:30"
@@ -5033,22 +5033,22 @@
           },
           {
             "canonicalName": "IPolicy.ClaimState",
-            "id": 12121,
+            "id": 12129,
             "members": [
               {
-                "id": 12118,
+                "id": 12126,
                 "name": "Applied",
                 "nodeType": "EnumValue",
                 "src": "2111:7:30"
               },
               {
-                "id": 12119,
+                "id": 12127,
                 "name": "Confirmed",
                 "nodeType": "EnumValue",
                 "src": "2120:9:30"
               },
               {
-                "id": 12120,
+                "id": 12128,
                 "name": "Declined",
                 "nodeType": "EnumValue",
                 "src": "2131:8:30"
@@ -5060,16 +5060,16 @@
           },
           {
             "canonicalName": "IPolicy.PayoutState",
-            "id": 12124,
+            "id": 12132,
             "members": [
               {
-                "id": 12122,
+                "id": 12130,
                 "name": "Expected",
                 "nodeType": "EnumValue",
                 "src": "2164:8:30"
               },
               {
-                "id": 12123,
+                "id": 12131,
                 "name": "PaidOut",
                 "nodeType": "EnumValue",
                 "src": "2174:7:30"
@@ -5081,14 +5081,14 @@
           },
           {
             "canonicalName": "IPolicy.Metadata",
-            "id": 12155,
+            "id": 12163,
             "members": [
               {
                 "constant": false,
-                "id": 12126,
+                "id": 12134,
                 "name": "applicationId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2247:21:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5097,7 +5097,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12125,
+                  "id": 12133,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2247:7:30",
@@ -5111,10 +5111,10 @@
               },
               {
                 "constant": false,
-                "id": 12128,
+                "id": 12136,
                 "name": "policyId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2278:16:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5123,7 +5123,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12127,
+                  "id": 12135,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2278:7:30",
@@ -5137,10 +5137,10 @@
               },
               {
                 "constant": false,
-                "id": 12131,
+                "id": 12139,
                 "name": "claimIds",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2304:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5150,7 +5150,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 12129,
+                    "id": 12137,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2304:7:30",
@@ -5159,7 +5159,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12130,
+                  "id": 12138,
                   "length": null,
                   "nodeType": "ArrayTypeName",
                   "src": "2304:9:30",
@@ -5173,10 +5173,10 @@
               },
               {
                 "constant": false,
-                "id": 12134,
+                "id": 12142,
                 "name": "payoutIds",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2332:19:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5186,7 +5186,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 12132,
+                    "id": 12140,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2332:7:30",
@@ -5195,7 +5195,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12133,
+                  "id": 12141,
                   "length": null,
                   "nodeType": "ArrayTypeName",
                   "src": "2332:9:30",
@@ -5209,10 +5209,10 @@
               },
               {
                 "constant": false,
-                "id": 12136,
+                "id": 12144,
                 "name": "hasPolicy",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2361:14:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5221,7 +5221,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 12135,
+                  "id": 12143,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "2361:4:30",
@@ -5235,10 +5235,10 @@
               },
               {
                 "constant": false,
-                "id": 12138,
+                "id": 12146,
                 "name": "hasApplication",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2385:19:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5247,7 +5247,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 12137,
+                  "id": 12145,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "2385:4:30",
@@ -5261,10 +5261,10 @@
               },
               {
                 "constant": false,
-                "id": 12140,
+                "id": 12148,
                 "name": "tokenContract",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2438:21:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5273,7 +5273,7 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 12139,
+                  "id": 12147,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "2438:7:30",
@@ -5288,10 +5288,10 @@
               },
               {
                 "constant": false,
-                "id": 12142,
+                "id": 12150,
                 "name": "tokenId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2469:15:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5300,7 +5300,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12141,
+                  "id": 12149,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2469:7:30",
@@ -5314,10 +5314,10 @@
               },
               {
                 "constant": false,
-                "id": 12144,
+                "id": 12152,
                 "name": "registryContract",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2510:24:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5326,7 +5326,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12143,
+                  "id": 12151,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2510:7:30",
@@ -5340,10 +5340,10 @@
               },
               {
                 "constant": false,
-                "id": 12146,
+                "id": 12154,
                 "name": "release",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2544:15:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5352,7 +5352,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12145,
+                  "id": 12153,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2544:7:30",
@@ -5366,26 +5366,26 @@
               },
               {
                 "constant": false,
-                "id": 12148,
+                "id": 12156,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2586:21:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
+                  "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
                   "typeString": "enum IPolicy.PolicyFlowState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12147,
+                  "id": 12155,
                   "name": "PolicyFlowState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12109,
+                  "referencedDeclaration": 12117,
                   "src": "2586:15:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyFlowState_$12109",
+                    "typeIdentifier": "t_enum$_PolicyFlowState_$12117",
                     "typeString": "enum IPolicy.PolicyFlowState"
                   }
                 },
@@ -5394,10 +5394,10 @@
               },
               {
                 "constant": false,
-                "id": 12150,
+                "id": 12158,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2617:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5406,7 +5406,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12149,
+                  "id": 12157,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "2617:7:30",
@@ -5420,10 +5420,10 @@
               },
               {
                 "constant": false,
-                "id": 12152,
+                "id": 12160,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2667:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5432,7 +5432,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12151,
+                  "id": 12159,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2667:7:30",
@@ -5446,10 +5446,10 @@
               },
               {
                 "constant": false,
-                "id": 12154,
+                "id": 12162,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12155,
+                "scope": 12163,
                 "src": "2694:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5458,7 +5458,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12153,
+                  "id": 12161,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2694:7:30",
@@ -5473,20 +5473,20 @@
             ],
             "name": "Metadata",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "2203:563:30",
             "visibility": "public"
           },
           {
             "canonicalName": "IPolicy.Application",
-            "id": 12175,
+            "id": 12183,
             "members": [
               {
                 "constant": false,
-                "id": 12157,
+                "id": 12165,
                 "name": "metadataId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2801:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5495,7 +5495,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12156,
+                  "id": 12164,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2801:7:30",
@@ -5509,10 +5509,10 @@
               },
               {
                 "constant": false,
-                "id": 12159,
+                "id": 12167,
                 "name": "customerExternalId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2849:26:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5521,7 +5521,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12158,
+                  "id": 12166,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "2849:7:30",
@@ -5535,10 +5535,10 @@
               },
               {
                 "constant": false,
-                "id": 12161,
+                "id": 12169,
                 "name": "premium",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2904:15:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5547,7 +5547,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12160,
+                  "id": 12168,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "2904:7:30",
@@ -5561,10 +5561,10 @@
               },
               {
                 "constant": false,
-                "id": 12163,
+                "id": 12171,
                 "name": "currency",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2929:16:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5573,7 +5573,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12162,
+                  "id": 12170,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "2929:7:30",
@@ -5587,10 +5587,10 @@
               },
               {
                 "constant": false,
-                "id": 12166,
+                "id": 12174,
                 "name": "payoutOptions",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "2991:23:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5600,7 +5600,7 @@
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 12164,
+                    "id": 12172,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "2991:7:30",
@@ -5609,7 +5609,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 12165,
+                  "id": 12173,
                   "length": null,
                   "nodeType": "ArrayTypeName",
                   "src": "2991:9:30",
@@ -5623,26 +5623,26 @@
               },
               {
                 "constant": false,
-                "id": 12168,
+                "id": 12176,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "3041:22:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_ApplicationState_$12114",
+                  "typeIdentifier": "t_enum$_ApplicationState_$12122",
                   "typeString": "enum IPolicy.ApplicationState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12167,
+                  "id": 12175,
                   "name": "ApplicationState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12114,
+                  "referencedDeclaration": 12122,
                   "src": "3041:16:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ApplicationState_$12114",
+                    "typeIdentifier": "t_enum$_ApplicationState_$12122",
                     "typeString": "enum IPolicy.ApplicationState"
                   }
                 },
@@ -5651,10 +5651,10 @@
               },
               {
                 "constant": false,
-                "id": 12170,
+                "id": 12178,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "3073:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5663,7 +5663,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12169,
+                  "id": 12177,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3073:7:30",
@@ -5677,10 +5677,10 @@
               },
               {
                 "constant": false,
-                "id": 12172,
+                "id": 12180,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "3123:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5689,7 +5689,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12171,
+                  "id": 12179,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3123:7:30",
@@ -5703,10 +5703,10 @@
               },
               {
                 "constant": false,
-                "id": 12174,
+                "id": 12182,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12175,
+                "scope": 12183,
                 "src": "3150:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5715,7 +5715,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12173,
+                  "id": 12181,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3150:7:30",
@@ -5730,20 +5730,20 @@
             ],
             "name": "Application",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "2772:402:30",
             "visibility": "public"
           },
           {
             "canonicalName": "IPolicy.Policy",
-            "id": 12186,
+            "id": 12194,
             "members": [
               {
                 "constant": false,
-                "id": 12177,
+                "id": 12185,
                 "name": "metadataId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3204:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5752,7 +5752,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12176,
+                  "id": 12184,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3204:7:30",
@@ -5766,26 +5766,26 @@
               },
               {
                 "constant": false,
-                "id": 12179,
+                "id": 12187,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3249:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_PolicyState_$12117",
+                  "typeIdentifier": "t_enum$_PolicyState_$12125",
                   "typeString": "enum IPolicy.PolicyState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12178,
+                  "id": 12186,
                   "name": "PolicyState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12117,
+                  "referencedDeclaration": 12125,
                   "src": "3249:11:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PolicyState_$12117",
+                    "typeIdentifier": "t_enum$_PolicyState_$12125",
                     "typeString": "enum IPolicy.PolicyState"
                   }
                 },
@@ -5794,10 +5794,10 @@
               },
               {
                 "constant": false,
-                "id": 12181,
+                "id": 12189,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3276:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5806,7 +5806,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12180,
+                  "id": 12188,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3276:7:30",
@@ -5820,10 +5820,10 @@
               },
               {
                 "constant": false,
-                "id": 12183,
+                "id": 12191,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3326:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5832,7 +5832,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12182,
+                  "id": 12190,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3326:7:30",
@@ -5846,10 +5846,10 @@
               },
               {
                 "constant": false,
-                "id": 12185,
+                "id": 12193,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12186,
+                "scope": 12194,
                 "src": "3353:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5858,7 +5858,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12184,
+                  "id": 12192,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3353:7:30",
@@ -5873,20 +5873,20 @@
             ],
             "name": "Policy",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "3180:197:30",
             "visibility": "public"
           },
           {
             "canonicalName": "IPolicy.Claim",
-            "id": 12199,
+            "id": 12207,
             "members": [
               {
                 "constant": false,
-                "id": 12188,
+                "id": 12196,
                 "name": "metadataId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3406:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5895,7 +5895,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12187,
+                  "id": 12195,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3406:7:30",
@@ -5909,10 +5909,10 @@
               },
               {
                 "constant": false,
-                "id": 12190,
+                "id": 12198,
                 "name": "data",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3450:12:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5921,7 +5921,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12189,
+                  "id": 12197,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3450:7:30",
@@ -5935,26 +5935,26 @@
               },
               {
                 "constant": false,
-                "id": 12192,
+                "id": 12200,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3489:16:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_ClaimState_$12121",
+                  "typeIdentifier": "t_enum$_ClaimState_$12129",
                   "typeString": "enum IPolicy.ClaimState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12191,
+                  "id": 12199,
                   "name": "ClaimState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12121,
+                  "referencedDeclaration": 12129,
                   "src": "3489:10:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_ClaimState_$12121",
+                    "typeIdentifier": "t_enum$_ClaimState_$12129",
                     "typeString": "enum IPolicy.ClaimState"
                   }
                 },
@@ -5963,10 +5963,10 @@
               },
               {
                 "constant": false,
-                "id": 12194,
+                "id": 12202,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3515:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -5975,7 +5975,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12193,
+                  "id": 12201,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3515:7:30",
@@ -5989,10 +5989,10 @@
               },
               {
                 "constant": false,
-                "id": 12196,
+                "id": 12204,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3583:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6001,7 +6001,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12195,
+                  "id": 12203,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3583:7:30",
@@ -6015,10 +6015,10 @@
               },
               {
                 "constant": false,
-                "id": 12198,
+                "id": 12206,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12199,
+                "scope": 12207,
                 "src": "3610:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6027,7 +6027,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12197,
+                  "id": 12205,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3610:7:30",
@@ -6042,20 +6042,20 @@
             ],
             "name": "Claim",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "3383:251:30",
             "visibility": "public"
           },
           {
             "canonicalName": "IPolicy.Payout",
-            "id": 12216,
+            "id": 12224,
             "members": [
               {
                 "constant": false,
-                "id": 12201,
+                "id": 12209,
                 "name": "metadataId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3664:18:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6064,7 +6064,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12200,
+                  "id": 12208,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3664:7:30",
@@ -6078,10 +6078,10 @@
               },
               {
                 "constant": false,
-                "id": 12203,
+                "id": 12211,
                 "name": "claimId",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3692:15:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6090,7 +6090,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12202,
+                  "id": 12210,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3692:7:30",
@@ -6104,10 +6104,10 @@
               },
               {
                 "constant": false,
-                "id": 12205,
+                "id": 12213,
                 "name": "expectedAmount",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3736:22:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6116,7 +6116,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12204,
+                  "id": 12212,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3736:7:30",
@@ -6130,10 +6130,10 @@
               },
               {
                 "constant": false,
-                "id": 12207,
+                "id": 12215,
                 "name": "actualAmount",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3768:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6142,7 +6142,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12206,
+                  "id": 12214,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3768:7:30",
@@ -6156,26 +6156,26 @@
               },
               {
                 "constant": false,
-                "id": 12209,
+                "id": 12217,
                 "name": "state",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3815:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_PayoutState_$12124",
+                  "typeIdentifier": "t_enum$_PayoutState_$12132",
                   "typeString": "enum IPolicy.PayoutState"
                 },
                 "typeName": {
                   "contractScope": null,
-                  "id": 12208,
+                  "id": 12216,
                   "name": "PayoutState",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12124,
+                  "referencedDeclaration": 12132,
                   "src": "3815:11:30",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PayoutState_$12124",
+                    "typeIdentifier": "t_enum$_PayoutState_$12132",
                     "typeString": "enum IPolicy.PayoutState"
                   }
                 },
@@ -6184,10 +6184,10 @@
               },
               {
                 "constant": false,
-                "id": 12211,
+                "id": 12219,
                 "name": "stateMessage",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3842:20:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6196,7 +6196,7 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 12210,
+                  "id": 12218,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "3842:7:30",
@@ -6210,10 +6210,10 @@
               },
               {
                 "constant": false,
-                "id": 12213,
+                "id": 12221,
                 "name": "createdAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3910:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6222,7 +6222,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12212,
+                  "id": 12220,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3910:7:30",
@@ -6236,10 +6236,10 @@
               },
               {
                 "constant": false,
-                "id": 12215,
+                "id": 12223,
                 "name": "updatedAt",
                 "nodeType": "VariableDeclaration",
-                "scope": 12216,
+                "scope": 12224,
                 "src": "3937:17:30",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -6248,7 +6248,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 12214,
+                  "id": 12222,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "3937:7:30",
@@ -6263,12 +6263,12 @@
             ],
             "name": "Payout",
             "nodeType": "StructDefinition",
-            "scope": 12217,
+            "scope": 12225,
             "src": "3640:321:30",
             "visibility": "public"
           }
         ],
-        "scope": 12218,
+        "scope": 12226,
         "src": "24:3939:30"
       }
     ],
@@ -6279,8 +6279,8 @@
     "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.1",
-  "updatedAt": "2019-02-13T15:10:19.373Z",
+  "schemaVersion": "3.0.2",
+  "updatedAt": "2019-02-15T09:40:03.277Z",
   "devdoc": {
     "methods": {}
   },

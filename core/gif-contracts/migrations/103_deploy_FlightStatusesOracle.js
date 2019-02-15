@@ -23,7 +23,7 @@ module.exports = async (deployer) => {
   // Deploy FlightStatusesOracle
   const flightStatusesOracle = await deployer.deploy(
     FlightStatusesOracle, oracleService.address, encryptedQueryReq.data.result, {
-      value: 1 * (10 ** 18),
+      value: 2 * (10 ** 18),
       gas: 4500000,
     },
   );
