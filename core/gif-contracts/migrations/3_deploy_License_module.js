@@ -13,7 +13,8 @@ module.exports = async (deployer) => {
 
   // Deploy storage and controller contracts
   await deployer.deploy(License, registryStorage.address, { gas: 1000000 });
-  await deployer.deploy(LicenseController, registryStorage.address, { gas: 3000000 });
+  const productIdIncrement = 0;
+  await deployer.deploy(LicenseController, registryStorage.address, productIdIncrement, { gas: 3000000 });
 
   const licenseStorage = await License.deployed();
   const licenseController = await LicenseController.deployed();
