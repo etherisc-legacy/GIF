@@ -11,10 +11,9 @@ module.exports = async (deployer) => {
   const daoService = await DAOService.deployed();
 
   await deployer.deploy(FlightDelayOraclize, productService.address, { gas: 3500000 });
-
-  const registrationId = 1;
+  const productId = 2;
 
   info('Approve product');
-  await daoService.approveRegistration(registrationId, { gas: 200000 })
+  await daoService.approveProduct(productId, { gas: 200000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 };

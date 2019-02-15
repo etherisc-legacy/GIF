@@ -45,7 +45,7 @@ contract('FlightDelayOraclize', () => {
         toBlock: 'latest',
       })
         .on('data', (log) => {
-          if (log.event === 'LogPolicyExpired') {
+          if (log.event === 'LogRequestPayout') {
             resolve();
           }
         });

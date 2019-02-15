@@ -21,9 +21,7 @@ async function run() {
 
   await productService.register(web3.utils.utf8ToHex('testProductSevice'), web3.utils.utf8ToHex('PolicyFlowDefault'));
 
-  const regisrationId = licenseLogs[0].args.registrationId.toString();
-
-  console.log(regisrationId);
+  console.log(licenseLogs[0].args.productId.toString());
 
   await productService.newApplication(web3.utils.utf8ToHex('customerId'), 1, web3.utils.utf8ToHex('eur'), ['1', '2', '3', '4']);
 }

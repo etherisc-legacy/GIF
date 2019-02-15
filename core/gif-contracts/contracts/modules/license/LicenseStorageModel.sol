@@ -1,81 +1,37 @@
 pragma solidity 0.5.2;
 
 contract LicenseStorageModel {
-    event LogNewRegistration(
-        uint256 registrationId,
+    event LogNewProduct(
+        uint256 productId,
         bytes32 name,
-        address addr
+        address addr,
+        bytes32 policyFlow
     );
 
-    event LogRegistrationDeclined(uint256 registrationId);
+    event LogProductApproved(uint256 id, bytes32 name, address addr);
 
-    event LogNewProductApproved(bytes32 name, address addr, uint256 id);
+    event LogProductDisapproved(uint256 id, bytes32 name, address addr);
 
-    event LogProductDisapproved(bytes32 name, address addr, uint256 id);
+    event LogProductPaused(uint256 id, bytes32 name, address addr);
 
-    event LogProductReapproved(bytes32 name, address addr, uint256 id);
-
-    event LogProductPaused(bytes32 name, address addr, uint256 id);
-
-    event LogProductUnpaused(bytes32 name, address addr, uint256 id);
-
-    struct Registration {
-        bytes32 name;
-        address addr;
-        bytes32 policyFlow;
-        uint256 release;
-        bool declined;
-    }
+    event LogProductUnpaused(uint256 id, bytes32 name, address addr);
 
     struct Product {
         bytes32 name;
         address addr;
         bytes32 policyFlow;
-        uint256 release; // core
-        // uint256 applicationRelease
+        uint256 release; // core release
+        // uint256 product release
         address policyToken;
         bool approved;
         bool paused;
     }
 
-    /**
-     * @dev Registration array
-     */
-    Registration[] public registrations;
-
-    /**
-     * @dev Products
-     */
-    Product[] public products;
-
-    /**
-     * @dev Get product id by contract's address
-     */
+    mapping(uint256 => Product) public products;
     mapping(address => uint256) public productIdByAddress;
+    uint256 public productIdIncrement;
 
-    //    event LogNewProduct(uint256 productId, bytes32 name, address addr);
-    //
-    //    event LogProductApproved(bytes32 name, address addr, uint256 id);
-    //
-    //    event LogProductDisapproved(bytes32 name, address addr, uint256 id);
-    //
-    //    event LogProductPaused(bytes32 name, address addr, uint256 id);
-    //
-    //    event LogProductUnpaused(bytes32 name, address addr, uint256 id);
-    //
-    //    struct Product {
-    //        bytes32 name;
-    //        address addr;
-    //        bytes32 policyFlow;
-    //        uint256 release; // core release
-    //        // uint256 product release
-    //        address policyToken;
-    //        bool approved;
-    //        bool paused;
-    //    }
-    //
-    //    mapping(uint256 => Product) public products;
-    //    mapping(address => uint256) public productIdByAddress;
-    //    uint256 public productIdIncrement;
+    // todo: Add list of approved products
+    // todo: Add list of products for approval
 
 }

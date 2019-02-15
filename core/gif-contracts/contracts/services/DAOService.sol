@@ -12,23 +12,12 @@ contract DAOService is WithRegistry {
     constructor(address _registry) public WithRegistry(_registry) {}
 
     /* License */
-    function approveRegistration(uint256 _registrationId)
-        external
-        returns (uint256 _productId)
-    {
-        _productId = license().approveRegistration(_registrationId);
-    }
-
-    function declineRegistration(uint256 _registrationId) external {
-        license().declineRegistration(_registrationId);
+    function approveProduct(uint256 _productId) external {
+        license().approveProduct(_productId);
     }
 
     function disapproveProduct(uint256 _productId) external {
         license().disapproveProduct(_productId);
-    }
-
-    function reapproveProduct(uint256 _productId) external {
-        license().reapproveProduct(_productId);
     }
 
     function pauseProduct(uint256 _productId) external {

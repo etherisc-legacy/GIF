@@ -6,125 +6,99 @@ import "../../shared/ModuleController.sol";
 contract LicenseController is LicenseStorageModel, ModuleController {
     bytes32 public constant NAME = "LicenseController";
 
-    constructor(address _registry) public WithRegistry(_registry) {}
+    constructor(address _registry, uint256 _productIdIncrement)
+        public
+        WithRegistry(_registry)
+    {
+        // productIdIncrement should be equal to the value from the last deployed licence storage or zero
+        productIdIncrement = productIdIncrement;
+    }
 
     /**
      * @dev Register new product
      */
     function register(bytes32 _name, address _addr, bytes32 _policyFlow)
         external
-        returns (uint256 _registrationId)
+        returns (uint256 _id)
     {
-        _registrationId = registrations.length++;
+        // todo: add restriction, allow only ProductOwners
+        require(productIdByAddress[_addr] == 0, "ERROR::PRODUCT_IS_ACTIVE");
 
-        Registration storage newRegistration = registrations[_registrationId];
-        newRegistration.name = _name;
-        newRegistration.addr = _addr;
-        newRegistration.policyFlow = _policyFlow;
-        newRegistration.release = getRelease();
-        newRegistration.declined = true;
+        _id = ++productIdIncrement;
 
-        emit LogNewRegistration(_registrationId, _name, _addr);
+        // todo: check required policyFlow existence
+
+        products[_id].name = _name;
+        products[_id].addr = _addr;
+        products[_id].policyFlow = _policyFlow;
+        products[_id].release = getRelease();
+
+        emit LogNewProduct(_id, _name, _addr, _policyFlow);
     }
 
-    /**
-     * @dev Decline new product registration
+    /*
+     * @dev Approve product
      */
-    function declineRegistration(uint256 _registrationId) external onlyDAO {
+    function approveProduct(uint256 _id) external onlyDAO {
+        require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
         require(
-            registrations.length > _registrationId,
-            "ERROR_INVALID_REGISTRATION_ID"
-        ); // todo: check overflow
-
-        Registration storage registration = registrations[_registrationId];
-        registration.declined = true;
-
-        emit LogRegistrationDeclined(_registrationId);
-    }
-
-    /**
-     * @dev Approve registration and create new product
-     */
-    function approveRegistration(uint256 _registrationId)
-        external
-        onlyDAO
-        returns (uint256 _productId)
-    {
-        require(
-            registrations.length > _registrationId,
-            "ERROR_INVALID_REGISTRATION_ID"
-        ); // todo: check overflow
-
-        _productId = products.length++;
-
-        Product storage newProduct = products[_productId];
-        newProduct.name = registrations[_registrationId].name;
-        newProduct.addr = registrations[_registrationId].addr;
-        newProduct.policyFlow = registrations[_registrationId].policyFlow;
-        newProduct.release = registrations[_registrationId].release;
-        newProduct.approved = true;
-
-        productIdByAddress[newProduct.addr] = _productId;
-
-        // create new erc721 token
-
-        emit LogNewProductApproved(
-            newProduct.name,
-            newProduct.addr,
-            _productId
+            products[_id].approved != true,
+            "ERROR::PRODUCT_ALREADY_APPROVED"
         );
+        require(
+            productIdByAddress[products[_id].addr] == 0,
+            "ERROR::PRODUCT_ADDRESS_ALREADY_APPROVED"
+        );
+        // todo: check if policyFlow is correct
+        // todo: should we allow products with the same name?
+
+        products[_id].approved = true;
+        productIdByAddress[products[_id].addr] = _id;
+
+        emit LogProductApproved(_id, products[_id].name, products[_id].addr);
     }
 
-    /**
-     * @dev Disapprove product once it was approved
+    /*
+     * @dev Disapprove product
      */
-    function disapproveProduct(uint256 _productId) external onlyDAO {
-        Product storage product = products[_productId];
+    function disapproveProduct(uint256 _id) external onlyDAO {
+        require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
+        require(products[_id].approved == true, "ERROR::PRODUCT_NOT_APPROVED");
+        require(
+            productIdByAddress[products[_id].addr] > 0,
+            "ERROR::PRODUCT_ADDRESS_NOT_APPROVED"
+        );
 
-        require(product.approved == true, "ERROR_INVALID_APPROVE_STATUS");
+        products[_id].approved = false;
+        delete productIdByAddress[products[_id].addr];
 
-        product.approved = false;
-
-        emit LogProductDisapproved(product.name, product.addr, _productId);
+        emit LogProductDisapproved(_id, products[_id].name, products[_id].addr);
     }
 
-    /**
-     * @dev Reapprove product once it was disapproved
-     */
-    function reapproveProduct(uint256 _productId) external onlyDAO {
-        Product storage product = products[_productId];
+    function pauseProduct(uint256 _id) external onlyDAO {
+        // todo: should be restricted to ProductOwners
+        require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
+        require(
+            productIdByAddress[products[_id].addr] > 0,
+            "ERROR::PRODUCT_NOT_ACTIVE"
+        );
 
-        require(product.approved == false, "ERROR_INVALID_APPROVE_STATUS");
+        products[_id].paused = true;
 
-        product.approved = true;
-
-        emit LogProductReapproved(product.name, product.addr, _productId);
+        emit LogProductPaused(_id, products[_id].name, products[_id].addr);
     }
 
-    /**
-     * @dev Pause product
-     */
-    function pauseProduct(uint256 _productId) external onlyDAO {
-        Product storage product = products[_productId];
+    function unpauseProduct(uint256 _id) external onlyDAO {
+        // todo: should be restricted to ProductOwners
+        require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
+        require(
+            productIdByAddress[products[_id].addr] > 0,
+            "ERROR::PRODUCT_NOT_ACTIVE"
+        );
 
-        require(product.paused == false, "ERROR_INVALID_PAUSED_STATUS");
+        products[_id].paused = false;
 
-        product.paused = true;
-
-        emit LogProductPaused(product.name, product.addr, _productId);
-    }
-
-    /**
-     * @dev Unpause product
-     */
-    function unpauseProduct(uint256 _productId) external onlyDAO {
-        Product storage product = products[_productId];
-
-        require(product.paused == true, "ERROR_INVALID_PAUSED_STATUS");
-
-        product.paused = false;
-
-        emit LogProductUnpaused(product.name, product.addr, _productId);
+        emit LogProductUnpaused(_id, products[_id].name, products[_id].addr);
     }
 
     /**
@@ -135,7 +109,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         view
         returns (bool _approved)
     {
-        _approved = products[productIdByAddress[_addr]].approved == true;
+        _approved = products[productIdByAddress[_addr]].approved == true && productIdByAddress[_addr] > 0 && products[productIdByAddress[_addr]].addr == _addr;
     }
 
     /**
@@ -166,6 +140,11 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         view
         returns (uint256 _productId)
     {
+        require(
+            productIdByAddress[_addr] > 0,
+            "ERROR::PRODUCT_NOT_APPROVED_OR_NOT_EXISTS"
+        );
+
         _productId = productIdByAddress[_addr];
     }
 }
