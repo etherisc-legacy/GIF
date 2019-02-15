@@ -46,6 +46,9 @@ class TransferwisePlugin {
    */
   async processPayout({ id }) {
     const response = await this.transferwiseClient.fundTransfer(id);
+    if (response.errorCode !== null) {
+      throw new Error(`Transferwise error: ${response.errorCode}`);
+    }
     return response;
   }
 }

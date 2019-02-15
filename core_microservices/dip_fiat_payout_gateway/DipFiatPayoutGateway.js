@@ -165,9 +165,12 @@ class DipFiatPayoutGateway {
 
       const provider = this.providers.get(payout.provider);
 
+      let transfer = null;
+      let transferResult = null;
+
       try {
         // Initialize Payout
-        const transfer = await provider.initializePayout({
+        transfer = await provider.initializePayout({
           name: `${policy.customer.firstname} ${policy.customer.lastname}`,
           email: policy.customer.email,
           currency: String(payout.currency).toUpperCase(),
@@ -175,8 +178,8 @@ class DipFiatPayoutGateway {
         });
 
         // Process Payout
-        const result = await provider.processPayout(transfer);
-        this._log.info('Transferwise result:', result);
+        transferResult = await provider.processPayout(transfer);
+        this._log.info('Payout result:', transferResult);
       } catch (error) {
         // update payout status to failed
         await payout.$query().update({ status: 'failed' });
@@ -193,6 +196,7 @@ class DipFiatPayoutGateway {
           policyId: policy.id,
           amount: payout.payoutAmount,
           contractPayoutId: payout.contractPayoutId,
+          details: { transfer, transferResult },
         },
         correlationId: properties.correlationId,
       });

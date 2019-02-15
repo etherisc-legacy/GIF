@@ -130,6 +130,11 @@ class FddApi {
           transport: 'smtp',
           template: fs.readFileSync('./templates/policy_issued_letter.html', 'utf8'),
         },
+        {
+          name: 'claim_paid_out',
+          transport: 'telegram',
+          template: '🔔 *Claim paid out:*\nPolicy : _{{policy.id}}_\nTransferwise Transfer : _{{transferwiseTransferId}}_',
+        },
       ],
     });
     await this._gif.setupCertificateTemplate({
@@ -296,11 +301,16 @@ class FddApi {
    * @param {{}} properties
    */
   async handlePaidOut({ content, fields, properties }) {
-    const { contractPayoutId, amount, policyId } = content;
+    const {
+      contractPayoutId,
+      amount,
+      policyId,
+      details,
+    } = content;
     await this._gif.confirmPayout(contractPayoutId, amount);
     await this._gif.sendNotification({
       type: 'claim_paid_out',
-      data: { policy: { id: policyId } },
+      data: { policy: { id: policyId }, transferwiseTransferId: details.transfer.id },
       props: {},
     });
   }

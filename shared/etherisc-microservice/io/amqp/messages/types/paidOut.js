@@ -6,9 +6,10 @@ schemaVersions['1.0'] = {
   properties: {
     policyId: { type: 'string' },
     amount: { type: 'number' },
-    contractPolicyId: { type: 'string' },
+    contractPayoutId: { type: 'number' },
+    details: { type: 'object' },
   },
-  required: ['policyId'],
+  required: ['policyId', 'amount', 'contractPayoutId'],
 };
 
 module.exports = schemaVersions;
