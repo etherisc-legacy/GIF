@@ -23,6 +23,8 @@ contract FlightDelayOraclize is Product {
         uint256 amount
     );
 
+    event LogError(string error);
+
     event LogUnprocessableStatus(uint256 requestId, uint256 policyId);
 
     event LogPolicyExpired(uint256 policyId);
@@ -123,10 +125,10 @@ contract FlightDelayOraclize is Product {
             risk.arrivalTime = _arrivalTime;
         }
 
-        require(
-            _premium * risk.premiumMultiplier + risk.cumulatedWeightedPremium < MAX_CUMULATED_WEIGHTED_PREMIUM,
-            "ERROR::CLUSTER_RISK"
-        );
+        if (_premium * risk.premiumMultiplier + risk.cumulatedWeightedPremium >= MAX_CUMULATED_WEIGHTED_PREMIUM) {
+            emit LogError("ERROR::CLUSTER_RISK");
+            return;
+        }
 
         if (risk.cumulatedWeightedPremium == 0) {
             risk.cumulatedWeightedPremium = MAX_CUMULATED_WEIGHTED_PREMIUM;
@@ -182,17 +184,21 @@ contract FlightDelayOraclize is Product {
             _statistics
         );
 
-        require(
-            payoutOptions.length == calculatedPayouts.length,
-            "ERROR::INVALID_PAYOUT_OPTIONS_COUNT"
-        );
+        if (payoutOptions.length != calculatedPayouts.length) {
+            emit LogError("ERROR::INVALID_PAYOUT_OPTIONS_COUNT");
+            return;
+        }
 
         for (uint256 i = 0; i < 5; i++) {
-            require(
-                payoutOptions[i] == calculatedPayouts[i],
-                "ERROR::INVALID_PAYOUT_OPTION"
-            );
-            assert(payoutOptions[i] <= MAX_PAYOUT);
+            if (payoutOptions[i] != calculatedPayouts[i]) {
+                emit LogError("ERROR::INVALID_PAYOUT_OPTION");
+                return;
+            }
+
+            if (payoutOptions[i] > MAX_PAYOUT) {
+                emit LogError("ERROR::INVALID_PAYOUT_OPTION");
+                return;
+            }
         }
 
         bytes32 riskId = requests[_requestId].riskId;
