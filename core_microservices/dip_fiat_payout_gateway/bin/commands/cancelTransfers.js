@@ -54,9 +54,10 @@ async function getAccessToken() {
 /**
  * Get active transfers
  * @param {string} accessToken
+ * @param {string} status
  */
-async function getTransfers(accessToken) {
-  const response = await fetch(`${url}/v1/transfers/?offset=0&limit=100&profile=${profileId}&createdDateStart=${yesterday()}&createdDateEnd=${tomorrow()}&status=waiting_recipient_input_to_proceed`, {
+async function getTransfers(accessToken, status) {
+  const response = await fetch(`${url}/v1/transfers/?offset=0&limit=100&profile=${profileId}&createdDateStart=${yesterday()}&createdDateEnd=${tomorrow()}&status=${status}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   const transfers = await response.json();
@@ -85,12 +86,23 @@ class CancelTransferwiseTransfers extends Command {
    */
   async run() {
     const accessToken = await getAccessToken();
-    const transfers = await getTransfers(accessToken);
+    const transfersWaitingRecipient = await getTransfers(accessToken, 'waiting_recipient_input_to_proceed');
 
-    if (transfers.errors) {
+    if (transfersWaitingRecipient.errors) {
       console.log('Something went wrong, try again');
       return;
     }
+    const transfersWaitingIncomingPayment = await getTransfers(accessToken, 'incoming_payment_waiting');
+
+    if (transfersWaitingIncomingPayment.errors) {
+      console.log('Something went wrong, try again');
+      return;
+    }
+
+    const transfers = [].concat(
+      transfersWaitingRecipient,
+      transfersWaitingIncomingPayment,
+    );
 
     console.log(`${transfers.length} transfers found`);
 
