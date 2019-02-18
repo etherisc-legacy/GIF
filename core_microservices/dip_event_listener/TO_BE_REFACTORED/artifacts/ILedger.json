@@ -3,29 +3,29 @@
   "abi": [],
   "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820ac59482402e3638848a72125ca53dfeb4b17ce730c3a5602beacf33f3ca337090029",
   "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820ac59482402e3638848a72125ca53dfeb4b17ce730c3a5602beacf33f3ca337090029",
-  "sourceMap": "24:383:18:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:383:18;;;;;;;",
-  "deployedSourceMap": "24:383:18:-;;;;;",
+  "sourceMap": "24:383:17:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:383:17;;;;;;;",
+  "deployedSourceMap": "24:383:17:-;;;;;",
   "source": "pragma solidity 0.5.2;\n\ninterface ILedger {\n    struct Ledger {\n        int256 premium; // 0\n        int256 riskFund; // 1\n        int256 payout; // 2\n        int256 reward; // 3\n        int256 oracleCosts; // 4\n        int256 balance; // 5\n        bool enabled;\n    }\n\n    struct Currency {\n        bytes32 code;\n        address token;\n        bool erc20;\n        bool erc721;\n        bool enabled;\n    }\n}\n",
   "sourcePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/ledger/ILedger.sol",
   "ast": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/ledger/ILedger.sol",
     "exportedSymbols": {
       "ILedger": [
-        11258
+        11184
       ]
     },
-    "id": 11259,
+    "id": 11185,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11231,
+        "id": 11157,
         "literals": [
           "solidity",
           "0.5",
           ".2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:18"
+        "src": "0:22:17"
       },
       {
         "baseContracts": [],
@@ -33,24 +33,24 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11258,
+        "id": 11184,
         "linearizedBaseContracts": [
-          11258
+          11184
         ],
         "name": "ILedger",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "ILedger.Ledger",
-            "id": 11246,
+            "id": 11172,
             "members": [
               {
                 "constant": false,
-                "id": 11233,
+                "id": 11159,
                 "name": "premium",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "72:14:18",
+                "scope": 11172,
+                "src": "72:14:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -58,10 +58,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11232,
+                  "id": 11158,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "72:6:18",
+                  "src": "72:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -72,11 +72,11 @@
               },
               {
                 "constant": false,
-                "id": 11235,
+                "id": 11161,
                 "name": "riskFund",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "101:15:18",
+                "scope": 11172,
+                "src": "101:15:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -84,10 +84,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11234,
+                  "id": 11160,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "101:6:18",
+                  "src": "101:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -98,11 +98,11 @@
               },
               {
                 "constant": false,
-                "id": 11237,
+                "id": 11163,
                 "name": "payout",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "131:13:18",
+                "scope": 11172,
+                "src": "131:13:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -110,10 +110,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11236,
+                  "id": 11162,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "131:6:18",
+                  "src": "131:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -124,11 +124,11 @@
               },
               {
                 "constant": false,
-                "id": 11239,
+                "id": 11165,
                 "name": "reward",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "159:13:18",
+                "scope": 11172,
+                "src": "159:13:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -136,10 +136,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11238,
+                  "id": 11164,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "159:6:18",
+                  "src": "159:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -150,11 +150,11 @@
               },
               {
                 "constant": false,
-                "id": 11241,
+                "id": 11167,
                 "name": "oracleCosts",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "187:18:18",
+                "scope": 11172,
+                "src": "187:18:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -162,10 +162,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11240,
+                  "id": 11166,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "187:6:18",
+                  "src": "187:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -176,11 +176,11 @@
               },
               {
                 "constant": false,
-                "id": 11243,
+                "id": 11169,
                 "name": "balance",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "220:14:18",
+                "scope": 11172,
+                "src": "220:14:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -188,10 +188,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11242,
+                  "id": 11168,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "220:6:18",
+                  "src": "220:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -202,11 +202,11 @@
               },
               {
                 "constant": false,
-                "id": 11245,
+                "id": 11171,
                 "name": "enabled",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "249:12:18",
+                "scope": 11172,
+                "src": "249:12:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -214,10 +214,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 11244,
+                  "id": 11170,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "249:4:18",
+                  "src": "249:4:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -229,21 +229,21 @@
             ],
             "name": "Ledger",
             "nodeType": "StructDefinition",
-            "scope": 11258,
-            "src": "48:220:18",
+            "scope": 11184,
+            "src": "48:220:17",
             "visibility": "public"
           },
           {
             "canonicalName": "ILedger.Currency",
-            "id": 11257,
+            "id": 11183,
             "members": [
               {
                 "constant": false,
-                "id": 11248,
+                "id": 11174,
                 "name": "code",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "300:12:18",
+                "scope": 11183,
+                "src": "300:12:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -251,10 +251,10 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 11247,
+                  "id": 11173,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "300:7:18",
+                  "src": "300:7:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes32",
                     "typeString": "bytes32"
@@ -265,11 +265,11 @@
               },
               {
                 "constant": false,
-                "id": 11250,
+                "id": 11176,
                 "name": "token",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "322:13:18",
+                "scope": 11183,
+                "src": "322:13:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -277,10 +277,10 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 11249,
+                  "id": 11175,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
-                  "src": "322:7:18",
+                  "src": "322:7:17",
                   "stateMutability": "nonpayable",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
@@ -292,11 +292,11 @@
               },
               {
                 "constant": false,
-                "id": 11252,
+                "id": 11178,
                 "name": "erc20",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "345:10:18",
+                "scope": 11183,
+                "src": "345:10:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -304,10 +304,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 11251,
+                  "id": 11177,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "345:4:18",
+                  "src": "345:4:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -318,11 +318,11 @@
               },
               {
                 "constant": false,
-                "id": 11254,
+                "id": 11180,
                 "name": "erc721",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "365:11:18",
+                "scope": 11183,
+                "src": "365:11:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -330,10 +330,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 11253,
+                  "id": 11179,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "365:4:18",
+                  "src": "365:4:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -344,11 +344,11 @@
               },
               {
                 "constant": false,
-                "id": 11256,
+                "id": 11182,
                 "name": "enabled",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "386:12:18",
+                "scope": 11183,
+                "src": "386:12:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -356,10 +356,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 11255,
+                  "id": 11181,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "386:4:18",
+                  "src": "386:4:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -371,36 +371,36 @@
             ],
             "name": "Currency",
             "nodeType": "StructDefinition",
-            "scope": 11258,
-            "src": "274:131:18",
+            "scope": 11184,
+            "src": "274:131:17",
             "visibility": "public"
           }
         ],
-        "scope": 11259,
-        "src": "24:383:18"
+        "scope": 11185,
+        "src": "24:383:17"
       }
     ],
-    "src": "0:408:18"
+    "src": "0:408:17"
   },
   "legacyAST": {
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/ledger/ILedger.sol",
     "exportedSymbols": {
       "ILedger": [
-        11258
+        11184
       ]
     },
-    "id": 11259,
+    "id": 11185,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11231,
+        "id": 11157,
         "literals": [
           "solidity",
           "0.5",
           ".2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:22:18"
+        "src": "0:22:17"
       },
       {
         "baseContracts": [],
@@ -408,24 +408,24 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11258,
+        "id": 11184,
         "linearizedBaseContracts": [
-          11258
+          11184
         ],
         "name": "ILedger",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "ILedger.Ledger",
-            "id": 11246,
+            "id": 11172,
             "members": [
               {
                 "constant": false,
-                "id": 11233,
+                "id": 11159,
                 "name": "premium",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "72:14:18",
+                "scope": 11172,
+                "src": "72:14:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -433,10 +433,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11232,
+                  "id": 11158,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "72:6:18",
+                  "src": "72:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -447,11 +447,11 @@
               },
               {
                 "constant": false,
-                "id": 11235,
+                "id": 11161,
                 "name": "riskFund",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "101:15:18",
+                "scope": 11172,
+                "src": "101:15:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -459,10 +459,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11234,
+                  "id": 11160,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "101:6:18",
+                  "src": "101:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -473,11 +473,11 @@
               },
               {
                 "constant": false,
-                "id": 11237,
+                "id": 11163,
                 "name": "payout",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "131:13:18",
+                "scope": 11172,
+                "src": "131:13:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -485,10 +485,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11236,
+                  "id": 11162,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "131:6:18",
+                  "src": "131:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -499,11 +499,11 @@
               },
               {
                 "constant": false,
-                "id": 11239,
+                "id": 11165,
                 "name": "reward",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "159:13:18",
+                "scope": 11172,
+                "src": "159:13:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -511,10 +511,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11238,
+                  "id": 11164,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "159:6:18",
+                  "src": "159:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -525,11 +525,11 @@
               },
               {
                 "constant": false,
-                "id": 11241,
+                "id": 11167,
                 "name": "oracleCosts",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "187:18:18",
+                "scope": 11172,
+                "src": "187:18:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -537,10 +537,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11240,
+                  "id": 11166,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "187:6:18",
+                  "src": "187:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -551,11 +551,11 @@
               },
               {
                 "constant": false,
-                "id": 11243,
+                "id": 11169,
                 "name": "balance",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "220:14:18",
+                "scope": 11172,
+                "src": "220:14:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -563,10 +563,10 @@
                   "typeString": "int256"
                 },
                 "typeName": {
-                  "id": 11242,
+                  "id": 11168,
                   "name": "int256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "220:6:18",
+                  "src": "220:6:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_int256",
                     "typeString": "int256"
@@ -577,11 +577,11 @@
               },
               {
                 "constant": false,
-                "id": 11245,
+                "id": 11171,
                 "name": "enabled",
                 "nodeType": "VariableDeclaration",
-                "scope": 11246,
-                "src": "249:12:18",
+                "scope": 11172,
+                "src": "249:12:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -589,10 +589,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 11244,
+                  "id": 11170,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "249:4:18",
+                  "src": "249:4:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -604,21 +604,21 @@
             ],
             "name": "Ledger",
             "nodeType": "StructDefinition",
-            "scope": 11258,
-            "src": "48:220:18",
+            "scope": 11184,
+            "src": "48:220:17",
             "visibility": "public"
           },
           {
             "canonicalName": "ILedger.Currency",
-            "id": 11257,
+            "id": 11183,
             "members": [
               {
                 "constant": false,
-                "id": 11248,
+                "id": 11174,
                 "name": "code",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "300:12:18",
+                "scope": 11183,
+                "src": "300:12:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -626,10 +626,10 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 11247,
+                  "id": 11173,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "300:7:18",
+                  "src": "300:7:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes32",
                     "typeString": "bytes32"
@@ -640,11 +640,11 @@
               },
               {
                 "constant": false,
-                "id": 11250,
+                "id": 11176,
                 "name": "token",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "322:13:18",
+                "scope": 11183,
+                "src": "322:13:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -652,10 +652,10 @@
                   "typeString": "address"
                 },
                 "typeName": {
-                  "id": 11249,
+                  "id": 11175,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
-                  "src": "322:7:18",
+                  "src": "322:7:17",
                   "stateMutability": "nonpayable",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
@@ -667,11 +667,11 @@
               },
               {
                 "constant": false,
-                "id": 11252,
+                "id": 11178,
                 "name": "erc20",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "345:10:18",
+                "scope": 11183,
+                "src": "345:10:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -679,10 +679,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 11251,
+                  "id": 11177,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "345:4:18",
+                  "src": "345:4:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -693,11 +693,11 @@
               },
               {
                 "constant": false,
-                "id": 11254,
+                "id": 11180,
                 "name": "erc721",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "365:11:18",
+                "scope": 11183,
+                "src": "365:11:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -705,10 +705,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 11253,
+                  "id": 11179,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "365:4:18",
+                  "src": "365:4:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -719,11 +719,11 @@
               },
               {
                 "constant": false,
-                "id": 11256,
+                "id": 11182,
                 "name": "enabled",
                 "nodeType": "VariableDeclaration",
-                "scope": 11257,
-                "src": "386:12:18",
+                "scope": 11183,
+                "src": "386:12:17",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -731,10 +731,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 11255,
+                  "id": 11181,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "386:4:18",
+                  "src": "386:4:17",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -746,16 +746,16 @@
             ],
             "name": "Currency",
             "nodeType": "StructDefinition",
-            "scope": 11258,
-            "src": "274:131:18",
+            "scope": 11184,
+            "src": "274:131:17",
             "visibility": "public"
           }
         ],
-        "scope": 11259,
-        "src": "24:383:18"
+        "scope": 11185,
+        "src": "24:383:17"
       }
     ],
-    "src": "0:408:18"
+    "src": "0:408:17"
   },
   "compiler": {
     "name": "solc",
@@ -763,7 +763,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-15T09:40:03.274Z",
+  "updatedAt": "2019-02-18T10:13:22.879Z",
   "devdoc": {
     "methods": {}
   },
