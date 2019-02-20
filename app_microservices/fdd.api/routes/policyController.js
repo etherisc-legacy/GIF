@@ -192,9 +192,14 @@ module.exports = ({
 
       try {
         const transactionResult = await gif.applyForPolicy(application);
+        const { transactionHash, events } = transactionResult;
 
-        const { transactionHash } = transactionResult;
-        const { applicationId: contractAppicationId } = transactionResult.events.LogNewApplication.returnValues;
+        if (events.LogError) {
+          const { error: message } = events.LogError.returnValues;
+          throw new Error(message);
+        }
+
+        const { applicationId: contractAppicationId } = events.LogNewApplication.returnValues;
 
         await gif.applyForPolicySuccess({ policyId, contractAppicationId });
 
@@ -208,11 +213,11 @@ module.exports = ({
         await Policy.query().delete().where('id', policyId);
         await gif.applyForPolicyError({ policyId });
         log.error(error);
-        ctx.badRequest(error);
+        ctx.badRequest({ error: error.message });
       }
     } catch (error) {
       log.error(error);
-      ctx.badRequest(error);
+      ctx.badRequest({ error: error.message });
     }
   });
 
