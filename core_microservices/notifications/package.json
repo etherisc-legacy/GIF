@@ -1,0 +1,35 @@
+{
+  "name": "@etherisc/notifications",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./bootstrap.js",
+    "prod": "node ./bootstrap.js",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "knex": "knex",
+    "test": "NODE_ENV=test mocha",
+    "coverage": "nyc mocha",
+    "check:coverage": "nyc --check-coverage --statements 70 --functions 70 --lines 70 --branches 70 mocha"
+  },
+  "dependencies": {
+    "@etherisc/microservice": "^0.4.12",
+    "dotenv": "^6.2.0",
+    "emailjs": "^2.2.0",
+    "handlebars": "^4.0.12",
+    "knex": "^0.16.3",
+    "lodash": "^4.17.11",
+    "objection": "^1.4.0",
+    "pg": "^7.8.0",
+    "telegrambot": "^0.1.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "should": "^13.2.3",
+    "should-sinon": "0.0.6",
+    "sinon": "^7.2.2"
+  }
+}
