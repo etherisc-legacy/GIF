@@ -8,6 +8,8 @@ export const calculatePayouts = (stats) => (premium, currency) => {
     return false;
   }
 
+  premium = Number(Number(premium).toFixed(2));
+
   const weightPattern = CustomConfig.payoutCalc.weightPattern || [0, 0, 0, 30, 50, 50];
   const maxPayouts = CustomConfig.payoutCalc.maxPayouts || MAX_PAYOUTS;
   const MAX_PAYOUT = maxPayouts[currency];

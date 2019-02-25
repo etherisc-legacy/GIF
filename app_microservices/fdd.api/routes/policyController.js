@@ -112,7 +112,7 @@ module.exports = ({
 
       const payment = {
         kind: 'fiat',
-        premium: body.amount,
+        premium: toMoney(body.amount / 100),
         currency: body.currency,
         provider: 'stripe',
         sourceId: body.stripeSourceId,

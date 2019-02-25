@@ -60,7 +60,7 @@ class PolicyTable extends Component {
     this.props.change('premium', premium);
   }
 
-  toggleCheck = () => this.setState({checked: !this.state.checked})
+  toggleCheck = () => this.setState({ checked: !this.state.checked })
 
   selectCurrency = (e) => {
     if (
@@ -98,18 +98,26 @@ class PolicyTable extends Component {
   }
 
   checkCoupon = e => {
-    this.props.checkCoupon({couponCode: e.target.value, date: this.props.application.date});
+    this.props.checkCoupon({ couponCode: e.target.value, date: this.props.application.date });
   }
 
   calculatePayouts = calculatePayouts(this.props.application.flight.flightRating);
+
+  normalizePremium = (value, previousValue, allValues) => {
+    if (value != Number(value).toString()) {
+      return value;
+    }
+    const premium = Number(Number(value).toFixed(2));
+    return premium;
+  }
 
   submit = values => {
     this.props.submitPolicyTable({
       ...values,
       payouts: this.calculatePayouts(values.premium, values.currency),
       couponCode: this.state.checked && this.props.application.policy &&
-      this.props.application.policy.couponCode &&
-      this.props.application.policy.couponCode.exists
+        this.props.application.policy.couponCode &&
+        this.props.application.policy.couponCode.exists
         ? this.props.application.policy.couponCode
         : null,
       date: this.props.application.date,
@@ -147,7 +155,7 @@ class PolicyTable extends Component {
     }
 
     const applyStarted = (application.policy && application.policy.isApplyPolicyEthReq) ||
-    (application.policy && application.policy.isCreatePolicyEthReq)
+      (application.policy && application.policy.isCreatePolicyEthReq)
 
     return (
       <div className="step">
@@ -171,13 +179,13 @@ class PolicyTable extends Component {
         <form onSubmit={handleSubmit(this.submit)}>
 
           {!applyStarted && (
-          <div>
-            <div className="payment-type">
-              <div className="payment-type__title">
-                <strong>{t('Currency')}:</strong>
-              </div>
-              <div className="payment-type__items">
-                {/* {CustomConfig.policyTable.supportsEth !== false &&
+            <div>
+              <div className="payment-type">
+                <div className="payment-type__title">
+                  <strong>{t('Currency')}:</strong>
+                </div>
+                <div className="payment-type__items">
+                  {/* {CustomConfig.policyTable.supportsEth !== false &&
                   <div>
                     <label htmlFor="eth">
                       <Field id="eth" name="currency" onChange={v => this.selectCurrency(v)} component="input"
@@ -186,71 +194,72 @@ class PolicyTable extends Component {
                     </label>
                   </div>
                 } */}
-                {CustomConfig.policyTable.disabledEth &&
-                <div className={styles.disabled}>
-                  <label htmlFor="eth">
-                    <Field id="eth" name="currency" onChange={v => this.selectCurrency(v)} component="input"
-                           type="radio" value="0" disabled />
-                    <span>ETH</span>
-                    <div className={styles.small}>(back soon!)</div>
-                  </label>
-                </div>
-                }
-                <div>
-                  <label htmlFor="eur">
-                    <Field id="eur" name="currency" onChange={v => this.selectCurrency(v)} component="input"
-                           type="radio" value="1" />
-                    <span>EUR</span>
-                  </label>
-                </div>
-                <div className={styles.disabled}>
-                  <label htmlFor="usd">
-                    <Field id="usd" name="currency" onChange={v => this.selectCurrency(v)} component="input"
-                           type="radio" value="2" disabled />
-                    <span>USD</span>
-                    <div className={styles.small}>(back soon!)</div>
-                  </label>
-                </div>
-                <div className={styles.disabled}>
-                  <label htmlFor="gbp">
-                    <Field id="gbp" name="currency" onChange={v => this.selectCurrency(v)} component="input"
-                           type="radio" value="3" disabled />
-                    <span>GBP</span>
-                    <div className={styles.small}>(back soon!)</div>
-                  </label>
+                  {CustomConfig.policyTable.disabledEth &&
+                    <div className={styles.disabled}>
+                      <label htmlFor="eth">
+                        <Field id="eth" name="currency" onChange={v => this.selectCurrency(v)} component="input"
+                          type="radio" value="0" disabled />
+                        <span>ETH</span>
+                        <div className={styles.small}>(back soon!)</div>
+                      </label>
+                    </div>
+                  }
+                  <div>
+                    <label htmlFor="eur">
+                      <Field id="eur" name="currency" onChange={v => this.selectCurrency(v)} component="input"
+                        type="radio" value="1" />
+                      <span>EUR</span>
+                    </label>
+                  </div>
+                  <div className={styles.disabled}>
+                    <label htmlFor="usd">
+                      <Field id="usd" name="currency" onChange={v => this.selectCurrency(v)} component="input"
+                        type="radio" value="2" disabled />
+                      <span>USD</span>
+                      <div className={styles.small}>(back soon!)</div>
+                    </label>
+                  </div>
+                  <div className={styles.disabled}>
+                    <label htmlFor="gbp">
+                      <Field id="gbp" name="currency" onChange={v => this.selectCurrency(v)} component="input"
+                        type="radio" value="3" disabled />
+                      <span>GBP</span>
+                      <div className={styles.small}>(back soon!)</div>
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className={cn(CustomConfig.policyTable.supportsCoupons !== false ? 'col-md-6' : 'col-md-12')}>
-              <Field
-                name="premium"
-                everytime
-                className="form-control text-field"
-                component={FdiInput}
-                label={t('Premium')}
-                validate={[required, number, this.minPremium, this.maxPremium]}
-              />
-            </div>
-
-            {CustomConfig.policyTable.supportsCoupons !== false &&
-              <div className="col-md-6">
+              <div className={cn(CustomConfig.policyTable.supportsCoupons !== false ? 'col-md-6' : 'col-md-12')}>
                 <Field
-                  disabled={process.env.DEMO}
-                  name="coupon"
-                  onChange={(v) => this.checkCoupon(v)}
-                  normalize={v => v}
+                  name="premium"
+                  everytime
                   className="form-control text-field"
                   component={FdiInput}
-                  label="Coupon code (optional)"
+                  label={t('Premium')}
+                  validate={[required, number, this.minPremium, this.maxPremium]}
+                  normalize={this.normalizePremium}
                 />
               </div>
-            }
 
-            <div className="info-text">
-              {t(`If you pay the premium in ${curLabel} the payout will also be in ${curLabel}`)}
-            </div>
-          </div>)}
+              {CustomConfig.policyTable.supportsCoupons !== false &&
+                <div className="col-md-6">
+                  <Field
+                    disabled={process.env.DEMO}
+                    name="coupon"
+                    onChange={(v) => this.checkCoupon(v)}
+                    normalize={v => v}
+                    className="form-control text-field"
+                    component={FdiInput}
+                    label="Coupon code (optional)"
+                  />
+                </div>
+              }
+
+              <div className="info-text">
+                {t(`If you pay the premium in ${curLabel} the payout will also be in ${curLabel}`)}
+              </div>
+            </div>)}
 
           <div className="form-group form-style -withTable">
             <table className="table">
@@ -259,7 +268,7 @@ class PolicyTable extends Component {
                   <td colSpan="6">
                     <strong>
                       {t('Payouts for premium')}:{' '}
-                      {premium}<span dangerouslySetInnerHTML={{__html: curCode}} />
+                      {premium}<span dangerouslySetInnerHTML={{ __html: curCode }} />
                     </strong>
                   </td>
                 </tr>
@@ -280,13 +289,13 @@ class PolicyTable extends Component {
                     {payouts && payouts.p2}<span dangerouslySetInnerHTML={{__html: curCode}} />
                   </td> */}
                   <td>
-                    {payouts && payouts.p3}<span dangerouslySetInnerHTML={{__html: curCode}} />
+                    {payouts && payouts.p3}<span dangerouslySetInnerHTML={{ __html: curCode }} />
                   </td>
                   <td>
-                    {payouts && payouts.p4}<span dangerouslySetInnerHTML={{__html: curCode}} />
+                    {payouts && payouts.p4}<span dangerouslySetInnerHTML={{ __html: curCode }} />
                   </td>
                   <td>
-                    {payouts && payouts.p5}<span dangerouslySetInnerHTML={{__html: curCode}} />
+                    {payouts && payouts.p5}<span dangerouslySetInnerHTML={{ __html: curCode }} />
                   </td>
                 </tr>
               </tbody>
