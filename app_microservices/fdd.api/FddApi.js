@@ -11,7 +11,7 @@ const artifacts = require('./FlightDelayOraclize.json');
 
 
 const MNEMONIC = 'way web chapter satisfy solid future avoid push insane viable dizzy conduct fork fantasy asthma';
-const CONTRACT = '0xDbce63964bd122a91e9a987d14947B1c558231e4';
+const CONTRACT = '0xA4dEF7E6d4121bFcB2d5844893c6694b703Dcadf';
 const ACCOUNT = '0x5E391721c8f61C4F1E58A74d1a2f02428e922CDE';
 const HTTP_PROVIDER = 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
 /**

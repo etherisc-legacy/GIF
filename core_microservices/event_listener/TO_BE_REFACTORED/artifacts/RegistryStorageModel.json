@@ -173,14 +173,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/RegistryStorageModel.sol",
     "exportedSymbols": {
       "RegistryStorageModel": [
-        15161
+        15246
       ]
     },
-    "id": 15162,
+    "id": 15247,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 15137,
+        "id": 15222,
         "literals": [
           "solidity",
           "0.5",
@@ -192,10 +192,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
         "file": "./IRegistry.sol",
-        "id": 15138,
+        "id": 15223,
         "nodeType": "ImportDirective",
-        "scope": 15162,
-        "sourceUnit": 14673,
+        "scope": 15247,
+        "sourceUnit": 14758,
         "src": "24:25:45",
         "symbolAliases": [],
         "unitAlias": ""
@@ -206,41 +206,41 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 15139,
+              "id": 15224,
               "name": "IRegistry",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 14672,
+              "referencedDeclaration": 14757,
               "src": "84:9:45",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IRegistry_$14672",
+                "typeIdentifier": "t_contract$_IRegistry_$14757",
                 "typeString": "contract IRegistry"
               }
             },
-            "id": 15140,
+            "id": 15225,
             "nodeType": "InheritanceSpecifier",
             "src": "84:9:45"
           }
         ],
         "contractDependencies": [
-          14672
+          14757
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 15161,
+        "id": 15246,
         "linearizedBaseContracts": [
-          15161,
-          14672
+          15246,
+          14757
         ],
         "name": "RegistryStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 15142,
+            "id": 15227,
             "name": "release",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "144:22:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -249,7 +249,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 15141,
+              "id": 15226,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "144:7:45",
@@ -263,10 +263,10 @@
           },
           {
             "constant": false,
-            "id": 15145,
+            "id": 15230,
             "name": "maxContracts",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "242:33:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -275,7 +275,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 15143,
+              "id": 15228,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "242:7:45",
@@ -287,7 +287,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "313030",
-              "id": 15144,
+              "id": 15229,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -306,10 +306,10 @@
           },
           {
             "constant": false,
-            "id": 15151,
+            "id": 15236,
             "name": "contracts",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "334:64:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -318,9 +318,9 @@
               "typeString": "mapping(uint256 => mapping(bytes32 => address))"
             },
             "typeName": {
-              "id": 15150,
+              "id": 15235,
               "keyType": {
-                "id": 15146,
+                "id": 15231,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "342:7:45",
@@ -336,9 +336,9 @@
                 "typeString": "mapping(uint256 => mapping(bytes32 => address))"
               },
               "valueType": {
-                "id": 15149,
+                "id": 15234,
                 "keyType": {
-                  "id": 15147,
+                  "id": 15232,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "361:7:45",
@@ -354,7 +354,7 @@
                   "typeString": "mapping(bytes32 => address)"
                 },
                 "valueType": {
-                  "id": 15148,
+                  "id": 15233,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "372:7:45",
@@ -371,10 +371,10 @@
           },
           {
             "constant": false,
-            "id": 15156,
+            "id": 15241,
             "name": "contractNames",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "439:50:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -383,9 +383,9 @@
               "typeString": "mapping(uint256 => bytes32[])"
             },
             "typeName": {
-              "id": 15155,
+              "id": 15240,
               "keyType": {
-                "id": 15152,
+                "id": 15237,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "447:7:45",
@@ -402,7 +402,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 15153,
+                  "id": 15238,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "458:7:45",
@@ -411,7 +411,7 @@
                     "typeString": "bytes32"
                   }
                 },
-                "id": 15154,
+                "id": 15239,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "458:9:45",
@@ -426,10 +426,10 @@
           },
           {
             "constant": false,
-            "id": 15160,
+            "id": 15245,
             "name": "controllers",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "529:46:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -438,9 +438,9 @@
               "typeString": "mapping(bytes32 => address)"
             },
             "typeName": {
-              "id": 15159,
+              "id": 15244,
               "keyType": {
-                "id": 15157,
+                "id": 15242,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "537:7:45",
@@ -456,7 +456,7 @@
                 "typeString": "mapping(bytes32 => address)"
               },
               "valueType": {
-                "id": 15158,
+                "id": 15243,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "548:7:45",
@@ -471,7 +471,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 15162,
+        "scope": 15247,
         "src": "51:527:45"
       }
     ],
@@ -481,14 +481,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/RegistryStorageModel.sol",
     "exportedSymbols": {
       "RegistryStorageModel": [
-        15161
+        15246
       ]
     },
-    "id": 15162,
+    "id": 15247,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 15137,
+        "id": 15222,
         "literals": [
           "solidity",
           "0.5",
@@ -500,10 +500,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/registry/IRegistry.sol",
         "file": "./IRegistry.sol",
-        "id": 15138,
+        "id": 15223,
         "nodeType": "ImportDirective",
-        "scope": 15162,
-        "sourceUnit": 14673,
+        "scope": 15247,
+        "sourceUnit": 14758,
         "src": "24:25:45",
         "symbolAliases": [],
         "unitAlias": ""
@@ -514,41 +514,41 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 15139,
+              "id": 15224,
               "name": "IRegistry",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 14672,
+              "referencedDeclaration": 14757,
               "src": "84:9:45",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IRegistry_$14672",
+                "typeIdentifier": "t_contract$_IRegistry_$14757",
                 "typeString": "contract IRegistry"
               }
             },
-            "id": 15140,
+            "id": 15225,
             "nodeType": "InheritanceSpecifier",
             "src": "84:9:45"
           }
         ],
         "contractDependencies": [
-          14672
+          14757
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 15161,
+        "id": 15246,
         "linearizedBaseContracts": [
-          15161,
-          14672
+          15246,
+          14757
         ],
         "name": "RegistryStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 15142,
+            "id": 15227,
             "name": "release",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "144:22:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -557,7 +557,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 15141,
+              "id": 15226,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "144:7:45",
@@ -571,10 +571,10 @@
           },
           {
             "constant": false,
-            "id": 15145,
+            "id": 15230,
             "name": "maxContracts",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "242:33:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -583,7 +583,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 15143,
+              "id": 15228,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "242:7:45",
@@ -595,7 +595,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "313030",
-              "id": 15144,
+              "id": 15229,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -614,10 +614,10 @@
           },
           {
             "constant": false,
-            "id": 15151,
+            "id": 15236,
             "name": "contracts",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "334:64:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -626,9 +626,9 @@
               "typeString": "mapping(uint256 => mapping(bytes32 => address))"
             },
             "typeName": {
-              "id": 15150,
+              "id": 15235,
               "keyType": {
-                "id": 15146,
+                "id": 15231,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "342:7:45",
@@ -644,9 +644,9 @@
                 "typeString": "mapping(uint256 => mapping(bytes32 => address))"
               },
               "valueType": {
-                "id": 15149,
+                "id": 15234,
                 "keyType": {
-                  "id": 15147,
+                  "id": 15232,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "361:7:45",
@@ -662,7 +662,7 @@
                   "typeString": "mapping(bytes32 => address)"
                 },
                 "valueType": {
-                  "id": 15148,
+                  "id": 15233,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "372:7:45",
@@ -679,10 +679,10 @@
           },
           {
             "constant": false,
-            "id": 15156,
+            "id": 15241,
             "name": "contractNames",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "439:50:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -691,9 +691,9 @@
               "typeString": "mapping(uint256 => bytes32[])"
             },
             "typeName": {
-              "id": 15155,
+              "id": 15240,
               "keyType": {
-                "id": 15152,
+                "id": 15237,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "447:7:45",
@@ -710,7 +710,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 15153,
+                  "id": 15238,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "458:7:45",
@@ -719,7 +719,7 @@
                     "typeString": "bytes32"
                   }
                 },
-                "id": 15154,
+                "id": 15239,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "458:9:45",
@@ -734,10 +734,10 @@
           },
           {
             "constant": false,
-            "id": 15160,
+            "id": 15245,
             "name": "controllers",
             "nodeType": "VariableDeclaration",
-            "scope": 15161,
+            "scope": 15246,
             "src": "529:46:45",
             "stateVariable": true,
             "storageLocation": "default",
@@ -746,9 +746,9 @@
               "typeString": "mapping(bytes32 => address)"
             },
             "typeName": {
-              "id": 15159,
+              "id": 15244,
               "keyType": {
-                "id": 15157,
+                "id": 15242,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "537:7:45",
@@ -764,7 +764,7 @@
                 "typeString": "mapping(bytes32 => address)"
               },
               "valueType": {
-                "id": 15158,
+                "id": 15243,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "548:7:45",
@@ -779,7 +779,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 15162,
+        "scope": 15247,
         "src": "51:527:45"
       }
     ],
@@ -791,7 +791,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-18T10:13:22.898Z",
+  "updatedAt": "2019-02-25T08:57:37.620Z",
   "devdoc": {
     "methods": {}
   },

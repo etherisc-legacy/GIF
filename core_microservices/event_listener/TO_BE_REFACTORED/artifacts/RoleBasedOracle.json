@@ -199,14 +199,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/examples/RoleBasedOracle/RoleBasedOracle.sol",
     "exportedSymbols": {
       "RoleBasedOracle": [
-        10973
+        11058
       ]
     },
-    "id": 10974,
+    "id": 11059,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10952,
+        "id": 11037,
         "literals": [
           "solidity",
           "0.5",
@@ -218,9 +218,9 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/Oracle.sol",
         "file": "../../Oracle.sol",
-        "id": 10953,
+        "id": 11038,
         "nodeType": "ImportDirective",
-        "scope": 10974,
+        "scope": 11059,
         "sourceUnit": 106,
         "src": "24:26:11",
         "symbolAliases": [],
@@ -232,7 +232,7 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 10954,
+              "id": 11039,
               "name": "Oracle",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 105,
@@ -242,24 +242,24 @@
                 "typeString": "contract Oracle"
               }
             },
-            "id": 10955,
+            "id": 11040,
             "nodeType": "InheritanceSpecifier",
             "src": "80:6:11"
           }
         ],
         "contractDependencies": [
-          9,
           105,
-          16678
+          9,
+          16763
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 10973,
+        "id": 11058,
         "linearizedBaseContracts": [
-          10973,
+          11058,
           105,
-          16678,
+          16763,
           9
         ],
         "name": "RoleBasedOracle",
@@ -267,13 +267,13 @@
         "nodes": [
           {
             "body": {
-              "id": 10963,
+              "id": 11048,
               "nodeType": "Block",
               "src": "165:2:11",
               "statements": []
             },
             "documentation": null,
-            "id": 10964,
+            "id": 11049,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -281,11 +281,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 10960,
+                    "id": 11045,
                     "name": "_oracleController",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 10957,
+                    "referencedDeclaration": 11042,
                     "src": "146:17:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -293,10 +293,10 @@
                     }
                   }
                 ],
-                "id": 10961,
+                "id": 11046,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 10959,
+                  "id": 11044,
                   "name": "Oracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
@@ -314,15 +314,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10958,
+              "id": 11043,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10957,
+                  "id": 11042,
                   "name": "_oracleController",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10964,
+                  "scope": 11049,
                   "src": "105:25:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -331,7 +331,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10956,
+                    "id": 11041,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "105:7:11",
@@ -348,12 +348,12 @@
               "src": "104:27:11"
             },
             "returnParameters": {
-              "id": 10962,
+              "id": 11047,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "165:0:11"
             },
-            "scope": 10973,
+            "scope": 11058,
             "src": "93:74:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -361,31 +361,31 @@
           },
           {
             "body": {
-              "id": 10967,
+              "id": 11052,
               "nodeType": "Block",
               "src": "201:2:11",
               "statements": []
             },
             "documentation": null,
-            "id": 10968,
+            "id": 11053,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "request",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10965,
+              "id": 11050,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "189:2:11"
             },
             "returnParameters": {
-              "id": 10966,
+              "id": 11051,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "201:0:11"
             },
-            "scope": 10973,
+            "scope": 11058,
             "src": "173:30:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -393,38 +393,38 @@
           },
           {
             "body": {
-              "id": 10971,
+              "id": 11056,
               "nodeType": "Block",
               "src": "240:2:11",
               "statements": []
             },
             "documentation": null,
-            "id": 10972,
+            "id": 11057,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "underwrite",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10969,
+              "id": 11054,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "228:2:11"
             },
             "returnParameters": {
-              "id": 10970,
+              "id": 11055,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "240:0:11"
             },
-            "scope": 10973,
+            "scope": 11058,
             "src": "209:33:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 10974,
+        "scope": 11059,
         "src": "52:192:11"
       }
     ],
@@ -434,14 +434,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/examples/RoleBasedOracle/RoleBasedOracle.sol",
     "exportedSymbols": {
       "RoleBasedOracle": [
-        10973
+        11058
       ]
     },
-    "id": 10974,
+    "id": 11059,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10952,
+        "id": 11037,
         "literals": [
           "solidity",
           "0.5",
@@ -453,9 +453,9 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/Oracle.sol",
         "file": "../../Oracle.sol",
-        "id": 10953,
+        "id": 11038,
         "nodeType": "ImportDirective",
-        "scope": 10974,
+        "scope": 11059,
         "sourceUnit": 106,
         "src": "24:26:11",
         "symbolAliases": [],
@@ -467,7 +467,7 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 10954,
+              "id": 11039,
               "name": "Oracle",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 105,
@@ -477,24 +477,24 @@
                 "typeString": "contract Oracle"
               }
             },
-            "id": 10955,
+            "id": 11040,
             "nodeType": "InheritanceSpecifier",
             "src": "80:6:11"
           }
         ],
         "contractDependencies": [
-          9,
           105,
-          16678
+          9,
+          16763
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 10973,
+        "id": 11058,
         "linearizedBaseContracts": [
-          10973,
+          11058,
           105,
-          16678,
+          16763,
           9
         ],
         "name": "RoleBasedOracle",
@@ -502,13 +502,13 @@
         "nodes": [
           {
             "body": {
-              "id": 10963,
+              "id": 11048,
               "nodeType": "Block",
               "src": "165:2:11",
               "statements": []
             },
             "documentation": null,
-            "id": 10964,
+            "id": 11049,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -516,11 +516,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 10960,
+                    "id": 11045,
                     "name": "_oracleController",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 10957,
+                    "referencedDeclaration": 11042,
                     "src": "146:17:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -528,10 +528,10 @@
                     }
                   }
                 ],
-                "id": 10961,
+                "id": 11046,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 10959,
+                  "id": 11044,
                   "name": "Oracle",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
@@ -549,15 +549,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10958,
+              "id": 11043,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10957,
+                  "id": 11042,
                   "name": "_oracleController",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10964,
+                  "scope": 11049,
                   "src": "105:25:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -566,7 +566,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10956,
+                    "id": 11041,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "105:7:11",
@@ -583,12 +583,12 @@
               "src": "104:27:11"
             },
             "returnParameters": {
-              "id": 10962,
+              "id": 11047,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "165:0:11"
             },
-            "scope": 10973,
+            "scope": 11058,
             "src": "93:74:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -596,31 +596,31 @@
           },
           {
             "body": {
-              "id": 10967,
+              "id": 11052,
               "nodeType": "Block",
               "src": "201:2:11",
               "statements": []
             },
             "documentation": null,
-            "id": 10968,
+            "id": 11053,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "request",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10965,
+              "id": 11050,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "189:2:11"
             },
             "returnParameters": {
-              "id": 10966,
+              "id": 11051,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "201:0:11"
             },
-            "scope": 10973,
+            "scope": 11058,
             "src": "173:30:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -628,38 +628,38 @@
           },
           {
             "body": {
-              "id": 10971,
+              "id": 11056,
               "nodeType": "Block",
               "src": "240:2:11",
               "statements": []
             },
             "documentation": null,
-            "id": 10972,
+            "id": 11057,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "underwrite",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10969,
+              "id": 11054,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "228:2:11"
             },
             "returnParameters": {
-              "id": 10970,
+              "id": 11055,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "240:0:11"
             },
-            "scope": 10973,
+            "scope": 11058,
             "src": "209:33:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 10974,
+        "scope": 11059,
         "src": "52:192:11"
       }
     ],
@@ -671,7 +671,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-18T10:13:22.877Z",
+  "updatedAt": "2019-02-25T08:57:37.599Z",
   "devdoc": {
     "methods": {}
   },

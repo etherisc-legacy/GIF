@@ -17,6 +17,8 @@ contract PolicyFlowDefault is WithRegistry {
         bytes32 _currency,
         uint256[] calldata _payoutOptions
     ) external returns (uint256 _applicationId) {
+        // todo: check DIP stake
+
         uint256 productId = license().getProductId(msg.sender);
 
         uint256 metadataId = policy().createPolicyFlow(productId);
@@ -31,6 +33,8 @@ contract PolicyFlowDefault is WithRegistry {
         );
 
         _applicationId = applicationId;
+
+        // todo: reduce available applications for product
     }
 
     function underwrite(uint256 _applicationId)

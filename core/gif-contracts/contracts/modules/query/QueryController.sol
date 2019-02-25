@@ -300,6 +300,8 @@ contract QueryController is QueryStorageModel, ModuleController {
 
         _requestId = oracleRequests.length++;
 
+        // todo: get token from product
+
         OracleRequest storage req = oracleRequests[_requestId];
         req.data = _input;
         req.callbackMethodName = _callbackMethodName;
@@ -333,6 +335,8 @@ contract QueryController is QueryStorageModel, ModuleController {
                 _data
             )
         );
+
+        // todo: send reward
 
         _responseId = oracleResponses.length++;
         oracleResponses[_responseId] = OracleResponse(

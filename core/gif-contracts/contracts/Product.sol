@@ -7,6 +7,11 @@ contract Product is RBAC {
     bool public developmentMode = false;
     bool public maintenanceMode = false;
 
+    modifier onlySandbox {
+        // todo: Restrict to sandbox account
+        _;
+    }
+
     IProductService public productService;
 
     constructor(address _productService, bytes32 _name, bytes32 _policyFlow)

@@ -607,14 +607,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/PolicyStorageModel.sol",
     "exportedSymbols": {
       "PolicyStorageModel": [
-        13425
+        13510
       ]
     },
-    "id": 13426,
+    "id": 13511,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 13396,
+        "id": 13481,
         "literals": [
           "solidity",
           "0.5",
@@ -626,10 +626,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/IPolicy.sol",
         "file": "./IPolicy.sol",
-        "id": 13397,
+        "id": 13482,
         "nodeType": "ImportDirective",
-        "scope": 13426,
-        "sourceUnit": 12128,
+        "scope": 13511,
+        "sourceUnit": 12213,
         "src": "24:23:33",
         "symbolAliases": [],
         "unitAlias": ""
@@ -640,52 +640,52 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 13398,
+              "id": 13483,
               "name": "IPolicy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 12127,
+              "referencedDeclaration": 12212,
               "src": "80:7:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IPolicy_$12127",
+                "typeIdentifier": "t_contract$_IPolicy_$12212",
                 "typeString": "contract IPolicy"
               }
             },
-            "id": 13399,
+            "id": 13484,
             "nodeType": "InheritanceSpecifier",
             "src": "80:7:33"
           }
         ],
         "contractDependencies": [
-          12127
+          12212
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 13425,
+        "id": 13510,
         "linearizedBaseContracts": [
-          13425,
-          12127
+          13510,
+          12212
         ],
         "name": "PolicyStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 13404,
+            "id": 13489,
             "name": "metadata",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "94:46:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12065_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12150_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
             },
             "typeName": {
-              "id": 13403,
+              "id": 13488,
               "keyType": {
-                "id": 13400,
+                "id": 13485,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "102:7:33",
@@ -697,28 +697,28 @@
               "nodeType": "Mapping",
               "src": "94:30:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12065_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12150_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13401,
+                  "id": 13486,
                   "name": "Metadata",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12065,
+                  "referencedDeclaration": 12150,
                   "src": "113:8:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Metadata_$12065_storage_ptr",
+                    "typeIdentifier": "t_struct$_Metadata_$12150_storage_ptr",
                     "typeString": "struct IPolicy.Metadata"
                   }
                 },
-                "id": 13402,
+                "id": 13487,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "113:10:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Metadata_$12065_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Metadata_$12150_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Metadata[]"
                 }
               }
@@ -728,21 +728,21 @@
           },
           {
             "constant": false,
-            "id": 13409,
+            "id": 13494,
             "name": "applications",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "147:53:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12085_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12170_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Application[])"
             },
             "typeName": {
-              "id": 13408,
+              "id": 13493,
               "keyType": {
-                "id": 13405,
+                "id": 13490,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "155:7:33",
@@ -754,28 +754,28 @@
               "nodeType": "Mapping",
               "src": "147:33:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12085_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12170_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Application[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13406,
+                  "id": 13491,
                   "name": "Application",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12085,
+                  "referencedDeclaration": 12170,
                   "src": "166:11:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Application_$12085_storage_ptr",
+                    "typeIdentifier": "t_struct$_Application_$12170_storage_ptr",
                     "typeString": "struct IPolicy.Application"
                   }
                 },
-                "id": 13407,
+                "id": 13492,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "166:13:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Application_$12085_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Application_$12170_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Application[]"
                 }
               }
@@ -785,21 +785,21 @@
           },
           {
             "constant": false,
-            "id": 13414,
+            "id": 13499,
             "name": "policies",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "207:44:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12096_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12181_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
             },
             "typeName": {
-              "id": 13413,
+              "id": 13498,
               "keyType": {
-                "id": 13410,
+                "id": 13495,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "215:7:33",
@@ -811,28 +811,28 @@
               "nodeType": "Mapping",
               "src": "207:28:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12096_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12181_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13411,
+                  "id": 13496,
                   "name": "Policy",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12096,
+                  "referencedDeclaration": 12181,
                   "src": "226:6:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Policy_$12096_storage_ptr",
+                    "typeIdentifier": "t_struct$_Policy_$12181_storage_ptr",
                     "typeString": "struct IPolicy.Policy"
                   }
                 },
-                "id": 13412,
+                "id": 13497,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "226:8:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Policy_$12096_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Policy_$12181_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Policy[]"
                 }
               }
@@ -842,21 +842,21 @@
           },
           {
             "constant": false,
-            "id": 13419,
+            "id": 13504,
             "name": "claims",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "258:41:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12109_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12194_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
             },
             "typeName": {
-              "id": 13418,
+              "id": 13503,
               "keyType": {
-                "id": 13415,
+                "id": 13500,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "266:7:33",
@@ -868,28 +868,28 @@
               "nodeType": "Mapping",
               "src": "258:27:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12109_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12194_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13416,
+                  "id": 13501,
                   "name": "Claim",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12109,
+                  "referencedDeclaration": 12194,
                   "src": "277:5:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Claim_$12109_storage_ptr",
+                    "typeIdentifier": "t_struct$_Claim_$12194_storage_ptr",
                     "typeString": "struct IPolicy.Claim"
                   }
                 },
-                "id": 13417,
+                "id": 13502,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "277:7:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Claim_$12109_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Claim_$12194_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Claim[]"
                 }
               }
@@ -899,21 +899,21 @@
           },
           {
             "constant": false,
-            "id": 13424,
+            "id": 13509,
             "name": "payouts",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "306:43:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12126_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12211_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
             },
             "typeName": {
-              "id": 13423,
+              "id": 13508,
               "keyType": {
-                "id": 13420,
+                "id": 13505,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "314:7:33",
@@ -925,28 +925,28 @@
               "nodeType": "Mapping",
               "src": "306:28:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12126_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12211_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13421,
+                  "id": 13506,
                   "name": "Payout",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12126,
+                  "referencedDeclaration": 12211,
                   "src": "325:6:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Payout_$12126_storage_ptr",
+                    "typeIdentifier": "t_struct$_Payout_$12211_storage_ptr",
                     "typeString": "struct IPolicy.Payout"
                   }
                 },
-                "id": 13422,
+                "id": 13507,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "325:8:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Payout_$12126_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Payout_$12211_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Payout[]"
                 }
               }
@@ -955,7 +955,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 13426,
+        "scope": 13511,
         "src": "49:303:33"
       }
     ],
@@ -965,14 +965,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/PolicyStorageModel.sol",
     "exportedSymbols": {
       "PolicyStorageModel": [
-        13425
+        13510
       ]
     },
-    "id": 13426,
+    "id": 13511,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 13396,
+        "id": 13481,
         "literals": [
           "solidity",
           "0.5",
@@ -984,10 +984,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/policy/IPolicy.sol",
         "file": "./IPolicy.sol",
-        "id": 13397,
+        "id": 13482,
         "nodeType": "ImportDirective",
-        "scope": 13426,
-        "sourceUnit": 12128,
+        "scope": 13511,
+        "sourceUnit": 12213,
         "src": "24:23:33",
         "symbolAliases": [],
         "unitAlias": ""
@@ -998,52 +998,52 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 13398,
+              "id": 13483,
               "name": "IPolicy",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 12127,
+              "referencedDeclaration": 12212,
               "src": "80:7:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IPolicy_$12127",
+                "typeIdentifier": "t_contract$_IPolicy_$12212",
                 "typeString": "contract IPolicy"
               }
             },
-            "id": 13399,
+            "id": 13484,
             "nodeType": "InheritanceSpecifier",
             "src": "80:7:33"
           }
         ],
         "contractDependencies": [
-          12127
+          12212
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 13425,
+        "id": 13510,
         "linearizedBaseContracts": [
-          13425,
-          12127
+          13510,
+          12212
         ],
         "name": "PolicyStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 13404,
+            "id": 13489,
             "name": "metadata",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "94:46:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12065_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12150_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
             },
             "typeName": {
-              "id": 13403,
+              "id": 13488,
               "keyType": {
-                "id": 13400,
+                "id": 13485,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "102:7:33",
@@ -1055,28 +1055,28 @@
               "nodeType": "Mapping",
               "src": "94:30:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12065_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Metadata_$12150_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Metadata[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13401,
+                  "id": 13486,
                   "name": "Metadata",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12065,
+                  "referencedDeclaration": 12150,
                   "src": "113:8:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Metadata_$12065_storage_ptr",
+                    "typeIdentifier": "t_struct$_Metadata_$12150_storage_ptr",
                     "typeString": "struct IPolicy.Metadata"
                   }
                 },
-                "id": 13402,
+                "id": 13487,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "113:10:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Metadata_$12065_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Metadata_$12150_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Metadata[]"
                 }
               }
@@ -1086,21 +1086,21 @@
           },
           {
             "constant": false,
-            "id": 13409,
+            "id": 13494,
             "name": "applications",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "147:53:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12085_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12170_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Application[])"
             },
             "typeName": {
-              "id": 13408,
+              "id": 13493,
               "keyType": {
-                "id": 13405,
+                "id": 13490,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "155:7:33",
@@ -1112,28 +1112,28 @@
               "nodeType": "Mapping",
               "src": "147:33:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12085_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Application_$12170_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Application[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13406,
+                  "id": 13491,
                   "name": "Application",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12085,
+                  "referencedDeclaration": 12170,
                   "src": "166:11:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Application_$12085_storage_ptr",
+                    "typeIdentifier": "t_struct$_Application_$12170_storage_ptr",
                     "typeString": "struct IPolicy.Application"
                   }
                 },
-                "id": 13407,
+                "id": 13492,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "166:13:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Application_$12085_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Application_$12170_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Application[]"
                 }
               }
@@ -1143,21 +1143,21 @@
           },
           {
             "constant": false,
-            "id": 13414,
+            "id": 13499,
             "name": "policies",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "207:44:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12096_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12181_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
             },
             "typeName": {
-              "id": 13413,
+              "id": 13498,
               "keyType": {
-                "id": 13410,
+                "id": 13495,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "215:7:33",
@@ -1169,28 +1169,28 @@
               "nodeType": "Mapping",
               "src": "207:28:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12096_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Policy_$12181_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Policy[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13411,
+                  "id": 13496,
                   "name": "Policy",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12096,
+                  "referencedDeclaration": 12181,
                   "src": "226:6:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Policy_$12096_storage_ptr",
+                    "typeIdentifier": "t_struct$_Policy_$12181_storage_ptr",
                     "typeString": "struct IPolicy.Policy"
                   }
                 },
-                "id": 13412,
+                "id": 13497,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "226:8:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Policy_$12096_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Policy_$12181_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Policy[]"
                 }
               }
@@ -1200,21 +1200,21 @@
           },
           {
             "constant": false,
-            "id": 13419,
+            "id": 13504,
             "name": "claims",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "258:41:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12109_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12194_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
             },
             "typeName": {
-              "id": 13418,
+              "id": 13503,
               "keyType": {
-                "id": 13415,
+                "id": 13500,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "266:7:33",
@@ -1226,28 +1226,28 @@
               "nodeType": "Mapping",
               "src": "258:27:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12109_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Claim_$12194_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Claim[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13416,
+                  "id": 13501,
                   "name": "Claim",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12109,
+                  "referencedDeclaration": 12194,
                   "src": "277:5:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Claim_$12109_storage_ptr",
+                    "typeIdentifier": "t_struct$_Claim_$12194_storage_ptr",
                     "typeString": "struct IPolicy.Claim"
                   }
                 },
-                "id": 13417,
+                "id": 13502,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "277:7:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Claim_$12109_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Claim_$12194_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Claim[]"
                 }
               }
@@ -1257,21 +1257,21 @@
           },
           {
             "constant": false,
-            "id": 13424,
+            "id": 13509,
             "name": "payouts",
             "nodeType": "VariableDeclaration",
-            "scope": 13425,
+            "scope": 13510,
             "src": "306:43:33",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12126_storage_$dyn_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12211_storage_$dyn_storage_$",
               "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
             },
             "typeName": {
-              "id": 13423,
+              "id": 13508,
               "keyType": {
-                "id": 13420,
+                "id": 13505,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "314:7:33",
@@ -1283,28 +1283,28 @@
               "nodeType": "Mapping",
               "src": "306:28:33",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12126_storage_$dyn_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_array$_t_struct$_Payout_$12211_storage_$dyn_storage_$",
                 "typeString": "mapping(uint256 => struct IPolicy.Payout[])"
               },
               "valueType": {
                 "baseType": {
                   "contractScope": null,
-                  "id": 13421,
+                  "id": 13506,
                   "name": "Payout",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 12126,
+                  "referencedDeclaration": 12211,
                   "src": "325:6:33",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Payout_$12126_storage_ptr",
+                    "typeIdentifier": "t_struct$_Payout_$12211_storage_ptr",
                     "typeString": "struct IPolicy.Payout"
                   }
                 },
-                "id": 13422,
+                "id": 13507,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "325:8:33",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Payout_$12126_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_Payout_$12211_storage_$dyn_storage_ptr",
                   "typeString": "struct IPolicy.Payout[]"
                 }
               }
@@ -1313,7 +1313,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 13426,
+        "scope": 13511,
         "src": "49:303:33"
       }
     ],
@@ -1325,7 +1325,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-18T10:13:22.892Z",
+  "updatedAt": "2019-02-25T08:57:37.608Z",
   "devdoc": {
     "methods": {}
   },

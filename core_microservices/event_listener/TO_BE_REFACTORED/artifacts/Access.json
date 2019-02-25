@@ -179,14 +179,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/Access.sol",
     "exportedSymbols": {
       "Access": [
-        10991
+        11076
       ]
     },
-    "id": 10992,
+    "id": 11077,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10975,
+        "id": 11060,
         "literals": [
           "solidity",
           "0.5",
@@ -198,10 +198,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/AccessStorageModel.sol",
         "file": "./AccessStorageModel.sol",
-        "id": 10976,
+        "id": 11061,
         "nodeType": "ImportDirective",
-        "scope": 10992,
-        "sourceUnit": 11124,
+        "scope": 11077,
+        "sourceUnit": 11209,
         "src": "24:34:12",
         "symbolAliases": [],
         "unitAlias": ""
@@ -209,10 +209,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/ModuleStorage.sol",
         "file": "../../shared/ModuleStorage.sol",
-        "id": 10977,
+        "id": 11062,
         "nodeType": "ImportDirective",
-        "scope": 10992,
-        "sourceUnit": 16560,
+        "scope": 11077,
+        "sourceUnit": 16645,
         "src": "59:40:12",
         "symbolAliases": [],
         "unitAlias": ""
@@ -223,17 +223,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 10978,
+              "id": 11063,
               "name": "AccessStorageModel",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11123,
+              "referencedDeclaration": 11208,
               "src": "120:18:12",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_AccessStorageModel_$11123",
+                "typeIdentifier": "t_contract$_AccessStorageModel_$11208",
                 "typeString": "contract AccessStorageModel"
               }
             },
-            "id": 10979,
+            "id": 11064,
             "nodeType": "InheritanceSpecifier",
             "src": "120:18:12"
           },
@@ -241,56 +241,56 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 10980,
+              "id": 11065,
               "name": "ModuleStorage",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 16559,
+              "referencedDeclaration": 16644,
               "src": "140:13:12",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ModuleStorage_$16559",
+                "typeIdentifier": "t_contract$_ModuleStorage_$16644",
                 "typeString": "contract ModuleStorage"
               }
             },
-            "id": 10981,
+            "id": 11066,
             "nodeType": "InheritanceSpecifier",
             "src": "140:13:12"
           }
         ],
         "contractDependencies": [
-          11123,
-          11126,
-          16436,
-          16477,
-          16501,
-          16559,
-          16773
+          11208,
+          11211,
+          16521,
+          16562,
+          16586,
+          16644,
+          16858
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 10991,
+        "id": 11076,
         "linearizedBaseContracts": [
-          10991,
-          16559,
-          16477,
-          16501,
-          16773,
-          16436,
-          11123,
-          11126
+          11076,
+          16644,
+          16562,
+          16586,
+          16858,
+          16521,
+          11208,
+          11211
         ],
         "name": "Access",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 10989,
+              "id": 11074,
               "nodeType": "Block",
               "src": "222:2:12",
               "statements": []
             },
             "documentation": null,
-            "id": 10990,
+            "id": 11075,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -298,11 +298,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 10986,
+                    "id": 11071,
                     "name": "_registry",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 10983,
+                    "referencedDeclaration": 11068,
                     "src": "211:9:12",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -310,17 +310,17 @@
                     }
                   }
                 ],
-                "id": 10987,
+                "id": 11072,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 10985,
+                  "id": 11070,
                   "name": "WithRegistry",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 16773,
+                  "referencedDeclaration": 16858,
                   "src": "198:12:12",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_WithRegistry_$16773_$",
+                    "typeIdentifier": "t_type$_t_contract$_WithRegistry_$16858_$",
                     "typeString": "type(contract WithRegistry)"
                   }
                 },
@@ -331,15 +331,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10984,
+              "id": 11069,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10983,
+                  "id": 11068,
                   "name": "_registry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10990,
+                  "scope": 11075,
                   "src": "172:17:12",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -348,7 +348,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10982,
+                    "id": 11067,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "172:7:12",
@@ -365,19 +365,19 @@
               "src": "171:19:12"
             },
             "returnParameters": {
-              "id": 10988,
+              "id": 11073,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "222:0:12"
             },
-            "scope": 10991,
+            "scope": 11076,
             "src": "160:64:12",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 10992,
+        "scope": 11077,
         "src": "101:125:12"
       }
     ],
@@ -387,14 +387,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/Access.sol",
     "exportedSymbols": {
       "Access": [
-        10991
+        11076
       ]
     },
-    "id": 10992,
+    "id": 11077,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10975,
+        "id": 11060,
         "literals": [
           "solidity",
           "0.5",
@@ -406,10 +406,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/access/AccessStorageModel.sol",
         "file": "./AccessStorageModel.sol",
-        "id": 10976,
+        "id": 11061,
         "nodeType": "ImportDirective",
-        "scope": 10992,
-        "sourceUnit": 11124,
+        "scope": 11077,
+        "sourceUnit": 11209,
         "src": "24:34:12",
         "symbolAliases": [],
         "unitAlias": ""
@@ -417,10 +417,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/ModuleStorage.sol",
         "file": "../../shared/ModuleStorage.sol",
-        "id": 10977,
+        "id": 11062,
         "nodeType": "ImportDirective",
-        "scope": 10992,
-        "sourceUnit": 16560,
+        "scope": 11077,
+        "sourceUnit": 16645,
         "src": "59:40:12",
         "symbolAliases": [],
         "unitAlias": ""
@@ -431,17 +431,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 10978,
+              "id": 11063,
               "name": "AccessStorageModel",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11123,
+              "referencedDeclaration": 11208,
               "src": "120:18:12",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_AccessStorageModel_$11123",
+                "typeIdentifier": "t_contract$_AccessStorageModel_$11208",
                 "typeString": "contract AccessStorageModel"
               }
             },
-            "id": 10979,
+            "id": 11064,
             "nodeType": "InheritanceSpecifier",
             "src": "120:18:12"
           },
@@ -449,56 +449,56 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 10980,
+              "id": 11065,
               "name": "ModuleStorage",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 16559,
+              "referencedDeclaration": 16644,
               "src": "140:13:12",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ModuleStorage_$16559",
+                "typeIdentifier": "t_contract$_ModuleStorage_$16644",
                 "typeString": "contract ModuleStorage"
               }
             },
-            "id": 10981,
+            "id": 11066,
             "nodeType": "InheritanceSpecifier",
             "src": "140:13:12"
           }
         ],
         "contractDependencies": [
-          11123,
-          11126,
-          16436,
-          16477,
-          16501,
-          16559,
-          16773
+          11208,
+          11211,
+          16521,
+          16562,
+          16586,
+          16644,
+          16858
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 10991,
+        "id": 11076,
         "linearizedBaseContracts": [
-          10991,
-          16559,
-          16477,
-          16501,
-          16773,
-          16436,
-          11123,
-          11126
+          11076,
+          16644,
+          16562,
+          16586,
+          16858,
+          16521,
+          11208,
+          11211
         ],
         "name": "Access",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 10989,
+              "id": 11074,
               "nodeType": "Block",
               "src": "222:2:12",
               "statements": []
             },
             "documentation": null,
-            "id": 10990,
+            "id": 11075,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -506,11 +506,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 10986,
+                    "id": 11071,
                     "name": "_registry",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 10983,
+                    "referencedDeclaration": 11068,
                     "src": "211:9:12",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -518,17 +518,17 @@
                     }
                   }
                 ],
-                "id": 10987,
+                "id": 11072,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 10985,
+                  "id": 11070,
                   "name": "WithRegistry",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 16773,
+                  "referencedDeclaration": 16858,
                   "src": "198:12:12",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_WithRegistry_$16773_$",
+                    "typeIdentifier": "t_type$_t_contract$_WithRegistry_$16858_$",
                     "typeString": "type(contract WithRegistry)"
                   }
                 },
@@ -539,15 +539,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10984,
+              "id": 11069,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10983,
+                  "id": 11068,
                   "name": "_registry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10990,
+                  "scope": 11075,
                   "src": "172:17:12",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -556,7 +556,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 10982,
+                    "id": 11067,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "172:7:12",
@@ -573,19 +573,19 @@
               "src": "171:19:12"
             },
             "returnParameters": {
-              "id": 10988,
+              "id": 11073,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "222:0:12"
             },
-            "scope": 10991,
+            "scope": 11076,
             "src": "160:64:12",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 10992,
+        "scope": 11077,
         "src": "101:125:12"
       }
     ],
@@ -597,7 +597,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-18T10:13:22.878Z",
+  "updatedAt": "2019-02-25T08:57:37.599Z",
   "devdoc": {
     "methods": {}
   },

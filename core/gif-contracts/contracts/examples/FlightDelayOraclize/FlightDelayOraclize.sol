@@ -29,6 +29,8 @@ contract FlightDelayOraclize is Product {
 
     event LogPolicyExpired(uint256 policyId);
 
+    event LogRequestPayment(uint256 requestId, uint256 applicationId);
+
     bytes32 public constant NAME = "FlightDelayOraclize";
     bytes32 public constant POLICY_FLOW = "PolicyFlowDefault";
 
@@ -208,10 +210,29 @@ contract FlightDelayOraclize is Product {
             risks[riskId].cumulatedWeightedPremium = premium * 100000 / weight;
             risks[riskId].premiumMultiplier = 100000 / weight;
         } else {
-            risks[riskId].cumulatedWeightedPremium = risks[riskId].cumulatedWeightedPremium + premium * risks[riskId].premiumMultiplier;
+            uint256 cumulatedWeightedPremium = premium * risks[riskId].premiumMultiplier;
+
+            if (cumulatedWeightedPremium > MAX_PAYOUT) {
+                cumulatedWeightedPremium = MAX_PAYOUT;
+            }
+
+            risks[riskId].cumulatedWeightedPremium = risks[riskId].cumulatedWeightedPremium + cumulatedWeightedPremium;
         }
 
         risks[riskId].weight = weight;
+
+        // New request
+        uint256 newRequestId = requests.length++;
+        RequestMetadata storage requestMetadata = requests[newRequestId];
+        requestMetadata.applicationId = applicationId;
+        requestMetadata.riskId = riskId;
+
+        emit LogRequestPayment(newRequestId, applicationId);
+    }
+
+    function confirmPaymentSuccess(uint256 _requestId) external {
+        uint256 applicationId = requests[_requestId].applicationId;
+        bytes32 riskId = requests[_requestId].riskId;
 
         uint256 policyId = underwrite(applicationId);
 
@@ -236,6 +257,10 @@ contract FlightDelayOraclize is Product {
             risks[riskId].carrierFlightNumber,
             risks[riskId].arrivalTime
         );
+    }
+
+    function confirmPaymentFailure(uint256 _requestId) external {
+        decline(requests[_requestId].applicationId);
     }
 
     function flightStatusCallback(uint256 _requestId, bytes calldata _response)
@@ -317,3 +342,4 @@ contract FlightDelayOraclize is Product {
         }
     }
 }
+

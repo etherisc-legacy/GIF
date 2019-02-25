@@ -26,6 +26,13 @@ contract('FlightDelayOraclize', () => {
       customerExternalId: web3utils.bytes(32, '12345'),
     };
 
+    const events = [];
+    fdd.allEvents({
+      fromBlock: web3.eth.blockNumber,
+      toBlock: 'latest',
+    })
+      .on('data', log => events.push(log));
+
     await fdd.applyForPolicy(
       application.carrierFlightNumber,
       application.yearMonthDay,
@@ -37,18 +44,32 @@ contract('FlightDelayOraclize', () => {
       application.customerExternalId,
     );
 
-    await new Promise((resolve, reject) => {
-      setTimeout(reject, 60000);
+    const requestPaymentLogs = await new Promise((resolve, reject) => {
+      const interval = setInterval(() => {
+        const logs = events.filter(evt => evt.event === 'LogRequestPayment');
 
-      fdd.allEvents({
-        fromBlock: web3.eth.blockNumber,
-        toBlock: 'latest',
-      })
-        .on('data', (log) => {
-          if (log.event === 'LogRequestPayout') {
-            resolve();
-          }
-        });
+        if (logs.length > 0) {
+          clearInterval(interval);
+          resolve(logs);
+        }
+      }, 1000);
+
+      setTimeout(reject, 60000);
+    });
+
+    await fdd.confirmPaymentSuccess(requestPaymentLogs[0].args.requestId.toString());
+
+    await new Promise((resolve, reject) => {
+      const interval = setInterval(() => {
+        const logs = events.filter(evt => evt.event === 'LogRequestPayout');
+
+        if (logs.length > 0) {
+          clearInterval(interval);
+          resolve(logs);
+        }
+      }, 1000);
+
+      setTimeout(reject, 60000);
     });
   });
 });
