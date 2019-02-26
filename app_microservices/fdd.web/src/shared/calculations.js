@@ -1,3 +1,4 @@
+import BN from 'bn.js';
 import { MAX_PAYOUTS } from './constants';
 
 import CustomConfig from './customConfig';
@@ -18,17 +19,20 @@ export const calculatePayouts = (stats) => (premium, currency) => {
     stats.observations, stats.late15, stats.late30, stats.late45, stats.cancelled, stats.diverted,
   ];
 
-  let weight = 0;
+  let weight = new BN(0);
 
   for (let i = 1; i < 6; i++) {
-    weight += weightPattern[i] * statistics[i] * 10000 / stats.observations;
+    weight = weight.add(
+      new BN(weightPattern[i])
+        .mul(new BN(statistics[i]))
+        .mul(new BN(10000))
+        .div(new BN(stats.observations))
+    );
   }
 
-  if (weight === 0) {
-    weight = 100000 / stats.observations;
+  if (weight.eq(new BN(0))) {
+    weight = new BN(100000).div(new BN(stats.observations));
   }
-
-  weight = Math.floor(weight);
 
   let payoutOptions = {};
 
