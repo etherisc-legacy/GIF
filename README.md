@@ -101,6 +101,12 @@ Some of them have default values pre-configured.
 
 #### Notes
 - All the notes for minikube deployment apply, but in case of local docker setup, <minikubeip> will need to be replaced with `localhost`
+
+- To connect to cluster service with a local management / edit tool, you'd need to start a port-forwarding process:
+    > kubectl port-forward svc/**service name** **(port that will be available to you locally)**:**(service port)**
+  
+  For example: 
+    > kubectl port-forward svc/postgres 5432:5432  
     
 ### C. Setup local development environment for deployment to GKE clusters
 1. Install and set up [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
@@ -148,3 +154,14 @@ Add another variable called GCLOUD_PROJECT_ID and set the value to the key of yo
 Add GCLOUD_CLUSTER, GCLOUD_ZONE variables to specify your GKE cluster.
 
 Use custom commands specified in bitbucket-pipelines.yml to deploy info Kubernetes cluster.
+
+## Manually switching between `kubectl` contexts ( existing deployments )
+To add context for already existing cluster to your local `kubectl`, use [this guide](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl).
+
+The following command will show all the configured environments:
+    > kubectl config get-contexts
+
+To switch the kubectl context between environments:
+    > kubectl config use-context <contextname>
+   
+Note: do not switch contexts during deploy, since the next kubectl instruction will apply to the new active context instead of the one you started the deploy with.
