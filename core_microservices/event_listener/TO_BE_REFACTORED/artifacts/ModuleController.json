@@ -111,14 +111,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/ModuleController.sol",
     "exportedSymbols": {
       "ModuleController": [
-        16615
+        16597
       ]
     },
-    "id": 16616,
+    "id": 16598,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 16588,
+        "id": 16570,
         "literals": [
           "solidity",
           "0.5",
@@ -130,10 +130,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/BaseModuleController.sol",
         "file": "./BaseModuleController.sol",
-        "id": 16589,
+        "id": 16571,
         "nodeType": "ImportDirective",
-        "scope": 16616,
-        "sourceUnit": 16537,
+        "scope": 16598,
+        "sourceUnit": 16519,
         "src": "24:36:62",
         "symbolAliases": [],
         "unitAlias": ""
@@ -141,10 +141,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/WithRegistry.sol",
         "file": "./WithRegistry.sol",
-        "id": 16590,
+        "id": 16572,
         "nodeType": "ImportDirective",
-        "scope": 16616,
-        "sourceUnit": 16859,
+        "scope": 16598,
+        "sourceUnit": 16841,
         "src": "61:28:62",
         "symbolAliases": [],
         "unitAlias": ""
@@ -155,17 +155,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 16591,
+              "id": 16573,
               "name": "WithRegistry",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 16858,
+              "referencedDeclaration": 16840,
               "src": "120:12:62",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_WithRegistry_$16858",
+                "typeIdentifier": "t_contract$_WithRegistry_$16840",
                 "typeString": "contract WithRegistry"
               }
             },
-            "id": 16592,
+            "id": 16574,
             "nodeType": "InheritanceSpecifier",
             "src": "120:12:62"
           },
@@ -173,42 +173,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 16593,
+              "id": 16575,
               "name": "BaseModuleController",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 16536,
+              "referencedDeclaration": 16518,
               "src": "134:20:62",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_BaseModuleController_$16536",
+                "typeIdentifier": "t_contract$_BaseModuleController_$16518",
                 "typeString": "contract BaseModuleController"
               }
             },
-            "id": 16594,
+            "id": 16576,
             "nodeType": "InheritanceSpecifier",
             "src": "134:20:62"
           }
         ],
         "contractDependencies": [
-          16521,
-          16536,
-          16858
+          16503,
+          16518,
+          16840
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 16615,
+        "id": 16597,
         "linearizedBaseContracts": [
-          16615,
-          16536,
-          16858,
-          16521
+          16597,
+          16518,
+          16840,
+          16503
         ],
         "name": "ModuleController",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 16601,
+              "id": 16583,
               "nodeType": "Block",
               "src": "224:63:62",
               "statements": [
@@ -219,7 +219,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "4552524f523a3a46414c4c4241434b5f46554e4354494f4e5f4e4f575f414c4c4f574544",
-                        "id": 16598,
+                        "id": 16580,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -242,21 +242,21 @@
                           "typeString": "literal_string \"ERROR::FALLBACK_FUNCTION_NOW_ALLOWED\""
                         }
                       ],
-                      "id": 16597,
+                      "id": 16579,
                       "name": "revert",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        17006,
-                        17007
+                        16988,
+                        16989
                       ],
-                      "referencedDeclaration": 17007,
+                      "referencedDeclaration": 16989,
                       "src": "234:6:62",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_revert_pure$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (string memory) pure"
                       }
                     },
-                    "id": 16599,
+                    "id": 16581,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -270,32 +270,32 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 16600,
+                  "id": 16582,
                   "nodeType": "ExpressionStatement",
                   "src": "234:46:62"
                 }
               ]
             },
             "documentation": null,
-            "id": 16602,
+            "id": 16584,
             "implemented": true,
             "kind": "fallback",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 16595,
+              "id": 16577,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "212:2:62"
             },
             "returnParameters": {
-              "id": 16596,
+              "id": 16578,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "224:0:62"
             },
-            "scope": 16615,
+            "scope": 16597,
             "src": "204:83:62",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -303,7 +303,7 @@
           },
           {
             "body": {
-              "id": 16613,
+              "id": 16595,
               "nodeType": "Block",
               "src": "393:41:62",
               "statements": [
@@ -313,11 +313,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 16610,
+                        "id": 16592,
                         "name": "_storage",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 16604,
+                        "referencedDeclaration": 16586,
                         "src": "418:8:62",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -332,18 +332,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 16609,
+                      "id": 16591,
                       "name": "_assignStorage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 16535,
+                      "referencedDeclaration": 16517,
                       "src": "403:14:62",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 16611,
+                    "id": 16593,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -357,27 +357,27 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 16612,
+                  "id": 16594,
                   "nodeType": "ExpressionStatement",
                   "src": "403:24:62"
                 }
               ]
             },
             "documentation": null,
-            "id": 16614,
+            "id": 16596,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 16607,
+                "id": 16589,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 16606,
+                  "id": 16588,
                   "name": "onlyDAO",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 16437,
+                  "referencedDeclaration": 16419,
                   "src": "385:7:62",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -391,15 +391,15 @@
             "name": "assignStorage",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 16605,
+              "id": 16587,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 16604,
+                  "id": 16586,
                   "name": "_storage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 16614,
+                  "scope": 16596,
                   "src": "358:16:62",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -408,7 +408,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 16603,
+                    "id": 16585,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "358:7:62",
@@ -425,19 +425,19 @@
               "src": "357:18:62"
             },
             "returnParameters": {
-              "id": 16608,
+              "id": 16590,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "393:0:62"
             },
-            "scope": 16615,
+            "scope": 16597,
             "src": "335:99:62",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 16616,
+        "scope": 16598,
         "src": "91:345:62"
       }
     ],
@@ -447,14 +447,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/ModuleController.sol",
     "exportedSymbols": {
       "ModuleController": [
-        16615
+        16597
       ]
     },
-    "id": 16616,
+    "id": 16598,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 16588,
+        "id": 16570,
         "literals": [
           "solidity",
           "0.5",
@@ -466,10 +466,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/BaseModuleController.sol",
         "file": "./BaseModuleController.sol",
-        "id": 16589,
+        "id": 16571,
         "nodeType": "ImportDirective",
-        "scope": 16616,
-        "sourceUnit": 16537,
+        "scope": 16598,
+        "sourceUnit": 16519,
         "src": "24:36:62",
         "symbolAliases": [],
         "unitAlias": ""
@@ -477,10 +477,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/WithRegistry.sol",
         "file": "./WithRegistry.sol",
-        "id": 16590,
+        "id": 16572,
         "nodeType": "ImportDirective",
-        "scope": 16616,
-        "sourceUnit": 16859,
+        "scope": 16598,
+        "sourceUnit": 16841,
         "src": "61:28:62",
         "symbolAliases": [],
         "unitAlias": ""
@@ -491,17 +491,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 16591,
+              "id": 16573,
               "name": "WithRegistry",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 16858,
+              "referencedDeclaration": 16840,
               "src": "120:12:62",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_WithRegistry_$16858",
+                "typeIdentifier": "t_contract$_WithRegistry_$16840",
                 "typeString": "contract WithRegistry"
               }
             },
-            "id": 16592,
+            "id": 16574,
             "nodeType": "InheritanceSpecifier",
             "src": "120:12:62"
           },
@@ -509,42 +509,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 16593,
+              "id": 16575,
               "name": "BaseModuleController",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 16536,
+              "referencedDeclaration": 16518,
               "src": "134:20:62",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_BaseModuleController_$16536",
+                "typeIdentifier": "t_contract$_BaseModuleController_$16518",
                 "typeString": "contract BaseModuleController"
               }
             },
-            "id": 16594,
+            "id": 16576,
             "nodeType": "InheritanceSpecifier",
             "src": "134:20:62"
           }
         ],
         "contractDependencies": [
-          16521,
-          16536,
-          16858
+          16503,
+          16518,
+          16840
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 16615,
+        "id": 16597,
         "linearizedBaseContracts": [
-          16615,
-          16536,
-          16858,
-          16521
+          16597,
+          16518,
+          16840,
+          16503
         ],
         "name": "ModuleController",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 16601,
+              "id": 16583,
               "nodeType": "Block",
               "src": "224:63:62",
               "statements": [
@@ -555,7 +555,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "4552524f523a3a46414c4c4241434b5f46554e4354494f4e5f4e4f575f414c4c4f574544",
-                        "id": 16598,
+                        "id": 16580,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -578,21 +578,21 @@
                           "typeString": "literal_string \"ERROR::FALLBACK_FUNCTION_NOW_ALLOWED\""
                         }
                       ],
-                      "id": 16597,
+                      "id": 16579,
                       "name": "revert",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        17006,
-                        17007
+                        16988,
+                        16989
                       ],
-                      "referencedDeclaration": 17007,
+                      "referencedDeclaration": 16989,
                       "src": "234:6:62",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_revert_pure$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (string memory) pure"
                       }
                     },
-                    "id": 16599,
+                    "id": 16581,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -606,32 +606,32 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 16600,
+                  "id": 16582,
                   "nodeType": "ExpressionStatement",
                   "src": "234:46:62"
                 }
               ]
             },
             "documentation": null,
-            "id": 16602,
+            "id": 16584,
             "implemented": true,
             "kind": "fallback",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 16595,
+              "id": 16577,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "212:2:62"
             },
             "returnParameters": {
-              "id": 16596,
+              "id": 16578,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "224:0:62"
             },
-            "scope": 16615,
+            "scope": 16597,
             "src": "204:83:62",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -639,7 +639,7 @@
           },
           {
             "body": {
-              "id": 16613,
+              "id": 16595,
               "nodeType": "Block",
               "src": "393:41:62",
               "statements": [
@@ -649,11 +649,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 16610,
+                        "id": 16592,
                         "name": "_storage",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 16604,
+                        "referencedDeclaration": 16586,
                         "src": "418:8:62",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -668,18 +668,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 16609,
+                      "id": 16591,
                       "name": "_assignStorage",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 16535,
+                      "referencedDeclaration": 16517,
                       "src": "403:14:62",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 16611,
+                    "id": 16593,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -693,27 +693,27 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 16612,
+                  "id": 16594,
                   "nodeType": "ExpressionStatement",
                   "src": "403:24:62"
                 }
               ]
             },
             "documentation": null,
-            "id": 16614,
+            "id": 16596,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 16607,
+                "id": 16589,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 16606,
+                  "id": 16588,
                   "name": "onlyDAO",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 16437,
+                  "referencedDeclaration": 16419,
                   "src": "385:7:62",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -727,15 +727,15 @@
             "name": "assignStorage",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 16605,
+              "id": 16587,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 16604,
+                  "id": 16586,
                   "name": "_storage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 16614,
+                  "scope": 16596,
                   "src": "358:16:62",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -744,7 +744,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 16603,
+                    "id": 16585,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "358:7:62",
@@ -761,19 +761,19 @@
               "src": "357:18:62"
             },
             "returnParameters": {
-              "id": 16608,
+              "id": 16590,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "393:0:62"
             },
-            "scope": 16615,
+            "scope": 16597,
             "src": "335:99:62",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 16616,
+        "scope": 16598,
         "src": "91:345:62"
       }
     ],
@@ -785,7 +785,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-25T08:57:37.632Z",
+  "updatedAt": "2019-02-26T20:35:09.898Z",
   "devdoc": {
     "methods": {}
   },

@@ -82,7 +82,7 @@ export async function getFlightRating(carrier, flightNumber) {
 }
 
 export async function applyForPolicyFiat(data) {
-  const url = '/api/policies';
+  const url = localStorage.getItem('TEST') ? '/api/policies?mode=test' : '/api/policies';
   const response = await fetch(url, {
     method: 'POST',
     headers: {

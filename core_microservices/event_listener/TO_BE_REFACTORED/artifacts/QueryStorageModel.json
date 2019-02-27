@@ -555,14 +555,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/QueryStorageModel.sol",
     "exportedSymbols": {
       "QueryStorageModel": [
-        14727
+        14709
       ]
     },
-    "id": 14728,
+    "id": 14710,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 14682,
+        "id": 14664,
         "literals": [
           "solidity",
           "0.5",
@@ -574,10 +574,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQuery.sol",
         "file": "./IQuery.sol",
-        "id": 14683,
+        "id": 14665,
         "nodeType": "ImportDirective",
-        "scope": 14728,
-        "sourceUnit": 13665,
+        "scope": 14710,
+        "sourceUnit": 13647,
         "src": "24:22:39",
         "symbolAliases": [],
         "unitAlias": ""
@@ -588,52 +588,52 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 14684,
+              "id": 14666,
               "name": "IQuery",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 13664,
+              "referencedDeclaration": 13646,
               "src": "78:6:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IQuery_$13664",
+                "typeIdentifier": "t_contract$_IQuery_$13646",
                 "typeString": "contract IQuery"
               }
             },
-            "id": 14685,
+            "id": 14667,
             "nodeType": "InheritanceSpecifier",
             "src": "78:6:39"
           }
         ],
         "contractDependencies": [
-          13664
+          13646
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 14727,
+        "id": 14709,
         "linearizedBaseContracts": [
-          14727,
-          13664
+          14709,
+          13646
         ],
         "name": "QueryStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 14689,
+            "id": 14671,
             "name": "oracleTypes",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "111:49:39",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_OracleType_$13532_storage_$",
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_OracleType_$13514_storage_$",
               "typeString": "mapping(bytes32 => struct IQuery.OracleType)"
             },
             "typeName": {
-              "id": 14688,
+              "id": 14670,
               "keyType": {
-                "id": 14686,
+                "id": 14668,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "119:7:39",
@@ -645,18 +645,18 @@
               "nodeType": "Mapping",
               "src": "111:30:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_OracleType_$13532_storage_$",
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_OracleType_$13514_storage_$",
                 "typeString": "mapping(bytes32 => struct IQuery.OracleType)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 14687,
+                "id": 14669,
                 "name": "OracleType",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 13532,
+                "referencedDeclaration": 13514,
                 "src": "130:10:39",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_OracleType_$13532_storage_ptr",
+                  "typeIdentifier": "t_struct$_OracleType_$13514_storage_ptr",
                   "typeString": "struct IQuery.OracleType"
                 }
               }
@@ -666,10 +666,10 @@
           },
           {
             "constant": false,
-            "id": 14695,
+            "id": 14677,
             "name": "assignedOracles",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "166:67:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -678,9 +678,9 @@
               "typeString": "mapping(bytes32 => mapping(uint256 => bool))"
             },
             "typeName": {
-              "id": 14694,
+              "id": 14676,
               "keyType": {
-                "id": 14690,
+                "id": 14672,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "174:7:39",
@@ -696,9 +696,9 @@
                 "typeString": "mapping(bytes32 => mapping(uint256 => bool))"
               },
               "valueType": {
-                "id": 14693,
+                "id": 14675,
                 "keyType": {
-                  "id": 14691,
+                  "id": 14673,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "193:7:39",
@@ -714,7 +714,7 @@
                   "typeString": "mapping(uint256 => bool)"
                 },
                 "valueType": {
-                  "id": 14692,
+                  "id": 14674,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "204:4:39",
@@ -730,10 +730,10 @@
           },
           {
             "constant": false,
-            "id": 14700,
+            "id": 14682,
             "name": "assignedOraclesIds",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "239:55:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -742,9 +742,9 @@
               "typeString": "mapping(bytes32 => uint256[])"
             },
             "typeName": {
-              "id": 14699,
+              "id": 14681,
               "keyType": {
-                "id": 14696,
+                "id": 14678,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "247:7:39",
@@ -761,7 +761,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 14697,
+                  "id": 14679,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "258:7:39",
@@ -770,7 +770,7 @@
                     "typeString": "uint256"
                   }
                 },
-                "id": 14698,
+                "id": 14680,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "258:9:39",
@@ -785,10 +785,10 @@
           },
           {
             "constant": false,
-            "id": 14705,
+            "id": 14687,
             "name": "proposedOracleIds",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "300:54:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -797,9 +797,9 @@
               "typeString": "mapping(bytes32 => uint256[])"
             },
             "typeName": {
-              "id": 14704,
+              "id": 14686,
               "keyType": {
-                "id": 14701,
+                "id": 14683,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "308:7:39",
@@ -816,7 +816,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 14702,
+                  "id": 14684,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "319:7:39",
@@ -825,7 +825,7 @@
                     "typeString": "uint256"
                   }
                 },
-                "id": 14703,
+                "id": 14685,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "319:9:39",
@@ -840,21 +840,21 @@
           },
           {
             "constant": false,
-            "id": 14709,
+            "id": 14691,
             "name": "oracles",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "376:41:39",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Oracle_$13541_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Oracle_$13523_storage_$",
               "typeString": "mapping(uint256 => struct IQuery.Oracle)"
             },
             "typeName": {
-              "id": 14708,
+              "id": 14690,
               "keyType": {
-                "id": 14706,
+                "id": 14688,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "384:7:39",
@@ -866,18 +866,18 @@
               "nodeType": "Mapping",
               "src": "376:26:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Oracle_$13541_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Oracle_$13523_storage_$",
                 "typeString": "mapping(uint256 => struct IQuery.Oracle)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 14707,
+                "id": 14689,
                 "name": "Oracle",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 13541,
+                "referencedDeclaration": 13523,
                 "src": "395:6:39",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Oracle_$13541_storage_ptr",
+                  "typeIdentifier": "t_struct$_Oracle_$13523_storage_ptr",
                   "typeString": "struct IQuery.Oracle"
                 }
               }
@@ -887,10 +887,10 @@
           },
           {
             "constant": false,
-            "id": 14713,
+            "id": 14695,
             "name": "oracleIdByAddress",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "423:52:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -899,9 +899,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 14712,
+              "id": 14694,
               "keyType": {
-                "id": 14710,
+                "id": 14692,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "431:7:39",
@@ -917,7 +917,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 14711,
+                "id": 14693,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "442:7:39",
@@ -932,10 +932,10 @@
           },
           {
             "constant": false,
-            "id": 14718,
+            "id": 14700,
             "name": "assignedOracleTypes",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "481:56:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -944,9 +944,9 @@
               "typeString": "mapping(uint256 => bytes32[])"
             },
             "typeName": {
-              "id": 14717,
+              "id": 14699,
               "keyType": {
-                "id": 14714,
+                "id": 14696,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "489:7:39",
@@ -963,7 +963,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 14715,
+                  "id": 14697,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "500:7:39",
@@ -972,7 +972,7 @@
                     "typeString": "bytes32"
                   }
                 },
-                "id": 14716,
+                "id": 14698,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "500:9:39",
@@ -987,10 +987,10 @@
           },
           {
             "constant": false,
-            "id": 14720,
+            "id": 14702,
             "name": "oracleIdIncrement",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "543:32:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -999,7 +999,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 14719,
+              "id": 14701,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "543:7:39",
@@ -1013,36 +1013,36 @@
           },
           {
             "constant": false,
-            "id": 14723,
+            "id": 14705,
             "name": "oracleRequests",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "598:37:39",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_OracleRequest_$13554_storage_$dyn_storage",
+              "typeIdentifier": "t_array$_t_struct$_OracleRequest_$13536_storage_$dyn_storage",
               "typeString": "struct IQuery.OracleRequest[]"
             },
             "typeName": {
               "baseType": {
                 "contractScope": null,
-                "id": 14721,
+                "id": 14703,
                 "name": "OracleRequest",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 13554,
+                "referencedDeclaration": 13536,
                 "src": "598:13:39",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_OracleRequest_$13554_storage_ptr",
+                  "typeIdentifier": "t_struct$_OracleRequest_$13536_storage_ptr",
                   "typeString": "struct IQuery.OracleRequest"
                 }
               },
-              "id": 14722,
+              "id": 14704,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "598:15:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_OracleRequest_$13554_storage_$dyn_storage_ptr",
+                "typeIdentifier": "t_array$_t_struct$_OracleRequest_$13536_storage_$dyn_storage_ptr",
                 "typeString": "struct IQuery.OracleRequest[]"
               }
             },
@@ -1051,36 +1051,36 @@
           },
           {
             "constant": false,
-            "id": 14726,
+            "id": 14708,
             "name": "oracleResponses",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "659:39:39",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_OracleResponse_$13563_storage_$dyn_storage",
+              "typeIdentifier": "t_array$_t_struct$_OracleResponse_$13545_storage_$dyn_storage",
               "typeString": "struct IQuery.OracleResponse[]"
             },
             "typeName": {
               "baseType": {
                 "contractScope": null,
-                "id": 14724,
+                "id": 14706,
                 "name": "OracleResponse",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 13563,
+                "referencedDeclaration": 13545,
                 "src": "659:14:39",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_OracleResponse_$13563_storage_ptr",
+                  "typeIdentifier": "t_struct$_OracleResponse_$13545_storage_ptr",
                   "typeString": "struct IQuery.OracleResponse"
                 }
               },
-              "id": 14725,
+              "id": 14707,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "659:16:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_OracleResponse_$13563_storage_$dyn_storage_ptr",
+                "typeIdentifier": "t_array$_t_struct$_OracleResponse_$13545_storage_$dyn_storage_ptr",
                 "typeString": "struct IQuery.OracleResponse[]"
               }
             },
@@ -1088,7 +1088,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 14728,
+        "scope": 14710,
         "src": "48:653:39"
       }
     ],
@@ -1098,14 +1098,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/QueryStorageModel.sol",
     "exportedSymbols": {
       "QueryStorageModel": [
-        14727
+        14709
       ]
     },
-    "id": 14728,
+    "id": 14710,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 14682,
+        "id": 14664,
         "literals": [
           "solidity",
           "0.5",
@@ -1117,10 +1117,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/query/IQuery.sol",
         "file": "./IQuery.sol",
-        "id": 14683,
+        "id": 14665,
         "nodeType": "ImportDirective",
-        "scope": 14728,
-        "sourceUnit": 13665,
+        "scope": 14710,
+        "sourceUnit": 13647,
         "src": "24:22:39",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1131,52 +1131,52 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 14684,
+              "id": 14666,
               "name": "IQuery",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 13664,
+              "referencedDeclaration": 13646,
               "src": "78:6:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IQuery_$13664",
+                "typeIdentifier": "t_contract$_IQuery_$13646",
                 "typeString": "contract IQuery"
               }
             },
-            "id": 14685,
+            "id": 14667,
             "nodeType": "InheritanceSpecifier",
             "src": "78:6:39"
           }
         ],
         "contractDependencies": [
-          13664
+          13646
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 14727,
+        "id": 14709,
         "linearizedBaseContracts": [
-          14727,
-          13664
+          14709,
+          13646
         ],
         "name": "QueryStorageModel",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 14689,
+            "id": 14671,
             "name": "oracleTypes",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "111:49:39",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_OracleType_$13532_storage_$",
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_OracleType_$13514_storage_$",
               "typeString": "mapping(bytes32 => struct IQuery.OracleType)"
             },
             "typeName": {
-              "id": 14688,
+              "id": 14670,
               "keyType": {
-                "id": 14686,
+                "id": 14668,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "119:7:39",
@@ -1188,18 +1188,18 @@
               "nodeType": "Mapping",
               "src": "111:30:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_OracleType_$13532_storage_$",
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_OracleType_$13514_storage_$",
                 "typeString": "mapping(bytes32 => struct IQuery.OracleType)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 14687,
+                "id": 14669,
                 "name": "OracleType",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 13532,
+                "referencedDeclaration": 13514,
                 "src": "130:10:39",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_OracleType_$13532_storage_ptr",
+                  "typeIdentifier": "t_struct$_OracleType_$13514_storage_ptr",
                   "typeString": "struct IQuery.OracleType"
                 }
               }
@@ -1209,10 +1209,10 @@
           },
           {
             "constant": false,
-            "id": 14695,
+            "id": 14677,
             "name": "assignedOracles",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "166:67:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1221,9 +1221,9 @@
               "typeString": "mapping(bytes32 => mapping(uint256 => bool))"
             },
             "typeName": {
-              "id": 14694,
+              "id": 14676,
               "keyType": {
-                "id": 14690,
+                "id": 14672,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "174:7:39",
@@ -1239,9 +1239,9 @@
                 "typeString": "mapping(bytes32 => mapping(uint256 => bool))"
               },
               "valueType": {
-                "id": 14693,
+                "id": 14675,
                 "keyType": {
-                  "id": 14691,
+                  "id": 14673,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "193:7:39",
@@ -1257,7 +1257,7 @@
                   "typeString": "mapping(uint256 => bool)"
                 },
                 "valueType": {
-                  "id": 14692,
+                  "id": 14674,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "204:4:39",
@@ -1273,10 +1273,10 @@
           },
           {
             "constant": false,
-            "id": 14700,
+            "id": 14682,
             "name": "assignedOraclesIds",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "239:55:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1285,9 +1285,9 @@
               "typeString": "mapping(bytes32 => uint256[])"
             },
             "typeName": {
-              "id": 14699,
+              "id": 14681,
               "keyType": {
-                "id": 14696,
+                "id": 14678,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "247:7:39",
@@ -1304,7 +1304,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 14697,
+                  "id": 14679,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "258:7:39",
@@ -1313,7 +1313,7 @@
                     "typeString": "uint256"
                   }
                 },
-                "id": 14698,
+                "id": 14680,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "258:9:39",
@@ -1328,10 +1328,10 @@
           },
           {
             "constant": false,
-            "id": 14705,
+            "id": 14687,
             "name": "proposedOracleIds",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "300:54:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1340,9 +1340,9 @@
               "typeString": "mapping(bytes32 => uint256[])"
             },
             "typeName": {
-              "id": 14704,
+              "id": 14686,
               "keyType": {
-                "id": 14701,
+                "id": 14683,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
                 "src": "308:7:39",
@@ -1359,7 +1359,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 14702,
+                  "id": 14684,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "319:7:39",
@@ -1368,7 +1368,7 @@
                     "typeString": "uint256"
                   }
                 },
-                "id": 14703,
+                "id": 14685,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "319:9:39",
@@ -1383,21 +1383,21 @@
           },
           {
             "constant": false,
-            "id": 14709,
+            "id": 14691,
             "name": "oracles",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "376:41:39",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Oracle_$13541_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Oracle_$13523_storage_$",
               "typeString": "mapping(uint256 => struct IQuery.Oracle)"
             },
             "typeName": {
-              "id": 14708,
+              "id": 14690,
               "keyType": {
-                "id": 14706,
+                "id": 14688,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "384:7:39",
@@ -1409,18 +1409,18 @@
               "nodeType": "Mapping",
               "src": "376:26:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Oracle_$13541_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Oracle_$13523_storage_$",
                 "typeString": "mapping(uint256 => struct IQuery.Oracle)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 14707,
+                "id": 14689,
                 "name": "Oracle",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 13541,
+                "referencedDeclaration": 13523,
                 "src": "395:6:39",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Oracle_$13541_storage_ptr",
+                  "typeIdentifier": "t_struct$_Oracle_$13523_storage_ptr",
                   "typeString": "struct IQuery.Oracle"
                 }
               }
@@ -1430,10 +1430,10 @@
           },
           {
             "constant": false,
-            "id": 14713,
+            "id": 14695,
             "name": "oracleIdByAddress",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "423:52:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1442,9 +1442,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 14712,
+              "id": 14694,
               "keyType": {
-                "id": 14710,
+                "id": 14692,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "431:7:39",
@@ -1460,7 +1460,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 14711,
+                "id": 14693,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "442:7:39",
@@ -1475,10 +1475,10 @@
           },
           {
             "constant": false,
-            "id": 14718,
+            "id": 14700,
             "name": "assignedOracleTypes",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "481:56:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1487,9 +1487,9 @@
               "typeString": "mapping(uint256 => bytes32[])"
             },
             "typeName": {
-              "id": 14717,
+              "id": 14699,
               "keyType": {
-                "id": 14714,
+                "id": 14696,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "489:7:39",
@@ -1506,7 +1506,7 @@
               },
               "valueType": {
                 "baseType": {
-                  "id": 14715,
+                  "id": 14697,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
                   "src": "500:7:39",
@@ -1515,7 +1515,7 @@
                     "typeString": "bytes32"
                   }
                 },
-                "id": 14716,
+                "id": 14698,
                 "length": null,
                 "nodeType": "ArrayTypeName",
                 "src": "500:9:39",
@@ -1530,10 +1530,10 @@
           },
           {
             "constant": false,
-            "id": 14720,
+            "id": 14702,
             "name": "oracleIdIncrement",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "543:32:39",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1542,7 +1542,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 14719,
+              "id": 14701,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "543:7:39",
@@ -1556,36 +1556,36 @@
           },
           {
             "constant": false,
-            "id": 14723,
+            "id": 14705,
             "name": "oracleRequests",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "598:37:39",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_OracleRequest_$13554_storage_$dyn_storage",
+              "typeIdentifier": "t_array$_t_struct$_OracleRequest_$13536_storage_$dyn_storage",
               "typeString": "struct IQuery.OracleRequest[]"
             },
             "typeName": {
               "baseType": {
                 "contractScope": null,
-                "id": 14721,
+                "id": 14703,
                 "name": "OracleRequest",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 13554,
+                "referencedDeclaration": 13536,
                 "src": "598:13:39",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_OracleRequest_$13554_storage_ptr",
+                  "typeIdentifier": "t_struct$_OracleRequest_$13536_storage_ptr",
                   "typeString": "struct IQuery.OracleRequest"
                 }
               },
-              "id": 14722,
+              "id": 14704,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "598:15:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_OracleRequest_$13554_storage_$dyn_storage_ptr",
+                "typeIdentifier": "t_array$_t_struct$_OracleRequest_$13536_storage_$dyn_storage_ptr",
                 "typeString": "struct IQuery.OracleRequest[]"
               }
             },
@@ -1594,36 +1594,36 @@
           },
           {
             "constant": false,
-            "id": 14726,
+            "id": 14708,
             "name": "oracleResponses",
             "nodeType": "VariableDeclaration",
-            "scope": 14727,
+            "scope": 14709,
             "src": "659:39:39",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_array$_t_struct$_OracleResponse_$13563_storage_$dyn_storage",
+              "typeIdentifier": "t_array$_t_struct$_OracleResponse_$13545_storage_$dyn_storage",
               "typeString": "struct IQuery.OracleResponse[]"
             },
             "typeName": {
               "baseType": {
                 "contractScope": null,
-                "id": 14724,
+                "id": 14706,
                 "name": "OracleResponse",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 13563,
+                "referencedDeclaration": 13545,
                 "src": "659:14:39",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_OracleResponse_$13563_storage_ptr",
+                  "typeIdentifier": "t_struct$_OracleResponse_$13545_storage_ptr",
                   "typeString": "struct IQuery.OracleResponse"
                 }
               },
-              "id": 14725,
+              "id": 14707,
               "length": null,
               "nodeType": "ArrayTypeName",
               "src": "659:16:39",
               "typeDescriptions": {
-                "typeIdentifier": "t_array$_t_struct$_OracleResponse_$13563_storage_$dyn_storage_ptr",
+                "typeIdentifier": "t_array$_t_struct$_OracleResponse_$13545_storage_$dyn_storage_ptr",
                 "typeString": "struct IQuery.OracleResponse[]"
               }
             },
@@ -1631,7 +1631,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 14728,
+        "scope": 14710,
         "src": "48:653:39"
       }
     ],
@@ -1643,7 +1643,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-25T08:57:37.613Z",
+  "updatedAt": "2019-02-26T20:35:09.883Z",
   "devdoc": {
     "methods": {}
   },

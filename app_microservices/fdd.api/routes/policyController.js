@@ -91,6 +91,7 @@ module.exports = ({
   db,
   log,
   gif,
+  flightService,
 }) => {
   router.post('/api/policies', async (ctx) => {
     const { body } = ctx.request;
@@ -102,6 +103,8 @@ module.exports = ({
       ctx.badRequest({ error: validate.errors });
       return;
     }
+
+    const testMode = Boolean(ctx.query.mode);
 
     try {
       const customer = {
@@ -191,6 +194,24 @@ module.exports = ({
       };
 
       try {
+        const flightRating = await flightService.getFlightRating(policy.carrier, policy.flightNumber, testMode);
+        const statistics = [
+          flightRating.observations,
+          flightRating.late15,
+          flightRating.late30,
+          flightRating.late45,
+          flightRating.cancelled,
+          flightRating.diverted,
+        ];
+
+        const payoutOptions = await gif.calculatePayouts(payment.premium, statistics);
+
+        payoutOptions._payoutOptions.forEach((option, i) => {
+          if (String(option) !== String(application.payoutOptions[i])) {
+            throw new Error(`Invalid payout option: ${option} but ${application.payoutOptions[i]} received`);
+          }
+        });
+
         const transactionResult = await gif.applyForPolicy(application);
         const { transactionHash, events } = transactionResult;
 

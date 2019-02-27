@@ -343,14 +343,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/license/License.sol",
     "exportedSymbols": {
       "License": [
-        11439
+        11421
       ]
     },
-    "id": 11440,
+    "id": 11422,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11420,
+        "id": 11402,
         "literals": [
           "solidity",
           "0.5",
@@ -362,10 +362,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/license/LicenseStorageModel.sol",
         "file": "./LicenseStorageModel.sol",
-        "id": 11421,
+        "id": 11403,
         "nodeType": "ImportDirective",
-        "scope": 11440,
-        "sourceUnit": 11968,
+        "scope": 11422,
+        "sourceUnit": 11950,
         "src": "24:35:25",
         "symbolAliases": [],
         "unitAlias": ""
@@ -373,10 +373,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/ModuleStorage.sol",
         "file": "../../shared/ModuleStorage.sol",
-        "id": 11422,
+        "id": 11404,
         "nodeType": "ImportDirective",
-        "scope": 11440,
-        "sourceUnit": 16645,
+        "scope": 11422,
+        "sourceUnit": 16627,
         "src": "60:40:25",
         "symbolAliases": [],
         "unitAlias": ""
@@ -387,17 +387,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11423,
+              "id": 11405,
               "name": "LicenseStorageModel",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11967,
+              "referencedDeclaration": 11949,
               "src": "122:19:25",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_LicenseStorageModel_$11967",
+                "typeIdentifier": "t_contract$_LicenseStorageModel_$11949",
                 "typeString": "contract LicenseStorageModel"
               }
             },
-            "id": 11424,
+            "id": 11406,
             "nodeType": "InheritanceSpecifier",
             "src": "122:19:25"
           },
@@ -405,51 +405,51 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11425,
+              "id": 11407,
               "name": "ModuleStorage",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 16644,
+              "referencedDeclaration": 16626,
               "src": "143:13:25",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ModuleStorage_$16644",
+                "typeIdentifier": "t_contract$_ModuleStorage_$16626",
                 "typeString": "contract ModuleStorage"
               }
             },
-            "id": 11426,
+            "id": 11408,
             "nodeType": "InheritanceSpecifier",
             "src": "143:13:25"
           }
         ],
         "contractDependencies": [
-          11967,
-          16521,
-          16562,
-          16586,
-          16644,
-          16858
+          11949,
+          16503,
+          16544,
+          16568,
+          16626,
+          16840
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11439,
+        "id": 11421,
         "linearizedBaseContracts": [
-          11439,
-          16644,
-          16562,
-          16586,
-          16858,
-          16521,
-          11967
+          11421,
+          16626,
+          16544,
+          16568,
+          16840,
+          16503,
+          11949
         ],
         "name": "License",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 11429,
+            "id": 11411,
             "name": "NAME",
             "nodeType": "VariableDeclaration",
-            "scope": 11439,
+            "scope": 11421,
             "src": "163:40:25",
             "stateVariable": true,
             "storageLocation": "default",
@@ -458,7 +458,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 11427,
+              "id": 11409,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "163:7:25",
@@ -470,7 +470,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "4c6963656e7365",
-              "id": 11428,
+              "id": 11410,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -489,13 +489,13 @@
           },
           {
             "body": {
-              "id": 11437,
+              "id": 11419,
               "nodeType": "Block",
               "src": "272:24:25",
               "statements": []
             },
             "documentation": null,
-            "id": 11438,
+            "id": 11420,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -503,11 +503,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 11434,
+                    "id": 11416,
                     "name": "_registry",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 11431,
+                    "referencedDeclaration": 11413,
                     "src": "261:9:25",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -515,17 +515,17 @@
                     }
                   }
                 ],
-                "id": 11435,
+                "id": 11417,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 11433,
+                  "id": 11415,
                   "name": "WithRegistry",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 16858,
+                  "referencedDeclaration": 16840,
                   "src": "248:12:25",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_WithRegistry_$16858_$",
+                    "typeIdentifier": "t_type$_t_contract$_WithRegistry_$16840_$",
                     "typeString": "type(contract WithRegistry)"
                   }
                 },
@@ -536,15 +536,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11432,
+              "id": 11414,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11431,
+                  "id": 11413,
                   "name": "_registry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11438,
+                  "scope": 11420,
                   "src": "222:17:25",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -553,7 +553,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11430,
+                    "id": 11412,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "222:7:25",
@@ -570,19 +570,19 @@
               "src": "221:19:25"
             },
             "returnParameters": {
-              "id": 11436,
+              "id": 11418,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "272:0:25"
             },
-            "scope": 11439,
+            "scope": 11421,
             "src": "210:86:25",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 11440,
+        "scope": 11422,
         "src": "102:196:25"
       }
     ],
@@ -592,14 +592,14 @@
     "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/license/License.sol",
     "exportedSymbols": {
       "License": [
-        11439
+        11421
       ]
     },
-    "id": 11440,
+    "id": 11422,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 11420,
+        "id": 11402,
         "literals": [
           "solidity",
           "0.5",
@@ -611,10 +611,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/modules/license/LicenseStorageModel.sol",
         "file": "./LicenseStorageModel.sol",
-        "id": 11421,
+        "id": 11403,
         "nodeType": "ImportDirective",
-        "scope": 11440,
-        "sourceUnit": 11968,
+        "scope": 11422,
+        "sourceUnit": 11950,
         "src": "24:35:25",
         "symbolAliases": [],
         "unitAlias": ""
@@ -622,10 +622,10 @@
       {
         "absolutePath": "/Users/ka/Projects/Altoros/Etherisc/dip-platform/core/gif-contracts/contracts/shared/ModuleStorage.sol",
         "file": "../../shared/ModuleStorage.sol",
-        "id": 11422,
+        "id": 11404,
         "nodeType": "ImportDirective",
-        "scope": 11440,
-        "sourceUnit": 16645,
+        "scope": 11422,
+        "sourceUnit": 16627,
         "src": "60:40:25",
         "symbolAliases": [],
         "unitAlias": ""
@@ -636,17 +636,17 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11423,
+              "id": 11405,
               "name": "LicenseStorageModel",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 11967,
+              "referencedDeclaration": 11949,
               "src": "122:19:25",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_LicenseStorageModel_$11967",
+                "typeIdentifier": "t_contract$_LicenseStorageModel_$11949",
                 "typeString": "contract LicenseStorageModel"
               }
             },
-            "id": 11424,
+            "id": 11406,
             "nodeType": "InheritanceSpecifier",
             "src": "122:19:25"
           },
@@ -654,51 +654,51 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 11425,
+              "id": 11407,
               "name": "ModuleStorage",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 16644,
+              "referencedDeclaration": 16626,
               "src": "143:13:25",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ModuleStorage_$16644",
+                "typeIdentifier": "t_contract$_ModuleStorage_$16626",
                 "typeString": "contract ModuleStorage"
               }
             },
-            "id": 11426,
+            "id": 11408,
             "nodeType": "InheritanceSpecifier",
             "src": "143:13:25"
           }
         ],
         "contractDependencies": [
-          11967,
-          16521,
-          16562,
-          16586,
-          16644,
-          16858
+          11949,
+          16503,
+          16544,
+          16568,
+          16626,
+          16840
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 11439,
+        "id": 11421,
         "linearizedBaseContracts": [
-          11439,
-          16644,
-          16562,
-          16586,
-          16858,
-          16521,
-          11967
+          11421,
+          16626,
+          16544,
+          16568,
+          16840,
+          16503,
+          11949
         ],
         "name": "License",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 11429,
+            "id": 11411,
             "name": "NAME",
             "nodeType": "VariableDeclaration",
-            "scope": 11439,
+            "scope": 11421,
             "src": "163:40:25",
             "stateVariable": true,
             "storageLocation": "default",
@@ -707,7 +707,7 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 11427,
+              "id": 11409,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
               "src": "163:7:25",
@@ -719,7 +719,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "4c6963656e7365",
-              "id": 11428,
+              "id": 11410,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -738,13 +738,13 @@
           },
           {
             "body": {
-              "id": 11437,
+              "id": 11419,
               "nodeType": "Block",
               "src": "272:24:25",
               "statements": []
             },
             "documentation": null,
-            "id": 11438,
+            "id": 11420,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -752,11 +752,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 11434,
+                    "id": 11416,
                     "name": "_registry",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 11431,
+                    "referencedDeclaration": 11413,
                     "src": "261:9:25",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -764,17 +764,17 @@
                     }
                   }
                 ],
-                "id": 11435,
+                "id": 11417,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 11433,
+                  "id": 11415,
                   "name": "WithRegistry",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 16858,
+                  "referencedDeclaration": 16840,
                   "src": "248:12:25",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_WithRegistry_$16858_$",
+                    "typeIdentifier": "t_type$_t_contract$_WithRegistry_$16840_$",
                     "typeString": "type(contract WithRegistry)"
                   }
                 },
@@ -785,15 +785,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 11432,
+              "id": 11414,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 11431,
+                  "id": 11413,
                   "name": "_registry",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11438,
+                  "scope": 11420,
                   "src": "222:17:25",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -802,7 +802,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 11430,
+                    "id": 11412,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "222:7:25",
@@ -819,19 +819,19 @@
               "src": "221:19:25"
             },
             "returnParameters": {
-              "id": 11436,
+              "id": 11418,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "272:0:25"
             },
-            "scope": 11439,
+            "scope": 11421,
             "src": "210:86:25",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 11440,
+        "scope": 11422,
         "src": "102:196:25"
       }
     ],
@@ -845,12 +845,12 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0x2E7282d8e22999B134104a762A919b50113141d2",
-      "transactionHash": "0xfbfbc32f86509dcefc9bdc1d0e42d80ac65b1d1e22cc61e2aa7aa07202d4146f"
+      "address": "0x81bE7c48002600Aa4E52d63936c900B6B0b89cA4",
+      "transactionHash": "0x7d519799026ea2f6513f2c9c8c79c072049d34fac34efef6c3c23400f58335c9"
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-25T09:01:23.222Z",
+  "updatedAt": "2019-02-26T20:38:18.970Z",
   "devdoc": {
     "methods": {}
   },

@@ -118,6 +118,16 @@ class GIFService {
   }
 
   /**
+   * Calculate payout options based on premium and flight rating
+   * @param {*} premium
+   * @param {*} statistics
+   * @return {*}
+   */
+  calculatePayouts(premium, statistics) {
+    return this._contract().methods.calculatePayouts(premium, statistics).call();
+  }
+
+  /**
    * Apply For Policy
    * @param {number} payoutId
    * @param {number} sum
