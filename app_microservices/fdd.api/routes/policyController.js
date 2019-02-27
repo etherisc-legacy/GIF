@@ -194,6 +194,13 @@ module.exports = ({
       };
 
       try {
+        const flightRatingsMode = await gif.checkFlightRatingsMode();
+        const flightStatusesMode = await gif.checkFlightStatusesMode();
+
+        if (flightRatingsMode !== flightStatusesMode || flightRatingsMode !== testMode) {
+          throw new Error('Oracle contracts and UI are in different modes');
+        }
+
         const flightRating = await flightService.getFlightRating(policy.carrier, policy.flightNumber, testMode);
         const statistics = [
           flightRating.observations,

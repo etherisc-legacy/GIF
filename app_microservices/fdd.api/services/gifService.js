@@ -12,11 +12,15 @@ class GIFService {
     log,
     messageBus,
     contract,
+    flightRatingsOracle,
+    flightStatusesOracle,
   }) {
     this._amqp = amqp;
     this._log = log;
     this._messageBus = messageBus;
     this._contract = contract;
+    this._flightRatingsOracle = flightRatingsOracle;
+    this._flightStatusesOracle = flightStatusesOracle;
   }
 
   /**
@@ -157,6 +161,22 @@ class GIFService {
    */
   calculatePayouts(premium, statistics) {
     return this._contract().methods.calculatePayouts(premium, statistics).call();
+  }
+
+  /**
+   * Check FlightRatingsOracle test mode
+   * @return {Promise<{testMode: *}>}
+   */
+  checkFlightRatingsMode() {
+    return this._flightRatingsOracle().methods.testMode().call();
+  }
+
+  /**
+   * Check FlightStatusesOracle test mode
+   * @return {Promise<{testMode: *}>}
+   */
+  checkFlightStatusesMode() {
+    return this._flightStatusesOracle().methods.testMode().call();
   }
 
   /**

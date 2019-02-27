@@ -8,6 +8,7 @@ const registerRoutes = require('./routes');
 const services = require('./services');
 const models = require('./models/module');
 const artifacts = require('./FlightDelayOraclize.json');
+const oracleAbi = require('./OracleAbi.json');
 
 
 const MNEMONIC = process.env.FDD_MNEMONIC
@@ -15,6 +16,10 @@ const MNEMONIC = process.env.FDD_MNEMONIC
 const CONTRACT = process.env.FDD_CONTRACT || '0xE9Af8565E3e14e66f0c44603135A303c30f14396';
 const ACCOUNT = process.env.FDD_ACCOUNT || '0x5E391721c8f61C4F1E58A74d1a2f02428e922CDE';
 const HTTP_PROVIDER = process.env.FDD_HTTP_PROVIDER || 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
+
+const FLIGHT_RATINGS_ORACLE = process.env.FLIGHT_RATINGS_ORACLE || '0xA25FEEA2B998F6cEe3Cc83e49114311AC629cE74';
+const FLIGHT_STATUSES_ORACLE = process.env.FLIGHT_STATUSES_ORACLE || '0xb4F35706cDb562d536969FDfdD69293615AbaD93';
+
 
 /**
  * Signer factory
@@ -48,6 +53,18 @@ class FddApi {
       from: ACCOUNT,
     });
 
+    this._flightRatingsOracle = () => new (signer()).eth.Contract(oracleAbi, FLIGHT_RATINGS_ORACLE, {
+      gasPrice: 10 * (10 ** 9),
+      gas: 3000000,
+      from: ACCOUNT,
+    });
+
+    this._flightStatusesOracle = () => new (signer()).eth.Contract(oracleAbi, FLIGHT_STATUSES_ORACLE, {
+      gasPrice: 10 * (10 ** 9),
+      gas: 3000000,
+      from: ACCOUNT,
+    });
+
     const flightStatsClient = new FlightStatsClient({ ...config });
     const deps = {
       config,
@@ -57,6 +74,8 @@ class FddApi {
       signer,
       genericInsurance,
       contract: this._contract,
+      flightRatingsOracle: this._flightRatingsOracle,
+      flightStatusesOracle: this._flightStatusesOracle,
       messageBus: this._messageBus,
       db: this._db,
     };
