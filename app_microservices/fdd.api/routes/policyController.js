@@ -196,7 +196,14 @@ module.exports = ({
 
         if (events.LogError) {
           const { error: message } = events.LogError.returnValues;
-          throw new Error(message);
+          switch (message) {
+            case 'ERROR::CLUSTER_RISK':
+              throw new Error('cluster_risk');
+            case 'ERROR::INVALID_PAYOUT_OPTION':
+              throw new Error('invalid_payout_option');
+            default:
+              throw new Error('');
+          }
         }
 
         const { applicationId: contractAppicationId } = events.LogNewApplication.returnValues;
