@@ -117,6 +117,38 @@ class GIFService {
     ).send();
   }
 
+  /** Request Payment Processing
+   * @param {object} content
+   * @return {Promise<*>}
+   */
+  async processPayment(content) {
+    await this._amqp.publish({
+      messageType: 'processPayment',
+      messageVersion: '1.*',
+      content,
+    });
+  }
+
+  /**
+   * Confirm Payment Success
+   * @param {number} requestId
+   * @return {Promise<*>}
+   */
+  confirmPaymentSuccess(requestId) {
+    return this._contract().methods.confirmPaymentSuccess(requestId).send();
+  }
+
+  /**
+   * Handle Payment Failure
+   * @param {number} requestId
+   * @param {string} error
+   * @return {Promise<*>}
+   */
+  handlePaymentFailure(requestId, error) {
+    // TODO: Publish error for other services
+    return this._contract().methods.confirmPaymentFailure(requestId).send();
+  }
+
   /**
    * Calculate payout options based on premium and flight rating
    * @param {*} premium

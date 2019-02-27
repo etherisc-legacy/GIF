@@ -5,6 +5,7 @@ schemaVersions['1.0'] = {
   type: 'object',
   properties: {
     policyId: { type: 'string' },
+    error: { type: 'string' },
   },
 };
 

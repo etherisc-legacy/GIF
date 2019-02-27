@@ -10,11 +10,12 @@ const models = require('./models/module');
 const artifacts = require('./FlightDelayOraclize.json');
 
 
-const MNEMONIC = 'way web chapter satisfy solid future avoid push insane viable dizzy conduct fork fantasy asthma';
-const CONTRACT = '0xE9Af8565E3e14e66f0c44603135A303c30f14396';
-const ACCOUNT = '0x5E391721c8f61C4F1E58A74d1a2f02428e922CDE';
-// const HTTP_PROVIDER = 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
-const HTTP_PROVIDER = 'https://eth-rinkeby.alchemyapi.io/jsonrpc/-yDg7wmgGw5LdsP4p4kyxRYuDzCkXtoI';
+const MNEMONIC = process.env.FDD_MNEMONIC
+    || 'way web chapter satisfy solid future avoid push insane viable dizzy conduct fork fantasy asthma';
+const CONTRACT = process.env.FDD_CONTRACT || '0xE9Af8565E3e14e66f0c44603135A303c30f14396';
+const ACCOUNT = process.env.FDD_ACCOUNT || '0x5E391721c8f61C4F1E58A74d1a2f02428e922CDE';
+const HTTP_PROVIDER = process.env.FDD_HTTP_PROVIDER || 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
+
 /**
  * Signer factory
  * @return {{}}
@@ -88,6 +89,11 @@ class FddApi {
       messageType: 'policyCreationSuccess',
       messageVersion: '1.*',
       handler: this.onPolicyCreationSuccess.bind(this),
+    });
+    await this._amqp.consume({
+      messageType: 'processPaymentResult',
+      messageVersion: '1.*',
+      handler: this.handleProcessPaymentResult.bind(this),
     });
     await this._amqp.consume({
       messageType: 'policyGetResponse',
@@ -228,13 +234,16 @@ class FddApi {
   }
 
   /**
-   * get policy response
+   * Handle decoded ethereum event
    * @param {{}} content
    * @param {{}} fields
    * @param {{}} properties
    */
   async handleDecodedEvent({ content, fields, properties }) {
     switch (content.eventName) {
+      case 'LogRequestPayment':
+        await this.handleLogRequestPayment(content);
+        break;
       case 'LogNewPolicy':
         await this.handleLogNewPolicy(content);
         break;
@@ -250,14 +259,32 @@ class FddApi {
   }
 
   /**
+   * LogRequestPayment
+   * @param {{}} content
+   */
+  async handleLogRequestPayment(content) {
+    const { applicationId: contractApplicationId, requestId: contractRequestId } = content.eventArgs;
+
+    const { Policy } = this._db;
+
+    const policy = await Policy.query().where({ contractApplicationId }).first();
+
+    if (policy) {
+      await policy.$query().updateAndFetch({ contractRequestId });
+      await this._gif.processPayment({ policyId: policy.id });
+      this._log.info('LogRequestPolicy', content);
+    }
+  }
+
+  /**
    * LogNewPolicy
    * @param {{}} content
    */
   async handleLogNewPolicy(content) {
-    const { applicationId: contractAppicationId, policyId: contractPolicyId } = content.eventArgs;
+    const { applicationId: contractApplicationId, policyId: contractPolicyId } = content.eventArgs;
     const { Policy } = this._db;
 
-    const policy = await Policy.query().where({ contractAppicationId }).first();
+    const policy = await Policy.query().where({ contractApplicationId }).first();
 
     if (policy) {
       await policy.$query().updateAndFetch({ contractPolicyId });
@@ -267,7 +294,7 @@ class FddApi {
   }
 
   /**
-   * LogNewPolicy
+   * LogNewPayout
    * @param {{}} content
    */
   async handleLogNewPayout(content) {
@@ -296,6 +323,28 @@ class FddApi {
   }
 
   /**
+   * Handle Payment result event
+   * @param {{}} content
+   * @param {{}} fields
+   * @param {{}} properties
+   */
+  async handleProcessPaymentResult({ content, fields, properties }) {
+    const {
+      policyId,
+      error,
+    } = content;
+
+    const { Policy } = this._db;
+    const policy = await Policy.query().where({ id: policyId }).first();
+
+    if (error) {
+      await this._gif.handlePaymentFailure(policy.contractRequestId, error);
+    } else {
+      await this._gif.confirmPaymentSuccess(policy.contractRequestId);
+    }
+  }
+
+  /**
    * Handle PaidOut event
    * @param {{}} content
    * @param {{}} fields
@@ -317,7 +366,7 @@ class FddApi {
   }
 
   /**
-   * Handle PaidOut event
+   * Handle PaidOut error event
    * @param {{}} content
    * @param {{}} fields
    * @param {{}} properties

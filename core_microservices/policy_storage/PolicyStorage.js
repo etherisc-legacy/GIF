@@ -273,10 +273,10 @@ class PolicyStorage {
    * @return {Promise<void>}
    */
   async handleApplyForPolicySuccess({ content, fields, properties }) {
-    const { contractAppicationId, policyId } = content;
+    const { contractApplicationId, policyId } = content;
     const { Policy } = this._models;
     await Policy.query()
-      .update({ contractAppicationId })
+      .update({ contractApplicationId })
       .where('id', policyId);
   }
 
@@ -305,21 +305,21 @@ class PolicyStorage {
    */
   async handleDecodedEvent({ content, fields, properties }) {
     if (content.eventName === 'LogNewPolicy') {
-      const { applicationId: contractAppicationId, policyId: contractPolicyId } = content.eventArgs;
-      await this.newPolicyCreated(contractAppicationId, contractPolicyId);
+      const { applicationId: contractApplicationId, policyId: contractPolicyId } = content.eventArgs;
+      await this.newPolicyCreated(contractApplicationId, contractPolicyId);
     }
   }
 
   /**
    * New policy created handler
-   * @param {*} contractAppicationId
+   * @param {*} contractApplicationId
    * @param {*} contractPolicyId
    */
-  async newPolicyCreated(contractAppicationId, contractPolicyId) {
+  async newPolicyCreated(contractApplicationId, contractPolicyId) {
     const { Policy } = this._models;
     await Policy.query()
       .update({ contractPolicyId })
-      .where({ contractAppicationId });
+      .where({ contractApplicationId });
   }
 }
 

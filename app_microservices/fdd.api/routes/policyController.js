@@ -227,12 +227,12 @@ module.exports = ({
           }
         }
 
-        const { applicationId: contractAppicationId } = events.LogNewApplication.returnValues;
+        const { applicationId: contractApplicationId } = events.LogNewApplication.returnValues;
 
-        await gif.applyForPolicySuccess({ policyId, contractAppicationId });
+        await gif.applyForPolicySuccess({ policyId, contractApplicationId });
 
         await Policy.query()
-          .update({ contractAppicationId })
+          .update({ contractApplicationId })
           .where('id', policyId);
 
         ctx.ok({ customerId, policyToken: policyId, txHash: transactionHash });

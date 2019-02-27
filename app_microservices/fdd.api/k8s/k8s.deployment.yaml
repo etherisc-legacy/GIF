@@ -24,6 +24,8 @@ spec:
               name: pg-connection
           - secretRef:
               name: fdd
+          - secretRef:
+              name: fdd-temp
         env:
         - name: AMQP_MODE
           value: product
