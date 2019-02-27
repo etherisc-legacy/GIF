@@ -15,8 +15,8 @@ contract PolicyFlowDefault is WithRegistry {
         bytes32 _customerExternalId,
         uint256 _premium,
         bytes32 _currency,
-        uint256[] calldata _payoutOptions
-    ) external returns (uint256 _applicationId) {
+        uint256[] memory _payoutOptions
+    ) public returns (uint256 _applicationId) {
         // todo: check DIP stake
 
         uint256 productId = license().getProductId(msg.sender);

@@ -11,7 +11,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         WithRegistry(_registry)
     {
         // productIdIncrement should be equal to the value from the last deployed licence storage or zero
-        productIdIncrement = productIdIncrement;
+        productIdIncrement = _productIdIncrement;
     }
 
     /**
