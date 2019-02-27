@@ -1,5 +1,5 @@
+const moment = require('moment');
 const { schema } = require('./knexfile');
-
 
 /**
  * DIP Event Logging microservice
@@ -39,7 +39,9 @@ class EventLogging {
       }
     });
 
-    this._log.info(`[MESSAGE #${id}] ${fields.routingKey}: ${JSON.stringify(contentToLog)}; correlationId: ${properties.correlationId}`);
+    this._log.info(
+      `<${moment().format('YYYY-MM-DD T HH:mm:ss')}> [MESSAGE #${id}] ${fields.routingKey}: ${JSON.stringify(contentToLog)}; correlationId: ${properties.correlationId}`,
+    );
   }
 
   /**
