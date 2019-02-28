@@ -171,6 +171,8 @@ class FiatPaymentGateway {
           error.name = 'AMQP_ERROR';
           throw error;
         });
+
+      this._log.info(`Payment for policy ${policyId} processed successfully.`);
     } catch (error) {
       await Payment.query().upsertGraph({
         id: payment.id,
@@ -180,6 +182,7 @@ class FiatPaymentGateway {
         ],
       });
 
+      this._log.error(`Payment error - ${error.message} (${error.name}; id: ${payment.id} )`);
       this.onError(policyId, 'processPaymentResult', error.message, correlationId);
     }
   }

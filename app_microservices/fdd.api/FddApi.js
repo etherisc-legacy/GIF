@@ -142,12 +142,12 @@ class FddApi {
         {
           name: 'smtp',
           props: { from: 'policies@etherisc.com' },
-          events: ['policy_issued'],
+          events: ['policy_issued', 'charge_error'],
         },
         {
           name: 'telegram',
           props: { chatId: -319007131 },
-          events: ['policy_issued', 'claim_paid_out', 'policy_error'],
+          events: ['policy_issued', 'claim_paid_out', 'policy_error', 'charge_error'],
         },
       ],
       templates: [
@@ -160,6 +160,16 @@ class FddApi {
           name: 'claim_paid_out',
           transport: 'telegram',
           template: '🔔 *Claim paid out:*\nPolicy : _{{policy.id}}_\nTransferwise Transfer : _{{transferwiseTransferId}}_',
+        },
+        {
+          name: 'charge_error',
+          transport: 'smtp',
+          template: fs.readFileSync('./templates/charge_error_smtp.html', 'utf8'),
+        },
+        {
+          name: 'charge_error',
+          transport: 'telegram',
+          template: fs.readFileSync('./templates/charge_error_telegram.html', 'utf8'),
         },
       ],
     });
@@ -357,6 +367,16 @@ class FddApi {
     const policy = await Policy.query().where({ id: policyId }).first();
 
     if (error) {
+      const { Customer } = this._db;
+      const customer = await Customer.query().where('id', policy.customerId).first();
+      await this._gif.sendNotification({
+        type: 'charge_error',
+        data: { customer, error, policy: { id: policy.id } },
+        props: {
+          recipient: customer.email,
+          subject: 'Insurance Policy payment failed',
+        },
+      });
       await this._gif.handlePaymentFailure(policy.contractRequestId, error);
     } else {
       await this._gif.confirmPaymentSuccess(policy.contractRequestId);

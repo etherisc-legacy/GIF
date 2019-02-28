@@ -199,6 +199,11 @@ class PolicyStorage {
       .first();
 
     if (error) {
+      // TODO: Do we need to delete these? Seems like they would benefit from being labeled as failed.
+      const { PolicyExtra } = this._models;
+      await PolicyExtra.query()
+        .delete()
+        .where({ policyId });
       await Policy.query()
         .delete()
         .where({ id: policyId });
