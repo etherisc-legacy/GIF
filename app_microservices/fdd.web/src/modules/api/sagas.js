@@ -183,7 +183,7 @@ function* reqApplyForPolicyFiat(action) {
       departsAt: application.flight.departureTime,
       origin: application.flight.origin,
       destination: application.flight.destination,
-      amount: application.policy.premium * 100,
+      amount: (application.policy.premium * 1000) / 10,
       currency: PAYMENT_TYPES[Number(application.policy.currency)],
       stripeSourceId: source.id,
       payouts: application.policy.payouts,
