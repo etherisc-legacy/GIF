@@ -17,7 +17,9 @@ module.exports = {
     tx_timeout_details: 'Your application has been received. The processing of your transaction ' +
       'can take some time. You can check the progress <a href="{{link}}" target="_blank">here</a>. After successful ' +
       'processing of your application and payment, you will receive an email with a confirmation and ' +
-      'your insurance policy.'
+      'your insurance policy.',
+      cluster_risk: 'There is a cluster risk, try to buy later.',
+      invalid_payout_option: 'Invalid payout.'
   },
   certificate: {
     time_format: 'MMMM DD, YYYY HH:mm',
