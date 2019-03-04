@@ -301,7 +301,7 @@ class FddApi {
     if (policy) {
       await policy.$query().updateAndFetch({ contractRequestId });
       await this._gif.processPayment({ policyId: policy.id });
-      this._log.info('LogRequestPolicy', content);
+      this._log.info('LogRequestPayment', content);
     }
   }
 
@@ -374,7 +374,7 @@ class FddApi {
         data: { customer, error, policy: { id: policy.id } },
         props: {
           recipient: customer.email,
-          subject: 'Insurance Policy payment failed',
+          subject: 'Insurance Policy payment has been failed',
         },
       });
       await this._gif.handlePaymentFailure(policy.contractRequestId, error);
