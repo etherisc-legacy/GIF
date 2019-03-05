@@ -104,6 +104,13 @@ module.exports = ({
       return;
     }
 
+    const enoughEth = await gif.checkBalance();
+
+    if (!enoughEth) {
+      ctx.badRequest({ error: 'Seems like there is not enough ether on the contracts.' });
+      return;
+    }
+
     const testMode = Boolean(ctx.query.mode);
 
     try {
