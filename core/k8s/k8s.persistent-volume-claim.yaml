@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gif-contracts-claim
+  labels:
+    app: gif-contracts
+spec:
+  storageClassName: gif-contracts
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
