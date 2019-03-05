@@ -1,0 +1,68 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gif-contracts
+  labels:
+    app: gif-contracts
+spec:
+  template:
+    metadata:
+      name: gif-contracts
+      labels:
+        app: gif-contracts
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: gif-contracts
+        image: <!--image-->
+        envFrom:
+        - secretRef:
+            name: chain
+        env:
+        - name: NETWORK
+          value: "$(NETWORK_NAME)"
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: MINIO_ACCESS_KEY
+        - name: AWS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio
+              key: MINIO_SECRET_KEY
+        - name: AWS_ENDPOINT
+          value: "http://$(MINIO_SERVICE_HOST):$(MINIO_SERVICE_PORT)"
+        - name: AMQP_MODE
+          value: core
+        - name: AMQP_HOST
+          value: "$(RABBITMQ_SERVICE_HOST)"
+        - name: AMQP_PORT
+          value: "$(RABBITMQ_SERVICE_PORT_AMQP)"
+        - name: AMQP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-credentials
+              key: AMQP_PLATFORM_USERNAME
+        - name: AMQP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-credentials
+              key: AMQP_PLATFORM_PASSWORD
+        - name: FLIGHTSTATS_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: fdd
+              key: FLIGHT_STATS_ID
+        - name: FLIGHTSTATS_APP_KEY
+          valueFrom:
+            secretKeyRef:
+              name: fdd
+              key: FLIGHT_STATS_KEY
+        volumeMounts:
+          - mountPath: /app/build
+            name: build-folder
+      volumes:
+        - name: build-folder
+          persistentVolumeClaim:
+            claimName: gif-contracts-claim

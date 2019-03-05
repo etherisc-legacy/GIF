@@ -1,6 +1,5 @@
 const Web3 = require('web3');
 const retry = require('async-retry');
-const tempSaveArtifacts = require('./TO_BE_REFACTORED/tempSaveArtifacts');
 const models = require('./models');
 
 /**
@@ -42,39 +41,6 @@ class EventListener {
    */
   async bootstrap() {
     try {
-      /* TO_BE_REFACTORED */
-      this._log.info('Saving artifacts');
-
-      const { Contract } = this._models;
-
-      const knownContracts = await tempSaveArtifacts(this._web3);
-
-      console.log(`known contracts: ${knownContracts.length}`);
-
-      for (let i = 0; i < knownContracts.length; i += 1) {
-        await Contract.query().delete().where({
-          product: knownContracts[i].contractName,
-          networkName: this._networkName,
-          version: '1.0.0',
-        });
-
-        const { blockNumber } = await this._web3.eth.getTransaction(knownContracts[i].transactionHash);
-
-        await Contract.query()
-          .upsertGraph({
-            product: knownContracts[i].contractName,
-            networkName: this._networkName,
-            version: '1.0.0',
-            address: knownContracts[i].address.toLowerCase(),
-            abi: JSON.stringify(knownContracts[i].abi),
-            transactionHash: knownContracts[i].transactionHash,
-            blockNumber,
-          });
-      }
-
-      this._log.info('Artifacts saved');
-      /* TO_BE_REFACTORED */
-
       await retry(this.watchEvents.bind(this), {
         retries: 10,
         onRetry: () => this._log.info('Try to reconnect'),
@@ -140,8 +106,6 @@ class EventListener {
    * @return {void}
    */
   async getPastEvents(addresses) {
-    this._log.info('Get past events');
-
     try {
       const { Event, Contract } = this._models;
 
@@ -301,7 +265,6 @@ class EventListener {
     }
   }
 
-
   /**
    * Send existing events
    * @param {{}} params
@@ -364,22 +327,37 @@ class EventListener {
   async saveArtifact({ content, fields, properties }) {
     try {
       const {
-        product, network, version, artifact,
+        product, network, networkId, version, artifact,
       } = content;
+
       const artifactObject = JSON.parse(artifact);
-      const networkId = Object.keys(artifactObject.networks)[0];
-      const { address } = artifactObject.networks[networkId];
+      const { address, transactionHash } = artifactObject.networks[networkId];
+
       const abi = JSON.stringify(artifactObject.abi);
       const { Contract } = this._models;
+      const { blockNumber } = await this._web3.eth.getTransaction(transactionHash);
 
-      await Contract.query()
-        .upsertGraph({
-          product,
-          networkName: network,
-          version,
-          address: address.toLowerCase(),
-          abi,
-        });
+      const exists = await Contract.query().findOne({
+        networkName: network,
+        address: address.toLowerCase(),
+      });
+
+      if (!exists) {
+        await Contract.query()
+          .upsertGraph({
+            product,
+            networkName: network,
+            version,
+            address: address.toLowerCase(),
+            abi,
+            transactionHash: artifactObject.transactionHash,
+            blockNumber,
+          });
+
+        await this.getPastEvents([{ address }]);
+
+        this._log.info(`Artifact saved: ${product} ${artifactObject.contractName} (${address})`);
+      }
     } catch (e) {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
