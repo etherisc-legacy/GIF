@@ -2,7 +2,7 @@
 
 set -e
 
-for package in `ls -d core/*`
+for package in `ls -d core_microservices/* core/* shared/*`
 do
   echo "Install dependencies for $package"
   (

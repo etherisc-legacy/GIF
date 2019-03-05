@@ -227,13 +227,18 @@ Check [FlightDelay example](core/gif-contracts/contracts/examples/FlightDelayMan
 
 # Getting Started ( Installation instructions )
 1.  Install `Node.js`. Node.js version should be 8.12.0 or higher, npm version should be 6.4.1 or higher. [Download](https://nodejs.org/en/download/current/). 
-2.  In the project root, run 
+2.  Install `Docker` [Download](https://www.docker.com/get-started). 
+3.  Run to install project's root dependencies
     > npm install
-3.  Run 
-    > npm run bootstrap
-4.  Navigate to `/core/gif-contracts`
-5.  Install and start [Ganache](https://truffleframework.com/docs/ganache/quickstart).
-6.  Run
+4.  Run to install dependencies for packages
+    > npm run bootstrap   
+5.  Run to start services in Docker 
+6.  > npm run dev:services:run
+7.  Run to start migrations (this will deploy contracts and run database migrations)
     > npm run migrate
-7.  Run to open the console
+8.  Look at deployed contracts
+    > npm run script -- networks    
+9.  Run to start microservices
+    > npm run dev    
+10. Run to open the console
     > npm run develop
