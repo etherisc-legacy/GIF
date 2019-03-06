@@ -259,7 +259,7 @@ module.exports = ({
       }
     } catch (error) {
       log.error(error);
-      ctx.badRequest({ error: error.message });
+      ctx.badRequest({ error: error.error ? error.error : error.message });
     }
   });
 
