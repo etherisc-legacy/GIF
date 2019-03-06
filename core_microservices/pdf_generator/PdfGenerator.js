@@ -134,6 +134,8 @@ class PdfGenerator {
     });
     this.log.info(`Certificate for ${policy.id} generated`);
 
+    await browser.close();
+
     const fileKey = `pdf/certificate-${policy.id}.pdf`;
     await this.s3.putObject({
       Bucket: this.config.bucket,
