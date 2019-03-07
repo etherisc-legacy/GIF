@@ -1,4 +1,4 @@
-const Amqp = require('./amqp');
+const Amqp = require('@etherisc/amqp');
 const Database = require('./db');
 const HttpApp = require('./http');
 const log = require('./log');
