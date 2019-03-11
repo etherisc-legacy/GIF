@@ -13,12 +13,12 @@ const oracleAbi = require('./OracleAbi.json');
 
 const MNEMONIC = process.env.FDD_MNEMONIC
     || 'way web chapter satisfy solid future avoid push insane viable dizzy conduct fork fantasy asthma';
-const CONTRACT = process.env.FDD_CONTRACT || '0xbb37533B0b6aa7cDeFeb3BBf971e73B5420f39c3';
+const CONTRACT = process.env.FDD_CONTRACT || '0xbAa03abA88737b83467f3faf68E36661536f024d';
 const ACCOUNT = process.env.FDD_ACCOUNT || '0x5E391721c8f61C4F1E58A74d1a2f02428e922CDE';
 const HTTP_PROVIDER = process.env.FDD_HTTP_PROVIDER || 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
 
-const FLIGHT_RATINGS_ORACLE = process.env.FLIGHT_RATINGS_ORACLE || '0xca1252443798dD9566EeAa5BbE88a9F1B4BEb6eF';
-const FLIGHT_STATUSES_ORACLE = process.env.FLIGHT_STATUSES_ORACLE || '0x137D71CbdE50C5dB23639039826694AA67461e5c';
+const FLIGHT_RATINGS_ORACLE = process.env.FLIGHT_RATINGS_ORACLE || '0xbAa03abA88737b83467f3faf68E36661536f024d';
+const FLIGHT_STATUSES_ORACLE = process.env.FLIGHT_STATUSES_ORACLE || '0x2A4884d49A1FDDFc36e74967A95eE938121270dA';
 
 
 /**
