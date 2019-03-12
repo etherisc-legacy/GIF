@@ -13,7 +13,7 @@ const oracleAbi = require('./OracleAbi.json');
 
 const MNEMONIC = process.env.FDD_MNEMONIC
     || 'way web chapter satisfy solid future avoid push insane viable dizzy conduct fork fantasy asthma';
-const CONTRACT = process.env.FDD_CONTRACT || '0xbAa03abA88737b83467f3faf68E36661536f024d';
+const CONTRACT = process.env.FDD_CONTRACT || '0xFb646F9713463b0FA024FCd3aBC1B61b8a73a6c6';
 const ACCOUNT = process.env.FDD_ACCOUNT || '0x5E391721c8f61C4F1E58A74d1a2f02428e922CDE';
 const HTTP_PROVIDER = process.env.FDD_HTTP_PROVIDER || 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
 
