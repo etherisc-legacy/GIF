@@ -19,6 +19,9 @@ spec:
         image: <!--image-->
         ports:
         - containerPort: 3000
+        envFrom:
+          - secretRef:
+              name: pg-connection
         env:
         - name: AMQP_MODE
           value: core

@@ -1,4 +1,6 @@
 const models = require('./models');
+const routes = require('./routes');
+const services = require('./services');
 
 /**
  * License Manager microservice
@@ -7,18 +9,29 @@ class LicenseManager {
   /**
      * Constructor
      * @param {object} amqp
+     * @param {object} http
+     * @param {object} router
      * @param {object} config
      * @param {object} log
      * @param {object} db
      */
   constructor({
-    amqp, config, log, db,
+    amqp, http, router, config, log, db,
   }) {
     this.amqp = amqp;
     this.config = config;
     this.log = log;
     this.db = db;
     this.models = models(db);
+
+    const dependencies = {
+      config,
+      amqp,
+      log,
+      models: this.models,
+    };
+    const serviceDependencies = services({ ...dependencies });
+    routes({ router, ...dependencies, ...serviceDependencies });
   }
 
   /**
@@ -77,7 +90,6 @@ class LicenseManager {
       },
     });
   }
-
 
   /**
      * Start application

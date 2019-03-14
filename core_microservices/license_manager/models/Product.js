@@ -1,4 +1,4 @@
-const { Model } = require('objection');
+const { BaseModel } = require('./BaseModel');
 const { constants, schema } = require('../knexfile');
 
 
@@ -7,7 +7,7 @@ const { PRODUCTS_TABLE } = constants;
 /**
  * Product fields model
  */
-class Product extends Model {
+class Product extends BaseModel {
   /**
      * Get table name
      * @return {string}

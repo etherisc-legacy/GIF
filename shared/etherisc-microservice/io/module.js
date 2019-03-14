@@ -21,7 +21,7 @@ module.exports = (config) => {
   });
 
   const db = new Database(config.knexfile);
-  const http = new HttpApp(config.httpPort);
+  const http = new HttpApp(config.httpPort, config.httpAdditionalMiddleware || []);
 
   /**
    * Create WebSocket endpoint

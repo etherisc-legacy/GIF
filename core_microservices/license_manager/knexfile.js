@@ -5,6 +5,7 @@ module.exports = {
   ...knexfile,
   schema: knexfile.prefix,
   constants: {
+    USERS_TABLE: 'users',
     PRODUCTS_TABLE: 'products',
   },
   seeds: {

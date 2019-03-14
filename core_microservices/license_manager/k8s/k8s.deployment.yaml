@@ -17,9 +17,13 @@ spec:
       containers:
         - name: license-manager
           image: <!--image-->
+          ports:
+            - containerPort: 3000
           envFrom:
             - secretRef:
                 name: pg-connection
+            - secretRef:
+                name: jwt
           env:
           - name: AMQP_MODE
             value: license
@@ -27,6 +31,10 @@ spec:
             value: "$(RABBITMQ_SERVICE_HOST)"
           - name: AMQP_PORT
             value: "$(RABBITMQ_SERVICE_PORT_AMQP)"
+          - name: RABBIT_API_HOST
+            value: "$(RABBITMQ_SERVICE_HOST)"
+          - name: RABBIT_API_PORT
+            value: "$(RABBITMQ_SERVICE_PORT_HTTP)"
           - name: AMQP_USERNAME
             valueFrom:
               secretKeyRef:
@@ -37,3 +45,14 @@ spec:
               secretKeyRef:
                 name: rabbitmq-credentials
                 key: AMQP_PLATFORM_PASSWORD
+          - name: RABBIT_ADMIN_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: rabbitmq-credentials
+                key: AMQP_ADMIN_USERNAME
+          - name: RABBIT_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: rabbitmq-credentials
+                key: AMQP_ADMIN_PASSWORD
+
