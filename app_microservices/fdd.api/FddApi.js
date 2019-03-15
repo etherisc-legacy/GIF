@@ -73,9 +73,9 @@ class FddApi {
       log,
       signer,
       genericInsurance,
-      contract: this._contract,
-      flightRatingsOracle: this._flightRatingsOracle,
-      flightStatusesOracle: this._flightStatusesOracle,
+      contract: () => this._contract(),
+      flightRatingsOracle: () => this._flightRatingsOracle(),
+      flightStatusesOracle: () => this._flightStatusesOracle(),
       messageBus: this._messageBus,
       db: this._db,
     };
@@ -226,7 +226,7 @@ class FddApi {
       });
     }
 
-    this._messageBus.emit('certificateIssued', content, fields, properties);
+    this._messageBus.emit('certificateIssued', content);
   }
 
   /**
