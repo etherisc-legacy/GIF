@@ -330,6 +330,10 @@ class EventListener {
         product, network, networkId, version, artifact,
       } = content;
 
+      if (properties.headers.product && properties.headers.product !== product) {
+        throw new Error('Product ID does not match message signature');
+      }
+
       const artifactObject = JSON.parse(artifact);
       const { address, transactionHash } = artifactObject.networks[networkId];
 
@@ -337,27 +341,31 @@ class EventListener {
       const { Contract } = this._models;
       const { blockNumber } = await this._web3.eth.getTransaction(transactionHash);
 
-      const exists = await Contract.query().findOne({
+      const contractLookupCriteria = {
+        product,
         networkName: network,
+        contractName: artifactObject.contractName,
+        version,
+      };
+      const updateValues = {
         address: address.toLowerCase(),
-      });
+        abi,
+        transactionHash: artifactObject.transactionHash,
+        blockNumber,
+      };
+
+      const exists = await Contract.query().findOne(contractLookupCriteria);
 
       if (!exists) {
         await Contract.query()
-          .upsertGraph({
-            product,
-            networkName: network,
-            version,
-            address: address.toLowerCase(),
-            abi,
-            transactionHash: artifactObject.transactionHash,
-            blockNumber,
-          });
-
-        await this.getPastEvents([{ address }]);
-
-        this._log.info(`Artifact saved: ${product} ${artifactObject.contractName} (${address})`);
+          .upsertGraph({ ...contractLookupCriteria, ...updateValues });
+      } else {
+        await Contract.query()
+          .where(contractLookupCriteria)
+          .update(updateValues);
       }
+      await this.getPastEvents([{ address }]);
+      this._log.info(`Artifact saved: ${product} ${artifactObject.contractName} (${address})`);
     } catch (e) {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
