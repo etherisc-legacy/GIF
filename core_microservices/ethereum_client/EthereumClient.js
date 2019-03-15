@@ -62,32 +62,41 @@ class EthereumClient {
         product, network, networkId, version, artifact,
       } = content;
 
+      if (properties.headers.product && properties.headers.product !== product) {
+        throw new Error('Product ID does not match message signature');
+      }
+
       const artifactObject = JSON.parse(artifact);
       const { address } = artifactObject.networks[networkId];
 
       const abi = JSON.stringify(artifactObject.abi);
       const { Contract } = this._models;
 
-      const exists = await Contract.query().findOne({
+      const contractLookupCriteria = {
+        product,
         networkName: network,
+        contractName: artifactObject.contractName,
+        version,
+      };
+      const updateValues = {
         address: address.toLowerCase(),
-      });
+        abi,
+      };
+
+      const exists = await Contract.query().findOne(contractLookupCriteria);
 
       if (!exists) {
         await Contract.query()
-          .upsertGraph({
-            product,
-            contractName: artifactObject.contractName,
-            networkName: network,
-            version,
-            address: address.toLowerCase(),
-            abi,
-          });
-
-        this._log.info(`Artifact saved: ${product} ${artifactObject.contractName} (${address})`);
+          .upsertGraph({ ...contractLookupCriteria, ...updateValues });
+      } else {
+        await Contract.query()
+          .where(contractLookupCriteria)
+          .update(updateValues);
       }
-    } catch (e) {
-      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
+
+      this._log.info(`Artifact saved: ${product} ${artifactObject.contractName} (${address})`);
+    } catch (error) {
+      this._log.error(new Error(JSON.stringify({ message: error.message, stack: error.stack })));
     }
   }
 

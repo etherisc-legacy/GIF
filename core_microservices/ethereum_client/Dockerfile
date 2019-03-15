@@ -9,4 +9,4 @@ RUN npm update -g npm
 RUN npm ci
 RUN rm .npmrc
 
-CMD [ "npm", "run", "prod" ]
+CMD npm run migrate && npm run prod
