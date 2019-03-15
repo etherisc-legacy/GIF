@@ -152,6 +152,7 @@ class Amqp {
   /**
    * Start listening to queue messages
    * @param {{}} params
+   * @param {string} [params.productId = '*']
    * @param {string} [params.sourceMicroservice = '*']
    * @param {string} [params.messageType = '*']
    * @param {string} [params.messageTypeVersion = '*.*']
@@ -159,7 +160,11 @@ class Amqp {
    * @return {Promise<void>}
    */
   async consume({
-    sourceMicroservice = '*', messageType = '*', messageTypeVersion = '*.*', handler,
+    productId = '*',
+    sourceMicroservice = '*',
+    messageType = '*',
+    messageTypeVersion = '*.*',
+    handler,
   }) {
     const channel = this.consumeChannel;
 
@@ -175,6 +180,7 @@ class Amqp {
     ].join('_');
 
     const topic = [
+      productId,
       sourceMicroservice,
       messageType,
       messageTypeVersion,
@@ -235,15 +241,21 @@ class Amqp {
   /**
    * Publish message to queue
    * @param {{}} params
-   * @param {string} [params.messageType = 'latest']
-   * @param {string} params.messageTypeVersion
+   * @param {string} [params.productId = this.connectionConfig.username]
+   * @param {string} params.messageType
+   * @param {string} [params.messageTypeVersion = 'latest']
    * @param {{}} params.content
    * @param {string} params.correlationId
    * @param {{}} params.customHeaders
    * @return {Promise<void>}
    */
   async publish({
-    messageType, messageTypeVersion = 'latest', content, correlationId, customHeaders,
+    productId = this.connectionConfig.username,
+    messageType,
+    messageTypeVersion = 'latest',
+    content,
+    correlationId,
+    customHeaders,
   }) {
     const channel = this.publishChannel;
 
@@ -253,6 +265,7 @@ class Amqp {
 
     const specificMessageTypeVersion = messageProcessor.findMessageSchema(messageType, messageTypeVersion).version;
     const topic = [
+      productId,
       this.appName,
       messageType,
       specificMessageTypeVersion,

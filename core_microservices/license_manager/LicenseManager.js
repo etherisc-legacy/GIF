@@ -81,6 +81,7 @@ class LicenseManager {
     // TODO: Optionally filter content out
 
     this.amqp.publish({
+      productId: properties.userId,
       messageType: properties.headers.messageType,
       messageTypeVersion: properties.headers.messageTypeVersion,
       content,
