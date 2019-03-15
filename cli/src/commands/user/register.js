@@ -1,29 +1,30 @@
-const { Command } = require('@oclif/command');
-const { cli } = require('cli-ux');
-const os = require('os');
 const PasswordValidator = require('password-validator');
 const emailValidator = require('email-validator');
-const fs = require('fs-jetpack');
+const BaseCommand = require('../../lib/BaseCommand');
 
 /**
  * Register command
  */
-class Register extends Command {
+class Register extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}
    */
   async run() {
-    const email = await cli.prompt('Email');
-    const firstname = await cli.prompt('Firstname');
-    const lastname = await cli.prompt('Lastname');
-    const password = await cli.prompt('Password', { type: 'hide' });
-    const passwordRepeat = await cli.prompt('Repeat password', { type: 'hide' });
+    // Firstname
+    const firstname = await this.cli.prompt('Firstname');
+    if (!firstname.length) throw new Error('Firstname not provided');
 
-    if (password !== passwordRepeat) {
-      //
-    }
+    // Lastname
+    const lastname = await this.cli.prompt('Lastname');
+    if (!lastname.length) throw new Error('Lastname not provided');
 
+    // Email
+    const email = await this.cli.prompt('Email');
+    if (!emailValidator.validate(email)) throw new Error('Email is invalid');
+
+    // Password
+    const password = await this.cli.prompt('Password', { type: 'hide' });
     const passwordSchema = new PasswordValidator();
     passwordSchema
       .is().min(8)
@@ -31,30 +32,34 @@ class Register extends Command {
       .has().uppercase() // eslint-disable-line
       .has().lowercase() // eslint-disable-line
       .has().digits() // eslint-disable-line
-      .has().not().spaces() // eslint-disable-line
-      .is().not().oneOf(['Passw0rd', 'Password123']); // eslint-disable-line
+      .has().not().spaces(); // eslint-disable-line
 
-    if (!passwordSchema.validate(password)) {
-      //
-    }
+    // if (!passwordSchema.validate(password)) throw new Error('Password is invalid');
 
-    if (!emailValidator.validate(email)) {
-      //
-    }
+    // Repeat password
+    const passwordRepeat = await this.cli.prompt('Repeat password', { type: 'hide' });
+    if (password !== passwordRepeat) throw new Error('Passwords are not equal');
 
-    if (!firstname.length) {
-      //
-    }
+    // E.g. response:
+    // const response = {
+    //   data: {
+    //     id : 1,
+    //     token: 'c3FIOG9vSGV4VHo4QzAyg5T1JvNnJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ',
+    //   },
+    // };
 
-    if (!lastname.length) {
-      //
-    }
+    const response = await this.api.register(firstname, lastname, email, password);
 
-    const config = {};
+    const config = {
+      user: {
+        id: response.data.id,
+        token: response.data.token,
+      },
+    };
 
-    fs.write(`${os.homedir()}/.gifconfig.json`, JSON.stringify(config));
+    this.configure(config);
 
-    this.log('\nRegistration succeed');
+    this.log('User registered');
   }
 }
 

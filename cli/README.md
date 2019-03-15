@@ -19,7 +19,7 @@ $ npm install -g gifcli
 $ gifcli COMMAND
 running command...
 $ gifcli (-v|--version|version)
-gifcli/0.0.0 darwin-x64 node-v11.10.1
+gifcli/0.0.0 darwin-x64 node-v11.6.0
 $ gifcli --help [COMMAND]
 USAGE
   $ gifcli COMMAND
@@ -29,14 +29,19 @@ USAGE
 # Commands
 <!-- commands -->
 * [`gifcli console`](#gifcli-console)
+* [`gifcli contracts:list`](#gifcli-contractslist)
 * [`gifcli customer:create`](#gifcli-customercreate)
 * [`gifcli customer:get`](#gifcli-customerget)
 * [`gifcli customer:list`](#gifcli-customerlist)
 * [`gifcli exec`](#gifcli-exec)
 * [`gifcli help [COMMAND]`](#gifcli-help-command)
 * [`gifcli oracle:create`](#gifcli-oraclecreate)
+* [`gifcli oracle:list`](#gifcli-oraclelist)
 * [`gifcli product:create`](#gifcli-productcreate)
+* [`gifcli product:list`](#gifcli-productlist)
+* [`gifcli product:select`](#gifcli-productselect)
 * [`gifcli product:sendArtifacts`](#gifcli-productsendartifacts)
+* [`gifcli user:get`](#gifcli-userget)
 * [`gifcli user:login`](#gifcli-userlogin)
 * [`gifcli user:logout`](#gifcli-userlogout)
 * [`gifcli user:register`](#gifcli-userregister)
@@ -52,6 +57,19 @@ USAGE
 DESCRIPTION
   ...
   Run console mode
+```
+
+## `gifcli contracts:list`
+
+List core contracts
+
+```
+USAGE
+  $ gifcli contracts:list
+
+DESCRIPTION
+  ...
+  List contracts
 ```
 
 ## `gifcli customer:create`
@@ -146,6 +164,23 @@ DESCRIPTION
   Create new oracle
 ```
 
+## `gifcli oracle:list`
+
+List oracles
+
+```
+USAGE
+  $ gifcli oracle:list
+
+OPTIONS
+  -l, --limit=limit    [default: 20] records offset
+  -o, --offset=offset  records limit
+
+DESCRIPTION
+  ...
+  List oracles
+```
+
 ## `gifcli product:create`
 
 Create new product
@@ -159,6 +194,36 @@ DESCRIPTION
   Create new product
 ```
 
+## `gifcli product:list`
+
+List products
+
+```
+USAGE
+  $ gifcli product:list
+
+OPTIONS
+  -l, --limit=limit    [default: 20] records offset
+  -o, --offset=offset  records limit
+
+DESCRIPTION
+  ...
+  List products
+```
+
+## `gifcli product:select`
+
+Select current product
+
+```
+USAGE
+  $ gifcli product:select
+
+DESCRIPTION
+  ...
+  Select current product
+```
+
 ## `gifcli product:sendArtifacts`
 
 Send artifacts into GIF
@@ -170,6 +235,19 @@ USAGE
 DESCRIPTION
   ...
   Send artifacts into GIF
+```
+
+## `gifcli user:get`
+
+Get current user
+
+```
+USAGE
+  $ gifcli user:get
+
+DESCRIPTION
+  ...
+  Get user
 ```
 
 ## `gifcli user:login`

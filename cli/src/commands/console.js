@@ -1,20 +1,23 @@
-const { Command } = require('@oclif/command');
+const BaseCommand = require('../lib/BaseCommand');
 const ReplManager = require('../lib/ReplManager');
-const Gif = require('../lib/Gif');
 
 /**
  * Start console command
  */
-class Console extends Command {
+class Console extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}
    */
   async run() {
-    const repl = new ReplManager();
-    repl.start();
-    repl.setContext({
-      gif: new Gif(),
+    const replManager = new ReplManager();
+
+    await new Promise((resolve) => {
+      replManager.start();
+      replManager.repl.on('exit', resolve);
+      replManager.setContext({
+        gif: this.gif.cli,
+      });
     });
   }
 }

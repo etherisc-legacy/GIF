@@ -2,28 +2,28 @@ const { flags } = require('@oclif/command');
 const BaseCommand = require('../../lib/BaseCommand');
 
 /**
- * List customers
+ * List products
  */
-class ListCustomers extends BaseCommand {
+class ListProducts extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}
    */
   async run() {
-    const { flags: { limit, offset } } = this.parse(ListCustomers);
+    const { flags: { limit, offset } } = this.parse(ListProducts);
 
     this.log(`Retrieve ${limit} customers from ${offset}`);
   }
 }
 
-ListCustomers.flags = {
+ListProducts.flags = {
   limit: flags.string({ char: 'l', description: 'records offset', default: 20 }),
   offset: flags.string({ char: 'o', description: 'records limit', default: 0 }),
 };
 
-ListCustomers.description = `List customers
+ListProducts.description = `List products
 ...
-List customers
+List products
 `;
 
-module.exports = ListCustomers;
+module.exports = ListProducts;

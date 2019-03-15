@@ -1,9 +1,9 @@
 const BaseCommand = require('../../lib/BaseCommand');
 
 /**
- * Create customer
+ * Get current user
  */
-class CreateCustomer extends BaseCommand {
+class GetUser extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}
@@ -13,9 +13,9 @@ class CreateCustomer extends BaseCommand {
   }
 }
 
-CreateCustomer.description = `Create customer
+GetUser.description = `Get current user
 ...
-Create customer
+Get user
 `;
 
-module.exports = CreateCustomer;
+module.exports = GetUser;

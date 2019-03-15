@@ -5,8 +5,8 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "postdocs": "rm -f oclif.manifest.json",
+    "docs": "oclif-dev manifest && oclif-dev readme",
     "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
     "version": "oclif-dev readme && git add README.md"
   },
@@ -26,6 +26,9 @@
       "user": {
         "description": "Manage user"
       },
+      "contracts": {
+        "description": "View core contracts"
+      },
       "customer": {
         "description": "Manage customers"
       },
@@ -42,15 +45,18 @@
     ]
   },
   "dependencies": {
-    "@etherisc/amqp": "^1.1.0-rc1",
+    "@etherisc/amqp": "^1.1.0",
     "@oclif/command": "^1.5.11",
     "@oclif/config": "^1.12.9",
     "@oclif/plugin-help": "^2.1.6",
     "@oclif/test": "^1.2.4",
+    "axios": "^0.18.0",
     "cli-ux": "^5.2.0",
     "email-validator": "^2.0.4",
     "fs-jetpack": "^2.2.2",
-    "password-validator": "^4.1.1"
+    "lodash": "^4.17.11",
+    "password-validator": "^4.1.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.21.2",

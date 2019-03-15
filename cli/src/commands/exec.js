@@ -1,13 +1,13 @@
-const { Command, flags } = require('@oclif/command');
+const { flags } = require('@oclif/command');
 const fs = require('fs');
 const vm = require('vm');
 const Module = require('module');
-const Gif = require('../lib/Gif');
+const BaseCommand = require('../lib/BaseCommand');
 
 /**
  * Exec script file command
  */
-class Exec extends Command {
+class Exec extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}
@@ -22,11 +22,11 @@ class Exec extends Command {
       module: mod,
       require: mod.require,
       console,
-      gif: new Gif(),
+      gif: this.gif.cli,
     };
 
-    const script = vm.createScript(code.toString('utf8'), { filename: file });
-    script.runInNewContext(context);
+    const script = new vm.Script(code.toString('utf8'), { filename: file });
+    await script.runInNewContext(context);
   }
 }
 

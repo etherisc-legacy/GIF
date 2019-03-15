@@ -1,15 +1,17 @@
-const { Command } = require('@oclif/command');
+const BaseCommand = require('../../lib/BaseCommand');
 
 /**
  * Logout command
  */
-class Logout extends Command {
+class Logout extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}
    */
   async run() {
-    this.log('Logout');
+    this.configure({});
+
+    this.log('Logged out');
   }
 }
 

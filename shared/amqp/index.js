@@ -23,6 +23,8 @@ class Amqp {
 
     this._publish_channel = null;
     this._consume_channel = null;
+
+    this.shutdown = this.shutdown.bind(this);
   }
 
   /**
@@ -69,8 +71,14 @@ class Amqp {
    * Close channel
    */
   closeChannels() {
-    if (this._publish_channel) this._publish_channel.close();
-    if (this._consume_channel) this._consume_channel.close();
+    if (this._publish_channel) {
+      this._publish_channel.close();
+      this._publish_channel = null;
+    }
+    if (this._consume_channel) {
+      this._consume_channel.close();
+      this._consume_channel = null;
+    }
   }
 
   /**
@@ -152,7 +160,7 @@ class Amqp {
   /**
    * Start listening to queue messages
    * @param {{}} params
-   * @param {string} [params.productId = '*']
+   * @param {string} [params.product = '*']
    * @param {string} [params.sourceMicroservice = '*']
    * @param {string} [params.messageType = '*']
    * @param {string} [params.messageTypeVersion = '*.*']
@@ -160,7 +168,7 @@ class Amqp {
    * @return {Promise<void>}
    */
   async consume({
-    productId = '*',
+    product = '*',
     sourceMicroservice = '*',
     messageType = '*',
     messageTypeVersion = '*.*',
@@ -171,6 +179,7 @@ class Amqp {
     if (!channel) throw new Error('Amqp channel doesn\'t exist');
 
     const queueName = [
+      product,
       this.connectionConfig.username,
       this.appName,
       this.appVersion,
@@ -180,7 +189,7 @@ class Amqp {
     ].join('_');
 
     const topic = [
-      productId,
+      product,
       sourceMicroservice,
       messageType,
       messageTypeVersion,
@@ -241,7 +250,7 @@ class Amqp {
   /**
    * Publish message to queue
    * @param {{}} params
-   * @param {string} [params.productId = this.connectionConfig.username]
+   * @param {string} [params.product = this.connectionConfig.username]
    * @param {string} params.messageType
    * @param {string} [params.messageTypeVersion = 'latest']
    * @param {{}} params.content
@@ -250,7 +259,7 @@ class Amqp {
    * @return {Promise<void>}
    */
   async publish({
-    productId = this.connectionConfig.username,
+    product = this.connectionConfig.username,
     messageType,
     messageTypeVersion = 'latest',
     content,
@@ -265,7 +274,7 @@ class Amqp {
 
     const specificMessageTypeVersion = messageProcessor.findMessageSchema(messageType, messageTypeVersion).version;
     const topic = [
-      productId,
+      product,
       this.appName,
       messageType,
       specificMessageTypeVersion,

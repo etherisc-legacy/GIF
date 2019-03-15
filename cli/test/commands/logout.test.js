@@ -4,8 +4,8 @@ const { expect, test } = require('@oclif/test');
 describe('Logout', () => {
   test
     .stdout()
-    .command(['logout'])
+    .command(['user:logout'])
     .it('runs logout', (ctx) => {
-      expect(ctx.stdout).to.contain('Logout');
+      expect(ctx.stdout).to.contain('Logged out');
     });
 });

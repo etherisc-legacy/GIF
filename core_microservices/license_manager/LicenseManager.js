@@ -80,15 +80,21 @@ class LicenseManager {
   }) {
     // TODO: Optionally filter content out
 
+    const customHeaders = {
+      product: properties.userId,
+    };
+
+    if (properties.headers.requestId) {
+      customHeaders.requestId = properties.headers.requestId;
+    }
+
     this.amqp.publish({
-      productId: properties.userId,
+      product: properties.userId,
       messageType: properties.headers.messageType,
       messageTypeVersion: properties.headers.messageTypeVersion,
       content,
       correlationId: properties.correlationId,
-      customHeaders: {
-        product: properties.userId,
-      },
+      customHeaders,
     });
   }
 

@@ -1,5 +1,15 @@
 /* global gif */
 
-const customers = gif.getCustomers();
+/**
+ * Script
+ * @return {Promise<void>}
+ */
+async function main() {
+  const { product } = gif.info();
+  console.log(`Customers in product ${product}`);
 
-console.table(customers);
+  const customers = await gif.customers.list();
+  console.table(customers);
+}
+
+main().catch(console.log);

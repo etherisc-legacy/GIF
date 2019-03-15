@@ -1,9 +1,10 @@
-const { Command, flags } = require('@oclif/command');
+const { flags } = require('@oclif/command');
+const BaseCommand = require('../../lib/BaseCommand');
 
 /**
  * Get customer
  */
-class GetCustomer extends Command {
+class GetCustomer extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}

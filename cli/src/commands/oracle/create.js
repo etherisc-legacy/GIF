@@ -1,9 +1,9 @@
-const { Command } = require('@oclif/command');
+const BaseCommand = require('../../lib/BaseCommand');
 
 /**
  * Create oracle command
  */
-class CreateOracle extends Command {
+class CreateOracle extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}

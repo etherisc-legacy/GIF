@@ -52,6 +52,159 @@ class PolicyStorage {
       messageVersion: '1.*',
       handler: this.handleApplyForPolicyError.bind(this),
     });
+    await this._amqp.consume({
+      messageType: 'createCustomer',
+      messageVersion: '1.*',
+      handler: this.handleCreateCustomer.bind(this),
+    });
+    await this._amqp.consume({
+      messageType: 'getCustomer',
+      messageVersion: '1.*',
+      handler: this.handleGetCustomer.bind(this),
+    });
+    await this._amqp.consume({
+      messageType: 'listCustomers',
+      messageVersion: '1.*',
+      handler: this.handleListCustomers.bind(this),
+    });
+  }
+
+  /**
+   * Handle create customer message
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
+   * @return {Promise<void>}
+   */
+  async handleCreateCustomer({ content, fields, properties }) {
+    try {
+      const customerId = await this.createCustomerIfNotExists(content, properties.headers.product);
+
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'createCustomerResult',
+        messageVersion: '1.*',
+        content: { customerId },
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    } catch (e) {
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'createCustomerResult',
+        messageVersion: '1.*',
+        content: { error: e.message },
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    }
+  }
+
+  /**
+   * Handle get customer message
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
+   * @return {Promise<void>}
+   */
+  async handleGetCustomer({ content, fields, properties }) {
+    try {
+      const { customer, extra } = await this.getCustomerById(content.customerId, properties.headers.product);
+      const response = { ..._.omit(customer, ['updated', 'productName']), ...extra };
+
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'getCustomerResult',
+        messageVersion: '1.*',
+        content: response,
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    } catch (e) {
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'getCustomerResult',
+        messageVersion: '1.*',
+        content: { error: e.message },
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    }
+  }
+
+  /**
+   * Handle get list of customers message
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
+   * @return {Promise<void>}
+   */
+  async handleListCustomers({ content, fields, properties }) {
+    try {
+      const response = await this.getCustomers(properties.headers.product);
+
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'listCustomersResult',
+        messageVersion: '1.*',
+        content: response,
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    } catch (e) {
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'listCustomersResult',
+        messageVersion: '1.*',
+        content: { error: e.message },
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    }
+  }
+
+  /**
+   * Get customer by id
+   * @param {String} id
+   * @param {String} productName
+   * @return {Promise<{extra: *, customer: *}>}
+   */
+  async getCustomerById(id, productName) {
+    const { Customer, CustomerExtra } = this._models;
+
+    const customer = await Customer.query().where({
+      id,
+      productName,
+    }).first();
+
+    if (!customer) {
+      throw new Error('ERROR::CUSTOMER_NOT_EXISTS');
+    }
+
+    const extra = await CustomerExtra.query().where('customerId', customer.id)
+      .then(rows => _.fromPairs(_.map(rows, r => [r.field, r.value])));
+
+    return { customer, extra };
+  }
+
+  /**
+   * Get list of customer
+   * @param {String} productName
+   * @return {Promise<*>}
+   */
+  async getCustomers(productName) {
+    const { Customer } = this._models;
+
+    const customers = await Customer.query()
+      .where({ productName }).eager('extra');
+
+    return customers.map(customer => ({
+      ..._.omit(customer, ['updated', 'productName', 'extra']),
+      ..._.fromPairs(_.map(customer.extra, r => [r.field, r.value])),
+    }));
   }
 
   /**
@@ -69,9 +222,14 @@ class PolicyStorage {
   /**
    * Create new customer if doesn't exists
    * @param {{}} customer
+   * @param {String} productName
    * @return {string}
    */
-  async createCustomerIfNotExists(customer) {
+  async createCustomerIfNotExists(customer, productName) {
+    if (!customer.firstname) throw new Error('ERROR::FIRSTNAME_NOT_PROVIDED');
+    if (!customer.lastname) throw new Error('ERROR::LASTNAME_NOT_PROVIDED');
+    if (!customer.email) throw new Error('ERROR::EMAIL_NOT_PROVIDED');
+
     const customerId = this.generateCustomerId(customer.firstname, customer.lastname, customer.email);
 
     const { Customer } = this._models;
@@ -83,7 +241,19 @@ class PolicyStorage {
     if (!customerExists) {
       await Customer.query().insertGraph({
         id: customerId,
+        productName,
         ..._.pick(customer, ['firstname', 'lastname', 'email']),
+        extra: [
+          ..._.map(
+            _.toPairs(_.omit(customer, ['firstname', 'lastname', 'email'])),
+            ([field, value]) => ({ field, value }),
+          ),
+        ],
+      });
+    } else {
+      // Update customer data
+      await Customer.query().upsertGraph({
+        id: customerId,
         extra: [
           ..._.map(
             _.toPairs(_.omit(customer, ['firstname', 'lastname', 'email'])),

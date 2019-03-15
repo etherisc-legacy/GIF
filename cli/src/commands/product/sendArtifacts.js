@@ -1,9 +1,9 @@
-const { Command } = require('@oclif/command');
+const BaseCommand = require('../../lib/BaseCommand');
 
 /**
  * Send artifacts command
  */
-class SendArtifacts extends Command {
+class SendArtifacts extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}
