@@ -17,7 +17,7 @@ Product contracts use an oracle to obtain off-chain data and confirm or decline 
 The GIF accomplished a strategy for product contracts to get data from a specific oracle, which a product is particularly interested in.
 
 .. image:: oracle_flow.jpeg
-    :scale: 100 %
+    :scale: 50 %
     :align: center
     :alt: request and response flow with oracles
 
