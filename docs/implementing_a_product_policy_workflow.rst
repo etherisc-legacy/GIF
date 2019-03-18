@@ -30,7 +30,7 @@ There are two possible ways of choosing premiums by a customer of a product: bas
 **The Business Process Model and Notation policy flow with prepaid premium diagram**
 
 .. image:: policy_flow_prepaid.png
-    :scale: 100 %
+    :scale: 50 %
     :align: center
     :alt: policy flow with prepaid premium
 
