@@ -27,9 +27,11 @@ Below, you will find a glossary of the technical terms used in this document.
 **Generic Insurance Framework (GIF).**
     A combined codebase, which includes smart contracts and utility services (core smart contracts and microservices) provided by the DIP Foundation and partners. The codebase can be extended by product-specific smart contracts and microservices created by product builders. Using this framework, product builders can develop full-featured DApps.
 
-**GIF instance.** A deployed set of core smart contracts, operated by an instance operator, in most cases together with an appropriate set of utility services. A GIF instance is essentially an "Insurance as a Service (IaaS)".
+**GIF instance.** 
+    A deployed set of core smart contracts, operated by an instance operator, in most cases together with an appropriate set of utility services. A GIF instance is essentially an "Insurance as a Service (IaaS)".
 
-**Instance operator.** An Ethereum account which operates an instance of the GIF. An instance operator can be a decentralized organization (DAO) or a single account owned by some legal entity.
+**Instance operator.** 
+    An Ethereum account which operates an instance of the GIF. An instance operator can be a decentralized organization (DAO) or a single account owned by some legal entity.
 
 **Metadata.**
     A shared object between all the objects of a particular policy flow.
