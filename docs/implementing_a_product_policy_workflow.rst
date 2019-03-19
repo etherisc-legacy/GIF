@@ -1,4 +1,4 @@
-.. _rst_table_of_contents:
+﻿.. _rst_table_of_contents:
 
 Implementing a product policy workflow
 ======================================
