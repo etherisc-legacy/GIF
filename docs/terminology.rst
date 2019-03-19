@@ -23,6 +23,9 @@ Below, you will find a glossary of the technical terms used in this document.
 
 **Decentralized Insurance Protocol (DIP Protocol).**
     A set of standards, rules, templates and definitions which define the interaction of participants in the ecosystem.
+    
+**DIP Token.**
+    The Decentralized Insurance Protocol Token (DIP) is an ERC-20 token on the Ethereum Mainnet (`token contract on etherscan <https://etherscan.io/token/0xc719d010b63e5bbf2c0551872cd5316ed26acd83>`_). DIP tokens were issued by the DI Foundation during the `DIP Token Generating Event in 2018 <https://blog.etherisc.com/etherisc-dip-token-generating-event-is-finished-summary-and-next-steps-2bd0bdda3686>`_, and will be used as a platform token in the DIP platform to incentivize different actors. The `DIP token mechanics paper <https://etherisc.com/files/token_mechanics_1.0_en.pdf>`_ has more details on the token model."
 
 **Generic Insurance Framework (GIF).**
     A combined codebase, which includes smart contracts and utility services (core smart contracts and microservices) provided by the DIP Foundation and partners. The codebase can be extended by product-specific smart contracts and microservices created by product builders. Using this framework, product builders can develop full-featured DApps.
