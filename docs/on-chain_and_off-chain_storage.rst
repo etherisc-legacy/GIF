@@ -1,4 +1,4 @@
-.. _rst_table_of_contents:
+﻿.. _rst_table_of_contents:
 
 On-chain and off-chain storage
 ==============================
@@ -21,7 +21,7 @@ On-chain
 --------
 As the DIP operates in the Ethereum environment, the term **on-chain** specifies smart contracts, where a product can store risk description and specific metadata per policy.
 
-The key principle of how the DIP itself uses data is that no personal data is kept in smart contracts—only **unique hashed references**.
+The key principle of how the DIP itself uses data is that no personal data is kept in smart contracts — only **unique hashed references**.
 
 The DIP allows to store data for any product regarding its:
 
@@ -31,7 +31,7 @@ The DIP allows to store data for any product regarding its:
 
 - claims
 
-In case a product doesn't want to use a platform database, it is possible to use the product’s database.
+In case a product doesn't want to use a platform database, it is possible to use the product's database.
 
 .. attention:: 
 

@@ -1,4 +1,4 @@
-.. _rst_table_of_contents:
+﻿.. _rst_table_of_contents:
 
 Use Cases for Product Owners
 ############################
@@ -8,7 +8,7 @@ For any product that expects to perform certain actions, it is crucial to regist
 
 The registration of a product contract takes place on a smart contract level.
 
-A product creates a contract and inherits one of the GIF contracts�a product contract. After inheriting, a product contract is able to use the GIF functions to describe its business process.
+A product creates a contract and inherits one of the GIF contracts — a product contract. After inheriting, a product contract is able to use the GIF functions to describe its business process.
 
 The **register** function (see the code below) is used to register a new product contract. After approval, a contract obtains access to call entry methods.
 

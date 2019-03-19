@@ -1,4 +1,4 @@
-
+﻿
 ###########################################################
 Welcome to User Manual for the Generic Insurance Framework!
 ###########################################################
@@ -7,7 +7,7 @@ Welcome to User Manual for the Generic Insurance Framework!
 
     This manual explains the key ideas, terms, and principles of the `Generic Insurance Framework <https://github.com/etherisc/GIF>`_ (GIF) as a tool that enables to utilize both smart contracts and microservices to create specific insurance products. You will learn the best ways to interact with this framework, as well as employ the available functionality to the fullest.
 
-    The manual focuses on the needs of product builders and helps them to implement  the existing solutions on top of the Generic Insurance Framework.
+    The manual focuses on the needs of product builders and helps them to implement the existing solutions on top of the Generic Insurance Framework.
 
 .. toctree:: 
     :maxdepth: 2
