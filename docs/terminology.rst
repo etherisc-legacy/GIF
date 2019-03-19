@@ -23,13 +23,18 @@ Below, you will find a glossary of the technical terms used in this document.
 
 **Decentralized Insurance Protocol (DIP Protocol).**
     A set of standards, rules, templates and definitions which define the interaction of participants in the ecosystem.
+    
+**DIP Token.**
+    The Decentralized Insurance Protocol Token (DIP) is an ERC-20 token on the Ethereum Mainnet (`token contract on etherscan <https://etherscan.io/token/0xc719d010b63e5bbf2c0551872cd5316ed26acd83>`_). DIP tokens were issued by the DI Foundation during the `DIP Token Generating Event in 2018 <https://blog.etherisc.com/etherisc-dip-token-generating-event-is-finished-summary-and-next-steps-2bd0bdda3686>`_, and will be used as a platform token in the DIP platform to incentivize different actors. The `DIP token mechanics paper <https://etherisc.com/files/token_mechanics_1.0_en.pdf>`_ has more details on the token model."
 
 **Generic Insurance Framework (GIF).**
     A combined codebase, which includes smart contracts and utility services (core smart contracts and microservices) provided by the DIP Foundation and partners. The codebase can be extended by product-specific smart contracts and microservices created by product builders. Using this framework, product builders can develop full-featured DApps.
 
-**GIF instance.** A deployed set of core smart contracts, operated by an instance operator, in most cases together with an appropriate set of utility services. A GIF instance is essentially an "Insurance as a Service (IaaS)".
+**GIF instance.** 
+    A deployed set of core smart contracts, operated by an instance operator, in most cases together with an appropriate set of utility services. A GIF instance is essentially an "Insurance as a Service (IaaS)".
 
-**Instance operator.** An Ethereum account which operates an instance of the GIF. An instance operator can be a decentralized organization (DAO) or a single account owned by some legal entity.
+**Instance operator.** 
+    An Ethereum account which operates an instance of the GIF. An instance operator can be a decentralized organization (DAO) or a single account owned by some legal entity.
 
 **Metadata.**
     A shared object between all the objects of a particular policy flow.
