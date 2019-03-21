@@ -8,7 +8,7 @@ module.exports = {
     insurance_not_available:
     'Seems like insurance for your flight is not available yet due to lack of statistical data. ' +
     'Perhaps we can insure your next flight!?',
-    insurance_for_departure_not_available: 'Insurance for this departure date is\'n available.',
+    insurance_for_departure_not_available: 'Insurance for this departure date isn\'t available.',
     transaction_declined:
     'Your transaction is declined for some reasons. Please, contact the administrator ' +
     'by email: policies@etherisc.com',
