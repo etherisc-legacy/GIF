@@ -2,6 +2,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: ganache
+  labels:
+    tier: infrastructure
 spec:
   replicas: 1
   template:

@@ -2,6 +2,8 @@ apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: rabbitmq
+  labels:
+    tier: infrastructure
 spec:
   serviceName: rabbitmq
   replicas: 3

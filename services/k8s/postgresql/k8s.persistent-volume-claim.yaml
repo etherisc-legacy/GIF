@@ -4,6 +4,7 @@ metadata:
   name: postgres-pv-claim
   labels:
     app: postgres
+    tier: infrastructure
 spec:
   storageClassName: manual
   accessModes:

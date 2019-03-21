@@ -4,6 +4,7 @@ metadata:
   name: minio-pv-claim
   labels:
     app: minio
+    tier: infrastructure
 spec:
   storageClassName: minio
   accessModes:

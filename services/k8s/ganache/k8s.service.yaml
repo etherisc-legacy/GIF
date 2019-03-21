@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ganache
+  labels:
+    tier: infrastructure
 spec:
   type: ClusterIP
   ports:

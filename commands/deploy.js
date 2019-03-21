@@ -13,6 +13,8 @@ const inquirer = require('inquirer');
 const DESTINATION = process.env.DEPLOY_DESTINATION;
 const PROD = DESTINATION === 'gke';
 
+const DEPLOYMENT_TIERS = ['infrastructure', 'platform', 'contracts', 'product', 'other'];
+
 const imageRegex = /<!--image-->/;
 
 /**
@@ -118,10 +120,13 @@ class Deploy extends Command {
     const files = await glob(patterns);
 
     const entities = {};
+    DEPLOYMENT_TIERS.forEach((tier) => { entities[tier] = {}; });
 
     files.forEach((file) => {
       const fileContent = fs.readFileSync(file, 'utf8');
       const list = yaml.safeLoadAll(fileContent);
+
+      let tier = DEPLOYMENT_TIERS[DEPLOYMENT_TIERS.length - 1];
 
       list.forEach((listElement) => {
         let element = listElement;
@@ -150,12 +155,25 @@ class Deploy extends Command {
           [element] = yaml.safeLoadAll(yaml.safeDump(element).replace(imageRegex, entity.imageName));
 
           element.metadata.labels.version = version;
+
+          if (element.spec.template) {
+            if (!element.spec.template.metadata) { element.spec.template.metadata = {}; }
+            if (!element.spec.template.metadata.labels) { element.spec.template.metadata.labels = {}; }
+            element.spec.template.metadata.labels.timestamp = moment().unix().toString();
+          }
         }
 
         entity.config = element;
 
-        if (!entities[element.kind]) entities[element.kind] = [];
-        entities[element.kind].push(entity);
+        const { labels } = element.metadata;
+        if (labels && labels.tier) {
+          if (DEPLOYMENT_TIERS.includes(labels.tier)) {
+            ({ tier } = labels);
+          }
+        }
+
+        if (!entities[tier][element.kind]) entities[tier][element.kind] = [];
+        entities[tier][element.kind].push(entity);
       });
     });
 
@@ -238,6 +256,24 @@ class Deploy extends Command {
    * @return {Promise<undefined>}
    */
   async deploy(entities) {
+    await this.execute('mkdir -p temp/deploy');
+
+    const tiers = DEPLOYMENT_TIERS;
+
+    for (let tierIndex = 0; tierIndex < tiers.length; tierIndex += 1) {
+      const tier = tiers[tierIndex];
+      this.timestamp(`Starting to deploy "${tier}" tier.`);
+
+      if (entities[tier]) { await this.tierDeploy(entities[tier]); }
+    }
+  }
+
+  /**
+   * Run deploy scripts for a certain tier of deployment
+   * @param {Object} entities
+   * @return {Promise<undefined>}
+   */
+  async tierDeploy(entities) {
     const groupPriority = [
       'Role', 'RoleBinding', 'ConfigMap', 'Secret',
       'PersistentVolume', 'PersistentVolumeClaim',
@@ -245,10 +281,9 @@ class Deploy extends Command {
       'StatefuleSet', 'Deployment',
       'Job',
     ];
+
     const groups = Object.keys(entities);
     groups.sort((first, second) => groupPriority.indexOf(first) - groupPriority.indexOf(second));
-
-    await this.execute('mkdir -p temp/deploy');
 
     for (let groupIndex = 0; groupIndex < groups.length; groupIndex += 1) {
       const group = groups[groupIndex];
@@ -265,7 +300,9 @@ class Deploy extends Command {
         if (entity.config) {
           this.log.info(`${EOL}Apply ${group} ${entity.config.metadata.name}`);
 
-          if (entity.dockerfilePath) { await this.packageDockerContainer(entity); }
+          if (entity.dockerfilePath) {
+            await this.packageDockerContainer(entity);
+          }
 
           const file = path.join(process.cwd(), `temp/deploy/${group}-${entity.config.metadata.name}.yaml`);
 
@@ -278,7 +315,9 @@ class Deploy extends Command {
           await this.execute(`kubectl apply -f ${file}`);
 
           this.timestamp(`Finished Application of ${file}`);
-          if (!this.optionsPrompt.keepConfigs) { fs.unlinkSync(file); }
+          if (!this.optionsPrompt.keepConfigs) {
+            fs.unlinkSync(file);
+          }
         }
       }
     }
@@ -325,7 +364,6 @@ class Deploy extends Command {
    * @return {Promise<void>}
    */
   async packageDockerContainer(element) {
-    // TODO: Skip packaging if container exists
     this.timestamp(`Start Docker build for ${element.imageName}`);
 
     if (DESTINATION === 'minikube') {
