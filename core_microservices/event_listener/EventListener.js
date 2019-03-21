@@ -2,6 +2,9 @@ const Web3 = require('web3');
 const retry = require('async-retry');
 const models = require('./models');
 
+
+const KEEP_ALIVE_PERIOD_SECONDS = 60 * 3; // 3 minutes
+
 /**
  * DIP Event Listener microservice
  */
@@ -41,10 +44,12 @@ class EventListener {
    */
   async bootstrap() {
     try {
-      await retry(this.watchEvents.bind(this), {
+      retry(this.watchEvents.bind(this), {
         retries: 10,
         onRetry: () => this._log.info('Try to reconnect'),
       });
+
+      this.keepAlive();
 
       await this._amqp.consume({
         messageType: 'existingEventsRequest',
@@ -196,6 +201,18 @@ class EventListener {
     })
       .on('data', this.onData.bind(this))
       .on('error', this.onError.bind(this));
+  }
+
+  /**
+   * Periodically ping web3 to keep ws connection alive
+   * @return {void}
+   */
+  async keepAlive() {
+    setInterval(() => {
+      this._web3.eth.getProtocolVersion().then(version => this._log.info(
+        `- Keep Alive request (${process.pid}); Ethereum protocol version of the node: ${version}`,
+      ));
+    }, KEEP_ALIVE_PERIOD_SECONDS * 1000); // seconds constant * milliseconds
   }
 
   /**
