@@ -10,5 +10,10 @@ do
 
     cd $package
     npm ci
+
+    if [ -f './.env.sample' ] && [ ! -f './.env' ]; then
+        echo ".env file not found, making a copy"
+        cp './.env.sample' './.env'
+    fi
   )
 done
