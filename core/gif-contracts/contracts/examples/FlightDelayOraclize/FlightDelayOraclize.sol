@@ -96,8 +96,8 @@ contract FlightDelayOraclize is Product {
         uint256 _premium,
         bytes32 _currency,
         uint256[] calldata _payoutOptions,
-        // customer
-        bytes32 _customerExternalId
+        // BP
+        bytes32 _bpExternalKey
     ) external {
         // Validate input parameters
         require(_premium >= MIN_PREMIUM, "ERROR::INVALID_PREMIUM");
@@ -139,15 +139,15 @@ contract FlightDelayOraclize is Product {
         }
 
         // Create new application
-        uint256 applicationId = newApplication(
-            _customerExternalId,
+        uint256 applicationId = _newApplication(
+            _bpExternalKey,
             _premium,
             _currency,
             _payoutOptions
         );
 
         // Request flight ratings
-        uint256 requestId = request(
+        uint256 requestId = _request(
             abi.encode(_carrierFlightNumber),
             "flightStatisticsCallback",
             "FlightRatings",
@@ -175,12 +175,12 @@ contract FlightDelayOraclize is Product {
         uint256 applicationId = oracleRequests[_requestId].applicationId;
 
         if (_statistics[0] <= MIN_OBSERVATIONS) {
-            decline(applicationId);
+            _decline(applicationId);
             return;
         }
 
-        uint256 premium = getPremium(applicationId);
-        uint256[] memory payoutOptions = getPayoutOptions(applicationId);
+        uint256 premium = _getPremium(applicationId);
+        uint256[] memory payoutOptions = _getPayoutOptions(applicationId);
         (uint256 weight, uint256[5] memory calculatedPayouts) = calculatePayouts(
             premium,
             _statistics
@@ -232,10 +232,10 @@ contract FlightDelayOraclize is Product {
         uint256 applicationId = actionRequests[_requestId].applicationId;
         bytes32 riskId = actionRequests[_requestId].riskId;
 
-        uint256 policyId = underwrite(applicationId);
+        uint256 policyId = _underwrite(applicationId);
 
         // Request flight statuses
-        uint256 requestId = request(
+        uint256 requestId = _request(
             abi.encode(
                 risks[riskId].arrivalTime + CHECK_OFFSET,
                 risks[riskId].carrierFlightNumber,
@@ -260,7 +260,7 @@ contract FlightDelayOraclize is Product {
     }
 
     function confirmPaymentFailure(uint256 _requestId) external {
-        decline(actionRequests[_requestId].applicationId);
+        _decline(actionRequests[_requestId].applicationId);
     }
 
     function flightStatusCallback(uint256 _requestId, bytes calldata _response)
@@ -270,7 +270,7 @@ contract FlightDelayOraclize is Product {
 
         uint256 policyId = oracleRequests[_requestId].policyId;
         uint256 applicationId = oracleRequests[_requestId].applicationId;
-        uint256[] memory payoutOptions = getPayoutOptions(applicationId);
+        uint256[] memory payoutOptions = _getPayoutOptions(applicationId);
 
         if (status != "L" && status != "A" && status != "C" && status != "D") {
             emit LogUnprocessableStatus(_requestId, policyId);
@@ -298,7 +298,7 @@ contract FlightDelayOraclize is Product {
     }
 
     function confirmPayout(uint256 _payoutId, uint256 _amount) external {
-        payout(_payoutId, _amount);
+        _payout(_payoutId, _amount);
     }
 
     function calculatePayouts(uint256 _premium, uint256[6] memory _statistics)
@@ -331,12 +331,12 @@ contract FlightDelayOraclize is Product {
 
     function resolvePayout(uint256 _policyId, uint256 _payoutAmount) internal {
         if (_payoutAmount == 0) {
-            expire(_policyId);
+            _expire(_policyId);
 
             emit LogPolicyExpired(_policyId);
         } else {
-            uint256 claimId = newClaim(_policyId);
-            uint256 payoutId = confirmClaim(claimId, _payoutAmount);
+            uint256 claimId = _newClaim(_policyId);
+            uint256 payoutId = _confirmClaim(claimId, _payoutAmount);
 
             emit LogRequestPayout(_policyId, claimId, payoutId, _payoutAmount);
         }

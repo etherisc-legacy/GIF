@@ -92,7 +92,7 @@ contract FlightRatingsOracle is Oracle, usingOraclize {
                     );
                 }
 
-                respond(requestId, abi.encode(statistics));
+                _respond(requestId, abi.encode(statistics));
             }
         }
 

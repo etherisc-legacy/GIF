@@ -80,8 +80,8 @@ contract FlightDelayManual is Product {
         uint256 _premium,
         bytes32 _currency,
         uint256[] calldata _payoutOptions,
-        // customer
-        bytes32 _customerExternalId
+        // BP
+        bytes32 _bpExternalKey
     ) external {
         // Validate input parameters
         // Validate input parameters
@@ -123,8 +123,8 @@ contract FlightDelayManual is Product {
         }
 
         // Create new application
-        uint256 applicationId = newApplication(
-            _customerExternalId,
+        uint256 applicationId = _newApplication(
+            _bpExternalKey,
             _premium,
             _currency,
             _payoutOptions
@@ -153,12 +153,12 @@ contract FlightDelayManual is Product {
         uint256 applicationId = requests[requestId].applicationId;
 
         if (_statistics[0] <= MIN_OBSERVATIONS) {
-            decline(applicationId);
+            _decline(applicationId);
             return;
         }
 
-        uint256 premium = getPremium(applicationId);
-        uint256[] memory payoutOptions = getPayoutOptions(applicationId);
+        uint256 premium = _getPremium(applicationId);
+        uint256[] memory payoutOptions = _getPayoutOptions(applicationId);
         (uint256 weight, uint256[5] memory calculatedPayouts) = calculatePayouts(
             premium,
             _statistics
@@ -189,7 +189,7 @@ contract FlightDelayManual is Product {
 
         risks[riskId].weight = weight;
 
-        uint256 policyId = underwrite(applicationId);
+        uint256 policyId = _underwrite(applicationId);
 
         // New request
         uint256 newRequestId = requests.length++;
@@ -211,7 +211,7 @@ contract FlightDelayManual is Product {
     ) external {
         uint256 policyId = requests[requestId].policyId;
         uint256 applicationId = requests[requestId].policyId;
-        uint256[] memory payoutOptions = getPayoutOptions(applicationId);
+        uint256[] memory payoutOptions = _getPayoutOptions(applicationId);
 
         uint256 payoutAmount;
 
@@ -228,17 +228,17 @@ contract FlightDelayManual is Product {
                 payoutAmount = payoutOptions[0];
             }
 
-            uint256 claimId = newClaim(policyId);
-            uint256 payoutId = confirmClaim(claimId, payoutAmount);
+            uint256 claimId = _newClaim(policyId);
+            uint256 payoutId = _confirmClaim(claimId, payoutAmount);
 
             emit LogRequestPayout(claimId, payoutId, payoutAmount);
         } else {
-            expire(policyId);
+            _expire(policyId);
         }
     }
 
     function confirmPayout(uint256 _payoutId, uint256 _sum) external {
-        payout(_payoutId, _sum);
+        _payout(_payoutId, _sum);
     }
 
     function calculatePayouts(uint256 _premium, uint256[6] memory _statistics)

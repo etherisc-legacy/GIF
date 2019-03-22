@@ -11,8 +11,6 @@ module.exports = async (deployer) => {
   const registry = await RegistryController.at(registryStorage.address);
 
   await deployer.deploy(PolicyFlowDefault, registry.address, { gas: 3000000 });
-  // Etherscan doesn't detects constructor arguments for this contract
-  info('PolicyFlowDefault constructor arguments: %s\n', web3.eth.abi.encodeParameters(['address'], [registryStorage.address]).substr(2));
 
   const policyFlowDefault = await PolicyFlowDefault.deployed();
   const policyFlowDefaultName = await policyFlowDefault.NAME.call();

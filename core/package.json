@@ -2,7 +2,7 @@
   "name": "core-gif-contracts-deploy",
   "version": "1.0.0",
   "scripts": {
-    "dev": "cp -a ./deploy/. ./gif-contracts && cd gif-contracts && NETWORK=rinkeby node ./broadcast.js"
+    "broadcast": "cp -a ./deploy/. ./gif-contracts && cd gif-contracts && NETWORK=rinkeby node ./broadcast.js"
   },
   "dependencies": {
     "fs-extra": "^7.0.1"

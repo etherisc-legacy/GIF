@@ -61,6 +61,8 @@ module.exports = ({
 
       const user = await User.query().insertGraph(userData);
 
+      log.info(`New user created: ${body.email}, id ${user.id}`);
+
       ctx.ok({
         token: tokenGenerationService.generateToken(user),
         id: user.id,

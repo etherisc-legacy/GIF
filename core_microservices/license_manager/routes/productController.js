@@ -59,6 +59,8 @@ module.exports = ({
         return;
       }
 
+      log.info(`New product created: ${product.name}`);
+
       ctx.ok({
         id: product.id,
         password,

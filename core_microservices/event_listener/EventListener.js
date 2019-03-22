@@ -126,7 +126,7 @@ class EventListener {
           .limit(1);
 
         if (lastevent && lastevent.blockNumber) {
-          fromBlock = lastevent.blockNumber + 1;
+          fromBlock = Number(lastevent.blockNumber) + 1;
         } else {
           const [contract] = await Contract.query()
             .select('blockNumber')
@@ -234,7 +234,21 @@ class EventListener {
         .filter(i => i.type === 'event')
         .map(i => Object.assign(i, { signature: this._web3.eth.abi.encodeEventSignature(i) }))
         .filter(i => i.signature === event.topics[0]);
-      const decodedEvent = this._web3.eth.abi.decodeLog(abi[0].inputs, event.data, event.topics.slice(1));
+
+      // Fix decoding events with all indexed parameters
+      const data = event.data === '0x' ? '' : event.data;
+      const { inputs } = abi[0];
+      const decodedEvent = this._web3.eth.abi.decodeLog(inputs, data, event.topics.slice(1));
+
+      for (let i = 0; i < inputs.length; i += 1) {
+        const paramFormat = inputs[i];
+
+        if (/bytes/.test(paramFormat.type)) {
+          decodedEvent[i] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+          decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+        }
+      }
+
       // const block = await this._web3.eth.getBlock(event.blockNumber);
 
       // TODO: TEMPORARY FIX
@@ -273,9 +287,13 @@ class EventListener {
         return;
       }
       await this._amqp.publish({
+        product: contract.product,
         messageType: 'decodedEvent',
         messageTypeVersion: '1.*',
         content: eventModel,
+        customHeaders: {
+          product: contract.product,
+        },
       });
     } catch (e) {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
@@ -344,11 +362,13 @@ class EventListener {
   async saveArtifact({ content, fields, properties }) {
     try {
       const {
-        product, network, networkId, version, artifact,
+        network, networkId, version, artifact,
       } = content;
 
-      if (properties.headers.product && properties.headers.product !== product) {
-        throw new Error('Product ID does not match message signature');
+      const { product } = properties.headers;
+
+      if (!product) {
+        throw new Error('Product not defined');
       }
 
       const artifactObject = JSON.parse(artifact);

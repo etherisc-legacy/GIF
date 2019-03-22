@@ -1,43 +1,44 @@
 pragma solidity 0.5.2;
 
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "../modules/license/ILicenseController.sol";
 import "../modules/access/IAccessController.sol";
 import "../modules/registry/IRegistryController.sol";
 import "../modules/query/IQueryController.sol";
 import "../shared/WithRegistry.sol";
 
-contract DAOService is WithRegistry {
+contract DAOService is WithRegistry, Ownable {
     bytes32 public constant NAME = "DAO";
 
     constructor(address _registry) public WithRegistry(_registry) {}
 
     /* License */
-    function approveProduct(uint256 _productId) external {
+    function approveProduct(uint256 _productId) external onlyOwner {
         license().approveProduct(_productId);
     }
 
-    function disapproveProduct(uint256 _productId) external {
+    function disapproveProduct(uint256 _productId) external onlyOwner {
         license().disapproveProduct(_productId);
     }
 
-    function pauseProduct(uint256 _productId) external {
+    function pauseProduct(uint256 _productId) external onlyOwner {
         license().pauseProduct(_productId);
     }
 
-    function unpauseProduct(uint256 _productId) external {
+    function unpauseProduct(uint256 _productId) external onlyOwner {
         license().unpauseProduct(_productId);
     }
 
     /* Access */
-    function createRole(bytes32 _role) external {
+    function createRole(bytes32 _role) external onlyOwner {
         access().createRole(_role);
     }
 
-    function addRoleToAccount(address _address, bytes32 _role) external {
+    function addRoleToAccount(address _address, bytes32 _role) external onlyOwner {
         access().addRoleToAccount(_address, _role);
     }
 
-    function cleanRolesForAccount(address _address) external {
+    function cleanRolesForAccount(address _address) external onlyOwner {
         access().cleanRolesForAccount(_address);
     }
 
@@ -46,8 +47,8 @@ contract DAOService is WithRegistry {
         uint256 _release,
         bytes32 _contractName,
         address _contractAddress
-    ) external {
-        registryStorage().registerInRelease(
+    ) external onlyOwner {
+        registry.registerInRelease(
             _release,
             _contractName,
             _contractAddress
@@ -55,38 +56,38 @@ contract DAOService is WithRegistry {
     }
 
     function register(bytes32 _contractName, address _contractAddress)
-        external
+        external onlyOwner
     {
-        registryStorage().register(_contractName, _contractAddress);
+        registry.register(_contractName, _contractAddress);
     }
 
     function deregisterInRelease(uint256 _release, bytes32 _contractName)
-        external
+        external onlyOwner
     {
-        registryStorage().deregisterInRelease(_release, _contractName);
+        registry.deregisterInRelease(_release, _contractName);
     }
 
-    function deregister(bytes32 _contractName) external {
-        registryStorage().deregister(_contractName);
+    function deregister(bytes32 _contractName) external onlyOwner {
+        registry.deregister(_contractName);
     }
 
-    function prepareRelease() external returns (uint256 _release) {
-        _release = registryStorage().prepareRelease();
+    function prepareRelease() external onlyOwner returns (uint256 _release) {
+        _release = registry.prepareRelease();
     }
 
     /* Query */
-    function activateOracleType(bytes32 _oracleTypeName) external {
+    function activateOracleType(bytes32 _oracleTypeName) external onlyOwner {
         query().activateOracleType(_oracleTypeName);
     }
 
-    function activateOracle(uint256 _oracleId) external {
+    function activateOracle(uint256 _oracleId) external onlyOwner {
         query().activateOracle(_oracleId);
     }
 
     function assignOracleToOracleType(
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    ) external {
+    ) external onlyOwner {
         query().assignOracleToOracleType(_oracleTypeName, _oracleId);
     }
 
@@ -97,10 +98,6 @@ contract DAOService is WithRegistry {
 
     function access() internal view returns (IAccessController) {
         return IAccessController(registry.getContract("Access"));
-    }
-
-    function registryStorage() internal view returns (IRegistryController) {
-        return IRegistryController(registry.getContract("Registry"));
     }
 
     function query() internal view returns (IQueryController) {

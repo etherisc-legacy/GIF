@@ -8,6 +8,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     constructor() public {
         // Init
         controllers["DAO"] = msg.sender;
+        register("Registry", address(this));
     }
 
     function assignStorage(address _storage) external onlyDAO {

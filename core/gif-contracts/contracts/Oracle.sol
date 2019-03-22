@@ -11,7 +11,7 @@ contract Oracle is IOracle, RBAC {
         oracleService = IOracleService(_oracleService);
     }
 
-    function respond(uint256 _requestId, bytes memory _data) internal {
+    function _respond(uint256 _requestId, bytes memory _data) internal {
         oracleService.respond(_requestId, _data);
     }
 }

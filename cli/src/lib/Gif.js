@@ -42,12 +42,12 @@ class Gif {
    * Constructor
    * @param {Amqp} amqp
    * @param {Object} info
+   * @param {Object} eth
    */
-  constructor(amqp, info) {
+  constructor(amqp, info, eth) {
     this._amqp = amqp;
     this._info = info;
-
-    this.shutdown = this.shutdown.bind(this);
+    this._eth = eth;
   }
 
   /**
@@ -64,12 +64,45 @@ class Gif {
   get cli() {
     return {
       info: this.info.bind(this),
+      artifacts: {
+        send: this.sendArtifacts.bind(this),
+      },
+      contract: {
+        send: this.sendTransaction.bind(this),
+        call: this.callContract.bind(this),
+        onEvent: this.onEvent.bind(this),
+      },
       customers: {
         create: this.createCustomer.bind(this),
-        getById: this.getCustomerById.bind(this),
-        list: this.listCustomers.bind(this),
+        getById: this.getById('Customer').bind(this),
+        list: this.list('Customers').bind(this),
+      },
+      bp: {
+        create: this.createBp.bind(this),
+        getById: this.getById('Metadata').bind(this),
+        list: this.list('Metadata').bind(this),
+      },
+      application: {
+        getById: this.getById('Application').bind(this),
+        list: this.list('Applications').bind(this),
+      },
+      policy: {
+        getById: this.getById('Policy').bind(this),
+        list: this.list('Policies').bind(this),
+      },
+      claim: {
+        getById: this.getById('Claim').bind(this),
+        list: this.list('Claims').bind(this),
+      },
+      payout: {
+        getById: this.getById('Payout').bind(this),
+        list: this.list('Payouts').bind(this),
+      },
+      product: {
+        get: this.getProduct.bind(this),
       },
       help: cmd => console.log(docs[cmd] || 'No documentation'),
+      shutdown: this.shutdown.bind(this),
     };
   }
 
@@ -98,30 +131,165 @@ class Gif {
   }
 
   /**
-   * Get customer by id request
-   * @param {String} customerId
+   * Create business process request
+   * @param {Object} payload
    * @return {Promise<any|{error: string}>}
    */
-  async getCustomerById(customerId) {
+  async createBp(payload) {
     return this.request({
-      payload: {
-        customerId,
-      },
-      pubMessageType: 'getCustomer',
-      subMessageType: 'getCustomerResult',
+      payload,
+      pubMessageType: 'createMetadata',
+      subMessageType: 'createMetadataResult',
     });
   }
 
   /**
-   * Get list of customers request
+   * Get product request
    * @return {Promise<any|{error: string}>}
    */
-  async listCustomers() {
+  async getProduct() {
     return this.request({
       payload: {},
-      pubMessageType: 'listCustomers',
-      subMessageType: 'listCustomersResult',
+      pubMessageType: 'getProduct',
+      subMessageType: 'getProductResult',
     });
+  }
+
+  /**
+   * Request entity by id
+   * @param {String} entity
+   * @return {function(*): Promise<any|{error: string}>}
+   */
+  getById(entity) {
+    return id => this.request({
+      payload: { id },
+      pubMessageType: `get${entity}`,
+      subMessageType: `get${entity}Result`,
+    });
+  }
+
+  /**
+   * Request list on entities
+   * @param {String} entity
+   * @return {function(): Promise<any|{error: string}>}
+   */
+  list(entity) {
+    return () => this.request({
+      payload: {},
+      pubMessageType: `list${entity}`,
+      subMessageType: `list${entity}Result`,
+    });
+  }
+
+  /**
+   * Send artifacts
+   * @param {Object} payload
+   * @return {Promise<any|{error: string}>}
+   */
+  async sendArtifacts(payload) {
+    return this.broadcast({
+      payload,
+      messageType: 'contractDeployment',
+    });
+  }
+
+  /**
+   * Get artifacts
+   * @param {String} network
+   * @return {Promise<any|{error: string}>}
+   */
+  async getArtifacts(network) {
+    return this.request({
+      payload: { network },
+      pubMessageType: 'getArtifacts',
+      subMessageType: 'getArtifactsResult',
+    });
+  }
+
+  /**
+   * Sent transaction request
+   * @param {String} contractName
+   * @param {String} methodName
+   * @param {Array} parameters
+   * @return {Promise<*>}
+   */
+  async sendTransaction(contractName, methodName, parameters) {
+    const response = await this.request({
+      payload: {
+        contractName,
+        methodName,
+        parameters,
+      },
+      pubMessageType: 'contractTransactionRequest',
+      subMessageType: 'contractTransactionResult',
+    });
+
+    return response.result;
+  }
+
+  /**
+   * Call contract request
+   * @param {String} contractName
+   * @param {String} methodName
+   * @param {Array} parameters
+   * @return {Promise<*>}
+   */
+  async callContract(contractName, methodName, parameters) {
+    const response = await this.request({
+      payload: {
+        contractName,
+        methodName,
+        parameters,
+      },
+      pubMessageType: 'contractCallRequest',
+      subMessageType: 'contractCallResult',
+    });
+
+    return response.result;
+  }
+
+  /**
+   * Broadcast message
+   * @param {Object} payload
+   * @param {String} messageType
+   * @return {Promise<void>}
+   */
+  async broadcast({ payload, messageType }) {
+    try {
+      await this._amqp.createChannels();
+
+      await this._amqp.publish({
+        messageType,
+        messageVersion: '1.*',
+        content: {
+          ...payload,
+        },
+      });
+
+      await this._amqp.closeChannels();
+    } catch (e) {
+      this.errorHandler(e);
+    }
+  }
+
+  /**
+   * Handler for message with Ethereum event
+   * @param {Function} handler
+   * @return {Promise<void>}
+   */
+  async onEvent(handler) {
+    try {
+      await this._amqp.createChannels();
+
+      this._amqp.consume({
+        product: this._amqp.appName,
+        messageType: 'decodedEvent',
+        messageVersion: '1.*',
+        handler,
+      });
+    } catch (e) {
+      this.errorHandler(e);
+    }
   }
 
   /**
@@ -186,79 +354,8 @@ class Gif {
    * @return {{error: String}}
    */
   errorHandler(e) {
-    return { error: e.message };
+    return { error: e.message || e.error || e };
   }
-  //
-  // async getCustomerById() {
-  //   const customer = {
-  //     firstname: 'Joe',
-  //     lastname: 'Dow',
-  //     email: 'joe@dow.com',
-  //   };
-  //
-  //   //console.table(customer);
-  //
-  //   return customer;
-  // } // eslint-disable-line
-  //
-  // async getCustomers() {
-  //   const customers = [
-  //     {
-  //       firstname: 'Joe',
-  //       lastname: 'Dow',
-  //       email: 'joe@dow.com',
-  //     },
-  //     {
-  //       firstname: 'Joe2',
-  //       lastname: 'Dow',
-  //       email: 'joe2@dow.com',
-  //     },
-  //     {
-  //       firstname: 'Joe3',
-  //       lastname: 'Dow',
-  //       email: 'joe3@dow.com',
-  //     },
-  //   ];
-  //
-  //   //console.table(customers);
-  //
-  //   return customers;
-  // } // eslint-disable-line
-  //
-  // /* Applications */
-  // createApplication() {} // eslint-disable-line
-  //
-  // getApplicationById() {} // eslint-disable-line
-  //
-  // getApplications() {} // eslint-disable-line
-  //
-  // /* Policies */
-  // getPolicyById() {} // eslint-disable-line
-  //
-  // getPolicyByContractId() {} // eslint-disable-line
-  //
-  // getPolicies() {} // eslint-disable-line
-  //
-  // /* Claims */
-  // getClaimById() {} // eslint-disable-line
-  //
-  // getClaims() {} // eslint-disable-line
-  //
-  // /* Payouts */
-  // getPayoutById() {} // eslint-disable-line
-  //
-  // getPayouts() {} // eslint-disable-line
-  //
-  // /* Ethereum events */
-  // subscribeToEvents() {} // eslint-disable-line
-  //
-  // /* Contract API */
-  // sendTransactions() {} // eslint-disable-line
-  //
-  // callContract() {} // eslint-disable-line
-  //
-  // /* Notifications */
-  // sendNotification() {} // eslint-disable-line
 }
 
 module.exports = Gif;

@@ -28,23 +28,31 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`gifcli artifacts:send`](#gifcli-artifactssend)
 * [`gifcli console`](#gifcli-console)
-* [`gifcli contracts:list`](#gifcli-contractslist)
-* [`gifcli customer:create`](#gifcli-customercreate)
-* [`gifcli customer:get`](#gifcli-customerget)
-* [`gifcli customer:list`](#gifcli-customerlist)
 * [`gifcli exec`](#gifcli-exec)
 * [`gifcli help [COMMAND]`](#gifcli-help-command)
-* [`gifcli oracle:create`](#gifcli-oraclecreate)
-* [`gifcli oracle:list`](#gifcli-oraclelist)
 * [`gifcli product:create`](#gifcli-productcreate)
-* [`gifcli product:list`](#gifcli-productlist)
 * [`gifcli product:select`](#gifcli-productselect)
-* [`gifcli product:sendArtifacts`](#gifcli-productsendartifacts)
-* [`gifcli user:get`](#gifcli-userget)
-* [`gifcli user:login`](#gifcli-userlogin)
 * [`gifcli user:logout`](#gifcli-userlogout)
 * [`gifcli user:register`](#gifcli-userregister)
+
+## `gifcli artifacts:send`
+
+Send artifacts
+
+```
+USAGE
+  $ gifcli artifacts:send
+
+OPTIONS
+  -f, --file=file        (required) truffle artifacts file
+  -n, --network=network  (required) network
+
+DESCRIPTION
+  ...
+  Send artifacts
+```
 
 ## `gifcli console`
 
@@ -57,65 +65,6 @@ USAGE
 DESCRIPTION
   ...
   Run console mode
-```
-
-## `gifcli contracts:list`
-
-List core contracts
-
-```
-USAGE
-  $ gifcli contracts:list
-
-DESCRIPTION
-  ...
-  List contracts
-```
-
-## `gifcli customer:create`
-
-Create customer
-
-```
-USAGE
-  $ gifcli customer:create
-
-DESCRIPTION
-  ...
-  Create customer
-```
-
-## `gifcli customer:get`
-
-Get customer
-
-```
-USAGE
-  $ gifcli customer:get
-
-OPTIONS
-  -i, --id=id  (required) customer id
-
-DESCRIPTION
-  ...
-  Get customer
-```
-
-## `gifcli customer:list`
-
-List customers
-
-```
-USAGE
-  $ gifcli customer:list
-
-OPTIONS
-  -l, --limit=limit    [default: 20] records offset
-  -o, --offset=offset  records limit
-
-DESCRIPTION
-  ...
-  List customers
 ```
 
 ## `gifcli exec`
@@ -151,36 +100,6 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.6/src/commands/help.ts)_
 
-## `gifcli oracle:create`
-
-Create new oracle
-
-```
-USAGE
-  $ gifcli oracle:create
-
-DESCRIPTION
-  ...
-  Create new oracle
-```
-
-## `gifcli oracle:list`
-
-List oracles
-
-```
-USAGE
-  $ gifcli oracle:list
-
-OPTIONS
-  -l, --limit=limit    [default: 20] records offset
-  -o, --offset=offset  records limit
-
-DESCRIPTION
-  ...
-  List oracles
-```
-
 ## `gifcli product:create`
 
 Create new product
@@ -192,23 +111,6 @@ USAGE
 DESCRIPTION
   ...
   Create new product
-```
-
-## `gifcli product:list`
-
-List products
-
-```
-USAGE
-  $ gifcli product:list
-
-OPTIONS
-  -l, --limit=limit    [default: 20] records offset
-  -o, --offset=offset  records limit
-
-DESCRIPTION
-  ...
-  List products
 ```
 
 ## `gifcli product:select`
@@ -224,48 +126,9 @@ DESCRIPTION
   Select current product
 ```
 
-## `gifcli product:sendArtifacts`
-
-Send artifacts into GIF
-
-```
-USAGE
-  $ gifcli product:sendArtifacts
-
-DESCRIPTION
-  ...
-  Send artifacts into GIF
-```
-
-## `gifcli user:get`
-
-Get current user
-
-```
-USAGE
-  $ gifcli user:get
-
-DESCRIPTION
-  ...
-  Get user
-```
-
-## `gifcli user:login`
-
-Login to GIF
-
-```
-USAGE
-  $ gifcli user:login
-
-DESCRIPTION
-  ...
-  Login to GIF
-```
-
 ## `gifcli user:logout`
 
-Logout from GIF
+Logout
 
 ```
 USAGE
@@ -273,7 +136,7 @@ USAGE
 
 DESCRIPTION
   ...
-  Logout from GIF
+  Logout
 ```
 
 ## `gifcli user:register`

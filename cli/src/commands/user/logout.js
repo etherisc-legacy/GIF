@@ -1,7 +1,7 @@
 const BaseCommand = require('../../lib/BaseCommand');
 
 /**
- * Logout command
+ * Logout
  */
 class Logout extends BaseCommand {
   /**
@@ -15,9 +15,9 @@ class Logout extends BaseCommand {
   }
 }
 
-Logout.description = `Logout from GIF
+Logout.description = `Logout
 ...
-Logout from GIF
+Logout
 `;
 
 module.exports = Logout;

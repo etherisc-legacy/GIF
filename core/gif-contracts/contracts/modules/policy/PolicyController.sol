@@ -11,7 +11,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     constructor(address _registry) public WithRegistry(_registry) {}
 
     /* Metadata */
-    function createPolicyFlow(uint256 _productId)
+    function createPolicyFlow(uint256 _productId, bytes32 _bpExternalKey)
         external
         onlyPolicyFlow("Policy")
         returns (uint256 _metadataId)
@@ -20,10 +20,11 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
         Metadata storage metadatum = metadata[_productId][_metadataId];
         metadatum.state = PolicyFlowState.Started;
+        metadatum.bpExternalKey = _bpExternalKey;
         metadatum.createdAt = block.timestamp;
         metadatum.updatedAt = block.timestamp;
 
-        emit LogNewMetadata(_productId, _metadataId, PolicyFlowState.Started);
+        emit LogNewMetadata(_productId, _bpExternalKey, _metadataId, PolicyFlowState.Started);
     }
 
     function setPolicyFlowState(
@@ -42,7 +43,6 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     function createApplication(
         uint256 _productId,
         uint256 _metadataId,
-        bytes32 _customerExternalId,
         uint256 _premium,
         bytes32 _currency,
         uint256[] calldata _payoutOptions
@@ -51,7 +51,6 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
         Application storage application = applications[_productId][_applicationId];
         application.metadataId = _metadataId;
-        application.customerExternalId = _customerExternalId;
         application.premium = _premium;
         application.currency = _currency;
         // todo: check payoutOptions values
@@ -150,10 +149,11 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         metadatum.claimIds.push(_claimId);
         metadatum.updatedAt = block.timestamp;
 
-        emit LogClaimStateChanged(
+        emit LogNewClaim(
             _productId,
             policy.metadataId,
             _policyId,
+            _claimId,
             ClaimState.Applied
         );
     }
@@ -173,6 +173,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
             _productId,
             claim.metadataId,
             metadatum.policyId,
+            _claimId,
             _state
         );
     }
@@ -291,14 +292,12 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         view
         returns (
         uint256 _metadataId,
-        bytes32 _customerExternalId,
         uint256 _premium,
         bytes32 _currency,
         ApplicationState _state
     )
     {
         _metadataId = applications[_productId][_applicationId].metadataId;
-        _customerExternalId = applications[_productId][_applicationId].customerExternalId;
         _premium = applications[_productId][_applicationId].premium;
         _currency = applications[_productId][_applicationId].currency;
         _state = applications[_productId][_applicationId].state;

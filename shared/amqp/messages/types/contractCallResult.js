@@ -8,7 +8,7 @@ schemaVersions['1.0'] = {
     contractName: { type: 'string' },
     methodName: { type: 'string' },
     key: { type: 'string' },
-    result: { type: 'object' },
+    networkName: { type: 'string' },
   },
 };
 

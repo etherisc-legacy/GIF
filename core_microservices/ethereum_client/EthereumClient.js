@@ -59,11 +59,13 @@ class EthereumClient {
   async saveArtifact({ content, fields, properties }) {
     try {
       const {
-        product, network, networkId, version, artifact,
+        network, networkId, version, artifact,
       } = content;
 
-      if (properties.headers.product && properties.headers.product !== product) {
-        throw new Error('Product ID does not match message signature');
+      const { product } = properties.headers;
+
+      if (!product) {
+        throw new Error('Product not defined');
       }
 
       const artifactObject = JSON.parse(artifact);
@@ -110,8 +112,15 @@ class EthereumClient {
    */
   async onTransactionRequest({ content, fields, properties }) {
     const {
-      product, contractName, methodName, key, parameters,
+      contractName, methodName, key, parameters,
     } = content;
+
+    const { product } = properties.headers;
+
+    if (!product) {
+      throw new Error('Product not defined');
+    }
+
     const { Contract } = this._models;
 
     this._log.info(`Making ${methodName} transaction for ${contractName}@${product}`);
@@ -144,6 +153,7 @@ class EthereumClient {
     }
 
     this._amqp.publish({
+      product,
       messageType: 'contractTransactionResult',
       messageVersion: '1.*',
       content: {
@@ -152,8 +162,10 @@ class EthereumClient {
         methodName,
         key,
         result,
+        networkName: process.env.NETWORK_NAME,
       },
       correlationId: properties.correlationId,
+      customHeaders: properties.headers,
     });
   }
 
@@ -167,8 +179,15 @@ class EthereumClient {
    */
   async onCallRequest({ content, fields, properties }) {
     const {
-      product, contractName, methodName, key, parameters,
+      contractName, methodName, key, parameters,
     } = content;
+
+    const { product } = properties.headers;
+
+    if (!product) {
+      throw new Error('Product not defined');
+    }
+
     const { Contract } = this._models;
 
     this._log.info(`Making ${methodName} call for ${contractName}@${product}`);
@@ -198,6 +217,7 @@ class EthereumClient {
     }
 
     this._amqp.publish({
+      product,
       messageType: 'contractCallResult',
       messageVersion: '1.*',
       content: {
@@ -206,8 +226,10 @@ class EthereumClient {
         methodName,
         key,
         result,
+        networkName: process.env.NETWORK_NAME,
       },
       correlationId: properties.correlationId,
+      customHeaders: properties.headers,
     });
   }
 
@@ -219,6 +241,7 @@ class EthereumClient {
    * @return {[]} transformedparameters
    */
   transformParams(parameters, methodDescription, utils) {
+    const web3 = signer();
     const transformedParameters = [];
     for (let index = 0; index < parameters.length; index += 1) {
       const paramFormat = methodDescription.inputs[index];

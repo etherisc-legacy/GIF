@@ -4,6 +4,7 @@ interface IPolicy {
     // Events
     event LogNewMetadata(
         uint256 productId,
+        bytes32 bpExternalKey,
         uint256 metadataId,
         PolicyFlowState state
     );
@@ -45,6 +46,7 @@ interface IPolicy {
         uint256 productId,
         uint256 metadataId,
         uint256 policyId,
+        uint256 claimId,
         ClaimState state
     );
 
@@ -52,6 +54,7 @@ interface IPolicy {
         uint256 productId,
         uint256 metadataId,
         uint256 policyId,
+        uint256 claimId,
         ClaimState state
     );
 
@@ -112,25 +115,26 @@ interface IPolicy {
         bool hasApplication;
         // ERC721 token
         address tokenContract;
-        uint256 tokenId;
         // Core
-        uint256 registryContract;
+        address registryContract;
         uint256 release;
         // State
         PolicyFlowState state;
         bytes32 stateMessage;
-        // Datetime
-        uint256 createdAt;
-        uint256 updatedAt;
 
         // BPMN
         // PolicyState[] next;
+
+        // BP
+        bytes32 bpExternalKey;
+
+        // Datetime
+        uint256 createdAt;
+        uint256 updatedAt;
     }
 
     struct Application {
         uint256 metadataId;
-        // Customer
-        bytes32 customerExternalId;
         // Premium
         uint256 premium;
         bytes32 currency;

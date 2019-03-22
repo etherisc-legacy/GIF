@@ -1,10 +1,12 @@
 const { Command } = require('@oclif/command');
 const { cli } = require('cli-ux');
+const moment = require('moment');
 const os = require('os');
 const fs = require('fs-jetpack');
 const Amqp = require('@etherisc/amqp');
 const Gif = require('./Gif');
 const Api = require('./Api');
+const eth = require('./eth');
 
 
 /**
@@ -62,6 +64,9 @@ class BaseCommand extends Command {
       this.api.setAuthToken(configuration.user.token);
     }
 
+    // Eth
+    this.eth = eth;
+
     // Initialize and configure AMQP and Gif
     if (configuration && configuration.current) {
       if (!configuration.products) throw new Error('Invalid configuration format');
@@ -89,8 +94,11 @@ class BaseCommand extends Command {
         product: configuration.current,
       };
 
-      this.gif = new Gif(amqp, info);
+      const gif = new Gif(amqp, info, this.eth);
+      this.gif = gif.cli;
     }
+
+    this.moment = moment;
   }
 
   /**
@@ -99,8 +107,8 @@ class BaseCommand extends Command {
    */
   async finally() {
     if (this.gif) {
+      await new Promise(resolve => setTimeout(resolve, 500));
       await this.gif.shutdown();
-      process.exit(0);
     }
   }
 }

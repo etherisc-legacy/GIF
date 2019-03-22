@@ -53,7 +53,11 @@ class EventLogging {
    * @return {Integer} id
    * */
   async saveMessage({ content, fields, properties }) {
-    const idArray = await this._db(`${schema}.events`).insert({ content, fields, properties }).returning('id');
+    const idArray = await this._db(`${schema}.events`).insert({
+      content: JSON.stringify(content),
+      fields: JSON.stringify(fields),
+      properties: JSON.stringify(properties),
+    }).returning('id');
     return idArray[0];
   }
 

@@ -46,11 +46,13 @@ class Contracts {
           messageType: 'contractDeployment',
           messageVersion: '1.*',
           content: {
-            product,
             network: networkName,
             networkId,
             version: '1.0.0',
             artifact,
+          },
+          customHeaders: {
+            product,
           },
         });
       }

@@ -16,7 +16,10 @@ class Console extends BaseCommand {
       replManager.start();
       replManager.repl.on('exit', resolve);
       replManager.setContext({
-        gif: this.gif.cli,
+        gif: this.gif,
+        eth: this.eth,
+        moment: this.moment,
+        clear: () => process.stdout.write('\u001b[2J\u001b[0;0H'),
       });
     });
   }

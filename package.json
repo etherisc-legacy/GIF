@@ -11,6 +11,7 @@
     "deploy:docker": "echo 'Deploy to Docker-for-Desktop Kubernetes'; DEPLOY_DESTINATION=docker ./bin/run deploy",
     "deploy:gke:secret": "echo Deploy secrets to GKE; ./bin/run deploySecret",
     "deploy:gke": "echo 'Deploy to GKE'; DEPLOY_DESTINATION=gke ./bin/run deploy",
+    "dev:env": "./bin/set_dev_env.sh",
     "bootstrap": "./bin/bootstrap.sh && lerna link",
     "bootstrap:update": "./bin/update_locks.sh ",
     "clean": "echo 'Cleaning local /node_modules folders'; lerna clean --concurrency 100 --progress",

@@ -22,7 +22,9 @@ class Exec extends BaseCommand {
       module: mod,
       require: mod.require,
       console,
-      gif: this.gif.cli,
+      gif: this.gif,
+      eth: this.eth,
+      moment: this.moment,
     };
 
     const script = new vm.Script(code.toString('utf8'), { filename: file });
