@@ -41,3 +41,5 @@ spec:
             secretKeyRef:
               name: rabbitmq-credentials
               key: AMQP_PLATFORM_PASSWORD
+        - name: DEBUG
+          value: 'knex:query'

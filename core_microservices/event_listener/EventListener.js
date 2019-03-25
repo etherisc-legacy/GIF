@@ -32,7 +32,7 @@ class EventListener {
    * @return {void}
    */
   setWeb3() {
-    this._web3 = new Web3(new Web3.providers.WebsocketProvider(this._config.rpcNode));
+    this._web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER));
   }
 
   /**
@@ -149,53 +149,54 @@ class EventListener {
   }
 
   /**
-   * Handle event
-   * @param {object} event
-   * @return {void}
-   */
-  async onData(event) {
-    try {
-      this.fromBlock = event.blockNumber;
-      const { Contract } = this._models;
-      const contracts = await Contract.query().where({
-        address: event.address.toLowerCase(),
-        networkName: this._networkName,
-      });
-      if (contracts.length > 0) {
-        this.handleEvent(event);
-      }
-    } catch (e) {
-      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-    }
-  }
-
-  /**
-   * Handle error
-   * @param {error} e
-   * @return {void}
-   */
-  onError(e) {
-    this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-    this.reconnect();
-  }
-
-  /**
    * Watch events
    * @return {void}
    */
   async watchEvents() {
     this.setWeb3();
-    const fromBlock = await this._web3.eth.getBlockNumber();
+
+    let fromBlock = await this._web3.eth.getBlockNumber() + 1;
 
     await this.checkPastEvents();
 
-    this._web3.eth.subscribe('logs', { fromBlock }, (e) => {
-      if (!e) return;
+    setInterval(async () => {
+      const toBlock = await this._web3.eth.getBlockNumber();
+      this._log.info(`Current block number: ${toBlock}`);
+      if (toBlock >= fromBlock) {
+        this._log.info(`Pulling events for blocks ${fromBlock} - ${toBlock}`);
+        await this.processEvents({ fromBlock, toBlock });
+        fromBlock = toBlock + 1;
+      }
+    }, 10 * 1000); // 10 seconds
+  }
+
+  /**
+   * Handle events from the block
+   * @param {Integer} fromBlock
+   * @param {Integer} toBlock
+   * @return {void}
+   */
+  async processEvents({ fromBlock, toBlock }) {
+    try {
+      const { Contract } = this._models;
+      const contractAddresses = await Contract.query().where({
+        networkName: this._networkName,
+      }).select('address').pluck('address');
+
+      if (contractAddresses.length > 0) {
+        const events = await this._web3.eth.getPastLogs({
+          fromBlock: this._web3.utils.toHex(fromBlock),
+          toBlock: this._web3.utils.toHex(toBlock),
+          address: contractAddresses,
+        });
+
+        for (let index = 0; index < events.length; index += 1) {
+          await this.handleEvent(events[index]);
+        }
+      }
+    } catch (e) {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-      throw new Error(e);
-    })
-      .on('data', this.onData.bind(this))
-      .on('error', this.onError.bind(this));
+    }
   }
 
   /**
