@@ -155,19 +155,27 @@ class EventListener {
 
   /**
    * Handle event
-   * @param {object} event
+   * @param {object} data
    * @return {void}
    */
-  async onData(event) {
+  async onData(data) {
     try {
-      this.fromBlock = event.blockNumber;
+      const blockNumber = this._web3.utils.toHex(data.number);
       const { Contract } = this._models;
-      const contracts = await Contract.query().where({
-        address: event.address.toLowerCase(),
+      const contractAddresses = await Contract.query().where({
         networkName: this._networkName,
-      });
-      if (contracts.length > 0) {
-        this.handleEvent(event);
+      }).select('address').pluck('address');
+
+      if (contractAddresses.length > 0) {
+        const events = await this._web3.eth.getPastLogs({
+          fromBlock: blockNumber,
+          toBlock: blockNumber,
+          address: contractAddresses,
+        });
+
+        for (let index = 0; index < events.length; index += 1) {
+          await this.handleEvent(events[index]);
+        }
       }
     } catch (e) {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
@@ -190,11 +198,10 @@ class EventListener {
    */
   async watchEvents() {
     this.setWeb3();
-    const fromBlock = await this._web3.eth.getBlockNumber();
 
     await this.checkPastEvents();
 
-    this._web3.eth.subscribe('logs', { fromBlock }, (e) => {
+    this._web3.eth.subscribe('newBlockHeaders', (e) => {
       if (!e) return;
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
       throw new Error(e);
