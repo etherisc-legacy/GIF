@@ -13,6 +13,10 @@ class Exec extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
+    if (!this.gif) {
+      this.error('You are not logged-in or product not provided');
+    }
+
     const { flags: { file } } = this.parse(Exec);
 
     const code = fs.readFileSync(file);

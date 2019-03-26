@@ -39,7 +39,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     /*
      * @dev Approve product
      */
-    function approveProduct(uint256 _id) external onlyDAO {
+    function approveProduct(uint256 _id) external onlyInstanceOperator {
         require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
         require(
             products[_id].approved != true,
@@ -61,7 +61,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     /*
      * @dev Disapprove product
      */
-    function disapproveProduct(uint256 _id) external onlyDAO {
+    function disapproveProduct(uint256 _id) external onlyInstanceOperator {
         require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
         require(products[_id].approved == true, "ERROR::PRODUCT_NOT_APPROVED");
         require(
@@ -75,7 +75,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         emit LogProductDisapproved(_id, products[_id].name, products[_id].addr);
     }
 
-    function pauseProduct(uint256 _id) external onlyDAO {
+    function pauseProduct(uint256 _id) external onlyInstanceOperator {
         // todo: should be restricted to ProductOwners
         require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
         require(
@@ -88,7 +88,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         emit LogProductPaused(_id, products[_id].name, products[_id].addr);
     }
 
-    function unpauseProduct(uint256 _id) external onlyDAO {
+    function unpauseProduct(uint256 _id) external onlyInstanceOperator {
         // todo: should be restricted to ProductOwners
         require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
         require(

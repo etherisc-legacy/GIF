@@ -7,6 +7,7 @@ const Amqp = require('@etherisc/amqp');
 const Gif = require('./Gif');
 const Api = require('./Api');
 const eth = require('./eth');
+const errorMessages = require('./errorMessages');
 
 
 /**
@@ -99,6 +100,8 @@ class BaseCommand extends Command {
     }
 
     this.moment = moment;
+
+    this.errorMessages = errorMessages;
   }
 
   /**

@@ -8,7 +8,7 @@ function flatten {
 }
 
 # Services
-flatten ./contracts/services/DAOService.sol ./verification/DAOService.txt
+flatten ./contracts/services/InstanceOperatorService.sol ./verification/InstanceOperatorService.txt
 flatten ./contracts/services/ProductService.sol ./verification/ProductService.txt
 flatten ./contracts/services/ProductOwnerService.sol ./verification/ProductOwnerService.txt
 flatten ./contracts/services/OracleService.sol ./verification/OracleService.txt

@@ -10,7 +10,7 @@ contract WithRegistry is AccessModifiers {
         registry = IRegistryController(_registry);
     }
 
-    function assignRegistry(address _registry) external onlyDAO {
+    function assignRegistry(address _registry) external onlyInstanceOperator {
         registry = IRegistryController(_registry);
     }
 

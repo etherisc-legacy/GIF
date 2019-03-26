@@ -11,6 +11,10 @@ class SendArtifacts extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
+    if (!this.gif) {
+      this.error('You are not logged-in or product not provided');
+    }
+
     const { flags: { file, network } } = this.parse(SendArtifacts);
 
     const networkInfo = this.eth.networkByName(network);

@@ -13,15 +13,21 @@ class Register extends BaseCommand {
   async run() {
     // Firstname
     const firstname = await this.cli.prompt('Firstname');
-    if (!firstname.length) throw new Error('Firstname not provided');
+    if (!firstname.length) {
+      this.error('Firstname not provided');
+    }
 
     // Lastname
     const lastname = await this.cli.prompt('Lastname');
-    if (!lastname.length) throw new Error('Lastname not provided');
+    if (!lastname.length) {
+      this.error('Lastname not provided');
+    }
 
     // Email
     const email = await this.cli.prompt('Email');
-    if (!emailValidator.validate(email)) throw new Error('Email is invalid');
+    if (!emailValidator.validate(email)) {
+      this.error('Email is invalid');
+    }
 
     // Password
     const password = await this.cli.prompt('Password', { type: 'hide' });
@@ -38,7 +44,9 @@ class Register extends BaseCommand {
 
     // Repeat password
     const passwordRepeat = await this.cli.prompt('Repeat password', { type: 'hide' });
-    if (password !== passwordRepeat) throw new Error('Passwords are not equal');
+    if (password !== passwordRepeat) {
+      this.error('Passwords are not equal');
+    }
 
     // E.g. response:
     // const response = {
@@ -48,7 +56,11 @@ class Register extends BaseCommand {
     //   },
     // };
 
-    const response = await this.api.register(firstname, lastname, email, password);
+    const response = await this.api.register(firstname, lastname, email, password)
+      .catch((error) => {
+        this.log(JSON.stringify(error.response.data));
+        this.error(error.message);
+      });
 
     const config = {
       user: {

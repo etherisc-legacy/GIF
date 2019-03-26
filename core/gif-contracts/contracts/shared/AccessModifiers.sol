@@ -1,8 +1,11 @@
 pragma solidity 0.5.2;
 
 contract AccessModifiers {
-    modifier onlyDAO() {
-        require(msg.sender == getService("DAO"), "ERROR::NOT_DAO_SERVICE");
+    modifier onlyInstanceOperator() {
+        require(
+            msg.sender == getService("InstanceOperator"),
+            "ERROR::NOT_INSTANCE_OPERATOR"
+        );
         _;
     }
 

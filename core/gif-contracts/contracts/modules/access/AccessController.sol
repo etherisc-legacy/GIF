@@ -6,7 +6,7 @@ import "../../shared/ModuleController.sol";
 contract AccessController is AccessStorageModel, ModuleController {
     constructor(address _registry) public WithRegistry(_registry) {}
 
-    function createRole(bytes32 _role) external onlyDAO {
+    function createRole(bytes32 _role) external onlyInstanceOperator {
         require(roles[_role] == 0);
 
         roles[_role] = 1 << rolesKeys.length;
@@ -15,14 +15,17 @@ contract AccessController is AccessStorageModel, ModuleController {
 
     function addRoleToAccount(address _address, bytes32 _role)
         external
-        onlyDAO
+        onlyInstanceOperator
     {
         require(roles[_role] != 0);
 
         permissions[_address] = permissions[_address] | roles[_role];
     }
 
-    function cleanRolesForAccount(address _address) external onlyDAO {
+    function cleanRolesForAccount(address _address)
+        external
+        onlyInstanceOperator
+    {
         delete permissions[_address];
     }
 

@@ -11,8 +11,8 @@ class SelectProduct extends BaseCommand {
   async run() {
     const { products } = this.configuration;
 
-    if (products && Object.keys(products).length === 0) {
-      throw new Error('No products');
+    if (!products || Object.keys(products).length === 0) {
+      this.error('No available products');
     }
 
     this.log('Available products:');
@@ -20,7 +20,7 @@ class SelectProduct extends BaseCommand {
     const current = await this.cli.prompt('Select product');
 
     if (!products[current]) {
-      throw new Error('No such product');
+      this.error('No such product');
     }
 
     this.configure({ ...this.configuration, current });

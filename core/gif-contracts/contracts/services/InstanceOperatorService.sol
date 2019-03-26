@@ -7,8 +7,8 @@ import "../modules/registry/IRegistryController.sol";
 import "../modules/query/IQueryController.sol";
 import "../shared/WithRegistry.sol";
 
-contract DAOService is WithRegistry, Ownable {
-    bytes32 public constant NAME = "DAO";
+contract InstanceOperatorService is WithRegistry, Ownable {
+    bytes32 public constant NAME = "InstanceOperator";
 
     constructor(address _registry) public WithRegistry(_registry) {}
 
@@ -34,7 +34,10 @@ contract DAOService is WithRegistry, Ownable {
         access().createRole(_role);
     }
 
-    function addRoleToAccount(address _address, bytes32 _role) external onlyOwner {
+    function addRoleToAccount(address _address, bytes32 _role)
+        external
+        onlyOwner
+    {
         access().addRoleToAccount(_address, _role);
     }
 
@@ -48,21 +51,19 @@ contract DAOService is WithRegistry, Ownable {
         bytes32 _contractName,
         address _contractAddress
     ) external onlyOwner {
-        registry.registerInRelease(
-            _release,
-            _contractName,
-            _contractAddress
-        );
+        registry.registerInRelease(_release, _contractName, _contractAddress);
     }
 
     function register(bytes32 _contractName, address _contractAddress)
-        external onlyOwner
+        external
+        onlyOwner
     {
         registry.register(_contractName, _contractAddress);
     }
 
     function deregisterInRelease(uint256 _release, bytes32 _contractName)
-        external onlyOwner
+        external
+        onlyOwner
     {
         registry.deregisterInRelease(_release, _contractName);
     }

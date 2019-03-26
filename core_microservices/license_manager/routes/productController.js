@@ -39,6 +39,7 @@ module.exports = ({
 
     const validate = ajv.compile(createProductSchema);
     if (!validate(body)) {
+      log.error(validate.errors);
       ctx.badRequest({ error: validate.errors });
       return;
     }

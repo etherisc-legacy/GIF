@@ -21,7 +21,10 @@ contract PolicyFlowDefault is WithRegistry {
 
         uint256 productId = license().getProductId(msg.sender);
 
-        uint256 metadataId = policy().createPolicyFlow(productId, _bpExternalKey);
+        uint256 metadataId = policy().createPolicyFlow(
+            productId,
+            _bpExternalKey
+        );
 
         uint256 applicationId = policy().createApplication(
             productId,
@@ -34,6 +37,7 @@ contract PolicyFlowDefault is WithRegistry {
         _applicationId = applicationId;
 
         // todo: reduce available applications for product
+
     }
 
     function underwrite(uint256 _applicationId)

@@ -27,11 +27,12 @@ class ReplManager extends EventEmitter {
 
   /**
    * Start REPL
+   * @param {String} product
    */
-  start() {
+  start(product) {
     if (!this.repl) {
       this.repl = repl.start({
-        prompt: 'GIF >  ',
+        prompt: `GIF > ${product} > `,
         eval: this.interpret.bind(this),
         useColors: true,
       });

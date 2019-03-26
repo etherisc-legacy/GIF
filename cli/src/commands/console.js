@@ -10,10 +10,14 @@ class Console extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
+    if (!this.gif) {
+      this.error('You are not logged-in or product not provided');
+    }
+
     const replManager = new ReplManager();
 
     await new Promise((resolve) => {
-      replManager.start();
+      replManager.start(this.configuration.current);
       replManager.repl.on('exit', resolve);
       replManager.setContext({
         gif: this.gif,

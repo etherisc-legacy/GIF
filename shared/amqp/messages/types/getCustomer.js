@@ -4,8 +4,9 @@ schemaVersions['1.0'] = {
   id: 'getCustomer',
   type: 'object',
   properties: {
-    customerId: { type: 'string' },
+    id: { type: 'string' },
   },
+  required: ['id'],
 };
 
 module.exports = schemaVersions;

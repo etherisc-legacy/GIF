@@ -247,9 +247,10 @@ class EthereumClient {
       const paramFormat = methodDescription.inputs[index];
       if (/bytes/.test(paramFormat.type)) {
         const byteSize = parseInt(paramFormat.type.replace('bytes', ''), 10);
+        const length = byteSize * 2 + 2;
         const hexString = (parameters[index].match(/^0x/))
-          ? parameters[index] : web3.utils.asciiToHex(parameters[index]);
-        transformedParameters[index] = web3.utils.padRight(hexString, byteSize + 2).substr(0, byteSize + 2);
+          ? parameters[index] : web3.utils.utf8ToHex(parameters[index]);
+        transformedParameters[index] = web3.utils.padRight(hexString, length).substr(0, length);
       } else {
         transformedParameters[index] = parameters[index];
       }

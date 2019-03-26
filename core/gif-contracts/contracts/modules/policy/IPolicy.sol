@@ -70,6 +70,7 @@ interface IPolicy {
 
     event LogPayoutStateChanged(
         uint256 productId,
+        uint256 payoutId,
         uint256 metadataId,
         uint256 policyId,
         uint256 claimId,
@@ -80,6 +81,7 @@ interface IPolicy {
         uint256 productId,
         uint256 policyId,
         uint256 payoutId,
+        uint256 metadataId,
         uint256 amount,
         PayoutState state
     );
@@ -88,6 +90,7 @@ interface IPolicy {
         uint256 productId,
         uint256 policyId,
         uint256 payoutId,
+        uint256 metadataId,
         uint256 amount,
         uint256 remainder,
         PayoutState state
@@ -121,13 +124,11 @@ interface IPolicy {
         // State
         PolicyFlowState state;
         bytes32 stateMessage;
-
         // BPMN
         // PolicyState[] next;
 
         // BP
         bytes32 bpExternalKey;
-
         // Datetime
         uint256 createdAt;
         uint256 updatedAt;

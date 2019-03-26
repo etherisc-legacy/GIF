@@ -16,15 +16,20 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         onlyPolicyFlow("Policy")
         returns (uint256 _metadataId)
     {
-        _metadataId = metadata[_productId].length++;
+        _metadataId = ++metadataIdIncrement;
 
-        Metadata storage metadatum = metadata[_productId][_metadataId];
-        metadatum.state = PolicyFlowState.Started;
-        metadatum.bpExternalKey = _bpExternalKey;
-        metadatum.createdAt = block.timestamp;
-        metadatum.updatedAt = block.timestamp;
+        Metadata storage meta = metadata[_productId][_metadataId];
+        meta.state = PolicyFlowState.Started;
+        meta.bpExternalKey = _bpExternalKey;
+        meta.createdAt = block.timestamp;
+        meta.updatedAt = block.timestamp;
 
-        emit LogNewMetadata(_productId, _bpExternalKey, _metadataId, PolicyFlowState.Started);
+        emit LogNewMetadata(
+            _productId,
+            _bpExternalKey,
+            _metadataId,
+            PolicyFlowState.Started
+        );
     }
 
     function setPolicyFlowState(
@@ -32,9 +37,9 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         uint256 _metadataId,
         PolicyFlowState _state
     ) external onlyPolicyFlow("Policy") {
-        Metadata storage metadatum = metadata[_productId][_metadataId];
-        metadatum.state = _state;
-        metadatum.updatedAt = block.timestamp;
+        Metadata storage meta = metadata[_productId][_metadataId];
+        meta.state = _state;
+        meta.updatedAt = block.timestamp;
 
         emit LogMetadataStateChanged(_productId, _metadataId, _state);
     }
@@ -47,7 +52,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         bytes32 _currency,
         uint256[] calldata _payoutOptions
     ) external onlyPolicyFlow("Policy") returns (uint256 _applicationId) {
-        _applicationId = applications[_productId].length++;
+        _applicationId = ++applicationIdIncrement;
 
         Application storage application = applications[_productId][_applicationId];
         application.metadataId = _metadataId;
@@ -59,10 +64,10 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         application.createdAt = block.timestamp;
         application.updatedAt = block.timestamp;
 
-        Metadata storage metadatum = metadata[_productId][_metadataId];
-        metadatum.applicationId = _applicationId;
-        metadatum.hasApplication = true;
-        metadatum.updatedAt = block.timestamp;
+        Metadata storage meta = metadata[_productId][_metadataId];
+        meta.applicationId = _applicationId;
+        meta.hasApplication = true;
+        meta.updatedAt = block.timestamp;
 
         emit LogNewApplication(_productId, _metadataId, _applicationId);
     }
@@ -90,7 +95,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         onlyPolicyFlow("Policy")
         returns (uint256 _policyId)
     {
-        _policyId = policies[_productId].length++;
+        _policyId = ++policyIdIncrement;
 
         Policy storage policy = policies[_productId][_policyId];
         policy.metadataId = _metadataId;
@@ -98,16 +103,16 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         policy.createdAt = block.timestamp;
         policy.updatedAt = block.timestamp;
 
-        Metadata storage metadatum = metadata[_productId][_metadataId];
-        metadatum.policyId = _policyId;
-        metadatum.hasPolicy = true;
-        metadatum.updatedAt = block.timestamp;
+        Metadata storage meta = metadata[_productId][_metadataId];
+        meta.policyId = _policyId;
+        meta.hasPolicy = true;
+        meta.updatedAt = block.timestamp;
 
         emit LogNewPolicy(
             _productId,
             _metadataId,
             _policyId,
-            metadatum.applicationId
+            meta.applicationId
         );
     }
 
@@ -136,7 +141,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     {
         Policy storage policy = policies[_productId][_policyId];
 
-        _claimId = claims[_productId].length++;
+        _claimId = ++claimIdIncrement;
 
         Claim storage claim = claims[_productId][_claimId];
         claim.metadataId = policy.metadataId;
@@ -145,9 +150,9 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         claim.createdAt = block.timestamp;
         claim.updatedAt = block.timestamp;
 
-        Metadata storage metadatum = metadata[_productId][policy.metadataId];
-        metadatum.claimIds.push(_claimId);
-        metadatum.updatedAt = block.timestamp;
+        Metadata storage meta = metadata[_productId][policy.metadataId];
+        meta.claimIds.push(_claimId);
+        meta.updatedAt = block.timestamp;
 
         emit LogNewClaim(
             _productId,
@@ -167,12 +172,12 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         claim.state = _state;
         claim.updatedAt = block.timestamp;
 
-        Metadata storage metadatum = metadata[_productId][claim.metadataId];
+        Metadata storage meta = metadata[_productId][claim.metadataId];
 
         emit LogClaimStateChanged(
             _productId,
             claim.metadataId,
-            metadatum.policyId,
+            meta.policyId,
             _claimId,
             _state
         );
@@ -186,7 +191,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     {
         Claim storage claim = claims[_productId][_claimId];
 
-        _payoutId = payouts[_productId].length++;
+        _payoutId = ++payoutIdIncrement;
 
         Payout storage payout = payouts[_productId][_payoutId];
         payout.metadataId = claim.metadataId;
@@ -196,15 +201,15 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         payout.createdAt = block.timestamp;
         payout.updatedAt = block.timestamp;
 
-        Metadata storage metadatum = metadata[_productId][claim.metadataId];
-        metadatum.payoutIds.push(_payoutId);
-        metadatum.updatedAt = block.timestamp;
+        Metadata storage meta = metadata[_productId][claim.metadataId];
+        meta.payoutIds.push(_payoutId);
+        meta.updatedAt = block.timestamp;
 
         emit LogNewPayout(
             _productId,
             _payoutId,
             claim.metadataId,
-            metadatum.policyId,
+            meta.policyId,
             _claimId,
             _amount,
             PayoutState.Expected
@@ -217,7 +222,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         returns (uint256 _remainder)
     {
         Payout storage payout = payouts[_productId][_payoutId];
-        Metadata storage metadatum = metadata[_productId][payout.metadataId];
+        Metadata storage meta = metadata[_productId][payout.metadataId];
 
         uint256 actualAmount = payout.actualAmount.add(_amount);
 
@@ -243,8 +248,9 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
             emit LogPayoutCompleted(
                 _productId,
-                metadatum.policyId,
+                meta.policyId,
                 _payoutId,
+                meta.policyId,
                 actualAmount,
                 payout.state
             );
@@ -257,8 +263,9 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
             emit LogPartialPayout(
                 _productId,
-                metadatum.policyId,
+                meta.policyId,
                 _payoutId,
+                payout.metadataId,
                 actualAmount,
                 _remainder,
                 payout.state
@@ -275,12 +282,13 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         payout.state = _state;
         payout.updatedAt = block.timestamp;
 
-        Metadata storage metadatum = metadata[_productId][payout.metadataId];
+        Metadata storage meta = metadata[_productId][payout.metadataId];
 
         emit LogPayoutStateChanged(
             _productId,
+            _payoutId,
             payout.metadataId,
-            metadatum.policyId,
+            meta.policyId,
             payout.claimId,
             _state
         );

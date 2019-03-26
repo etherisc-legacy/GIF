@@ -18,7 +18,22 @@ class CreateProduct extends BaseCommand {
     //     password: 'FpEgkNTllW1z903qvvoA5UXL',
     //   },
     // };
-    const response = await this.api.createProduct(name);
+
+    const response = await this.api.createProduct(name)
+      .catch((error) => {
+        if (error.response.data && error.response.data.error && error.response.data.error.length > 0) {
+          error.response.data.error.forEach((e) => {
+            if (e.keyword && this.errorMessages[e.keyword]) {
+              this.log('Error:', this.errorMessages[e.keyword]);
+            } else {
+              this.log('Error:', e);
+            }
+          });
+        }
+
+        this.error(error.message);
+      });
+
 
     const config = this.configuration;
 

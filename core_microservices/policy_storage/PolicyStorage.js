@@ -272,7 +272,7 @@ class PolicyStorage {
     if (entity === 'Metadata') {
       const { Metadata, MetadataExtra } = this._models;
 
-      const base = await Metadata.query().where({ key: id, product }).first();
+      const base = await Metadata.query().where({ id, product }).first();
       if (!base) return { error: 'ERROR::METADATA_NOT_EXISTS' };
 
       const extra = await MetadataExtra.query().where('metadataKey', base.key)
@@ -526,14 +526,15 @@ class PolicyStorage {
 
   /**
    * Generate id for customer
+   * @param {string} product
    * @param {string} firstname
    * @param {string} lastname
    * @param {string} email
    * @return {*}
    */
-  generateCustomerId(firstname, lastname, email) {
+  generateCustomerId(product, firstname, lastname, email) {
     const salt = process.env.SALT || 'salt';
-    return sha256(`${firstname}${lastname}${email}${salt}`).slice(0, 31);
+    return sha256(`${product}${firstname}${lastname}${email}${salt}`);
   }
 
   /**
@@ -547,7 +548,7 @@ class PolicyStorage {
     if (!customer.lastname) throw new Error('ERROR::LASTNAME_NOT_PROVIDED');
     if (!customer.email) throw new Error('ERROR::EMAIL_NOT_PROVIDED');
 
-    const customerId = this.generateCustomerId(customer.firstname, customer.lastname, customer.email);
+    const customerId = this.generateCustomerId(product, customer.firstname, customer.lastname, customer.email);
 
     const { Customer } = this._models;
 
@@ -891,7 +892,7 @@ class PolicyStorage {
           messageType: 'contractTransactionRequest',
           messageVersion: '1.*',
           content: {
-            contractName: 'DAOService',
+            contractName: 'InstanceOperatorService',
             methodName: 'approveProduct',
             parameters: [productInContract.productId],
           },
@@ -965,7 +966,7 @@ class PolicyStorage {
    * @param {Number} productId
    * @return {Promise<void>}
    */
-  async getProductById(productId) {
+  async getProductNameById(productId) {
     const { Products } = this._models;
 
     const { product } = await Products.query().select('product').findOne({ productId });
@@ -1054,12 +1055,13 @@ class PolicyStorage {
    */
   async handleMetadataEvt({ content, fields, properties }) {
     const { productId, metadataId } = content.eventArgs;
-    const { Metadata } = this._models;
+    const { address, eventName } = content;
 
-    const data = await this.getContractData(content.address, 'metadata', [productId, metadataId]);
-
-    // update
-    await Metadata.query().update({ ...data }).where({ key: data.bpExternalKey });
+    if (eventName === 'LogNewMetadata') {
+      await this.linkMetadata(productId, metadataId, address);
+    } else {
+      await this.sync('metadata', productId, metadataId, address, 'update');
+    }
   }
 
   /**
@@ -1072,23 +1074,11 @@ class PolicyStorage {
    */
   async handleApplicationEvt({ content, fields, properties }) {
     const { productId, applicationId } = content.eventArgs;
-    const { Applications } = this._models;
+    const { address, eventName } = content;
 
-    const data = await this.getContractData(content.address, 'applications', [productId, applicationId]);
-
-    const product = await this.getProductById(productId);
-
-    if (content.eventName === 'LogNewApplication') {
-      // insert
-      const key = randomId();
-
-      await Applications.query().insert({
-        key, product, productId, id: applicationId, ...data,
-      });
-    } else {
-      // update
-      await Applications.query().update({ ...data }).where({ product, productId, id: applicationId });
-    }
+    const syncType = eventName === 'LogNewApplication' ? 'insert' : 'update';
+    const data = await this.sync('application', productId, applicationId, address, syncType);
+    await this.sync('metadata', productId, data.metadataId, address, 'update');
   }
 
   /**
@@ -1107,23 +1097,11 @@ class PolicyStorage {
     // }
 
     const { productId, policyId } = content.eventArgs;
-    const { Policies } = this._models;
+    const { address, eventName } = content;
 
-    const data = await this.getContractData(content.address, 'policies', [productId, policyId]);
-
-    const product = await this.getProductById(productId);
-
-    if (content.eventName === 'LogNewPolicy') {
-      // insert
-      const key = randomId();
-
-      await Policies.query().insert({
-        key, product, productId, id: policyId, ...data,
-      });
-    } else {
-      // update
-      await Policies.query().update({ ...data }).where({ product, productId, id: policyId });
-    }
+    const syncType = eventName === 'LogNewPolicy' ? 'insert' : 'update';
+    const data = await this.sync('policy', productId, policyId, address, syncType);
+    await this.sync('metadata', productId, data.metadataId, address, 'update');
   }
 
   /**
@@ -1136,23 +1114,11 @@ class PolicyStorage {
    */
   async handleClaimEvt({ content, fields, properties }) {
     const { productId, claimId } = content.eventArgs;
-    const { Claims } = this._models;
+    const { address, eventName } = content;
 
-    const data = await this.getContractData(content.address, 'claims', [productId, claimId]);
-
-    const product = await this.getProductById(productId);
-
-    if (content.eventName === 'LogNewClaim') {
-      // insert
-      const key = randomId();
-
-      await Claims.query().insert({
-        key, product, productId, id: claimId, ...data,
-      });
-    } else {
-      // update
-      await Claims.query().update({ ...data }).where({ product, productId, id: claimId });
-    }
+    const syncType = eventName === 'LogNewClaim' ? 'insert' : 'update';
+    const data = await this.sync('claim', productId, claimId, address, syncType);
+    await this.sync('metadata', productId, data.metadataId, address, 'update');
   }
 
   /**
@@ -1165,22 +1131,90 @@ class PolicyStorage {
    */
   async handlePayoutEvt({ content, fields, properties }) {
     const { productId, payoutId } = content.eventArgs;
-    const { Payouts } = this._models;
+    const { address, eventName } = content;
 
-    const data = await this.getContractData(content.address, 'payouts', [productId, payoutId]);
+    const syncType = eventName === 'LogNewPayout' ? 'insert' : 'update';
+    const data = await this.sync('payout', productId, payoutId, address, syncType);
+    await this.sync('metadata', productId, data.metadataId, address, 'update');
+  }
 
-    const product = await this.getProductById(productId);
+  /**
+   * Link metadata object in contract with db
+   * @param {String} productId
+   * @param {Number }id
+   * @param {String} address
+   * @return {Promise<void>}
+   */
+  async linkMetadata(productId, id, address) {
+    const { Metadata } = this._models;
 
-    if (content.eventName === 'LogNewPayout') {
-      // insert
+    const product = await this.getProductNameById(productId);
+    const data = await this.getContractData(address, 'metadata', [productId, id]);
+
+    // update
+    await Metadata.query().update({ productId, id, ...data }).where({ product, key: data.bpExternalKey });
+  }
+
+  /**
+   * Sync object from contract with db
+   * @param {String} entity
+   * @param {Number} productId
+   * @param {Number} id
+   * @param {String} address
+   * @param {String} syncType
+   * @return {Promise<void>}
+   */
+  async sync(entity, productId, id, address, syncType) {
+    let dbModel;
+    let getMethod;
+
+    if (entity === 'payout') {
+      dbModel = this._models.Payouts;
+      getMethod = 'payouts';
+    }
+
+    if (entity === 'claim') {
+      dbModel = this._models.Claims;
+      getMethod = 'claims';
+    }
+
+    if (entity === 'policy') {
+      dbModel = this._models.Policies;
+      getMethod = 'policies';
+    }
+
+    if (entity === 'application') {
+      dbModel = this._models.Applications;
+      getMethod = 'applications';
+    }
+
+    if (entity === 'metadata') {
+      dbModel = this._models.Metadata;
+      getMethod = 'metadata';
+    }
+
+    if (!dbModel && !getMethod) {
+      throw new Error('Invalid sync options');
+    }
+
+    const data = await this.getContractData(address, getMethod, [productId, id]);
+    const product = await this.getProductNameById(productId);
+
+    if (syncType === 'insert') {
       const key = randomId();
-      await Payouts.query().insert({
-        key, product, productId, id: payoutId, ...data,
+      await dbModel.query().insert({
+        key,
+        product,
+        productId,
+        id,
+        ...data,
       });
     } else {
       // update
-      await Payouts.query().update({ ...data }).where({ product, productId, id: payoutId });
+      await dbModel.query().update({ ...data }).where({ product, productId, id });
     }
+
+    return data;
   }
 }
 

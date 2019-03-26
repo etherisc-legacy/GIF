@@ -10,7 +10,7 @@ contract ModuleController is WithRegistry, BaseModuleController {
     }
     /* solhint-enable payable-fallback */
 
-    function assignStorage(address _storage) external onlyDAO {
+    function assignStorage(address _storage) external onlyInstanceOperator {
         _assignStorage(_storage);
     }
 }
