@@ -1,15 +1,17 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: postgres-pv-volume
+  name: postgres-persistent-volume
   labels:
     type: local
     app: postgres
 spec:
-  storageClassName: manual
+  storageClassName: postgres-storage
   capacity:
     storage: 5Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+    - ReadOnlyMany
   hostPath:
-    path: "/var/db"
+    path: '/podMount/postgres'
+    type: DirectoryOrCreate

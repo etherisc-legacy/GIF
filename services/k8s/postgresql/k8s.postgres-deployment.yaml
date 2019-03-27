@@ -20,8 +20,9 @@ spec:
                 name: pg-connection
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgredb
+              name: storage
+              subPath: postgres
       volumes:
-        - name: postgredb
+        - name: storage
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: postgres-volume-claim

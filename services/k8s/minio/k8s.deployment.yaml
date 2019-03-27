@@ -24,7 +24,8 @@ spec:
           volumeMounts:
             - mountPath: /data
               name: storage
+              subPath: minio
       volumes:
       - name: storage
         persistentVolumeClaim:
-          claimName: minio-pv-claim
+          claimName: minio-volume-claim

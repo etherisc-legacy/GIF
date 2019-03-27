@@ -112,7 +112,14 @@ class Deploy extends Command {
     ];
 
     if (PROD) {
+      // For deployment to local test env, we use pre-described Persistent Volume files
+      // creating Persistent Volume Claims through mounting hostPath of the parent node into the pod,
+      // but for GCE, we use automatically provisioned GCE disks described in Storage Class files
+      patterns.push('!**/k8s.persistent-volume.yaml');
+      // We don't need ganache in GCE
       patterns.push('!**/k8s/ganache/**');
+    } else {
+      patterns.push('!**/k8s.storage-class.yaml');
     }
 
     const files = await glob(patterns);
@@ -240,7 +247,7 @@ class Deploy extends Command {
   async deploy(entities) {
     const groupPriority = [
       'Role', 'RoleBinding', 'ConfigMap', 'Secret',
-      'PersistentVolume', 'PersistentVolumeClaim',
+      'PersistentVolume', 'StorageClass', 'PersistentVolumeClaim',
       'ServiceAccount', 'Service',
       'StatefuleSet', 'Deployment',
       'Job',
@@ -339,7 +346,7 @@ class Deploy extends Command {
     } catch (error) {
       this.log.info('Error on image detection; building a new one');
       await this.execute(
-        `cd ${element.dockerfilePath}; 
+        `cd ${element.dockerfilePath};
          docker build --build-arg NPM_TOKEN=${process.env.NPM_TOKEN} -t ${element.imageName} .`,
       );
     }

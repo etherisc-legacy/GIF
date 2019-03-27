@@ -1,15 +1,17 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: minio-pv-volume
+  name: minio-volume
   labels:
     type: local
     app: minio
 spec:
-  storageClassName: minio
+  storageClassName: minio-storage
   capacity:
     storage: 5Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+    - ReadOnlyMany
   hostPath:
-    path: /var/minio
+    path: '/podMount/minio'
+    type: DirectoryOrCreate

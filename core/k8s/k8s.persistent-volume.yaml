@@ -6,10 +6,12 @@ metadata:
     type: local
     app: gif-contracts
 spec:
-  storageClassName: gif-contracts
+  storageClassName: gif-contracts-storage
   capacity:
-    storage: 5Gi
+    storage: 1Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+    - ReadOnlyMany
   hostPath:
-    path: '/var/contracts'
+    path: '/podMount/contracts'
+    type: DirectoryOrCreate
