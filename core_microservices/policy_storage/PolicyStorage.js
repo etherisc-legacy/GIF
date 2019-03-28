@@ -890,7 +890,7 @@ class PolicyStorage {
 
       const updateValues = {
         address: address.toLowerCase(),
-        abi,
+        abi: JSON.stringify(abi),
       };
 
       const checkVersionExistance = await Contracts.query().findOne(contractLookupCriteria);
@@ -1350,7 +1350,6 @@ class PolicyStorage {
       const policyController = await this.getContractData(address, 'controller', []);
       const payoutOptions = await this.getContractData(address, 'getPayoutOptions', [productId, id], policyController);
 
-      console.log(JSON.stringify(payoutOptions));
       data.payoutOptions = JSON.stringify(payoutOptions);
     }
 
