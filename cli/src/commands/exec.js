@@ -14,8 +14,10 @@ class Exec extends BaseCommand {
    */
   async run() {
     if (!this.gif) {
-      this.error('You are not logged-in or product not provided');
+      this.error(this.errorMessages.notConnectedToGif);
     }
+
+    await this.gif.connect();
 
     const { flags: { file } } = this.parse(Exec);
 
@@ -26,13 +28,15 @@ class Exec extends BaseCommand {
       module: mod,
       require: mod.require,
       console,
-      gif: this.gif,
+      gif: this.gif.cli,
       eth: this.eth,
       moment: this.moment,
     };
 
     const script = new vm.Script(code.toString('utf8'), { filename: file });
     await script.runInNewContext(context);
+
+    await this.gif.shutdown();
   }
 }
 

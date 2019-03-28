@@ -11,8 +11,10 @@ class Console extends BaseCommand {
    */
   async run() {
     if (!this.gif) {
-      this.error('You are not logged-in or product not provided');
+      this.error(this.errorMessages.notConnectedToGif);
     }
+
+    await this.gif.connect();
 
     const replManager = new ReplManager();
 
@@ -20,12 +22,14 @@ class Console extends BaseCommand {
       replManager.start(this.configuration.current);
       replManager.repl.on('exit', resolve);
       replManager.setContext({
-        gif: this.gif,
+        gif: this.gif.cli,
         eth: this.eth,
         moment: this.moment,
         clear: () => process.stdout.write('\u001b[2J\u001b[0;0H'),
       });
     });
+
+    await this.gif.shutdown();
   }
 }
 

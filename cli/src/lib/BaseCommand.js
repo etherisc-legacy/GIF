@@ -53,12 +53,13 @@ class BaseCommand extends Command {
    */
   async init() {
     const {
-      API_BASE_URI,
-      AMQP_HOST, AMQP_PORT,
+      GIF_API_BASE_HOST, GIF_API_PORT,
+      GIF_AMQP_HOST, GIF_AMQP_PORT,
     } = process.env;
 
     // Initialize and configure API
-    this.api = new Api(API_BASE_URI || 'http://localhost:4001');
+    const apiUri = `${GIF_API_BASE_HOST || 'https://sandbox.etherisc.com'}:${GIF_API_PORT || 4001}`;
+    this.api = new Api(apiUri);
 
     const { configuration } = this;
     if (configuration && configuration.user && configuration.user.token) {
@@ -70,33 +71,31 @@ class BaseCommand extends Command {
 
     // Initialize and configure AMQP and Gif
     if (configuration && configuration.current) {
-      if (!configuration.products) throw new Error('Invalid configuration format');
+      if (!configuration.products) throw new Error(errorMessages.invalidConfigurationFormat);
 
       const product = configuration.products[configuration.current];
-      if (!product) throw new Error('Invalid configuration format');
+      if (!product) throw new Error(errorMessages.invalidConfigurationFormat);
 
       const { amqpLogin, amqpPassword } = product;
 
-      if (!amqpLogin) throw new Error('Invalid configuration: AMQP login not provided');
-      if (!amqpPassword) throw new Error('Invalid configuration: AMQP password not provided');
+      if (!amqpLogin) throw new Error(errorMessages.noAmqpLogin);
+      if (!amqpPassword) throw new Error(errorMessages.noAmqpPassword);
 
       const config = {
         mode: 'product',
         username: amqpLogin,
         password: amqpPassword,
-        host: AMQP_HOST || 'localhost',
-        port: AMQP_PORT || '5672',
+        host: GIF_AMQP_HOST || 'https://sandbox.etherisc.com',
+        port: GIF_AMQP_PORT || '5672',
       };
 
       const amqp = new Amqp(config, amqpLogin, this.config.version);
-      await amqp.createConnections();
 
       const info = {
         product: configuration.current,
       };
 
-      const gif = new Gif(amqp, info, this.eth);
-      this.gif = gif.cli;
+      this.gif = new Gif(amqp, info, this.eth, this.error);
     }
 
     this.moment = moment;
@@ -109,8 +108,7 @@ class BaseCommand extends Command {
    * @return {Promise<void>}
    */
   async finally() {
-    if (this.gif) {
-      await new Promise(resolve => setTimeout(resolve, 500));
+    if (this.gif && this.gif.connected) {
       await this.gif.shutdown();
     }
   }

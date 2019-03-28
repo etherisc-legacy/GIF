@@ -32,7 +32,7 @@ class ReplManager extends EventEmitter {
   start(product) {
     if (!this.repl) {
       this.repl = repl.start({
-        prompt: `GIF > ${product} > `,
+        prompt: `GIF :: ${product} > `,
         eval: this.interpret.bind(this),
         useColors: true,
       });

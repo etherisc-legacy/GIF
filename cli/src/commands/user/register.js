@@ -14,19 +14,19 @@ class Register extends BaseCommand {
     // Firstname
     const firstname = await this.cli.prompt('Firstname');
     if (!firstname.length) {
-      this.error('Firstname not provided');
+      this.error(this.errorMessages.invalidFirstname);
     }
 
     // Lastname
     const lastname = await this.cli.prompt('Lastname');
     if (!lastname.length) {
-      this.error('Lastname not provided');
+      this.error(this.errorMessages.invalidLastname);
     }
 
     // Email
     const email = await this.cli.prompt('Email');
     if (!emailValidator.validate(email)) {
-      this.error('Email is invalid');
+      this.error(this.errorMessages.invalidEmail);
     }
 
     // Password
@@ -45,7 +45,7 @@ class Register extends BaseCommand {
     // Repeat password
     const passwordRepeat = await this.cli.prompt('Repeat password', { type: 'hide' });
     if (password !== passwordRepeat) {
-      this.error('Passwords are not equal');
+      this.error(this.errorMessages.notEqualPasswords);
     }
 
     // E.g. response:

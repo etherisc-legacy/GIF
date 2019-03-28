@@ -3,23 +3,25 @@ const { flags } = require('@oclif/command');
 const BaseCommand = require('../../lib/BaseCommand');
 
 /**
- * Create or replace artifacts for products' contract
+ * Create or replace artifact for products' contract
  */
-class SendArtifacts extends BaseCommand {
+class SendArtifact extends BaseCommand {
   /**
    * Run command
    * @return {Promise<void>}
    */
   async run() {
     if (!this.gif) {
-      this.error('You are not logged-in or product not provided');
+      this.error(this.errorMessages.notConnectedToGif);
     }
 
-    const { flags: { file, network } } = this.parse(SendArtifacts);
+    await this.gif.connect();
+
+    const { flags: { file, network } } = this.parse(SendArtifact);
 
     const networkInfo = this.eth.networkByName(network);
     if (!networkInfo) {
-      throw new Error('Unknown network');
+      this.error(this.errorMessages.unknownNetwork);
     }
 
     const artifactContent = fs.read(file, 'utf8');
@@ -27,29 +29,35 @@ class SendArtifacts extends BaseCommand {
 
     const deployment = artifact.networks[networkInfo.id];
     if (!deployment) {
-      throw new Error('No deployment');
+      this.error(this.errorMessages.noDeployment);
     }
 
-    await this.gif.artifacts.send({
+    const response = await this.gif.cli.artifacts.send({
       network,
       networkId: networkInfo.id,
       artifact: artifactContent,
       version: this.config.version,
     });
 
-    this.log('Artifacts sent');
+    if (response.error) {
+      this.error(response.error);
+    } else {
+      this.log(response);
+    }
+
+    await this.gif.shutdown();
   }
 }
 
-SendArtifacts.flags = {
+SendArtifact.flags = {
   file: flags.string({ char: 'f', description: 'truffle artifacts file', required: true }),
   network: flags.string({ char: 'n', description: 'network', required: true }),
 };
 
 
-SendArtifacts.description = `Send artifacts
+SendArtifact.description = `Send artifact
 ...
 Send artifacts
 `;
 
-module.exports = SendArtifacts;
+module.exports = SendArtifact;

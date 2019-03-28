@@ -112,7 +112,7 @@ Some of them have default values pre-configured.
 1. Install and set up [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 2. Install and initialize [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstarts)
 3. Create account / login to [Google Cloud Platform Console](https://console.cloud.google.com)
-4. In GCP dashboard navigate to Kubernetes Engine > Clusters and create new cluster
+4. In GCP dashboard navigate to Kubernetes Engine > Clusters and create new cluster. Choose "Advanced options" and check "Try the new Stackdriver beta Monitoring and Logging experience" checkbox. This will enable platform-wide logging.
 5. In the description of the newly created cluster, find and click the "connect" button and run the generated command in the local console you are going to use for deploy.
 6. `npm install` to install package dependencies
 7. `gcloud auth configure-docker --quiet` to authorize to Google Registry
@@ -130,6 +130,7 @@ Some of them have default values pre-configured.
 1. In GCP dashboard navigate to Kubernetes Engine > Clusters
 2. Create new cluster
 3. If you deploy first time, answer `Y` when the deployment script asks you whether you want to `Set Secret variables?` in general, as well as each specific set of secrets later on.
+4. Choose "Advanced options" and check "Try the new Stackdriver beta Monitoring and Logging experience" checkbox. This will enable platform-wide logging.
 
 #### Create authorization credentials for Bitbucket
 Create an App Engine service account and API key. Bitbucket needs this information to deploy to App Engine.
@@ -164,4 +165,13 @@ The following command will show all the configured environments:
 To switch the kubectl context between environments:
     > kubectl config use-context <contextname>
    
-Note: do not switch contexts during deploy, since the next kubectl instruction will apply to the new active context instead of the one you started the deploy with.
+Note: do not switch contexts during deploy, since the next kubectl instruction will apply to the new active context instead of the one you started the deploy with.  
+
+## View logs from Kubernetes
+During cluster creation choose "Advanced options" and check "Try the new Stackdriver beta Monitoring and Logging experience" checkbox.  
+This will enable platform-wide logging.  
+In order to view logs navigate to "Logging > Logs".  
+Select filter: "Kubernetes Container > YOUR-CLUSTER > default > All container_name"
+In advanced filter add lines to the query:  
+`NOT textPayload:(GET /ready)`  
+`NOT textPayload:(GET /live)`

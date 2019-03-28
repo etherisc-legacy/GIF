@@ -28,7 +28,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`gifcli artifacts:send`](#gifcli-artifactssend)
+* [`gifcli artifact:send`](#gifcli-artifactsend)
 * [`gifcli console`](#gifcli-console)
 * [`gifcli exec`](#gifcli-exec)
 * [`gifcli help [COMMAND]`](#gifcli-help-command)
@@ -37,13 +37,13 @@ USAGE
 * [`gifcli user:logout`](#gifcli-userlogout)
 * [`gifcli user:register`](#gifcli-userregister)
 
-## `gifcli artifacts:send`
+## `gifcli artifact:send`
 
-Send artifacts
+Send artifact
 
 ```
 USAGE
-  $ gifcli artifacts:send
+  $ gifcli artifact:send
 
 OPTIONS
   -f, --file=file        (required) truffle artifacts file

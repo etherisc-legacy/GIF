@@ -17,6 +17,7 @@ interface ILicense {
     event LogProductUnpaused(uint256 productId, bytes32 name, address addr);
 
     struct Product {
+        address productOwner;
         bytes32 name;
         address addr;
         bytes32 policyFlow;

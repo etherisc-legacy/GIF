@@ -1,4 +1,5 @@
 const uuid = require('uuid/v1');
+const errorMessages = require('./errorMessages');
 
 
 const REQUEST_TIMEOUT = 10000;
@@ -43,18 +44,48 @@ class Gif {
    * @param {Amqp} amqp
    * @param {Object} info
    * @param {Object} eth
+   * @param {Function} errorHandler
    */
-  constructor(amqp, info, eth) {
+  constructor(amqp, info, eth, errorHandler) {
     this._amqp = amqp;
     this._info = info;
     this._eth = eth;
+    this._error = errorHandler;
+    this._connected = true;
+  }
+
+  /**
+   * Check amqp connection
+   * @return {boolean}
+   */
+  get connected() {
+    return this._connected;
+  }
+
+  /**
+   * Connect to amqp
+   * @return {Promise<void>}
+   */
+  async connect() {
+    try {
+      await this._amqp.createConnections();
+      this._connected = true;
+    } catch (e) {
+      this._error(errorMessages.failedToConnect(this._info.product));
+    }
   }
 
   /**
    * Shutdown
    */
-  shutdown() {
-    this._amqp.closeConnections();
+  async shutdown() {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      await this._amqp.closeConnections();
+      this._connected = false;
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 
   /**
@@ -64,15 +95,15 @@ class Gif {
   get cli() {
     return {
       info: this.info.bind(this),
-      artifacts: {
-        send: this.sendArtifacts.bind(this),
+      artifact: {
+        send: this.sendArtifact.bind(this),
+        get: this.getArtifact.bind(this),
       },
       contract: {
         send: this.sendTransaction.bind(this),
         call: this.callContract.bind(this),
-        onEvent: this.onEvent.bind(this),
       },
-      customers: {
+      customer: {
         create: this.createCustomer.bind(this),
         getById: this.getById('Customer').bind(this),
         list: this.list('Customers').bind(this),
@@ -102,7 +133,6 @@ class Gif {
         get: this.getProduct.bind(this),
       },
       help: cmd => console.log(docs[cmd] || 'No documentation'),
-      shutdown: this.shutdown.bind(this),
     };
   }
 
@@ -182,27 +212,28 @@ class Gif {
   }
 
   /**
-   * Send artifacts
+   * Send artifact
    * @param {Object} payload
    * @return {Promise<any|{error: string}>}
    */
-  async sendArtifacts(payload) {
-    return this.broadcast({
+  async sendArtifact(payload) {
+    return this.request({
       payload,
-      messageType: 'contractDeployment',
+      pubMessageType: 'contractDeployment',
+      subMessageType: 'contractDeploymentResult',
     });
   }
 
   /**
    * Get artifacts
-   * @param {String} network
+   * @param {String} contractName
    * @return {Promise<any|{error: string}>}
    */
-  async getArtifacts(network) {
+  async getArtifact(contractName) {
     return this.request({
-      payload: { network },
-      pubMessageType: 'getArtifacts',
-      subMessageType: 'getArtifactsResult',
+      payload: { contractName },
+      pubMessageType: 'getArtifact',
+      subMessageType: 'getArtifactResult',
     });
   }
 

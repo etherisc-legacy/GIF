@@ -19,6 +19,6 @@ contract Policy is PolicyStorageModel, ModuleStorage {
         applicationIdIncrement = _applicationIdIncrement;
         policyIdIncrement = _policyIdIncrement;
         claimIdIncrement = _claimIdIncrement;
-        payoutIdIncrement = payoutIdIncrement;
+        payoutIdIncrement = _payoutIdIncrement;
     }
 }

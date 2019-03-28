@@ -84,6 +84,11 @@ class PolicyStorage {
       handler: this.saveArtifact.bind(this),
     });
     await this._amqp.consume({
+      messageType: 'getArtifact',
+      messageTypeVersion: '1.*',
+      handler: this.handleGetArtifact.bind(this),
+    });
+    await this._amqp.consume({
       messageType: 'createMetadata',
       messageVersion: '1.*',
       handler: this.handleCreateMetadata.bind(this),
@@ -332,7 +337,12 @@ class PolicyStorage {
     if (entity === 'Product') {
       const { Products } = this._models;
 
-      const base = await Products.query().where({ product }).first();
+      const base = await Products.query().where({
+        product,
+        approved: true,
+      })
+        .orderBy('productId', 'desc')
+        .first();
 
       if (!base) return { error: 'ERROR::PRODUCT_NOT_EXISTS' };
 
@@ -842,37 +852,50 @@ class PolicyStorage {
    * @return {void}
    */
   async saveArtifact({ content, fields, properties }) {
+    const {
+      network, networkId, version, artifact,
+    } = content;
+
+    const { product } = properties.headers;
+    const isProductDeployment = product !== 'platform';
+
+    const { Contracts, Products } = this._models;
+
     try {
-      const {
-        network, networkId, version, artifact,
-      } = content;
-
-      const { product } = properties.headers;
-
       if (!product) {
-        throw new Error('Product not defined');
+        throw new Error('Product is not defined');
       }
 
-      const artifactObject = JSON.parse(artifact);
-      const { address } = artifactObject.networks[networkId];
+      const { networks, abi, contractName } = JSON.parse(artifact);
+      const { address } = networks[networkId];
 
-      const abi = JSON.stringify(artifactObject.abi);
-      const { Contracts } = this._models;
+      const checkAddressExistance = await Contracts.query().findOne({
+        networkName: network,
+        address: address.toLowerCase(),
+      });
+
+      if (checkAddressExistance) {
+        if (isProductDeployment) {
+          throw new Error(`Contract ${address} exists`);
+        }
+        return;
+      }
 
       const contractLookupCriteria = {
         product,
         networkName: network,
-        contractName: artifactObject.contractName,
+        contractName,
         version,
       };
+
       const updateValues = {
         address: address.toLowerCase(),
         abi,
       };
 
-      const exists = await Contracts.query().findOne(contractLookupCriteria);
+      const checkVersionExistance = await Contracts.query().findOne(contractLookupCriteria);
 
-      if (!exists) {
+      if (!checkVersionExistance) {
         await Contracts.query()
           .upsertGraph({ ...contractLookupCriteria, ...updateValues });
       } else {
@@ -881,30 +904,137 @@ class PolicyStorage {
           .update(updateValues);
       }
 
-      this._log.info(`Artifact saved: ${product} ${artifactObject.contractName} (${address})`);
+      this._log.info(`Artifact saved: ${product} ${contractName} (${address})`);
 
-      if (product !== 'platform') {
+      if (isProductDeployment) {
         // GOD MODE ON
-        const { Products } = this._models;
-        const productInContract = await Products.query().findOne({ addr: address.toLowerCase() });
+        const productInContract = await Products.query().findOne({
+          addr: address.toLowerCase(),
+        });
+
+        if (productInContract.product && productInContract.product !== product) {
+          throw new Error(`Ethereum contract ${address} belongs to another product`);
+        }
+
+        if (!productInContract.approved && !productInContract.product) {
+          await this._amqp.publish({
+            messageType: 'contractTransactionRequest',
+            messageVersion: '1.*',
+            content: {
+              contractName: 'InstanceOperatorService',
+              methodName: 'approveProduct',
+              parameters: [productInContract.productId],
+            },
+            correlationId: properties.correlationId,
+            customHeaders: {
+              product: 'platform',
+            },
+          });
+        } else {
+          throw new Error('Product already exists and approved');
+        }
 
         await this._amqp.publish({
-          messageType: 'contractTransactionRequest',
+          product: properties.headers.product,
+          messageType: 'contractDeploymentResult',
           messageVersion: '1.*',
           content: {
-            contractName: 'InstanceOperatorService',
-            methodName: 'approveProduct',
-            parameters: [productInContract.productId],
+            result: 'Artifact saved',
+            product,
+            contractName,
+            address,
+            network,
+            version,
           },
           correlationId: properties.correlationId,
-          customHeaders: {
-            product: 'platform',
-          },
+          customHeaders: properties.headers,
         });
       }
     } catch (error) {
+      if (isProductDeployment) {
+        await this._amqp.publish({
+          product: properties.headers.product,
+          messageType: 'contractDeploymentResult',
+          messageVersion: '1.*',
+          content: {
+            error: error.message,
+          },
+          correlationId: properties.correlationId,
+          customHeaders: properties.headers,
+        });
+      }
+
       this._log.error(new Error(JSON.stringify({ message: error.message, stack: error.stack })));
     }
+  }
+
+  /**
+   * Handle get artifact event
+   * @param {{}} params
+   * @param {{}} params.content
+   * @param {{}} params.fields
+   * @param {{}} params.properties
+   * @return {void}
+   */
+  async handleGetArtifact({ content, fields, properties }) {
+    try {
+      const { contractName } = content;
+
+      const { product } = properties.headers;
+
+      if (!product) {
+        throw new Error('Product is not defined');
+      }
+
+      if (!contractName) {
+        throw new Error('ContractName is not defined');
+      }
+
+      const response = await this.getArtifact(product, process.env.NETWORK_NAME, contractName);
+
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'getArtifactResult',
+        messageVersion: '1.*',
+        content: response,
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    } catch (e) {
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'getArtifactResult',
+        messageVersion: '1.*',
+        content: { error: e.message },
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    }
+  }
+
+  /**
+   * Get artifact
+   * @param {Stirng} product
+   * @param {String} networkName
+   * @param {String} contractName
+   * @return {Promise<{address: *, name: *, abi: string, version: *, network: *}>}
+   */
+  async getArtifact(product, networkName, contractName) {
+    const { Contracts } = this._models;
+
+    const contract = await Contracts.query().findOne({
+      product,
+      networkName,
+      contractName,
+    });
+
+    return {
+      name: contract.contractName,
+      abi: JSON.stringify(contract.abi),
+      network: contract.networkName,
+      version: contract.version,
+      address: contract.address,
+    };
   }
 
   /**
@@ -912,37 +1042,54 @@ class PolicyStorage {
    * @param {String} address
    * @param {String} method
    * @param {Array} params
+   * @param {String} interfaceContract
    * @return {Promise<void>}
    */
-  async getContractData(address, method, params) {
+  async getContractData(address, method, params, interfaceContract) {
     const { Contracts } = this._models;
 
     const contractData = await Contracts.query().findOne({
-      address,
+      address: interfaceContract || address,
       networkName: process.env.NETWORK_NAME,
     });
 
     const abi = JSON.parse(contractData.abi);
-    const licenseContract = new this._web3.eth.Contract(abi, contractData.address);
+    const contract = new this._web3.eth.Contract(abi, address);
     const methodDescription = abi.find(m => m.name === method);
-    const callData = await licenseContract.methods[method](...params).call();
+    const callData = await contract.methods[method](...params).call();
 
-    const productData = _.omit(callData, _.filter(_.keys(callData), k => !_.isNaN(Number(k))));
+    /**
+     * Format values
+     * @param {*} value
+     * @param {String} type
+     * @return {*}
+     */
+    const format = (value, type) => {
+      if (/bytes/.test(type)) {
+        return this._web3.utils.toUtf8(value);
+      }
+
+      if (type === 'address') {
+        return value.toLowerCase();
+      }
+
+      return value;
+    };
 
     const { outputs } = methodDescription;
+
+    if (!_.isPlainObject(callData)) {
+      return format(callData, outputs[0].type);
+    }
+
+    const data = _.omit(callData, _.filter(_.keys(callData), k => !_.isNaN(Number(k))));
     for (let i = 0; i < outputs.length; i += 1) {
       const paramFormat = outputs[i];
 
-      if (/bytes/.test(paramFormat.type)) {
-        productData[paramFormat.name] = this._web3.utils.toUtf8(productData[paramFormat.name]);
-      }
-
-      if (paramFormat.type === 'address') {
-        productData[paramFormat.name] = productData[paramFormat.name].toLowerCase();
-      }
+      data[paramFormat.name] = format(data[paramFormat.name], paramFormat.type);
     }
 
-    return productData;
+    return data;
   }
 
   /**
@@ -1198,6 +1345,15 @@ class PolicyStorage {
     }
 
     const data = await this.getContractData(address, getMethod, [productId, id]);
+
+    if (entity === 'application') {
+      const policyController = await this.getContractData(address, 'controller', []);
+      const payoutOptions = await this.getContractData(address, 'getPayoutOptions', [productId, id], policyController);
+
+      console.log(JSON.stringify(payoutOptions));
+      data.payoutOptions = JSON.stringify(payoutOptions);
+    }
+
     const product = await this.getProductNameById(productId);
 
     if (syncType === 'insert') {

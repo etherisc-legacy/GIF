@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const BaseCommand = require('../../lib/BaseCommand');
 
 /**
@@ -9,6 +10,10 @@ class CreateProduct extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
+    if (!this.configuration) {
+      this.error(this.errorMessages.noConfiguration);
+    }
+
     const name = await this.cli.prompt('Product name');
 
     // E.g. response
@@ -21,19 +26,24 @@ class CreateProduct extends BaseCommand {
 
     const response = await this.api.createProduct(name)
       .catch((error) => {
-        if (error.response.data && error.response.data.error && error.response.data.error.length > 0) {
-          error.response.data.error.forEach((e) => {
-            if (e.keyword && this.errorMessages[e.keyword]) {
-              this.log('Error:', this.errorMessages[e.keyword]);
-            } else {
-              this.log('Error:', e);
-            }
-          });
+        if (error.response.data && error.response.data.error) {
+          const e = error.response.data.error;
+
+          if (_.isString(e)) {
+            this.error(e);
+          }
+
+          if (_.isArray(e)) {
+            e.forEach((el) => {
+              if (el.keyword && this.errorMessages[el.keyword]) {
+                this.log('Error:', this.errorMessages[el.keyword]);
+              } else {
+                this.log('Error:', el);
+              }
+            });
+          }
         }
-
-        this.error(error.message);
       });
-
 
     const config = this.configuration;
 
