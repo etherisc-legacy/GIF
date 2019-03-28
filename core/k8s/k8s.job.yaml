@@ -63,7 +63,8 @@ spec:
         volumeMounts:
           - mountPath: /app/build
             name: build-folder
+            subPath: contracts
       volumes:
         - name: build-folder
           persistentVolumeClaim:
-            claimName: gif-contracts-claim
+            claimName: gif-contracts-volume-claim
