@@ -142,12 +142,12 @@ class FddApi {
         {
           name: 'smtp',
           props: { from: 'policies@etherisc.com' },
-          events: ['policy_issued', 'charge_error'],
+          events: ['policy_issued', 'charge_error', 'policy_issue_error'],
         },
         {
           name: 'telegram',
           props: { chatId: -319007131 },
-          events: ['policy_issued', 'claim_paid_out', 'policy_error', 'charge_error'],
+          events: ['policy_issued', 'claim_paid_out', 'policy_error', 'charge_error', 'policy_issue_error'],
         },
       ],
       templates: [
@@ -155,6 +155,16 @@ class FddApi {
           name: 'policy_issued',
           transport: 'smtp',
           template: fs.readFileSync('./templates/policy_issued_letter.html', 'utf8'),
+        },
+        {
+          name: 'policy_issue_error',
+          transport: 'smtp',
+          template: fs.readFileSync('./templates/policy_issue_error_letter.html', 'utf8'),
+        },
+        {
+          name: 'policy_issue_error',
+          transport: 'telegram',
+          template: fs.readFileSync('./templates/policy_issue_error_telegram.html', 'utf8'),
         },
         {
           name: 'claim_paid_out',
@@ -363,12 +373,12 @@ class FddApi {
       error,
     } = content;
 
-    const { Policy } = this._db;
+    const { Policy, Customer } = this._db;
     const policy = await Policy.query().where({ id: policyId }).first();
 
     if (error) {
-      const { Customer } = this._db;
       const customer = await Customer.query().where('id', policy.customerId).first();
+
       await this._gif.sendNotification({
         type: 'charge_error',
         data: { customer, error, policy: { id: policy.id } },
@@ -379,7 +389,19 @@ class FddApi {
       });
       await this._gif.handlePaymentFailure(policy.contractRequestId, error);
     } else {
-      await this._gif.confirmPaymentSuccess(policy.contractRequestId);
+      try {
+        await this._gif.confirmPaymentSuccess(policy.contractRequestId);
+      } catch (gifException) {
+        const customer = await Customer.query().where('id', policy.customerId).first();
+        await this._gif.sendNotification({
+          type: 'policy_issue_error',
+          data: { customer, policy, error: JSON.stringify(gifException) },
+          props: {
+            recipient: customer.email,
+            subject: 'Insurance Policy processing has been failed',
+          },
+        });
+      }
     }
   }
 
