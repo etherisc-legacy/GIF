@@ -33,9 +33,9 @@ spec:
           - name: AMQP_PORT
             value: "$(RABBITMQ_SERVICE_PORT_AMQP)"
           - name: RABBIT_API_HOST
-            value: "$(RABBITMQ_SERVICE_HOST)"
+            value: "$(RABBITMQ_MANAGEMENT_SERVICE_HOST)"
           - name: RABBIT_API_PORT
-            value: "$(RABBITMQ_SERVICE_PORT_HTTP)"
+            value: "$(RABBITMQ_MANAGEMENT_SERVICE_PORT_HTTP)"
           - name: AMQP_USERNAME
             valueFrom:
               secretKeyRef:
