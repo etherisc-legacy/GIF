@@ -33,7 +33,7 @@ class Console extends BaseCommand {
   }
 }
 
-Console.description = `Run console mode
+Console.description = `run console mode
 ...
 Run console mode
 `;

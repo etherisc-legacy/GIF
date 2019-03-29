@@ -254,6 +254,15 @@ class EventListener {
           decodedEvent[i] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
           decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
         }
+
+        if (paramFormat.type === 'address') {
+          decodedEvent[paramFormat.name] = paramFormat.name.toLowerCase();
+        }
+
+        if (/int/.test(paramFormat.type)) {
+          decodedEvent[i] = decodedEvent[paramFormat.name].toString();
+          decodedEvent[paramFormat.name] = decodedEvent[paramFormat.name].toString();
+        }
       }
 
       // const block = await this._web3.eth.getBlock(event.blockNumber);

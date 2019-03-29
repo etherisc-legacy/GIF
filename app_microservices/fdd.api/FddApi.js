@@ -13,12 +13,12 @@ const oracleAbi = require('./OracleAbi.json');
 
 const MNEMONIC = process.env.FDD_MNEMONIC
     || 'way web chapter satisfy solid future avoid push insane viable dizzy conduct fork fantasy asthma';
-const CONTRACT = process.env.FDD_CONTRACT || '0xbb37533B0b6aa7cDeFeb3BBf971e73B5420f39c3';
+const CONTRACT = process.env.FDD_CONTRACT || '0xFb646F9713463b0FA024FCd3aBC1B61b8a73a6c6';
 const ACCOUNT = process.env.FDD_ACCOUNT || '0x5E391721c8f61C4F1E58A74d1a2f02428e922CDE';
 const HTTP_PROVIDER = process.env.FDD_HTTP_PROVIDER || 'https://rinkeby.infura.io/1reQ7FJQ1zs0QGExhlZ8';
 
-const FLIGHT_RATINGS_ORACLE = process.env.FLIGHT_RATINGS_ORACLE || '0xca1252443798dD9566EeAa5BbE88a9F1B4BEb6eF';
-const FLIGHT_STATUSES_ORACLE = process.env.FLIGHT_STATUSES_ORACLE || '0x137D71CbdE50C5dB23639039826694AA67461e5c';
+const FLIGHT_RATINGS_ORACLE = process.env.FLIGHT_RATINGS_ORACLE || '0xbAa03abA88737b83467f3faf68E36661536f024d';
+const FLIGHT_STATUSES_ORACLE = process.env.FLIGHT_STATUSES_ORACLE || '0x2A4884d49A1FDDFc36e74967A95eE938121270dA';
 
 
 /**
@@ -73,9 +73,9 @@ class FddApi {
       log,
       signer,
       genericInsurance,
-      contract: this._contract,
-      flightRatingsOracle: this._flightRatingsOracle,
-      flightStatusesOracle: this._flightStatusesOracle,
+      contract: () => this._contract(),
+      flightRatingsOracle: () => this._flightRatingsOracle(),
+      flightStatusesOracle: () => this._flightStatusesOracle(),
       messageBus: this._messageBus,
       db: this._db,
     };
@@ -142,12 +142,12 @@ class FddApi {
         {
           name: 'smtp',
           props: { from: 'policies@etherisc.com' },
-          events: ['policy_issued', 'charge_error'],
+          events: ['policy_issued', 'charge_error', 'policy_issue_error'],
         },
         {
           name: 'telegram',
           props: { chatId: -319007131 },
-          events: ['policy_issued', 'claim_paid_out', 'policy_error', 'charge_error'],
+          events: ['policy_issued', 'claim_paid_out', 'policy_error', 'charge_error', 'policy_issue_error'],
         },
       ],
       templates: [
@@ -155,6 +155,16 @@ class FddApi {
           name: 'policy_issued',
           transport: 'smtp',
           template: fs.readFileSync('./templates/policy_issued_letter.html', 'utf8'),
+        },
+        {
+          name: 'policy_issue_error',
+          transport: 'smtp',
+          template: fs.readFileSync('./templates/policy_issue_error_letter.html', 'utf8'),
+        },
+        {
+          name: 'policy_issue_error',
+          transport: 'telegram',
+          template: fs.readFileSync('./templates/policy_issue_error_telegram.html', 'utf8'),
         },
         {
           name: 'claim_paid_out',
@@ -226,7 +236,7 @@ class FddApi {
       });
     }
 
-    this._messageBus.emit('certificateIssued', content, fields, properties);
+    this._messageBus.emit('certificateIssued', content);
   }
 
   /**
@@ -363,12 +373,12 @@ class FddApi {
       error,
     } = content;
 
-    const { Policy } = this._db;
+    const { Policy, Customer } = this._db;
     const policy = await Policy.query().where({ id: policyId }).first();
 
     if (error) {
-      const { Customer } = this._db;
       const customer = await Customer.query().where('id', policy.customerId).first();
+
       await this._gif.sendNotification({
         type: 'charge_error',
         data: { customer, error, policy: { id: policy.id } },
@@ -379,7 +389,19 @@ class FddApi {
       });
       await this._gif.handlePaymentFailure(policy.contractRequestId, error);
     } else {
-      await this._gif.confirmPaymentSuccess(policy.contractRequestId);
+      try {
+        await this._gif.confirmPaymentSuccess(policy.contractRequestId);
+      } catch (gifException) {
+        const customer = await Customer.query().where('id', policy.customerId).first();
+        await this._gif.sendNotification({
+          type: 'policy_issue_error',
+          data: { customer, policy, error: JSON.stringify(gifException) },
+          props: {
+            recipient: customer.email,
+            subject: 'Insurance Policy processing has been failed',
+          },
+        });
+      }
     }
   }
 

@@ -40,7 +40,7 @@ class Exec extends BaseCommand {
   }
 }
 
-Exec.description = `Execute file
+Exec.description = `execute file
 ...
 Execute file
 `;

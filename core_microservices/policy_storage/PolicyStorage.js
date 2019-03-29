@@ -1066,11 +1066,22 @@ class PolicyStorage {
      */
     const format = (value, type) => {
       if (/bytes/.test(type)) {
+        // e.g. bytes32
         return this._web3.utils.toUtf8(value);
       }
 
       if (type === 'address') {
         return value.toLowerCase();
+      }
+
+      if (/int[\d]+\[\]/.test(type)) {
+        // e.g. uint256[], int64[]
+        return value.map(el => el.toString());
+      }
+
+      if (/int/.test(type)) {
+        // e.g. uint256, int256
+        return value.toString();
       }
 
       return value;

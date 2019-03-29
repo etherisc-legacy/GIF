@@ -9,6 +9,7 @@ class GIFService {
    */
   constructor({
     amqp,
+    signer,
     log,
     messageBus,
     contract,
@@ -17,6 +18,7 @@ class GIFService {
   }) {
     this._amqp = amqp;
     this._log = log;
+    this._signer = signer;
     this._messageBus = messageBus;
     this._contract = contract;
     this._flightRatingsOracle = flightRatingsOracle;
@@ -177,6 +179,30 @@ class GIFService {
    */
   checkFlightStatusesMode() {
     return this._flightStatusesOracle().methods.testMode().call();
+  }
+
+  /**
+   * Check balance
+   * @return {Promise<{testMode: *}>}
+   */
+  async checkBalance() {
+    const signer = this._signer();
+    const results = await Promise.all([
+      signer.eth.getBalance(this._contract().options.from),
+      signer.eth.getBalance(this._flightRatingsOracle().options.address),
+      signer.eth.getBalance(this._flightStatusesOracle().options.address),
+    ]);
+
+    const { BN, toWei } = signer.utils;
+    const minBalance = new BN(toWei('0.1', 'ether'));
+
+    for (let i = 0, l = results.length; i < l; i += 1) {
+      if (minBalance.cmp(new BN(results[i])) !== -1) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /**

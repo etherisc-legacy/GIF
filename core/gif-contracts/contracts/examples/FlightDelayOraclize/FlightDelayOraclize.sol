@@ -31,6 +31,8 @@ contract FlightDelayOraclize is Product {
 
     event LogRequestPayment(uint256 requestId, uint256 applicationId);
 
+    event LogUnexpectedStatus(uint256 requestId, bytes1 status, int256 delay);
+
     bytes32 public constant NAME = "FlightDelayOraclize";
     bytes32 public constant POLICY_FLOW = "PolicyFlowDefault";
 
@@ -41,7 +43,7 @@ contract FlightDelayOraclize is Product {
     // Maximum duration of flight
     uint256 public constant MAX_FLIGHT_DURATION = 2 days;
     // Check for delay after .. minutes after scheduled arrival
-    uint256 public constant CHECK_OFFSET = 15 minutes;
+    uint256 public constant CHECK_OFFSET = 3 hours;
 
     // All amounts expected to be provided in a currency’s smallest unit
     // E.g. 10 EUR = 1000 (1000 cents)
@@ -279,6 +281,7 @@ contract FlightDelayOraclize is Product {
 
         if (status == "A") {
             // todo: active, reschedule oracle call + 45 min
+            emit LogUnexpectedStatus(_requestId, status, delay);
             return;
         }
 

@@ -19,7 +19,7 @@ $ npm install -g gifcli
 $ gifcli COMMAND
 running command...
 $ gifcli (-v|--version|version)
-gifcli/0.0.0 darwin-x64 node-v11.6.0
+gifcli/0.0.0 darwin-x64 node-v11.12.0
 $ gifcli --help [COMMAND]
 USAGE
   $ gifcli COMMAND
@@ -29,11 +29,13 @@ USAGE
 # Commands
 <!-- commands -->
 * [`gifcli artifact:send`](#gifcli-artifactsend)
+* [`gifcli autocomplete [SHELL]`](#gifcli-autocomplete-shell)
 * [`gifcli console`](#gifcli-console)
 * [`gifcli exec`](#gifcli-exec)
 * [`gifcli help [COMMAND]`](#gifcli-help-command)
 * [`gifcli product:create`](#gifcli-productcreate)
 * [`gifcli product:select`](#gifcli-productselect)
+* [`gifcli update [CHANNEL]`](#gifcli-update-channel)
 * [`gifcli user:logout`](#gifcli-userlogout)
 * [`gifcli user:register`](#gifcli-userregister)
 
@@ -53,6 +55,29 @@ DESCRIPTION
   ...
   Send artifacts
 ```
+
+## `gifcli autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ gifcli autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
+
+OPTIONS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ gifcli autocomplete
+  $ gifcli autocomplete bash
+  $ gifcli autocomplete zsh
+  $ gifcli autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.1.0/src/commands/autocomplete/index.ts)_
 
 ## `gifcli console`
 
@@ -125,6 +150,17 @@ DESCRIPTION
   ...
   Select current product
 ```
+
+## `gifcli update [CHANNEL]`
+
+update the gifcli CLI
+
+```
+USAGE
+  $ gifcli update [CHANNEL]
+```
+
+_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v1.3.9/src/commands/update.ts)_
 
 ## `gifcli user:logout`
 

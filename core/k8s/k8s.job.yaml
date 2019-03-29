@@ -50,16 +50,6 @@ spec:
             secretKeyRef:
               name: rabbitmq-credentials
               key: AMQP_PLATFORM_PASSWORD
-        - name: FLIGHTSTATS_APP_ID
-          valueFrom:
-            secretKeyRef:
-              name: fdd
-              key: FLIGHT_STATS_ID
-        - name: FLIGHTSTATS_APP_KEY
-          valueFrom:
-            secretKeyRef:
-              name: fdd
-              key: FLIGHT_STATS_KEY
         volumeMounts:
           - mountPath: /app/build
             name: build-folder

@@ -13,7 +13,7 @@ const enLocale = {
   errorDialog: {
     insurance_not_available:
       'Seems like insurance for your flight is not available yet. Perhaps we can insure your next flight!?',
-    insurance_for_departure_not_available: 'Insurance for this departure date is\'n available.',
+    insurance_for_departure_not_available: 'Insurance for this departure date isn\'t available.',
     transaction_declined: 'Your transaction is declined for some reasons. Please, contact the administrator ' +
       'by email: policies@etherisc.com',
     no_enough_money: 'Seems like your bank declined the transaction or you don’t have enough money on your card',

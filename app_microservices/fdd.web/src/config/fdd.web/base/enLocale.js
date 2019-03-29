@@ -8,7 +8,7 @@ module.exports = {
     insurance_not_available:
     'Seems like insurance for your flight is not available yet due to lack of statistical data. ' +
     'Perhaps we can insure your next flight!?',
-    insurance_for_departure_not_available: 'Insurance for this departure date is\'n available.',
+    insurance_for_departure_not_available: 'Insurance for this departure date isn\'t available.',
     transaction_declined:
     'Your transaction is declined for some reasons. Please, contact the administrator ' +
     'by email: policies@etherisc.com',
@@ -18,8 +18,8 @@ module.exports = {
       'can take some time. You can check the progress <a href="{{link}}" target="_blank">here</a>. After successful ' +
       'processing of your application and payment, you will receive an email with a confirmation and ' +
       'your insurance policy.',
-      cluster_risk: 'There is a cluster risk, try to buy later.',
-      invalid_payout_option: 'Invalid payout.'
+    cluster_risk: 'There is a cluster risk, try to buy later.',
+    invalid_payout_option: 'Invalid payout.'
   },
   certificate: {
     time_format: 'MMMM DD, YYYY HH:mm',

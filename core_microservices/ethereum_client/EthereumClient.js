@@ -145,7 +145,13 @@ class EthereumClient {
 
       const transformedParameters = this.transformParams(parameters, methodDescription, web3.utils);
 
-      result = await contractInterface.methods[methodName](...transformedParameters).send();
+      result = await new Promise((resolve, reject) => {
+        contractInterface.methods[methodName](...transformedParameters).send()
+          .on('confirmation', (confirmation, receipt) => resolve(receipt))
+          .on('receipt', receipt => resolve(receipt))
+          .on('error', error => reject(error));
+      });
+
       this._log.info(`Completed ${methodName} transaction for ${contractName}@${product}`);
     } catch (error) {
       this._log.error(error);
@@ -209,7 +215,9 @@ class EthereumClient {
       const methodDescription = contractData.abi.find(method => method.name === methodName);
       const transformedParameters = this.transformParams(parameters, methodDescription, web3.utils);
 
-      result = await contractInterface.methods[methodName](...transformedParameters).call();
+      const callResult = await contractInterface.methods[methodName](...transformedParameters).call();
+
+      result = this.transformOutput(callResult, methodDescription.outputs, web3.utils);
       this._log.info(`Completed ${methodName} call for ${contractName}@${product}`);
     } catch (error) {
       this._log.error(error);
@@ -256,6 +264,60 @@ class EthereumClient {
       }
     }
     return transformedParameters;
+  }
+
+  /**
+   * Transform contract call output
+   * @param {*} data
+   * @param {Object} abi
+   * @param {Object} utils
+   * @return {Object}
+   */
+  transformOutput(data, abi, utils) {
+    const result = {};
+
+    if (abi.length === 1) {
+      const { name, type } = abi[0];
+      result[name] = this.format(data, type, utils);
+      return result;
+    }
+
+    for (let i = 0; i < abi.length; i += 1) {
+      const { name, type } = abi[i];
+      result[name] = this.format(data[name], type, utils);
+    }
+
+    return result;
+  }
+
+  /**
+   * Format values
+   * @param {*} value
+   * @param {String} type
+   * @param {Object} utils
+   * @return {*}
+   */
+  format(value, type, utils) {
+    if (/bytes/.test(type)) {
+      // e.g. bytes32
+      return utils.toUtf8(value);
+    }
+
+    if (type === 'address') {
+      return value.toLowerCase();
+    }
+
+    if (/int[\d]+\[\]/.test(type)) {
+      // e.g. uint256[], int64[]
+      return value.map(el => el.toString());
+    }
+
+    if (/int/.test(type)) {
+      // e.g. uint256, int256
+      return value.toString();
+    }
+
+    return value;
   }
 }
 

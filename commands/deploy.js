@@ -13,7 +13,13 @@ const inquirer = require('inquirer');
 const DESTINATION = process.env.DEPLOY_DESTINATION;
 const PROD = DESTINATION === 'gke';
 
-const DEPLOYMENT_TIERS = ['infrastructure', 'platform', 'contracts', 'product', 'other'];
+const DEPLOYMENT_TIERS = [
+  'infrastructure',
+  'platform',
+  'contracts',
+  // 'product',
+  'other',
+];
 
 const imageRegex = /<!--image-->/;
 
@@ -156,7 +162,7 @@ class Deploy extends Command {
           if (!PROD) {
             entity.imageName = `${entity.name}:${folderHash}`;
           } else {
-            entity.imageName = `gcr.io/${process.env.GCLOUD_PROJECT_ID}/${entity.name}:${folderHash}`;
+            entity.imageName = `eu.gcr.io/${process.env.GCLOUD_PROJECT_ID}/${entity.name}:${folderHash}`;
           }
 
           [element] = yaml.safeLoadAll(yaml.safeDump(element).replace(imageRegex, entity.imageName));
