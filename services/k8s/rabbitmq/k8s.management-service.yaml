@@ -1,17 +1,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: rabbitmq
+  name: rabbitmq-management
   labels:
     app: rabbitmq
-    type: LoadBalancer
     tier: infrastructure
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-  - name: amqp
-    protocol: TCP
-    port: 5672
-    targetPort: 5672
+    - name: http
+      protocol: TCP
+      port: 15672
   selector:
     app: rabbitmq
