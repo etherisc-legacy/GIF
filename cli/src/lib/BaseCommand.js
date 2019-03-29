@@ -58,7 +58,7 @@ class BaseCommand extends Command {
     } = process.env;
 
     // Initialize and configure API
-    const apiUri = `${GIF_API_HOST || 'https://sandbox.etherisc.com'}:${GIF_API_PORT || 4001}`;
+    const apiUri = `${GIF_API_HOST || 'https://api.sandbox.etherisc.com'}:${GIF_API_PORT || 4001}`;
     this.api = new Api(apiUri);
 
     const { configuration } = this;
@@ -85,8 +85,8 @@ class BaseCommand extends Command {
         mode: 'product',
         username: amqpLogin,
         password: amqpPassword,
-        host: GIF_AMQP_HOST || 'sandbox.etherisc.com',
-        port: GIF_AMQP_PORT || '5672',
+        host: GIF_AMQP_HOST || 'amqp.sandbox.etherisc.com',
+        port: GIF_AMQP_PORT || 5672,
       };
 
       const amqp = new Amqp(config, amqpLogin, this.config.version);
