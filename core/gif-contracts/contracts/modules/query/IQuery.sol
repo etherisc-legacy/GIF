@@ -27,6 +27,7 @@ interface IQuery {
         bytes32 oracleTypeName;
         uint256 responsibleOracleId;
         uint256 createdAt;
+        bool responseReceived;
     }
 
     struct OracleResponse {

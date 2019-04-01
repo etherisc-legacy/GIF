@@ -326,6 +326,11 @@ contract QueryController is QueryStorageModel, ModuleController {
     ) external onlyOracle returns (uint256 _responseId) {
         OracleRequest storage req = oracleRequests[_requestId];
 
+        require(
+            !req.responseReceived,
+            "ERROR::ORACLE_RESPONSE_ALREADY_RECEIVED"
+        );
+
         (bool status, ) = req.callbackContractAddress.call(
             abi.encodeWithSignature(
                 string(
@@ -345,6 +350,8 @@ contract QueryController is QueryStorageModel, ModuleController {
             block.timestamp,
             status
         );
+
+        req.responseReceived = true;
 
         emit LogOracleResponded(_requestId, _responseId, _responder, status);
     }
