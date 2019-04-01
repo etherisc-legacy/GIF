@@ -2,9 +2,6 @@ const Web3 = require('web3');
 const retry = require('async-retry');
 const models = require('./models');
 
-
-const KEEP_ALIVE_PERIOD_SECONDS = 60 * 3; // 3 minutes
-
 /**
  * DIP Event Listener microservice
  */
@@ -35,7 +32,7 @@ class EventListener {
    * @return {void}
    */
   setWeb3() {
-    this._web3 = new Web3(new Web3.providers.WebsocketProvider(this._config.rpcNode));
+    this._web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER));
   }
 
   /**
@@ -48,8 +45,6 @@ class EventListener {
         retries: 10,
         onRetry: () => this._log.info('Try to reconnect'),
       });
-
-      this.keepAlive();
 
       await this._amqp.consume({
         messageType: 'existingEventsRequest',
@@ -154,13 +149,35 @@ class EventListener {
   }
 
   /**
-   * Handle event
-   * @param {object} data
+   * Watch events
    * @return {void}
    */
-  async onData(data) {
+  async watchEvents() {
+    this.setWeb3();
+
+    let fromBlock = await this._web3.eth.getBlockNumber() + 1;
+
+    await this.checkPastEvents();
+
+    setInterval(async () => {
+      const toBlock = await this._web3.eth.getBlockNumber();
+      this._log.info(`Current block number: ${toBlock}`);
+      if (toBlock >= fromBlock) {
+        this._log.info(`Pulling events for blocks ${fromBlock} - ${toBlock}`);
+        await this.processEvents({ fromBlock, toBlock });
+        fromBlock = toBlock + 1;
+      }
+    }, 10 * 1000); // 10 seconds
+  }
+
+  /**
+   * Handle events from the block
+   * @param {Integer} fromBlock
+   * @param {Integer} toBlock
+   * @return {void}
+   */
+  async processEvents({ fromBlock, toBlock }) {
     try {
-      const blockNumber = this._web3.utils.toHex(data.number);
       const { Contract } = this._models;
       const contractAddresses = await Contract.query().where({
         networkName: this._networkName,
@@ -168,8 +185,8 @@ class EventListener {
 
       if (contractAddresses.length > 0) {
         const events = await this._web3.eth.getPastLogs({
-          fromBlock: blockNumber,
-          toBlock: blockNumber,
+          fromBlock: this._web3.utils.toHex(fromBlock),
+          toBlock: this._web3.utils.toHex(toBlock),
           address: contractAddresses,
         });
 
@@ -182,45 +199,6 @@ class EventListener {
     }
   }
 
-  /**
-   * Handle error
-   * @param {error} e
-   * @return {void}
-   */
-  onError(e) {
-    this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-    this.reconnect();
-  }
-
-  /**
-   * Watch events
-   * @return {void}
-   */
-  async watchEvents() {
-    this.setWeb3();
-
-    await this.checkPastEvents();
-
-    this._web3.eth.subscribe('newBlockHeaders', (e) => {
-      if (!e) return;
-      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-      throw new Error(e);
-    })
-      .on('data', this.onData.bind(this))
-      .on('error', this.onError.bind(this));
-  }
-
-  /**
-   * Periodically ping web3 to keep ws connection alive
-   * @return {void}
-   */
-  async keepAlive() {
-    setInterval(() => {
-      this._web3.eth.getProtocolVersion().then(version => this._log.info(
-        `- Keep Alive request (${process.pid}); Ethereum protocol version of the node: ${version}`,
-      ));
-    }, KEEP_ALIVE_PERIOD_SECONDS * 1000); // seconds constant * milliseconds
-  }
 
   /**
    * Handle event
@@ -256,7 +234,7 @@ class EventListener {
         }
 
         if (paramFormat.type === 'address') {
-          decodedEvent[paramFormat.name] = paramFormat.name.toLowerCase();
+          decodedEvent[paramFormat.name] = decodedEvent[paramFormat.name].toLowerCase();
         }
 
         if (/int/.test(paramFormat.type)) {

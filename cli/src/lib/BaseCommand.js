@@ -58,7 +58,7 @@ class BaseCommand extends Command {
     } = process.env;
 
     // Initialize and configure API
-    const apiUri = `${GIF_API_HOST || 'https://api.sandbox.etherisc.com'}:${GIF_API_PORT || 4001}`;
+    const apiUri = `${GIF_API_HOST || 'http://api.sandbox.etherisc.com'}:${GIF_API_PORT || 4001}`;
     this.api = new Api(apiUri);
 
     const { configuration } = this;

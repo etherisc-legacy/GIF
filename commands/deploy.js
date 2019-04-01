@@ -8,18 +8,15 @@ const yaml = require('js-yaml');
 const crypto = require('crypto');
 const moment = require('moment');
 const inquirer = require('inquirer');
+const _ = require('lodash');
 
 
 const DESTINATION = process.env.DEPLOY_DESTINATION;
 const PROD = DESTINATION === 'gke';
 
-const DEPLOYMENT_TIERS = [
-  'infrastructure',
-  'platform',
-  'contracts',
-  // 'product',
-  'other',
-];
+const DEPLOYMENT_TIERS = ['infrastructure', 'platform', 'contracts', 'product', 'other'];
+
+const OMIT_TIERS = ['product'];
 
 const imageRegex = /<!--image-->/;
 
@@ -190,7 +187,7 @@ class Deploy extends Command {
       });
     });
 
-    return entities;
+    return _.omit(entities, OMIT_TIERS);
   }
 
   /**

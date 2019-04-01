@@ -1,7 +1,7 @@
 const _ = require('lodash');
-const networksLookup = require('eth-cli/src/networks');
 const Web3 = require('web3');
 const HDWalletProvider = require('truffle-hdwallet-provider');
+const networksLookup = require('./networks');
 
 
 /**
