@@ -19,7 +19,7 @@ $ npm install -g @etherisc/gifcli
 $ gifcli COMMAND
 running command...
 $ gifcli (-v|--version|version)
-@etherisc/gifcli/1.0.5 darwin-x64 node-v11.12.0
+@etherisc/gifcli/1.1.2 darwin-x64 node-v11.12.0
 $ gifcli --help [COMMAND]
 USAGE
   $ gifcli COMMAND
@@ -34,9 +34,9 @@ USAGE
 * [`gifcli help [COMMAND]`](#gifcli-help-command)
 * [`gifcli product:create`](#gifcli-productcreate)
 * [`gifcli product:select`](#gifcli-productselect)
-* [`gifcli update [CHANNEL]`](#gifcli-update-channel)
 * [`gifcli user:logout`](#gifcli-userlogout)
 * [`gifcli user:register`](#gifcli-userregister)
+* [`gifcli version`](#gifcli-version)
 
 ## `gifcli artifact:send`
 
@@ -127,17 +127,6 @@ DESCRIPTION
   Select current product
 ```
 
-## `gifcli update [CHANNEL]`
-
-update the gifcli CLI
-
-```
-USAGE
-  $ gifcli update [CHANNEL]
-```
-
-_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v1.3.9/src/commands/update.ts)_
-
 ## `gifcli user:logout`
 
 Logout
@@ -162,5 +151,18 @@ USAGE
 DESCRIPTION
   ...
   Register in GIF
+```
+
+## `gifcli version`
+
+print version
+
+```
+USAGE
+  $ gifcli version
+
+DESCRIPTION
+  ...
+  Print version
 ```
 <!-- commandsstop -->

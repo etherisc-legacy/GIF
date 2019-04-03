@@ -1,3 +1,4 @@
+const updateNotifier = require('update-notifier');
 const { Command } = require('@oclif/command');
 const { cli } = require('cli-ux');
 const moment = require('moment');
@@ -52,6 +53,13 @@ class BaseCommand extends Command {
    * @return {Promise<void>}
    */
   async init() {
+    // Check latest version
+    const pkg = require(`${this.config.root}/package.json`);
+    updateNotifier({
+      pkg,
+      updateCheckInterval: 0,
+    }).notify();
+
     const {
       GIF_API_HOST, GIF_API_PORT,
       GIF_AMQP_HOST, GIF_AMQP_PORT,

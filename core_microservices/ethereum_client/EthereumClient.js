@@ -149,30 +149,38 @@ class EthereumClient {
         contractInterface.methods[methodName](...transformedParameters).send()
           .on('confirmation', (confirmation, receipt) => resolve(receipt))
           .on('receipt', receipt => resolve(receipt))
-          .on('error', error => reject(error));
+          .on('error', error => reject(error))
+          .catch((error) => {
+            if (error.code === 'INVALID_ARGUMENT') {
+              const types = error.value.types.map(type => `${type.type} ${type.name}`);
+              reject(new Error(`Expected ${error.count.types} arguments (${types.join(', ')}), but ${error.count.values} values provided (${error.value.values.join(', ')})`));
+            }
+
+            reject(error);
+          });
       });
 
       this._log.info(`Completed ${methodName} transaction for ${contractName}@${product}`);
     } catch (error) {
       this._log.error(error);
       result = { error: error.message };
-    }
-
-    this._amqp.publish({
-      product,
-      messageType: 'contractTransactionResult',
-      messageVersion: '1.*',
-      content: {
+    } finally {
+      this._amqp.publish({
         product,
-        contractName,
-        methodName,
-        key,
-        result,
-        networkName: process.env.NETWORK_NAME,
-      },
-      correlationId: properties.correlationId,
-      customHeaders: properties.headers,
-    });
+        messageType: 'contractTransactionResult',
+        messageVersion: '1.*',
+        content: {
+          product,
+          contractName,
+          methodName,
+          key,
+          result,
+          networkName: process.env.NETWORK_NAME,
+        },
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
+    }
   }
 
   /**
@@ -221,7 +229,13 @@ class EthereumClient {
       this._log.info(`Completed ${methodName} call for ${contractName}@${product}`);
     } catch (error) {
       this._log.error(error);
-      result = { error: error.message };
+
+      if (error.code === 'INVALID_ARGUMENT') {
+        const types = error.value.types.map(type => `${type.type} ${type.name}`);
+        result = { error: `Expected ${error.count.types} arguments (${types.join(', ')}), but ${error.count.values} values provided (${error.value.values.join(', ')})` };
+      } else {
+        result = { error: error.message };
+      }
     }
 
     this._amqp.publish({
@@ -253,6 +267,12 @@ class EthereumClient {
     const transformedParameters = [];
     for (let index = 0; index < parameters.length; index += 1) {
       const paramFormat = methodDescription.inputs[index];
+
+      if (!paramFormat) {
+        const types = methodDescription.inputs.map(type => `${type.type} ${type.name}`);
+        throw new Error(`Unknown argument ${parameters[index]}, expected arguments: ${types.join(', ')}`);
+      }
+
       if (/bytes/.test(paramFormat.type)) {
         const byteSize = parseInt(paramFormat.type.replace('bytes', ''), 10);
         const length = byteSize * 2 + 2;

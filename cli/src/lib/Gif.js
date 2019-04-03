@@ -1,5 +1,7 @@
 const uuid = require('uuid/v1');
+const _ = require('lodash');
 const errorMessages = require('./errorMessages');
+const docs = require('./docs');
 
 
 const REQUEST_TIMEOUT = 10000;
@@ -12,28 +14,15 @@ const scheduleTimeout = (cb) => {
   setTimeout(() => cb('Timeout'), REQUEST_TIMEOUT);
 };
 
-const docs = {
-  info: `
-    Information about the product
-  `,
-  'customers.create': `
-    Create customer:
-      - firstname (required)
-      - lastname (required)
-      - email (required)
-      - examplefiled
-    E.g. gif.customers.create({ firstname: 'Jow', lastname: 'Dow', email: 'example@email.com', age: 25 })  
-  `,
-  'customers.getById': `
-    Get customer by id:
-      - id (required)
-    E.g. gif.customers.getById('eef381f42a369f42dd725c6a7cc8905');  
-  `,
-  'customers.list': `
-    Get all customers:
-    E.g. gif.customers.list()
-  `,
+const entities = {
+  bp: { singular: 'Metadata', plural: 'Metadata' },
+  customer: { singular: 'Customer', plural: 'Customers' },
+  application: { singular: 'Application', plural: 'Applications' },
+  policy: { singular: 'Policy', plural: 'Policies' },
+  claim: { singular: 'Claim', plural: 'Claims' },
+  payout: { singular: 'Payout', plural: 'Payouts' },
 };
+
 
 /**
  * GIF client
@@ -95,6 +84,7 @@ class Gif {
   get cli() {
     return {
       info: this.info.bind(this),
+      help: this.help.bind(this),
       artifact: {
         send: this.sendArtifact.bind(this),
         get: this.getArtifact.bind(this),
@@ -105,35 +95,47 @@ class Gif {
       },
       customer: {
         create: this.createCustomer.bind(this),
-        getById: this.getById('Customer').bind(this),
-        list: this.list('Customers').bind(this),
+        getById: this.getByIdentifier('customer').bind(this),
+        list: this.list('customer').bind(this),
       },
       bp: {
         create: this.createBp.bind(this),
-        getById: this.getById('Metadata').bind(this),
-        list: this.list('Metadata').bind(this),
+        getByKey: this.getByIdentifier('bp', 'key').bind(this),
+        getById: this.getByIdentifier('bp').bind(this),
+        list: this.list('bp').bind(this),
       },
       application: {
-        getById: this.getById('Application').bind(this),
-        list: this.list('Applications').bind(this),
+        getById: this.getByIdentifier('application').bind(this),
+        list: this.list('application').bind(this),
       },
       policy: {
-        getById: this.getById('Policy').bind(this),
-        list: this.list('Policies').bind(this),
+        getById: this.getByIdentifier('policy').bind(this),
+        list: this.list('policy').bind(this),
       },
       claim: {
-        getById: this.getById('Claim').bind(this),
-        list: this.list('Claims').bind(this),
+        getById: this.getByIdentifier('claim').bind(this),
+        list: this.list('claim').bind(this),
       },
       payout: {
-        getById: this.getById('Payout').bind(this),
-        list: this.list('Payouts').bind(this),
+        getById: this.getByIdentifier('payout').bind(this),
+        list: this.list('payout').bind(this),
       },
       product: {
         get: this.getProduct.bind(this),
       },
-      help: cmd => console.log(docs[cmd] || 'No documentation'),
     };
+  }
+
+  /**
+   * Get information about commad
+   * @param {String} cmd
+   * @return {*}
+   */
+  help(cmd) {
+    if (!cmd) {
+      return this.wrongArgument('help');
+    }
+    return console.log(docs[cmd] || `No documentation for ${cmd}`);
   }
 
   /* Info section */
@@ -153,6 +155,11 @@ class Gif {
    * @return {Promise<any|{error: string}>}
    */
   async createCustomer(payload) {
+    console.log(payload);
+    if (!payload.firstname || !payload.lastname || !payload.email) {
+      return this.wrongArgument('customer.create');
+    }
+
     return this.request({
       payload,
       pubMessageType: 'createCustomer',
@@ -188,14 +195,25 @@ class Gif {
   /**
    * Request entity by id
    * @param {String} entity
+   * @param {String} identifier
    * @return {function(*): Promise<any|{error: string}>}
    */
-  getById(entity) {
-    return id => this.request({
-      payload: { id },
-      pubMessageType: `get${entity}`,
-      subMessageType: `get${entity}Result`,
-    });
+  getByIdentifier(entity, identifier = 'id') {
+    if (!entity && !entities[entity]) {
+      throw new Error('Unknown entity');
+    }
+
+    return (id) => {
+      if (!id) {
+        return this.wrongArgument(`${entity}.getBy${_.upperFirst(identifier)}`);
+      }
+
+      return this.request({
+        payload: { id, identifier },
+        pubMessageType: `get${entities[entity].singular}`,
+        subMessageType: `get${entities[entity].singular}Result`,
+      });
+    };
   }
 
   /**
@@ -204,10 +222,14 @@ class Gif {
    * @return {function(): Promise<any|{error: string}>}
    */
   list(entity) {
+    if (!entity && !entities[entity]) {
+      throw new Error('Unknown entity');
+    }
+
     return () => this.request({
       payload: {},
-      pubMessageType: `list${entity}`,
-      subMessageType: `list${entity}Result`,
+      pubMessageType: `list${entities[entity].plural}`,
+      subMessageType: `list${entities[entity].plural}Result`,
     });
   }
 
@@ -216,7 +238,10 @@ class Gif {
    * @param {Object} payload
    * @return {Promise<any|{error: string}>}
    */
-  async sendArtifact(payload) {
+  async sendArtifact(payload = {}) {
+    if (!payload.network && !payload.networkId && !payload.artifact && !payload.version) {
+      return this.wrongArgument('artifact.send');
+    }
     return this.request({
       payload,
       pubMessageType: 'contractDeployment',
@@ -230,6 +255,9 @@ class Gif {
    * @return {Promise<any|{error: string}>}
    */
   async getArtifact(contractName) {
+    if (!contractName) {
+      return this.wrongArgument('artifact.get');
+    }
     return this.request({
       payload: { contractName },
       pubMessageType: 'getArtifact',
@@ -245,6 +273,10 @@ class Gif {
    * @return {Promise<*>}
    */
   async sendTransaction(contractName, methodName, parameters) {
+    if (!contractName && !methodName && !parameters) {
+      return this.wrongArgument('contract.send');
+    }
+
     const response = await this.request({
       payload: {
         contractName,
@@ -266,6 +298,10 @@ class Gif {
    * @return {Promise<*>}
    */
   async callContract(contractName, methodName, parameters) {
+    if (!contractName && !methodName && !parameters) {
+      return this.wrongArgument('contract.call');
+    }
+
     const response = await this.request({
       payload: {
         contractName,
@@ -386,6 +422,16 @@ class Gif {
    */
   errorHandler(e) {
     return { error: e.message || e.error || e };
+  }
+
+  /**
+   * Wrong argument error handler
+   * @param {String} cmd
+   * @return {{error: String}}
+   */
+  wrongArgument(cmd) {
+    this.cli.help(cmd);
+    return this.errorHandler(new Error('Wrong arguments'));
   }
 }
 

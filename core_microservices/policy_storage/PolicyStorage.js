@@ -225,7 +225,9 @@ class PolicyStorage {
   handleGetEntity(entity) {
     return async ({ content, fields, properties }) => {
       try {
-        const { base, extra, error } = await this.getEntityById(entity, content.id, properties.headers.product);
+        const { base, extra, error } = await this.getEntityByIdentifier(
+          entity, content.id, properties.headers.product, content.identifier,
+        );
 
         if (error) {
           throw new Error(error);
@@ -259,11 +261,14 @@ class PolicyStorage {
    * @param {String} entity
    * @param {Number} id
    * @param {String} product
+   * @param {String} identifier
    * @return {Promise<*>}
    */
-  async getEntityById(entity, id, product) {
+  async getEntityByIdentifier(entity, id, product, identifier = 'id') {
     if (entity === 'Customer') {
       const { Customer, CustomerExtra } = this._models;
+
+      if (identifier !== 'id') return { error: 'ERROR::INVALID_INENTIFIER_TYPE' };
 
       const base = await Customer.query().where({ id, product }).first();
       if (!base) return { error: 'ERROR::CUSTOMER_NOT_EXISTS' };
@@ -277,7 +282,7 @@ class PolicyStorage {
     if (entity === 'Metadata') {
       const { Metadata, MetadataExtra } = this._models;
 
-      const base = await Metadata.query().where({ id, product }).first();
+      const base = await Metadata.query().where({ [identifier]: id, product }).first();
       if (!base) return { error: 'ERROR::METADATA_NOT_EXISTS' };
 
       const extra = await MetadataExtra.query().where('metadataKey', base.key)
@@ -289,7 +294,7 @@ class PolicyStorage {
     if (entity === 'Application') {
       const { Applications, ApplicationsExtra } = this._models;
 
-      const base = await Applications.query().where({ id, product }).first();
+      const base = await Applications.query().where({ [identifier]: id, product }).first();
       if (!base) return { error: 'ERROR::APPLICATION_NOT_EXISTS' };
 
       const extra = await ApplicationsExtra.query().where('applicationKey', base.key)
@@ -301,7 +306,7 @@ class PolicyStorage {
     if (entity === 'Policy') {
       const { Policies, PoliciesExtra } = this._models;
 
-      const base = await Policies.query().where({ id, product }).first();
+      const base = await Policies.query().where({ [identifier]: id, product }).first();
       if (!base) return { error: 'ERROR::POLICY_NOT_EXISTS' };
 
       const extra = await PoliciesExtra.query().where('policyKey', base.key)
@@ -313,7 +318,7 @@ class PolicyStorage {
     if (entity === 'Claim') {
       const { Claims, ClaimsExtra } = this._models;
 
-      const base = await Claims.query().where({ id, product }).first();
+      const base = await Claims.query().where({ [identifier]: id, product }).first();
       if (!base) return { error: 'ERROR::CLAIM_NOT_EXISTS' };
 
       const extra = await ClaimsExtra.query().where('claimKey', base.key)
@@ -325,7 +330,7 @@ class PolicyStorage {
     if (entity === 'Payout') {
       const { Payouts, PayoutsExtra } = this._models;
 
-      const base = await Payouts.query().where({ id, product }).first();
+      const base = await Payouts.query().where({ [identifier]: id, product }).first();
       if (!base) return { error: 'ERROR::PAYOUT_NOT_EXISTS' };
 
       const extra = await PayoutsExtra.query().where('payoutKey', base.key)
@@ -1170,7 +1175,7 @@ class PolicyStorage {
     let customerId;
 
     if (bp.customerId) {
-      const customer = await this.getEntityById('Customer', bp.customerId, product);
+      const customer = await this.getEntityByIdentifier('Customer', bp.customerId, product);
       if (customer.error) {
         throw new Error(customer.error);
       }
