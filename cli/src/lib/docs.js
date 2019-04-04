@@ -12,15 +12,6 @@ module.exports = {
       - contractName (required)
     E.g. gif.artifact.get('MyContract')  
   `,
-  'artifact.send': `
-    Send artifact for contract:
-      - params (required)
-        - params.network (required)
-        - params.networkId (required)
-        - params.artifact (required)
-        - params.version (reguired)
-    E.g. gif.artifact.send({ network: 'rinkeby , networkId: 4, artifact: {...}, version: '1.0.0' })  
-  `,
   'contract.send': `
     Send transaction to contract
       - contractName (required)
@@ -28,12 +19,12 @@ module.exports = {
       - parameters (array, required)
     E.g. gif.contract.send('MyContract', 'applyForPolicy', [1, 2, 3]) 
   `,
-  'contract:call': `
+  'contract.call': `
     Call contract
       - contractName (required)
       - methodName (required)
       - parameters (array, required)
-    E.g. gif.contract.send('MyContract', 'getQuote', [1, 2, 3]) 
+    E.g. gif.contract.call('MyContract', 'getQuote', [1, 2, 3]) 
   `,
   'customer.create': `
     Create customer:
@@ -41,23 +32,23 @@ module.exports = {
       - lastname (required)
       - email (required)
       - optional_fields
-    E.g. gif.customers.create({ firstname: 'Jow', lastname: 'Dow', email: 'example@email.com', age: 25 })  
+    E.g. gif.customer.create({ firstname: 'Jow', lastname: 'Dow', email: 'example@email.com', age: 25 })  
   `,
   'customer.getById': `
     Get customer by id:
       - id (required)
-    E.g. gif.customers.getById('eef381f42a369f42dd725c6a7cc8905');  
+    E.g. gif.customer.getById('eef381f42a369f42dd725c6a7cc8905');  
   `,
   'customer.list': `
     Get all customers:
-    E.g. gif.customers.list()
+    E.g. gif.customer.list()
   `,
   'bp.create': `
     Create new business process
       - customerId or customer (required)
       - optional_fields
-    E.g. gif.bp.create({ customer: { firstname: 'Jow', lastname: 'Dow', email: 'example@email.com', age: 25 } )  
-    E.g. gif.bp.create({ customerId: 'eef381f42a369f42dd725c6a7cc8905' )  
+    E.g. gif.bp.create({ customer: { firstname: 'Jow', lastname: 'Dow', email: 'example@email.com', age: 25 } })  
+    E.g. gif.bp.create({ customerId: 'eef381f42a369f42dd725c6a7cc8905' })  
   `,
   'bp.getByKey': `
     Get business process by key identifier:
@@ -67,7 +58,7 @@ module.exports = {
   'bp.getById': `
     Get business process by id identifier:
       - id (required)
-    E.g. gif.bp.getByKey(1)  
+    E.g. gif.bp.getById(1)  
   `,
   'bp.list': `
     Get all business processes:
@@ -111,6 +102,6 @@ module.exports = {
   `,
   'product.get': `
     Get product instance:
-    E.g. gif.getProduct()
+    E.g. gif.product.get()
   `,
 };

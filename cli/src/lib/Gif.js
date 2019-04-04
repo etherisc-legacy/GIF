@@ -86,7 +86,6 @@ class Gif {
       info: this.info.bind(this),
       help: this.help.bind(this),
       artifact: {
-        send: this.sendArtifact.bind(this),
         get: this.getArtifact.bind(this),
       },
       contract: {

@@ -32,7 +32,7 @@ class SendArtifact extends BaseCommand {
       this.error(this.errorMessages.noDeployment);
     }
 
-    const response = await this.gif.cli.artifact.send({
+    const response = await this.gif.sendArtifact({
       network,
       networkId: networkInfo.id,
       artifact: artifactContent,
