@@ -396,8 +396,13 @@ class Deploy extends Command {
     }
 
     if (DESTINATION === 'gke') {
-      this.log.info('Push image to GCR');
-      await this.execute(`docker push ${element.imageName}`);
+      try {
+        this.log.info('Checking image existence in Container Repository');
+        await this.execute(`gcloud container images describe ${element.imageName}`);
+      } catch (error) {
+        this.log.info('Not found, push image to GCR');
+        await this.execute(`docker push ${element.imageName}`);
+      }
     }
 
     this.timestamp(`Finished Docker build for ${element.imageName}`);
