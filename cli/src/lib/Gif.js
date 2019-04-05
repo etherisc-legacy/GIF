@@ -1,5 +1,7 @@
 const uuid = require('uuid/v1');
 const _ = require('lodash');
+const chalk = require('chalk');
+const columnify = require('columnify');
 const errorMessages = require('./errorMessages');
 const docs = require('./docs');
 
@@ -128,13 +130,24 @@ class Gif {
   /**
    * Get information about commad
    * @param {String} cmd
-   * @return {*}
+   * @return {void}
    */
   help(cmd) {
     if (!cmd) {
-      return this.wrongArgument('help');
+      const commands = _.map(_.keys(docs), el => [chalk.blue(el), docs[el].annotation]);
+      console.log(columnify(commands, { showHeaders: false }));
+      return;
     }
-    return console.log(docs[cmd] || `No documentation for ${cmd}`);
+
+    if (!docs[cmd]) {
+      console.error(`No documentation for ${cmd}`);
+      return;
+    }
+
+    console.log('     ', chalk.blue(docs[cmd].annotation));
+    if (docs[cmd].details) {
+      console.log(docs[cmd].details);
+    }
   }
 
   /* Info section */
@@ -154,9 +167,8 @@ class Gif {
    * @return {Promise<any|{error: string}>}
    */
   async createCustomer(payload) {
-    console.log(payload);
     if (!payload.firstname || !payload.lastname || !payload.email) {
-      return this.wrongArgument('customer.create');
+      return this.wrongArgument('gif.customer.create');
     }
 
     return this.request({
@@ -204,7 +216,7 @@ class Gif {
 
     return (id) => {
       if (!id) {
-        return this.wrongArgument(`${entity}.getBy${_.upperFirst(identifier)}`);
+        return this.wrongArgument(`gif.${entity}.getBy${_.upperFirst(identifier)}`);
       }
 
       return this.request({
@@ -239,7 +251,7 @@ class Gif {
    */
   async sendArtifact(payload = {}) {
     if (!payload.network && !payload.networkId && !payload.artifact && !payload.version) {
-      return this.wrongArgument('artifact.send');
+      return this.wrongArgument('gif.artifact.send');
     }
     return this.request({
       payload,
@@ -255,7 +267,7 @@ class Gif {
    */
   async getArtifact(contractName) {
     if (!contractName) {
-      return this.wrongArgument('artifact.get');
+      return this.wrongArgument('gif.artifact.get');
     }
     return this.request({
       payload: { contractName },
@@ -273,7 +285,7 @@ class Gif {
    */
   async sendTransaction(contractName, methodName, parameters) {
     if (!contractName && !methodName && !parameters) {
-      return this.wrongArgument('contract.send');
+      return this.wrongArgument('gif.contract.send');
     }
 
     const response = await this.request({
@@ -298,7 +310,7 @@ class Gif {
    */
   async callContract(contractName, methodName, parameters) {
     if (!contractName && !methodName && !parameters) {
-      return this.wrongArgument('contract.call');
+      return this.wrongArgument('gif.contract.call');
     }
 
     const response = await this.request({
