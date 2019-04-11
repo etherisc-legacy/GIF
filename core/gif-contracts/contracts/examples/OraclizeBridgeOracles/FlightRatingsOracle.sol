@@ -42,6 +42,8 @@ contract FlightRatingsOracle is Oracle, usingOraclize {
         encryptedQuery = _encryptedQuery;
     }
 
+    function() external payable {}
+
     function setTestMode(bool _testMode) external {
         // todo: set permissions
         testMode = _testMode;
@@ -90,7 +92,7 @@ contract FlightRatingsOracle is Oracle, usingOraclize {
                     );
                 }
 
-                respond(requestId, abi.encode(statistics));
+                _respond(requestId, abi.encode(statistics));
             }
         }
 

@@ -47,6 +47,8 @@ contract FlightStatusesOracle is Oracle, usingOraclize {
         encryptedQuery = _encryptedQuery;
     }
 
+    function() external payable {}
+
     function setTestMode(bool _testMode) external {
         // todo: set permissions
         testMode = _testMode;
@@ -98,20 +100,20 @@ contract FlightStatusesOracle is Oracle, usingOraclize {
 
         if (status == "C") {
             // flight cancelled
-            respond(requestId, abi.encode(status, -1));
+            _respond(requestId, abi.encode(status, -1));
         } else if (status == "D") {
             // flight diverted
-            respond(requestId, abi.encode(status, -1));
+            _respond(requestId, abi.encode(status, -1));
         } else if (status != "L" && status != "A" && status != "C" && status != "D") {
             // Unprocessable status;
-            respond(requestId, abi.encode(status, -1));
+            _respond(requestId, abi.encode(status, -1));
         } else {
             slResult = _result.toSlice();
             bool arrived = slResult.contains("actualGateArrival".toSlice());
 
             if (status == "A" || (status == "L" && !arrived)) {
                 // flight still active or not at gate
-                respond(requestId, abi.encode(bytes1("A"), -1));
+                _respond(requestId, abi.encode(bytes1("A"), -1));
             } else if (status == "L" && arrived) {
                 strings.slice memory aG = "\"arrivalGateDelayMinutes\": ".toSlice(
 
@@ -134,10 +136,10 @@ contract FlightStatusesOracle is Oracle, usingOraclize {
                     delayInMinutes = 0;
                 }
 
-                respond(requestId, abi.encode(status, delayInMinutes));
+                _respond(requestId, abi.encode(status, delayInMinutes));
             } else {
                 // no delay info
-                respond(requestId, abi.encode(status, -1));
+                _respond(requestId, abi.encode(status, -1));
             }
 
         }

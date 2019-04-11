@@ -1,11 +1,20 @@
 pragma solidity 0.5.2;
 
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./shared/RBAC.sol";
 import "./services/IProductService.sol";
 
-contract Product is RBAC {
+contract Product is RBAC, Ownable {
+    using SafeMath for *;
+
     bool public developmentMode = false;
     bool public maintenanceMode = false;
+
+    modifier onlySandbox {
+        // todo: Restrict to sandbox account
+        _;
+    }
 
     IProductService public productService;
 
@@ -13,7 +22,7 @@ contract Product is RBAC {
         internal
     {
         productService = IProductService(_productService);
-        register(_name, _policyFlow);
+        _register(_name, _policyFlow);
     }
 
     function toggleDevelopmentMode() internal {
@@ -24,72 +33,72 @@ contract Product is RBAC {
         maintenanceMode = !maintenanceMode;
     }
 
-    function register(bytes32 _productName, bytes32 _policyFlow) internal {
+    function _register(bytes32 _productName, bytes32 _policyFlow) internal {
         productService.register(_productName, _policyFlow);
     }
 
-    function newApplication(
-        bytes32 _customerExternalId,
+    function _newApplication(
+        bytes32 _bpExternalKey,
         uint256 _premium,
         bytes32 _currency,
         uint256[] memory _payoutOptions
     ) internal returns (uint256 _applicationId) {
         _applicationId = productService.newApplication(
-            _customerExternalId,
+            _bpExternalKey,
             _premium,
             _currency,
             _payoutOptions
         );
     }
 
-    function underwrite(uint256 _applicationId)
+    function _underwrite(uint256 _applicationId)
         internal
         returns (uint256 _policyId)
     {
         _policyId = productService.underwrite(_applicationId);
     }
 
-    function decline(uint256 _applicationId) internal {
+    function _decline(uint256 _applicationId) internal {
         productService.decline(_applicationId);
     }
 
-    function newClaim(uint256 _policyId) internal returns (uint256 _claimId) {
+    function _newClaim(uint256 _policyId) internal returns (uint256 _claimId) {
         _claimId = productService.newClaim(_policyId);
     }
 
-    function confirmClaim(uint256 _claimId, uint256 _amount)
+    function _confirmClaim(uint256 _claimId, uint256 _amount)
         internal
         returns (uint256 _payoutId)
     {
         _payoutId = productService.confirmClaim(_claimId, _amount);
     }
 
-    function expire(uint256 _policyId) internal {
+    function _expire(uint256 _policyId) internal {
         productService.expire(_policyId);
     }
 
-    function payout(uint256 _payoutId, uint256 _amount)
+    function _payout(uint256 _payoutId, uint256 _amount)
         internal
         returns (uint256 _remainder)
     {
         _remainder = productService.payout(_payoutId, _amount);
     }
 
-    function getPayoutOptions(uint256 _applicationId)
+    function _getPayoutOptions(uint256 _applicationId)
         internal
         returns (uint256[] memory _payoutOptions)
     {
         _payoutOptions = productService.getPayoutOptions(_applicationId);
     }
 
-    function getPremium(uint256 _applicationId)
+    function _getPremium(uint256 _applicationId)
         internal
         returns (uint256 _premium)
     {
         _premium = productService.getPremium(_applicationId);
     }
 
-    function request(
+    function _request(
         bytes memory _input,
         string memory _callbackMethodName,
         bytes32 _oracleTypeName,
