@@ -4,7 +4,7 @@ pragma experimental ABIEncoderV2;
 import "./IPolicy.sol";
 
 interface IPolicyController {
-    function createPolicyFlow(uint256 _productId)
+    function createPolicyFlow(uint256 _productId, bytes32 _bpExternalKey)
         external
         returns (uint256 _metadataId);
 
@@ -17,7 +17,6 @@ interface IPolicyController {
     function createApplication(
         uint256 _productId,
         uint256 _metadataId,
-        bytes32 _customerExternalId,
         uint256 _premium,
         bytes32 _currency,
         uint256[] calldata _payoutOptions
@@ -68,7 +67,6 @@ interface IPolicyController {
         view
         returns (
         uint256 _metadataId,
-        bytes32 _customerExternalId,
         uint256 _premium,
         bytes32 _currency,
         IPolicy.ApplicationState _state
