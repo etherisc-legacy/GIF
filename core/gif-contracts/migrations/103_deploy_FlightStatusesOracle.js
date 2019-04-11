@@ -2,14 +2,14 @@ const axios = require('axios');
 const { web3utils, logger: { info } } = require('../io/module')(web3, artifacts);
 
 
-const DAOService = artifacts.require('controllers/DAOService.sol');
+const InstanceOperatorService = artifacts.require('controllers/InstanceOperatorService.sol');
 const OracleService = artifacts.require('controllers/OracleService.sol');
 const OracleOwnerService = artifacts.require('controllers/OracleOwnerService.sol');
 const FlightStatusesOracle = artifacts.require('examples/OraclizeBridgeOracles/FlightStatusesOracle.sol');
 
 
 module.exports = async (deployer) => {
-  const daoService = await DAOService.deployed();
+  const instanceOperator = await InstanceOperatorService.deployed();
   const oracleService = await OracleService.deployed();
   const oracleOwnerService = await OracleOwnerService.deployed();
 
@@ -23,7 +23,7 @@ module.exports = async (deployer) => {
   // Deploy FlightStatusesOracle
   const flightStatusesOracle = await deployer.deploy(
     FlightStatusesOracle, oracleService.address, encryptedQueryReq.data.result, {
-      value: 1 * (10 ** 18),
+      value: 2 * (10 ** 18),
       gas: 4500000,
     },
   );
@@ -31,7 +31,7 @@ module.exports = async (deployer) => {
   const prodUrl = await flightStatusesOracle.getOraclizeUrl.call(web3utils.bytes(32, 'AA/100'), web3utils.bytes(32, '2019/02/02'), { gas: 300000 });
   info('Oraclize production url: %s\n', prodUrl);
 
-  /* COMMENT/UNCOMMENT IF YOU WANT IN TEST MODE */
+  /* UNCOMMENT IF YOU WANT IN TEST MODE */
   info('Set test mode');
   await flightStatusesOracle.setTestMode(true, { gas: 200000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
@@ -43,7 +43,7 @@ module.exports = async (deployer) => {
   );
 
   info('Oraclize test url: %s', testUrl);
-  /* COMMENT/UNCOMMENT IF YOU WANT IN TEST MODE */
+  /* UNCOMMENT IF YOU WANT IN TEST MODE */
 
   info('Propose FlightStatuses OracleType');
   await oracleOwnerService.proposeOracleType(
@@ -60,12 +60,12 @@ module.exports = async (deployer) => {
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   info('Activate FlightStatuses OracleType');
-  await daoService.activateOracleType(web3utils.bytes(32, 'FlightStatuses'), { gas: 200000 })
+  await instanceOperator.activateOracleType(web3utils.bytes(32, 'FlightStatuses'), { gas: 200000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   info('Activate FlightStatuses Oracle');
   const oracleId = 1;
-  await daoService.activateOracle(oracleId, { gas: 200000 })
+  await instanceOperator.activateOracle(oracleId, { gas: 200000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   info('Propose FlightStatusesOracle to FlightStatuses OracleType');
@@ -74,5 +74,5 @@ module.exports = async (deployer) => {
 
   info('Assign FlightStatusesOracle to FlightStatuses OracleType');
   const proposalId = 0;
-  await daoService.assignOracleToOracleType(web3utils.bytes(32, 'FlightStatuses'), proposalId, { gas: 200000 });
+  await instanceOperator.assignOracleToOracleType(web3utils.bytes(32, 'FlightStatuses'), proposalId, { gas: 200000 });
 };
