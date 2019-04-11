@@ -3,21 +3,15 @@ pragma solidity 0.5.2;
 interface ILicenseController {
     function register(bytes32 _name, address _addr, bytes32 _policyFlow)
         external
-        returns (uint256 _registrationId);
+        returns (uint256 _id);
 
-    function declineRegistration(uint256 _registrationId) external;
+    function approveProduct(uint256 _id) external;
 
-    function approveRegistration(uint256 _registrationId)
-        external
-        returns (uint256 _productId);
+    function disapproveProduct(uint256 _id) external;
 
-    function disapproveProduct(uint256 _productId) external;
+    function pauseProduct(uint256 _id) external;
 
-    function reapproveProduct(uint256 _productId) external;
-
-    function pauseProduct(uint256 _productId) external;
-
-    function unpauseProduct(uint256 _productId) external;
+    function unpauseProduct(uint256 _id) external;
 
     function isApprovedProduct(address _addr)
         external

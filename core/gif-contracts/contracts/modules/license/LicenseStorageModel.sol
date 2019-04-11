@@ -1,55 +1,13 @@
 pragma solidity 0.5.2;
 
-contract LicenseStorageModel {
-    event LogNewRegistration(
-        uint256 registrationId,
-        bytes32 name,
-        address addr
-    );
+import "./ILicense.sol";
 
-    event LogRegistrationDeclined(uint256 registrationId);
-
-    event LogNewProductApproved(bytes32 name, address addr, uint256 id);
-
-    event LogProductDisapproved(bytes32 name, address addr, uint256 id);
-
-    event LogProductReapproved(bytes32 name, address addr, uint256 id);
-
-    event LogProductPaused(bytes32 name, address addr, uint256 id);
-
-    event LogProductUnpaused(bytes32 name, address addr, uint256 id);
-
-    struct Registration {
-        bytes32 name;
-        address addr;
-        bytes32 policyFlow;
-        uint256 release;
-        bool declined;
-    }
-
-    struct Product {
-        bytes32 name;
-        address addr;
-        bytes32 policyFlow;
-        uint256 release; // core
-        // uint256 applicationRelease
-        address policyToken;
-        bool approved;
-        bool paused;
-    }
-
-    /**
-     * @dev Registration array
-     */
-    Registration[] public registrations;
-
-    /**
-     * @dev Products
-     */
-    Product[] public products;
-
-    /**
-     * @dev Get product id by contract's address
-     */
+contract LicenseStorageModel is ILicense {
+    mapping(uint256 => Product) public products;
     mapping(address => uint256) public productIdByAddress;
+    uint256 public productIdIncrement;
+
+    // todo: Add list of approved products
+    // todo: Add list of products for approval
+
 }
