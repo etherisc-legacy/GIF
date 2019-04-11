@@ -6,7 +6,7 @@ interface IProductService {
         returns (uint256 _registrationId);
 
     function newApplication(
-        bytes32 _customerExternalId,
+        bytes32 _bpExternalKey,
         uint256 _premium,
         bytes32 _currency,
         uint256[] calldata _payoutOptions

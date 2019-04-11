@@ -7,14 +7,18 @@ import "../../shared/AccessModifiers.sol";
 contract RegistryController is RegistryStorageModel, BaseModuleController, AccessModifiers {
     constructor() public {
         // Init
-        controllers["DAO"] = msg.sender;
+        controllers["InstanceOperator"] = msg.sender;
+        register("Registry", address(this));
     }
 
-    function assignStorage(address _storage) external onlyDAO {
+    function assignStorage(address _storage) external onlyInstanceOperator {
         _assignStorage(_storage);
     }
 
-    function registerService(bytes32 _name, address _addr) external onlyDAO {
+    function registerService(bytes32 _name, address _addr)
+        external
+        onlyInstanceOperator
+    {
         controllers[_name] = _addr;
     }
 
@@ -29,7 +33,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         uint256 _release,
         bytes32 _contractName,
         address _contractAddress
-    ) public onlyDAO {
+    ) public onlyInstanceOperator {
         require(
             contractNames[_release].length <= maxContracts,
             "ERROR::MAX_CONTRACTS_LIMIT"
@@ -49,7 +53,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
      */
     function register(bytes32 _contractName, address _contractAddress)
         public
-        onlyDAO
+        onlyInstanceOperator
     {
         registerInRelease(release, _contractName, _contractAddress);
     }
@@ -59,7 +63,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
      */
     function deregisterInRelease(uint256 _release, bytes32 _contractName)
         public
-        onlyDAO
+        onlyInstanceOperator
     {
         uint256 indexToDelete;
         uint256 countContracts = contractNames[_release].length;
@@ -85,14 +89,18 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     /**
      * @dev Deregister contract in the latest release
      */
-    function deregister(bytes32 _contractName) public onlyDAO {
+    function deregister(bytes32 _contractName) public onlyInstanceOperator {
         deregisterInRelease(release, _contractName);
     }
 
     /**
      * @dev Create new release, copy contracts from previous release
      */
-    function prepareRelease() public onlyDAO returns (uint256 _release) {
+    function prepareRelease()
+        public
+        onlyInstanceOperator
+        returns (uint256 _release)
+    {
         uint256 countContracts = contractNames[release].length;
 
         require(countContracts > 0, "ERROR::EMPTY_RELEASE");

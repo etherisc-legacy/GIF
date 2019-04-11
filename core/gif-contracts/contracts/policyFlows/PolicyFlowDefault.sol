@@ -12,19 +12,21 @@ contract PolicyFlowDefault is WithRegistry {
     constructor(address _registry) public WithRegistry(_registry) {}
 
     function newApplication(
-        bytes32 _customerExternalId,
+        bytes32 _bpExternalKey,
         uint256 _premium,
         bytes32 _currency,
-        uint256[] calldata _payoutOptions
-    ) external returns (uint256 _applicationId) {
+        uint256[] memory _payoutOptions
+    ) public returns (uint256 _applicationId) {
         uint256 productId = license().getProductId(msg.sender);
 
-        uint256 metadataId = policy().createPolicyFlow(productId);
+        uint256 metadataId = policy().createPolicyFlow(
+            productId,
+            _bpExternalKey
+        );
 
         uint256 applicationId = policy().createApplication(
             productId,
             metadataId,
-            _customerExternalId,
             _premium,
             _currency,
             _payoutOptions
@@ -53,7 +55,7 @@ contract PolicyFlowDefault is WithRegistry {
             IPolicy.ApplicationState.Underwritten
         );
 
-        (uint256 metadataId, , , , ) = policy().getApplicationData(
+        (uint256 metadataId, , , ) = policy().getApplicationData(
             productId,
             _applicationId
         );
