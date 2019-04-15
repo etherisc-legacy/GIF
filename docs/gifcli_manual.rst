@@ -46,13 +46,18 @@ In the table below, you can see a list of commands, available on the GIF CLI.
    :header-rows: 1
 
    * - Group of commands/ methods
+    
      - CLI mode 
 
-       (gifcli [COMMAND] — commands)
+       (gifcli [COMMAND] 
+
+       — commands)
      - Console + Execute mode 
 
        (gif.[METHOD] — methods)
-   * - **Common service commands/methods**
+   * - **Common service commands/**
+
+       methods**
      - gifcli console 
        
        gifcli exec 
@@ -64,9 +69,9 @@ In the table below, you can see a list of commands, available on the GIF CLI.
        i.e. product:create]
      - gif.help() 
        
-       gif.help('type a command here, 
+       gif.help('type a command
 
-       i.e. product.get')
+       here, i.e. product.get')
    * - **Commands related to users** 
 
        **(product builders)**
@@ -83,7 +88,9 @@ In the table below, you can see a list of commands, available on the GIF CLI.
      - gif.product.get
    * - **Methods to set and oversee** 
 
-       **the business processes of a product**
+       **the business processes**
+
+       **of a product**
      - —
      - gif.bp.create
 
@@ -102,9 +109,11 @@ In the table below, you can see a list of commands, available on the GIF CLI.
        gif.contract.send
    * - **Methods related to customers** 
 
-       **(end-users of a product, developed** 
+       **(end-users of a product,** 
 
-       **by product builders)**
+       **developed by**
+
+       **product builders)**
      - —
      - gif.customer.create
 
