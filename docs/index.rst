@@ -11,6 +11,7 @@ Welcome to User Manual for the Generic Insurance Framework!
 
 .. toctree:: 
     :maxdepth: 2
+    :caption: User Manual for the Generic Insurance Framework
 
     terminology.rst
     generic_insurance_framework.rst
@@ -29,8 +30,10 @@ Welcome to User Manual for the Generic Insurance Framework!
     oracle_flow.jpeg
     change_contracts.png
 
+.. _GIF_sandbox_CLI:
 
 .. toctree:: 
     :maxdepth: 2
+    :caption: User Manual for the GIF sandbox CLI
 
     gifcli_manual.rst
