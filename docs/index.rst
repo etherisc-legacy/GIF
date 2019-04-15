@@ -30,7 +30,7 @@ Welcome to User Manual for the Generic Insurance Framework!
     oracle_flow.jpeg
     change_contracts.png
 
-.. _GIF_sandbox_CLI:
+.. _GIF_CLI_manual:
 
 .. toctree:: 
     :maxdepth: 2
