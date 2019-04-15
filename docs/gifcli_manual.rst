@@ -67,9 +67,9 @@ In the table below, you can see a list of commands, available on the GIF CLI.
        gif.help('type a command here, 
 
        i.e. product.get')
-   * - **Commands related to users 
+   * - **Commands related to users** 
 
-       (product builders)**
+       **(product builders)**
      - gifcli user:register
 
        gifcli user:logout
@@ -81,9 +81,9 @@ In the table below, you can see a list of commands, available on the GIF CLI.
 
        gifcli artifact:send
      - gif.product.get
-   * - **Methods to set and oversee 
+   * - **Methods to set and oversee** 
 
-       the business processes of a product**
+       **the business processes of a product**
      - —
      - gif.bp.create
 
@@ -93,18 +93,18 @@ In the table below, you can see a list of commands, available on the GIF CLI.
 
        gif.bp.getByKey
        
-   * - **Methods to interact with 
+   * - **Methods to interact with** 
 
-       product contracts**
+       **product contracts**
      - —
      - gif.contract.call
 
        gif.contract.send
-   * - **Methods related to customers 
+   * - **Methods related to customers** 
 
-       (end-users of a product, developed 
+       **(end-users of a product, developed** 
 
-       by product builders)**
+       **by product builders)**
      - —
      - gif.customer.create
 
