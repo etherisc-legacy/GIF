@@ -42,7 +42,6 @@ The other commands are used when you have already created a product. These comma
 In the table below, you can see a list of commands, available on the GIF CLI.
 
 .. list-table:: 
-   :widths: 10 12 12
    :header-rows: 1
 
    * - Group of commands/ methods
@@ -54,17 +53,21 @@ In the table below, you can see a list of commands, available on the GIF CLI.
        — commands)
      - Console + Execute mode 
 
-       (gif.[METHOD] — methods)
+       (gif.[METHOD]
+       
+       — methods)
    * - **Common service commands/**
 
-       methods**
+       **methods**
      - gifcli console 
        
        gifcli exec 
 
-       gifcli help [type here the name 
-
-       of the necessary command, 
+       gifcli help [type here
+       
+       the name of 
+       
+       the necessary command, 
 
        i.e. product:create]
      - gif.help() 
