@@ -28,3 +28,9 @@ Welcome to User Manual for the Generic Insurance Framework!
     gdpr.jpeg
     oracle_flow.jpeg
     change_contracts.png
+
+
+.. toctree:: 
+    :maxdepth: 2
+
+    gifcli_manual.rst
