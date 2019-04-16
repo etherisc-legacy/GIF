@@ -1,4 +1,17 @@
-﻿
+﻿.. _rst_table_of_contents:
+
+######################################################
+User Manual for the GIF sandbox Command Line Interface
+######################################################
+
+.. pull-quote::
+
+    Once developed by the Etherisc team, the Generic Insurance Framework (GIF) is released as an environment where product builders can create their own products. To access the GIF and to make user experience more enjoyable, the Etherisc team has also created a so-called "sandbox" — a particular working environment where product builders are able to experiment with their products in a test mode, not worrying about possible "unexpected" results.
+
+    The next step is to equip product builders with a plain and powerful solution, enabling them to operate the GIF, as well as a sandbox for it. Such a solution is now available for product builders through the GIF Command Line Interface (CLI). Here, we present a quick reference on how to use the Command Line Interface while working with the GIF.
+
+    For better understanding of this document, you can refer to the `User manual for the GIF <https://gif-manual.readthedocs.io/en/latest/index.html>`_ to refresh the content and the features of the framework. There you can also find basic methods necessary for creating your own product's contract.
+    
 Prerequisites
 *************
 
@@ -21,70 +34,127 @@ General description
 
 The basic principle of the CLI is the same as of any other command line: to manage a programming working environment with commands. Actually, you run the CLI within the operating system console of your computer (e.g., a command line of Microsoft Windows, Ubuntu, etc.).
 
-Here, we list commands available for product builders and will further describe each command in more detail. There are a few basic commands in the **CLI mode** available right after installation of the **gifcli** necessary for making the very first steps: ``gifcli console`` , ``gifcli exec`` , ``gifcli help [or any other gifcli command with a space after "help" and without an additional "gifcli", e.g. *gifcli help user:register*]`` , ``gifcli user:register`` , ``gifcli product:create`` , ``gifcli product:select`` , ``gifcli artifact:send`` and ``gifcli user:logout`` .
+Here, we list commands available for product builders and will further describe each command in more detail. There are a few basic commands in the **CLI mode** available right after installation of the **gifcli** necessary for making the very first steps: ``gifcli console`` , ``gifcli exec`` , ``gifcli help [COMMAND]`` (or any other gifcli command with a space after "help" and without an additional "gifcli", e.g. gifcli help user:register), ``gifcli user:register`` , ``gifcli product:create`` , ``gifcli product:select`` , ``gifcli artifact:send`` and ``gifcli user:logout`` .
 
 The other commands are used when you have already created a product. These commands (beginning with "gif") are available in the **console mode** , which is run by the ``gifcli console`` command.
 
 In the table below, you can see a list of commands, available on the GIF CLI.
 
-+--------------------------------+--------------------------------+--------------------------------+
-| Group of commands/ methods     | CLI mode (gifcli [COMMAND]     | Console + Execute mode         |
-|                                | — commands)                    | (gif.[METHOD] — methods)       |
-+================================+================================+================================+
-| **Common service               | gifcli console                 |                                |
-| commands/methods**             |                                |                                |
-|                                | gifcli exec                    |                                |
-|                                |                                |                                |
-|                                | gifcli help [type here         | gif.help()                     | 
-|                                | the name of the necessary      |                                |
-|                                | command, i.e. product:create]  | gif.help('type a command here, |
-|                                |                                | i.e. product.get')             |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Commands related to users    | gifcli user:register           |                                |
-| (product builders)**           |                                |               —                |
-|                                | gifcli user:logout             |                                |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Commands to manage           | gifcli product:create          | gif.product.get                |
-| products**                     |                                |                                |
-|                                | gifcli product:select          |                                |
-|                                |                                |                                |
-|                                | gifcli artifact:send           |                                |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Methods to set and oversee   |                                | gif.bp.create                  |
-| the business processes of a    |                                |                                |
-| product**                      |                                | gif.bp.list                    |
-|                                |               —                |                                |
-|                                |                                | gif.bp.getById                 |
-|                                |                                |                                |
-|                                |                                | gif.bp.getByKey                |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Methods to interact with     |                                | gif.contract.call              |
-| product contracts**            |               —                |                                |
-|                                |                                | gif.contract.send              |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Methods related to customers |                                | gif.customer.create            |
-| (end-users of a product, deve- |                                |                                |
-| loped by product builders)**   |               —                | gif.customer.getById           |
-|                                |                                |                                |
-|                                |                                | gif.customer.list              |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Methods to manage            |                                | gif.application.list           |
-| applications**                 |               —                |                                |
-|                                |                                | gif.application.getById        |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Methods to interact with     |                                | gif.policy.list                |
-| a policy**                     |               —                |                                |
-|                                |                                | gif.policy.getById             |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Methods to manage claims**   |                                | gif.claim.list                 |
-|                                |               —                |                                |
-|                                |                                | gif.claim.getById              |
-+--------------------------------+--------------------------------+--------------------------------+
-| **Methods to work with         |                                | gif.payout.list                |
-| payouts**                      |               —                |                                |
-|                                |                                | gif.payout.getById             |
-+--------------------------------+--------------------------------+--------------------------------+
+.. list-table:: 
+   :header-rows: 1
 
+   * - Group of
+
+       commands/
+
+       methods
+     - CLI mode 
+
+       (gifcli [COMMAND] 
+
+       — commands)
+     - Console + Execute mode 
+
+       (gif.[METHOD]
+
+       — methods)
+   * - **Common service**
+
+       **commands/**
+
+       **methods**
+     - gifcli console 
+       
+       gifcli exec 
+
+       gifcli help [type here the name 
+
+       of the necessary command, 
+
+       i.e. product:create]
+     - gif.help() 
+       
+       gif.help('type a command
+
+       here, i.e. product.get')
+   * - **Commands related to users** 
+
+       **(product builders)**
+     - gifcli user:register
+
+       gifcli user:logout
+     - —
+   * - **Commands to manage**
+
+       **products**
+     - gifcli product:create
+
+       gifcli product:select
+
+       gifcli artifact:send
+     - gif.product.get
+   * - **Methods to set and oversee** 
+
+       **the business processes**
+
+       **of a product**
+     - —
+     - gif.bp.create
+
+       gif.bp.list
+
+       gif.bp.getById
+
+       gif.bp.getByKey
+       
+   * - **Methods to interact with** 
+
+       **product contracts**
+     - —
+     - gif.contract.call
+
+       gif.contract.send
+   * - **Methods related to customers** 
+
+       **(end-users of a product,** 
+
+       **developed by**
+
+       **product builders)**
+     - —
+     - gif.customer.create
+
+       gif.customer.getById
+
+       gif.customer.list
+   * - **Methods to manage**
+
+       **applications**
+     - —
+     - gif.application.list
+
+       gif.application.getById
+   * - **Methods to interact**
+
+       **with a policy**
+     - —
+     - gif.policy.list
+
+       gif.policy.getById
+   * - **Methods to manage**
+ 
+       **claims**
+     - —
+     - gif.claim.list
+
+       gif.claim.getById
+   * - **Methods to work**
+
+       **with payouts**
+     - —
+     - gif.payout.list
+
+       gif.payout.getById
 
 When using the CLI for the first time, you need to register a user. Then, you can create your product, add customers, etc.
 
@@ -466,7 +536,7 @@ In case you would need to exploit your previous user, you should backup the **.g
 It is also required to fund your account with some test ETH on `Rinkeby test network <https://faucet.rinkeby.io/>`_.
 
 
-9. After that, you can continue with the migration using the ``HTTP_PROVIDER="https://rinkeby.infura.io/v3/paste your infura key here" MNEMONIC="input here the mnemonic, created in the previous step" npm run migrate -- --network rinkeby`` command. To execute the command, you need to create an account at `Infura <https://infura.io/register>`_ (if you haven't yet) and paste the key from your account into the mentioned space in the command.
+9. After that, you can continue with the migration using the ``HTTP_PROVIDER="https://rinkeby.infura.io/v3/KEY" MNEMONIC="mnemonic" npm run migrate -- --network rinkeby`` command. In the command text, instead of the word "KEY" paste your infura key and, instead of the word "mnemonic", input here the mnemonic, created in the previous step. To execute the command, you need to create an account at `Infura <https://infura.io/register>`_ (if you haven't yet) and paste the key from your account into the mentioned space in the command.
 
 .. note :: Operating on the Ethereum environment, all the transactions consume "gas". You can face a warning message like this: *"Error:  *** Deployment Failed *** "Migrations" -- The contract code couldn't be stored, please check your gas limit."* In this case, you need to top up your account with some ETH and execute the command again.
 
@@ -571,7 +641,7 @@ It is also required to fund your account with some test ETH on `Rinkeby test net
       productOwner: '0x0000000000000000000000000000000000000000' }
 
 
-13. Now, you can proceed with creating a customer. Here, the ``gif.customer.create({ firstname: '...', lastname: '...', email: '...@....com' and other necessary arguments about your customers, e.g., the age: ,etc. })`` method will help:
+13. Now, you can proceed with creating a customer. Here, the ``gif.customer.create({ firstname: '...', lastname: '...', email: '...@....com'})`` method will help:
 
 ::
 
@@ -581,6 +651,7 @@ It is also required to fund your account with some test ETH on `Rinkeby test net
         '5efaf976b1fb4fe0be9b0d68e833c469757c2749863c33b77ce907e6f3bc8cee'
     } 
 
+You can add other necessary arguments about your customers, e.g., the age (as in our example), etc. in the text of the method.
 
 14. Then, using the ``gif.customer.getById("insert customer ID here")`` method, you can receive specific data related to a certain customer by a customer ID. From the previous step, you will receive the output with the customer's first name, last name, e-mail address, and age.
 
@@ -667,7 +738,7 @@ Here is the data from our sample:
     { _premium: '10' } 
 
 
-19. The ``gif.contract.send("ProductName", "applyForPolicy", ['ExternalKey given at the 18th step', sum of payout, 'currency', [sum of premium]])`` method can be used for different purposes. As you can see from our example, it helps to apply for a policy but it is also used for underwriting applications, as well as creating and confirming claims. We will do this in a few steps. By this method, you can send transactions to the contract's method. As a result, the state of the contract is changed and a transaction on the blockchain is made.
+19. The ``gif.contract.send("ProductName", "applyForPolicy", ['ExternalKey', sum of payout, 'currency', [sum of premium]])`` method can be used for different purposes. In place of the "ExternalKey" text in the method you need to input the key given at the 18th step. As you can see from our example, it helps to apply for a policy but it is also used for underwriting applications, as well as creating and confirming claims. We will do this in a few steps. By this method, you can send transactions to the contract's method. As a result, the state of the contract is changed and a transaction on the blockchain is made.
 
 ::
 
@@ -850,7 +921,7 @@ Here is the data from our sample:
         updatedAt: 1553619501 } 
 
 
-28. You can provide a confirmation of a claim by the ``gif.contract.send("ProductName", "confirmClaim", [ ID number of a claim, sum of payout - in our case it is less, than amount of the premium])`` method:
+28. You can provide a confirmation of a claim by the ``gif.contract.send("ProductName", "confirmClaim", [ ID number of a claim, sum of payout])`` method:
 
 ::
 
@@ -872,7 +943,7 @@ Here is the data from our sample:
         raw: [Object] } } } 
 
 
-29. To make a payout, you need to confirm it using the ``gif.contract.send("ProductName", "confirmPayout", [ 3, 100  ])`` method:
+29. To make a payout, you need to confirm it using the ``gif.contract.send("ProductName", "confirmPayout", [3, 100])`` method:
 
 ::
 
@@ -919,7 +990,7 @@ You can also use the ``gif.payout.getById(ID number of a payout)`` method when y
 
 With these basic steps, you can start using the Generic Insurance Framework.
 
-For your convenience, we also provide the addresses of the smart contracts, deployed in the blockchain test network Rinkeby. These contracts enable the necessary functionality for the GIF CLI. In particular, you should use the ProductService contract to deploy your own product's contract.
+.. note :: For your convenience, we also provide the addresses of the smart contracts, deployed in the blockchain test network Rinkeby. These contracts enable the necessary functionality for the GIF CLI. In particular, you should use the ProductService contract to deploy your own product's contract.
 
 **Network: rinkeby** (id: 4)  
 
