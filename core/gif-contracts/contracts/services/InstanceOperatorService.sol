@@ -2,7 +2,6 @@ pragma solidity 0.5.2;
 
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "../modules/license/ILicenseController.sol";
-import "../modules/access/IAccessController.sol";
 import "../modules/registry/IRegistryController.sol";
 import "../modules/query/IQueryController.sol";
 import "../shared/WithRegistry.sol";
@@ -28,23 +27,7 @@ contract InstanceOperatorService is WithRegistry, Ownable {
     function unpauseProduct(uint256 _productId) external onlyOwner {
         license().unpauseProduct(_productId);
     }
-
-    /* Access */
-    function createRole(bytes32 _role) external onlyOwner {
-        access().createRole(_role);
-    }
-
-    function addRoleToAccount(address _address, bytes32 _role)
-        external
-        onlyOwner
-    {
-        access().addRoleToAccount(_address, _role);
-    }
-
-    function cleanRolesForAccount(address _address) external onlyOwner {
-        access().cleanRolesForAccount(_address);
-    }
-
+    
     /* Registry */
     function registerInRelease(
         uint256 _release,
@@ -95,10 +78,6 @@ contract InstanceOperatorService is WithRegistry, Ownable {
     /* Lookup */
     function license() internal view returns (ILicenseController) {
         return ILicenseController(registry.getContract("License"));
-    }
-
-    function access() internal view returns (IAccessController) {
-        return IAccessController(registry.getContract("Access"));
     }
 
     function query() internal view returns (IQueryController) {

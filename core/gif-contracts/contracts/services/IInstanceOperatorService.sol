@@ -10,13 +10,6 @@ interface IInstanceOperatorService {
 
     function unpauseProduct(uint256 _productId) external;
 
-    // Access
-    function createRole(bytes32 _role) external;
-
-    function addRoleToAccount(address _address, bytes32 _role) external;
-
-    function cleanRolesForAccount(address _address) external;
-
     // Registry
     function registerInRelease(
         uint256 _release,
