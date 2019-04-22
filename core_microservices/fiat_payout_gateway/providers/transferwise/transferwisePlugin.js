@@ -13,6 +13,7 @@ class TransferwisePlugin {
    */
   constructor(config, log) {
     this.transferwiseClient = new TransferwiseClient(config, log);
+    this.log = log;
   }
 
   /**
@@ -35,8 +36,9 @@ class TransferwisePlugin {
       this.transferwiseClient.createAccount(name, currency, email),
       this.transferwiseClient.createQuote(currency, amount),
     ]);
-
+    this.log.info(`Creating a pending transfer for quote #${quote.id}`);
     const transfer = await this.transferwiseClient.makeTransfer(account.id, quote.id, uuid());
+    this.log.info(`Transfer created: ${JSON.stringify(transfer)}`);
     return transfer;
   }
 
@@ -45,7 +47,9 @@ class TransferwisePlugin {
    * @param {*} transfer
    */
   async processPayout({ id }) {
+    this.log.info(`Making fund request for transfer #${id}`);
     const response = await this.transferwiseClient.fundTransfer(id);
+    this.log.info(`Fund request response: ${JSON.stringify(response)}`);
     if (response.errorCode !== null) {
       throw new Error(`Transferwise error: ${response.errorCode}`);
     }
