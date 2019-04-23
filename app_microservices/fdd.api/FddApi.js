@@ -351,7 +351,7 @@ class FddApi {
       const { currency } = await PolicyExtra.query().where('policyId', policy.id)
         .then(rows => _.fromPairs(_.map(rows, r => [r.field, r.value])));
       await this._gif.makePayout({
-        provider: 'transferwise',
+        provider: 'demo',
         currency,
         payoutAmount: Number(amount),
         policyId: policy.id,
