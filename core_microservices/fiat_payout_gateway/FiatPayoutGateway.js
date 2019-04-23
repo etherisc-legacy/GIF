@@ -1,7 +1,7 @@
 const { transaction } = require('objection');
 const models = require('./models/module');
 const TransferwisePlugin = require('./providers/transferwise/transferwisePlugin');
-
+const DemoPlugin = require('./providers/demo/demoPlugin');
 
 /**
  * DIP Fiat Payout Gateway microservice
@@ -32,6 +32,7 @@ class FiatPayoutGateway {
       login: process.env.TRANSFERWISE_LOGIN,
       password: process.env.TRANSFERWISE_PASSWORD,
     }, this._log));
+    this._registerProvider('demo', new DemoPlugin(this._log));
     await this._amqp.consume({
       messageType: 'payout',
       messageVersion: '1.*',

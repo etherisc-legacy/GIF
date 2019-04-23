@@ -96,7 +96,8 @@ describe('PolicyStorage microservice', () => {
     const policy = await Policy.query();
 
     policy.length.should.be.equal(1);
-    _.omit(policy[0], ['created', 'updated', 'id', 'creationId']).should.be.deepEqual({
+    const fieldsToOmit = ['created', 'updated', 'id', 'creationId', 'contractApplicationId', 'contractPolicyId'];
+    _.omit(policy[0], fieldsToOmit).should.be.deepEqual({
       customerId,
       distributorId: data.policy.distributorId,
     });
