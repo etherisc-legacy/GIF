@@ -149,7 +149,7 @@ describe('Fdd api microservice', function describe() {
     const [msg] = spyCall.args;
 
     msg.messageType.should.be.equal('payout');
-    msg.content.provider.should.be.equal('transferwise');
+    msg.content.provider.should.be.equal('demo');
     msg.content.currency.should.be.equal('EUR');
     msg.content.payoutAmount.should.be.equal(10000);
     msg.content.policyId.should.be.equal(POLICY_ID);

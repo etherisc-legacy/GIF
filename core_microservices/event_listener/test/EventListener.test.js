@@ -50,7 +50,7 @@ describe('EventListener microservice', () => {
         resolve();
       });
 
-      await this.microservice.app.onData({
+      await this.microservice.app.handleEvent({
         logIndex: 0,
         transactionIndex: 0,
         transactionHash: '0x387905a4404da0410e6dc70ec0e4ad33702e73cc0c8e1b17f31ce3245efcf968',
