@@ -32,7 +32,7 @@ class FiatPayoutGateway {
       login: process.env.TRANSFERWISE_LOGIN,
       password: process.env.TRANSFERWISE_PASSWORD,
     }, this._log));
-    this._registerProvider('demo', new DemoPlugin(this._log));
+    this._registerProvider('demo', new DemoPlugin(this._log, this._amqp));
     await this._amqp.consume({
       messageType: 'payout',
       messageVersion: '1.*',
@@ -176,6 +176,7 @@ class FiatPayoutGateway {
           email: policy.customer.email,
           currency: String(payout.currency).toUpperCase(),
           amount: payout.payoutAmount,
+          policyId: policy.id,
         });
 
         // Process Payout
