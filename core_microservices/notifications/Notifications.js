@@ -53,7 +53,7 @@ class Notifications {
    */
   async handleNotification({ content, fields, properties }) {
     const { ProductSettings } = this._models;
-    const productId = 'fdd'; // todo: use correct productId
+    const productId = properties.headers.product || 'platform';
 
     const [productSettings] = await ProductSettings.query()
       .select('settings')
@@ -75,7 +75,7 @@ class Notifications {
   async settingsUpdate({ content, fields, properties }) {
     const { transports, templates } = content;
     const { ProductSettings } = this._models;
-    const productId = 'fdd'; // todo: use correct productId
+    const productId = properties.headers.product || 'platform';
 
     const [productSettings] = await ProductSettings.query()
       .where('productId', productId)
