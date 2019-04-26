@@ -63,7 +63,7 @@ class DemoPlugin {
         },
         props: {
           recipient: email,
-          subject: 'Demo Insurance Policy on Etherisc triggered a payout',
+          subject: 'Insurance Test Policy has been paid out',
         },
       },
     });
