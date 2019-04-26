@@ -59,7 +59,7 @@ The code below illustrates how the above-mentioned methods can be invoked.
                 returns (uint256 _registrationId);
  
             function newApplication(
-                bytes32 _customerExternalId,
+                bytes32 _bpExternalKey,
                 uint256 _premium,
                 bytes32 _currency,
                 uint256[] calldata _payoutOptions

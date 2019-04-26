@@ -48,15 +48,28 @@ To avoid the possibility of the so-called customer "profiling," each newly issue
 
 Make Payouts
 ============
-In order to make payouts, a product contract can use the GIF **Payout** microservice. A product contract has two possible ways to be informed about the payout needed.
+In order to make payouts in fiat money, a product contract needs to use the GIF **Payout microservice**.
 
-In the **first way**, a product contract can sign up to the **statusChanged** event from a policy storage to be notified when a payout is needed. The microservice gets a message from a smart contract and sends it to a product application, which needs to provide a payout.
+Your product **App** (here we mean a server App body of your product that connects and coordinates its on-chain and off-chain parts) needs to subscribe to the **Event Listener** microservice to get notifications about the off-chain events related to your product. This way, the product **App** knows that a new entity **“Payout”** appears with the **“expected”** state. To make a payout, a product contract should send a message to the framework with the following structure:
 
-The **second way** implies that a product contract can sign up to the **Event Listener** and read events about its contracts.
+::
 
-The GIF **Payout** microservice doesn't have any business logic implementation regarding where to transfer payout funds and which way (transferring to a bank account, payment cards, a transferwise, paypal accounts, coin wallets, post transfers, etc.). This business logic could be implemented by a product contract.
+    {
+      id: 'payout',
+      type: 'object',
+      properties: {
+        policyId: { type: 'string' },
+        payoutAmount: { type: 'number' },
+        currency: { type: 'string' },
+        provider: { type: 'string' },
+        contractPayoutId: { type: 'string' },
+      },
 
-Below, you will find an example of a payout event, which has to be sent by a product contract.
+Where the *'policyId'*, *'payoutAmount'*, *'currency'*, *'provider'*, and *'contractPayoutId'* attributes are required to be defined.
+
+The product contract sends the above-mentioned message to the **Payout** microservice. The information should contain the address where payout funds are to be transferred and the transfer method (e.g., transfer to a bank account, payment card, a transferwise, PayPal account, coin wallet, post transfer, etc.).
+
+Below, you can find an example of a payout message (referred to a particular policy, with ID equal to 1) made by the Payout microservice (“Transferwise”). The payout is made in fiat money (100 EUR) and a product contract is to be notified about this.
 
 .. code-block:: solidity
    :linenos:
@@ -67,3 +80,15 @@ Below, you will find an example of a payout event, which has to be sent by a pro
     currency: 'EUR',
     provider: 'transferwise',
     }
+
+To describe the process in more detail, we provide the following clarification of the interaction between the GIF and product components during the payout process.
+
+There are a few entities involved in the process of payout: the *product smart contract*, the *product App*, the *ProductService contract*, the *Policy module* and some microservices (such as *Event Listener*, *Payout* microservice and *Ethereum signer*).
+
+The process starts with confirming a claim by calling the **_confirmClaim** function in the product contract. This function is addressed to the **ProductService** contract, which delegates it to the **Policy module**. The function is performed here and an entity **“Claim”** changes its state to **“Confirmed”**.
+
+At the same time, a new entity **“Payout”** is created at the **Policy** module with the **“expected”** state. When the states are changed, the **LogPayoutStateChanged** event takes place. This event, like many other events, is “listened” by a particular microservice — **Event Listener** subscribed to the events of the core contract. 
+
+Then, Event Listener notifies the product **App** (with a business logic implemented) about this event. This **App** exchanges messages with other microservices involved (the **Payout** microservice and the **Ethereum signer** microservice) in order to make a payout. The **Ethereum signer** microservice can make payouts on the Ethereum blockchain. It also notifies the **product** contract, which calls the **_confirmPayout** function and addresses it to the **ProductService** contract. 
+
+This results to a similar flow (*ProductService* — *Policy module* —  the payout changes state to *“Paid out”* — the *LogPayoutStateChanged* event occurs — *Event Listener* notifies the product *App* — the product *App* orders the *Notification* microservice to notify the customer about the payout — the *Notification* microservice sends a message to the customer and reports about it to the product *App*).
