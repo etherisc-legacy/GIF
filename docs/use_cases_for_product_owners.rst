@@ -15,11 +15,10 @@ The **register** function (see the code below) is used to register a new product
 .. code-block:: solidity
    :linenos:
 
-    function register(
+    function _register(
     bytes32 _productName, 
     bytes32 _policyFlow
-    ) external
-    returns (uint256 _registrationId);
+    ) internal
 
 Role assignment by a product 
 ============================

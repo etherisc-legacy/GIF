@@ -61,14 +61,14 @@ The code below demonstrates how the function is called.
 .. code-block:: solidity
    :linenos:
 
-    function newApplication(
-       bytes32 _customerExternalId,
+    function _newApplication(
+       bytes32 _bpExternalKey,
        uint256 _premium,
        bytes32 _currency,
        uint256[] memory _payoutOptions
    ) internal returns (uint256 _applicationId) {
        _applicationId = productService.newApplication(
-           _customerExternalId,
+           _bpExternalKey,
            _premium,
            _currency,
            _payoutOptions
@@ -86,7 +86,7 @@ The code below demonstrates how the function is invoked.
 .. code-block:: solidity
    :linenos:
 
-    function underwrite(uint256 _applicationId)
+    function _underwrite(uint256 _applicationId)
         internal
         returns (uint256 _policyId)
     {
@@ -102,7 +102,7 @@ The code below illustrates how the function performs.
 .. code-block:: solidity
    :linenos:
 
-    function decline(uint256 _applicationId) internal {
+    function _decline(uint256 _applicationId) internal {
         productService.decline(_applicationId);
     }
 
@@ -139,7 +139,7 @@ The code below demonstrates how to use the **expire** function.
 .. code-block:: solidity
    :linenos:
 
-    function expire(uint256 _policyId) internal {
+    function _expire(uint256 _policyId) internal {
         productService.expire(_policyId);
     }
 
@@ -164,7 +164,7 @@ The code below demonstrates how the function is invoked.
 .. code-block:: solidity
    :linenos:
 
-    function newClaim(uint256 _policyId) internal returns (uint256 _claimId) {
+    function _newClaim(uint256 _policyId) internal returns (uint256 _claimId) {
        _claimId = productService.newClaim(_policyId);
    }
 
@@ -177,7 +177,7 @@ The code below illustrates how the function performs.
 .. code-block:: solidity
    :linenos:
 
-    function confirmClaim(uint256 _claimId, uint256 _amount)
+    function _confirmClaim(uint256 _claimId, uint256 _amount)
        internal
        returns (uint256 _payoutId)
    {
@@ -193,7 +193,7 @@ The code below illustrates how the function is invoked.
 .. code-block:: solidity
    :linenos:
 
-    function decline(uint256 _applicationId) internal {
+    function _decline(uint256 _applicationId) internal {
         productService.decline(_applicationId);
     }
 
@@ -206,7 +206,7 @@ The method is used to confirm the payout that has actually happened. The payout 
 .. code-block:: solidity
    :linenos:
 
-    function payout(uint256 _payoutId, uint256 _amount)
+    function _payout(uint256 _payoutId, uint256 _amount)
         internal
         returns (uint256 _remainder)
     {
