@@ -21,8 +21,8 @@ contract AccessModifiers {
         _;
     }
 
-    modifier onlyOracle() {
-        require(msg.sender == getService("OracleService"), "ERROR::NOT_ORACLE");
+    modifier onlyOracleService() {
+        require(msg.sender == getService("OracleService"), "ERROR::NOT_ORACLE_SERVICE");
         _;
     }
 

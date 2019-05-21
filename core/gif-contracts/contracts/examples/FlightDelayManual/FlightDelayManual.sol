@@ -82,7 +82,7 @@ contract FlightDelayManual is Product {
         uint256[] calldata _payoutOptions,
         // BP
         bytes32 _bpExternalKey
-    ) external {
+    ) external onlySandbox {
         // Validate input parameters
         // Validate input parameters
         require(_premium >= MIN_PREMIUM, "ERROR::INVALID_PREMIUM");
@@ -147,7 +147,7 @@ contract FlightDelayManual is Product {
     function flightStatisticsCallback(
         uint256 requestId,
         uint256[6] calldata _statistics
-    ) external {
+    ) external onlySandbox {
         // Statistics: ['observations','late15','late30','late45','cancelled','diverted']
 
         uint256 applicationId = requests[requestId].applicationId;
@@ -208,7 +208,7 @@ contract FlightDelayManual is Product {
         uint256 _delay,
         bool _cancelled,
         bool _diverted
-    ) external {
+    ) external onlySandbox {
         uint256 policyId = requests[requestId].policyId;
         uint256 applicationId = requests[requestId].policyId;
         uint256[] memory payoutOptions = _getPayoutOptions(applicationId);
@@ -237,7 +237,10 @@ contract FlightDelayManual is Product {
         }
     }
 
-    function confirmPayout(uint256 _payoutId, uint256 _sum) external {
+    function confirmPayout(uint256 _payoutId, uint256 _sum)
+        external
+        onlySandbox
+    {
         _payout(_payoutId, _sum);
     }
 

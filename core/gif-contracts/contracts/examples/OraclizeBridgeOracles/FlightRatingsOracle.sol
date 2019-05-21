@@ -1,10 +1,11 @@
 pragma solidity 0.5.2;
 
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./oraclizeAPI.sol";
 import "./strings.sol";
 import "../../Oracle.sol";
 
-contract FlightRatingsOracle is Oracle, usingOraclize {
+contract FlightRatingsOracle is Oracle, usingOraclize, Ownable {
     using strings for *;
 
     modifier onlyOraclize {
@@ -44,17 +45,17 @@ contract FlightRatingsOracle is Oracle, usingOraclize {
 
     function() external payable {}
 
-    function setTestMode(bool _testMode) external {
+    function setTestMode(bool _testMode) external onlyOwner {
         // todo: set permissions
         testMode = _testMode;
     }
 
-    function setOraclizeGas(uint256 _oraclizeGas) external {
+    function setOraclizeGas(uint256 _oraclizeGas) external onlyOwner {
         // todo: set permissions
         oraclizeGas = _oraclizeGas;
     }
 
-    function request(uint256 _requestId, bytes calldata _input) external {
+    function request(uint256 _requestId, bytes calldata _input) external onlyQuery {
         // todo: set permissions
         bytes32 carrierFlightNumber = abi.decode(_input, (bytes32));
 
