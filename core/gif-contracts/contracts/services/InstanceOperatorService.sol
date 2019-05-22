@@ -76,6 +76,10 @@ contract InstanceOperatorService is WithRegistry, Ownable {
         _release = registry.prepareRelease();
     }
 
+    function registerService(bytes32 _name, address _addr) external {
+        registry.registerService(_name, _addr);
+    }
+
     /* Query */
     function activateOracleType(bytes32 _oracleTypeName) external onlyOwner {
         query().activateOracleType(_oracleTypeName);

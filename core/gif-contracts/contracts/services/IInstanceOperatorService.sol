@@ -33,6 +33,8 @@ interface IInstanceOperatorService {
 
     function prepareRelease() external returns (uint256 _release);
 
+    function registerService(bytes32 _name, address _addr) external;
+
     // Query
     function activateOracleType(bytes32 _oracleTypeName) external;
 

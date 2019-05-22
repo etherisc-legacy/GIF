@@ -5,6 +5,14 @@ import "../../IOracle.sol";
 import "../../shared/ModuleController.sol";
 
 contract QueryController is QueryStorageModel, ModuleController {
+    modifier isResponsibleOracle(uint256 _requestId, address _responder) {
+        require(
+            oracles[oracleRequests[_requestId].responsibleOracleId].oracleContract == _responder,
+            "ERROR::NOT_RESPONSIBLE_ORACLE"
+        );
+        _;
+    }
+
     constructor(address _registry) public WithRegistry(_registry) {}
 
     function proposeOracleType(
@@ -332,7 +340,12 @@ contract QueryController is QueryStorageModel, ModuleController {
         uint256 _requestId,
         address _responder,
         bytes calldata _data
-    ) external onlyOracle returns (uint256 _responseId) {
+    )
+        external
+        onlyOracleService
+        isResponsibleOracle(_requestId, _responder)
+        returns (uint256 _responseId)
+    {
         OracleRequest storage req = oracleRequests[_requestId];
 
         (bool status, ) = req.callbackContractAddress.call(
