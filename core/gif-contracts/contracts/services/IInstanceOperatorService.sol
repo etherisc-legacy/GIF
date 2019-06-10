@@ -1,6 +1,10 @@
 pragma solidity 0.5.2;
 
 interface IInstanceOperatorService {
+    function assignController(address _storage, address _controller) external;
+
+    function assingStorage(address _controller, address _storage) external;
+
     // License
     function approveProduct(uint256 _productId) external;
 

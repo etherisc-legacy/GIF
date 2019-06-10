@@ -6,11 +6,21 @@ import "../modules/access/IAccessController.sol";
 import "../modules/registry/IRegistryController.sol";
 import "../modules/query/IQueryController.sol";
 import "../shared/WithRegistry.sol";
+import "../shared/IModuleController.sol";
+import "../shared/IModuleStorage.sol";
 
 contract InstanceOperatorService is WithRegistry, Ownable {
     bytes32 public constant NAME = "InstanceOperator";
 
     constructor(address _registry) public WithRegistry(_registry) {}
+
+    function assignController(address _storage, address _controller) external onlyOwner {
+        IModuleStorage(_storage).assignController(_controller);
+    }
+
+    function assingStorage(address _controller, address _storage) external onlyOwner {
+        IModuleController(_controller).assignStorage(_storage);
+    }
 
     /* License */
     function approveProduct(uint256 _productId) external onlyOwner {
