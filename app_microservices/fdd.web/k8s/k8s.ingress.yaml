@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fdd-ui-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "fdd-ui"
+spec:
+  tls:
+    - secretName: fdd-ssl
+  backend:
+    serviceName: fddui
+    servicePort: 80

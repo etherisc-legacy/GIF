@@ -19,9 +19,17 @@ spec:
         image: <!--image-->
         ports:
         - containerPort: 80
+        - containerPort: 443
         env:
         - name: STRIPE_PKEY
           valueFrom:
             secretKeyRef:
               name: payment
               key: STRIPE_PUBLIC_KEY
+        volumeMounts:
+        - name: fdd-ssl
+          mountPath: /etc/ssl
+          readOnly: true
+    volumes:
+      - name: fdd-ssl
+        secret: fdd-ssl
