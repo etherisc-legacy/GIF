@@ -1,11 +1,10 @@
 pragma solidity 0.5.2;
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./shared/RBAC.sol";
 import "./services/IProductService.sol";
 
-contract Product is RBAC, Ownable {
+contract Product is RBAC {
     using SafeMath for *;
 
     bool public developmentMode = false;

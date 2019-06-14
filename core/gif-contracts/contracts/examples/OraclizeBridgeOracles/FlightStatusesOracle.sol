@@ -1,11 +1,10 @@
 pragma solidity 0.5.2;
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "../../Oracle.sol";
 import "./oraclizeAPI.sol";
 import "./strings.sol";
 
-contract FlightStatusesOracle is Oracle, usingOraclize, Ownable {
+contract FlightStatusesOracle is Oracle, usingOraclize {
     using strings for *;
 
     modifier onlyOraclize {
