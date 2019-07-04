@@ -20,6 +20,8 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /etc/rabbitmq
+        - name: storage
+          mountPath: /var/lib/rabbitmq
         ports:
         - name: http
           protocol: TCP
@@ -45,11 +47,15 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
+        - name: METADATA_HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
         - name: RABBITMQ_USE_LONGNAME
           value: "true"
         # See a note on cluster_formation.k8s.address_type in the config file section
         - name: RABBITMQ_NODENAME
-          value: "rabbit@$(MY_POD_IP)"
+          value: "$(METADATA_HOSTNAME)"
         - name: K8S_SERVICE_NAME
           value: "rabbitmq"
         - name: RABBITMQ_ERLANG_COOKIE
@@ -67,3 +73,6 @@ spec:
             path: enabled_plugins
           - key: definitions.json
             path: definitions.json
+      - name: storage
+        persistentVolumeClaim:
+          claimName: rabbitmq-volume-claim
