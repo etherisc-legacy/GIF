@@ -112,17 +112,19 @@ class Deploy extends Command {
    */
   async collectConfigurationFiles() {
     const patterns = [
-      '**/k8s*.yaml',
+      // '**/k8s*.yaml',
       '!**/node_modules/**',
+      '**/services/**/k8s*.yaml',
+      '**/license_manager/**/k8s*.yaml',
+      '!**/license_manager/**/k8s.add-fdd.yaml',
     ];
 
     if (PROD) {
       // For deployment to local test env, we use pre-described Persistent Volume files
       // creating Persistent Volume Claims through mounting hostPath of the parent node into the pod,
       // but for GCE, we use automatically provisioned GCE disks described in Storage Class files
-      patterns.push('!**/k8s.persistent-volume.yaml');
-      // We don't need ganache in GCE
-      patterns.push('!**/k8s/ganache/**');
+      // We also don't need ganache in GCE
+      patterns.push('!**/k8s/local-testing/**');
     } else {
       patterns.push('!**/k8s.storage-class.yaml');
     }
@@ -285,8 +287,8 @@ class Deploy extends Command {
    */
   async tierDeploy(entities) {
     const groupPriority = [
-      'Role', 'RoleBinding', 'ConfigMap', 'Secret',
-      'PersistentVolume', 'StorageClass', 'PersistentVolumeClaim',
+      'Role', 'RoleBinding', 'ConfigMap', 'Secret', 'PodDisruptionBudget',
+      'StorageClass', 'PersistentVolume', 'PersistentVolumeClaim',
       'ServiceAccount', 'Service',
       'StatefuleSet', 'Deployment',
       'Job',

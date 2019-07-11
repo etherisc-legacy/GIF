@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: rabbitmq-volume-rabbitmq-2
+  labels:
+    type: local
+    app: rabbitmq
+    tier: infrastructure
+spec:
+  storageClassName: rabbitmq-storage
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+  hostPath:
+    path: '/podMount/rabbitmq-2'
+    type: DirectoryOrCreate

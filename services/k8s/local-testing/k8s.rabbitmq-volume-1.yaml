@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: rabbitmq-persistent-volume
+  name: rabbitmq-volume-rabbitmq-1
   labels:
     type: local
     app: rabbitmq
@@ -9,10 +9,10 @@ metadata:
 spec:
   storageClassName: rabbitmq-storage
   capacity:
-    storage: 10Gi
+    storage: 8Gi
   accessModes:
     - ReadWriteOnce
     - ReadOnlyMany
   hostPath:
-    path: '/podMount/rabbitmq'
+    path: '/podMount/rabbitmq-1'
     type: DirectoryOrCreate

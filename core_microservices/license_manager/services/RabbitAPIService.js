@@ -70,8 +70,14 @@ class RabbitAPIService {
       read: `^[EXCHANGE|${name}_.*]`,
     };
 
-    const { error: publicPermissionsError } = await this.makeRequest('PUT', `permissions/public/${name}`, PRODUCT_PUBLIC_PERMISSIONS);
-    const { error: trustedPermissionsError } = await this.makeRequest('PUT', `permissions/trusted/${name}`, PRODUCT_TRUSTED_PERMISSIONS);
+    const ppr = await this.makeRequest('PUT', `permissions/public/${name}`, PRODUCT_PUBLIC_PERMISSIONS);
+    const tpr = await this.makeRequest('PUT', `permissions/trusted/${name}`, PRODUCT_TRUSTED_PERMISSIONS);
+
+    const publicPermissionsError = ppr.error;
+    const trustedPermissionsError = tpr.error;
+
+    this.log.info(JSON.stringify(ppr));
+    this.log.info(JSON.stringify(tpr));
 
     if (publicPermissionsError || trustedPermissionsError) {
       await this.makeRequest('DELETE', `users/${name}`, { username: name });
