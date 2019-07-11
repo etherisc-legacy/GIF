@@ -8,6 +8,7 @@ metadata:
   annotations:
     service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
 spec:
+  clusterIP: None
   type: ClusterIP
   publishNotReadyAddresses: true
   ports:

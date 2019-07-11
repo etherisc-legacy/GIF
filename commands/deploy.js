@@ -112,11 +112,8 @@ class Deploy extends Command {
    */
   async collectConfigurationFiles() {
     const patterns = [
-      // '**/k8s*.yaml',
+       '**/k8s*.yaml',
       '!**/node_modules/**',
-      '**/services/**/k8s*.yaml',
-      '**/license_manager/**/k8s*.yaml',
-      '!**/license_manager/**/k8s.add-fdd.yaml',
     ];
 
     if (PROD) {
