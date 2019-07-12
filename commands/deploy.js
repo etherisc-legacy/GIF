@@ -112,7 +112,7 @@ class Deploy extends Command {
    */
   async collectConfigurationFiles() {
     const patterns = [
-       '**/k8s*.yaml',
+      '**/k8s*.yaml',
       '!**/node_modules/**',
     ];
 
