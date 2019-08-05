@@ -1,0 +1,12 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: rabbitmq-pdb
+  labels:
+    tier: infrastructure
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+

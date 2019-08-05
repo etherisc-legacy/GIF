@@ -5,11 +5,20 @@ metadata:
   labels:
     app: rabbitmq
     tier: infrastructure
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
 spec:
+  clusterIP: None
   type: ClusterIP
+  publishNotReadyAddresses: true
   ports:
+    - name: epmd
+      protocol: TCP
+      port: 4369
+      targetPort: epmd
     - name: http
       protocol: TCP
       port: 15672
+      targetPort: http
   selector:
     app: rabbitmq

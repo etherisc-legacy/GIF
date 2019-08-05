@@ -5,65 +5,95 @@ metadata:
   labels:
     tier: infrastructure
 spec:
-  serviceName: rabbitmq
+  podManagementPolicy: OrderedReady
+  serviceName: rabbitmq-management
   replicas: 3
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
         app: rabbitmq
     spec:
-      serviceAccountName: rabbitmq
+      serviceAccountName: rabbitmq-account
       terminationGracePeriodSeconds: 10
       containers:
-      - name: rabbitmq-k8s
-        image: rabbitmq:3.7
-        volumeMounts:
-        - name: config-volume
-          mountPath: /etc/rabbitmq
-        ports:
-        - name: http
-          protocol: TCP
-          containerPort: 15672
-        - name: amqp
-          protocol: TCP
-          containerPort: 5672
-        livenessProbe:
-          exec:
-            command: ["rabbitmqctl", "status"]
-          initialDelaySeconds: 60
-          periodSeconds: 60
-          timeoutSeconds: 10
-        readinessProbe:
-          exec:
-            command: ["rabbitmqctl", "status"]
-          initialDelaySeconds: 20
-          periodSeconds: 60
-          timeoutSeconds: 10
-        imagePullPolicy: Always
-        env:
-        - name: MY_POD_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIP
-        - name: RABBITMQ_USE_LONGNAME
-          value: "true"
-        # See a note on cluster_formation.k8s.address_type in the config file section
-        - name: RABBITMQ_NODENAME
-          value: "rabbit@$(MY_POD_IP)"
-        - name: K8S_SERVICE_NAME
-          value: "rabbitmq"
-        - name: RABBITMQ_ERLANG_COOKIE
-          value: "mycookie"
-        # TODO: look into creating the cookie file in an entrypoint script,
-        # as knowing this cookie gives you the full access to all RabbitMQ internals
+        - name: rabbitmq-k8s
+          image: rabbitmq:3.7
+          imagePullPolicy: Always
+          ports:
+            - name: epmd
+              protocol: TCP
+              containerPort: 4369
+            - name: amqp
+              protocol: TCP
+              containerPort: 5672
+            - name: http
+              protocol: TCP
+              containerPort: 15672
+          livenessProbe:
+            exec:
+              command: ["rabbitmqctl", "status"]
+            initialDelaySeconds: 60
+            periodSeconds: 60
+            timeoutSeconds: 10
+          readinessProbe:
+            exec:
+              command: ["rabbitmqctl", "status"]
+            initialDelaySeconds: 20
+            periodSeconds: 60
+            timeoutSeconds: 10
+          env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: RABBITMQ_USE_LONGNAME
+              value: "true"
+            - name: RABBITMQ_NODENAME
+              value: rabbit@$(MY_POD_NAME).rabbitmq-management.default.svc.cluster.local
+            - name: K8S_HOSTNAME_SUFFIX
+              value: .rabbitmq-management.default.svc.cluster.local
+            - name: K8S_SERVICE_NAME
+              value: rabbitmq-management
+            - name: RABBITMQ_ERLANG_COOKIE
+              value: "mycookie"
+              # TODO: look into creating the cookie file in an entrypoint script,
+              # as knowing this cookie gives you the full access to all RabbitMQ internals
+            - name: RABBIT_MANAGEMENT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-credentials
+                  key: AMQP_ADMIN_USERNAME
+            - name: RABBIT_MANAGEMENT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-credentials
+                  key: AMQP_ADMIN_PASSWORD
+          volumeMounts:
+            - name: rabbitmq-volume
+              mountPath: /var/lib/rabbitmq
+            - name: config-volume
+              mountPath: /etc/rabbitmq
       volumes:
-      - name: config-volume
-        configMap:
-          name: rabbitmq-config
-          items:
-          - key: rabbitmq.conf
-            path: rabbitmq.conf
-          - key: enabled_plugins
-            path: enabled_plugins
-          - key: definitions.json
-            path: definitions.json
+        - name: config-volume
+          configMap:
+            name: rabbitmq-config
+            items:
+            - key: rabbitmq.conf
+              path: rabbitmq.conf
+            - key: enabled_plugins
+              path: enabled_plugins
+            - key: definitions.json
+              path: definitions.json
+  volumeClaimTemplates:
+    - metadata:
+        name: rabbitmq-volume
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: rabbitmq-storage
