@@ -205,24 +205,31 @@ contract PolicyFlowDefault is WithRegistry {
         external
         view
         returns (
-        uint256 applicationId;
-        uint256 policyId;
+        uint256 applicationId,
+        uint256 policyId,
         // ERC721 token
-        address tokenContract;
+        address tokenContract,
         // Core
-        address registryContract;
-        uint256 release;
-        // State
-        bytes32 stateMessage;
+        address registryContract,
+        uint256 release,
         // Datetime
-        uint256 createdAt;
-        uint256 updatedAt;
+        uint256 createdAt,
+        uint256 updatedAt
         )
     {
         uint256 productId = license().getProductId(msg.sender);
 
-        (applicationId, policyId, tokenContract, registryContract, release, stateMessage, createdAt, updatedAt)
+        (applicationId, policyId, tokenContract, registryContract, release, createdAt, updatedAt)
             = policy().getMetadataByExternalKey(productId, _bpExternalKey);
+    }
+
+    function getStateMessage(bytes32 _bpExternalKey)
+        external
+        view
+        returns ( bytes32 stateMessage )
+    {
+        uint256 productId = license().getProductId(msg.sender);
+        stateMessage = policy().getStateMessageByExternalKey(productId, _bpExternalKey);
     }
 
     function license() internal view returns (ILicenseController) {
