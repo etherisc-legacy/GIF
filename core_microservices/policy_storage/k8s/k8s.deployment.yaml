@@ -25,6 +25,8 @@ spec:
           envFrom:
             - secretRef:
                 name: pg-connection
+            - secretRef:
+                name: chain
           env:
           - name: AMQP_MODE
             value: core

@@ -898,24 +898,15 @@ class PolicyStorage {
         abi: JSON.stringify(abi),
       };
 
-      const checkVersionExistance = await Contracts.query().findOne(contractLookupCriteria);
-
-      if (!checkVersionExistance) {
-        await Contracts.query()
-          .upsertGraph({ ...contractLookupCriteria, ...updateValues });
-      } else {
-        await Contracts.query()
-          .where(contractLookupCriteria)
-          .update(updateValues);
-      }
-
-      this._log.info(`Artifact saved: ${product} ${contractName} (${address})`);
-
       if (isProductDeployment) {
         // GOD MODE ON
         const productInContract = await Products.query().findOne({
           addr: address.toLowerCase(),
         });
+
+        if (!productInContract) {
+          throw new Error('Contract not registered on Ethereum in GIF service contract');
+        }
 
         if (productInContract.product && productInContract.product !== product) {
           throw new Error(`Ethereum contract ${address} belongs to another product`);
@@ -955,6 +946,19 @@ class PolicyStorage {
           customHeaders: properties.headers,
         });
       }
+
+      const checkVersionExistance = await Contracts.query().findOne(contractLookupCriteria);
+
+      if (!checkVersionExistance) {
+        await Contracts.query()
+          .upsertGraph({ ...contractLookupCriteria, ...updateValues });
+      } else {
+        await Contracts.query()
+          .where(contractLookupCriteria)
+          .update(updateValues);
+      }
+
+      this._log.info(`Artifact saved: ${product} ${contractName} (${address})`);
     } catch (error) {
       if (isProductDeployment) {
         await this._amqp.publish({

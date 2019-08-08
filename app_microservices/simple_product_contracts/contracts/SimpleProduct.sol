@@ -13,12 +13,11 @@ contract SimpleProduct is Product {
     event PolicyExpired(uint256 policyId);
     event PayoutConfirmation(uint256 payoutId, uint256 amount);
 
-    bytes32 public constant NAME = "SimpleProduct";
     bytes32 public constant POLICY_FLOW = "PolicyFlowDefault";
 
-    constructor(address _productController)
+    constructor(address _productController, bytes32 _name)
         public
-        Product(_productController, NAME, POLICY_FLOW)
+        Product(_productController, _name, POLICY_FLOW)
     {}
 
     function applyForPolicy(
