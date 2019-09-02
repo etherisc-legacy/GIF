@@ -5,6 +5,7 @@ import "./IPolicy.sol";
 contract PolicyStorageModel is IPolicy {
     // Metadata
     mapping(uint256 => mapping(uint256 => Metadata)) public metadata;
+    mapping(uint256 => mapping(bytes32 => uint256)) public metadataIdByBpKey;
     uint256 public metadataIdIncrement;
 
     // Applications

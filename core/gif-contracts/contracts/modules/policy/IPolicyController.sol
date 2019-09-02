@@ -101,4 +101,25 @@ interface IPolicyController {
         external
         view
         returns (IPolicy.PayoutState _state);
+
+    function getMetadataByExternalKey(uint256 _productId, bytes32 _bpExternalKey)
+        external
+        view
+        returns (
+            uint256 applicationId,
+            uint256 policyId,
+            // ERC721 token
+            address tokenContract,
+            // Core
+            address registryContract,
+            uint256 release,
+            // Datetime
+            uint256 createdAt,
+            uint256 updatedAt
+        );
+
+    function getStateMessageByExternalKey(uint256 _productId, bytes32 _bpExternalKey)
+        external
+        view
+        returns (bytes32 stateMessage);
 }

@@ -1,5 +1,5 @@
 {
-  "name": "gif",
+  "name": "@etherisc/gif",
   "version": "1.0.0",
   "description": "Etherisc Generic Insurance Framework smart contracts",
   "repository": {
@@ -10,12 +10,14 @@
     "solc": "0.5.2"
   },
   "files": [
-    "*"
+    "contracts/*"
   ],
   "oclif": {
     "commands": "./bin/commands"
   },
   "scripts": {
+    "migrate:prod": "truffle migrate --verbose-rpc --network ${NETWORK}",
+    "migrate:reset:prod": "truffle migrate --reset --verbose-rpc --network ${NETWORK}",
     "compile": "echo 'Compile contracts'; truffle compile",
     "migrate": "echo 'Deploy contracts'; truffle migrate",
     "migrate:reset": "echo 'Deploy contracts'; truffle migrate --reset",
@@ -33,32 +35,34 @@
     "docs-serve": "echo 'Start documentation website'; (cd website; npm start)",
     "update-solc-version": "echo 'Update solc compiler version'; ./bin/command updateSolcVersion",
     "clean": "echo 'Clean repository'; rimraf build coverage",
-    "prepare-verification": "echo 'Concat sources for verification on Etherscan'; ./bin/prepare-verification.sh"
+    "prepare-verification": "echo 'Concat sources for verification on Etherscan'; ./bin/prepare-verification.sh",
+    "dev": "(cp -a ../deploy/. . && NETWORK=development node ./broadcast.js)"
   },
   "dependencies": {
-    "@oclif/command": "^1.5.10",
+    "@etherisc/microservice": "^0.6.1-sandbox",
+    "@oclif/command": "^1.5.13",
     "@oclif/errors": "^1.2.2",
     "abi-decoder": "^1.2.0",
     "axios": "^0.18.0",
     "bn-chai": "^1.0.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eth-decoder": "0.0.1-beta.1",
     "ethereum-event-logs": "^1.3.0",
-    "fast-glob": "^2.2.6",
-    "fs-jetpack": "^2.2.1",
+    "fast-glob": "^2.2.7",
+    "fs-extra": "^8.0.1",
+    "fs-jetpack": "^2.2.2",
     "moment": "^2.24.0",
-    "openzeppelin-solidity": "^2.1.2",
-    "opn-cli": "^4.0.0",
-    "prettier": "^1.16.4",
-    "prettier-plugin-solidity": "^1.0.0-alpha.18",
+    "openzeppelin-solidity": "^2.2.0",
+    "opn-cli": "^4.1.0",
+    "prettier": "^1.17.1",
+    "prettier-plugin-solidity": "^1.0.0-alpha.22",
     "rimraf": "^2.6.3",
-    "solhint": "^1.5.1",
+    "solhint": "^2.0.0",
     "solidity-coverage": "git+https://github.com/kandrianov/solidity-coverage.git",
-    "solidity-docgen": "^0.1.0",
-    "truffle": "^5.0.3",
-    "truffle-flattener": "^1.2.12",
-    "truffle-hdwallet-provider": "^1.0.3",
+    "solidity-docgen": "^0.1.1",
+    "truffle": "^5.0.18",
+    "truffle-flattener": "^1.3.0",
+    "truffle-hdwallet-provider": "^1.0.9",
     "winston": "^3.2.1"
   }
 }

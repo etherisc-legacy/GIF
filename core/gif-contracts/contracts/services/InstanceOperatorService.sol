@@ -5,11 +5,21 @@ import "../modules/license/ILicenseController.sol";
 import "../modules/registry/IRegistryController.sol";
 import "../modules/query/IQueryController.sol";
 import "../shared/WithRegistry.sol";
+import "../shared/IModuleController.sol";
+import "../shared/IModuleStorage.sol";
 
 contract InstanceOperatorService is WithRegistry, Ownable {
     bytes32 public constant NAME = "InstanceOperator";
 
     constructor(address _registry) public WithRegistry(_registry) {}
+
+    function assignController(address _storage, address _controller) external onlyOwner {
+        IModuleStorage(_storage).assignController(_controller);
+    }
+
+    function assingStorage(address _controller, address _storage) external onlyOwner {
+        IModuleController(_controller).assignStorage(_storage);
+    }
 
     /* License */
     function approveProduct(uint256 _productId) external onlyOwner {
@@ -27,7 +37,7 @@ contract InstanceOperatorService is WithRegistry, Ownable {
     function unpauseProduct(uint256 _productId) external onlyOwner {
         license().unpauseProduct(_productId);
     }
-    
+
     /* Registry */
     function registerInRelease(
         uint256 _release,
@@ -57,6 +67,10 @@ contract InstanceOperatorService is WithRegistry, Ownable {
 
     function prepareRelease() external onlyOwner returns (uint256 _release) {
         _release = registry.prepareRelease();
+    }
+
+    function registerService(bytes32 _name, address _addr) external {
+        registry.registerService(_name, _addr);
     }
 
     /* Query */

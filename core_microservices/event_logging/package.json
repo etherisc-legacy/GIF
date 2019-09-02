@@ -1,0 +1,30 @@
+{
+  "name": "@etherisc/event_logging",
+  "version": "0.2.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "dev": "node bootstrap.js",
+    "prod": "node bootstrap.js",
+    "test": "NODE_ENV=test mocha",
+    "coverage": "nyc mocha",
+    "check:coverage": "nyc --check-coverage --statements 70 --functions 70 --lines 70 --branches 70 mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@etherisc/microservice": "^0.6.2-sandbox",
+    "knex": "^0.16.3",
+    "mocha": "^6.0.2",
+    "moment": "^2.24.0",
+    "nyc": "^13.0.1",
+    "pg": "^7.9.0",
+    "should": "^13.2.3",
+    "should-sinon": "0.0.6",
+    "sinon": "^7.3.1",
+    "uuid": "^3.3.2"
+  }
+}
