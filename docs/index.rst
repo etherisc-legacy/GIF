@@ -29,6 +29,9 @@ Welcome to User Manual for the Generic Insurance Framework!
     gdpr.jpeg
     oracle_flow.jpeg
     change_contracts.png
+    notify_clients.rst
+    message_queue.png
+    gif_microservices
 
 .. toctree:: 
     :maxdepth: 2
@@ -36,3 +39,12 @@ Welcome to User Manual for the Generic Insurance Framework!
 
     gifcli_manual.rst
     
+.. toctree:: 
+    :maxdepth: 2
+    :caption: GIF Tutorial
+
+    gif_tutorial.rst
+    new_product_setting_environment.rst
+    configure_truffle.rst
+    create_smart_contract.rst
+    interact_with_smart_contract.rst
