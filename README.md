@@ -48,12 +48,13 @@ insurance policy - it defines when payments are made, when oracles are requested
 ##  Core Smart Contracts
 Core smart contracts represent a number of key contracts and modules. Product Controller, Policy flow and modules are described below.
 
-##  Product Controller
+##  Product Service
 
-The `Product Controller` is an entry point for Insurance Product application. When deploying smart contract Insurance Product 
-application passes arguments, and should pass ProductController address as one of the arguments.
-All Product Controller methods are used by Insurance Product application.
-Methods invoked by Product Controller:
+The `Product Service` is an entry point for Insurance Product application. When deploying smart contract Insurance Product 
+application passes arguments, and should pass ProductService address as one of the arguments.
+All Product Service methods are used by Insurance Product application. 
+
+Methods Product Service operates with:
 
    * **newApplication**  
    Method is used to store new application data which contains such fields as premium amount, currency, payout options, risk definition etc. Policy buyer signs policy agreement using this method.
@@ -73,8 +74,13 @@ Methods invoked by Product Controller:
 	Used to set policy expiration.
    * **register**  
 	Used to register new insurance applications. After approval a contract obtains access to call entry methods.
-   * **query**  
+   * **request**  
 	Method is used to communicate with oracles when insurance application requires data or decision of particular actor. 
+   * **getPayoutOptions**  
+	Method is used to check payout options data. 
+   * **getPremium**  
+	Method is used to check a premium per application. 
+    
 
 ##  Policy Flow
 
@@ -88,8 +94,6 @@ Action is a building block of a policy flow. Actions are controlled by PolicyFlo
 Here is the list of modules:
 
    * **Policy module** (manages applications, policies, claims, payouts and metadata objects)
-   * **Access module** (defines permissions between contracts and actors)
-   * **Ledger module** (bookkeeper for insurance operations, aggregates premiums, payouts, expenses etc.)
    * **Registry module** (registers sets of core contracts which are used in policy flow lifecycle in release groups)
    * **License module** (manages insurance applications)
    * **Query module** (manages queries to oracles and delivers responses from them).
@@ -116,21 +120,19 @@ Methods invoked by License Controller:
 	Method is called by platform administrator and is used to decline registration. 
    * **disapproveProduct** . 
 	Method is called when administrator approved registration and then wants to decline it.
-   * **reapproveProduct**  
-	Method is called when administrator declined registration and then wants to approve it.
    * **pauseProduct**  
 	Used when administrator wants to pause Insurance Product.
    * **unpauseProduct**  
 	Used when administrator wants to unpause Insurance Product.
-   * **isApproved**   
+   * **isApprovedProduct**   
 	Used by administrator to check if Insurance Product is approved.
-   * **isPaused**  
+   * **isPausedProduct**  
 	Used by administrator to check if Insurance Product is paused.
    * **isValidCall**  
 	Used by administrator to check if Insurance Product call is valid.
    * **authorize**  
 	Used by administrator to check Insurance Product address is authorised and what policy flow it uses.
-   * **getInsuranceProductId**  
+   * **getProductId**  
 	Used by administrator to check Insurance Product Id it has.
 
 ##  Policy Module
@@ -190,6 +192,11 @@ See the list of available functions below:
 	Used to get contract address in last release.
    * **getRelease**  
 	Used to get last release number.  
+   * **registerService**  
+	Used to register a new service.  
+   * **getService**  
+	Used to view a new service.  
+
 
 # How-To Start Building your Product
 
@@ -225,24 +232,6 @@ Check [FlightDelay example](core/gif-contracts/contracts/examples/FlightDelayMan
 10.	Call function confirmPayout.
     Payout confirmation with payoutId and payoutAmount.
 
-# Getting Started ( Installation instructions )
-1.  Install `Node.js`. Node.js version should be 8.12.0 or higher, npm version should be 6.4.1 or higher. [Download](https://nodejs.org/en/download/current/). 
-2.  Install `Docker` [Download](https://www.docker.com/get-started). 
-3.  Run to install project's root dependencies
-    > npm install
-4.  Run to install dependencies for packages
-    > npm run bootstrap   
-5.  Run to start services in Docker 
-6.  > npm run dev:services:run
-7.  Run to start migrations (this will deploy contracts and run database migrations)
-    > npm run migrate
-8.  Look at deployed contracts
-    > npm run script -- networks    
-9.  Run to start microservices
-    > npm run dev    
-10. Run to open the console
-    > npm run develop
-
 ## GIF core contracts on Rinkeby:  
 __ProductService:__ 0x6520354fa128cc6483B9662548A597f7FcB7a687  
 __InstanceOperatorService:__ 0x39F7826D3796BC4a2Eb2F0B8fF3799f30D02CBf5  
@@ -258,3 +247,21 @@ __QueryController:__ 0xAd517b5da0b62DfF56ac57d612f4bEf0eA1e1b78
 __Registry:__ 0x5E78A5a3ffd005761B501D6264cEcD87E2d331B0  
 __RegistryController:__ 0x4Bf8b2622a1b5B6b2865087323E6C518a3946AbA
 
+# Getting Started ( Installation instructions )
+1.  Install `Node.js`. Node.js version should be >=8.12.0 and <12, npm version should be 6.4.1 or higher. [Download](https://nodejs.org/en/download/current/). 
+2.  Install `Docker` [Download](https://www.docker.com/get-started). 
+3.  Run to install project's root dependencies
+    > npm install
+4.  Run to install dependencies for packages
+    > npm run bootstrap 
+5.  Run to start services in Docker 
+    > npm run dev:services:run
+6.  Run to start migrations (this will deploy contracts and run database migrations)
+    > npm run migrate
+7.  Look at deployed contracts
+    > npm run script -- networks
+8.  Run to start microservices
+    > npm run dev 
+9.  Run in a separate console
+    > npm run script -- broadcast
+    

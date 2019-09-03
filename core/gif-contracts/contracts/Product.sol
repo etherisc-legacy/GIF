@@ -1,22 +1,32 @@
 pragma solidity 0.5.2;
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./shared/RBAC.sol";
 import "./services/IProductService.sol";
 
-contract Product is RBAC, Ownable {
+contract Product is RBAC {
     using SafeMath for *;
 
     bool public developmentMode = false;
     bool public maintenanceMode = false;
 
+    IProductService public productService;
+
     modifier onlySandbox {
-        // todo: Restrict to sandbox account
+        require(
+            msg.sender == productService.getService("Sandbox"),
+            "ERROR::ACCESS_DENIED"
+        );
         _;
     }
 
-    IProductService public productService;
+    modifier onlyOracle {
+        require(
+            msg.sender == productService.getContract("Query"),
+            "ERROR::ACCESS_DENIED"
+        );
+        _;
+    }
 
     constructor(address _productService, bytes32 _name, bytes32 _policyFlow)
         internal

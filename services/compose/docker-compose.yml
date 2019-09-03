@@ -7,11 +7,33 @@ services:
     image: rabbitmq:3.7.7
     command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server;"
     volumes:
-      - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-      - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+    - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
     ports:
-      - "5672:5672"
-      - "15672:15672"
+    - "5672:5672"
+    - "15672:15672"
+
+  RabbitmqTest:
+    container_name: test_rabbitmq
+    image: rabbitmq:3.7.7
+    command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server;"
+    volumes:
+    - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+    - "5673:5672"
+
+  PostgreSqlTest:
+    container_name: test_postgresql
+    image: postgres:10.5
+    restart: always
+    environment:
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
+    volumes:
+    - ./postgresqltest:/var/lib/postgresql
+    ports:
+    - "5432:5432"
 
   PostgreSqlDev:
     container_name: dev_postgresql
@@ -21,9 +43,22 @@ services:
       POSTGRES_USER: postgresql
       POSTGRES_PASSWORD: postgresql
     volumes:
-      - ./postgresqldev:/var/lib/postgresql
+    - ./postgresqldev:/var/lib/postgresql
     ports:
-      - "5433:5432"
+    - "5433:5432"
+
+  Minio:
+    container_name: dev_minio
+    image: minio/minio
+    command: server /data
+    restart: always
+    environment:
+      MINIO_ACCESS_KEY: accesskey
+      MINIO_SECRET_KEY: secretkey
+    volumes:
+    - ./minio:/data
+    ports:
+    - "9000:9000"
 
   Ganache:
     container_name: dev_ganache
