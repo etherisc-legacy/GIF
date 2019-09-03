@@ -32,14 +32,6 @@ The main thing you get for including this npm package is the ability to start yo
 
 Let’s assume that you want to create a message logging microservice for your product.
 
-When using the CLI for the first time, you need to register a user. Then, you can create your product, add customers, etc.
-
-There are three modes of working with the CLI: a basic **CLI mode** (you can use it by inputing ``gifcli [COMMAND]`` in your system's command line), a **console mode** (using the ``gifcli console command``) and an **execute mode** (by the ``gifcli exec`` command). As we've mentioned, the first one becomes available right after the installation of the GIF CLI. The other commands would be ready for use just after you have created a user and a product. The **console mode** enables you to input methods one by one directly into the command line, and the **execute mode** allows to write sequence of commands in a particular file and then execute this file in the CLI.
-
-In the console mode, as well as in the execute mode, you interact with your product directly — the CLI executes commands on behalf of the current product (you can see the name of your current product in such a line: ``GIF :: ` **your product name** ` $ [COMMAND]``). As soon as you have several products, you can switch between them getting to the necessary product by the **gifcli product:select** command. To execute the gifcli commands, you should first exit from the console (or execute) mode by running ``Ctrl+C twice``.
-
-In case of doubt, you can always refer to the ``gifcli help [COMMAND]`` command in the **CLI mode**. There, you can find a list of currently available commands. The execution of this command looks like that.
-
 ::
 
     'bash >
