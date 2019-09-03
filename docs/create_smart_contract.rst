@@ -76,7 +76,7 @@ Now we can define a function that will be used to apply for a policy.
       uint256 _premium,
       bytes32 _currency,
       bytes32 _bpExternalKey
-    )external onlySandbox {
+    )external {
       require(_premium > 0, "ERROR:INVALID_PREMIUM");
       require(getQuote(_price) == _premium, "ERROR::INVALID_PREMIUM");
       bytes32 riskId = keccak256(abi.encodePacked(_brand, _model, _year));
@@ -90,7 +90,7 @@ Now we can define a function that will be used to apply for a policy.
 File: ./contracts/EStoreInsurance.sol
 
 
-We use the modifier "onlySandbox" here. It restricts permissions for this method to the sandbox account. As you will see later, as a product builder you can utilize the sandbox microservice to send transactions to your contract. The applyForPolicy method also contains the _newApplication invocation. It will create a new application in GIF core contracts.
+The applyForPolicy method contains the _newApplication invocation. It will create a new application in GIF core contracts.
 
 Create other required functions in the same manner.
 
@@ -100,24 +100,24 @@ Create other required functions in the same manner.
 
     emit LogRequestUnderwriter(applicationId);
     }
-    function underwriteApplication(uint256 _applicationId) external onlySandbox {
+    function underwriteApplication(uint256 _applicationId) external {
       uint256 policyId = _underwrite(_applicationId);
       emit LogApplicationUnderwritten(_applicationId, policyId);
     }
-    function declineApplication(uint256 _applicationId) external onlySandbox {
+    function declineApplication(uint256 _applicationId) external {
       _decline(_applicationId);
       emit LogApplicationDeclined(_applicationId);
     }
-    function createClaim(uint256 _policyId) external onlySandbox {
+    function createClaim(uint256 _policyId) external {
       uint256 claimId = _newClaim(_policyId);
       emit LogRequestClaimsManager(_policyId, claimId);
     }
-    function confirmClaim(uint256 _applicationId, uint256 _claimId) external onlySandbox {
+    function confirmClaim(uint256 _applicationId, uint256 _claimId) external {
       uint256[] memory payoutOptions = _getPayoutOptions(_applicationId);
       uint256 payoutId = _confirmClaim(_claimId, payoutOptions[0]);
       emit LogRequestPayout(payoutId);
     }
-    function confirmPayout(uint256 _claimId, uint256 _amount) external onlySandbox {
+    function confirmPayout(uint256 _claimId, uint256 _amount) external {
       _payout(_claimId, _amount);
       emit LogPayout(_claimId, _amount);
     }
