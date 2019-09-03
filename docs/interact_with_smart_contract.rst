@@ -8,7 +8,7 @@ Send artifacts of your deployment to GIF Sandbox:
 ::
 
     cd ./cli
-    ./bin/run artifact:send --file ./build/contracts/EStoreInsurance.json --network development
+    ./bin/run artifact:send --file <!-- PATH TO PRODUCT'S DIR -->/build/contracts/EStoreInsurance.json --network development
 
 
 After that, the product will be approved automatically and you can start interacting with it. 
