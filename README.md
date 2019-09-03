@@ -120,8 +120,6 @@ Methods invoked by License Controller:
 	Method is called by platform administrator and is used to decline registration. 
    * **disapproveProduct** . 
 	Method is called when administrator approved registration and then wants to decline it.
-   * **reapproveProduct**  
-	Method is called when administrator declined registration and then wants to approve it.
    * **pauseProduct**  
 	Used when administrator wants to pause Insurance Product.
    * **unpauseProduct**  
