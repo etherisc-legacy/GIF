@@ -15,8 +15,9 @@ class HttpApp extends Koa {
   /**
    * Constructor
    * @param {number} port
+   * @param {Function[]} httpAdditionalMiddleware
    */
-  constructor(port) {
+  constructor(port, httpAdditionalMiddleware = []) {
     super();
 
     this._server = null;
@@ -24,6 +25,8 @@ class HttpApp extends Koa {
     this._port = port;
 
     this._controllers = {};
+
+    this._additionalMiddleware = httpAdditionalMiddleware;
   }
 
   /**
@@ -116,7 +119,13 @@ class HttpApp extends Koa {
       .use(new Logger())
       .use(new Cors())
       .use(new BodyParser())
-      .use(new Respond())
+      .use(new Respond());
+
+    for (let index = 0; index < this._additionalMiddleware.length; index += 1) {
+      this.use(this._additionalMiddleware[index]);
+    }
+
+    this
       .use(appRouter.routes())
       .use(coreRouter.routes())
       .use(prometheus.httpMetricMiddleware())

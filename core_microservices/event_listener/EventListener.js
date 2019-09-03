@@ -32,7 +32,7 @@ class EventListener {
    * @return {void}
    */
   setWeb3() {
-    this._web3 = new Web3(new Web3.providers.WebsocketProvider(this._config.rpcNode));
+    this._web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER));
   }
 
   /**
@@ -41,7 +41,7 @@ class EventListener {
    */
   async bootstrap() {
     try {
-      await retry(this.watchEvents.bind(this), {
+      retry(this.watchEvents.bind(this), {
         retries: 10,
         onRetry: () => this._log.info('Try to reconnect'),
       });
@@ -121,7 +121,7 @@ class EventListener {
           .limit(1);
 
         if (lastevent && lastevent.blockNumber) {
-          fromBlock = lastevent.blockNumber + 1;
+          fromBlock = Number(lastevent.blockNumber) + 1;
         } else {
           const [contract] = await Contract.query()
             .select('blockNumber')
@@ -149,54 +149,56 @@ class EventListener {
   }
 
   /**
-   * Handle event
-   * @param {object} event
+   * Watch events
    * @return {void}
    */
-  async onData(event) {
+  async watchEvents() {
+    this.setWeb3();
+
+    let fromBlock = await this._web3.eth.getBlockNumber() + 1;
+
+    await this.checkPastEvents();
+
+    setInterval(async () => {
+      const toBlock = await this._web3.eth.getBlockNumber();
+      this._log.info(`Current block number: ${toBlock}`);
+      if (toBlock >= fromBlock) {
+        this._log.info(`Pulling events for blocks ${fromBlock} - ${toBlock}`);
+        await this.processEvents({ fromBlock, toBlock });
+        fromBlock = toBlock + 1;
+      }
+    }, 10 * 1000); // 10 seconds
+  }
+
+  /**
+   * Handle events from the block
+   * @param {Integer} fromBlock
+   * @param {Integer} toBlock
+   * @return {void}
+   */
+  async processEvents({ fromBlock, toBlock }) {
     try {
-      this.fromBlock = event.blockNumber;
       const { Contract } = this._models;
-      const contracts = await Contract.query().where({
-        address: event.address.toLowerCase(),
+      const contractAddresses = await Contract.query().where({
         networkName: this._networkName,
-      });
-      if (contracts.length > 0) {
-        this.handleEvent(event);
+      }).select('address').pluck('address');
+
+      if (contractAddresses.length > 0) {
+        const events = await this._web3.eth.getPastLogs({
+          fromBlock: this._web3.utils.toHex(fromBlock),
+          toBlock: this._web3.utils.toHex(toBlock),
+          address: contractAddresses,
+        });
+
+        for (let index = 0; index < events.length; index += 1) {
+          await this.handleEvent(events[index]);
+        }
       }
     } catch (e) {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }
   }
 
-  /**
-   * Handle error
-   * @param {error} e
-   * @return {void}
-   */
-  onError(e) {
-    this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-    this.reconnect();
-  }
-
-  /**
-   * Watch events
-   * @return {void}
-   */
-  async watchEvents() {
-    this.setWeb3();
-    const fromBlock = await this._web3.eth.getBlockNumber();
-
-    await this.checkPastEvents();
-
-    this._web3.eth.subscribe('logs', { fromBlock }, (e) => {
-      if (!e) return;
-      this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
-      throw new Error(e);
-    })
-      .on('data', this.onData.bind(this))
-      .on('error', this.onError.bind(this));
-  }
 
   /**
    * Handle event
@@ -217,7 +219,30 @@ class EventListener {
         .filter(i => i.type === 'event')
         .map(i => Object.assign(i, { signature: this._web3.eth.abi.encodeEventSignature(i) }))
         .filter(i => i.signature === event.topics[0]);
-      const decodedEvent = this._web3.eth.abi.decodeLog(abi[0].inputs, event.data, event.topics.slice(1));
+
+      // Fix decoding events with all indexed parameters
+      const data = event.data === '0x' ? '' : event.data;
+      const { inputs } = abi[0];
+      const decodedEvent = this._web3.eth.abi.decodeLog(inputs, data, event.topics.slice(1));
+
+      for (let i = 0; i < inputs.length; i += 1) {
+        const paramFormat = inputs[i];
+
+        if (/bytes/.test(paramFormat.type)) {
+          decodedEvent[i] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+          decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+        }
+
+        if (paramFormat.type === 'address') {
+          decodedEvent[paramFormat.name] = decodedEvent[paramFormat.name].toLowerCase();
+        }
+
+        if (/int/.test(paramFormat.type)) {
+          decodedEvent[i] = decodedEvent[paramFormat.name].toString();
+          decodedEvent[paramFormat.name] = decodedEvent[paramFormat.name].toString();
+        }
+      }
+
       // const block = await this._web3.eth.getBlock(event.blockNumber);
 
       // TODO: TEMPORARY FIX
@@ -256,9 +281,13 @@ class EventListener {
         return;
       }
       await this._amqp.publish({
+        product: contract.product,
         messageType: 'decodedEvent',
         messageTypeVersion: '1.*',
         content: eventModel,
+        customHeaders: {
+          product: contract.product,
+        },
       });
     } catch (e) {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
@@ -327,8 +356,14 @@ class EventListener {
   async saveArtifact({ content, fields, properties }) {
     try {
       const {
-        product, network, networkId, version, artifact,
+        network, networkId, version, artifact,
       } = content;
+
+      const { product } = properties.headers;
+
+      if (!product) {
+        throw new Error('Product not defined');
+      }
 
       const artifactObject = JSON.parse(artifact);
       const { address, transactionHash } = artifactObject.networks[networkId];
@@ -337,27 +372,31 @@ class EventListener {
       const { Contract } = this._models;
       const { blockNumber } = await this._web3.eth.getTransaction(transactionHash);
 
-      const exists = await Contract.query().findOne({
+      const contractLookupCriteria = {
+        product,
         networkName: network,
+        contractName: artifactObject.contractName,
+        version,
+      };
+      const updateValues = {
         address: address.toLowerCase(),
-      });
+        abi,
+        transactionHash: artifactObject.transactionHash,
+        blockNumber,
+      };
+
+      const exists = await Contract.query().findOne(contractLookupCriteria);
 
       if (!exists) {
         await Contract.query()
-          .upsertGraph({
-            product,
-            networkName: network,
-            version,
-            address: address.toLowerCase(),
-            abi,
-            transactionHash: artifactObject.transactionHash,
-            blockNumber,
-          });
-
-        await this.getPastEvents([{ address }]);
-
-        this._log.info(`Artifact saved: ${product} ${artifactObject.contractName} (${address})`);
+          .upsertGraph({ ...contractLookupCriteria, ...updateValues });
+      } else {
+        await Contract.query()
+          .where(contractLookupCriteria)
+          .update(updateValues);
       }
+      await this.getPastEvents([{ address }]);
+      this._log.info(`Artifact saved: ${product} ${artifactObject.contractName} (${address})`);
     } catch (e) {
       this._log.error(new Error(JSON.stringify({ message: e.message, stack: e.stack })));
     }

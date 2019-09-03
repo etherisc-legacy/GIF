@@ -49,17 +49,17 @@ contract FlightStatusesOracle is Oracle, usingOraclize {
 
     function() external payable {}
 
-    function setTestMode(bool _testMode) external {
+    function setTestMode(bool _testMode) external onlyOwner {
         // todo: set permissions
         testMode = _testMode;
     }
 
-    function setOraclizeGas(uint256 _oraclizeGas) external {
+    function setOraclizeGas(uint256 _oraclizeGas) external onlyOwner {
         // todo: set permissions
         oraclizeGas = _oraclizeGas;
     }
 
-    function request(uint256 _requestId, bytes calldata _input) external {
+    function request(uint256 _requestId, bytes calldata _input) external onlyQuery {
         // todo: set permissions
 
         (uint256 oraclizeTime, bytes32 carrierFlightNumber, bytes32 departureYearMonthDay) = abi.decode(

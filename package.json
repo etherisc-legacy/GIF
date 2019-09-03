@@ -1,29 +1,75 @@
 {
-  "name": "@etherisc/gif",
-  "description": "Etherisc Generic Insurance Framework",
-  "license": "Apache-2.0",
+  "name": "@etherisc/dip-platform",
+  "description": "Etherisc Decentralized Insurance Platform",
+  "private": true,
   "engines": {
-    "node": "11.2.0",
-    "npm": "6.4.1"
+    "node": "11.12.0",
+    "npm": "6.9.0"
   },
   "scripts": {
-    "bootstrap": "echo 'Install dependencies'; ./bin/bootstrap.sh && lerna link",
+    "deploy:minikube": "echo 'Deploy to Minikube'; DEPLOY_DESTINATION=minikube ./bin/run deploy",
+    "deploy:docker": "echo 'Deploy to Docker-for-Desktop Kubernetes'; DEPLOY_DESTINATION=docker ./bin/run deploy",
+    "deploy:gke:secret": "echo Deploy secrets to GKE; ./bin/run deploySecret",
+    "deploy:gke": "echo 'Deploy to GKE'; DEPLOY_DESTINATION=gke ./bin/run deploy",
+    "dev:env": "./bin/set_dev_env.sh",
+    "bootstrap": "./bin/bootstrap.sh && lerna link",
+    "bootstrap:update": "./bin/update_locks.sh ",
     "clean": "echo 'Cleaning local /node_modules folders'; lerna clean --concurrency 100 --progress",
-    "lint": "echo 'Lint javascript files'; eslint --ext js .",
+    "migrate": "echo 'Run database migrations for packages'; lerna run migrate",
+    "migrate:test": "echo 'Run database migrations for packages'; NODE_ENV=test lerna run migrate",
+    "seed": "lerna run seed",
     "dev": "echo 'Start packages in development mode'; lerna run dev --parallel --concurrency 100 --progress",
     "dev:services:run": "echo 'Run dockerized services'; docker-compose -f ./services/compose/docker-compose.yml up -d --remove-orphans",
     "dev:services:kill": "echo 'Kill dockerized services'; docker-compose -f ./services/compose/docker-compose.yml kill",
-    "dev:services:purge": "docker-compose -f ./services/compose/docker-compose.yml down -v; rm -rf ./services/compose/ganache",
-    "migrate": "echo 'Run database migrations for packages'; lerna run migrate",
+    "dev:services:purge": "echo 'Kill & purge dockerized services'; docker-compose -f ./services/compose/docker-compose.yml down -v; rm -rf ./services/compose/minio; rm -rf ./services/compose/postgresqldev; rm -rf ./services/compose/postgresqltest; rm -rf ./services/compose/dev_ganache",
+    "lint": "echo 'Lint javascript files'; eslint --ext js .",
+    "lint:fix": "echo 'Lint javascript files'; eslint --ext js --fix .",
+    "test:e2e": "echo 'Run e2e tests'; NODE_ENV=test mocha",
+    "test": "echo 'Run tests for packages'; lerna run test",
+    "coverage": "echo 'Run tests coverage for packages'; lerna run coverage",
+    "collect:coverage": "echo 'Collect tests coverage from packages in README.md'; ./bin/run collectCoverage",
+    "publish": "echo 'Publish updated packages to NPM'; lerna publish --progress",
     "script": "echo 'Run script in each package'; lerna run"
   },
+  "files": [
+    "*"
+  ],
+  "oclif": {
+    "commands": "./commands",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.13.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
-    "lerna": "^3.13.1"
+    "amqplib": "^0.5.5",
+    "app-module-path": "^2.2.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "knex": "^0.16.5",
+    "lerna": "^3.16.4",
+    "mocha": "^6.2.0",
+    "pg": "^7.12.1",
+    "should": "^13.2.3",
+    "should-sinon": "0.0.6",
+    "sinon": "^7.4.1",
+    "wait-on": "^3.3.0",
+    "ws": "^6.2.1"
+  },
+  "dependencies": {
+    "@oclif/command": "^1.5.18",
+    "@oclif/config": "^1.13.3",
+    "@oclif/plugin-help": "^2.2.1",
+    "@rauschma/stringio": "^1.4.0",
+    "fast-glob": "^2.2.7",
+    "inquirer": "^6.5.2",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "stripe": "^6.36.0",
+    "uuid": "^3.3.3"
   }
 }
