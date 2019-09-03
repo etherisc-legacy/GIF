@@ -52,7 +52,8 @@ Core smart contracts represent a number of key contracts and modules. Product Co
 
 The `Product Service` is an entry point for Insurance Product application. When deploying smart contract Insurance Product 
 application passes arguments, and should pass ProductService address as one of the arguments.
-All Product Service methods are used by Insurance Product application.
+All Product Service methods are used by Insurance Product application. 
+
 Methods Product Service operates with:
 
    * **newApplication**  
@@ -73,8 +74,13 @@ Methods Product Service operates with:
 	Used to set policy expiration.
    * **register**  
 	Used to register new insurance applications. After approval a contract obtains access to call entry methods.
-   * **query**  
+   * **request**  
 	Method is used to communicate with oracles when insurance application requires data or decision of particular actor. 
+   * **getPayoutOptions**  
+	Method is used to check payout options data. 
+   * **getPremium**  
+	Method is used to check a premium per application. 
+    
 
 ##  Policy Flow
 
@@ -120,15 +126,15 @@ Methods invoked by License Controller:
 	Used when administrator wants to pause Insurance Product.
    * **unpauseProduct**  
 	Used when administrator wants to unpause Insurance Product.
-   * **isApproved**   
+   * **isApprovedProduct**   
 	Used by administrator to check if Insurance Product is approved.
-   * **isPaused**  
+   * **isPausedProduct**  
 	Used by administrator to check if Insurance Product is paused.
    * **isValidCall**  
 	Used by administrator to check if Insurance Product call is valid.
    * **authorize**  
 	Used by administrator to check Insurance Product address is authorised and what policy flow it uses.
-   * **getInsuranceProductId**  
+   * **getProductId**  
 	Used by administrator to check Insurance Product Id it has.
 
 ##  Policy Module
@@ -188,6 +194,11 @@ See the list of available functions below:
 	Used to get contract address in last release.
    * **getRelease**  
 	Used to get last release number.  
+   * **registerService**  
+	Used to register a new service.  
+   * **getService**  
+	Used to view a new service.  
+
 
 # How-To Start Building your Product
 
