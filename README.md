@@ -48,12 +48,12 @@ insurance policy - it defines when payments are made, when oracles are requested
 ##  Core Smart Contracts
 Core smart contracts represent a number of key contracts and modules. Product Controller, Policy flow and modules are described below.
 
-##  Product Controller
+##  Product Service
 
-The `Product Controller` is an entry point for Insurance Product application. When deploying smart contract Insurance Product 
-application passes arguments, and should pass ProductController address as one of the arguments.
-All Product Controller methods are used by Insurance Product application.
-Methods invoked by Product Controller:
+The `Product Service` is an entry point for Insurance Product application. When deploying smart contract Insurance Product 
+application passes arguments, and should pass ProductService address as one of the arguments.
+All Product Service methods are used by Insurance Product application.
+Methods Product Service operates with:
 
    * **newApplication**  
    Method is used to store new application data which contains such fields as premium amount, currency, payout options, risk definition etc. Policy buyer signs policy agreement using this method.
@@ -88,8 +88,6 @@ Action is a building block of a policy flow. Actions are controlled by PolicyFlo
 Here is the list of modules:
 
    * **Policy module** (manages applications, policies, claims, payouts and metadata objects)
-   * **Access module** (defines permissions between contracts and actors)
-   * **Ledger module** (bookkeeper for insurance operations, aggregates premiums, payouts, expenses etc.)
    * **Registry module** (registers sets of core contracts which are used in policy flow lifecycle in release groups)
    * **License module** (manages insurance applications)
    * **Query module** (manages queries to oracles and delivers responses from them).
