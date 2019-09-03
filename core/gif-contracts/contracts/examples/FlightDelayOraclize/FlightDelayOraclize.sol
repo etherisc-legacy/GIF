@@ -100,7 +100,7 @@ contract FlightDelayOraclize is Product {
         uint256[] calldata _payoutOptions,
         // BP
         bytes32 _bpExternalKey
-    ) external {
+    ) external onlySandbox {
         // Validate input parameters
         require(_premium >= MIN_PREMIUM, "ERROR::INVALID_PREMIUM");
         require(_premium <= MAX_PREMIUM, "ERROR::INVALID_PREMIUM");
@@ -170,7 +170,7 @@ contract FlightDelayOraclize is Product {
     function flightStatisticsCallback(
         uint256 _requestId,
         bytes calldata _response
-    ) external {
+    ) external onlyOracle {
         // Statistics: ['observations','late15','late30','late45','cancelled','diverted']
         uint256[6] memory _statistics = abi.decode(_response, (uint256[6]));
 
@@ -230,7 +230,7 @@ contract FlightDelayOraclize is Product {
         emit LogRequestPayment(requestId, applicationId);
     }
 
-    function confirmPaymentSuccess(uint256 _requestId) external {
+    function confirmPaymentSuccess(uint256 _requestId) external onlySandbox {
         uint256 applicationId = actionRequests[_requestId].applicationId;
         bytes32 riskId = actionRequests[_requestId].riskId;
 
@@ -261,12 +261,13 @@ contract FlightDelayOraclize is Product {
         );
     }
 
-    function confirmPaymentFailure(uint256 _requestId) external {
+    function confirmPaymentFailure(uint256 _requestId) external onlySandbox {
         _decline(actionRequests[_requestId].applicationId);
     }
 
     function flightStatusCallback(uint256 _requestId, bytes calldata _response)
         external
+        onlyOracle
     {
         (bytes1 status, int256 delay) = abi.decode(_response, (bytes1, int256));
 
@@ -300,7 +301,10 @@ contract FlightDelayOraclize is Product {
         }
     }
 
-    function confirmPayout(uint256 _payoutId, uint256 _amount) external {
+    function confirmPayout(uint256 _payoutId, uint256 _amount)
+        external
+        onlySandbox
+    {
         _payout(_payoutId, _amount);
     }
 

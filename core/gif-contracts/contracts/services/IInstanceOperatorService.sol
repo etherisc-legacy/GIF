@@ -1,6 +1,10 @@
 pragma solidity 0.5.2;
 
 interface IInstanceOperatorService {
+    function assignController(address _storage, address _controller) external;
+
+    function assingStorage(address _controller, address _storage) external;
+
     // License
     function approveProduct(uint256 _productId) external;
 
@@ -32,6 +36,8 @@ interface IInstanceOperatorService {
     function deregister(bytes32 _contractName) external;
 
     function prepareRelease() external returns (uint256 _release);
+
+    function registerService(bytes32 _name, address _addr) external;
 
     // Query
     function activateOracleType(bytes32 _oracleTypeName) external;

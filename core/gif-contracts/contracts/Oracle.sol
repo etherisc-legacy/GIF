@@ -7,6 +7,14 @@ import "./IOracle.sol";
 contract Oracle is IOracle, RBAC {
     IOracleService public oracleService;
 
+    modifier onlyQuery {
+        require(
+            msg.sender == oracleService.getContract("Query"),
+            "ERROR::ACCESS_DENIED"
+        );
+        _;
+    }
+
     constructor(address _oracleService) internal {
         oracleService = IOracleService(_oracleService);
     }

@@ -2,15 +2,24 @@ pragma solidity 0.5.2;
 
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "../modules/license/ILicenseController.sol";
-import "../modules/access/IAccessController.sol";
 import "../modules/registry/IRegistryController.sol";
 import "../modules/query/IQueryController.sol";
 import "../shared/WithRegistry.sol";
+import "../shared/IModuleController.sol";
+import "../shared/IModuleStorage.sol";
 
 contract InstanceOperatorService is WithRegistry, Ownable {
     bytes32 public constant NAME = "InstanceOperator";
 
     constructor(address _registry) public WithRegistry(_registry) {}
+
+    function assignController(address _storage, address _controller) external onlyOwner {
+        IModuleStorage(_storage).assignController(_controller);
+    }
+
+    function assingStorage(address _controller, address _storage) external onlyOwner {
+        IModuleController(_controller).assignStorage(_storage);
+    }
 
     /* License */
     function approveProduct(uint256 _productId) external onlyOwner {
@@ -27,22 +36,6 @@ contract InstanceOperatorService is WithRegistry, Ownable {
 
     function unpauseProduct(uint256 _productId) external onlyOwner {
         license().unpauseProduct(_productId);
-    }
-
-    /* Access */
-    function createRole(bytes32 _role) external onlyOwner {
-        access().createRole(_role);
-    }
-
-    function addRoleToAccount(address _address, bytes32 _role)
-        external
-        onlyOwner
-    {
-        access().addRoleToAccount(_address, _role);
-    }
-
-    function cleanRolesForAccount(address _address) external onlyOwner {
-        access().cleanRolesForAccount(_address);
     }
 
     /* Registry */
@@ -76,6 +69,10 @@ contract InstanceOperatorService is WithRegistry, Ownable {
         _release = registry.prepareRelease();
     }
 
+    function registerService(bytes32 _name, address _addr) external {
+        registry.registerService(_name, _addr);
+    }
+
     /* Query */
     function activateOracleType(bytes32 _oracleTypeName) external onlyOwner {
         query().activateOracleType(_oracleTypeName);
@@ -95,10 +92,6 @@ contract InstanceOperatorService is WithRegistry, Ownable {
     /* Lookup */
     function license() internal view returns (ILicenseController) {
         return ILicenseController(registry.getContract("License"));
-    }
-
-    function access() internal view returns (IAccessController) {
-        return IAccessController(registry.getContract("Access"));
     }
 
     function query() internal view returns (IQueryController) {

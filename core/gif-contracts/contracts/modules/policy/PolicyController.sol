@@ -16,7 +16,11 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         onlyPolicyFlow("Policy")
         returns (uint256 _metadataId)
     {
+        require(metadataIdByBpKey[_productId][_bpExternalKey] == 0, "ERROR::BP_KEY_NOT_UNIQUE");
+
         _metadataId = ++metadataIdIncrement;
+
+        metadataIdByBpKey[_productId][_bpExternalKey] = _metadataId;
 
         Metadata storage meta = metadata[_productId][_metadataId];
 
@@ -401,5 +405,42 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         returns (PayoutState _state)
     {
         _state = payouts[_productId][_payoutId].state;
+    }
+
+    function getMetadataByExternalKey(uint256 _productId, bytes32 _bpExternalKey)
+        external
+        view
+        returns (
+            uint256 applicationId,
+            uint256 policyId,
+            // ERC721 token
+            address tokenContract,
+            // Core
+            address registryContract,
+            uint256 release,
+            // Datetime
+            uint256 createdAt,
+            uint256 updatedAt
+        )
+    {
+        uint256 _metadataId = metadataIdByBpKey[_productId][_bpExternalKey];
+        Metadata storage meta = metadata[_productId][_metadataId];
+
+        applicationId = meta.applicationId;
+        policyId = meta.policyId;
+        tokenContract = meta.tokenContract;
+        registryContract = meta.registryContract;
+        release = meta.release;
+        createdAt = meta.createdAt;
+        updatedAt = meta.updatedAt;
+    }
+
+    function getStateMessageByExternalKey(uint256 _productId, bytes32 _bpExternalKey)
+        external
+        view
+        returns (bytes32 stateMessage)
+    {
+        uint256 _metadataId = metadataIdByBpKey[_productId][_bpExternalKey];
+        stateMessage = metadata[_productId][_metadataId].stateMessage;
     }
 }

@@ -48,12 +48,12 @@ insurance policy - it defines when payments are made, when oracles are requested
 ##  Core Smart Contracts
 Core smart contracts represent a number of key contracts and modules. Product Controller, Policy flow and modules are described below.
 
-##  Product Controller
+##  Product Service
 
-The `Product Controller` is an entry point for Insurance Product application. When deploying smart contract Insurance Product 
-application passes arguments, and should pass ProductController address as one of the arguments.
-All Product Controller methods are used by Insurance Product application.
-Methods invoked by Product Controller:
+The `Product Service` is an entry point for Insurance Product application. When deploying smart contract Insurance Product 
+application passes arguments, and should pass ProductService address as one of the arguments.
+All Product Service methods are used by Insurance Product application.
+Methods Product Service operates with:
 
    * **newApplication**  
    Method is used to store new application data which contains such fields as premium amount, currency, payout options, risk definition etc. Policy buyer signs policy agreement using this method.
@@ -88,8 +88,6 @@ Action is a building block of a policy flow. Actions are controlled by PolicyFlo
 Here is the list of modules:
 
    * **Policy module** (manages applications, policies, claims, payouts and metadata objects)
-   * **Access module** (defines permissions between contracts and actors)
-   * **Ledger module** (bookkeeper for insurance operations, aggregates premiums, payouts, expenses etc.)
    * **Registry module** (registers sets of core contracts which are used in policy flow lifecycle in release groups)
    * **License module** (manages insurance applications)
    * **Query module** (manages queries to oracles and delivers responses from them).
@@ -225,20 +223,36 @@ Check [FlightDelay example](core/gif-contracts/contracts/examples/FlightDelayMan
 10.	Call function confirmPayout.
     Payout confirmation with payoutId and payoutAmount.
 
+## GIF core contracts on Rinkeby:  
+__ProductService:__ 0x6520354fa128cc6483B9662548A597f7FcB7a687  
+__InstanceOperatorService:__ 0x39F7826D3796BC4a2Eb2F0B8fF3799f30D02CBf5  
+__License:__ 0x9Fb57F1C2291395a0F654A03C2053309a9928d39  
+__LicenseController:__ 0xd5337b57c636EEF4Aa5C78625816715AE945f81A   
+__OracleOwnerService:__ 0xcD8438bA7580139e5df05067cd868ea31A7eb9E8  
+__OracleService:__ 0x5F4a25c03054f8072Bd10C6afc515E5C4a146f27  
+__Policy:__ 0x10154588296B531B880ca669E0807A3dA78F2Ae8  
+__PolicyController:__ 0x1fCda1D5efBCC82d24e0438C618DDCe7383827AB  
+__PolicyFlowDefault:__ 0x04EC0D88D70713ba304ad54c6f22200ea93dDd57  
+__Query:__ 0x2936555290B17062e3472CF3a5A3DE3B84A01515  
+__QueryController:__ 0xAd517b5da0b62DfF56ac57d612f4bEf0eA1e1b78  
+__Registry:__ 0x5E78A5a3ffd005761B501D6264cEcD87E2d331B0  
+__RegistryController:__ 0x4Bf8b2622a1b5B6b2865087323E6C518a3946AbA
+
 # Getting Started ( Installation instructions )
-1.  Install `Node.js`. Node.js version should be 8.12.0 or higher, npm version should be 6.4.1 or higher. [Download](https://nodejs.org/en/download/current/). 
+1.  Install `Node.js`. Node.js version should be >=8.12.0 and <12, npm version should be 6.4.1 or higher. [Download](https://nodejs.org/en/download/current/). 
 2.  Install `Docker` [Download](https://www.docker.com/get-started). 
 3.  Run to install project's root dependencies
     > npm install
 4.  Run to install dependencies for packages
-    > npm run bootstrap   
+    > npm run bootstrap 
 5.  Run to start services in Docker 
-6.  > npm run dev:services:run
-7.  Run to start migrations (this will deploy contracts and run database migrations)
+    > npm run dev:services:run
+6.  Run to start migrations (this will deploy contracts and run database migrations)
     > npm run migrate
-8.  Look at deployed contracts
-    > npm run script -- networks    
-9.  Run to start microservices
-    > npm run dev    
-10. Run to open the console
-    > npm run develop
+7.  Look at deployed contracts
+    > npm run script -- networks
+8.  Run to start microservices
+    > npm run dev 
+9.  Run in a separate console
+    > npm run script -- broadcast
+    
