@@ -36,7 +36,7 @@
     "update-solc-version": "echo 'Update solc compiler version'; ./bin/command updateSolcVersion",
     "clean": "echo 'Clean repository'; rimraf build coverage",
     "prepare-verification": "echo 'Concat sources for verification on Etherscan'; ./bin/prepare-verification.sh",
-    "dev": "(cp -a ../deploy/. . && NETWORK=development node ./broadcast.js)"
+    "broadcast": "(cp -a ../deploy/. . && NETWORK=development node ./broadcast.js)"
   },
   "dependencies": {
     "@etherisc/microservice": "^0.6.1-sandbox",

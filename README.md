@@ -253,3 +253,6 @@ __RegistryController:__ 0x4Bf8b2622a1b5B6b2865087323E6C518a3946AbA
     > npm run script -- networks
 8.  Run to start microservices
     > npm run dev 
+9.  Run in a separate console
+    > npm run script -- broadcast
+    
