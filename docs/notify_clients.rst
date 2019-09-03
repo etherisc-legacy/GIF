@@ -68,6 +68,7 @@ See code details:
 
   
 See events triggers here:
+
 +---------------------------+---------------------------------+--------------------------------+
 | **Message Name**          | **Description**                 | **Triggered**                  |
 |                           |                                 |                                |
