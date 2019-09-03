@@ -11,7 +11,7 @@ The pricing model is very simple. Let’s assume that a policy premium should be
 
 The policy expiration period is 1 year.
 
-Thу following actors will take part in the process: an application manager, an underwriter, a claims manager and a bookkeeper.
+The following actors will take part in the process: an application manager, an underwriter, a claims manager and a bookkeeper.
 
 Here are the steps of the product life cycle:
 
@@ -44,11 +44,11 @@ Prerequisites:
 
 GIF consists of 3 parts:
 
-- Core smart contracts
+- **Core smart contracts**
 
-- Microservices represent a utility layer. They are available to provide useful functionality for product builders (off-chain data storage, watch Ethereum events, interact with smart contracts (call data and send transactions), send emails, telegram notifications, etc.). More detailed information about available microservices will be published in the next articles.
+- **Microservices** represent a utility layer. They are available to provide useful functionality for product builders (off-chain data storage, watch Ethereum events, interact with smart contracts (call data and send transactions), send emails, telegram notifications, etc.). More detailed information about available microservices will be published in the next articles.
 
-- CLI tool (gifcli). A command-line interface to interact with the sandbox environment.
+- **CLI tool (gifcli)**. A command-line interface to interact with the sandbox environment.
 
 Registration
 ************
