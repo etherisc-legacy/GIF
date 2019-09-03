@@ -6,7 +6,7 @@ Coding part
 Configure a Truffle project
 ***************************
 
-Now we are ready to build a product. Create a new directory for it.
+Now we are ready to build a product. Create a new directory for it within root folder for GIF.
 
 ::
 
