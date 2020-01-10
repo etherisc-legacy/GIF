@@ -4,8 +4,8 @@ gifcli
 
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/gifcli.svg)](https://npmjs.org/package/gifcli)
-[![Downloads/week](https://img.shields.io/npm/dw/gifcli.svg)](https://npmjs.org/package/gifcli)
+[![Version](https://img.shields.io/npm/v/gifcli.svg)](https://npmjs.org/package/@etherisc/gifcli)
+[![Downloads/week](https://img.shields.io/npm/dw/gifcli.svg)](https://npmjs.org/package/@etherisc/gifcli)
 [![License](https://img.shields.io/npm/l/gifcli.svg)](https://github.com/kandrianov/gifcli/blob/master/package.json)
 
 <!-- toc -->
