@@ -69,7 +69,7 @@ class Register extends BaseCommand {
       },
     };
 
-    this.configure(config);
+    this.globalConfig.configure(config);
 
     this.log('User registered');
   }

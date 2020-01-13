@@ -28,7 +28,7 @@ class Exec extends BaseCommand {
       module: mod,
       require: mod.require,
       console,
-      gif: this.gif.cli,
+      gif: this.gif.commands,
       eth: this.eth,
       moment: this.moment,
     };

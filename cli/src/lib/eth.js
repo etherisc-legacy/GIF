@@ -1,6 +1,4 @@
 const _ = require('lodash');
-const Web3 = require('web3');
-const HDWalletProvider = require('truffle-hdwallet-provider');
 const networksLookup = require('./networks');
 
 
@@ -26,28 +24,7 @@ function networkById(id) {
   return networkByName(name);
 }
 
-/**
- * Web3 with HDWalletProvider
- * @param {String} mnemonic
- * @param {String} httpProvider
- * @return {Web3}
- */
-function signer(mnemonic, httpProvider) {
-  const { MNEMONIC, HTTP_PROVIDER } = process.env;
-
-  if (!MNEMONIC && !mnemonic) {
-    throw new Error('MNEMONIC not defined');
-  }
-
-  if (!HTTP_PROVIDER && !httpProvider) {
-    throw new Error('HTTP_PROVIDER not defined');
-  }
-
-  return new Web3(new HDWalletProvider(MNEMONIC, HTTP_PROVIDER, 0, 1, false));
-}
-
 module.exports = {
   networkByName,
   networkById,
-  signer,
 };

@@ -9,11 +9,11 @@ class SelectProduct extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
-    if (!this.configuration) {
+    if (!this.globalConfig.configuration) {
       this.error(this.errorMessages.noConfiguration);
     }
 
-    const { products } = this.configuration;
+    const { products } = this.globalConfig.configuration;
 
     if (!products || Object.keys(products).length === 0) {
       this.error(this.errorMessages.noProducts);
@@ -27,7 +27,7 @@ class SelectProduct extends BaseCommand {
       this.error(this.errorMessages.noProduct);
     }
 
-    this.configure({ ...this.configuration, current });
+    this.globalConfig.configure({ ...this.globalConfig.configuration, current });
 
     this.log(`${current} selected`);
   }

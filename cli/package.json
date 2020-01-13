@@ -1,6 +1,6 @@
 {
   "name": "@etherisc/gifcli",
-  "version": "1.1.4",
+  "version": "1.1.10-independant",
   "engines": {
     "node": ">=8.0.0"
   },
@@ -11,7 +11,7 @@
     "version": "oclif-dev readme && git add README.md"
   },
   "bin": {
-    "gifcli": "./bin/run"
+    "gifcli": "bin/run"
   },
   "files": [
     "/bin",
@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "@etherisc/amqp": "^1.2.1-sandbox",
-    "@oclif/command": "^1.5.11",
-    "@oclif/config": "^1.12.9",
+    "@oclif/command": "^1.5.13",
+    "@oclif/config": "^1.13.0",
     "@oclif/plugin-help": "^2.1.6",
     "@oclif/test": "^1.2.4",
     "axios": "^0.18.0",
@@ -50,19 +50,17 @@
     "columnify": "^1.5.4",
     "email-validator": "^2.0.4",
     "fs-jetpack": "^2.2.2",
-    "globby": "^8.0.2",
+    "globby": "^9.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "password-validator": "^4.1.1",
-    "truffle-hdwallet-provider": "^1.0.5",
-    "update-notifier": "^2.5.0",
-    "uuid": "^3.3.2",
-    "web3": "^1.0.0-beta.50"
+    "update-notifier": "^3.0.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.21.2",
     "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "nyc": "^13.3.0"
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1"
   }
 }

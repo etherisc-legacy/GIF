@@ -10,7 +10,7 @@ class CreateProduct extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
-    if (!this.configuration) {
+    if (!this.globalConfig.configuration) {
       this.error(this.errorMessages.noConfiguration);
     }
 
@@ -45,7 +45,7 @@ class CreateProduct extends BaseCommand {
         }
       });
 
-    const config = this.configuration;
+    const config = this.globalConfig.configuration;
 
     if (!config.products) {
       config.products = {};
@@ -59,7 +59,7 @@ class CreateProduct extends BaseCommand {
 
     config.current = name;
 
-    this.configure(config);
+    this.globalConfig.configure(config);
 
     this.log('Product created');
   }

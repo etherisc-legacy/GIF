@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+
+const EventEmitter = require('events');
 const uuid = require('uuid/v1');
 const _ = require('lodash');
 const chalk = require('chalk');
@@ -6,11 +9,11 @@ const errorMessages = require('./errorMessages');
 const docs = require('./docs');
 
 
-const REQUEST_TIMEOUT = 10000;
+const REQUEST_TIMEOUT = 100000;
 
 /**
  * Call function on timeout
- * @param {Functoin} cb
+ * @param {Function} cb
  */
 const scheduleTimeout = (cb) => {
   setTimeout(() => cb('Timeout'), REQUEST_TIMEOUT);
@@ -25,11 +28,10 @@ const entities = {
   payout: { singular: 'Payout', plural: 'Payouts' },
 };
 
-
 /**
  * GIF client
  */
-class Gif {
+class Gif extends EventEmitter {
   /**
    * Constructor
    * @param {Amqp} amqp
@@ -38,11 +40,14 @@ class Gif {
    * @param {Function} errorHandler
    */
   constructor(amqp, info, eth, errorHandler) {
+    super();
+
     this._amqp = amqp;
     this._info = info;
     this._eth = eth;
     this._error = errorHandler;
     this._connected = true;
+    this._consumers = {};
   }
 
   /**
@@ -67,10 +72,29 @@ class Gif {
   }
 
   /**
+   *
+   * @return {Promise<void>}
+   */
+  async usePersistantChannels() {
+    try {
+      await this._amqp.createChannels();
+      this._consumers = {};
+      this._persistantChannels = true;
+    } catch (e) {
+      this._error(errorMessages.createChannelsFailed(this._info.product));
+    }
+  }
+
+  /**
    * Shutdown
    */
   async shutdown() {
+    console.log('Shutdown connection...');
     try {
+      if (this._persistantChannels) {
+        await this._amqp.closeChannels();
+      }
+
       await new Promise(resolve => setTimeout(resolve, 500));
       await this._amqp.closeConnections();
       this._connected = false;
@@ -83,7 +107,7 @@ class Gif {
    * CLI
    * @return {Object}
    */
-  get cli() {
+  get commands() {
     return {
       info: this.info.bind(this),
       help: this.help.bind(this),
@@ -124,6 +148,7 @@ class Gif {
       product: {
         get: this.getProduct.bind(this),
       },
+      shutdown: this.shutdown.bind(this),
     };
   }
 
@@ -371,6 +396,89 @@ class Gif {
   }
 
   /**
+   *
+   * @param {Object} params
+   * @param {Object} params.payload
+   * @param {String} params.pubMessageType
+   * @param {String} params.subMessageType
+   * @returns {Promise<any|{error: string}|*>}
+   */
+  async request({ payload, pubMessageType, subMessageType }) {
+    try {
+      let result;
+
+      if (this._persistantChannels) {
+        result = await this._requestWithPersistantChannels({ payload, pubMessageType, subMessageType });
+      } else {
+        result = await this._request({ payload, pubMessageType, subMessageType });
+      }
+
+      return result;
+    } catch (e) {
+      const err = this.errorHandler(e);
+      this._error(err);
+      return e;
+    }
+  }
+
+  /**
+   *
+   * @param {Object} params
+   * @param {Object} params.payload
+   * @param {String} params.pubMessageType
+   * @param {String} params.subMessageType
+   * @returns {Promise<unknown>}
+   * @private
+   */
+  async _requestWithPersistantChannels({ payload, pubMessageType, subMessageType }) {
+    if (!this._consumers[subMessageType]) {
+      await this._amqp.consume({
+        product: this._product,
+        messageType: subMessageType,
+        messageVersion: '1.*',
+        handler: ({ content, properties }) => {
+          const { requestId } = properties.headers;
+
+          if (!requestId) {
+            this.errorHandler('RequestId not provided');
+          }
+
+          this.emit(requestId, content);
+        },
+      });
+
+      this._consumers.subMessageType = true;
+    }
+
+    const requestId = uuid();
+
+    const result = await new Promise((resolve, reject) => {
+      const timeout = scheduleTimeout(reject);
+      /* eslint-disable-next-line require-jsdoc */
+      const handler = (content) => {
+        this.removeListener(requestId, handler);
+        clearTimeout(timeout);
+        resolve(content);
+      };
+
+      this.on(requestId, handler);
+
+      this._amqp.publish({
+        messageType: pubMessageType,
+        messageVersion: '1.*',
+        content: {
+          ...payload,
+        },
+        customHeaders: {
+          requestId,
+        },
+      });
+    });
+
+    return result;
+  }
+
+  /**
    * Request
    * @param {Object} params
    * @param {Object} params.payload
@@ -378,52 +486,47 @@ class Gif {
    * @param {String} params.subMessageType
    * @return {Promise<any | {error: string}>}
    */
-  async request({ payload, pubMessageType, subMessageType }) {
-    try {
-      await this._amqp.createChannels();
+  async _request({ payload, pubMessageType, subMessageType }) {
+    await this._amqp.createChannels();
 
-      const requestId = uuid();
+    const requestId = uuid();
 
-      const result = await new Promise((resolve, reject) => {
-        this._amqp.consume({
-          product: this._amqp.appName,
-          messageType: subMessageType,
-          messageVersion: '1.*',
-          handler: ({ content, fields, properties }) => {
-            if (properties.headers.requestId === requestId) {
-              if (content.error) {
-                reject(content);
-              } else {
-                resolve(content);
-              }
+    const result = await new Promise((resolve, reject) => {
+      this._amqp.consume({
+        product: this._amqp.appName,
+        messageType: subMessageType,
+        messageVersion: '1.*',
+        handler: ({ content, properties }) => {
+          if (properties.headers.requestId === requestId) {
+            if (content.error) {
+              reject(content);
+            } else {
+              resolve(content);
             }
+          }
 
-            scheduleTimeout(reject);
-          },
-        })
-          .then(() => {
-            this._amqp.publish({
-              messageType: pubMessageType,
-              messageVersion: '1.*',
-              content: {
-                ...payload,
-              },
-              customHeaders: {
-                requestId,
-              },
-            }).catch(reject);
-          })
-          .catch(reject);
+          scheduleTimeout(reject);
+        },
       })
-        .catch(this.errorHandler);
+        .then(() => {
+          this._amqp.publish({
+            messageType: pubMessageType,
+            messageVersion: '1.*',
+            content: {
+              ...payload,
+            },
+            customHeaders: {
+              requestId,
+            },
+          }).catch(reject);
+        })
+        .catch(reject);
+    })
+      .catch(this.errorHandler);
 
-      await this._amqp.closeChannels();
+    await this._amqp.closeChannels();
 
-      return result;
-    } catch (e) {
-      this.errorHandler(e);
-      return e;
-    }
+    return result;
   }
 
   /**

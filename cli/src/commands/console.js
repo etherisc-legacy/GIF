@@ -7,7 +7,7 @@ const ReplManager = require('../lib/ReplManager');
 class Console extends BaseCommand {
   /**
    * Run command
-   * @return {Promise<void>}
+   * @return {Promise<void>}}
    */
   async run() {
     if (!this.gif) {
@@ -19,10 +19,10 @@ class Console extends BaseCommand {
     const replManager = new ReplManager();
 
     await new Promise((resolve) => {
-      replManager.start(this.configuration.current);
+      replManager.start(this.globalConfig.configuration.current);
       replManager.repl.on('exit', resolve);
       replManager.setContext({
-        gif: this.gif.cli,
+        gif: this.gif.commands,
         eth: this.eth,
         moment: this.moment,
         clear: () => process.stdout.write('\u001b[2J\u001b[0;0H'),

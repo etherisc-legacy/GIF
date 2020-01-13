@@ -17,4 +17,6 @@ module.exports = {
   invalidLastname: 'Lastname is not provided',
   invalidEmail: 'Email is invalid',
   notEqualPasswords: 'Passwords are not equal',
+  noCurrent: 'Current product not defined',
+  createChannelsFailed: 'Failed to create AMQP channels',
 };

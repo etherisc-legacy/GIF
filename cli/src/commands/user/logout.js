@@ -9,7 +9,7 @@ class Logout extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
-    this.configure({});
+    this.globalConfig.configure({});
 
     this.log('Logged out');
   }
