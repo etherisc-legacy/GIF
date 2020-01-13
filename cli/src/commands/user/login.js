@@ -2,7 +2,7 @@ const emailValidator = require('email-validator');
 const BaseCommand = require('../../lib/BaseCommand');
 
 /**
- * Register command
+ * Login command
  */
 class Login extends BaseCommand {
   /**
