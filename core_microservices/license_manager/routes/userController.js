@@ -32,8 +32,9 @@ module.exports = ({
   models,
   log,
   tokenGenerationService,
+  rabbitAPIService,
 }) => {
-  const { User } = models;
+  const { User, Product } = models;
 
   // Users index
   router.get('/api/users', async (ctx) => {
@@ -102,9 +103,28 @@ module.exports = ({
         return;
       }
 
+      const products = await Product.query().where({ userId: user.id });
+      const amqpLogins = {};
+
+      // eslint-disable-next-line no-plusplus
+      for (let index = 0; index < products.length; index++) {
+        const product = products[index];
+        const response = await rabbitAPIService.updatePassword(product.name);
+        if (response.updateError) {
+          ctx.badRequest({ error: response.updateError });
+          return;
+        }
+        amqpLogins[product.name] = {
+          id: product.id,
+          amqpLogin: product.name,
+          amqpPassword: response.password,
+        };
+      }
+
       ctx.ok({
-        token: tokenGenerationService.generateToken(user),
         id: user.id,
+        token: tokenGenerationService.generateToken(user),
+        products: amqpLogins,
       });
     } catch (error) {
       log.error(error);
