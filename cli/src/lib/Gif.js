@@ -113,6 +113,7 @@ class Gif extends EventEmitter {
       help: this.help.bind(this),
       artifact: {
         get: this.getArtifact.bind(this),
+        send: this.sendArtifact.bind(this),
       },
       contract: {
         send: this.sendTransaction.bind(this),

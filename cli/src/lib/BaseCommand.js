@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const updateNotifier = require('update-notifier');
 const { Command } = require('@oclif/command');
 const { cli } = require('cli-ux');

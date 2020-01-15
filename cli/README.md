@@ -19,7 +19,7 @@ $ npm install -g @etherisc/gifcli
 $ gifcli COMMAND
 running command...
 $ gifcli (-v|--version|version)
-@etherisc/gifcli/1.1.2 darwin-x64 node-v11.12.0
+@etherisc/gifcli/1.1.11-independant linux-x64 node-v10.15.3
 $ gifcli --help [COMMAND]
 USAGE
   $ gifcli COMMAND
@@ -34,6 +34,7 @@ USAGE
 * [`gifcli help [COMMAND]`](#gifcli-help-command)
 * [`gifcli product:create`](#gifcli-productcreate)
 * [`gifcli product:select`](#gifcli-productselect)
+* [`gifcli user:login`](#gifcli-userlogin)
 * [`gifcli user:logout`](#gifcli-userlogout)
 * [`gifcli user:register`](#gifcli-userregister)
 * [`gifcli version`](#gifcli-version)
@@ -99,7 +100,7 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.6/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
 
 ## `gifcli product:create`
 
@@ -125,6 +126,19 @@ USAGE
 DESCRIPTION
   ...
   Select current product
+```
+
+## `gifcli user:login`
+
+Log into in GIF
+
+```
+USAGE
+  $ gifcli user:login
+
+DESCRIPTION
+  ...
+  Log into GIF
 ```
 
 ## `gifcli user:logout`

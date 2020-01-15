@@ -1,4 +1,6 @@
 /* eslint-disable no-inner-declarations */
+require('dotenv').config();
+
 
 if (require.main === module) {
   module.exports = require('@oclif/command');
