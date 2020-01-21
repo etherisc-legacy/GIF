@@ -61,7 +61,6 @@ class DipMicroservice {
         await websocket.bootstrap();
         deps.websocket = websocket;
       }
-
       this.app = new this.App({
         ...deps,
         http: this.http,
@@ -70,6 +69,7 @@ class DipMicroservice {
         router: applicationRouter,
         appName: this.config.appName,
         appVersion: this.config.appVersion,
+        shutdown: this.shutdown.bind(this),
       });
 
       await this.app.bootstrap();
@@ -80,7 +80,7 @@ class DipMicroservice {
 
       ['SIGTERM', 'SIGHUP', 'SIGINT'].forEach((signal) => {
         process.on(signal, () => {
-          this.log.debug(`${signal} received, shutdown ${this.config.appName}.v${this.config.appVersion} microservice`);
+          this.log.debug(`${signal} received`);
 
           this.shutdown();
         });
@@ -95,6 +95,7 @@ class DipMicroservice {
    * Shutdown application
    */
   shutdown() {
+    this.log.debug(`Shutting down ${this.config.appName}.v${this.config.appVersion} microservice`);
     const status = this.http.getShuttingDownStatus();
 
     if (status === true) {

@@ -1,5 +1,5 @@
-const { settings } = require(`${process.cwd()}/package`);
 const HDWalletProvider = require('truffle-hdwallet-provider');
+const { settings } = require('./package');
 
 
 module.exports = {

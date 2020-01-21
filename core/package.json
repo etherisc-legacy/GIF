@@ -2,9 +2,10 @@
   "name": "core-gif-contracts-deploy",
   "version": "1.0.0",
   "scripts": {
-    "broadcast": "cp -a ./deploy/. ./gif-contracts && cd gif-contracts && node ./broadcast.js"
+    "broadcast": "node ./deploy/broadcast.js"
   },
   "dependencies": {
+    "@etherisc/microservice": "file:../shared/etherisc-microservice",
     "fs-extra": "^7.0.1"
   }
 }
