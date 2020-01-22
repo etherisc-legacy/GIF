@@ -52,7 +52,6 @@ class EthereumClient {
    * Save artifact
    * @param {{}} params
    * @param {{}} params.content
-   * @param {{}} params.fields
    * @param {{}} params.properties
    * @return {void}
    */
@@ -106,7 +105,6 @@ class EthereumClient {
    * Handle transaction request
    * @param {{}} params
    * @param {{}} params.content
-   * @param {{}} params.fields
    * @param {{}} params.properties
    * @return {void}
    */
@@ -143,7 +141,7 @@ class EthereumClient {
 
       const methodDescription = contractData.abi.find(method => method.name === methodName);
 
-      const transformedParameters = this.transformParams(parameters, methodDescription, web3.utils);
+      const transformedParameters = this.transformParams(parameters, methodDescription.inputs, web3.utils);
 
       result = await new Promise((resolve, reject) => {
         contractInterface.methods[methodName](...transformedParameters).send()
@@ -152,8 +150,16 @@ class EthereumClient {
           .on('error', error => reject(error))
           .catch((error) => {
             if (error.code === 'INVALID_ARGUMENT') {
-              const types = error.value.types.map(type => `${type.type} ${type.name}`);
-              reject(new Error(`Expected ${error.count.types} arguments (${types.join(', ')}), but ${error.count.values} values provided (${error.value.values.join(', ')})`));
+              if (typeof error.value === 'string') {
+                reject(new Error(`Expected ${error.coderType}, but got '${error.value}'`));
+              } else if (error.value === null) {
+                reject(new Error(`${error.reason} arg: ${error.arg}, coderType: ${error.coderType}`));
+              } else if (Array.isArray(error.value)) {
+                reject(new Error(`${error.reason} arg: ${error.arg}, coderType: ${error.coderType}, value: ${error.value}`));
+              } else {
+                const types = error.value && error.value.types ? error.value.types.map(type => `${type.type} ${type.name}`) : [];
+                reject(new Error(`Expected ${error.count.types} arguments (${types.join(', ')}), but ${error.count.values} values provided (${error.value.values.join(', ')})`));
+              }
             }
 
             reject(error);
@@ -187,7 +193,6 @@ class EthereumClient {
    * Handle call request
    * @param {{}} params
    * @param {{}} params.content
-   * @param {{}} params.fields
    * @param {{}} params.properties
    * @return {void}
    */
@@ -221,7 +226,7 @@ class EthereumClient {
       });
 
       const methodDescription = contractData.abi.find(method => method.name === methodName);
-      const transformedParameters = this.transformParams(parameters, methodDescription, web3.utils);
+      const transformedParameters = this.transformParams(parameters, methodDescription.inputs, web3.utils);
 
       const callResult = await contractInterface.methods[methodName](...transformedParameters).call();
 
@@ -255,30 +260,37 @@ class EthereumClient {
     });
   }
 
+
   /**
    * Handle call request
    * @param {[]} parameters
-   * @param {{}} methodDescription
+   * @param {[]} inputs
    * @param {{}} utils
    * @return {[]} transformedparameters
    */
-  transformParams(parameters, methodDescription, utils) {
+  transformParams(parameters, inputs, utils) {
     const web3 = signer();
     const transformedParameters = [];
+
     for (let index = 0; index < parameters.length; index += 1) {
-      const paramFormat = methodDescription.inputs[index];
+      const paramFormat = inputs[index];
 
       if (!paramFormat) {
-        const types = methodDescription.inputs.map(type => `${type.type} ${type.name}`);
+        const types = inputs.map(type => `${type.type} ${type.name}`);
         throw new Error(`Unknown argument ${parameters[index]}, expected arguments: ${types.join(', ')}`);
       }
-
       if (/bytes/.test(paramFormat.type)) {
         const byteSize = parseInt(paramFormat.type.replace('bytes', ''), 10);
         const length = byteSize * 2 + 2;
         const hexString = (parameters[index].match(/^0x/))
           ? parameters[index] : web3.utils.utf8ToHex(parameters[index]);
         transformedParameters[index] = web3.utils.padRight(hexString, length).substr(0, length);
+      } else if (paramFormat.type === 'tuple') {
+        transformedParameters[index] = this.transformParams(parameters[index], inputs[index].components);
+      } else if (paramFormat.type === 'tuple[]') {
+        transformedParameters[index] = parameters[index].map(
+          item => this.transformParams(item, inputs[index].components),
+        );
       } else {
         transformedParameters[index] = parameters[index];
       }

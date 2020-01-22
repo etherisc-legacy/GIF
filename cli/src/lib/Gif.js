@@ -98,6 +98,7 @@ class Gif extends EventEmitter {
       await new Promise(resolve => setTimeout(resolve, 500));
       await this._amqp.closeConnections();
       this._connected = false;
+      console.log('Bye...');
     } catch (e) {
       throw new Error(e);
     }
@@ -313,7 +314,6 @@ class Gif extends EventEmitter {
     if (!contractName && !methodName && !parameters) {
       return this.wrongArgument('gif.contract.send');
     }
-
     const response = await this.request({
       payload: {
         contractName,
