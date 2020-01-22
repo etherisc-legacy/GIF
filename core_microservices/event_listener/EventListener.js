@@ -229,8 +229,13 @@ class EventListener {
         const paramFormat = inputs[i];
 
         if (/bytes/.test(paramFormat.type)) {
-          decodedEvent[i] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
-          decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+          try {
+            decodedEvent[i] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+            decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+          } catch (e) {
+            decodedEvent[i] = decodedEvent[paramFormat.name];
+            // decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+          }
         }
 
         if (paramFormat.type === 'address') {
