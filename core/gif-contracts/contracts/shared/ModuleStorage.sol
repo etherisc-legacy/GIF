@@ -1,4 +1,4 @@
-pragma solidity 0.5.2;
+pragma solidity 0.5.12;
 
 import "./BaseModuleStorage.sol";
 import "./WithRegistry.sol";
