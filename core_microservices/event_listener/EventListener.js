@@ -219,6 +219,9 @@ class EventListener {
         .filter(i => i.type === 'event')
         .map(i => Object.assign(i, { signature: this._web3.eth.abi.encodeEventSignature(i) }))
         .filter(i => i.signature === event.topics[0]);
+      if (abi.length === 0) {
+        return;
+      }
 
       // Fix decoding events with all indexed parameters
       const data = event.data === '0x' ? '' : event.data;
