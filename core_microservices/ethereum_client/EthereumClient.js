@@ -226,12 +226,16 @@ class EthereumClient {
       });
 
       const methodDescription = contractData.abi.find(method => method.name === methodName);
-      const transformedParameters = this.transformParams(parameters, methodDescription.inputs, web3.utils);
+      if (!methodDescription) {
+        result = { error: `Undefined method ${methodName} in contract ${contractName}` };
+      } else {
+        const transformedParameters = this.transformParams(parameters, methodDescription.inputs, web3.utils);
 
-      const callResult = await contractInterface.methods[methodName](...transformedParameters).call();
+        const callResult = await contractInterface.methods[methodName](...transformedParameters).call();
 
-      result = this.transformOutput(callResult, methodDescription.outputs, web3.utils);
-      this._log.info(`Completed ${methodName} call for ${contractName}@${product}`);
+        result = this.transformOutput(callResult, methodDescription.outputs, web3.utils);
+        this._log.info(`Completed ${methodName} call for ${contractName}@${product}`);
+      }
     } catch (error) {
       this._log.error(error);
 
