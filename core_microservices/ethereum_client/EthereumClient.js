@@ -140,32 +140,35 @@ class EthereumClient {
       });
 
       const methodDescription = contractData.abi.find(method => method.name === methodName);
+      if (!methodDescription) {
+        result = { error: `Undefined method ${methodName} in contract ${contractName}` };
+      } else {
+        const transformedParameters = this.transformParams(parameters, methodDescription.inputs, web3.utils);
 
-      const transformedParameters = this.transformParams(parameters, methodDescription.inputs, web3.utils);
-
-      result = await new Promise((resolve, reject) => {
-        contractInterface.methods[methodName](...transformedParameters).send()
-          .on('confirmation', (confirmation, receipt) => resolve(receipt))
-          .on('receipt', receipt => resolve(receipt))
-          .on('error', error => reject(error))
-          .catch((error) => {
-            if (error.code === 'INVALID_ARGUMENT') {
-              if (typeof error.value === 'string') {
-                reject(new Error(`Expected ${error.coderType}, but got '${error.value}'`));
-              } else if (error.value === null) {
-                reject(new Error(`${error.reason} arg: ${error.arg}, coderType: ${error.coderType}`));
-              } else if (Array.isArray(error.value)) {
-                reject(new Error(`${error.reason} arg: ${error.arg}, coderType: ${error.coderType}, value: ${error.value}`));
-              } else {
-                const types = error.value && error.value.types ? error.value.types.map(type => `${type.type} ${type.name}`) : [];
-                reject(new Error(`Expected ${error.count.types} arguments (${types.join(', ')}), but ${error.count.values} values provided (${error.value.values.join(', ')})`));
+        result = await new Promise((resolve, reject) => {
+          contractInterface.methods[methodName](...transformedParameters)
+            .send()
+            .on('confirmation', (confirmation, receipt) => resolve(receipt))
+            .on('receipt', receipt => resolve(receipt))
+            .on('error', error => reject(error))
+            .catch((error) => {
+              if (error.code === 'INVALID_ARGUMENT') {
+                if (typeof error.value === 'string') {
+                  reject(new Error(`Expected ${error.coderType}, but got '${error.value}'`));
+                } else if (error.value === null) {
+                  reject(new Error(`${error.reason} arg: ${error.arg}, coderType: ${error.coderType}`));
+                } else if (Array.isArray(error.value)) {
+                  reject(new Error(`${error.reason} arg: ${error.arg}, coderType: ${error.coderType}, value: ${error.value}`));
+                } else {
+                  const types = error.value && error.value.types ? error.value.types.map(type => `${type.type} ${type.name}`) : [];
+                  reject(new Error(`Expected ${error.count.types} arguments (${types.join(', ')}), but ${error.count.values} values provided (${error.value.values.join(', ')})`));
+                }
               }
-            }
 
-            reject(error);
-          });
-      });
-
+              reject(error);
+            });
+        });
+      }
       this._log.info(`Completed ${methodName} transaction for ${contractName}@${product}`);
     } catch (error) {
       this._log.error(error);
