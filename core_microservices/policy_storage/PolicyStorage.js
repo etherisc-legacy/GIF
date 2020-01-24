@@ -1318,9 +1318,10 @@ class PolicyStorage {
 
     const product = await this.getProductNameById(productId);
     const data = await this.getContractData(address, 'metadata', [productId, id]);
+    const key = data.bpExternalKey;
 
     // update
-    await Metadata.query().update({ productId, id, ...data }).where({ product, key: data.bpExternalKey });
+    await Metadata.query().update({ productId, id, ...data }).where({ product, key });
   }
 
   /**
