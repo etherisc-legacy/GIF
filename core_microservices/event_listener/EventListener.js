@@ -314,14 +314,21 @@ class EventListener {
     try {
       // const event = await this.db.raw(`SELECT * FROM ${schema}.events`, []);
       const { Event } = this._models;
+      let { select, where, limit } = content;
+
+      if (!select) select = '*';
+      if (!where) where = {};
+      if (!limit) limit = 100;
 
       // todo: filter by network, version, address, fromBlock and any other fields including eventArgs
-      const events = await Event.query().select();
+      const events = await Event.query().select(select).where(where).limit(limit);
 
       await this._amqp.publish({
+        product: properties.headers.product,
+        customHeaders: properties.headers,
         messageType: 'decodedEvent',
         messageTypeVersion: '1.*',
-        content: events,
+        content: { events },
         correlationId: properties.correlationId,
       });
     } catch (e) {

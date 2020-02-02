@@ -112,6 +112,9 @@ class Gif extends EventEmitter {
     return {
       info: this.info.bind(this),
       help: this.help.bind(this),
+      events: {
+        get: this.getEvents.bind(this),
+      },
       artifact: {
         get: this.getArtifact.bind(this),
         send: this.sendArtifact.bind(this),
@@ -154,6 +157,15 @@ class Gif extends EventEmitter {
     };
   }
 
+  /* Info section */
+  /**
+   * Get product's info
+   * @return {*}
+   */
+  info() {
+    return this._info;
+  }
+
   /**
    * Get information about commad
    * @param {String} cmd
@@ -177,13 +189,19 @@ class Gif extends EventEmitter {
     }
   }
 
-  /* Info section */
+  /* Events section */
+
   /**
-   * Get product's info
-   * @return {*}
+   *
+   * @param {object} payload
+   * @returns {Promise<any|{error: string}|*>}
    */
-  info() {
-    return this._info;
+  async getEvents(payload) {
+    return this.request({
+      payload,
+      pubMessageType: 'existingEventsRequest',
+      subMessageType: 'decodedEvent',
+    });
   }
 
   /* Customers section */
