@@ -1,4 +1,4 @@
-pragma solidity 0.5.2;
+pragma solidity 0.5.12;
 
 interface IInstanceOperatorService {
     function assignController(address _storage, address _controller) external;

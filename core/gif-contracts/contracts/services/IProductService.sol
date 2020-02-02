@@ -1,4 +1,4 @@
-pragma solidity 0.5.2;
+pragma solidity 0.5.12;
 
 interface IProductService {
     function register(bytes32 _productName, bytes32 _policyFlow)

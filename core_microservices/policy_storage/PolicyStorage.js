@@ -18,6 +18,8 @@ class PolicyStorage {
   /**
    * Constructor
    * @param {Amqp} amqp
+   * @param {db} db
+   * @param {log} log
    */
   constructor({ amqp, db, log }) {
     this._amqp = amqp;
@@ -644,8 +646,6 @@ class PolicyStorage {
 
   /**
    * Handle policy creation
-   * @param {DipMessage} message
-   * @return {*}
    */
   async onPolicyCreateMessage({ content, fields, properties }) {
     // Check if distributor exists
@@ -730,8 +730,6 @@ class PolicyStorage {
 
   /**
    * Get policy message handler
-   * @param {DipMessage} message
-   * @return {*}
    */
   async onPolicyGetMessage({ content, fields, properties }) {
     // Get models
@@ -1023,7 +1021,7 @@ class PolicyStorage {
 
   /**
    * Get artifact
-   * @param {Stirng} product
+   * @param {String} product
    * @param {String} networkName
    * @param {String} contractName
    * @return {Promise<{address: *, name: *, abi: string, version: *, network: *}>}
@@ -1066,7 +1064,6 @@ class PolicyStorage {
     const contract = new this._web3.eth.Contract(abi, address);
     const methodDescription = abi.find(m => m.name === method);
     const callData = await contract.methods[method](...params).call();
-
     /**
      * Format values
      * @param {*} value
@@ -1076,7 +1073,11 @@ class PolicyStorage {
     const format = (value, type) => {
       if (/bytes/.test(type)) {
         // e.g. bytes32
-        return this._web3.utils.toUtf8(value);
+        try {
+          return this._web3.utils.toUtf8(value);
+        } catch (e) { // can't convert random hex to UTF8
+          return value;
+        }
       }
 
       if (type === 'address') {
@@ -1084,6 +1085,7 @@ class PolicyStorage {
       }
 
       if (/int[\d]+\[\]/.test(type)) {
+        if (!value) return ('[]');
         // e.g. uint256[], int64[]
         return value.map(el => el.toString());
       }
@@ -1098,14 +1100,13 @@ class PolicyStorage {
 
     const { outputs } = methodDescription;
 
-    if (!_.isPlainObject(callData)) {
+    if (callData && typeof callData !== 'object') {
       return format(callData, outputs[0].type);
     }
 
     const data = _.omit(callData, _.filter(_.keys(callData), k => !_.isNaN(Number(k))));
     for (let i = 0; i < outputs.length; i += 1) {
       const paramFormat = outputs[i];
-
       data[paramFormat.name] = format(data[paramFormat.name], paramFormat.type);
     }
 
@@ -1317,9 +1318,10 @@ class PolicyStorage {
 
     const product = await this.getProductNameById(productId);
     const data = await this.getContractData(address, 'metadata', [productId, id]);
+    const key = data.bpExternalKey;
 
     // update
-    await Metadata.query().update({ productId, id, ...data }).where({ product, key: data.bpExternalKey });
+    await Metadata.query().update({ productId, id, ...data }).where({ product, key });
   }
 
   /**
@@ -1369,7 +1371,6 @@ class PolicyStorage {
     if (entity === 'application') {
       const policyController = await this.getContractData(address, 'controller', []);
       const payoutOptions = await this.getContractData(address, 'getPayoutOptions', [productId, id], policyController);
-
       data.payoutOptions = JSON.stringify(payoutOptions);
     }
 

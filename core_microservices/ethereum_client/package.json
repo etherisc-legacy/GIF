@@ -7,16 +7,17 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "create:migration": "knex migrate:make",
-    "dev": "node ./bootstrap.js",
+    "dev": "nodemon ./bootstrap.js",
     "prod": "node ./bootstrap.js"
   },
   "dependencies": {
     "@etherisc/microservice": "^0.6.2-sandbox",
     "dotenv": "^7.0.0",
     "knex": "^0.16.3",
+    "nodemon": "^2.0.2",
     "objection": "^1.6.6",
     "pg": "^7.9.0",
     "truffle-hdwallet-provider": "^1.0.0-web3one.2",
-    "web3": "^1.0.0-beta.51"
+    "web3": "^1.2.5-rc.0"
   }
 }

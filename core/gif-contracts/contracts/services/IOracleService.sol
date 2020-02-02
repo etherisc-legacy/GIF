@@ -1,4 +1,4 @@
-pragma solidity 0.5.2;
+pragma solidity 0.5.12;
 
 interface IOracleService {
     function respond(uint256 _requestId, bytes calldata _data)

@@ -219,6 +219,9 @@ class EventListener {
         .filter(i => i.type === 'event')
         .map(i => Object.assign(i, { signature: this._web3.eth.abi.encodeEventSignature(i) }))
         .filter(i => i.signature === event.topics[0]);
+      if (abi.length === 0) {
+        return;
+      }
 
       // Fix decoding events with all indexed parameters
       const data = event.data === '0x' ? '' : event.data;
@@ -229,8 +232,13 @@ class EventListener {
         const paramFormat = inputs[i];
 
         if (/bytes/.test(paramFormat.type)) {
-          decodedEvent[i] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
-          decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+          try {
+            decodedEvent[i] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+            decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+          } catch (e) {
+            decodedEvent[i] = decodedEvent[paramFormat.name];
+            // decodedEvent[paramFormat.name] = this._web3.utils.toUtf8(decodedEvent[paramFormat.name]);
+          }
         }
 
         if (paramFormat.type === 'address') {
@@ -306,14 +314,21 @@ class EventListener {
     try {
       // const event = await this.db.raw(`SELECT * FROM ${schema}.events`, []);
       const { Event } = this._models;
+      let { select, where, limit } = content;
+
+      if (!select) select = '*';
+      if (!where) where = {};
+      if (!limit) limit = 100;
 
       // todo: filter by network, version, address, fromBlock and any other fields including eventArgs
-      const events = await Event.query().select();
+      const events = await Event.query().select(select).where(where).limit(limit);
 
       await this._amqp.publish({
+        product: properties.headers.product,
+        customHeaders: properties.headers,
         messageType: 'decodedEvent',
         messageTypeVersion: '1.*',
-        content: events,
+        content: { events },
         correlationId: properties.correlationId,
       });
     } catch (e) {

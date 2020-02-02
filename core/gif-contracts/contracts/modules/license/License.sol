@@ -1,4 +1,4 @@
-pragma solidity 0.5.2;
+pragma solidity 0.5.12;
 
 import "./LicenseStorageModel.sol";
 import "../../shared/ModuleStorage.sol";

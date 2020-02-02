@@ -1,4 +1,9 @@
 module.exports = {
+  development: {
+    id: 7777,
+    url: 'localhost:8545',
+    label: 'Development',
+  },
   mainnet: {
     id: 1,
     url: 'https://mainnet.infura.io',

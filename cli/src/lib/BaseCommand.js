@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const updateNotifier = require('update-notifier');
 const { Command } = require('@oclif/command');
 const { cli } = require('cli-ux');
@@ -41,6 +43,7 @@ class BaseCommand extends Command {
 
     // Initialize and configure API
     const apiUri = `${GIF_API_HOST || 'http://api.sandbox.etherisc.com'}:${GIF_API_PORT || 4001}`;
+    this.log(`Connecting to GIF API: ${apiUri}`);
     this.api = new Api(apiUri);
 
     this.globalConfig = new GlobalConfig();
@@ -65,6 +68,7 @@ class BaseCommand extends Command {
         port: GIF_AMQP_PORT || 5672,
       };
 
+      this.log(`Connecting to AMQP Host: ${config.host}:${config.port}`);
       const amqp = new Amqp(config, username, this.config.version);
 
       const info = {
