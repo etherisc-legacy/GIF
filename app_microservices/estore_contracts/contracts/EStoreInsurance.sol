@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.12;
 
 
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
@@ -117,7 +117,7 @@ contract EStoreInsurance is Ownable {
         _setPolicyState(_policyId, PolicyState.Declined, _reason);
     }
 
-    function newClaim(uint256 _policyId, string _reason) external onlyOwner {
+    function newClaim(uint256 _policyId, string calldata _reason) external onlyOwner {
         Policy storage policy = policies[_policyId];
         Risk storage risk = risks[policy.riskId];
 
@@ -140,7 +140,7 @@ contract EStoreInsurance is Ownable {
         _setPolicyState(_policyId, PolicyState.Expired, "Expired");
     }
 
-    function rejectClaim(uint256 _claimId, string _reason) external onlyOwner {
+    function rejectClaim(uint256 _claimId, string calldata _reason) external onlyOwner {
         Claim storage claim = claims[_claimId];
         Policy storage policy = policies[claim.policyId];
 
@@ -150,7 +150,7 @@ contract EStoreInsurance is Ownable {
         _setClaimState(_claimId, ClaimState.Rejected, _reason);
     }
 
-    function confirmClaim(uint256 _claimId, string _reason) external onlyOwner {
+    function confirmClaim(uint256 _claimId, string calldata _reason) external onlyOwner {
         Claim storage claim = claims[_claimId];
         Policy storage policy = policies[claim.policyId];
         Risk storage risk = risks[policy.riskId];
@@ -175,11 +175,11 @@ contract EStoreInsurance is Ownable {
         policy.expectedPayout = 0;
     }
 
-    function getPoliciesCount() public constant returns (uint256 _count) {
+    function getPoliciesCount() public view returns (uint256 _count) {
         _count = policies.length;
     }
 
-    function getClaimsCount() public constant returns (uint256 _count) {
+    function getClaimsCount() public view returns (uint256 _count) {
         _count = claims.length;
     }
 
@@ -193,7 +193,7 @@ contract EStoreInsurance is Ownable {
         emit LogPolicySetState(_policyId, _newState, block.timestamp, _stateMessage);
     }
 
-    function _setClaimState(uint256 _claimId, ClaimState _claimState, string _reason) internal {
+    function _setClaimState(uint256 _claimId, ClaimState _claimState, string memory _reason) internal {
         Claim storage claim = claims[_claimId];
 
         claim.state = _claimState;
