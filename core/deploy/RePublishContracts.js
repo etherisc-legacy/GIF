@@ -39,8 +39,7 @@ class Contracts {
       artifact.networks[networkName] = {};
       artifact.networks[networkName][networkId.toString()] = { address: artifact.address };
       this.log.info(`Publishing ${artifact.contractName}`);
-      this.log.info(artifact);
-
+      const artifactString = JSON.stringify(artifact);
       // TODO: get FDD contracts out / separate
       const product = artifact.contractName.match(/Flight/) ? 'fdd' : 'platform';
 
@@ -51,7 +50,7 @@ class Contracts {
           network: networkName,
           networkId,
           version: '1.0.0',
-          artifact,
+          artifactString,
         },
         customHeaders: {
           product,
