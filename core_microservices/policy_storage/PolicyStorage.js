@@ -881,7 +881,7 @@ class PolicyStorage {
         if (isProductDeployment) {
           throw new Error(`Contract ${address} exists`);
         }
-        return;
+        // return;
       }
 
       const contractLookupCriteria = {
@@ -927,23 +927,23 @@ class PolicyStorage {
         } else {
           throw new Error('Product already exists and approved');
         }
-
-        await this._amqp.publish({
-          product: properties.headers.product,
-          messageType: 'contractDeploymentResult',
-          messageVersion: '1.*',
-          content: {
-            result: 'Artifact saved',
-            product,
-            contractName,
-            address,
-            network,
-            version,
-          },
-          correlationId: properties.correlationId,
-          customHeaders: properties.headers,
-        });
       }
+
+      await this._amqp.publish({
+        product: properties.headers.product,
+        messageType: 'contractDeploymentResult',
+        messageVersion: '1.*',
+        content: {
+          result: 'Artifact saved',
+          product,
+          contractName,
+          address,
+          network,
+          version,
+        },
+        correlationId: properties.correlationId,
+        customHeaders: properties.headers,
+      });
 
       const checkVersionExistance = await Contracts.query().findOne(contractLookupCriteria);
 
