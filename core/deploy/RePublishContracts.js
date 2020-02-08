@@ -38,11 +38,11 @@ class Contracts {
       artifact.networks = [];
       artifact.networks[networkName] = {};
       artifact.networks[networkName][networkId.toString()] = { address: artifact.address };
-      this.log.info(`Publishing ${artifact.contractName}`);
+      this.log.info(`Publishing ${artifact.contractName} at ${artifact.address}`);
       const artifactString = JSON.stringify(artifact);
       // TODO: get FDD contracts out / separate
       const product = artifact.contractName.match(/Flight/) ? 'fdd' : 'platform';
-
+      // continue;
       await this.amqp.publish({
         messageType: 'contractDeployment',
         messageVersion: '1.*',
