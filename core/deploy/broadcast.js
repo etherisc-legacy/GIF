@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { bootstrap } = require('@etherisc/microservice');
-const RePublishContracts = require('./RePublishContracts');
+const PublishContracts = require('./PublishContracts');
 
 
-bootstrap(RePublishContracts, {
+bootstrap(PublishContracts, {
   amqp: true,
 });

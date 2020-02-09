@@ -881,7 +881,7 @@ class PolicyStorage {
         if (isProductDeployment) {
           throw new Error(`Contract ${address} exists`);
         }
-        return;
+        // return;
       }
 
       const contractLookupCriteria = {

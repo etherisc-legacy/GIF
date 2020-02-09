@@ -1,10 +1,23 @@
 const fs = require('fs-extra');
+const uuid = require('uuid/v1');
+const EventEmitter = require('events');
 const truffle = require('../gif-contracts/truffle-config');
+
+
+const REQUEST_TIMEOUT = 10000;
+/**
+ * Schedule a timeout with handler.
+ * @param {function} cb
+ */
+const scheduleTimeout = (cb) => {
+  setTimeout(() => cb('Timeout'), REQUEST_TIMEOUT);
+};
+
 
 /**
  * DIP Artifacts Storage microservice
  */
-class Contracts {
+class Contracts extends EventEmitter {
   /**
    * Constructor
    * @param {object} amqp
@@ -15,11 +28,72 @@ class Contracts {
   constructor({
     amqp, config, log, shutdown,
   }) {
+    super();
     this.amqp = amqp;
     this.config = config;
     this.log = log;
     this.shutdown = shutdown;
   }
+
+  /**
+   *
+   * @returns {Promise<void>}
+   */
+  async handleDeploymentResults() {
+    this.amqp.consume({
+      messageType: 'contractDeploymentResult',
+      messageVersion: '1.*',
+      handler: ({ content, properties }) => {
+        this.log.info(`${content.result}: ${content.contractName} ${content.version} at ${content.address} on ${content.network}`);
+        this.emit(properties.headers.requestId, content);
+      },
+    });
+  }
+
+  /**
+   *
+   * @param _artifact
+   * @param {string} networkName
+   * @param {string} networkId
+   * @returns {Promise<void>}
+   */
+  async publishOne(_artifact, networkName, networkId) {
+    const requestId = uuid();
+    const artifact = Object.assign({}, _artifact);
+    artifact.networks = {};
+    artifact.networks[networkId] = { address: artifact.address, transactionHash: artifact.transactionHash };
+    this.log.info(`Publishing ${artifact.contractName} at ${artifact.address}, requestId: ${requestId}`);
+    const artifactString = JSON.stringify(artifact, null, 2);
+    // console.log(artifactString);
+    // TODO: get FDD contracts out / separate
+
+    await new Promise((resolve, reject) => {
+      const timeout = scheduleTimeout(reject);
+      const handler = (content) => {
+        this.removeListener(requestId, handler);
+        clearTimeout(timeout);
+        resolve(content);
+      };
+
+      this.on(requestId, handler);
+
+      this.amqp.publish({
+        messageType: 'contractDeployment',
+        messageVersion: '1.*',
+        content: {
+          network: networkName,
+          networkId,
+          version: '1.0.0',
+          artifact: artifactString,
+        },
+        customHeaders: {
+          product: 'platform',
+          requestId,
+        },
+      });
+    });
+  }
+
 
   /**
    * Bootstrap and listen
@@ -31,34 +105,16 @@ class Contracts {
 
     this.log.info(`Starting publishing contracts for Network Name: ${networkName}, Id: ${networkId}`);
 
+    this.shuttingDown = false;
+    this.handleDeploymentResults();
+
     const artifacts = JSON.parse(fs.readFileSync('./data.json', 'utf-8'));
     for (let index = 0; index < artifacts.length; index += 1) {
       const artifact = artifacts[index];
-      // console.log(artifact);
-      artifact.networks = [];
-      artifact.networks[networkName] = {};
-      artifact.networks[networkName][networkId.toString()] = { address: artifact.address };
-      this.log.info(`Publishing ${artifact.contractName} at ${artifact.address}`);
-      const artifactString = JSON.stringify(artifact);
-      // TODO: get FDD contracts out / separate
-      const product = artifact.contractName.match(/Flight/) ? 'fdd' : 'platform';
-      // continue;
-      await this.amqp.publish({
-        messageType: 'contractDeployment',
-        messageVersion: '1.*',
-        content: {
-          network: networkName,
-          networkId,
-          version: '1.0.0',
-          artifactString,
-        },
-        customHeaders: {
-          product,
-        },
-      });
+      await this.publishOne(artifact, networkName, networkId);
     }
 
-    this.log.info('Published content of build folder');
+    this.log.info('RePublished GIF Core Contracts');
     this.shutdown();
   }
 }
