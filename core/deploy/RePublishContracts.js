@@ -70,6 +70,7 @@ class Contracts extends EventEmitter {
     await new Promise((resolve, reject) => {
       const timeout = scheduleTimeout(reject);
 
+      // eslint-disable-next-line require-jsdoc
       const handler = (content) => {
         this.removeListener(requestId, handler);
         clearTimeout(timeout);
