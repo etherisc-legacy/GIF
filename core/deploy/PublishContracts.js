@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const truffle = require('../gif-contracts/truffle-config');
 
+
 /**
  * DIP Artifacts Storage microservice
  */
@@ -40,7 +41,7 @@ class Contracts {
       const artifactContent = JSON.parse(artifact);
 
       if (artifactContent.networks[networkId]) {
-        this.log.info(`Publishing ${artifactContent.contractName}`);
+        this.log.info(`Publishing ${artifactContent.contractName} at ${artifactContent.networks[networkId].address}`);
 
         // TODO: get FDD contracts out / separate
         const product = artifactContent.contractName.match(/Flight/) ? 'fdd' : 'platform';
@@ -62,7 +63,7 @@ class Contracts {
     }
 
     this.log.info('Published content of build folder');
-    this.shutdown();
+    // this.shutdown(); // won't publish otherwise
   }
 }
 
