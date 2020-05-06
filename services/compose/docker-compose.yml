@@ -63,7 +63,7 @@ services:
   Ganache:
     container_name: dev_ganache
     image: trufflesuite/ganache-cli
-    command: --mnemonic 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' --debug --verbose --networkId 7777 --db /data
+    command: --mnemonic 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' --networkId 7777 --db /data
     restart: always
     volumes:
     - ./dev_ganache:/data
