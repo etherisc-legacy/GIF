@@ -3,12 +3,6 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 const models = require('./models');
 
 /**
- * Signer factory
- * @return {{}}
- */
-const signer = () => new Web3(new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER, 0, 1, false));
-
-/**
  * DIP Ethereum Client microservice
  */
 class EthereumClient {
@@ -22,6 +16,26 @@ class EthereumClient {
     this._amqp = amqp;
     this._models = models(db);
     this._log = log;
+
+    this.setSigner();
+    this.setWeb3();
+  }
+
+
+  /**
+   * Initialize signer
+   * @return {void}
+   */
+  setSigner() {
+    this._signer = new Web3(new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER, 0, 1, false));
+  }
+
+  /**
+   * Initialize web3
+   * @return {void}
+   */
+  setWeb3() {
+    this._web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER));
   }
 
   /**
@@ -131,9 +145,8 @@ class EthereumClient {
         networkName: process.env.NETWORK_NAME,
       });
 
-      const web3 = signer();
       // TODO: should gas and gasPrice be configurable per-request?
-      const contractInterface = new (web3).eth.Contract(contractData.abi, contractData.address, {
+      const contractInterface = new (this._signer).eth.Contract(contractData.abi, contractData.address, {
         gasPrice: 10 * (10 ** 9),
         gas: 3000000,
         from: process.env.ACCOUNT,
@@ -143,7 +156,7 @@ class EthereumClient {
       if (!methodDescription) {
         result = { error: `Undefined method ${methodName} in contract ${contractName}` };
       } else {
-        const transformedParameters = this.transformParams(parameters, methodDescription.inputs, web3.utils);
+        const transformedParameters = this.transformParams(parameters, methodDescription.inputs, this._web3.utils);
 
         result = await new Promise((resolve, reject) => {
           contractInterface.methods[methodName](...transformedParameters)
@@ -222,9 +235,7 @@ class EthereumClient {
         networkName: process.env.NETWORK_NAME,
       });
 
-      const web3 = signer();
-      // TODO: should gas and gasPrice be configurable per-request?
-      const contractInterface = new (web3).eth.Contract(contractData.abi, contractData.address, {
+      const contractInterface = new (this._web3).eth.Contract(contractData.abi, contractData.address, {
         from: process.env.ACCOUNT,
       });
 
@@ -232,11 +243,11 @@ class EthereumClient {
       if (!methodDescription) {
         result = { error: `Undefined method ${methodName} in contract ${contractName}` };
       } else {
-        const transformedParameters = this.transformParams(parameters, methodDescription.inputs, web3.utils);
+        const transformedParameters = this.transformParams(parameters, methodDescription.inputs, this._web3.utils);
 
         const callResult = await contractInterface.methods[methodName](...transformedParameters).call();
 
-        result = this.transformOutput(callResult, methodDescription.outputs, web3.utils);
+        result = this.transformOutput(callResult, methodDescription.outputs, this._web3.utils);
         this._log.info(`Completed ${methodName} call for ${contractName}@${product}`);
       }
     } catch (error) {
@@ -276,7 +287,6 @@ class EthereumClient {
    * @return {[]} transformedparameters
    */
   transformParams(parameters, inputs, utils) {
-    const web3 = signer();
     const transformedParameters = [];
 
     for (let index = 0; index < parameters.length; index += 1) {
@@ -290,8 +300,8 @@ class EthereumClient {
         const byteSize = parseInt(paramFormat.type.replace('bytes', ''), 10);
         const length = byteSize * 2 + 2;
         const hexString = (parameters[index].match(/^0x/))
-          ? parameters[index] : web3.utils.utf8ToHex(parameters[index]);
-        transformedParameters[index] = web3.utils.padRight(hexString, length).substr(0, length);
+          ? parameters[index] : this._web3.utils.utf8ToHex(parameters[index]);
+        transformedParameters[index] = this._web3.utils.padRight(hexString, length).substr(0, length);
       } else if (paramFormat.type === 'tuple') {
         transformedParameters[index] = this.transformParams(parameters[index], inputs[index].components);
       } else if (paramFormat.type === 'tuple[]') {
