@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  Rabbitmq:
+    container_name: dev_rabbitmq
+    image: rabbitmq:3.7.7
+    command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server;"
+    volumes:
+    - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+    - "5672:5672"
+    - "15672:15672"
+
+  PostgreSqlDev:
+    container_name: dev_postgresql
+    image: postgres:10.5
+    restart: always
+    environment:
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
+    volumes:
+    - ./postgresqldev:/var/lib/postgresql
+    ports:
+    - "5433:5432"
+
+  Minio:
+    container_name: dev_minio
+    image: minio/minio
+    command: server /data
+    restart: always
+    environment:
+      MINIO_ACCESS_KEY: accesskey
+      MINIO_SECRET_KEY: secretkey
+    volumes:
+    - ./minio:/data
+    ports:
+    - "9000:9000"
+
+  Ganache:
+    container_name: dev_ganache
+    image: trufflesuite/ganache-cli
+    command: --mnemonic 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' --networkId 7777 --db /data
+    restart: always
+    volumes:
+    - ./dev_ganache:/data
+    ports:
+    - "8545:8545"
