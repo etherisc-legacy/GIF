@@ -19,15 +19,38 @@ class EthereumClient {
 
     this.setSigner();
     this.setWeb3();
+    this.stopProvider.bind(this);
+    this.resetProvider.bind(this);
   }
 
+
+  /**
+   * Stop HDWallet provider engine
+   * @return {void}
+   */
+  stopProvider() {
+    if (this._provider) {
+      this._provider.engine.stop();
+    }
+  }
+
+  /**
+   * Reset HDWalletprovider if necessary.
+   * @return {void}
+   */
+  resetProvider() {
+    if (!this._signer) return;
+    this.stopProvider();
+    this._provider = new HDWalletProvider(process.env.MNEMONIC, process.env.WS_PROVIDER, 0, 1, false);
+    this._signer.setProvider(this._provider);
+  }
 
   /**
    * Initialize signer
    * @return {void}
    */
   setSigner() {
-    this._signer = new Web3(new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER, 0, 1, false));
+    this._signer = new Web3();
   }
 
   /**
@@ -146,6 +169,9 @@ class EthereumClient {
       });
 
       // TODO: should gas and gasPrice be configurable per-request?
+
+      this.resetProvider();
+
       const contractInterface = new (this._signer).eth.Contract(contractData.abi, contractData.address, {
         gasPrice: 10 * (10 ** 9),
         gas: 3000000,
@@ -177,7 +203,6 @@ class EthereumClient {
                   reject(new Error(`Expected ${error.count.types} arguments (${types.join(', ')}), but ${error.count.values} values provided (${error.value.values.join(', ')})`));
                 }
               }
-
               reject(error);
             });
         });
@@ -187,6 +212,7 @@ class EthereumClient {
       this._log.error(error);
       result = { error: error.message };
     } finally {
+      this.stopProvider();
       this._amqp.publish({
         product,
         messageType: 'contractTransactionResult',
