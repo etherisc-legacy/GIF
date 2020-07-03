@@ -10,19 +10,23 @@
     "prepare-verification": "truffle-flattener ./contracts/EStoreInsurance.sol > ./verification/EStoreInsurance.sol",
     "deploy": "MNEMONIC=${MNEMONIC} HTTP_PROVIDER=${HTTP_PROVIDER} truffle migrate --network ${NETWORK} && artifactsSender"
   },
+
+  "settings": {
+    "solc": "^0.5.12"
+  },
+
   "dependencies": {
-    "@etherisc/microservice": "^0.5.0",
+    "@etherisc/microservice": "^0.6.3-sandbox",
+    "@truffle/hdwallet-provider": "^1.0.30",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "chai-bignumber": "^2.0.2",
-    "install": "^0.12.1",
-    "moment": "^2.22.2",
-    "npm": "^6.4.1",
-    "openzeppelin-solidity": "^1.12.0",
-    "solhint": "^1.3.0",
-    "solidity-coverage": "^0.5.11",
-    "truffle": "^5.0.0-beta.1",
-    "truffle-flattener": "^1.2.9",
-    "truffle-hdwallet-provider": "^1.0.0-web3one.0"
+    "chai-bignumber": "^3.0.0",
+    "install": "^0.13.0",
+    "moment": "^2.24.0",
+    "npm": "^6.13.7",
+    "openzeppelin-solidity": "^2.5.0",
+    "solhint": "^2.3.0",
+    "solidity-coverage": "^0.7.1",
+    "truffle-flattener": "^1.4.2"
   }
 }

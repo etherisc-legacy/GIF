@@ -55,7 +55,7 @@ module.exports = (config) => {
     appName,
     appVersion,
   );
-  log.debug(`Connected in AMQP mode :${amqpMode}`);
+  log.debug(`Connected in AMQP mode [${amqpMode}] with host ${messageBrokerConfig.host} at port ${messageBrokerConfig.port} appName=${appName} appVersion=${appVersion}`);
 
   return {
     amqp, db, http, log, s3, config, websocket,

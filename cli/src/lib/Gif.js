@@ -434,8 +434,8 @@ class Gif extends EventEmitter {
 
       return result;
     } catch (e) {
-      const err = this.errorHandler(e);
-      this._error(err);
+      this._error(e);
+      // const err = this.errorHandler(e);
       return e;
     }
   }

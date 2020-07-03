@@ -1,13 +1,12 @@
 const moment = require('moment');
 const Web3 = require('web3');
-const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 const ABI = require('./EStoreInsurance.json');
 
 
-const MNEMONIC = 'seed sock milk update focus rotate barely fade car face mechanic mercy';
-const CONTRACT = '0xeff4c0C8898F05B8c8883D04CfDcc2923CCa7a2A';
-const ACCOUNT = '0x1b7eeb70b214a41e19fc8ba66fb291b9b097ecaf';
-const HTTP_PROVIDER = 'https://kovan.infura.io/1reQ7FJQ1zs0QGExhlZ8';
+const { MNEMONIC, HTTP_PROVIDER } = process.env;
+const CONTRACT = '0x4c5bbc1006da5dac190e35a18aff859794a5b998';
+const ACCOUNT = '0x0e48196F6e7c8Df0006Bb7e7122E1E9F5Ef46D6A';
 
 const CURRENCIES = {
   EUR: 0,
@@ -48,7 +47,7 @@ class EStoreInsurance {
   async bootstrap() {
     this.websocket.setHandler(this.onWsMessage.bind(this));
 
-    this.contract = new web3.eth.Contract(ABI, CONTRACT, {
+    this.contract = new web3.eth.Contract(ABI.abi, CONTRACT, {
       gasPrice: 5500000,
       from: ACCOUNT,
     });
