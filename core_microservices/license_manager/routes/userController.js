@@ -109,7 +109,7 @@ module.exports = ({
       // eslint-disable-next-line no-plusplus
       for (let index = 0; index < products.length; index++) {
         const product = products[index];
-        const response = await rabbitAPIService.updatePassword(product.name);
+        const response = await rabbitAPIService.register(product.name);
         if (response.updateError) {
           ctx.badRequest({ error: response.updateError });
           return;

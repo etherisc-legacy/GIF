@@ -13,28 +13,6 @@ services:
     - "5672:5672"
     - "15672:15672"
 
-  RabbitmqTest:
-    container_name: test_rabbitmq
-    image: rabbitmq:3.7.7
-    command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server;"
-    volumes:
-    - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-    - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
-    ports:
-    - "5673:5672"
-
-  PostgreSqlTest:
-    container_name: test_postgresql
-    image: postgres:10.5
-    restart: always
-    environment:
-      POSTGRES_USER: postgresql
-      POSTGRES_PASSWORD: postgresql
-    volumes:
-    - ./postgresqltest:/var/lib/postgresql
-    ports:
-    - "5432:5432"
-
   PostgreSqlDev:
     container_name: dev_postgresql
     image: postgres:10.5
@@ -69,13 +47,3 @@ services:
     - ./dev_ganache:/data
     ports:
     - "8545:8545"
-
-  EthereumBridge:
-    container_name: dev_ethereum_bridge
-    image: cryptomental/ethereum-bridge
-    command: -H dev_ganache:8545 -a 9 --dev
-    restart: always
-    links:
-    - "Ganache:dev_ganache"
-    depends_on:
-    - Ganache

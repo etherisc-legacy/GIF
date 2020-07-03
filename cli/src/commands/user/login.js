@@ -21,7 +21,9 @@ class Login extends BaseCommand {
 
     const response = await this.api.login(email, password)
       .catch((error) => {
-        this.log(JSON.stringify(error.response.data));
+        if (error.response && error.response.data) {
+          this.log(JSON.stringify(error.response.data));
+        }
         this.error(error.message);
       });
 

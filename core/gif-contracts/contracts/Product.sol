@@ -77,10 +77,16 @@ contract Product is RBAC {
     }
 
     function _confirmClaim(uint256 _claimId, uint256 _amount)
-        internal
-        returns (uint256 _payoutId)
+    internal
+    returns (uint256 _payoutId)
     {
         _payoutId = productService.confirmClaim(_claimId, _amount);
+    }
+
+    function _declineClaim(uint256 _claimId)
+    internal
+    {
+        productService.declineClaim(_claimId);
     }
 
     function _expire(uint256 _policyId) internal {
