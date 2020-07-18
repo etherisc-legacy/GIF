@@ -10,8 +10,8 @@ services:
     - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
     ports:
-    - "5672:5672"
-    - "15672:15672"
+    - "127.0.0.1:5672:5672"
+    - "127.0.0.1:15672:15672"
 
   RabbitmqTest:
     container_name: test_rabbitmq
@@ -21,7 +21,7 @@ services:
     - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
     ports:
-    - "5673:5672"
+    - "127.0.0.1:5673:5672"
 
   PostgreSqlTest:
     container_name: test_postgresql
@@ -33,7 +33,7 @@ services:
     volumes:
     - ./postgresqltest:/var/lib/postgresql
     ports:
-    - "5432:5432"
+    - "127.0.0.1:5432:5432"
 
   PostgreSqlDev:
     container_name: dev_postgresql
@@ -45,7 +45,7 @@ services:
     volumes:
     - ./postgresqldev:/var/lib/postgresql
     ports:
-    - "5433:5432"
+    - "127.0.0.1:5433:5432"
 
   Minio:
     container_name: dev_minio
@@ -58,7 +58,7 @@ services:
     volumes:
     - ./minio:/data
     ports:
-    - "9000:9000"
+    - "127.0.0.1:9000:9000"
 
   Ganache:
     container_name: dev_ganache
@@ -68,7 +68,7 @@ services:
     volumes:
     - ./dev_ganache:/data
     ports:
-    - "8545:8545"
+    - "127.0.0.1:8545:8545"
 
   EthereumBridge:
     container_name: dev_ethereum_bridge
