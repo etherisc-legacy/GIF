@@ -22,15 +22,16 @@ class TemplateResolver {
 
   /**
    * Get template by name
-   * @param {{}} policy
+   * @param {string} templateName
+   * @param {{}} data
    * @return {function}
    */
-  async getTemplate(policy) {
+  async getTemplate(templateName, data) {
     let tmplString = '';
     try {
       const opts = {
         Bucket: this.config.bucket,
-        Key: 'templates/certificate.html', // `templates/${product}/${templateName}.html`
+        Key: `templates/${templateName}.html`, // `templates/${product}/${templateName}.html`
       };
       // check if the file exists
       await this.s3.headObject(opts).promise();
@@ -39,12 +40,12 @@ class TemplateResolver {
       // if the file doesn't exist
       tmplString = await this.s3.getObject({
         Bucket: this.config.bucket,
-        Key: 'templates/default/certificate.html', // `templates/${product}/${templateName}.html`
+        Key: 'templates/default/templateNotFound.html', // templates/${product}/${templateName}.html`
       }).promise();
     }
 
     const template = handlebars.compile(tmplString.Body.toString());
-    return config => template({ policy, config });
+    return config => template({ data, config });
   }
 }
 
