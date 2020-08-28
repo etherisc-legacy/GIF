@@ -16,23 +16,31 @@ const LogMessage = ({ msg, id }) => {
   const { from, topic, msg: message } = JSON.parse(msg);
 
   return (
-    <Card elevation={0} backgroundColor="#ebf3fc" paddingLeft={10} paddingRight={10} paddingTop={4} paddingBottom={4} marginTop={10}>
+    <Card
+      elevation={0}
+      backgroundColor="#ebf3fc"
+      paddingLeft={10}
+      paddingRight={10}
+      paddingTop={4}
+      paddingBottom={4}
+      marginTop={10}
+    >
       <div>
         <Text fontSize={14} fontWeight="bold">
           {id}
-.
+          .
           {from}
         </Text>
       </div>
       {topic && (
-      <div>
-        <Text fontSize={13} fontWeight="bold">
-        Topic:
-          {' '}
-          {topic}
-        </Text>
-        <br />
-      </div>
+        <div>
+          <Text fontSize={13} fontWeight="bold">
+            Topic:
+            {' '}
+            {topic}
+          </Text>
+          <br />
+        </div>
       )}
       <div style={{ marginTop: 2 }}>
         <Text fontSize={13}>
