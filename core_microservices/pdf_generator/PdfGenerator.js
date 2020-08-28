@@ -47,8 +47,8 @@ class PdfGenerator {
     });
     await this.s3.putObject({
       Bucket: this.config.bucket,
-      Key: 'templates/default/certificate.html',
-      Body: fs.readFileSync('./templates/default/certificate.html'),
+      Key: 'templates/default/templateNotFound.html',
+      Body: fs.readFileSync('./templates/default/templateNotFound.html'),
     }).promise();
   }
 
