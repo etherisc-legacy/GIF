@@ -1,0 +1,16 @@
+{
+  "source": {
+    "include": ["./"],
+    "exclude": [
+      "app_microservices/etherisc_flight_delay_api",
+      "app_microservices/etherisc_flight_delay_ui"
+    ],
+    "excludePattern": "(node_modules|migrations|coverage|test|docs)/"
+  },
+  "opts": {
+    "destination": "./docs/",
+    "recurse": true
+  },
+  "plugins": [
+  ]
+}
