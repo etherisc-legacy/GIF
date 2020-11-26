@@ -4,20 +4,26 @@ const _ = require('lodash');
 const sinon = require('sinon');
 const uuid = require('uuid');
 const Notifications = require('../Notifications');
-const { constants: tables, schema } = require('../knexfile');
+let { constants: tables, schema } = require('../knexfile');
 
+
+let microservice;
 
 describe('Notifications microservice', () => {
   before(async () => {
-    this.microservice = fabric(Notifications, {
+    if (schema.trim() === '') schema = 'notifications';
+    const config = {
       db: true,
       amqp: true,
       s3: true,
       messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
       bucket: uuid(),
-    });
+      appName: 'notifications',
+      appVersion: '0.1.0',
+    };
+    this.microservice = fabric(Notifications, config);
+    microservice = this.microservice;
     await this.microservice.bootstrap();
-
     this.amqp = this.microservice.amqp;
     this.db = this.microservice.db.getConnection();
     this.s3 = this.microservice.s3;
@@ -31,8 +37,8 @@ describe('Notifications microservice', () => {
   after(async () => {
     sinon.restore();
     await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema}.${tables[key]} cascade`)));
-    this.microservice.shutdown();
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
+    // await this.microservice.shutdown();
   });
 
   it('should insert or update app setttings', async () => {
@@ -52,12 +58,12 @@ describe('Notifications microservice', () => {
       ],
       templates: [
         {
-          name: 'application_error',
+          event: 'application_error',
           transport: 'smtp',
           template: '<h1>Application Error {{policy.id}}</h1>',
         },
         {
-          name: 'application_error',
+          event: 'application_error',
           transport: 'telegram',
           template: 'Application Error {{policy.id}}',
         },
@@ -66,12 +72,12 @@ describe('Notifications microservice', () => {
 
     // insert settings
     await this.microservice.app.settingsUpdate({ content });
-
     const { ProductSettings } = this.microservice.app._models;
     let [productSettings] = await ProductSettings.query()
       .select('settings')
       .where('productId', productId)
       .limit(1);
+
     productSettings.settings.should.be.equal(JSON.stringify({ transports: content.transports }));
 
     let applicationErrorTemplate = await this.microservice.app._templateResolver.getTemplate(productId, 'smtp', 'application_error');
@@ -83,7 +89,7 @@ describe('Notifications microservice', () => {
       events: ['application_declined', 'application_error'],
     }];
     content.templates = [{
-      name: 'application_error',
+      event: 'application_error',
       transport: 'smtp',
       template: '<h1>Application Error Updated Template {{policy.id}}</h1>',
     }];

@@ -1,4 +1,3 @@
-const fs = require('fs');
 const puppeteer = require('puppeteer');
 const TemplateResolver = require('./TemplateResolver');
 
@@ -30,6 +29,7 @@ class PdfGenerator {
    * @return {Promise<void>}
    */
   async bootstrap() {
+    await this.templateResolver.setupDefaultTemplates();
     this.amqp.consume({
       messageType: 'issueCertificate',
       messageVersion: '1.*',
@@ -43,39 +43,34 @@ class PdfGenerator {
     this.amqp.consume({
       messageType: 'pdfTemplatesUpdate',
       messageVersion: '1.*',
-      handler: this.updateTemplates.bind(this),
+      handler: this.settingsUpdate.bind(this),
     });
-    await this.s3.putObject({
-      Bucket: this.config.bucket,
-      Key: 'templates/default/templateNotFound.html',
-      Body: fs.readFileSync('./templates/default/templateNotFound.html'),
-    }).promise();
   }
 
   /**
-   * Handle update templates message
+   *
    * @param {{}} message
-   * @return {Promise<void>}
+   * @returns {Promise<void>}
    */
-  async updateTemplates({ content, fields, properties }) {
+  async settingsUpdate({ content, fields, properties }) {
     const { templates } = content;
 
-    for (let i = 0, l = templates.length; i < l; i += 1) {
-      const tmpl = templates[i];
-      await this.s3.putObject({
-        Bucket: this.config.bucket,
-        Key: `templates/${tmpl.name}.html`, // `templates/${product}/${tmpl.name}.html`,
-        Body: tmpl.body,
-      }).promise();
-    }
+    this.productId = 'fdd'; // todo: use correct productId
 
+    for (let i = 0, l = templates.length; i < l; i += 1) {
+      const { name, template } = templates[i];
+      await this.templateResolver.updateTemplate(this.productId, name, template);
+    }
+    /*
     await this.amqp.publish({
       messageType: 'pdfTemplatesUpdateSuccess',
       messageVersion: '1.*',
       content: {},
       correlationId: properties.correlationId,
     });
+ */
   }
+
 
   /**
    * Handle certificate issue message
@@ -92,12 +87,44 @@ class PdfGenerator {
       return;
     }
 
+    // policyGetRequest is handled by PolicyStorage and will result in policyGetResponse message.
     await this.amqp.publish({
       messageType: 'policyGetRequest',
       messageVersion: '1.*',
       content: { policyId },
       correlationId: properties.correlationId,
     });
+  }
+
+  /**
+   * Handle get policy message
+   * @param {string} productId
+   * @param {string} templateName
+   * @param {{}} data
+   * @return {Promise<void>}
+   */
+  async generatePdf(productId, templateName, data) {
+    const template = await this.templateResolver.getTemplate(productId, templateName);
+    const htmlString = template(data);
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+    const page = await browser.newPage();
+    await page.setContent(htmlString, { waitUntil: 'networkidle0', networkIdleTimeout: 5000 });
+    await page.emulateMedia('screen');
+
+    const pdf = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+      margin: { // Word's default A4 margins
+        top: '2.54cm',
+        bottom: '2.54cm',
+        left: '2.54cm',
+        right: '2.54cm',
+      },
+    });
+
+    await browser.close();
+
+    return pdf;
   }
 
   /**
@@ -115,27 +142,8 @@ class PdfGenerator {
       return;
     }
 
-    const template = await this.templateResolver.getTemplate(policy);
-
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
-    const page = await browser.newPage();
-    await page.setContent(template(this.config), { waitUntil: 'networkidle', networkIdleTimeout: 5000 });
-    await page.emulateMedia('screen');
-
-    const pdf = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-      margin: { // Word's default A4 margins
-        top: '2.54cm',
-        bottom: '2.54cm',
-        left: '2.54cm',
-        right: '2.54cm',
-      },
-    });
+    const pdf = await this.generatePdf(this.productId, 'certificate', policy);
     this.log.info(`Certificate for ${policy.id} generated`);
-
-    await browser.close();
-
     const fileKey = `pdf/certificate-${policy.id}.pdf`;
     await this.s3.putObject({
       Bucket: this.config.bucket,
@@ -157,6 +165,7 @@ class PdfGenerator {
       correlationId: properties.correlationId,
     });
   }
+
 
   /**
    * Check if the certeficate already exists
