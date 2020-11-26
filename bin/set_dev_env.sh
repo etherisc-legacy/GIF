@@ -8,4 +8,4 @@
 
 set -e
 cd core_microservices
-[ ! -f .env ] && cp .env.sample .env && echo "INFO: .env created from .env.sample"
+( [ ! -f .env ] && cp .env.sample .env && echo "INFO: .env created from .env.sample" ) || echo "INFO: .env exists already"
