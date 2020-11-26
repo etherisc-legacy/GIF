@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '../.env' });
 const { bootstrap } = require('@etherisc/microservice');
 const EventLogging = require('./EventLogging');
 

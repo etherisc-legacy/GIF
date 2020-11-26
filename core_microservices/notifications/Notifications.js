@@ -81,6 +81,7 @@ class Notifications {
       .where('productId', productId)
       .limit(1);
 
+    // in ProductSettings we keep record on the transports to be used.
     if (productSettings) {
       await ProductSettings.query()
         .update({ settings: JSON.stringify({ transports }) })
@@ -94,9 +95,17 @@ class Notifications {
     }
 
     for (let i = 0, l = templates.length; i < l; i += 1) {
-      const { name, transport, template } = templates[i];
-      await this._templateResolver.updateTemplate(productId, transport, name, template);
+      const { event, transport, template } = templates[i];
+      await this._templateResolver.updateTemplate(productId, transport, event, template);
     }
+    /*
+    await this.amqp.publish({
+      messageType: 'notificationSettingsUpdateSuccess',
+      messageVersion: '1.*',
+      content: {},
+      correlationId: properties.correlationId,
+    });
+    */
   }
 }
 

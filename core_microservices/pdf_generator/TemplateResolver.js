@@ -1,5 +1,6 @@
 const handlebars = require('handlebars');
 const moment = require('moment');
+const fs = require('fs-extra');
 
 /**
  * Template resolver
@@ -21,17 +22,32 @@ class TemplateResolver {
   }
 
   /**
+   * Update template. The template is inserted/updated in the S3 bucket.
+   * @param {string} productId
+   * @param {string} name
+   * @param {string} template
+   * @return {Promise<void>}
+   */
+  async updateTemplate(productId, name, template) {
+    await this.s3.putObject({
+      Bucket: this.config.bucket,
+      Key: `templates/${productId}/${name}.html`, // `templates/${product}/${tmpl.name}.html`,
+      Body: template,
+    }).promise();
+  }
+
+  /**
    * Get template by name
+   * @param {string} productId
    * @param {string} templateName
-   * @param {{}} data
    * @return {function}
    */
-  async getTemplate(templateName, data) {
+  async getTemplate(productId, templateName) {
     let tmplString = '';
     try {
       const opts = {
         Bucket: this.config.bucket,
-        Key: `templates/${templateName}.html`, // `templates/${product}/${templateName}.html`
+        Key: `templates/${productId}/${templateName}.html`, // `templates/${product}/${templateName}.html`
       };
       // check if the file exists
       await this.s3.headObject(opts).promise();
@@ -44,8 +60,18 @@ class TemplateResolver {
       }).promise();
     }
 
-    const template = handlebars.compile(tmplString.Body.toString());
-    return config => template({ data, config });
+    return handlebars.compile(tmplString.Body.toString());
+  }
+
+  /**
+   * Setup default template(s). Currently only 1 template.
+   */
+  async setupDefaultTemplates() {
+    await this.s3.putObject({
+      Bucket: this.config.bucket,
+      Key: 'templates/default/templateNotFound.html',
+      Body: await fs.readFile('./templates/default/templateNotFound.html', 'utf-8'),
+    }).promise();
   }
 }
 

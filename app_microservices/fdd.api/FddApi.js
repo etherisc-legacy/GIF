@@ -152,32 +152,32 @@ class FddApi {
       ],
       templates: [
         {
-          name: 'policy_issued',
+          event: 'policy_issued',
           transport: 'smtp',
           template: fs.readFileSync('./templates/policy_issued_letter.html', 'utf8'),
         },
         {
-          name: 'policy_issue_error',
+          event: 'policy_issue_error',
           transport: 'smtp',
           template: fs.readFileSync('./templates/policy_issue_error_letter.html', 'utf8'),
         },
         {
-          name: 'policy_issue_error',
+          event: 'policy_issue_error',
           transport: 'telegram',
           template: fs.readFileSync('./templates/policy_issue_error_telegram.html', 'utf8'),
         },
         {
-          name: 'claim_paid_out',
+          event: 'claim_paid_out',
           transport: 'telegram',
           template: '🔔 *Claim paid out:*\nPolicy : _{{policy.id}}_\nTransferwise Transfer : _{{transferwiseTransferId}}_',
         },
         {
-          name: 'charge_error',
+          event: 'charge_error',
           transport: 'smtp',
           template: fs.readFileSync('./templates/charge_error_smtp.html', 'utf8'),
         },
         {
-          name: 'charge_error',
+          event: 'charge_error',
           transport: 'telegram',
           template: fs.readFileSync('./templates/charge_error_telegram.html', 'utf8'),
         },

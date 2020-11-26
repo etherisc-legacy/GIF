@@ -14,22 +14,22 @@
     "check:coverage": "nyc --check-coverage --statements 70 --functions 70 --lines 70 --branches 70 mocha"
   },
   "dependencies": {
-    "@etherisc/microservice": "^0.6.2-sandbox",
+    "@etherisc/microservice": "file:../../shared/etherisc-microservice",
     "dotenv": "^7.0.0",
     "emailjs": "^2.2.0",
-    "handlebars": "^4.1.1",
-    "knex": "^0.16.3",
-    "lodash": "^4.17.11",
-    "objection": "^1.6.6",
-    "pg": "^7.9.0",
+    "fs-extra": "^9.0.1",
+    "handlebars": "^4.7.6",
+    "knex": "^0.21.5",
+    "lodash": "^4.17.20",
+    "mocha": "^8.1.3",
+    "objection": "^1.6.11",
     "telegrambot": "^0.1.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
-    "mocha": "^6.0.2",
-    "nyc": "^13.3.0",
+    "nyc": "^15.1.0",
     "should": "^13.2.3",
     "should-sinon": "0.0.6",
-    "sinon": "^7.3.1"
+    "sinon": "^7.5.0"
   }
 }
