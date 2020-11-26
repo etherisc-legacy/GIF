@@ -28,13 +28,13 @@ class CardForm extends Component {
     },
   };
 
-  static defaultProps = {
-    stripe: {},
-  };
-
   static propTypes = {
     stripe: PropTypes.shape(),
     handleSubmit: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    stripe: {},
   };
 
   /**

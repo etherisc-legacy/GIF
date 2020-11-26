@@ -20,14 +20,14 @@ const LogMessage = ({ msg, id }) => {
       <div>
         <Text fontSize={14} fontWeight="bold">
           {id}
-.
+          .
           {from}
         </Text>
       </div>
       {topic && (
       <div>
         <Text fontSize={13} fontWeight="bold">
-        Topic:
+          Topic:
           {' '}
           {topic}
         </Text>
