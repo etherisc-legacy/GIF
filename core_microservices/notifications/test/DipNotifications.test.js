@@ -4,8 +4,7 @@ const _ = require('lodash');
 const sinon = require('sinon');
 const uuid = require('uuid');
 const Notifications = require('../Notifications');
-const { tables, schema } = require('../knexfile');
-// let { constants: tables, schema } = require('../knexfile');
+const { constants: tables, schema } = require('../knexfile');
 
 
 let schema2 = schema;
@@ -38,7 +37,7 @@ describe('Notifications microservice', () => {
     sinon.restore();
     await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema2}.${tables[key]} cascade`)));
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
-    // await this.microservice.shutdown();
+    await this.microservice.shutdown();
   });
 
   it('should insert or update app setttings', async () => {

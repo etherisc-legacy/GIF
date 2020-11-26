@@ -31,7 +31,7 @@ describe('PolicyStorage microservice', () => {
   after(async () => {
     await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema}.${tables[key]} cascade`)));
 
-    this.microservice.shutdown();
+    await this.microservice.shutdown();
   });
 
   it('onPolicyCreateMessage should create policy and new customer if it does not exists', async () => {

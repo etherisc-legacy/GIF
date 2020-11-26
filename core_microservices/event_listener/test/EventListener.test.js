@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '../../.env' });
 const uuid = require('uuid');
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
@@ -35,8 +36,8 @@ describe('EventListener microservice', () => {
   });
 
   after(async () => {
-    this.microservice.shutdown();
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
+    await this.microservice.shutdown();
   });
 
   it('handleEvent should publish decoded event', async () => {
