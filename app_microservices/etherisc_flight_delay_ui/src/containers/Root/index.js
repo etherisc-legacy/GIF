@@ -33,6 +33,14 @@ const LogMessage = ({ msg, id }) => {
         </Text>
       </div>
       {topic && (
+        <div>
+          <Text fontSize={13} fontWeight="bold">
+            Topic:
+            {' '}
+            {topic}
+          </Text>
+          <br />
+        </div>
       <div>
         <Text fontSize={13} fontWeight="bold">
           Topic:
