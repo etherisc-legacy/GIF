@@ -33,6 +33,7 @@ const LogMessage = ({ msg, id }) => {
         </Text>
       </div>
       {topic && (
+<<<<<<< HEAD
         <div>
           <Text fontSize={13} fontWeight="bold">
             Topic:
@@ -41,6 +42,8 @@ const LogMessage = ({ msg, id }) => {
           </Text>
           <br />
         </div>
+=======
+>>>>>>> Fix merge conflict
       <div>
         <Text fontSize={13} fontWeight="bold">
           Topic:

@@ -5,6 +5,7 @@ const sinon = require('sinon');
 const uuid = require('uuid');
 const Notifications = require('../Notifications');
 const { constants: tables, schema } = require('../knexfile');
+const { tables, schema } = require('../knexfile');
 
 
 let schema2 = schema;
