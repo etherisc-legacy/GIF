@@ -4,14 +4,15 @@ const _ = require('lodash');
 const sinon = require('sinon');
 const uuid = require('uuid');
 const Notifications = require('../Notifications');
-let { constants: tables, schema } = require('../knexfile');
+const { tables, schema } = require('../knexfile');
+// let { constants: tables, schema } = require('../knexfile');
 
 
-let microservice;
+let schema2 = schema;
 
 describe('Notifications microservice', () => {
   before(async () => {
-    if (schema.trim() === '') schema = 'notifications';
+    if (schema2.trim() === '') schema2 = 'notifications';
     const config = {
       db: true,
       amqp: true,
@@ -22,7 +23,6 @@ describe('Notifications microservice', () => {
       appVersion: '0.1.0',
     };
     this.microservice = fabric(Notifications, config);
-    microservice = this.microservice;
     await this.microservice.bootstrap();
     this.amqp = this.microservice.amqp;
     this.db = this.microservice.db.getConnection();
@@ -31,12 +31,12 @@ describe('Notifications microservice', () => {
 
   beforeEach(async () => {
     sinon.restore();
-    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema}.${tables[key]} cascade`)));
+    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema2}.${tables[key]} cascade`)));
   });
 
   after(async () => {
     sinon.restore();
-    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema}.${tables[key]} cascade`)));
+    await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema2}.${tables[key]} cascade`)));
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
     // await this.microservice.shutdown();
   });

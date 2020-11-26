@@ -4,8 +4,6 @@ const uuid = require('uuid');
 const PdfGenerator = require('../PdfGenerator');
 
 
-let microservice;
-
 describe('Pdf Generator microservice', () => {
   before(async () => {
     const config = {
@@ -18,7 +16,6 @@ describe('Pdf Generator microservice', () => {
     };
     this.config = config;
     this.microservice = fabric(PdfGenerator, config);
-    microservice = this.microservice;
     await this.microservice.bootstrap();
     this.amqp = this.microservice.amqp;
     this.s3 = this.microservice.s3;

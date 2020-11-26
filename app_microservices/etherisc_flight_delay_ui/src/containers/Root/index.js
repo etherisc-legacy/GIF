@@ -41,6 +41,14 @@ const LogMessage = ({ msg, id }) => {
           </Text>
           <br />
         </div>
+      <div>
+        <Text fontSize={13} fontWeight="bold">
+          Topic:
+          {' '}
+          {topic}
+        </Text>
+        <br />
+      </div>
       )}
       <div style={{ marginTop: 2 }}>
         <Text fontSize={13}>
