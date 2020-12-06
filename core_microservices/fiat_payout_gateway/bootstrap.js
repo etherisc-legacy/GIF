@@ -2,12 +2,12 @@ require('dotenv').config({ path: '../.env' });
 const { bootstrap } = require('@etherisc/microservice');
 const FiatPayoutGateway = require('./FiatPayoutGateway');
 
-/**
- * Switch off payout gateway unless explicitly enabled
- */
-if (!process.env.FIAT_PAYOUT_GATEWAY) process.exit(0);
+
+const requiredEnv = ['TRANSFERWISE_SRC_CURRENCY', 'TRANSFERWISE_PROFILE_ID', 'TRANSFERWISE_API_URL',
+  'TRANSFERWISE_API_TOKEN', 'TRANSFERWISE_LOGIN', 'TRANSFERWISE_PASSWORD'];
 
 bootstrap(FiatPayoutGateway, {
   amqp: true,
   db: true,
+  requiredEnv,
 });

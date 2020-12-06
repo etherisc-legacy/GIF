@@ -21,8 +21,7 @@ class EventListener {
     this._amqp = amqp;
     this._models = models(db);
     this._log = log;
-    this._config = config;
-    this._networkName = config.networkName;
+    this._networkName = process.env.NETWORK_NAME;
 
     this.setWeb3();
   }
