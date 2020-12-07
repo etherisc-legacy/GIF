@@ -6,16 +6,19 @@ if [ $1 == "run" ]
 then
   dc_command="up"
   dc_options="-d --remove-orphans"
+  dc_project="--project-name $2"
 
 elif [ $1 == "kill" ]
 then
   dc_command="kill"
   dc_options=""
+  dc_project="--project-name $2"
 
 elif [ $1 == "purge" ]
 then
   dc_command="down"
   dc_options="-v"
+  dc_project="--project-name $2"
   purge=true
 
 fi
@@ -34,12 +37,15 @@ elif [ $2 == "test" ]
 then
   dc_file="docker-compose-test.yml"
   env_file=".env.test"
-
+else
+  echo "Unsupported environment: " $2
+  exit 1
 fi
 
 # sudo rm -rf ./services/compose/minio; sudo rm -rf ./services/compose/postgresqldev; sudo rm -rf ./services/compose/postgresqltest; sudo rm -rf ./services/compose/dev_ganache",
 
-docker-compose -f ./services/compose/$dc_file --env-file ./services/compose/$env_file $dc_command $dc_options
+echo docker-compose -f ./services/compose/$dc_file --env-file ./services/compose/$env_file $dc_project $dc_command $dc_options
+docker-compose -f ./services/compose/$dc_file --env-file ./services/compose/$env_file $dc_project $dc_command $dc_options
 
 if [ "$purge" = true ]
 then

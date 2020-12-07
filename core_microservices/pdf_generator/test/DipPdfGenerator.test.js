@@ -10,11 +10,7 @@ describe('Pdf Generator microservice', () => {
       amqp: true,
       s3: true,
       messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
-<<<<<<< HEAD
-      bucket: uuid(),
-=======
       bucket: uuid.v4(),
->>>>>>> feature/GIF-391
       appName: 'pdf_generator',
       appVersion: '0.1.0',
     };
@@ -31,11 +27,7 @@ describe('Pdf Generator microservice', () => {
 
   after(async () => {
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
-<<<<<<< HEAD
-    // await this.microservice.shutdown();
-=======
     await this.microservice.shutdown();
->>>>>>> feature/GIF-391
   });
 
   it('should store and update PDF template', async () => {
