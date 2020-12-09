@@ -3,7 +3,7 @@ version: '3'
 services:
 
   RabbitmqTest:
-    container_name: ${NOD_ENV}_rabbitmq
+    container_name: ${NODE_ENV}_rabbitmq
     image: ${RABBITMQ_IMAGE}
     command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server;"
     volumes:
@@ -13,7 +13,7 @@ services:
       - "127.0.0.1:${RABBITMQ_PORT}:5672"
 
   PostgreSqlTest:
-    container_name: ${NOD_ENV}_postgresql
+    container_name: ${NODE_ENV}_postgresql
     image: ${POSTGRESQL_IMAGE}
     restart: always
     environment:

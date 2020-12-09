@@ -93,6 +93,8 @@ class EthereumClient {
    * @return {void}
    */
   async saveArtifact({ content, fields, properties }) {
+    console.log('saveArtifact');
+
     try {
       const {
         network, networkId, version, artifact,

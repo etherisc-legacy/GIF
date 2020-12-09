@@ -37,6 +37,12 @@ elif [ $2 == "test" ]
 then
   dc_file="docker-compose-test.yml"
   env_file=".env.test"
+
+elif [ $2 == "ganache" ]
+then
+  dc_file="docker-compose-ganache.yml"
+  env_file=".env.ganache"
+
 else
   echo "Unsupported environment: " $2
   exit 1
@@ -49,6 +55,7 @@ docker-compose -f ./services/compose/$dc_file --env-file ./services/compose/$env
 
 if [ "$purge" = true ]
 then
-  sudo rm -rf ./services/compose/$2_minio
-  sudo rm -rf ./services/compose/$2_postgresql
+  sudo rm -rf ./services/compose/volumes/$2_minio
+  sudo rm -rf ./services/compose/volumes/$2_postgresql
+  sudo rm -rf ./services/compose/volumes/$2_ganache
 fi
