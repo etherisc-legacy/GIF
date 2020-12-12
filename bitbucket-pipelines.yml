@@ -20,6 +20,7 @@ pipelines:
         - chmod +x /usr/local/bin/docker-compose
         - npm run dev:services run ganache
         - npm run dev:services run test
+        - docker ps
         - npm run bootstrap
         - docker logs ganache_ethereum_bridge
         - npm run migrate:test && npm run test
