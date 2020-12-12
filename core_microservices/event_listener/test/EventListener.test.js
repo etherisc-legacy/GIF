@@ -15,7 +15,7 @@ describe('EventListener microservice', () => {
       amqp: true,
       db: true,
       s3: true,
-      bucket: uuid(),
+      bucket: uuid.v4(),
       appName: process.env.APP_NAME,
       appVersion: process.env.APP_VERSION,
       requiredEnv,

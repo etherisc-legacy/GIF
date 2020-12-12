@@ -10,9 +10,6 @@ const requiredEnv = ['HTTP_PROVIDER', 'SALT', 'NETWORK_NAME',
 
 describe('PolicyStorage microservice', () => {
   before(async () => {
-    console.log(process.env);
-    console.log('HOST ', process.env.POSTGRES_SERVICE_HOST);
-    console.log('PORT ', process.env.POSTGRES_SERVICE_PORT);
     this.microservice = fabric(PolicyStorage, {
       db: true,
       amqp: true,
