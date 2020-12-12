@@ -19,8 +19,9 @@ pipelines:
         - curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         - chmod +x /usr/local/bin/docker-compose
         - npm run dev:services run staging
+        - npm run dev:services run ganache
         - npm run bootstrap
-        - docker logs dev_ethereum_bridge
+        - docker logs ganache_ethereum_bridge
         - npm run migrate:test && npm run test
         #- npm run migrate && npm run dev & (./node_modules/.bin/wait-on http://localhost:8080 && npm run test:e2e)
 
