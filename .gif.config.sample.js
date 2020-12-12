@@ -53,6 +53,12 @@ const web3Provider = {
     staging: 'development',
     test: 'development',
   },
+  TRUFFLE_HOST: "wss://sokol.poa.network/wss",
+  TRUFFLE_PORT: "80",
+  TRUFFLE_NETWORK_ID: "77",
+  TRUFFLE_GAS: "6600000",
+  TRUFFLE_GASPPRICE: "10 * (10 ** 9)",
+  TRUFFLE_WEBSOCKETS: "true",
 
 };
 const hdWallet = {
@@ -259,6 +265,14 @@ module.exports = {
         nodeEnvVar,
         globalVars,
         rabbitMQ,
+      },
+    },
+    {
+      name: 'GIF Contracts',
+      path: './core/gif_contracts',
+      environments: ['staging', 'production'],
+      vars: {
+        web3Provider,
       },
     },
     {
