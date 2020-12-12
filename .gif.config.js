@@ -2,6 +2,17 @@
  * GIF Configuration File
  *
  */
+
+const nodeEnvVar = {
+
+  NODE_ENV: {
+    production: 'production',
+    staging: 'staging',
+    test: 'test',
+    ganache: 'ganache',
+  },
+
+};
 const globalVars = {
 
   /**
@@ -66,24 +77,24 @@ const smtpCredentials = {
 
   // SMTP Credentials for Notifications
   SMTP_USERNAME: {
-    production: 'https://',
-    staging: 'https://',
-    test: '',
+    production: 'dummy',
+    staging: 'dummy',
+    test: 'dummy',
   },
   SMTP_PASSWORD: {
-    production: 'https://',
-    staging: 'https://',
-    test: '',
+    production: 'dummy',
+    staging: 'dummy',
+    test: 'dummy',
   },
   SMTP_HOST: {
-    production: 'https://',
-    staging: 'https://',
-    test: '',
+    production: 'dummy',
+    staging: 'dummy',
+    test: 'dummy',
   },
   SMTP_USE_SSL: {
-    production: 'https://',
-    staging: 'https://',
-    test: '',
+    production: 'true',
+    staging: 'true',
+    test: 'true',
   },
 
 };
@@ -91,9 +102,9 @@ const telegramBot = {
 
   // Telegram Bot Token
   BOT_TOKEN: {
-    production: 'https://',
-    staging: 'https://',
-    test: '',
+    production: 'dummy',
+    staging: 'dummy',
+    test: 'dummy',
   },
 
 };
@@ -103,12 +114,12 @@ const transferwiseCredentials = {
    * Fiat Payout Gateway microservice
    */
 
-  TRANSFERWISE_SRC_CURRENCY: '',
-  TRANSFERWISE_PROFILE_ID: '',
-  TRANSFERWISE_API_URL: '',
-  TRANSFERWISE_API_TOKEN: '',
-  TRANSFERWISE_LOGIN: '',
-  TRANSFERWISE_PASSWORD: '',
+  TRANSFERWISE_SRC_CURRENCY: 'EUR',
+  TRANSFERWISE_PROFILE_ID: 'dummy',
+  TRANSFERWISE_API_URL: 'dummy',
+  TRANSFERWISE_API_TOKEN: 'dummy',
+  TRANSFERWISE_LOGIN: 'dummy',
+  TRANSFERWISE_PASSWORD: 'dummy',
 
 };
 const stripeCredentials = {
@@ -144,8 +155,6 @@ const rabbitMQ = {
   AMQP_HOST: 'localhost',
   AMQP_USERNAME: 'platform',
   AMQP_PASSWORD: 'guest',
-  AMQP_MODE: 'core',
-
 
 };
 const dockerRabbitMQ = {
@@ -177,9 +186,9 @@ const minIO = {
    */
 
   AWS_ENDPOINT: {
-    test: 'http://localhost:9001',
-    staging: 'http://localhost:9001',
     production: 'http://localhost:9000',
+    staging: 'http://localhost:9001',
+    test: 'http://localhost:9001',
   },
   AWS_ACCESS_KEY: 'accesskey',
   AWS_SECRET_KEY: 'secretkey',
@@ -191,9 +200,9 @@ const postgresql = {
    * Postgresql Credentials
    */
   POSTGRES_SERVICE_PORT: {
-    test: '5434',
-    staging: '5433',
     production: '5432',
+    staging: '5433',
+    test: '5434',
   },
   POSTGRES_SERVICE_HOST: 'localhost',
   POSTGRES_DB: 'postgresql',
@@ -240,10 +249,27 @@ module.exports = {
 
   envFiles: [
     {
-      name:'ethereum_client',
+      name: 'broadcast',
+      path: './core',
+      environments: ['staging', 'production'],
+      vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
+        globalVars,
+        rabbitMQ,
+      },
+    },
+    {
+      name: 'ethereum_client',
       path: './core_microservices/ethereum_client',
       environments: ['test', 'staging', 'production'],
       vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
         globalVars,
         web3Provider,
         postgresql,
@@ -253,10 +279,14 @@ module.exports = {
       },
     },
     {
-      name:'event_listener',
+      name: 'event_listener',
       path: './core_microservices/event_listener',
       environments: ['test', 'staging', 'production'],
       vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
         globalVars,
         web3Provider,
         postgresql,
@@ -265,10 +295,14 @@ module.exports = {
       },
     },
     {
-      name:'event_logging',
+      name: 'event_logging',
       path: './core_microservices/event_logging',
       environments: ['test', 'staging', 'production'],
       vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
         globalVars,
         postgresql,
         rabbitMQ,
@@ -276,10 +310,14 @@ module.exports = {
       },
     },
     {
-      name:'fiat_payment_gateway',
+      name: 'fiat_payment_gateway',
       path: './core_microservices/fiat_payment_gateway',
       environments: ['test', 'staging', 'production'],
       vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
         globalVars,
         postgresql,
         rabbitMQ,
@@ -288,10 +326,14 @@ module.exports = {
       },
     },
     {
-      name:'fiat_payout_gateway',
+      name: 'fiat_payout_gateway',
       path: './core_microservices/fiat_payout_gateway',
       environments: ['test', 'staging', 'production'],
       vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
         globalVars,
         postgresql,
         rabbitMQ,
@@ -300,10 +342,14 @@ module.exports = {
       },
     },
     {
-      name:'license_manager',
+      name: 'license_manager',
       path: './core_microservices/license_manager',
       environments: ['test', 'staging', 'production'],
       vars: {
+        pkg: {
+          AMQP_MODE: 'license',
+        },
+        nodeEnvVar,
         globalVars,
         web3Provider,
         postgresql,
@@ -314,10 +360,14 @@ module.exports = {
       },
     },
     {
-      name:'notifications',
+      name: 'notifications',
       path: './core_microservices/notifications',
       environments: ['test', 'staging', 'production'],
       vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
         globalVars,
         postgresql,
         rabbitMQ,
@@ -327,10 +377,41 @@ module.exports = {
       },
     },
     {
-      name:'docker_containers',
+      name: 'pdf_generator',
+      path: './core_microservices/pdf_generator',
+      environments: ['test', 'staging', 'production'],
+      vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
+        globalVars,
+        rabbitMQ,
+        minIO,
+      },
+    },
+    {
+      name: 'policy_storage',
+      path: './core_microservices/policy_storage',
+      environments: ['test', 'staging', 'production'],
+      vars: {
+        pkg: {
+          AMQP_MODE: 'core',
+        },
+        nodeEnvVar,
+        globalVars,
+        web3Provider,
+        postgresql,
+        rabbitMQ,
+        minIO,
+      },
+    },
+    {
+      name: 'docker_containers',
       path: './services/compose',
       environments: ['test', 'staging', 'production'],
       vars: {
+        nodeEnvVar,
         globalVars,
         postgresql,
         rabbitMQ,
@@ -341,14 +422,15 @@ module.exports = {
       },
     },
     {
-      name:'docker_ganache',
+      name: 'docker_ganache',
       path: './services/compose',
       environments: ['ganache'],
       vars: {
+        nodeEnvVar,
         dockerGanache,
       },
     },
 
   ],
 
-}
+};

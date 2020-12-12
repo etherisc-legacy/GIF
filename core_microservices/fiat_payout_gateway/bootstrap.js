@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./env.${process.env.NODE_ENV}` });
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const { bootstrap } = require('@etherisc/microservice');
 const FiatPayoutGateway = require('./FiatPayoutGateway');
 
@@ -9,5 +9,7 @@ const requiredEnv = ['TRANSFERWISE_SRC_CURRENCY', 'TRANSFERWISE_PROFILE_ID', 'TR
 bootstrap(FiatPayoutGateway, {
   amqp: true,
   db: true,
+  appName: process.env.APP_NAME,
+  appVersion: process.env.APP_VERSION,
   requiredEnv,
 });

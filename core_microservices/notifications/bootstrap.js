@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./env.${process.env.NODE_ENV}` });
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const { bootstrap } = require('@etherisc/microservice');
 const Notifications = require('./Notifications');
 
@@ -9,6 +9,8 @@ bootstrap(Notifications, {
   db: true,
   amqp: true,
   s3: true,
-  requiredEnv,
+  appName: process.env.APP_NAME,
+  appVersion: process.env.APP_VERSION,
   bucket: 'dip-notification-templates', // TODO: pass in ENV ?
+  requiredEnv,
 });

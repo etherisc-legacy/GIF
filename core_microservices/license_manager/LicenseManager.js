@@ -60,7 +60,7 @@ class LicenseManager {
   }) {
     const { Product } = this.models;
     const [productCount] = await Product.query().where('name', properties.userId).count();
-
+    console.log('productCount=', productCount, ' userId=', properties.userId);
     // TODO: Optionally check for specific message-type permissions on the product
     // TODO: Check for throttling metrics or the uniqueness of the message
 
@@ -107,9 +107,10 @@ class LicenseManager {
       messageType: '*',
       messagetypeVersion: '#',
       handler: async ({ content, fields, properties }) => {
-        this.logMessage({ fields, properties });
+        this.logMessage({ content, fields, properties });
 
         if (await this.validateMessage({ content, fields, properties })) {
+          this.log.info('forwarding...');
           this.forwardMessage({ content, fields, properties });
         } else {
           this.log.error('Message not cleared for trusted queue.');

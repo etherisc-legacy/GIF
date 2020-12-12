@@ -1,8 +1,11 @@
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
 const EventLogging = require('../EventLogging');
 const { schema } = require('../knexfile');
 
+
+const requiredEnv = [];
 
 describe('EventLogging microservice', () => {
   before(async () => {
@@ -10,6 +13,9 @@ describe('EventLogging microservice', () => {
       amqp: true,
       db: true,
       messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
+      appName: process.env.APP_NAME,
+      appVersion: process.env.APP_VERSION,
+      requiredEnv,
     });
     await this.microservice.bootstrap();
 

@@ -123,8 +123,8 @@ class EthereumClient {
         abi,
       };
 
+      console.log(contractLookupCriteria);
       const exists = await Contract.query().findOne(contractLookupCriteria);
-
       if (!exists) {
         await Contract.query()
           .upsertGraph({ ...contractLookupCriteria, ...updateValues });

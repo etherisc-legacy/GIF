@@ -16,6 +16,15 @@ class SetEnv extends Command {
   }
 
   /**
+   * Read package.json
+   * @param {string} pkg
+   * @returns {any}
+   */
+  getPackageJson(pkg) {
+    return fs.read(`${pkg}/package.json`, 'json');
+  }
+
+  /**
    * Compute Environment variables
    * @param {{}} env
    * @param {string} nodeEnv
@@ -36,6 +45,7 @@ class SetEnv extends Command {
   async run() {
     for (let idx = 0; idx < config.envFiles.length; idx += 1) {
       const pkg = config.envFiles[idx];
+      const pkgJson = this.getPackageJson(pkg.path);
       for (let idx2 = 0; idx2 < pkg.environments.length; idx2 += 1) {
         const nodeEnv = pkg.environments[idx2];
         const filename = `${pkg.path}/.env.${nodeEnv}`;
@@ -48,6 +58,16 @@ class SetEnv extends Command {
 # Instead, modify .gif.config.js and run ./bin/run setEnv
 #
 `);
+        if (pkgJson) {
+          fs.append(filename, `
+#
+# Package:
+#
+APP_NAME=${pkgJson.name.split('/').slice(-1)[0]}
+APP_VERSION=${pkgJson.version}
+
+`);
+        }
         const keys = Object.keys(pkg.vars);
         for (let idx3 = 0; idx3 < keys.length; idx3 += 1) {
           const sectionName = keys[idx3];

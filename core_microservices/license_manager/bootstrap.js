@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./env.${process.env.NODE_ENV}` });
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const { bootstrap } = require('@etherisc/microservice');
 const mount = require('koa-mount');
 const jwt = require('koa-jwt');
@@ -15,5 +15,7 @@ bootstrap(LicenseManager, {
   httpAdditionalMiddleware: [
     mount('/api', jwt({ secret: process.env.JWT_SECRET }).unless({ path: [/^\/api\/users/] })),
   ],
+  appName: process.env.APP_NAME,
+  appVersion: process.env.APP_VERSION,
   requiredEnv,
 });

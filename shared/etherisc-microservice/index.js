@@ -3,7 +3,6 @@ const { isDockerHost, isKubernetesHost } = require('./utils');
 const knexfile = require('./knexfile');
 const ioModule = require('./io/module');
 const { DipMicroservice, GenericInsurance } = require('./services/module');
-const { name, version } = require('./package.json');
 
 
 const requiredGlobalEnv = ['NODE_ENV', 'KUBERNETES_HTTP_PORT'];
@@ -29,9 +28,7 @@ function bootstrap(App, config = { }) {
   checkEnv(requiredGlobalEnv);
 
   const ioConfig = {
-    knexfile,
-    appName: name,
-    appVersion: version,
+    knexfile: knexfile(config.appName),
     ...config,
   };
 
@@ -70,9 +67,7 @@ function fabric(App, config = {}) {
   checkEnv(requiredGlobalEnv);
 
   const ioConfig = {
-    knexfile,
-    appName: name,
-    appVersion: version,
+    knexfile: knexfile(config.APP_NAME),
     ...config,
   };
 

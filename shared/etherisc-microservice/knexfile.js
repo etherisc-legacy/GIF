@@ -1,9 +1,5 @@
-const _ = require('lodash');
 
-
-const prefix = _.last((process.env.npm_package_name || '').split('/')).replace('dip_', '');
-
-module.exports = {
+module.exports = prefix => ({
   prefix,
   client: 'pg',
   connection: {
@@ -45,26 +41,26 @@ module.exports = {
         BEGIN;
 
         SELECT pg_advisory_xact_lock(1);
-        
+
         CREATE OR REPLACE FUNCTION update_updated()
         RETURNS TRIGGER AS $$
         BEGIN
             NEW.updated = now();
-            RETURN NEW;  
+            RETURN NEW;
         END;
         $$ language 'plpgsql';
-        
+
         COMMIT;
       `,
       down: () => `
         BEGIN;
 
         SELECT pg_advisory_xact_lock(1);
-      
+
         DROP FUNCTION IF EXISTS update_updated RESTRICT;
-        
+
         COMMIT;
       `,
     },
   },
-};
+});

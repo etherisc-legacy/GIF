@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../../.env' });
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const uuid = require('uuid');
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
@@ -7,6 +7,8 @@ const EventListener = require('../EventListener');
 const { schema } = require('../knexfile');
 
 
+const requiredEnv = ['NETWORK_NAME', 'HTTP_PROVIDER'];
+
 describe('EventListener microservice', () => {
   before(async () => {
     this.microservice = fabric(EventListener, {
@@ -14,6 +16,9 @@ describe('EventListener microservice', () => {
       db: true,
       s3: true,
       bucket: uuid(),
+      appName: process.env.APP_NAME,
+      appVersion: process.env.APP_VERSION,
+      requiredEnv,
     });
     await this.microservice.bootstrap();
 
