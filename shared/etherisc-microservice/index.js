@@ -67,7 +67,7 @@ function fabric(App, config = {}) {
   checkEnv(requiredGlobalEnv);
 
   const ioConfig = {
-    knexfile: knexfile(config.APP_NAME),
+    knexfile: knexfile(config.appName),
     ...config,
   };
 

@@ -8,6 +8,6 @@ do
   (
     cd $package
     npm r @etherisc/microservice
-    npm i ../../shared/etherisc-microservice
+    npm i @etherisc/microservice@latest
   )
 done

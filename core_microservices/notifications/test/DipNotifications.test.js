@@ -18,7 +18,7 @@ describe('Notifications microservice', () => {
       db: true,
       amqp: true,
       s3: true,
-      messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
+      messageBroker: 'amqp://platform:guest@localhost:5674/trusted',
       bucket: uuid.v4(),
       appName: process.env.APP_NAME,
       appVersion: process.env.APP_VERSION,
