@@ -18,8 +18,8 @@ pipelines:
         - npm run lint
         - curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         - chmod +x /usr/local/bin/docker-compose
-        - npm run dev:services run staging
         - npm run dev:services run ganache
+        - npm run dev:services run test
         - npm run bootstrap
         - docker logs ganache_ethereum_bridge
         - npm run migrate:test && npm run test
