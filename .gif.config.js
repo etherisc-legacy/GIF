@@ -116,7 +116,7 @@ const transferwiseCredentials = {
 
   TRANSFERWISE_SRC_CURRENCY: 'EUR',
   TRANSFERWISE_PROFILE_ID: 'dummy',
-  TRANSFERWISE_API_URL: 'dummy',
+  TRANSFERWISE_API_URL: 'https://api.transferwise.com',
   TRANSFERWISE_API_TOKEN: 'dummy',
   TRANSFERWISE_LOGIN: 'dummy',
   TRANSFERWISE_PASSWORD: 'dummy',
@@ -239,7 +239,7 @@ const dockerMinIO = {
   MINIO_PORT: {
     production: 9000,
     staging: 9001,
-    test: 9001
+    test: 9001,
   },
 
 };
