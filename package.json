@@ -18,6 +18,7 @@
     "migrate:test": "echo 'Run database migrations for packages'; NODE_ENV=test lerna run migrate",
     "seed": "lerna run seed",
     "dev": "echo 'Start/Stop/Delete microservices'; ./bin/run_microservices.sh",
+    "dev:env": "echo 'Set env variables'; ./bin/run setEnv",
     "dev:services": "echo Start dockerized containers; ./bin/dev_services.sh",
     "lint": "echo 'Lint javascript files'; eslint --ext js .",
     "lint:fix": "echo 'Lint javascript files'; eslint --ext js --fix .",
