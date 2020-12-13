@@ -269,7 +269,7 @@ module.exports = {
     },
     {
       name: 'GIF Contracts',
-      path: './core/gif_contracts',
+      path: './core/gif-contracts',
       environments: ['staging', 'production'],
       vars: {
         web3Provider,
