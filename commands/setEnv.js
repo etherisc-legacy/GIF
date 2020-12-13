@@ -43,6 +43,7 @@ class SetEnv extends Command {
    * @return {Promise<void>}
    */
   async run() {
+    // TODO: use Array.reduce instead
     for (let idx = 0; idx < config.envFiles.length; idx += 1) {
       const pkg = config.envFiles[idx];
       const pkgJson = this.getPackageJson(pkg.path);
