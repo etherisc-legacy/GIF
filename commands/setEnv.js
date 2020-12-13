@@ -1,6 +1,6 @@
 const { Command } = require('@oclif/command');
 const fs = require('fs-jetpack');
-const config = fs.exists('../.gif.config.js') ? require('../.gif.config.js') : require('../.gif.config.sample.js');
+const config = fs.exists('.gif.config.js') ? require('../.gif.config.js') : require('../.gif.config.sample.js');
 
 /**
  * Create and distribute .env files
