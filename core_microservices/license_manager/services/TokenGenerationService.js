@@ -2,8 +2,6 @@ const jsonwebtoken = require('jsonwebtoken');
 const moment = require('moment');
 
 
-const TOKEN_EXPIRATION_MINUTES = process.env.JWT_TOKEN_EXPIRATION_MINUTES || 360;
-
 /**
  * JWT token generation service
  */
@@ -13,7 +11,7 @@ class TokenGenerationService {
      * @param {{}} dependencies
      */
   constructor(dependencies) {
-    this.secret = dependencies.config.jwt_secret;
+    this.secret = process.env.JWT_SECRET;
     this.log = dependencies.log;
   }
 
@@ -39,7 +37,7 @@ class TokenGenerationService {
     * @return {integer} unix timestamp
     */
   static tokenExpirationTime() {
-    return moment().add(TOKEN_EXPIRATION_MINUTES, 'minutes').unix();
+    return moment().add(process.env.JWT_TOKEN_EXPIRATION_MINUTES, 'minutes').unix();
     // return (Math.floor(Date.now() / 1000) - (TOKEN_EXPIRATION_MINUTES * 60));
   }
 }

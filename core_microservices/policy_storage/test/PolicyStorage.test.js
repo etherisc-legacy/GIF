@@ -1,8 +1,12 @@
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const { fabric } = require('@etherisc/microservice');
 const _ = require('lodash');
 const PolicyStorage = require('../PolicyStorage');
 const { constants: tables, schema } = require('../knexfile');
 
+
+const requiredEnv = ['HTTP_PROVIDER', 'SALT', 'NETWORK_NAME',
+  'POSTGRES_SERVICE_HOST', 'POSTGRES_SERVICE_PORT', 'POSTGRES_DB', 'POSTGRES_USER', 'POSTGRES_PASSWORD'];
 
 describe('PolicyStorage microservice', () => {
   before(async () => {
@@ -10,6 +14,9 @@ describe('PolicyStorage microservice', () => {
       db: true,
       amqp: true,
       httpPort: 4000,
+      appName: process.env.APP_NAME,
+      appVersion: process.env.APP_VERSION,
+      requiredEnv,
     });
     await this.microservice.bootstrap();
 
@@ -30,7 +37,6 @@ describe('PolicyStorage microservice', () => {
 
   after(async () => {
     await Promise.all(Object.keys(tables).map(key => this.db.raw(`truncate ${schema}.${tables[key]} cascade`)));
-
     await this.microservice.shutdown();
   });
 

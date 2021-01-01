@@ -33,7 +33,7 @@ class PolicyStorage {
    * @return {Promise<void>}
    */
   async bootstrap() {
-    this._web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER || 'http://localhost:8545'));
+    this._web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER));
 
     await this._amqp.consume({
       messageType: 'policyCreationRequest',
@@ -550,7 +550,7 @@ class PolicyStorage {
    * @return {*}
    */
   generateCustomerId(product, firstname, lastname, email) {
-    const salt = process.env.SALT || 'salt';
+    const salt = process.env.SALT;
     return sha256(`${product}${firstname}${lastname}${email}${salt}`);
   }
 

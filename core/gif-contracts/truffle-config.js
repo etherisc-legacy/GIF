@@ -1,3 +1,4 @@
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const { settings } = require('./package');
 
@@ -7,13 +8,23 @@ module.exports = {
   contracts_build_directory: process.env.CONTRACTS_BUILD_DIRECTORY || './build',
 
   networks: {
+
     development: {
-      host: 'localhost',
-      port: 8545,
-      network_id: 7777,
-      gas: 6600000,
-      gasPrice: 10 * (10 ** 9),
-      websockets: true,
+      host: process.env.TRUFFLE_HOST,
+      port: process.env.TRUFFLE_PORT,
+      network_id: process.env.TRUFFLE_NETWORK_ID,
+      gas: process.env.TRUFFLE_GAS,
+      gasPrice: process.env.TRUFFLE_GASPRICE,
+      websockets: process.env.TRUFFLE_WEBSOCKETS,
+    },
+
+    staging: {
+      host: process.env.TRUFFLE_HOST,
+      port: process.env.TRUFFLE_PORT,
+      network_id: process.env.TRUFFLE_NETWORK_ID,
+      gas: process.env.TRUFFLE_GAS,
+      gasPrice: process.env.TRUFFLE_GASPRICE,
+      websockets: process.env.TRUFFLE_WEBSOCKETS,
     },
 
     coverage: {

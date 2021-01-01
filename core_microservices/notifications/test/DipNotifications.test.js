@@ -1,3 +1,4 @@
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const { fabric } = require('@etherisc/microservice');
 const { deleteTestBucket } = require('@etherisc/microservice/test/helpers');
 const _ = require('lodash');
@@ -5,9 +6,9 @@ const sinon = require('sinon');
 const uuid = require('uuid');
 const Notifications = require('../Notifications');
 const { constants: tables, schema } = require('../knexfile');
-const { tables, schema } = require('../knexfile');
 
 
+const requiredEnv = ['SMTP_USERNAME', 'SMTP_PASSWORD', 'SMTP_HOST', 'SMTP_USE_SSL', 'BOT_TOKEN'];
 let schema2 = schema;
 
 describe('Notifications microservice', () => {
@@ -17,10 +18,11 @@ describe('Notifications microservice', () => {
       db: true,
       amqp: true,
       s3: true,
-      messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
-      bucket: uuid(),
-      appName: 'notifications',
-      appVersion: '0.1.0',
+      messageBroker: 'amqp://platform:guest@localhost:5674/trusted',
+      bucket: uuid.v4(),
+      appName: process.env.APP_NAME,
+      appVersion: process.env.APP_VERSION,
+      requiredEnv,
     };
     this.microservice = fabric(Notifications, config);
     await this.microservice.bootstrap();

@@ -1,8 +1,11 @@
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const { fabric } = require('@etherisc/microservice');
 const { deleteTestBucket } = require('@etherisc/microservice/test/helpers');
 const uuid = require('uuid');
 const PdfGenerator = require('../PdfGenerator');
 
+
+const requiredEnv = [];
 
 describe('Pdf Generator microservice', () => {
   before(async () => {
@@ -10,13 +13,10 @@ describe('Pdf Generator microservice', () => {
       amqp: true,
       s3: true,
       messageBroker: 'amqp://platform:guest@localhost:5673/trusted',
-<<<<<<< HEAD
-      bucket: uuid(),
-=======
       bucket: uuid.v4(),
->>>>>>> feature/GIF-391
-      appName: 'pdf_generator',
-      appVersion: '0.1.0',
+      appName: process.env.APP_NAME,
+      appVersion: process.env.APP_VERSION,
+      requiredEnv,
     };
     this.config = config;
     this.microservice = fabric(PdfGenerator, config);
@@ -31,11 +31,7 @@ describe('Pdf Generator microservice', () => {
 
   after(async () => {
     await deleteTestBucket(this.s3.client, this.microservice.config.bucket);
-<<<<<<< HEAD
-    // await this.microservice.shutdown();
-=======
     await this.microservice.shutdown();
->>>>>>> feature/GIF-391
   });
 
   it('should store and update PDF template', async () => {

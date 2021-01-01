@@ -93,6 +93,8 @@ class EthereumClient {
    * @return {void}
    */
   async saveArtifact({ content, fields, properties }) {
+    console.log('saveArtifact');
+
     try {
       const {
         network, networkId, version, artifact,
@@ -121,8 +123,8 @@ class EthereumClient {
         abi,
       };
 
+      console.log(contractLookupCriteria);
       const exists = await Contract.query().findOne(contractLookupCriteria);
-
       if (!exists) {
         await Contract.query()
           .upsertGraph({ ...contractLookupCriteria, ...updateValues });

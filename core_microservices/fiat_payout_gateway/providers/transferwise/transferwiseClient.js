@@ -2,8 +2,6 @@ const fetch = require('node-fetch');
 const btoa = require('btoa');
 
 
-const SRC_CURRENCY = process.env.TRANSFERWISE_SRC_CURRENCY;
-
 /**
  * Transferwise plugin
  */
@@ -67,7 +65,7 @@ class TransferwiseClient {
   async createQuote(currency, amount) {
     const data = {
       profile: this.profileId,
-      source: SRC_CURRENCY,
+      source: process.env.TRANSFERWISE_SRC_CURRENCY,
       target: currency,
       rateType: 'FIXED',
       targetAmount: (amount / 100).toFixed(2),

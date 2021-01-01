@@ -1,12 +1,21 @@
 const getPort = require('get-port-sync');
-const _ = require('lodash');
 const { isDockerHost, isKubernetesHost } = require('./utils');
 const knexfile = require('./knexfile');
 const ioModule = require('./io/module');
 const { DipMicroservice, GenericInsurance } = require('./services/module');
 
 
-const KUBERNETES_HTTP_PORT = 3000;
+const requiredGlobalEnv = ['NODE_ENV', 'KUBERNETES_HTTP_PORT'];
+
+/**
+ * Check if all required env variables are set.
+ * @param {array} requiredEnv
+ */
+function checkEnv(requiredEnv = []) {
+  for (let idx = 0; idx < requiredEnv.length; idx += 1) {
+    if (!process.env[requiredEnv[idx]]) throw new Error(`Required env variable not set (${requiredEnv[idx]})`);
+  }
+}
 
 /**
  * Start application
@@ -14,16 +23,18 @@ const KUBERNETES_HTTP_PORT = 3000;
  * @param {{}} config
  */
 function bootstrap(App, config = { }) {
+  if (!config.requiredEnv) throw new Error('requiredEnv not set');
+  checkEnv(config.requiredEnv);
+  checkEnv(requiredGlobalEnv);
+
   const ioConfig = {
-    knexfile,
-    appName: config.appName || _.last(process.env.npm_package_name.split('/')),
-    appVersion: config.appVersion || process.env.npm_package_version,
+    knexfile: knexfile(config.appName),
     ...config,
   };
 
   try {
     if (isKubernetesHost()) {
-      ioConfig.httpPort = KUBERNETES_HTTP_PORT;
+      ioConfig.httpPort = process.env.KUBERNETES_HTTP_PORT;
     } else {
       ioConfig.httpPort = ioConfig.httpDevPort || getPort();
     }
@@ -51,10 +62,12 @@ function bootstrap(App, config = { }) {
  * @return {DipMicroservice}
  */
 function fabric(App, config = {}) {
+  if (!config.requiredEnv) throw new Error('requiredEnv not set');
+  checkEnv(config.requiredEnv);
+  checkEnv(requiredGlobalEnv);
+
   const ioConfig = {
-    knexfile,
-    appName: config.appName || _.last(process.env.npm_package_name.split('/')),
-    appVersion: config.appVersion || process.env.npm_package_version,
+    knexfile: knexfile(config.appName),
     ...config,
   };
 
