@@ -11,7 +11,7 @@ if (require.main === module) {
   const eth = require('./lib/eth');
 
   const { GIF_AMQP_HOST, GIF_AMQP_PORT } = process.env;
-  const host = GIF_AMQP_HOST || 'amqp.sandbox.etherisc.com';
+  const host = GIF_AMQP_HOST || 'amqp-sandbox.etherisc.com';
   const port = GIF_AMQP_PORT || 5672;
   const mode = 'product';
   const version = '1.0.0';

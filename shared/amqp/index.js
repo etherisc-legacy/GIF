@@ -99,6 +99,7 @@ class Amqp {
     } = this.connectionConfig;
     // TODO: Simplify this
     const connectionString = `amqp://${username}:${password}@${host}:${port}`;
+    console.log(`connectionString: ${connectionString}`);
     switch (mode) {
       case 'product':
         this._consume_connection = await amqplib.connect(`${connectionString}/trusted`);
@@ -115,7 +116,7 @@ class Amqp {
       default:
         throw new Error('Unknown AMQP mode');
     }
-
+    console.log('Connected!');
     return null;
   }
 

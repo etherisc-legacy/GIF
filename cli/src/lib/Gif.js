@@ -67,6 +67,7 @@ class Gif extends EventEmitter {
       await this._amqp.createConnections();
       this._connected = true;
     } catch (e) {
+      console.log(e);
       this._error(errorMessages.failedToConnect(this._info.product));
     }
   }

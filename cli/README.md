@@ -19,7 +19,7 @@ $ npm install -g @etherisc/gifcli
 $ gifcli COMMAND
 running command...
 $ gifcli (-v|--version|version)
-@etherisc/gifcli/1.1.11-independant linux-x64 node-v10.15.3
+@etherisc/gifcli/1.1.16 linux-x64 node-v10.15.3
 $ gifcli --help [COMMAND]
 USAGE
   $ gifcli COMMAND
@@ -28,6 +28,7 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`gifcli artifact:get`](#gifcli-artifactget)
 * [`gifcli artifact:send`](#gifcli-artifactsend)
 * [`gifcli console`](#gifcli-console)
 * [`gifcli exec`](#gifcli-exec)
@@ -38,6 +39,22 @@ USAGE
 * [`gifcli user:logout`](#gifcli-userlogout)
 * [`gifcli user:register`](#gifcli-userregister)
 * [`gifcli version`](#gifcli-version)
+
+## `gifcli artifact:get`
+
+Get artifact
+
+```
+USAGE
+  $ gifcli artifact:get
+
+OPTIONS
+  -c, --contract=contract  (required) contract name
+
+DESCRIPTION
+  ...
+  Get artifact for contract
+```
 
 ## `gifcli artifact:send`
 

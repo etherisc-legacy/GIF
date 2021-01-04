@@ -3,6 +3,8 @@
  *
  */
 
+const configName = "Sample Configuration";
+
 const nodeEnvVar = {
 
   NODE_ENV: {
@@ -252,6 +254,8 @@ const dockerMinIO = {
 
 
 module.exports = {
+
+  configName,
 
   envFiles: [
     {

@@ -3,6 +3,9 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 const { settings } = require('./package');
 
 
+console.log(`Deploying to Network ID = ${process.env.TRUFFLE_NETWORK_ID}`);
+console.log(`Truffle host = ${process.env.TRUFFLE_HOST}:${process.env.TRUFFLE_PORT}`);
+
 module.exports = {
   migrations_directory: process.env.MIGRATIONS_DIRECTORY || './migrations',
   contracts_build_directory: process.env.CONTRACTS_BUILD_DIRECTORY || './build',
@@ -10,21 +13,26 @@ module.exports = {
   networks: {
 
     development: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER),
       host: process.env.TRUFFLE_HOST,
       port: process.env.TRUFFLE_PORT,
       network_id: process.env.TRUFFLE_NETWORK_ID,
       gas: process.env.TRUFFLE_GAS,
       gasPrice: process.env.TRUFFLE_GASPRICE,
       websockets: process.env.TRUFFLE_WEBSOCKETS,
+      skipDryRun: true,
     },
 
     staging: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER),
       host: process.env.TRUFFLE_HOST,
       port: process.env.TRUFFLE_PORT,
       network_id: process.env.TRUFFLE_NETWORK_ID,
       gas: process.env.TRUFFLE_GAS,
       gasPrice: process.env.TRUFFLE_GASPRICE,
+      confirmation: 2,
       websockets: process.env.TRUFFLE_WEBSOCKETS,
+      skipDryRun: true,
     },
 
     coverage: {

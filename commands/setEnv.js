@@ -1,6 +1,9 @@
 const { Command } = require('@oclif/command');
 const fs = require('fs-jetpack');
-const config = fs.exists('../.gif.config.js') ? require('../.gif.config.js') : require('../.gif.config.sample.js');
+
+
+console.log(fs.cwd());
+const config = fs.exists('./.gif.config.js') ? require('../.gif.config.js') : require('../.gif.config.sample.js');
 
 /**
  * Create and distribute .env files
@@ -43,6 +46,7 @@ class SetEnv extends Command {
    * @return {Promise<void>}
    */
   async run() {
+    console.log(`setEnv using configuration "${config.configName}"`);
     for (let idx = 0; idx < config.envFiles.length; idx += 1) {
       const pkg = config.envFiles[idx];
       const pkgJson = this.getPackageJson(pkg.path);

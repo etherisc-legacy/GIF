@@ -10,8 +10,9 @@ services:
       - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
     ports:
-      - "127.0.0.1:${RABBITMQ_PORT}:5672"
-      - "127.0.0.1:${RABBITMQ_ADMIN_PORT}:15672"
+      # RabbitMQ ports are visible externally!
+      - "${RABBITMQ_PORT}:5672"
+      - "${RABBITMQ_ADMIN_PORT}:15672"
 
   PostgreSql:
     container_name: "${NODE_ENV}_postgresql"
