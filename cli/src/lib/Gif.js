@@ -308,15 +308,17 @@ class Gif extends EventEmitter {
 
   /**
    * Get artifacts
+   * @param {String} product
+   * @param {String} networkName
    * @param {String} contractName
    * @return {Promise<any|{error: string}>}
    */
-  async getArtifact(contractName) {
+  async getArtifact(product, networkName, contractName) {
     if (!contractName) {
       return this.wrongArgument('gif.artifact.get');
     }
     return this.request({
-      payload: { contractName },
+      payload: { product, networkName, contractName },
       pubMessageType: 'getArtifact',
       subMessageType: 'getArtifactResult',
     });

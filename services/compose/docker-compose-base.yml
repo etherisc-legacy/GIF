@@ -24,7 +24,7 @@ services:
     volumes:
       - "./volumes/${NODE_ENV}_postgresql:/var/lib/postgresql"
     ports:
-      - "127.0.0.1:${POSTGRESQL_PORT}:5432"
+      - "${POSTGRESQL_PORT}:5432"
 
   Minio:
     container_name: "${NODE_ENV}_minio"

@@ -65,7 +65,7 @@ class BaseCommand extends Command {
         username,
         password,
         host: GIF_AMQP_HOST || 'amqp-sandbox.etherisc.com',
-        port: GIF_AMQP_PORT || 5672,
+        port: GIF_AMQP_PORT || 5673,
       };
 
       this.log(`Connecting to AMQP Host: ${config.host}${config.port ? `:${config.port}` : ''}`);

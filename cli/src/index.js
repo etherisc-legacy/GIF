@@ -12,7 +12,7 @@ if (require.main === module) {
 
   const { GIF_AMQP_HOST, GIF_AMQP_PORT } = process.env;
   const host = GIF_AMQP_HOST || 'amqp-sandbox.etherisc.com';
-  const port = GIF_AMQP_PORT || 5672;
+  const port = GIF_AMQP_PORT || 5673;
   const mode = 'product';
   const version = '1.0.0';
 
