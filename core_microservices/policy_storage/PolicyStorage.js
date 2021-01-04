@@ -1034,14 +1034,16 @@ class PolicyStorage {
       networkName,
       contractName,
     });
-
-    return {
-      name: contract.contractName,
-      abi: JSON.stringify(contract.abi),
-      network: contract.networkName,
-      version: contract.version,
-      address: contract.address,
-    };
+    if (contract) {
+      return {
+        name: contract.contractName,
+        abi: JSON.stringify(contract.abi),
+        network: contract.networkName,
+        version: contract.version,
+        address: contract.address,
+      };
+    }
+    throw new Error(`PolicyStorage/getArtifact: Contract not found; Product=${product} / network name=${networkName} / contract name=${contractName}`);
   }
 
   /**

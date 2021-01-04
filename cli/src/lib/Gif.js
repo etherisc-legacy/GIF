@@ -317,6 +317,7 @@ class Gif extends EventEmitter {
     if (!contractName) {
       return this.wrongArgument('gif.artifact.get');
     }
+    console.log(`GIF: ${product}/${networkName}/${contractName}`);
     return this.request({
       payload: { product, networkName, contractName },
       pubMessageType: 'getArtifact',

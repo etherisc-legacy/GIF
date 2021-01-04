@@ -1,7 +1,8 @@
+console.log(process.cwd());
 const fs = require('fs-extra');
 const uuid = require('uuid/v1');
 const EventEmitter = require('events');
-const truffle = require('../gif-contracts/truffle-config');
+const truffle = require('../../truffle-config');
 
 
 const REQUEST_TIMEOUT = 10000;

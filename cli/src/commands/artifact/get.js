@@ -16,8 +16,8 @@ class GetArtifact extends BaseCommand {
 
     await this.gif.connect();
 
-    const { flags: { contract } } = this.parse(GetArtifact);
-    const response = await this.gif.getArtifact(contract);
+    const { flags: { product, networkName, contractName } } = this.parse(GetArtifact);
+    const response = await this.gif.getArtifact(product, networkName, contractName);
 
     if (response.error) {
       this.error(response.error);
@@ -30,7 +30,9 @@ class GetArtifact extends BaseCommand {
 }
 
 GetArtifact.flags = {
-  contract: flags.string({ char: 'c', description: 'contract name', required: true }),
+  product: flags.string({ char: 'c', description: 'product [=platform for core contracts]', required: true }),
+  networkName: flags.string({ char: 'c', description: 'network name', required: true }),
+  contractName: flags.string({ char: 'c', description: 'contract name', required: true }),
 };
 
 
