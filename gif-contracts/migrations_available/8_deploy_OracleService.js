@@ -1,4 +1,5 @@
 const { info } = require('../io/logger');
+const progress = require('../bin/lib/progress');
 
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
@@ -6,7 +7,7 @@ const RegistryController = artifacts.require('modules/registry/RegistryControlle
 const OracleService = artifacts.require('controllers/OracleService.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = progress(['OracleOwnerService'], ['OracleService'], async (deployer, networks, accounts) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -18,4 +19,4 @@ module.exports = async (deployer) => {
   info('Register OracleService in Registry');
   await registry.registerService(oracleServiceName, oracleService.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
-};
+});

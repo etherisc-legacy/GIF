@@ -8,7 +8,7 @@ const log = require('../lib/logger');
 /**
  *
  */
-class selectResources extends Command {
+class SelectResources extends Command {
   /**
    * Put symlinks for selected resources
    *
@@ -46,7 +46,7 @@ class selectResources extends Command {
     try {
       // console.log(process.cwd());
       // console.log(yaml.safeLoad(fs.read('resources.yml')));
-      const { contracts, migrations, test } = yaml.safeLoad(fs.read('resources.yml'));
+      const { contracts, migrations, test } = yaml.load(fs.read('resources.yml'));
 
       this.selectResources('contracts', contracts);
       this.selectResources('migrations', migrations);
@@ -57,4 +57,5 @@ class selectResources extends Command {
   }
 }
 
-module.exports = selectResources;
+SelectResources.description = 'Select resources for compile / migrate / test';
+module.exports = SelectResources;

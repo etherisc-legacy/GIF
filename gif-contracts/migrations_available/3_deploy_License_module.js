@@ -1,4 +1,5 @@
 const { info } = require('../io/logger');
+const progress = require('../bin/lib/progress');
 
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
@@ -7,7 +8,7 @@ const License = artifacts.require('modules/license/License.sol');
 const LicenseController = artifacts.require('modules/license/LicenseController.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = progress(['Registry'], ['License'], async (deployer, networks, accounts) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -32,4 +33,4 @@ module.exports = async (deployer) => {
   info('Register License module in Registry');
   await registry.register(licenseStorageName, licenseStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
-};
+});

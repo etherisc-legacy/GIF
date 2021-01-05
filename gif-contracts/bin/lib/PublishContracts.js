@@ -1,5 +1,4 @@
 const fs = require('fs-extra');
-const truffle = require('../../truffle-config');
 
 /**
  * DIP Artifacts Storage microservice
@@ -26,6 +25,7 @@ class Contracts {
      * @return {Promise<void>}
      */
   async bootstrap() {
+    const truffle = require('../../truffle-config');
     const networkName = process.env.NETWORK || 'development';
     const networkId = parseInt(truffle.networks[networkName].network_id, 10);
     const buildDir = './build';

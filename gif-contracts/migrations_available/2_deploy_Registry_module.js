@@ -1,11 +1,12 @@
 const { info } = require('../io/logger');
+const progress = require('../bin/lib/progress');
 
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = progress(['Initial migration'], ['Registry'], async (deployer, networks, accounts) => {
   // Deploy storage and controller contracts
   await deployer.deploy(RegistryController, { gas: 2000000 });
 
@@ -17,4 +18,4 @@ module.exports = async (deployer) => {
   info('Assign controller to storage');
   await registryController.assignStorage(registryStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
-};
+});

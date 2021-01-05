@@ -1,8 +1,6 @@
-console.log(process.cwd());
 const fs = require('fs-extra');
 const uuid = require('uuid/v1');
 const EventEmitter = require('events');
-const truffle = require('../../truffle-config');
 
 
 const REQUEST_TIMEOUT = 10000;
@@ -103,6 +101,7 @@ class Contracts extends EventEmitter {
    * @return {Promise<void>}
    */
   async bootstrap() {
+    const truffle = require('../../truffle-config');
     const networkName = process.env.NETWORK || 'development';
     const networkId = truffle.networks[networkName].network_id;
 
