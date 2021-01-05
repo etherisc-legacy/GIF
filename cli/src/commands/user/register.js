@@ -58,7 +58,7 @@ class Register extends BaseCommand {
 
     const response = await this.api.register(firstname, lastname, email, password)
       .catch((error) => {
-        this.log(JSON.stringify(error.response.data));
+        this.log(error);
         this.error(error.message);
       });
 

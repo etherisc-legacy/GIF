@@ -2,7 +2,7 @@
 
 set -e
 
-for package in `ls -d app_microservices/* core_microservices/* core core/gif-contracts cli`
+for package in `ls -d app_microservices/* core-microservices/* core core/gif-contracts cli`
 do
   echo "Install dependencies for $package and update locks for deploy"
   (

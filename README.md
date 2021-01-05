@@ -39,7 +39,7 @@ postgresql-service.v1.0.0 | - | - | - | -
 4. `npm run bootstrap` to install dependencies for Lerna packages
 5. `npm run dev:services:run` to run Docker Compose with RabbitMQ and PostreSQL
 6. `npm run migrate` to run migrations. Optionally, you can run `npm run seed` to fill the databases with test data, where applicable.
-7. Many individual packages in `app_microservices` and `core_microservices` are configured by the files called `.env` that contain values for environment variables that a package expects to be present in the cloud environment. Where possible, bootstrap script from step 4 fills the defaults in from `.env.sample`, but developers are free to modify `.env` files as appropriate. 
+7. Many individual packages in `app_microservices` and `core-microservices` are configured by the files called `.env` that contain values for environment variables that a package expects to be present in the cloud environment. Where possible, bootstrap script from step 4 fills the defaults in from `.env.sample`, but developers are free to modify `.env` files as appropriate.
 8. `npm run dev` to start applications.
 9. `npm login` login into npm account with access to @etherisc organization private packages.
 10. `npm run publish` to update NPM packages
@@ -48,7 +48,7 @@ postgresql-service.v1.0.0 | - | - | - | -
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Make sure `kubectl` is the latest version.
 2. Run Minikube:
     `minikube start` will start Minikube. You may want to configure it for better performance:
-    
+
         `minikube cache add nginx:stable`
 
         `minikube cache add postgres:10.5`
@@ -56,11 +56,11 @@ postgresql-service.v1.0.0 | - | - | - | -
         `minikube cache add node:11.2.0`
 
         `minikube config set memory 4096`
-    
+
     `minikube ip` will return local Minikube IP
-    
+
     `minikube dashboard` will open Minikube dashboard for local Kubernetes cluster
-    
+
     `minikube delete` will delete Minikube cluster
 
     Note that the IP is new each time you restart minikube. You can get it at any time by running `minikube ip`.
@@ -84,7 +84,7 @@ postgresql-service.v1.0.0 | - | - | - | -
 
 `kubectl logs <pod name>`
 
-- For the front-end services, the deployments should ideally be accompanied by services exposing node-ports outward. 
+- For the front-end services, the deployments should ideally be accompanied by services exposing node-ports outward.
 But to forward the ports so deployment port interfaces are available from your local environment, run:
 
 `kubectl port-forward deployment/< DEPLOYMENT NAME> 8080:8080 8081:8081`
@@ -92,12 +92,12 @@ But to forward the ports so deployment port interfaces are available from your l
 Final param is a list of space-delimetered port pairs going local:minikube.
 
 #### B-2. Deploy to Minikube bundled with the local docker (alternative to setting up Minikube).
-If you are a Mac user and have Docker for Mac 17.12 CE Edge and higher, or 18.06 Stable and higher. 
+If you are a Mac user and have Docker for Mac 17.12 CE Edge and higher, or 18.06 Stable and higher.
 1. Configure [Kubernetes for Docker](https://docs.docker.com/docker-for-mac/#kubernetes)
 2. `npm ci` to install package dependencies
-3. `NPM_TOKEN=<token> npm run deploy:docker` 
+3. `NPM_TOKEN=<token> npm run deploy:docker`
 
-The deploy script will prompt you for values you'd like your environment to have configured in Secrets. 
+The deploy script will prompt you for values you'd like your environment to have configured in Secrets.
 Some of them have default values pre-configured.
 
 #### Notes
@@ -105,10 +105,10 @@ Some of them have default values pre-configured.
 
 - To connect to cluster service with a local management / edit tool, you'd need to start a port-forwarding process:
     > kubectl port-forward svc/**service name** **(port that will be available to you locally)**:**(service port)**
-  
-  For example: 
-    > kubectl port-forward svc/postgres 5432:5432  
-    
+
+  For example:
+    > kubectl port-forward svc/postgres 5432:5432
+
 ### C. Setup local development environment for deployment to GKE clusters
 1. Install and set up [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 2. Install and initialize [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstarts)
@@ -165,14 +165,14 @@ The following command will show all the configured environments:
 
 To switch the kubectl context between environments:
     > kubectl config use-context <contextname>
-   
-Note: do not switch contexts during deploy, since the next kubectl instruction will apply to the new active context instead of the one you started the deploy with.  
+
+Note: do not switch contexts during deploy, since the next kubectl instruction will apply to the new active context instead of the one you started the deploy with.
 
 ## View logs from Kubernetes
-During cluster creation choose "Advanced options" and check "Try the new Stackdriver beta Monitoring and Logging experience" checkbox.  
-This will enable platform-wide logging.  
-In order to view logs navigate to "Logging > Logs".  
+During cluster creation choose "Advanced options" and check "Try the new Stackdriver beta Monitoring and Logging experience" checkbox.
+This will enable platform-wide logging.
+In order to view logs navigate to "Logging > Logs".
 Select filter: "Kubernetes Container > YOUR-CLUSTER > default > All container_name"
-In advanced filter add lines to the query:  
-`NOT textPayload:(GET /ready)`  
+In advanced filter add lines to the query:
+`NOT textPayload:(GET /ready)`
 `NOT textPayload:(GET /live)`

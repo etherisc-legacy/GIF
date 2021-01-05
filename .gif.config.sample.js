@@ -281,7 +281,7 @@ module.exports = {
     },
     {
       name: 'ethereum_client',
-      path: './core_microservices/ethereum_client',
+      path: './core-microservices/ethereum_client',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -298,7 +298,7 @@ module.exports = {
     },
     {
       name: 'event_listener',
-      path: './core_microservices/event_listener',
+      path: './core-microservices/event_listener',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -314,7 +314,7 @@ module.exports = {
     },
     {
       name: 'event_logging',
-      path: './core_microservices/event_logging',
+      path: './core-microservices/event_logging',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -329,7 +329,7 @@ module.exports = {
     },
     {
       name: 'fiat_payment_gateway',
-      path: './core_microservices/fiat_payment_gateway',
+      path: './core-microservices/fiat_payment_gateway',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -345,7 +345,7 @@ module.exports = {
     },
     {
       name: 'fiat_payout_gateway',
-      path: './core_microservices/fiat_payout_gateway',
+      path: './core-microservices/fiat_payout_gateway',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -361,7 +361,7 @@ module.exports = {
     },
     {
       name: 'license_manager',
-      path: './core_microservices/license_manager',
+      path: './core-microservices/license_manager',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -379,7 +379,7 @@ module.exports = {
     },
     {
       name: 'notifications',
-      path: './core_microservices/notifications',
+      path: './core-microservices/notifications',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -396,7 +396,7 @@ module.exports = {
     },
     {
       name: 'pdf_generator',
-      path: './core_microservices/pdf_generator',
+      path: './core-microservices/pdf_generator',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -410,7 +410,7 @@ module.exports = {
     },
     {
       name: 'policy_storage',
-      path: './core_microservices/policy_storage',
+      path: './core-microservices/policy_storage',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {

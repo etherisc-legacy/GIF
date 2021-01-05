@@ -2,7 +2,7 @@
 
 set -e
 
-for package in `ls -d app_microservices/* core_microservices/* core core/gif-contracts shared/* cli`
+for package in `ls -d core-microservices/* core gif-contracts shared/* cli`
 do
   echo "Install dependencies for $package"
   (
@@ -11,9 +11,5 @@ do
     cd $package
     npm ci
 
-    if [ -f './.env.sample' ] && [ ! -f './.env' ]; then
-        echo ".env file not found, making a copy"
-        cp './.env.sample' './.env'
-    fi
   )
 done

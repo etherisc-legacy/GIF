@@ -2,7 +2,7 @@
 
 set -e
 
-for package in `ls -d core_microservices/*`
+for package in `ls -d core-microservices/*`
 do
   echo "Update @etherisc/microservice for $package from local package"
   (
