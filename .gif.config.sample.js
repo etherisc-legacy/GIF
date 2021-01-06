@@ -281,7 +281,7 @@ module.exports = {
     },
     {
       name: 'ethereum_client',
-      path: './core-microservices/ethereum_client',
+      path: './gif-microservices/ethereum_client',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -298,7 +298,7 @@ module.exports = {
     },
     {
       name: 'event_listener',
-      path: './core-microservices/event_listener',
+      path: './gif-microservices/event_listener',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -314,7 +314,7 @@ module.exports = {
     },
     {
       name: 'event_logging',
-      path: './core-microservices/event_logging',
+      path: './gif-microservices/event_logging',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -329,7 +329,7 @@ module.exports = {
     },
     {
       name: 'fiat_payment_gateway',
-      path: './core-microservices/fiat_payment_gateway',
+      path: './gif-microservices/fiat_payment_gateway',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -345,7 +345,7 @@ module.exports = {
     },
     {
       name: 'fiat_payout_gateway',
-      path: './core-microservices/fiat_payout_gateway',
+      path: './gif-microservices/fiat_payout_gateway',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -361,7 +361,7 @@ module.exports = {
     },
     {
       name: 'license_manager',
-      path: './core-microservices/license_manager',
+      path: './gif-microservices/license_manager',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -379,7 +379,7 @@ module.exports = {
     },
     {
       name: 'notifications',
-      path: './core-microservices/notifications',
+      path: './gif-microservices/notifications',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -396,7 +396,7 @@ module.exports = {
     },
     {
       name: 'pdf_generator',
-      path: './core-microservices/pdf_generator',
+      path: './gif-microservices/pdf_generator',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -410,7 +410,7 @@ module.exports = {
     },
     {
       name: 'policy_storage',
-      path: './core-microservices/policy_storage',
+      path: './gif-microservices/policy_storage',
       environments: ['test', 'staging', 'production'],
       vars: {
         pkg: {
@@ -426,7 +426,7 @@ module.exports = {
     },
     {
       name: 'docker_containers',
-      path: './services/compose',
+      path: './gif-services/compose',
       environments: ['test', 'staging', 'production'],
       vars: {
         nodeEnvVar,
@@ -441,7 +441,7 @@ module.exports = {
     },
     {
       name: 'docker_ganache',
-      path: './services/compose',
+      path: './gif-services/compose',
       environments: ['ganache'],
       vars: {
         nodeEnvVar,

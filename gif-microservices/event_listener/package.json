@@ -1,0 +1,40 @@
+{
+  "name": "@etherisc/event_listener",
+  "version": "1.1.0",
+  "description": "Etherisc Event Listener Microservice",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/etherisc/GIF.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "create:migration": "knex migrate:make",
+    "test": "NODE_ENV=test mocha",
+    "coverage": "nyc mocha",
+    "check:coverage": "nyc --check-coverage --statements 70 --functions 70 --lines 70 --branches 70 mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@etherisc/microservice": "^0.6.7-sandbox",
+    "async-retry": "^1.3.1",
+    "dotenv": "^7.0.0",
+    "fs-jetpack": "^2.4.0",
+    "knex": "^0.16.5",
+    "lodash": "^4.17.20",
+    "mocha": "^7.2.0",
+    "nodemon": "^2.0.6",
+    "nyc": "^15.1.0",
+    "objection": "^1.6.11",
+    "pg": "^7.18.2",
+    "should": "^13.2.3",
+    "should-sinon": "0.0.6",
+    "sinon": "^7.5.0",
+    "uuid": "^3.4.0",
+    "web3": "^1.3.0"
+  }
+}

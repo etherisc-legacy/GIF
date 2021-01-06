@@ -1,5 +1,5 @@
-const ProductService = artifacts.require('contracts/services/ProductService.sol');
-const IProductService = artifacts.require('contracts/services/IProductService.sol');
+const ProductService = artifacts.require('contracts/gif-services/ProductService.sol');
+const IProductService = artifacts.require('contracts/gif-services/IProductService.sol');
 const License = artifacts.require('contracts/modules/license/License.sol');
 const Policy = artifacts.require('contracts/modules/policy/Policy.sol');
 

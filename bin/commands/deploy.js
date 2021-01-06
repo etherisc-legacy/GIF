@@ -194,7 +194,7 @@ class Deploy extends Command {
    * @return {Promise<Object>}
    */
   async buildConfigMaps() {
-    const configurationsFolerPath = path.join(process.cwd(), 'services/configurations');
+    const configurationsFolerPath = path.join(process.cwd(), 'gif-services/configurations');
     const configFolderNames = fs.readdirSync(configurationsFolerPath);
 
     for (let index = 0; index < configFolderNames.length; index += 1) {

@@ -1,0 +1,71 @@
+{
+  "name": "@etherisc/gifcli",
+  "version": "1.2.8",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/etherisc/GIF.git"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "postdocs": "rm -f oclif.manifest.json",
+    "docs": "oclif-dev manifest && oclif-dev readme",
+    "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "bin": {
+    "gifcli": "bin/run"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "main": "bin/index.js",
+  "oclif": {
+    "commands": "./bin/commands",
+    "topics": {
+      "user": {
+        "description": "manage user"
+      },
+      "product": {
+        "description": "manage products"
+      },
+      "artifact": {
+        "description": "manage artifacts"
+      }
+    },
+    "bin": "gifcli",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "dependencies": {
+    "@etherisc/amqp": "^1.2.6",
+    "@oclif/command": "^1.5.13",
+    "@oclif/config": "^1.13.0",
+    "@oclif/plugin-help": "^2.1.6",
+    "@oclif/test": "^1.2.4",
+    "axios": "^0.21.1",
+    "chalk": "^2.4.2",
+    "cli-ux": "^5.2.0",
+    "columnify": "^1.5.4",
+    "dotenv": "^8.2.0",
+    "email-validator": "^2.0.4",
+    "fs-jetpack": "^2.2.2",
+    "globby": "^9.2.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "password-validator": "^4.1.1",
+    "update-notifier": "^3.0.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.21.2",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1"
+  }
+}

@@ -39,7 +39,7 @@ postgresql-service.v1.0.0 | - | - | - | -
 4. `npm run bootstrap` to install dependencies for Lerna packages
 5. `npm run dev:services:run` to run Docker Compose with RabbitMQ and PostreSQL
 6. `npm run migrate` to run migrations. Optionally, you can run `npm run seed` to fill the databases with test data, where applicable.
-7. Many individual packages in `app_microservices` and `core-microservices` are configured by the files called `.env` that contain values for environment variables that a package expects to be present in the cloud environment. Where possible, bootstrap script from step 4 fills the defaults in from `.env.sample`, but developers are free to modify `.env` files as appropriate.
+7. Many individual packages in `app_microservices` and `gif-microservices` are configured by the files called `.env` that contain values for environment variables that a package expects to be present in the cloud environment. Where possible, bootstrap script from step 4 fills the defaults in from `.env.sample`, but developers are free to modify `.env` files as appropriate.
 8. `npm run dev` to start applications.
 9. `npm login` login into npm account with access to @etherisc organization private packages.
 10. `npm run publish` to update NPM packages
