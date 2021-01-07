@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
+require('dotenv').config();
 const sinon = require('sinon');
 const { fabric } = require('@etherisc/microservice');
 const FiatPayoutGateway = require('../FiatPayoutGateway');

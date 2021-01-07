@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
+require('dotenv').config();
 const { bootstrap } = require('@etherisc/microservice');
 const { Command } = require('@oclif/command');
 const PublishContracts = require('../lib/PublishContracts');

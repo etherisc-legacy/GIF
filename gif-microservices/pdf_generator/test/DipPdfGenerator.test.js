@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
+require('dotenv').config();
 const { fabric } = require('@etherisc/microservice');
 const { deleteTestBucket } = require('@etherisc/microservice/test/helpers');
 const uuid = require('uuid');

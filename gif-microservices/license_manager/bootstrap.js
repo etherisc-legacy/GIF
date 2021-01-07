@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
+require('dotenv').config();
 const { bootstrap } = require('@etherisc/microservice');
 const mount = require('koa-mount');
 const jwt = require('koa-jwt');

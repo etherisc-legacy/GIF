@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
+require('dotenv').config();
 const { fabric } = require('@etherisc/microservice');
 const _ = require('lodash');
 const PolicyStorage = require('../PolicyStorage');
