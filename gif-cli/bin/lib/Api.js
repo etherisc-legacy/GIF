@@ -47,6 +47,15 @@ class Api {
   }
 
   /**
+   * Get User Profile data
+   * @param {number} id
+   * @return {*}
+   */
+  profile(id) {
+    return this.client.post('/api/users/profile', { id });
+  }
+
+  /**
    * Create new product
    * @param {String} name
    * @return {*}

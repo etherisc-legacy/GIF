@@ -31,6 +31,9 @@ class BaseCommand extends Command {
   async init() {
     // Check latest version
     const pkg = require(`${this.config.root}/package.json`);
+
+    this.log(`gifcli v${pkg.version}`);
+
     updateNotifier({
       pkg,
       updateCheckInterval: 0,
@@ -67,6 +70,7 @@ class BaseCommand extends Command {
     const { configuration } = this.globalConfig;
     if (configuration && configuration.current) {
       const { username, password } = this.globalConfig.credentials;
+      this.log(`You're logged for product ${username}`);
 
       const config = {
         mode: 'product',

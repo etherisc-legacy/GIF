@@ -3,8 +3,10 @@ require('dotenv').config();
 
 
 if (require.main === module) {
+  // we are on commandline
   module.exports = require('@oclif/command');
 } else {
+  // we are an imported module
   const Amqp = require('@etherisc/amqp');
   const GlobalConfig = require('./lib/GlobalConfig');
   const Gif = require('./lib/Gif');
