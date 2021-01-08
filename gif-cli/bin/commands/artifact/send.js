@@ -31,7 +31,7 @@ class SendArtifact extends BaseCommand {
     if (!deployment) {
       this.error(this.errorMessages.noDeployment);
     }
-
+    this.log(`Sending ${artifact.contractName} to ${network}, networkId=${networkInfo.id}, version ${this.config.version}`);
     const response = await this.gif.sendArtifact({
       network,
       networkId: networkInfo.id,

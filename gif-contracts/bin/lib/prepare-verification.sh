@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 mkdir -p ./verification
 
@@ -16,21 +16,14 @@ flatten ./contracts/services/OracleOwnerService.sol ./verification/OracleOwnerSe
 # Policy flows
 flatten ./contracts/policyFlows/PolicyFlowDefault.sol ./verification/PolicyFlowDefault.txt
 # Registry module
-flatten ./contracts/modules/Registry/Registry.sol ./verification/Registry.txt
-flatten ./contracts/modules/Registry/RegistryController.sol ./verification/RegistryController.txt
-# License modulecl
-flatten ./contracts/modules/License/License.sol ./verification/License.txt
-flatten ./contracts/modules/License/LicenseController.sol ./verification/LicenseController.txt
+flatten ./contracts/modules/registry/Registry.sol ./verification/Registry.txt
+flatten ./contracts/modules/registry/RegistryController.sol ./verification/RegistryController.txt
+# License module
+flatten ./contracts/modules/license/License.sol ./verification/License.txt
+flatten ./contracts/modules/license/LicenseController.sol ./verification/LicenseController.txt
 # Policy module
-flatten ./contracts/modules/Policy/Policy.sol ./verification/Policy.txt
-flatten ./contracts/modules/Policy/PolicyController.sol ./verification/PolicyController.txt
+flatten ./contracts/modules/policy/Policy.sol ./verification/Policy.txt
+flatten ./contracts/modules/policy/PolicyController.sol ./verification/PolicyController.txt
 # Query module
-flatten ./contracts/modules/Query/Query.sol ./verification/Query.txt
-flatten ./contracts/modules/Query/QueryController.sol ./verification/QueryController.txt
-# Example apps
-flatten ./contracts/examples/FlightDelayManual/FlightDelayManual.sol ./verification/FlightDelayManual.txt
-flatten ./contracts/examples/FlightDelayOraclize/FlightDelayOraclize.sol ./verification/FlightDelayOraclize.txt
-flatten ./contracts/examples/OraclizeBridgeOracles/FlightRatingsOracle.sol ./verification/FlightRatingsOracle.txt
-flatten ./contracts/examples/OraclizeBridgeOracles/FlightStatusesOracle.sol ./verification/FlightStatusesOracle.txt
-# Truffle
-flatten ./contracts/Migrations.sol ./verification/Migration.txt
+flatten ./contracts/modules/query/Query.sol ./verification/Query.txt
+flatten ./contracts/modules/query/QueryController.sol ./verification/QueryController.txt

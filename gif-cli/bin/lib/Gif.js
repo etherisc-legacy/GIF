@@ -469,7 +469,7 @@ class Gif extends EventEmitter {
         },
       });
 
-      this._consumers.subMessageType = true;
+      this._consumers[subMessageType] = true;
     }
 
     const requestId = uuid();
