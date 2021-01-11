@@ -42,8 +42,7 @@ class Contracts {
       if (artifactContent.networks[networkId]) {
         this.log.info(`Publishing ${artifactContent.contractName} at ${artifactContent.networks[networkId].address}`);
 
-        // TODO: get FDD contracts out / separate
-        const product = artifactContent.contractName.match(/Flight/) ? 'fdd' : 'platform';
+        const product = 'platform';
 
         await this.amqp.publish({
           messageType: 'contractDeployment',

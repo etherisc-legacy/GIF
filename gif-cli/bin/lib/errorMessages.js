@@ -14,6 +14,7 @@ module.exports = {
   noDeployment: 'No deployment',
   noProduct: 'No such product',
   noProducts: 'No available products',
+  noVersion: 'Contract has no VERSION field',
   not: 'Reserved name',
   notConnectedToGif: 'You are not logged in or product is not provided',
   notEqualPasswords: 'Passwords are not equal',

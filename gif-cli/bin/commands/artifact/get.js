@@ -22,10 +22,9 @@ class GetArtifact extends BaseCommand {
     if (response.error) {
       this.error(response.error);
     } else {
-      this.log(response);
+      response.abi = JSON.parse(JSON.parse(response.abi));
+      this.log(JSON.stringify(response, null, 2));
     }
-
-    // this.gif.shutdown();
   }
 }
 

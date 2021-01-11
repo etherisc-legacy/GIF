@@ -5,9 +5,9 @@ const { Command } = require('@oclif/command');
 const { cli } = require('cli-ux');
 const moment = require('moment');
 const Amqp = require('@etherisc/amqp');
+const chalk = require('chalk');
 const Gif = require('./Gif');
 const Api = require('./Api');
-const eth = require('./eth');
 const GlobalConfig = require('./GlobalConfig');
 const errorMessages = require('./errorMessages');
 
@@ -22,6 +22,34 @@ class BaseCommand extends Command {
    */
   get cli() {
     return cli;
+  }
+
+  /**
+   *
+   * @param{string} label
+   * @param{string} msg
+   */
+  log(label, msg) {
+    console.log(chalk` {green   > ${msg ? label : 'Info'}:} ${msg || label}`);
+  }
+
+
+  /**
+   *
+   * @param {error} error
+   * @returns {Promise<void>}
+   */
+  async catch(error) {
+    if (error instanceof Error) {
+      console.log(chalk`{red    > Error: } ${error.message}`);
+      if (process.env.DEBUG) {
+        console.log(error.stack);
+      }
+      throw (error);
+    } else {
+      console.log(chalk`{red    > Error: } ${error}`);
+      throw (new Error(error));
+    }
   }
 
   /**
@@ -63,9 +91,6 @@ class BaseCommand extends Command {
       this.api.setAuthToken(this.globalConfig.token);
     }
 
-    // Eth
-    this.eth = eth;
-
     // Initialize and configure AMQP and Gif
     const { configuration } = this.globalConfig;
     if (configuration && configuration.current) {
@@ -85,8 +110,7 @@ class BaseCommand extends Command {
       const info = {
         product: username,
       };
-
-      this.gif = new Gif(amqp, info, this.eth, this.error);
+      this.gif = await new Gif(amqp, info, this.catch);
     }
 
     this.moment = moment;
@@ -101,8 +125,10 @@ class BaseCommand extends Command {
   async finally() {
     if (this.gif && this.gif._connected) {
       await this.gif.shutdown();
-      process.exit(0);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // force exit
     }
+    process.exit(0);
   }
 }
 

@@ -3,9 +3,33 @@ const { flags } = require('@oclif/command');
 const BaseCommand = require('../../lib/BaseCommand');
 
 /**
+ *
+ * @param{{}} obj
+ * @param{{}} cond
+ * @returns {*}
+ */
+const objectFind = (obj, cond) => Object.keys(obj).map(item => obj[item]).find(cond);
+
+/**
  * Create or replace artifact for products' contract
  */
 class SendArtifact extends BaseCommand {
+  /**
+   *
+   * @param{{}} artifact
+   * @returns {*}
+   */
+  getVersion(artifact) {
+    const { contractName, ast } = artifact;
+    const { nodes } = ast;
+    const main = objectFind(nodes, item => item.name === contractName);
+    const versionNode = objectFind(main.nodes, item => item.name === 'VERSION');
+    if (!versionNode) {
+      this.error(this.errorMessages.noVersion);
+    }
+    return versionNode.value.value;
+  }
+
   /**
    * Run command
    * @return {Promise<void>}
@@ -17,32 +41,27 @@ class SendArtifact extends BaseCommand {
 
     await this.gif.connect();
 
-    const { flags: { file, network } } = this.parse(SendArtifact);
-
-    const networkInfo = this.eth.networkByName(network);
-    if (!networkInfo) {
-      this.error(this.errorMessages.unknownNetwork);
-    }
+    const { flags: { file, network, networkId } } = this.parse(SendArtifact);
 
     const artifactContent = fs.read(file, 'utf8');
     const artifact = JSON.parse(artifactContent);
-
-    const deployment = artifact.networks[networkInfo.id];
+    const version = this.getVersion(artifact);
+    const deployment = artifact.networks[networkId];
     if (!deployment) {
       this.error(this.errorMessages.noDeployment);
     }
-    this.log(`Sending ${artifact.contractName} to ${network}, networkId=${networkInfo.id}, version ${this.config.version}`);
+    this.log(`Sending ${artifact.contractName} to ${network}, networkId=${networkId}, version ${version}`);
     const response = await this.gif.sendArtifact({
       network,
-      networkId: networkInfo.id,
+      networkId,
       artifact: artifactContent,
-      version: this.config.version,
+      version,
     });
 
     if (response.error) {
       this.error(response.error);
     } else {
-      this.log(response);
+      this.log(JSON.stringify(response, null, 2));
     }
 
     await this.gif.shutdown();
@@ -52,6 +71,7 @@ class SendArtifact extends BaseCommand {
 SendArtifact.flags = {
   file: flags.string({ char: 'f', description: 'truffle artifacts file', required: true }),
   network: flags.string({ char: 'n', description: 'network', required: true }),
+  networkId: flags.integer({ char: 'i', description: 'networkId', required: true }),
 };
 
 

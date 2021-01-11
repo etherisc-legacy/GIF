@@ -36,18 +36,25 @@ class Gif extends EventEmitter {
    * Constructor
    * @param {Amqp} amqp
    * @param {Object} info
-   * @param {Object} eth
    * @param {Function} errorHandler
    */
-  constructor(amqp, info, eth, errorHandler) {
+  constructor(amqp, info, errorHandler) {
     super();
 
     this._amqp = amqp;
     this._info = info;
-    this._eth = eth;
     this._error = errorHandler;
     this._connected = true;
     this._consumers = {};
+  }
+
+  /**
+   *
+   * @param{string} label
+   * @param{string} msg
+   */
+  log(label, msg) {
+    console.log(chalk` {green   > ${msg ? label : 'Info'}:} ${msg || label}`);
   }
 
   /**
@@ -67,7 +74,6 @@ class Gif extends EventEmitter {
       await this._amqp.createConnections();
       this._connected = true;
     } catch (e) {
-      console.log(e);
       this._error(errorMessages.failedToConnect(this._info.product));
     }
   }
@@ -90,16 +96,16 @@ class Gif extends EventEmitter {
    * Shutdown
    */
   async shutdown() {
-    console.log('Shutdown connection...');
+    this.log('Info', 'Shutdown connection...');
     try {
       if (this._persistantChannels) {
         await this._amqp.closeChannels();
       }
 
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 1500));
       await this._amqp.closeConnections();
       this._connected = false;
-      console.log('Bye...');
+      this.log('Info', 'Shutdown finished.');
     } catch (e) {
       throw new Error(e);
     }
@@ -453,11 +459,12 @@ class Gif extends EventEmitter {
    * @private
    */
   async _requestWithPersistantChannels({ payload, pubMessageType, subMessageType }) {
+    console.log('using persistant channels');
     if (!this._consumers[subMessageType]) {
       await this._amqp.consume({
         product: this._product,
         messageType: subMessageType,
-        messageVersion: '1.*',
+        messageTypeVersion: '1.*',
         handler: ({ content, properties }) => {
           const { requestId } = properties.headers;
 

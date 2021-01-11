@@ -1028,6 +1028,8 @@ class PolicyStorage {
    * @return {Promise<{address: *, name: *, abi: string, version: *, network: *}>}
    */
   async getArtifact(product, networkName, contractName) {
+    console.log(product, networkName, contractName);
+
     const { Contracts } = this._models;
 
     const contract = await Contracts.query().findOne({

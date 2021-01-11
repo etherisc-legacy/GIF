@@ -10,8 +10,6 @@ if (require.main === module) {
   const Amqp = require('@etherisc/amqp');
   const GlobalConfig = require('./lib/GlobalConfig');
   const Gif = require('./lib/Gif');
-  const eth = require('./lib/eth');
-
   const { GIF_AMQP_HOST, GIF_AMQP_PORT } = process.env;
   const host = GIF_AMQP_HOST || 'amqp-sandbox.etherisc.com';
   const port = GIF_AMQP_PORT || 5673;
@@ -55,7 +53,7 @@ if (require.main === module) {
     const amqp = new Amqp(connectionConfig, username, version);
 
     const info = { product: connectionConfig.username };
-    const gif = new Gif(amqp, info, eth, errorHandler);
+    const gif = new Gif(amqp, info, errorHandler);
 
     await gif.connect();
     await gif.usePersistantChannels();

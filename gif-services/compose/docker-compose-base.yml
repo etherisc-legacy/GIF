@@ -10,7 +10,6 @@ services:
       - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
     ports:
-      # RabbitMQ ports are visible externally!
       - "${RABBITMQ_PORT}:5672"
       - "${RABBITMQ_ADMIN_PORT}:15672"
 
