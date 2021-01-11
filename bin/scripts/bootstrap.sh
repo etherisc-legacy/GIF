@@ -2,7 +2,7 @@
 
 set -e
 
-for package in `ls -d gif-microservices/* gif-contracts shared/* cli`
+for package in `ls -d gif-microservices/* gif-contracts shared/* gif-cli`
 do
   echo "Install dependencies for $package"
   (
