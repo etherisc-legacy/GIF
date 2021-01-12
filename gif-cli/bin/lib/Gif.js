@@ -459,7 +459,6 @@ class Gif extends EventEmitter {
    * @private
    */
   async _requestWithPersistantChannels({ payload, pubMessageType, subMessageType }) {
-    console.log('using persistant channels');
     if (!this._consumers[subMessageType]) {
       await this._amqp.consume({
         product: this._product,
@@ -481,7 +480,7 @@ class Gif extends EventEmitter {
 
     const requestId = uuid();
 
-    const result = await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const timeout = scheduleTimeout(reject);
       /* eslint-disable-next-line require-jsdoc */
       const handler = (content) => {
@@ -503,8 +502,6 @@ class Gif extends EventEmitter {
         },
       });
     });
-
-    return result;
   }
 
   /**
