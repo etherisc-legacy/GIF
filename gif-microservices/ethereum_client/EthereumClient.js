@@ -149,7 +149,7 @@ class EthereumClient {
    */
   async onTransactionRequest({ content, fields, properties }) {
     const {
-      contractName, methodName, key, parameters,
+      contractName, methodName, parameters,
     } = content;
 
     const { product } = properties.headers;
@@ -223,7 +223,6 @@ class EthereumClient {
           product,
           contractName,
           methodName,
-          key,
           result,
           networkName: process.env.NETWORK_NAME,
         },
@@ -242,7 +241,7 @@ class EthereumClient {
    */
   async onCallRequest({ content, fields, properties }) {
     const {
-      contractName, methodName, key, parameters,
+      contractName, methodName, parameters,
     } = content;
 
     const { product } = properties.headers;
@@ -297,7 +296,6 @@ class EthereumClient {
         product,
         contractName,
         methodName,
-        key,
         result,
         networkName: process.env.NETWORK_NAME,
       },
