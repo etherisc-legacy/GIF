@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+
+  Rabbitmq:
+    container_name: "${NODE_ENV}_rabbitmq"
+    image: "${RABBITMQ_IMAGE}"
+    command: sh -c "rabbitmq-plugins enable rabbitmq_management; rabbitmq-server;"
+    volumes:
+      - ../configurations/rabbitmq/local-rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ../configurations/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+      - "${RABBITMQ_PORT}:5672"
+      - "${RABBITMQ_ADMIN_PORT}:15672"
+
+  PostgreSql:
+    container_name: "${NODE_ENV}_postgresql"
+    image:  "${POSTGRESQL_IMAGE}"
+    restart: always
+    environment:
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: postgresql
+    volumes:
+      - "./volumes/${NODE_ENV}_postgresql:/var/lib/postgresql"
+    ports:
+      - "${POSTGRESQL_PORT}:5432"
+
+  Minio:
+    container_name: "${NODE_ENV}_minio"
+    image: "${MINIO_IMAGE}"
+    command: server /data
+    restart: always
+    environment:
+      MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
+      MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
+    volumes:
+      - "./volumes/${NODE_ENV}_minio:/data"
+    ports:
+      - "127.0.0.1:${MINIO_PORT}:9000"

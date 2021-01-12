@@ -1,0 +1,37 @@
+{
+  "name": "@etherisc/notifications",
+  "version": "1.1.0",
+  "description": "Etherisc Notifications Microservice",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/etherisc/GIF.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "create:migration": "knex migrate:make",
+    "coverage": "nyc mocha",
+    "check:coverage": "nyc --check-coverage --statements 70 --functions 70 --lines 70 --branches 70 mocha"
+  },
+  "dependencies": {
+    "@etherisc/microservice": "^0.6.7-sandbox",
+    "dotenv": "^7.0.0",
+    "emailjs": "^2.2.0",
+    "fs-extra": "^9.0.1",
+    "handlebars": "^4.7.6",
+    "knex": "^0.21.13",
+    "lodash": "^4.17.20",
+    "mocha": "^8.2.1",
+    "objection": "^1.6.11",
+    "telegrambot": "^0.1.0",
+    "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "nyc": "^15.1.0",
+    "should": "^13.2.3",
+    "should-sinon": "0.0.6",
+    "sinon": "^7.5.0"
+  }
+}

@@ -1,3 +1,0 @@
-contract('Registry module', () => {
-
-});

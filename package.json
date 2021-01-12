@@ -1,6 +1,11 @@
 {
   "name": "@etherisc/dip-platform",
   "description": "Etherisc Decentralized Insurance Platform",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/etherisc/GIF.git"
+  },
+  "license": "Apache-2.0",
   "private": true,
   "engines": {
     "node": "11.12.0",
@@ -11,15 +16,15 @@
     "deploy:docker": "echo 'Deploy to Docker-for-Desktop Kubernetes'; DEPLOY_DESTINATION=docker ./bin/run deploy",
     "deploy:gke:secret": "echo Deploy secrets to GKE; ./bin/run deploySecret",
     "deploy:gke": "echo 'Deploy to GKE'; DEPLOY_DESTINATION=gke ./bin/run deploy",
-    "bootstrap": "./bin/bootstrap.sh && lerna link",
-    "bootstrap:update": "./bin/update_locks.sh ",
+    "bootstrap": "bin/scripts/bootstrap.sh && lerna link",
+    "bootstrap:update": "bin/scripts/update_locks.sh ",
     "clean": "echo 'Cleaning local /node_modules folders'; lerna clean --concurrency 100 --progress",
     "migrate": "echo 'Run database migrations for packages'; lerna run migrate",
     "migrate:test": "echo 'Run database migrations for packages'; NODE_ENV=test lerna run migrate",
     "seed": "lerna run seed",
-    "dev": "echo 'Start/Stop/Delete microservices'; ./bin/run_microservices.sh",
+    "dev": "echo 'Start/Stop/Delete microservices'; bin/scripts/run_microservices.sh",
     "dev:env": "echo 'Set env variables'; ./bin/run setEnv",
-    "dev:services": "echo Start dockerized containers; ./bin/dev_services.sh",
+    "dev:services": "echo Start dockerized containers; bin/scripts/dev_services.sh",
     "lint": "echo 'Lint javascript files'; eslint --ext js .",
     "lint:fix": "echo 'Lint javascript files'; eslint --ext js --fix .",
     "docs": "echo 'Generate documentation'; jsdoc -c .jsdoc.json",
@@ -33,7 +38,7 @@
     "*"
   ],
   "oclif": {
-    "commands": "./commands",
+    "commands": "./bin/commands",
     "plugins": [
       "@oclif/plugin-help"
     ]

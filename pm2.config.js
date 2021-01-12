@@ -23,7 +23,7 @@ const apps = services.map(service => ({
   name: `${NODE_ENV}-${service}`,
   script: 'bootstrap.js',
   watch: '.',
-  cwd: `core_microservices/${service}`,
+  cwd: `gif-microservices/${service}`,
   autorestart: false,
 }));
 
