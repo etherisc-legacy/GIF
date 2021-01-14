@@ -1,4 +1,5 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 import "./QueryStorageModel.sol";
 import "../../IOracle.sol";
@@ -231,8 +232,9 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_ASSIGNED"
         );
 
-        _proposalId = proposedOracleIds[_oracleTypeName].length++;
-        proposedOracleIds[_oracleTypeName][_proposalId] = _oracleId;
+        _proposalId = proposedOracleIds[_oracleTypeName].length;
+        proposedOracleIds[_oracleTypeName].push(_oracleId);
+
 
         emit LogOracleProposedToType(_oracleTypeName, _oracleId, _proposalId);
     }
@@ -315,7 +317,8 @@ contract QueryController is QueryStorageModel, ModuleController {
     ) external onlyPolicyFlow("Query") returns (uint256 _requestId) {
         // todo: validate
 
-        _requestId = oracleRequests.length++;
+        _requestId = oracleRequests.length;
+        oracleRequests.push();
 
         // todo: get token from product
 
@@ -360,13 +363,13 @@ contract QueryController is QueryStorageModel, ModuleController {
 
         // todo: send reward
 
-        _responseId = oracleResponses.length++;
-        oracleResponses[_responseId] = OracleResponse(
+        _responseId = oracleResponses.length;
+        oracleResponses.push(OracleResponse(
             _requestId,
             _responder,
             block.timestamp,
             status
-        );
+        ));
 
         emit LogOracleResponded(_requestId, _responseId, _responder, status);
     }

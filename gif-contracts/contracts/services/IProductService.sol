@@ -1,4 +1,5 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 interface IProductService {
     function register(bytes32 _productName, bytes32 _policyFlow)

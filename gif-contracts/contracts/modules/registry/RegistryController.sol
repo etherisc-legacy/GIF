@@ -1,4 +1,5 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 import "./RegistryStorageModel.sol";
 import "../../shared/BaseModuleController.sol";
@@ -80,8 +81,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
             contractNames[_release][indexToDelete] = contractNames[_release][countContracts - 1];
         }
 
-        contractNames[_release].length--;
-        delete contracts[_release][_contractName];
+        contractNames[_release].pop();
 
         emit LogContractDeregistered(_release, _contractName);
     }
@@ -139,6 +139,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
      */
     function getContract(bytes32 _contractName)
         public
+        override
         view
         returns (address _addr)
     {
@@ -147,6 +148,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
 
     function getService(bytes32 _contractName)
         public
+        override
         view
         returns (address _addr)
     {

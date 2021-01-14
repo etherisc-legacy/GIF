@@ -1,4 +1,5 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 import "../shared/WithRegistry.sol";
 import "../shared/Delegator.sol";
@@ -9,7 +10,7 @@ contract ProductService is WithRegistry, Delegator {
 
     constructor(address _registry) public WithRegistry(_registry) {}
 
-    function() external {
+    fallback() external {
         (bool authorized, address policyFlow) = license().authorize(msg.sender);
 
         require(authorized == true, "ERROR::NOT_AUTHORIZED");

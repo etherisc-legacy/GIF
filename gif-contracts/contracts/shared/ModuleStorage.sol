@@ -1,11 +1,12 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 import "./BaseModuleStorage.sol";
 import "./WithRegistry.sol";
 
-contract ModuleStorage is WithRegistry, BaseModuleStorage {
+abstract contract ModuleStorage is WithRegistry, BaseModuleStorage {
     /* solhint-disable payable-fallback */
-    function() external {
+    fallback() override external {
         // todo: restrict to controllers
         _delegate(controller);
     }

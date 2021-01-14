@@ -1,4 +1,5 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 import "../modules/registry/IRegistryController.sol";
 import "./AccessModifiers.sol";
@@ -16,6 +17,7 @@ contract WithRegistry is AccessModifiers {
 
     function getService(bytes32 _contractName)
         public
+        override
         view
         returns (address _addr)
     {
@@ -24,6 +26,7 @@ contract WithRegistry is AccessModifiers {
 
     function getContract(bytes32 _contractName)
         public
+        override
         view
         returns (address _addr)
     {

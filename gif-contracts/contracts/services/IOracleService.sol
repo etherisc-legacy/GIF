@@ -1,4 +1,5 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 interface IOracleService {
     function respond(uint256 _requestId, bytes calldata _data)

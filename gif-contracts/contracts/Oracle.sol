@@ -1,10 +1,11 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 import "./services/IOracleService.sol";
 import "./shared/RBAC.sol";
 import "./IOracle.sol";
 
-contract Oracle is IOracle, RBAC {
+abstract contract Oracle is IOracle, RBAC {
     IOracleService public oracleService;
 
     modifier onlyQuery {

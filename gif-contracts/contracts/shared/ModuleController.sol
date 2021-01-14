@@ -1,11 +1,12 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 import "./BaseModuleController.sol";
 import "./WithRegistry.sol";
 
-contract ModuleController is WithRegistry, BaseModuleController {
+abstract contract ModuleController is WithRegistry, BaseModuleController {
     /* solhint-disable payable-fallback */
-    function() external {
+    fallback() external {
         revert("ERROR::FALLBACK_FUNCTION_NOW_ALLOWED");
     }
     /* solhint-enable payable-fallback */

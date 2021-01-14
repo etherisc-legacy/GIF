@@ -1,4 +1,5 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 interface IInstanceOperatorService {
     function assignController(address _storage, address _controller) external;

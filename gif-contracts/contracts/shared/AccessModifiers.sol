@@ -1,6 +1,7 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
-contract AccessModifiers {
+abstract contract AccessModifiers {
     modifier onlyInstanceOperator() {
         require(
             msg.sender == getService("InstanceOperator"),
@@ -44,11 +45,13 @@ contract AccessModifiers {
 
     function getContract(bytes32 _contractName)
         public
+        virtual
         view
         returns (address _addr);
 
     function getService(bytes32 _contractName)
         public
+        virtual
         view
         returns (address _addr);
 }

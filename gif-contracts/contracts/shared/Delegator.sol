@@ -1,4 +1,5 @@
 pragma solidity 0.6.11;
+// SPDX-License-Identifier: Apache-2.0
 
 contract Delegator {
     function _delegate(address _implementation) internal {
@@ -9,14 +10,14 @@ contract Delegator {
         /* solhint-disable no-inline-assembly */
         assembly {
             let result := delegatecall(
-                gas,
+                gas(),
                 _implementation,
                 add(data, 0x20),
                 mload(data),
                 0,
                 0
             )
-            let size := returndatasize
+            let size := returndatasize()
             let ptr := mload(0x40)
             returndatacopy(ptr, 0, size)
             switch result
