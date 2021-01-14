@@ -1,6 +1,6 @@
-pragma solidity 0.5.12;
+pragma solidity 0.6.11;
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
 import "../modules/license/ILicenseController.sol";
 import "../modules/access/IAccessController.sol";
 import "../modules/registry/IRegistryController.sol";

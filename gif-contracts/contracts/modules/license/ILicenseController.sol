@@ -1,4 +1,4 @@
-pragma solidity 0.5.12;
+pragma solidity 0.6.11;
 
 interface ILicenseController {
     function register(bytes32 _name, address _addr, bytes32 _policyFlow)

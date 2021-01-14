@@ -1,16 +1,19 @@
-pragma solidity 0.5.12;
+pragma solidity 0.6.11;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./shared/RBAC.sol";
 import "./services/IProductService.sol";
+import "./services/IRiskPoolService.sol";
 
 contract Product is RBAC {
     using SafeMath for *;
 
     bool public developmentMode = false;
     bool public maintenanceMode = false;
+    bool public onChainPaymentMode = false;
 
     IProductService public productService;
+    IRiskPoolService public riskPoolService;
 
     modifier onlySandbox {
         require(
@@ -28,19 +31,24 @@ contract Product is RBAC {
         _;
     }
 
-    constructor(address _productService, bytes32 _name, bytes32 _policyFlow)
+    constructor(address _productService, address _riskPoolService, bytes32 _name, bytes32 _policyFlow)
         internal
     {
         productService = IProductService(_productService);
+        riskPoolService = IRiskPoolService(_riskPoolService);
         _register(_name, _policyFlow);
     }
 
-    function toggleDevelopmentMode() internal {
-        developmentMode = !developmentMode;
+    function setDevelopmentMode(bool _newMode) internal {
+        developmentMode = _newMode;
     }
 
-    function toggleMaintenanceMode() internal {
-        maintenanceMode = !maintenanceMode;
+    function setMaintenanceMode(bool _newMode) internal {
+        maintenanceMode = _newMode;
+    }
+
+    function setOnChainPaymentMode(bool _newMode) internal {
+        onChainPaymentMode = _newMode;
     }
 
     function _register(bytes32 _productName, bytes32 _policyFlow) internal {
@@ -59,6 +67,12 @@ contract Product is RBAC {
             _currency,
             _payoutOptions
         );
+
+        // for on-chain payments, we forward the premium to the premium collector contract.
+        if (onChainPaymentMode) {
+            riskPoolService.getRiskPoolAddress().transfer(msg.value);
+        }
+
     }
 
     function _underwrite(uint256 _applicationId)
@@ -98,6 +112,12 @@ contract Product is RBAC {
         returns (uint256 _remainder)
     {
         _remainder = productService.payout(_payoutId, _amount);
+        // for on-chain payments, we forward the premium to the premium collector contract.
+        if (onChainPaymentMode) {
+            riskPoolService.getRiskPoolAddress().transfer(msg.value);
+        }
+
+
     }
 
     function _getPayoutOptions(uint256 _applicationId)

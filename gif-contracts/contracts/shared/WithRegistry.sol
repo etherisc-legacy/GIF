@@ -1,4 +1,4 @@
-pragma solidity 0.5.12;
+pragma solidity 0.6.11;
 
 import "../modules/registry/IRegistryController.sol";
 import "./AccessModifiers.sol";

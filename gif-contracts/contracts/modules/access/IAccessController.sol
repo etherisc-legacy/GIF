@@ -1,4 +1,4 @@
-pragma solidity 0.5.12;
+pragma solidity 0.6.11;
 
 interface IAccessController {
     function createRole(bytes32 _role) external;
