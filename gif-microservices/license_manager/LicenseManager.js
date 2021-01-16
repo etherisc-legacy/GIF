@@ -1,3 +1,4 @@
+const Amqp = require('@etherisc/amqp');
 const models = require('./models');
 const routes = require('./routes');
 const services = require('./services');
@@ -19,6 +20,7 @@ class LicenseManager {
     amqp, http, router, config, log, db,
   }) {
     this.amqp = amqp;
+    this.amqpTrusted = this.amqpTrustedInit({ config, log });
     this.config = config;
     this.log = log;
     this.db = db;
@@ -27,11 +29,45 @@ class LicenseManager {
     const dependencies = {
       config,
       amqp,
+      amqpTrusted: this.amqpTrusted,
       log,
       models: this.models,
     };
     const serviceDependencies = services({ ...dependencies });
     routes({ router, ...dependencies, ...serviceDependencies });
+  }
+
+  /**
+   *
+   * @param{{}} config
+   * @param{{}} log
+   * @returns {*}
+   */
+  amqpTrustedInit({ config, log }) {
+    const {
+      appName, appVersion,
+    } = config;
+    const {
+      AMQP_HOST, AMQP_PORT, AMQP_USERNAME, AMQP_PASSWORD,
+    } = process.env;
+
+    const messageBrokerConfig = {
+      mode: 'core',
+      username: AMQP_USERNAME || 'platform',
+      password: AMQP_PASSWORD || 'guest',
+      host: AMQP_HOST || 'localhost',
+      port: AMQP_PORT || '5673',
+    };
+
+    const amqp = new Amqp(
+      messageBrokerConfig,
+      appName,
+      appVersion,
+    );
+
+    log.info(`Connected in AMQP mode [core] with host ${messageBrokerConfig.host} at port ${messageBrokerConfig.port} appName=${appName} appVersion=${appVersion}`);
+
+    return amqp;
   }
 
   /**
@@ -117,6 +153,8 @@ class LicenseManager {
         }
       },
     });
+    await this.amqpTrusted.createConnections();
+    await this.amqpTrusted.createChannels();
   }
 }
 

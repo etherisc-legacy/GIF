@@ -5,6 +5,7 @@ const uuid = require('uuid/v1');
 const _ = require('lodash');
 const chalk = require('chalk');
 const columnify = require('columnify');
+const axios = require('axios');
 const errorMessages = require('./errorMessages');
 const docs = require('./docs');
 
@@ -35,17 +36,22 @@ class Gif extends EventEmitter {
   /**
    * Constructor
    * @param {Amqp} amqp
+   * @param {string} apiUri
    * @param {Object} info
    * @param {Function} errorHandler
    */
-  constructor(amqp, info, errorHandler) {
+  constructor(amqp, apiUri, info, errorHandler) {
     super();
 
     this._amqp = amqp;
+    this._apiUri = apiUri;
     this._info = info;
     this._error = errorHandler;
     this._connected = true;
     this._consumers = {};
+    this._api = axios.create({
+      baseURL: apiUri,
+    });
   }
 
   /**
@@ -297,6 +303,22 @@ class Gif extends EventEmitter {
   }
 
   /**
+   *
+   * @param{string} product
+   * @param{string} networkName
+   * @param{string} contractName
+   * @returns {Promise<any>}
+   */
+  async getArtifact(product, networkName, contractName) {
+    const response = await this.api.get('/api/artifact/get', { data: { product, networkName, contractName } });
+
+    if (response.error) {
+      this.error(response.error);
+    }
+    return JSON.parse(JSON.parse(response.abi));
+  }
+
+  /**
    * Send artifact
    * @param {Object} payload
    * @return {Promise<any|{error: string}>}
@@ -309,24 +331,6 @@ class Gif extends EventEmitter {
       payload,
       pubMessageType: 'contractDeployment',
       subMessageType: 'contractDeploymentResult',
-    });
-  }
-
-  /**
-   * Get artifacts
-   * @param {String} product
-   * @param {String} networkName
-   * @param {String} contractName
-   * @return {Promise<any|{error: string}>}
-   */
-  async getArtifact(product, networkName, contractName) {
-    if (!contractName) {
-      return this.wrongArgument('gif.artifact.get');
-    }
-    return this.request({
-      payload: { product, networkName, contractName },
-      pubMessageType: 'getArtifact',
-      subMessageType: 'getArtifactResult',
     });
   }
 

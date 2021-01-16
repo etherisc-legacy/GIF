@@ -110,7 +110,7 @@ class BaseCommand extends Command {
       const info = {
         product: username,
       };
-      this.gif = await new Gif(amqp, info, this.catch);
+      this.gif = await new Gif(amqp, apiUri, info, this.catch);
     }
 
     this.moment = moment;

@@ -10,14 +10,8 @@ class GetArtifact extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
-    if (!this.gif) {
-      this.error(this.errorMessages.notConnectedToGif);
-    }
-
-    await this.gif.connect();
-
     const { flags: { product, networkName, contractName } } = this.parse(GetArtifact);
-    const response = await this.gif.getArtifact(product, networkName, contractName);
+    const response = await this.api.getArtifact(product, networkName, contractName);
 
     if (response.error) {
       this.error(response.error);

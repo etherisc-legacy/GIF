@@ -23,6 +23,20 @@ class Api {
   }
 
   /**
+   * Get artifacts
+   * @param {String} product
+   * @param {String} networkName
+   * @param {String} contractName
+   * @return {Promise<any|{error: string}>}
+   */
+  async getArtifact(product, networkName, contractName) {
+    if (!contractName) {
+      return this.wrongArgument('gif.artifact.get');
+    }
+    return this.client.get('/api/artifact/get', { data: { product, networkName, contractName } });
+  }
+
+  /**
    * Register new user
    * @param {String} firstname
    * @param {String} lastname

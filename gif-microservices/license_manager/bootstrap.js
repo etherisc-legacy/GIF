@@ -13,7 +13,16 @@ bootstrap(LicenseManager, {
   amqp: true,
   httpDevPort: process.env.API_PORT,
   httpAdditionalMiddleware: [
-    mount('/api', jwt({ secret: process.env.JWT_SECRET }).unless({ path: [/^\/api\/users/] })),
+    mount(
+      '/api',
+      jwt({ secret: process.env.JWT_SECRET })
+        .unless({
+          path: [
+            /^\/api\/users/,
+            /^\/api\/artifact\/get/,
+          ],
+        }),
+    ),
   ],
   appName: process.env.APP_NAME,
   appVersion: process.env.APP_VERSION,

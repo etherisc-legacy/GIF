@@ -10,11 +10,31 @@ if (require.main === module) {
   const Amqp = require('@etherisc/amqp');
   const GlobalConfig = require('./lib/GlobalConfig');
   const Gif = require('./lib/Gif');
-  const { GIF_AMQP_HOST, GIF_AMQP_PORT } = process.env;
+  const {
+    GIF_AMQP_HOST, GIF_AMQP_PORT, GIF_API_HOST, GIF_API_PORT,
+  } = process.env;
   const host = GIF_AMQP_HOST || 'amqp-sandbox.etherisc.com';
   const port = GIF_AMQP_PORT || 5673;
   const mode = 'product';
   const version = '1.0.0';
+
+  /**
+   *
+   * @returns {string}
+   */
+  function getApiUri() {
+    // Initialize and configure API
+    const apiHost = GIF_API_HOST
+      ? (GIF_API_HOST.startsWith('http://') || GIF_API_HOST.startsWith('https://')
+        ? GIF_API_HOST
+        : `http://${GIF_API_HOST}`)
+      : 'https://api-sandbox.etherisc.com';
+    const apiPort = GIF_API_PORT
+      ? `:${GIF_API_PORT}`
+      : '';
+    return `${apiHost}${apiPort}`;
+  }
+
 
   /**
    *
@@ -51,9 +71,9 @@ if (require.main === module) {
     }
 
     const amqp = new Amqp(connectionConfig, username, version);
-
+    const apiUri = getApiUri();
     const info = { product: connectionConfig.username };
-    const gif = new Gif(amqp, info, errorHandler);
+    const gif = new Gif(amqp, apiUri, info, errorHandler);
 
     await gif.connect();
     await gif.usePersistantChannels();
