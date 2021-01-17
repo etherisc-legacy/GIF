@@ -35,40 +35,44 @@ class SendArtifact extends BaseCommand {
    * @return {Promise<void>}
    */
   async run() {
-    if (!this.gif) {
-      this.error(this.errorMessages.notConnectedToGif);
-    }
-
-    await this.gif.connect();
-
-    const { flags: { file, network, networkId } } = this.parse(SendArtifact);
-
+    const {
+      flags: {
+        product, file, network, networkId,
+      },
+    } = this.parse(SendArtifact);
     const artifactContent = fs.read(file, 'utf8');
-    const artifact = JSON.parse(artifactContent);
-    const version = this.getVersion(artifact);
+    const artifactJSON = JSON.parse(artifactContent);
+    const artifact = {
+      contractName: artifactJSON.contractName,
+      abi: artifactJSON.abi,
+      networks: artifactJSON.networks,
+      compiler: artifactJSON.compiler,
+      updatedAt: artifactJSON.updatedAt,
+    };
+    const version = this.getVersion(artifactJSON);
     const deployment = artifact.networks[networkId];
     if (!deployment) {
       this.error(this.errorMessages.noDeployment);
     }
     this.log(`Sending ${artifact.contractName} to ${network}, networkId=${networkId}, version ${version}`);
-    const response = await this.gif.sendArtifact({
+    const response = await this.api.sendArtifact({
+      product,
       network,
       networkId,
-      artifact: artifactContent,
+      artifact: JSON.stringify(artifact),
       version,
     });
 
     if (response.error) {
       this.error(response.error);
     } else {
-      this.log(JSON.stringify(response, null, 2));
+      this.log(JSON.stringify(response.data));
     }
-
-    await this.gif.shutdown();
   }
 }
 
 SendArtifact.flags = {
+  product: flags.string({ char: 'p', description: 'product designator', required: true }),
   file: flags.string({ char: 'f', description: 'truffle artifacts file', required: true }),
   network: flags.string({ char: 'n', description: 'network', required: true }),
   networkId: flags.integer({ char: 'i', description: 'networkId', required: true }),

@@ -9,6 +9,18 @@ const getArtifactSchema = {
   additionalProperties: false,
 };
 
+const sendArtifactSchema = {
+  properties: {
+    product: { type: 'string' },
+    network: { type: 'string' },
+    networkId: { type: 'integer' },
+    artifact: { type: 'string' },
+    version: { type: 'string' },
+  },
+  required: ['product', 'network', 'networkId', 'artifact', 'version'],
+  additionalProperties: false,
+};
+
 const contractCallSchema = {
   properties: {
     product: { type: 'string' },
@@ -37,6 +49,18 @@ module.exports = async ({
     const artifact = await gifService.getArtifact(ctx.request.body);
 
     ctx.ok(artifact);
+  });
+
+  router.post('/api/artifact/send', async (ctx) => {
+    const validate = ajv.compile(sendArtifactSchema);
+    if (!validate(ctx.request.body)) {
+      ctx.badRequest({ error: validate.errors });
+      return;
+    }
+
+    const result = await gifService.sendArtifact(ctx.request.body);
+
+    ctx.ok(result);
   });
 
   router.get('/api/contract/call', async (ctx) => {

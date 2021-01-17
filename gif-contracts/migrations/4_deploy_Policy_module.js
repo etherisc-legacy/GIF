@@ -32,7 +32,7 @@ module.exports = progress(['License'], ['Policy'], async (deployer, networks, ac
 
   const policyStorageName = await policyStorage.NAME.call();
 
-  info('Register License module in Registry');
+  info('Register Policy module in Registry');
   await registry.register(policyStorageName, policyStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 });

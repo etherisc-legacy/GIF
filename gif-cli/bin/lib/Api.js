@@ -30,10 +30,30 @@ class Api {
    * @return {Promise<any|{error: string}>}
    */
   async getArtifact(product, networkName, contractName) {
-    if (!contractName) {
+    if (!product || !networkName || !contractName) {
       return this.wrongArgument('gif.artifact.get');
     }
     return this.client.get('/api/artifact/get', { data: { product, networkName, contractName } });
+  }
+
+  /**
+   * Get artifacts
+   * @param {String} product
+   * @param {String} network
+   * @param {number} networkId
+   * @param {{}} artifact
+   * @param {string} version
+   * @return {Promise<any|{error: string}>}
+   */
+  async sendArtifact({
+    product, network, networkId, artifact, version,
+  }) {
+    if (!product || !network || !networkId || !artifact || !version) {
+      return this.wrongArgument('gif.artifact.get');
+    }
+    return this.client.post('/api/artifact/send', {
+      product, network, networkId, artifact, version,
+    });
   }
 
   /**
@@ -66,7 +86,7 @@ class Api {
    * @return {*}
    */
   profile(id) {
-    return this.client.post('/api/users/profile', { id });
+    return this.client.get('/api/users/profile', { id });
   }
 
   /**

@@ -30,7 +30,7 @@ module.exports = progress(['Policy'], ['Query'], async (deployer, networks, acco
 
   const queryStorageName = await queryStorage.NAME.call();
 
-  info('Register License module in Registry');
+  info('Register Query module in Registry');
   await registry.register(queryStorageName, queryStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 });

@@ -152,16 +152,16 @@ class Gif extends EventEmitter {
 
   /**
    * Send artifact
-   * @param {String} product
    * @param {Object} payload
    * @return {Promise<any|{error: string}>}
    */
-  async sendArtifact(product, payload = {}) {
-    if (!payload.network && !payload.networkId && !payload.artifact && !payload.version) {
+  async sendArtifact(payload = {}) {
+    console.log(payload);
+    if (!payload.product || !payload.network || !payload.networkId || !payload.artifact || !payload.version) {
       return this.wrongArgument('gif.artifact.send');
     }
     return this.request({
-      product, // TODO: this is just a quick hack, put it in users profile
+      product: payload.product, // TODO: this is just a quick hack, put it in users profile
       payload,
       pubMessageType: 'contractDeployment',
       subMessageType: 'contractDeploymentResult',

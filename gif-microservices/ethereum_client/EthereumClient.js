@@ -106,6 +106,7 @@ class EthereumClient {
         throw new Error('Product not defined');
       }
 
+      console.log(artifact);
       const artifactObject = JSON.parse(artifact);
       const { address } = artifactObject.networks[networkId];
 
