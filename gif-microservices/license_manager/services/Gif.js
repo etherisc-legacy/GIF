@@ -29,10 +29,9 @@ const entities = {
  */
 class Gif extends EventEmitter {
   /**
-   * Constructor
-   * @param {Amqp} amqp_trusted
-   * @param {Object} info
-   * @param {Function} errorHandler
+   *
+   * @param{{}} amqpTrusted
+   * @param{{}} log
    */
   constructor({ amqpTrusted, log }) {
     super();
@@ -197,7 +196,7 @@ class Gif extends EventEmitter {
    * @return {Promise<*>}
    */
   async sendTransaction(product, contractName, methodName, parameters) {
-    if (!contractName && !methodName && !parameters) {
+    if (!contractName || !methodName || !parameters) {
       return this.wrongArgument('gif.contract.send');
     }
     const response = await this.request({
@@ -222,8 +221,10 @@ class Gif extends EventEmitter {
    * @param {Array} parameters
    * @return {Promise<*>}
    */
-  async callContract(product, contractName, methodName, parameters) {
-    if (!contractName && !methodName && !parameters) {
+  async callContract({
+    product, contractName, methodName, parameters,
+  }) {
+    if (!contractName || !methodName || !parameters) {
       return this.wrongArgument('gif.contract.call');
     }
 
