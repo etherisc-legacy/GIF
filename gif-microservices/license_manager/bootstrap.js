@@ -20,6 +20,7 @@ bootstrap(LicenseManager, {
           path: [
             /^\/api\/users/,
             /^\/api\/artifact\/get/,
+            /^\/api\/contract\/call/,
           ],
         }),
     ),

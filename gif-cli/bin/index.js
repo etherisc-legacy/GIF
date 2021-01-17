@@ -7,16 +7,10 @@ if (require.main === module) {
   module.exports = require('@oclif/command');
 } else {
   // we are an imported module
-  const Amqp = require('@etherisc/amqp');
-  const GlobalConfig = require('./lib/GlobalConfig');
   const Gif = require('./lib/Gif');
   const {
-    GIF_AMQP_HOST, GIF_AMQP_PORT, GIF_API_HOST, GIF_API_PORT,
+    GIF_API_HOST, GIF_API_PORT,
   } = process.env;
-  const host = GIF_AMQP_HOST || 'amqp-sandbox.etherisc.com';
-  const port = GIF_AMQP_PORT || 5673;
-  const mode = 'product';
-  const version = '1.0.0';
 
   /**
    *
@@ -54,30 +48,10 @@ if (require.main === module) {
    * @param {String} password
    * @returns {Promise}
    */
-  async function connect(username, password) {
-    const connectionConfig = {
-      mode, host, port,
-    };
-
-    if (!username || !password) {
-      const globalConfig = new GlobalConfig();
-      const creds = globalConfig.credentials;
-
-      connectionConfig.username = creds.username;
-      connectionConfig.password = creds.password;
-    } else {
-      connectionConfig.username = username;
-      connectionConfig.password = password;
-    }
-
-    const amqp = new Amqp(connectionConfig, username, version);
+  async function connect() {
     const apiUri = getApiUri();
-    const info = { product: connectionConfig.username };
-    const gif = new Gif(amqp, apiUri, info, errorHandler);
-
-    await gif.connect();
-    await gif.usePersistantChannels();
-
+    console.log(`Connected with GIF API at ${apiUri}`);
+    const gif = new Gif(apiUri, errorHandler);
     return gif.commands;
   }
 
