@@ -295,6 +295,7 @@ class Gif extends EventEmitter {
         },
         customHeaders: {
           requestId,
+          product,
         },
       });
     });
