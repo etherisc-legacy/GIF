@@ -11,6 +11,7 @@ contract Product is RBAC {
     bool public developmentMode = false;
     bool public maintenanceMode = false;
     bool public onChainPaymentMode = false;
+    uint256 public productId;
 
     IProductService public productService;
 
@@ -50,7 +51,7 @@ contract Product is RBAC {
     }
 
     function _register(bytes32 _productName, bytes32 _policyFlow) internal {
-        productService.register(_productName, _policyFlow);
+        productId = productService.register(_productName, _policyFlow);
     }
 
     function _newApplication(

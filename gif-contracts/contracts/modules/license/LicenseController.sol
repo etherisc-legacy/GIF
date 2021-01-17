@@ -17,6 +17,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
 
     /**
      * @dev Register new product
+     * _addr the address of the calling contract, i.e. the product contract to register.
      */
     function register(bytes32 _name, address _addr, bytes32 _policyFlow)
         external

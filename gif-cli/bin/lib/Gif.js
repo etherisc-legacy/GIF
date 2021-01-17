@@ -96,7 +96,7 @@ class Gif extends EventEmitter {
     if (response.error) {
       this.error(response.error);
     }
-    return JSON.parse(JSON.parse(response.abi));
+    return response.data;
   }
 
   /**
