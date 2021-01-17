@@ -14,7 +14,7 @@ const contractCallSchema = {
     product: { type: 'string' },
     contractName: { type: 'string' },
     methodName: { type: 'string' },
-    parameters: { type: 'object' },
+    parameters: {},
   },
   required: ['product', 'contractName', 'methodName', 'parameters'],
   additionalProperties: false,
