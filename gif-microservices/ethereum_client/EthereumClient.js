@@ -41,7 +41,11 @@ class EthereumClient {
   resetProvider() {
     if (!this._signer) return;
     this.stopProvider();
-    this._provider = new HDWalletProvider(process.env.MNEMONIC, process.env.WS_PROVIDER, 0, 1, false);
+    const hdWalletConfig = {
+      mnemonic: process.env.MNEMONIC,
+      providerOrUrl: process.env.HTTP_PROVIDER,
+    };
+    this._provider = new HDWalletProvider(hdWalletConfig);
     this._signer.setProvider(this._provider);
   }
 

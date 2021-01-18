@@ -3,8 +3,14 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 const { settings } = require('./package');
 
 
+const hdWalletConfig = {
+  mnemonic: process.env.MNEMONIC,
+  providerOrUrl: process.env.HTTP_PROVIDER,
+};
+
 console.log(`Deploying to Network ID = ${process.env.TRUFFLE_NETWORK_ID}`);
 console.log(`Truffle host = ${process.env.TRUFFLE_HOST}:${process.env.TRUFFLE_PORT}`);
+
 
 module.exports = {
   migrations_directory: process.env.MIGRATIONS_DIRECTORY || './migrations',
@@ -13,7 +19,7 @@ module.exports = {
   networks: {
 
     development: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER),
+      provider: () => new HDWalletProvider(hdWalletConfig),
       host: process.env.TRUFFLE_HOST,
       port: process.env.TRUFFLE_PORT,
       network_id: process.env.TRUFFLE_NETWORK_ID,
@@ -24,7 +30,7 @@ module.exports = {
     },
 
     staging: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER),
+      provider: () => new HDWalletProvider(hdWalletConfig),
       host: process.env.TRUFFLE_HOST,
       port: process.env.TRUFFLE_PORT,
       network_id: process.env.TRUFFLE_NETWORK_ID,
@@ -46,7 +52,7 @@ module.exports = {
     kovan: {
       // MNEMONIC: BIP39 mnemonic, e.g. https://iancoleman.io/bip39/#english
       // HTTP_PRODIVER: e.g. https://kovan.infura.io/<your-token>
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER),
+      provider: () => new HDWalletProvider(hdWalletConfig),
       network_id: 42,
       confirmation: 2,
       timeoutBlocks: 200,
@@ -58,7 +64,7 @@ module.exports = {
     rinkeby: {
       // MNEMONIC: BIP39 mnemonic, e.g. https://iancoleman.io/bip39/#english
       // HTTP_PRODIVER: e.g. https://rinkeby.infura.io/<your-token>
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, process.env.HTTP_PROVIDER),
+      provider: () => new HDWalletProvider(hdWalletConfig),
       network_id: 4,
       confirmation: 2,
       timeoutBlocks: 200,
