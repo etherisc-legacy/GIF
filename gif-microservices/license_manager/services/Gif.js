@@ -316,7 +316,6 @@ class Gif extends EventEmitter {
    * @return {{error: String}}
    */
   wrongArgument(cmd) {
-    this.cli.help(cmd);
     return this.errorHandler(new Error('Wrong arguments'));
   }
 }
