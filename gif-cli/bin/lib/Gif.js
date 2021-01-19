@@ -5,6 +5,7 @@ const _ = require('lodash');
 const chalk = require('chalk');
 const columnify = require('columnify');
 const axios = require('axios');
+const fs = require('fs-jetpack');
 const docs = require('./docs');
 
 
@@ -25,6 +26,72 @@ class Gif extends EventEmitter {
     this.api = axios.create({
       baseURL: apiUri,
     });
+  }
+
+  /**
+   *
+   * @param{{}} obj
+   * @param{{}} cond
+   * @returns {*}
+   */
+  objectFind(obj, cond) {
+    return Object.keys(obj).map(item => obj[item]).find(cond);
+  }
+
+  /**
+   *
+   * @param{{}} artifact
+   * @returns {*}
+   */
+  getVersion(artifact) {
+    const { contractName, ast } = artifact;
+    const { nodes } = ast;
+    const main = this.objectFind(nodes, item => item.name === contractName);
+    const versionNode = this.objectFind(main.nodes, item => item.name === 'VERSION');
+    if (!versionNode) {
+      this.errorHandler('Contract has no VERSION field');
+    }
+    return versionNode.value.value;
+  }
+
+  /**
+   *
+   * @param{string} file
+   * @param{string} network
+   * @param{number} networkId
+   * @param{string} product
+   * @returns {Promise<void>}
+   */
+  async sendArtifact(file, network, networkId, product) {
+    const artifactContent = fs.read(file, 'utf8');
+    const artifactJSON = JSON.parse(artifactContent);
+    const artifact = {
+      contractName: artifactJSON.contractName,
+      abi: artifactJSON.abi,
+      networks: artifactJSON.networks,
+      compiler: artifactJSON.compiler,
+      updatedAt: artifactJSON.updatedAt,
+    };
+    const version = this.getVersion(artifactJSON);
+    const deployment = artifact.networks[networkId];
+    if (!deployment) {
+      this.error(this.errorMessages.noDeployment);
+    }
+    this.log(`Sending ${artifact.contractName} to ${network}, networkId=${networkId}, version ${version}`);
+    const response = await this.api.sendArtifact({
+      product,
+      network,
+      networkId,
+      artifact: JSON.stringify(artifact),
+      version,
+    });
+
+    if (response.error) {
+      console.log(response);
+      this.error(response.error);
+    } else {
+      this.log(JSON.stringify(response.data));
+    }
   }
 
   /**

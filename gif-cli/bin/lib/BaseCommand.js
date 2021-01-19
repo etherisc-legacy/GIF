@@ -41,7 +41,7 @@ class BaseCommand extends Command {
    */
   async catch(error) {
     if (error instanceof Error) {
-      console.log(chalk`{red    > Error: } ${error.message}`);
+      console.log(chalk`{red    >> Error: } ${error.message}`);
       if (process.env.DEBUG) {
         console.log(error.stack);
       }

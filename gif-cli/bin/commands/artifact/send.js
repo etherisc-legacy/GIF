@@ -64,7 +64,7 @@ class SendArtifact extends BaseCommand {
     });
 
     if (response.error) {
-      console.log(response.error);
+      console.log('Response.error: ', response.error);
       this.error(response.error);
     } else {
       this.log(JSON.stringify(response.data));
