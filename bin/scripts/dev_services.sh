@@ -33,14 +33,13 @@ else
 
 fi
 
-# sudo rm -rf ./gif-services/compose/minio; sudo rm -rf ./gif-services/compose/postgresqldev; sudo rm -rf ./gif-services/compose/postgresqltest; sudo rm -rf ./gif-services/compose/dev_ganache",
-
-echo docker-compose --env-file ./gif-services/compose/.env -f ./gif-services/compose/$dc_file $dc_project $dc_command $dc_options
-docker-compose --env-file ./gif-services/compose/.env -f ./gif-services/compose/$dc_file $dc_project $dc_command $dc_options
+cd ./gif-services/compose
+echo docker-compose -f ./gif-services/compose/$dc_file $dc_project $dc_command $dc_options
+docker-compose -f ./gif-services/compose/$dc_file $dc_project $dc_command $dc_options
 
 if [ "$purge" = true ]
 then
-  sudo rm -rf ./gif-services/compose/volumes/$2_minio
-  sudo rm -rf ./gif-services/compose/volumes/$2_postgresql
-  sudo rm -rf ./gif-services/compose/volumes/$2_ganache
+  sudo rm -rf ./volumes/$2_minio
+  sudo rm -rf ./volumes/$2_postgresql
+  sudo rm -rf ./volumes/$2_ganache
 fi
