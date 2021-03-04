@@ -21,6 +21,7 @@ bootstrap(LicenseManager, {
             /^\/api\/users/,
             /^\/api\/artifact\/get/,
             /^\/api\/contract\/call/,
+            /^\/api\/health-check/,
           ],
         }),
     ),
