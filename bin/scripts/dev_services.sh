@@ -34,8 +34,8 @@ else
 fi
 
 cd ./gif-services/compose
-echo docker-compose -f ./gif-services/compose/$dc_file $dc_project $dc_command $dc_options
-docker-compose -f ./gif-services/compose/$dc_file $dc_project $dc_command $dc_options
+echo docker-compose -f ./$dc_file $dc_project $dc_command $dc_options
+docker-compose -f ./$dc_file $dc_project $dc_command $dc_options
 
 if [ "$purge" = true ]
 then
