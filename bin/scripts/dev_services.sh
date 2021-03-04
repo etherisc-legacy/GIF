@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 purge=false
+set -x
 
 if [ $1 == "run" ]
 then
@@ -34,8 +35,8 @@ fi
 
 # sudo rm -rf ./gif-services/compose/minio; sudo rm -rf ./gif-services/compose/postgresqldev; sudo rm -rf ./gif-services/compose/postgresqltest; sudo rm -rf ./gif-services/compose/dev_ganache",
 
-echo docker-compose -f ./gif-services/compose/$dc_file --env-file ./gif-services/compose/.env $dc_project $dc_command $dc_options
-docker-compose -f ./gif-services/compose/$dc_file --env-file ./gif-services/compose/.env $dc_project $dc_command $dc_options
+echo docker-compose --env-file ./gif-services/compose/.env -f ./gif-services/compose/$dc_file $dc_project $dc_command $dc_options
+docker-compose --env-file ./gif-services/compose/.env -f ./gif-services/compose/$dc_file $dc_project $dc_command $dc_options
 
 if [ "$purge" = true ]
 then

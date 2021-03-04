@@ -49,7 +49,7 @@ class Api {
     product, network, networkId, artifact, version,
   }) {
     if (!product || !network || !networkId || !artifact || !version) {
-      return this.wrongArgument('gif.artifact.get');
+      return this.wrongArgument('gif.artifact.send');
     }
     return this.client.post('/api/artifact/send', {
       product, network, networkId, artifact, version,
