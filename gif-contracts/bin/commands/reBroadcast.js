@@ -12,6 +12,7 @@ class ReBroadcast extends Command {
   run() {
     bootstrap(RePublishContracts, {
       amqp: true,
+      requiredEnv: [],
     });
   }
 }
