@@ -52,10 +52,9 @@ const xDaiVerifyContract = async (contractJsonFile, flattenedSourceFile, network
       message: response.statusText,
     };
   } catch (e) {
-    console.log(e);
     return {
       success: false,
-      message: e.message,
+      message: e.data.message,
     };
   }
 };
