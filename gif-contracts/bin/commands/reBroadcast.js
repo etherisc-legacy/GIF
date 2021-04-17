@@ -1,6 +1,8 @@
 const { Command } = require('@oclif/command');
 const { bootstrap } = require('@etherisc/microservice');
 const RePublishContracts = require('../lib/RePublishContracts');
+const pkg = require('../../package.json');
+
 
 /**
  * Rebroadcast GIF core contracts
@@ -12,6 +14,8 @@ class ReBroadcast extends Command {
   run() {
     bootstrap(RePublishContracts, {
       amqp: true,
+      appName: pkg.name,
+      appVersion: pkg.version,
       requiredEnv: [],
     });
   }
