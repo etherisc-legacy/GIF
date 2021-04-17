@@ -1,5 +1,5 @@
 const { info } = require('../io/logger');
-const { xDaiVerifyContract } = require('../bin/lib/blockscout_verify');
+// const { xDaiVerifyContract } = require('../bin/lib/blockscout_verify');
 
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
@@ -12,20 +12,6 @@ module.exports = async (deployer) => {
 
   const registryController = await RegistryController.deployed();
 
-  console.log(registryController);
-  let response = await xDaiVerifyContract(
-    './build/RegistryController.json',
-    './verification/RegistryController.txt',
-    registryController.constructor.network_id,
-  );
-
-  if (!response.success) {
-    // eslint-disable-next-line no-console
-    console.log(`Contract Verification failed, reason: ${response.message}`);
-    throw new Error(response.message);
-  }
-
-
   await deployer.deploy(Registry, registryController.address, { gas: 1000000 });
 
   const registryStorage = await Registry.deployed();
@@ -33,15 +19,4 @@ module.exports = async (deployer) => {
   info('Assign controller to storage');
   await registryController.assignStorage(registryStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
-
-  response = await xDaiVerifyContract(
-    './build/RegistryController.json',
-    './verification/RegistryController.txt',
-  );
-
-  if (!response.success) {
-    // eslint-disable-next-line no-console
-    console.log(`Contract Verification failed, reason: ${response.message}`);
-    throw new Error(response.message);
-  }
 };

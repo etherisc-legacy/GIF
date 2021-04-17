@@ -60,3 +60,17 @@ const xDaiVerifyContract = async (contractJsonFile, flattenedSourceFile, network
 };
 
 module.exports = { xDaiVerifyContract };
+
+/*
+  response = await xDaiVerifyContract(
+    './build/RegistryController.json',
+    './verification/RegistryController.txt',
+  );
+
+  if (!response.success) {
+    // eslint-disable-next-line no-console
+    console.log(`Contract Verification failed, reason: ${response.message}`);
+    throw new Error(response.message);
+  }
+
+ */
