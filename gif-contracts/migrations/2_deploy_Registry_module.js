@@ -20,8 +20,8 @@ module.exports = async (deployer) => {
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   const response = await xDaiVerifyContract(
-    '../build/RegistryController.json',
-    '../verification/RegistryController.txt',
+    './build/RegistryController.json',
+    './verification/RegistryController.txt',
   );
 
   if (!response.success) {

@@ -38,18 +38,26 @@ const xDaiVerifyContract = async (contractJsonFile, flattenedSourceFile, network
 
   payload.contractSourceCode = source;
 
-  const response = await axios.post(baseUrl + urlParams, payload);
+  try {
+    const response = await axios.post(baseUrl + urlParams, payload);
 
-  if (response.status === 200) {
+    if (response.status === 200) {
+      return {
+        success: true,
+        message: 'Contract verified',
+      };
+    }
     return {
-      success: true,
-      message: 'Contract verified',
+      success: false,
+      message: response.statusText,
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      success: false,
+      message: e.message,
     };
   }
-  return {
-    success: false,
-    message: response.statusText,
-  };
 };
 
 module.exports = { xDaiVerifyContract };
