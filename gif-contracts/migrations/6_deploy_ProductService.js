@@ -1,5 +1,4 @@
 const { info } = require('../io/logger');
-const progress = require('../bin/lib/progress');
 
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
@@ -7,7 +6,7 @@ const RegistryController = artifacts.require('modules/registry/RegistryControlle
 const ProductService = artifacts.require('gif-services/ProductService.sol');
 
 
-module.exports = progress(['Query'], ['ProductService'], async (deployer, networks, accounts) => {
+module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -19,4 +18,4 @@ module.exports = progress(['Query'], ['ProductService'], async (deployer, networ
   info('Register ProductService in Registry');
   await registry.register(productServiceName, productService.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
-});
+};

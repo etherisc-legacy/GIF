@@ -1,5 +1,4 @@
 const { info } = require('../io/logger');
-const progress = require('../bin/lib/progress');
 
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
@@ -7,7 +6,7 @@ const RegistryController = artifacts.require('modules/registry/RegistryControlle
 const InstanceOperatorService = artifacts.require('gif-services/InstanceOperatorService.sol');
 
 
-module.exports = progress(['PolicyFlow'], ['InstanceOperatorService'], async (deployer, networks, accounts) => {
+module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -19,4 +18,4 @@ module.exports = progress(['PolicyFlow'], ['InstanceOperatorService'], async (de
   info('Register InstanceOperatorService in Registry');
   await registry.registerService(instanceOperatorName, instanceOperator.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
-});
+};

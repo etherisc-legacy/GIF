@@ -1,5 +1,4 @@
 const { info } = require('../io/logger');
-const progress = require('../bin/lib/progress');
 
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
@@ -7,7 +6,7 @@ const InstanceOperatorService = artifacts.require('gif-services/InstanceOperator
 const QueryController = artifacts.require('modules/query/QueryController.sol');
 const Query = artifacts.require('modules/query/Query.sol');
 
-module.exports = progress(['RegisterSandbox'], ['Update 01'], async (deployer, networks, accounts) => {
+module.exports = async (deployer) => {
   const instanceOperatorOld = await InstanceOperatorService.deployed();
   const registryStorage = await Registry.deployed();
   const query = await Query.deployed();
@@ -26,4 +25,4 @@ module.exports = progress(['RegisterSandbox'], ['Update 01'], async (deployer, n
   const queryController = await QueryController.deployed();
 
   await instanceOperator.assignController(query.address, queryController.address);
-});
+};
