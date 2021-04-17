@@ -4,14 +4,15 @@ const fs = require('fs-jetpack');
 
 /**
  *
- * @param {{}} contractJson
+ * @param {string} contractJsonFile
  * @param {string} flattenedSourceFile
  * @param {string} network
  * @returns {{}}
  */
-const xDaiVerifyContract = async (contractJson, flattenedSourceFile, network) => {
+const xDaiVerifyContract = async (contractJsonFile, flattenedSourceFile, network) => {
   const baseUrl = 'https://blockscout.com/xdai/mainnet/api';
   const urlParams = '?module=contract&action=verify';
+  const contractJson = fs.read(contractJsonFile, 'json');
   const source = fs.read(flattenedSourceFile);
   const metadata = JSON.parse(contractJson.metadata);
   if (!contractJson.networks[network]) {
