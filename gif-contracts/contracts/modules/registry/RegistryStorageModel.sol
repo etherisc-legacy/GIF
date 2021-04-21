@@ -6,11 +6,14 @@ import "./IRegistry.sol";
 contract RegistryStorageModel is IRegistry {
     /**
      * @dev Current release
+     * We use semantic versioning with 2 digits:
+     * 1.0.0 = 10000; 1.0.1 = 10001; 1.5.3 = 10503 etc
      */
-    uint256 public release;
+    uint256 public release = 10000;
 
     /**
      * @dev  Save number of items to iterate through
+     * Currently we have < 20 contracts.
      */
     uint256 public maxContracts = 100;
 

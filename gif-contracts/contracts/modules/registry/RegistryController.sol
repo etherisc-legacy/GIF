@@ -9,7 +9,6 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     constructor() public {
         // Init
         controllers["InstanceOperator"] = msg.sender;
-        register("Registry", address(this));
     }
 
     function assignStorage(address _storage) external onlyInstanceOperator {

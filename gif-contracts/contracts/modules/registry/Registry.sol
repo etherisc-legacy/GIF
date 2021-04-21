@@ -5,6 +5,8 @@ import "./RegistryStorageModel.sol";
 import "../../shared/BaseModuleStorage.sol";
 
 contract Registry is RegistryStorageModel, BaseModuleStorage {
+    bytes32 public constant NAME = "Registry";
+
     constructor(address _controller) public {
         // Init
         controllers["InstanceOperator"] = msg.sender;

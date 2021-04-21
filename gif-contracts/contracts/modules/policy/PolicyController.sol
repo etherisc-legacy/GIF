@@ -47,7 +47,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     ) external onlyPolicyFlow("Policy") {
         Metadata storage meta = metadata[_productId][_metadataId];
 
-        require(meta.createdAt > 0, "ERROR::METADATA_NOT_EXISTS");
+        require(meta.createdAt > 0, "ERROR::METADATA_DOES_NOT_EXIST");
 
         meta.state = _state;
         meta.updatedAt = block.timestamp;
@@ -98,7 +98,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     ) external onlyPolicyFlow("Policy") {
         Application storage application = applications[_productId][_applicationId];
 
-        require(application.createdAt > 0, "ERROR::APPLICATION_NOT_EXISTS");
+        require(application.createdAt > 0, "ERROR::APPLICATION_DOES_NOT_EXIST");
 
         application.state = _state;
         application.updatedAt = block.timestamp;
@@ -153,7 +153,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     ) external onlyPolicyFlow("Policy") {
         Policy storage policy = policies[_productId][_policyId];
 
-        require(policy.createdAt > 0, "ERROR::POLICY_NOT_EXISTS");
+        require(policy.createdAt > 0, "ERROR::POLICY_DOES_NOT_EXIST");
 
         policy.state = _state;
         policy.updatedAt = block.timestamp;
@@ -174,7 +174,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     {
         Policy storage policy = policies[_productId][_policyId];
 
-        require(policy.createdAt > 0, "ERROR::POLICY_NOT_EXISTS");
+        require(policy.createdAt > 0, "ERROR::POLICY_DOES_NOT_EXIST");
 
         _claimId = ++claimIdIncrement;
 
@@ -209,7 +209,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     ) external onlyPolicyFlow("Policy") {
         Claim storage claim = claims[_productId][_claimId];
 
-        require(claim.createdAt > 0, "ERROR::CLAIM_NOT_EXISTS");
+        require(claim.createdAt > 0, "ERROR::CLAIM_DOES_NOT_EXIST");
 
         claim.state = _state;
         claim.updatedAt = block.timestamp;
@@ -233,7 +233,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     {
         Claim storage claim = claims[_productId][_claimId];
 
-        require(claim.createdAt > 0, "ERROR::CLAIM_NOT_EXISTS");
+        require(claim.createdAt > 0, "ERROR::CLAIM_DOES_NOT_EXIST");
 
         _payoutId = ++payoutIdIncrement;
 
@@ -268,7 +268,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         Payout storage payout = payouts[_productId][_payoutId];
         Metadata storage meta = metadata[_productId][payout.metadataId];
 
-        require(payout.createdAt > 0, "ERROR::PAYOUT_NOT_EXISTS");
+        require(payout.createdAt > 0, "ERROR::PAYOUT_DOES_NOT_EXIST");
 
         uint256 actualAmount = payout.actualAmount.add(_amount);
 
@@ -326,7 +326,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     ) external onlyPolicyFlow("Policy") {
         Payout storage payout = payouts[_productId][_payoutId];
 
-        require(payout.createdAt > 0, "ERROR::PAYOUT_NOT_EXISTS");
+        require(payout.createdAt > 0, "ERROR::PAYOUT_DOES_NOT_EXIST");
 
         payout.state = _state;
         payout.updatedAt = block.timestamp;

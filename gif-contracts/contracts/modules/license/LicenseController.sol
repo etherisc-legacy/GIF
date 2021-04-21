@@ -42,7 +42,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
      * @dev Approve product
      */
     function approveProduct(uint256 _id) external onlyInstanceOperator {
-        require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
+        require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
         require(
             products[_id].approved != true,
             "ERROR::PRODUCT_ALREADY_APPROVED"
@@ -64,7 +64,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
      * @dev Disapprove product
      */
     function disapproveProduct(uint256 _id) external onlyInstanceOperator {
-        require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
+        require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
         require(products[_id].approved == true, "ERROR::PRODUCT_NOT_APPROVED");
         require(
             productIdByAddress[products[_id].addr] > 0,
@@ -79,7 +79,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
 
     function pauseProduct(uint256 _id) external onlyInstanceOperator {
         // todo: should be restricted to ProductOwners
-        require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
+        require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
         require(
             productIdByAddress[products[_id].addr] > 0,
             "ERROR::PRODUCT_NOT_ACTIVE"
@@ -92,7 +92,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
 
     function unpauseProduct(uint256 _id) external onlyInstanceOperator {
         // todo: should be restricted to ProductOwners
-        require(products[_id].addr != address(0), "ERROR::PRODUCT_NOT_EXISTS");
+        require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
         require(
             productIdByAddress[products[_id].addr] > 0,
             "ERROR::PRODUCT_NOT_ACTIVE"
@@ -144,7 +144,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     {
         require(
             productIdByAddress[_addr] > 0,
-            "ERROR::PRODUCT_NOT_APPROVED_OR_NOT_EXISTS"
+            "ERROR::PRODUCT_NOT_APPROVED_OR_DOES_NOT_EXIST"
         );
 
         _productId = productIdByAddress[_addr];
