@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./IQuery.sol";
@@ -33,26 +33,19 @@ interface IQueryController {
 
     function deactivateOracle(uint256 _oracleId) external;
 
-    function removeOracle(uint256 _oracleId) external;
-
-    function proposeOracleToType(
+    function proposeOracleToOracleType(
         address _sender,
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    ) external returns (uint256 _proposalId);
+    ) external;
 
-    function revokeOracleToTypeProposal(
+    function revokeOracleFromOracleType(
         address _sender,
         bytes32 _oracleTypeName,
-        uint256 _proposalId
+        uint256 _oracleId
     ) external;
 
     function assignOracleToOracleType(
-        bytes32 _oracleTypeName,
-        uint256 _proposalId
-    ) external;
-
-    function removeOracleFromOracleType(
         bytes32 _oracleTypeName,
         uint256 _oracleId
     ) external;

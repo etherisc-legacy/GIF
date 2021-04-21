@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
@@ -13,7 +13,7 @@ import "../shared/IModuleStorage.sol";
 contract InstanceOperatorService is WithRegistry, Ownable {
     bytes32 public constant NAME = "InstanceOperator";
 
-    constructor(address _registry) public WithRegistry(_registry) {}
+    constructor(address _registry) WithRegistry(_registry) {}
 
     function assignController(address _storage, address _controller) external onlyOwner {
         IModuleStorage(_storage).assignController(_controller);

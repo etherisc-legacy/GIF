@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "../modules/registry/IRegistryController.sol";
@@ -7,7 +7,7 @@ import "./AccessModifiers.sol";
 contract WithRegistry is AccessModifiers {
     IRegistryController public registry;
 
-    constructor(address _registry) internal {
+    constructor(address _registry) {
         registry = IRegistryController(_registry);
     }
 

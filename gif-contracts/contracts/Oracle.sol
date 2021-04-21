@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./services/IOracleService.sol";
@@ -16,7 +16,7 @@ abstract contract Oracle is IOracle, RBAC {
         _;
     }
 
-    constructor(address _oracleService) internal {
+    constructor(address _oracleService) {
         oracleService = IOracleService(_oracleService);
     }
 

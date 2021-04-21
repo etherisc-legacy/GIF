@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "../modules/query/IQuery.sol";
@@ -8,7 +8,7 @@ import "../shared/WithRegistry.sol";
 contract OracleOwnerService is WithRegistry {
     bytes32 public constant NAME = "OracleOwnerService";
 
-    constructor(address _registry) public WithRegistry(_registry) {}
+    constructor(address _registry) WithRegistry(_registry) {}
 
     function proposeOracleType(
         bytes32 _oracleTypeName,
@@ -37,12 +37,11 @@ contract OracleOwnerService is WithRegistry {
         );
     }
 
-    function proposeOracleToType(bytes32 _oracleTypeName, uint256 _oracleId)
+    function proposeOracleToOracleType(bytes32 _oracleTypeName, uint256 _oracleId)
         external
-        returns (uint256 _proposalId)
     {
         // todo: oracle owner should be approved
-        _proposalId = query().proposeOracleToType(
+        query().proposeOracleToOracleType(
             msg.sender,
             _oracleTypeName,
             _oracleId

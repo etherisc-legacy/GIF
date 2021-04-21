@@ -1,12 +1,10 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./shared/RBAC.sol";
 import "./services/IProductService.sol";
 
 contract Product is RBAC {
-    using SafeMath for *;
 
     bool public developmentMode = false;
     bool public maintenanceMode = false;
@@ -32,7 +30,6 @@ contract Product is RBAC {
     }
 
     constructor(address _productService, bytes32 _name, bytes32 _policyFlow)
-        internal
     {
         productService = IProductService(_productService);
         _register(_name, _policyFlow);

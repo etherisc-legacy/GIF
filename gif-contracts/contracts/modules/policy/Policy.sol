@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./PolicyStorageModel.sol";
@@ -14,7 +14,7 @@ contract Policy is PolicyStorageModel, ModuleStorage {
         uint256 _policyIdIncrement,
         uint256 _claimIdIncrement,
         uint256 _payoutIdIncrement
-    ) public WithRegistry(_registry) {
+    ) WithRegistry(_registry) {
         // increments should be equal to the value from the last deployed storage or zero
         metadataIdIncrement = _metadataIdIncrement;
         applicationIdIncrement = _applicationIdIncrement;

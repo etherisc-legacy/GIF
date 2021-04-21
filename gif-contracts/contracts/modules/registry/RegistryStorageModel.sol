@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./IRegistry.sol";
@@ -21,6 +21,7 @@ contract RegistryStorageModel is IRegistry {
     mapping(uint256 => mapping(bytes32 => address)) public contracts;
     // release => contract name []
     mapping(uint256 => bytes32[]) public contractNames;
+    mapping(uint256 => uint256) public contractNamesIncrement;
     // controller name => address
     mapping(bytes32 => address) public controllers;
 }

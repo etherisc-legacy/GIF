@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "../shared/WithRegistry.sol";
@@ -7,7 +7,7 @@ import "../modules/query/IQueryController.sol";
 contract OracleService is WithRegistry {
     bytes32 public constant NAME = "OracleService";
 
-    constructor(address _registry) public WithRegistry(_registry) {}
+    constructor(address _registry) WithRegistry(_registry) {}
 
     function respond(uint256 _requestId, bytes calldata _data)
         external

@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./QueryStorageModel.sol";
@@ -14,7 +14,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         _;
     }
 
-    constructor(address _registry) public WithRegistry(_registry) {}
+    constructor(address _registry) WithRegistry(_registry) {}
 
     function proposeOracleType(
         bytes32 _oracleTypeName,
@@ -32,8 +32,12 @@ contract QueryController is QueryStorageModel, ModuleController {
             _callbackFormat,
             _description,
             OracleTypeState.Inactive,
-            true
+            true,
+            0
         );
+
+        oracleTypeNames.push(_oracleTypeName);
+        oracleTypeNamesIncrement += 1;
 
         emit LogOracleTypeProposed(
             _oracleTypeName,
@@ -74,33 +78,11 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_TYPE_NOT_ACTIVE"
         );
         require(
-            assignedOraclesIds[_oracleTypeName].length == 0,
+            oracleTypes[_oracleTypeName].activeOracles == 0,
             "ERROR::ORACLE_TYPE_HAS_ACTIVE_ORACLES"
         );
 
         oracleTypes[_oracleTypeName].state = OracleTypeState.Inactive;
-
-        emit LogOracleTypeDeactivated(_oracleTypeName);
-    }
-
-    function removeOracleType(bytes32 _oracleTypeName)
-        external
-        onlyInstanceOperator
-    {
-        require(
-            oracleTypes[_oracleTypeName].initialized == true,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
-        );
-        require(
-            oracleTypes[_oracleTypeName].state == OracleTypeState.Active,
-            "ERROR::ORACLE_TYPE_NOT_ACTIVE"
-        );
-        require(
-            assignedOraclesIds[_oracleTypeName].length == 0,
-            "ERROR::ORACLE_TYPE_HAS_ACTIVE_ORACLES"
-        );
-
-        delete oracleTypes[_oracleTypeName];
 
         emit LogOracleTypeDeactivated(_oracleTypeName);
     }
@@ -115,13 +97,15 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_ALREADY_EXISTS"
         );
 
-        _oracleId = oracleIdIncrement++;
+        _oracleId = oracleIdIncrement;
+        oracleIdIncrement += 1;
 
         oracles[_oracleId] = Oracle(
             _sender,
             _oracleContract,
             _description,
-            OracleState.Inactive
+            OracleState.Inactive,
+            0
         );
         oracleIdByAddress[_oracleContract] = _oracleId;
 
@@ -180,7 +164,7 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_NOT_ACTIVE"
         );
         require(
-            assignedOracleTypes[_oracleId].length != 0,
+            oracles[_oracleId].activeOracleTypes == 0,
             "ERROR::ORACLE_ALREADY_ASSIGNED_TO_ORACLE_TYPES"
         );
 
@@ -189,32 +173,14 @@ contract QueryController is QueryStorageModel, ModuleController {
         emit LogOracleDeactivated(_oracleId);
     }
 
-    function removeOracle(uint256 _oracleId) external onlyInstanceOperator {
-        require(
-            oracles[_oracleId].oracleContract != address(0),
-            "ERROR::ORACLE_DOES_NOT_EXIST"
-        );
-        require(
-            oracles[_oracleId].state != OracleState.Active,
-            "ERROR::ORACLE_NOT_ACTIVE"
-        );
-        require(
-            assignedOracleTypes[_oracleId].length != 0,
-            "ERROR::ORACLE_ASSIGNED_TO_ORACLE_TYPES"
-        );
-
-        delete oracleIdByAddress[oracles[_oracleId].oracleContract];
-        delete oracles[_oracleId];
-        delete assignedOracleTypes[_oracleId];
-
-        emit LogOracleRemoved(_oracleId);
-    }
-
-    function proposeOracleToType(
+    function proposeOracleToOracleType(
         address _sender,
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    ) external onlyOracleOwner returns (uint256 _proposalId) {
+    )
+        external
+        onlyOracleOwner
+    {
         require(
             oracles[_oracleId].oracleOwner == _sender,
             "ERROR::NOT_ORACLE_OWNER"
@@ -228,83 +194,68 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
         );
         require(
-            assignedOracles[_oracleTypeName][_oracleId] != true,
-            "ERROR::ORACLE_ALREADY_ASSIGNED"
+            assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Unassigned,
+            "ERROR::ORACLE_ALREADY_PROPOSED_OR_ASSIGNED"
         );
 
-        _proposalId = proposedOracleIds[_oracleTypeName].length;
-        proposedOracleIds[_oracleTypeName].push(_oracleId);
+        assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Proposed;
 
-
-        emit LogOracleProposedToType(_oracleTypeName, _oracleId, _proposalId);
+        emit LogOracleProposedToOracleType(_oracleTypeName, _oracleId);
     }
 
-    function revokeOracleToTypeProposal(
+    function revokeOracleFromOracleType(
         address _sender,
         bytes32 _oracleTypeName,
-        uint256 _proposalId
+        uint256 _oracleId
     ) external onlyOracleOwner {
-        uint256 oracleId = proposedOracleIds[_oracleTypeName][_proposalId];
 
         require(
-            oracles[oracleId].oracleOwner == _sender,
+            oracles[_oracleId].oracleOwner == _sender,
             "ERROR::NOT_ORACLE_OWNER"
         );
         require(
-            oracles[oracleId].oracleContract != address(0),
+            oracles[_oracleId].oracleContract != address(0),
             "ERROR::ORACLE_DOES_NOT_EXIST"
         );
         require(
             oracleTypes[_oracleTypeName].initialized == true,
             "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
         );
-        // TODO: delete entry
-
-        emit LogOracleToTypeProposalRevoked(
-            _oracleTypeName,
-            oracleId,
-            _proposalId
+        require(
+            assignedOracles[_oracleTypeName][_oracleId] != OracleAssignmentState.Unassigned,
+            "ERROR::ORACLE_NOT_PROPOSED_OR_ASSIGNED"
         );
+
+        assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Unassigned;
+        oracleTypes[_oracleTypeName].activeOracles -= 1;
+        oracles[_oracleId].activeOracleTypes -= 1;
+
+        emit LogOracleRevokedFromOracleType(_oracleTypeName, _oracleId);
     }
 
     function assignOracleToOracleType(
         bytes32 _oracleTypeName,
-        uint256 _proposalId
+        uint256 _oracleId
     ) external onlyInstanceOperator {
         require(
             oracleTypes[_oracleTypeName].initialized == true,
             "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
         );
 
-        uint256 oracleId = proposedOracleIds[_oracleTypeName][_proposalId];
-
         require(
-            oracles[oracleId].oracleContract != address(0),
+            oracles[_oracleId].oracleContract != address(0),
             "ERROR::ORACLE_DOES_NOT_EXIST"
         );
         require(
-            assignedOracles[_oracleTypeName][oracleId] != true,
-            "ERROR::ORACLE_ALREADY_ASSIGNED"
+            assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Proposed,
+            "ERROR::ORACLE_NOT_PROPOSED"
         );
 
-        assignedOracles[_oracleTypeName][oracleId] = true;
-        assignedOraclesIds[_oracleTypeName].push(oracleId);
+        assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Assigned;
+        oracleTypes[_oracleTypeName].activeOracles += 1;
+        oracles[_oracleId].activeOracleTypes += 1;
 
-        emit LogOracleAssignedToOracleType(_oracleTypeName, oracleId);
-    }
-
-    function removeOracleFromOracleType(
-        bytes32 _oracleTypeName,
-        uint256 _oracleId
-    ) external onlyInstanceOperator {
-        require(
-            assignedOracles[_oracleTypeName][_oracleId] == true,
-            "ERROR::ORACLE_NOT_ASSIGNED"
-        );
-
-        assignedOracles[_oracleTypeName][_oracleId] = false;
-
-        emit LogOracleRemovedFromOracleType(_oracleTypeName, _oracleId);
+        emit LogOracleAssignedToOracleType(_oracleTypeName, _oracleId);
     }
 
     /* Oracle Request */

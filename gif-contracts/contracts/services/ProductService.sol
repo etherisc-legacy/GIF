@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "../shared/WithRegistry.sol";
@@ -8,7 +8,7 @@ import "../modules/license/ILicenseController.sol";
 contract ProductService is WithRegistry, Delegator {
     bytes32 public constant NAME = "ProductService";
 
-    constructor(address _registry) public WithRegistry(_registry) {}
+    constructor(address _registry) WithRegistry(_registry) {}
 
     fallback() external {
         (bool authorized, address policyFlow) = license().authorize(msg.sender);

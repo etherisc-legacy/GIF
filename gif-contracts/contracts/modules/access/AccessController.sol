@@ -1,11 +1,11 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./AccessStorageModel.sol";
 import "../../shared/ModuleController.sol";
 
 contract AccessController is AccessStorageModel, ModuleController {
-    constructor(address _registry) public WithRegistry(_registry) {}
+    constructor(address _registry) WithRegistry(_registry) {}
 
     function createRole(bytes32 _role) external onlyInstanceOperator {
         require(roles[_role] == 0);

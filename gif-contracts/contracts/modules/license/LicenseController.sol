@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./LicenseStorageModel.sol";
@@ -7,9 +7,7 @@ import "../../shared/ModuleController.sol";
 contract LicenseController is LicenseStorageModel, ModuleController {
     bytes32 public constant NAME = "LicenseController";
 
-    constructor(address _registry, uint256 _productIdIncrement)
-        public
-        WithRegistry(_registry)
+    constructor(address _registry, uint256 _productIdIncrement) WithRegistry(_registry)
     {
         // productIdIncrement should be equal to the value from the last deployed licence storage or zero
         productIdIncrement = _productIdIncrement;

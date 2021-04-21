@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./RegistryStorageModel.sol";
@@ -6,7 +6,7 @@ import "../../shared/BaseModuleController.sol";
 import "../../shared/AccessModifiers.sol";
 
 contract RegistryController is RegistryStorageModel, BaseModuleController, AccessModifiers {
-    constructor() public {
+    constructor() {
         // Init
         controllers["InstanceOperator"] = msg.sender;
     }

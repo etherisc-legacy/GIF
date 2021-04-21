@@ -1,10 +1,11 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 interface IQuery {
     enum OracleTypeState {Inactive, Active}
 
     enum OracleState {Inactive, Active}
+    enum OracleAssignmentState {Unassigned, Proposed, Assigned}
 
     struct OracleType {
         string inputFormat; // e.g. '(uint256 longitude,uint256 latitude)'
@@ -12,6 +13,7 @@ interface IQuery {
         string description;
         OracleTypeState state;
         bool initialized;
+        uint256 activeOracles;
     }
 
     struct Oracle {
@@ -19,6 +21,7 @@ interface IQuery {
         address oracleContract;
         string description;
         OracleState state;
+        uint256 activeOracleTypes;
     }
 
     struct OracleRequest {
@@ -49,8 +52,6 @@ interface IQuery {
 
     event LogOracleTypeDeactivated(bytes32 oracleTypeName);
 
-    event LogOracleTypeRemoved(bytes32 oracleTypeName);
-
     event LogOracleProposed(address oracleContract, string description);
 
     event LogOracleContractUpdated(
@@ -63,12 +64,9 @@ interface IQuery {
 
     event LogOracleDeactivated(uint256 oracleId);
 
-    event LogOracleRemoved(uint256 oracleId);
-
-    event LogOracleProposedToType(
+    event LogOracleProposedToOracleType(
         bytes32 oracleTypeName,
-        uint256 oracleId,
-        uint256 proposalId
+        uint256 oracleId
     );
 
     event LogOraclePriceUpdatedInType(
@@ -77,18 +75,12 @@ interface IQuery {
         uint256 price
     );
 
-    event LogOracleToTypeProposalRevoked(
-        bytes32 oracleTypeName,
-        uint256 oracleId,
-        uint256 proposalId
-    );
-
-    event LogOracleAssignedToOracleType(
+    event LogOracleRevokedFromOracleType(
         bytes32 oracleTypeName,
         uint256 oracleId
     );
 
-    event LogOracleRemovedFromOracleType(
+    event LogOracleAssignedToOracleType(
         bytes32 oracleTypeName,
         uint256 oracleId
     );

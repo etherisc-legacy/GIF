@@ -1,15 +1,13 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 pragma experimental ABIEncoderV2;
 
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./PolicyStorageModel.sol";
 import "../../shared/ModuleController.sol";
 
 contract PolicyController is PolicyStorageModel, ModuleController {
-    using SafeMath for *;
 
-    constructor(address _registry) public WithRegistry(_registry) {}
+    constructor(address _registry) WithRegistry(_registry) {}
 
     /* Metadata */
     function createPolicyFlow(uint256 _productId, bytes32 _bpExternalKey)
@@ -176,7 +174,8 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
         require(policy.createdAt > 0, "ERROR::POLICY_DOES_NOT_EXIST");
 
-        _claimId = ++claimIdIncrement;
+        claimIdIncrement += 1;
+        _claimId = claimIdIncrement;
 
         Claim storage claim = claims[_productId][_claimId];
 
@@ -235,7 +234,8 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
         require(claim.createdAt > 0, "ERROR::CLAIM_DOES_NOT_EXIST");
 
-        _payoutId = ++payoutIdIncrement;
+        payoutIdIncrement += 1;
+        _payoutId = payoutIdIncrement;
 
         Payout storage payout = payouts[_productId][_payoutId];
         payout.metadataId = claim.metadataId;
@@ -270,7 +270,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
         require(payout.createdAt > 0, "ERROR::PAYOUT_DOES_NOT_EXIST");
 
-        uint256 actualAmount = payout.actualAmount.add(_amount);
+        uint256 actualAmount = payout.actualAmount + _amount;
 
         require(
             payout.state == PayoutState.Expected,
@@ -305,7 +305,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
             payout.actualAmount = actualAmount;
             payout.updatedAt = block.timestamp;
 
-            _remainder = payout.expectedAmount.sub(payout.actualAmount);
+            _remainder = payout.expectedAmount - payout.actualAmount;
 
             emit LogPartialPayout(
                 _productId,

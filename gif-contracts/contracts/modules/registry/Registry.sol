@@ -1,4 +1,4 @@
-pragma solidity 0.6.11;
+pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./RegistryStorageModel.sol";
@@ -7,7 +7,7 @@ import "../../shared/BaseModuleStorage.sol";
 contract Registry is RegistryStorageModel, BaseModuleStorage {
     bytes32 public constant NAME = "Registry";
 
-    constructor(address _controller) public {
+    constructor(address _controller) {
         // Init
         controllers["InstanceOperator"] = msg.sender;
         _assignController(_controller);
