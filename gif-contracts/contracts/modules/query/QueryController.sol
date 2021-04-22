@@ -198,7 +198,7 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_ALREADY_PROPOSED_OR_ASSIGNED"
         );
 
-        assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Proposed;
+        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState.Proposed;
 
         emit LogOracleProposedToOracleType(_oracleTypeName, _oracleId);
     }
@@ -226,7 +226,7 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_NOT_PROPOSED_OR_ASSIGNED"
         );
 
-        assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Unassigned;
+        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState.Unassigned;
         oracleTypes[_oracleTypeName].activeOracles -= 1;
         oracles[_oracleId].activeOracleTypes -= 1;
 
@@ -251,7 +251,7 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_NOT_PROPOSED"
         );
 
-        assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Assigned;
+        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState.Assigned;
         oracleTypes[_oracleTypeName].activeOracles += 1;
         oracles[_oracleId].activeOracleTypes += 1;
 

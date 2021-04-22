@@ -14,7 +14,7 @@ contract QueryStorageModel is IQuery {
     // Oracles
     mapping(uint256 => Oracle) public oracles;
     mapping(address => uint256) public oracleIdByAddress;
-    uint256 oracleIdIncrement = 1; // first oracleId is 1
+    uint256 public oracleIdIncrement = 1; // first oracleId is 1
 
     // Requests
     OracleRequest[] public oracleRequests;
