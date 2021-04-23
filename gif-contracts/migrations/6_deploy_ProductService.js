@@ -1,3 +1,4 @@
+const { verify } = require('truffle-source-verify/lib');
 const { info } = require('../io/logger');
 
 
@@ -6,7 +7,7 @@ const RegistryController = artifacts.require('modules/registry/RegistryControlle
 const ProductService = artifacts.require('gif-services/ProductService.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = async (deployer, network) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -18,4 +19,9 @@ module.exports = async (deployer) => {
   info('Register ProductService in Registry');
   await registry.register(productServiceName, productService.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
+  if (network === 'xDai') {
+    info('Verifying ProductService on Blockscout');
+    await verify(['ProductService'], 'xDai', 'Apache-2.0');
+  }
 };

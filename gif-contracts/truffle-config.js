@@ -8,6 +8,7 @@ const hdWalletConfig = {
   providerOrUrl: process.env.HTTP_PROVIDER,
 };
 
+/* eslint-disable no-console */
 console.log(`Deploying to Network ID = ${process.env.TRUFFLE_NETWORK_ID}`);
 console.log(`Truffle host = ${process.env.TRUFFLE_HOST}:${process.env.TRUFFLE_PORT}`);
 
@@ -19,6 +20,17 @@ module.exports = {
   networks: {
 
     development: {
+      provider: () => new HDWalletProvider(hdWalletConfig),
+      host: process.env.TRUFFLE_HOST,
+      port: process.env.TRUFFLE_PORT,
+      network_id: process.env.TRUFFLE_NETWORK_ID,
+      gas: process.env.TRUFFLE_GAS,
+      gasPrice: process.env.TRUFFLE_GASPRICE,
+      websockets: process.env.TRUFFLE_WEBSOCKETS,
+      skipDryRun: true,
+    },
+
+    xDai: {
       provider: () => new HDWalletProvider(hdWalletConfig),
       host: process.env.TRUFFLE_HOST,
       port: process.env.TRUFFLE_PORT,
@@ -88,6 +100,7 @@ module.exports = {
           runs: 200,
         },
         evmVersion: 'byzantium', // -> constantinople
+        evmTarget: 'byzantium', // -> constantinople, hack for truffle-source-verify
       },
     },
   },

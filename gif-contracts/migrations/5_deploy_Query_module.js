@@ -1,3 +1,4 @@
+const { verify } = require('truffle-source-verify/lib');
 const { info } = require('../io/logger');
 
 
@@ -7,7 +8,7 @@ const Query = artifacts.require('modules/query/Query.sol');
 const QueryController = artifacts.require('modules/query/QueryController.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = async (deployer, network) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -32,4 +33,11 @@ module.exports = async (deployer) => {
   info('Register Query module in Registry');
   await registry.register(queryStorageName, queryStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
+  if (network === 'xDai') {
+    info('Verifying Query on Blockscout');
+    await verify(['Query'], 'xDai', 'Apache-2.0');
+    info('Verifying QueryController on Blockscout');
+    await verify(['QueryController'], 'xDai', 'Apache-2.0');
+  }
 };

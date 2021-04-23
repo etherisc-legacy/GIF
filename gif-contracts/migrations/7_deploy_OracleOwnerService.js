@@ -1,3 +1,4 @@
+const { verify } = require('truffle-source-verify/lib');
 const { info } = require('../io/logger');
 
 
@@ -6,7 +7,7 @@ const RegistryController = artifacts.require('modules/registry/RegistryControlle
 const OracleOwnerService = artifacts.require('controllers/OracleOwnerService.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = async (deployer, network) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -18,4 +19,9 @@ module.exports = async (deployer) => {
   info('Register OracleOwnerService in Registry');
   await registry.registerService(OracleOwnerServiceName, oracleOwnerService.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
+  if (network === 'xDai') {
+    info('Verifying OracleOwnerService on Blockscout');
+    await verify(['OracleOwnerService'], 'xDai', 'Apache-2.0');
+  }
 };

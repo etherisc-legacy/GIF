@@ -1,3 +1,4 @@
+const { verify } = require('truffle-source-verify/lib');
 const { info } = require('../io/logger');
 
 
@@ -7,7 +8,7 @@ const License = artifacts.require('modules/license/License.sol');
 const LicenseController = artifacts.require('modules/license/LicenseController.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = async (deployer, network) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -32,4 +33,11 @@ module.exports = async (deployer) => {
   info('Register License module in Registry');
   await registry.register(licenseStorageName, licenseStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
+  if (network === 'xDai') {
+    info('Verifying License on Blockscout');
+    await verify(['License'], 'xDai', 'Apache-2.0');
+    info('Verifying LicenseController on Blockscout');
+    await verify(['LicenseController'], 'xDai', 'Apache-2.0');
+  }
 };

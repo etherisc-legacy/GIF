@@ -1,3 +1,4 @@
+const { verify } = require('truffle-source-verify/lib');
 const { info } = require('../io/logger');
 
 
@@ -6,7 +7,7 @@ const RegistryController = artifacts.require('modules/registry/RegistryControlle
 const InstanceOperatorService = artifacts.require('gif-services/InstanceOperatorService.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = async (deployer, network) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -18,4 +19,9 @@ module.exports = async (deployer) => {
   info('Register InstanceOperatorService in Registry');
   await registry.registerService(instanceOperatorName, instanceOperator.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
+  if (network === 'xDai') {
+    info('Verifying InstanceOperatorService on Blockscout');
+    await verify(['InstanceOperatorService'], 'xDai', 'Apache-2.0');
+  }
 };

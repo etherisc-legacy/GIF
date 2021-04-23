@@ -1,12 +1,12 @@
+const { verify } = require('truffle-source-verify/lib');
 const { info } = require('../io/logger');
-// const { xDaiVerifyContract } = require('../bin/lib/blockscout_verify');
 
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
 
 
-module.exports = async (deployer) => {
+module.exports = async (deployer, network) => {
   // Deploy storage and controller contracts
   await deployer.deploy(RegistryController, { gas: 2000000 });
 
@@ -25,4 +25,11 @@ module.exports = async (deployer) => {
   const registryStorageName = await registryStorage.NAME.call();
   await registry.register(registryStorageName, registryStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
+  if (network === 'xDai') {
+    info('Verifying Registry on Blockscout');
+    await verify(['Registry'], 'xDai', 'Apache-2.0');
+    info('Verifying RegistryController on Blockscout');
+    await verify(['RegistryController'], 'xDai', 'Apache-2.0');
+  }
 };
