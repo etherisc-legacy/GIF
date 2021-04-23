@@ -3,7 +3,18 @@
 mkdir -p ./verification
 
 function flatten {
-  ./node_modules/.bin/truffle-flattener $1 | sed "s|$PWD|.|g" > $2
+  ./node_modules/.bin/truffle-flattener $1 \
+   | sed -e "s|$PWD|.|g" -e "s/^\/\/\s*SPDX.*//g" \
+   | awk '
+    BEGIN {
+      print "//SPDX-License-Identifier: Apache-2.0"
+      print ""
+      }
+
+   {print $0}
+
+   ' \
+   > $2
    echo "Source code prepared for" $1
 }
 
