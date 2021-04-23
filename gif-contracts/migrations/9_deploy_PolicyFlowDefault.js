@@ -22,6 +22,6 @@ module.exports = async (deployer, network) => {
 
   if (network === 'xdai') {
     info('Verifying PolicyFlowDefault on Blockscout');
-    await verify(['PolicyFlowDefault'], 'xDai', 'Apache-2.0');
+    await verify(['PolicyFlowDefault'], 'xdai', 'Apache-2.0');
   }
 };

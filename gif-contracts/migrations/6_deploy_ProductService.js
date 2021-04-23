@@ -22,6 +22,6 @@ module.exports = async (deployer, network) => {
 
   if (network === 'xdai') {
     info('Verifying ProductService on Blockscout');
-    await verify(['ProductService'], 'xDai', 'Apache-2.0');
+    await verify(['ProductService'], 'xdai', 'Apache-2.0');
   }
 };

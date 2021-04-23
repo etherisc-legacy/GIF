@@ -36,8 +36,8 @@ module.exports = async (deployer, network) => {
 
   if (network === 'xdai') {
     info('Verifying Query on Blockscout');
-    await verify(['Query'], 'xDai', 'Apache-2.0');
+    await verify(['Query'], 'xdai', 'Apache-2.0');
     info('Verifying QueryController on Blockscout');
-    await verify(['QueryController'], 'xDai', 'Apache-2.0');
+    await verify(['QueryController'], 'xdai', 'Apache-2.0');
   }
 };

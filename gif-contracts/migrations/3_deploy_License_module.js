@@ -36,8 +36,8 @@ module.exports = async (deployer, network) => {
 
   if (network === 'xdai') {
     info('Verifying License on Blockscout');
-    await verify(['License'], 'xDai', 'Apache-2.0');
+    await verify(['License'], 'xdai', 'Apache-2.0');
     info('Verifying LicenseController on Blockscout');
-    await verify(['LicenseController'], 'xDai', 'Apache-2.0');
+    await verify(['LicenseController'], 'xdai', 'Apache-2.0');
   }
 };

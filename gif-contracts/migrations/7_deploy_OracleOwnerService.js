@@ -22,6 +22,6 @@ module.exports = async (deployer, network) => {
 
   if (network === 'xdai') {
     info('Verifying OracleOwnerService on Blockscout');
-    await verify(['OracleOwnerService'], 'xDai', 'Apache-2.0');
+    await verify(['OracleOwnerService'], 'xdai', 'Apache-2.0');
   }
 };

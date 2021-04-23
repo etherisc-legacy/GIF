@@ -28,8 +28,8 @@ module.exports = async (deployer, network) => {
 
   if (network === 'xdai') {
     info('Verifying Registry on Blockscout');
-    await verify(['Registry'], 'xDai', 'Apache-2.0');
+    await verify(['Registry'], 'xdai', 'Apache-2.0');
     info('Verifying RegistryController on Blockscout');
-    await verify(['RegistryController'], 'xDai', 'Apache-2.0');
+    await verify(['RegistryController'], 'xdai', 'Apache-2.0');
   }
 };

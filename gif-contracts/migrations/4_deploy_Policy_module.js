@@ -38,8 +38,8 @@ module.exports = async (deployer, network) => {
 
   if (network === 'xdai') {
     info('Verifying Policy on Blockscout');
-    await verify(['Policy'], 'xDai', 'Apache-2.0');
+    await verify(['Policy'], 'xdai', 'Apache-2.0');
     info('Verifying PolicyController on Blockscout');
-    await verify(['PolicyController'], 'xDai', 'Apache-2.0');
+    await verify(['PolicyController'], 'xdai', 'Apache-2.0');
   }
 };
