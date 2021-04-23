@@ -104,4 +104,7 @@ module.exports = {
       },
     },
   },
+
+  plugins: ['truffle-source-verify'],
+
 };
