@@ -20,7 +20,7 @@ module.exports = async (deployer, network) => {
   await registry.register(policyFlowDefaultName, policyFlowDefault.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
-  if (network === 'xDai') {
+  if (network === 'xdai') {
     info('Verifying PolicyFlowDefault on Blockscout');
     await verify(['PolicyFlowDefault'], 'xDai', 'Apache-2.0');
   }

@@ -26,7 +26,7 @@ module.exports = async (deployer, network) => {
   await registry.register(registryStorageName, registryStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
-  if (network === 'xDai') {
+  if (network === 'xdai') {
     info('Verifying Registry on Blockscout');
     await verify(['Registry'], 'xDai', 'Apache-2.0');
     info('Verifying RegistryController on Blockscout');

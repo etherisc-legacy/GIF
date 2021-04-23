@@ -36,7 +36,7 @@ module.exports = async (deployer, network) => {
   await registry.register(policyStorageName, policyStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
-  if (network === 'xDai') {
+  if (network === 'xdai') {
     info('Verifying Policy on Blockscout');
     await verify(['Policy'], 'xDai', 'Apache-2.0');
     info('Verifying PolicyController on Blockscout');

@@ -34,7 +34,7 @@ module.exports = async (deployer, network) => {
   await registry.register(licenseStorageName, licenseStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
-  if (network === 'xDai') {
+  if (network === 'xdai') {
     info('Verifying License on Blockscout');
     await verify(['License'], 'xDai', 'Apache-2.0');
     info('Verifying LicenseController on Blockscout');

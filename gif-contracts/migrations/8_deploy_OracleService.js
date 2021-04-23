@@ -20,7 +20,7 @@ module.exports = async (deployer, network) => {
   await registry.registerService(oracleServiceName, oracleService.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
-  if (network === 'xDai') {
+  if (network === 'xdai') {
     info('Verifying OracleService on Blockscout');
     await verify(['OracleService'], 'xDai', 'Apache-2.0');
   }

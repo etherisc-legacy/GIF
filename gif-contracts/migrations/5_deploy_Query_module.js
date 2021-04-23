@@ -34,7 +34,7 @@ module.exports = async (deployer, network) => {
   await registry.register(queryStorageName, queryStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
-  if (network === 'xDai') {
+  if (network === 'xdai') {
     info('Verifying Query on Blockscout');
     await verify(['Query'], 'xDai', 'Apache-2.0');
     info('Verifying QueryController on Blockscout');

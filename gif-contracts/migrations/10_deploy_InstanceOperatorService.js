@@ -20,7 +20,7 @@ module.exports = async (deployer, network) => {
   await registry.registerService(instanceOperatorName, instanceOperator.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
-  if (network === 'xDai') {
+  if (network === 'xdai') {
     info('Verifying InstanceOperatorService on Blockscout');
     await verify(['InstanceOperatorService'], 'xDai', 'Apache-2.0');
   }
