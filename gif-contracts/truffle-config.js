@@ -30,7 +30,7 @@ module.exports = {
       skipDryRun: true,
     },
 
-    xDai: {
+    xdai: {
       provider: () => new HDWalletProvider(hdWalletConfig),
       host: process.env.TRUFFLE_HOST,
       port: process.env.TRUFFLE_PORT,
