@@ -5,7 +5,7 @@ pragma solidity 0.8.0;
 abstract contract AccessModifiers {
     modifier onlyInstanceOperator() {
         require(
-            msg.sender == getContract("InstanceOperator"),
+            msg.sender == getContract("InstanceOperatorService"),
             "ERROR::NOT_INSTANCE_OPERATOR"
         );
         _;
