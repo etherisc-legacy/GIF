@@ -10,8 +10,8 @@ contract Registry is RegistryStorageModel, BaseModuleStorage {
     constructor(address _controller, bytes32 _initialRelease) {
         // Init
         release = _initialRelease;
-        contracts[release]["InstanceOperator"] = msg.sender;
-        contractNames[release].push("InstanceOperator");
+        contracts[release]["InstanceOperatorService"] = msg.sender;
+        contractNames[release].push("InstanceOperatorService");
         contractsInRelease[release] = 1;
         _assignController(_controller);
     }

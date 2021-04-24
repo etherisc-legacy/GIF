@@ -9,7 +9,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     constructor(bytes32 _initialRelease) {
         // Init
         release = _initialRelease;
-        contracts[release]["InstanceOperator"] = msg.sender;
+        contracts[release]["InstanceOperatorService"] = msg.sender;
     }
 
     function assignStorage(

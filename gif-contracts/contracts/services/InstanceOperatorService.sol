@@ -11,7 +11,7 @@ import "../shared/IModuleController.sol";
 import "../shared/IModuleStorage.sol";
 
 contract InstanceOperatorService is WithRegistry, Ownable {
-    bytes32 public constant NAME = "InstanceOperator";
+    bytes32 public constant NAME = "InstanceOperatorService";
 
     constructor(address _registry) WithRegistry(_registry) {}
 
@@ -22,7 +22,7 @@ contract InstanceOperatorService is WithRegistry, Ownable {
         IModuleStorage(_storage).assignController(_controller);
     }
 
-    function assingStorage(address _controller, address _storage)
+    function assignStorage(address _controller, address _storage)
         external
         onlyOwner
     {
