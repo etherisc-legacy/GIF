@@ -11,9 +11,10 @@ const { info } = require('../../io/logger');
  */
 const checkThenVerify = async (contract) => {
   if (fs.find('contracts', { matching: `${contract}.sol`, recursive: true })) {
-    info('Verifying Registry on Blockscout');
-    await verify([contract], 'xdai', 'Apache-2.0');
+    const code = await verify([contract], 'xdai', 'Apache-2.0');
+    return (code === 0 ? `${contract}: successfully verified` : `${contract}: verification failed`);
   }
+  return `${contract}: not deployed on xdai`;
 };
 
 /**
@@ -21,19 +22,28 @@ const checkThenVerify = async (contract) => {
  * @returns {Promise<void>}
  */
 const doVerify = async () => {
-  await checkThenVerify('Registry');
-  await checkThenVerify('RegistryController');
-  await checkThenVerify('License');
-  await checkThenVerify('LicenseController');
-  await checkThenVerify('Policy');
-  await checkThenVerify('PolicyController');
-  await checkThenVerify('Query');
-  await checkThenVerify('QueryController');
-  await checkThenVerify('ProductService');
-  await checkThenVerify('OracleOwnerService');
-  await checkThenVerify('OracleService');
-  await checkThenVerify('PolicyFlowDefault');
-  await checkThenVerify('InstanceOperatorService');
+  const contracts = [
+    'Registry',
+    'RegistryController',
+    'License',
+    'LicenseController',
+    'Policy',
+    'PolicyController',
+    'Query',
+    'QueryController',
+    'ProductService',
+    'OracleOwnerService',
+    'OracleService',
+    'PolicyFlowDefault',
+    'InstanceOperatorService',
+  ];
+
+  const results = await Promise.all(
+    contracts.map(contract => new Promise(resolve => checkThenVerify(contract)
+      .then(res => resolve(res)))),
+  );
+
+  info(JSON.stringify(results, null, 2));
 };
 
 doVerify();
