@@ -14,8 +14,15 @@ module.exports = async (deployer) => {
   await deployer.deploy(Registry, registryController.address, initialRelease, { gas: 1000000 });
 
   const registryStorage = await Registry.deployed();
+  const registry = await RegistryController.at(registryStorage.address);
 
   info('Assign controller to storage');
   await registryController.assignStorage(registryStorage.address, { gas: 100000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+
+  const registryStorageName = await registryStorage.NAME.call();
+
+  info('Register Registry module in Registry');
+  await registry.register(registryStorageName, registryStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 };

@@ -11,7 +11,7 @@ contract Registry is RegistryStorageModel, BaseModuleStorage {
         // Init
         release = _initialRelease;
         contracts[release]["InstanceOperator"] = msg.sender;
-        contractNames[release].push("Registry");
+        contractNames[release].push("InstanceOperator");
         contractsInRelease[release] = 1;
         _assignController(_controller);
     }
