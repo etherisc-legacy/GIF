@@ -38,12 +38,12 @@ const doVerify = async () => {
     'InstanceOperatorService',
   ];
 
-  const results = await Promise.all(
-    contracts.map(contract => new Promise(resolve => checkThenVerify(contract)
-      .then(res => resolve(res)))),
-  );
+  const res = [];
+  for (let idx = 0; idx < contracts.length; idx += 1) {
+    res.push(await checkThenVerify(contracts[idx]));
+  }
 
-  info(JSON.stringify(results, null, 2));
+  info(JSON.stringify(res, null, 2));
 };
 
 doVerify();
