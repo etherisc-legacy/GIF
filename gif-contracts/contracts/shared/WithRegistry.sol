@@ -15,25 +15,16 @@ contract WithRegistry is AccessModifiers {
         registry = IRegistryController(_registry);
     }
 
-    function getService(bytes32 _contractName)
-        public
-        override
-        view
-        returns (address _addr)
-    {
-        _addr = registry.getService(_contractName);
-    }
-
     function getContract(bytes32 _contractName)
         public
-        override
         view
+        override
         returns (address _addr)
     {
         _addr = registry.getContract(_contractName);
     }
 
-    function getContractInRelease(uint256 _release, bytes32 _contractName)
+    function getContractInRelease(bytes32 _release, bytes32 _contractName)
         internal
         view
         returns (address _addr)
@@ -41,7 +32,7 @@ contract WithRegistry is AccessModifiers {
         _addr = registry.getContractInRelease(_release, _contractName);
     }
 
-    function getRelease() internal view returns (uint256 _release) {
+    function getRelease() internal view returns (bytes32 _release) {
         _release = registry.getRelease();
     }
 }

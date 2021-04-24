@@ -17,7 +17,7 @@ module.exports = async (deployer, network) => {
   const instanceOperatorName = await instanceOperator.NAME.call();
 
   info('Register InstanceOperatorService in Registry');
-  await registry.registerService(instanceOperatorName, instanceOperator.address, { gas: 100000 })
+  await registry.register(instanceOperatorName, instanceOperator.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   if (network === 'xdai') {

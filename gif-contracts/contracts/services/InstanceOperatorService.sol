@@ -15,11 +15,17 @@ contract InstanceOperatorService is WithRegistry, Ownable {
 
     constructor(address _registry) WithRegistry(_registry) {}
 
-    function assignController(address _storage, address _controller) external onlyOwner {
+    function assignController(address _storage, address _controller)
+        external
+        onlyOwner
+    {
         IModuleStorage(_storage).assignController(_controller);
     }
 
-    function assingStorage(address _controller, address _storage) external onlyOwner {
+    function assingStorage(address _controller, address _storage)
+        external
+        onlyOwner
+    {
         IModuleController(_controller).assignStorage(_storage);
     }
 
@@ -58,7 +64,7 @@ contract InstanceOperatorService is WithRegistry, Ownable {
 
     /* Registry */
     function registerInRelease(
-        uint256 _release,
+        bytes32 _release,
         bytes32 _contractName,
         address _contractAddress
     ) external onlyOwner {
@@ -72,7 +78,7 @@ contract InstanceOperatorService is WithRegistry, Ownable {
         registry.register(_contractName, _contractAddress);
     }
 
-    function deregisterInRelease(uint256 _release, bytes32 _contractName)
+    function deregisterInRelease(bytes32 _release, bytes32 _contractName)
         external
         onlyOwner
     {
@@ -83,12 +89,8 @@ contract InstanceOperatorService is WithRegistry, Ownable {
         registry.deregister(_contractName);
     }
 
-    function prepareRelease() external onlyOwner returns (uint256 _release) {
-        _release = registry.prepareRelease();
-    }
-
-    function registerService(bytes32 _name, address _addr) external {
-        registry.registerService(_name, _addr);
+    function prepareRelease() external onlyOwner{
+        registry.prepareRelease();
     }
 
     /* Query */

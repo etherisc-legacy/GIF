@@ -10,6 +10,7 @@ contract BaseModuleStorage is Delegator {
     fallback() virtual external {
         _delegate(controller);
     }
+
     /* solhint-enable payable-fallback */
 
     function _assignController(address _controller) internal {

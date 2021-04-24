@@ -17,7 +17,7 @@ module.exports = async (deployer) => {
   const instanceOperatorName = await instanceOperator.NAME.call();
 
   info('Register New InstanceOperatorService in Registry');
-  await instanceOperatorOld.registerService(instanceOperatorName, instanceOperator.address, { gas: 100000 })
+  await instanceOperatorOld.register(instanceOperatorName, instanceOperator.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   info('Deploy new QueryController');

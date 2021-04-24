@@ -6,10 +6,11 @@ import "./WithRegistry.sol";
 
 abstract contract ModuleStorage is WithRegistry, BaseModuleStorage {
     /* solhint-disable payable-fallback */
-    fallback() override external {
+    fallback() external override {
         // todo: restrict to controllers
         _delegate(controller);
     }
+
     /* solhint-enable payable-fallback */
 
     function assignController(address _controller)

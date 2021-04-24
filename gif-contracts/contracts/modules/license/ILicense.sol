@@ -22,7 +22,7 @@ interface ILicense {
         bytes32 name;
         address addr;
         bytes32 policyFlow;
-        uint256 release; // core release
+        bytes32 release; // core release
         // uint256 product release
         address policyToken;
         bool approved;

@@ -1,10 +1,11 @@
 pragma solidity 0.8.0;
+
 // SPDX-License-Identifier: Apache-2.0
 
 abstract contract AccessModifiers {
     modifier onlyInstanceOperator() {
         require(
-            msg.sender == getService("InstanceOperator"),
+            msg.sender == getContract("InstanceOperator"),
             "ERROR::NOT_INSTANCE_OPERATOR"
         );
         _;
@@ -23,13 +24,16 @@ abstract contract AccessModifiers {
     }
 
     modifier onlyOracleService() {
-        require(msg.sender == getService("OracleService"), "ERROR::NOT_ORACLE_SERVICE");
+        require(
+            msg.sender == getContract("OracleService"),
+            "ERROR::NOT_ORACLE_SERVICE"
+        );
         _;
     }
 
     modifier onlyOracleOwner() {
         require(
-            msg.sender == getService("OracleOwnerService"),
+            msg.sender == getContract("OracleOwnerService"),
             "ERROR::NOT_ORACLE_OWNER"
         );
         _;
@@ -37,7 +41,7 @@ abstract contract AccessModifiers {
 
     modifier onlyProductOwner() {
         require(
-            msg.sender == getService("ProductOwnerService"),
+            msg.sender == getContract("ProductOwnerService"),
             "ERROR::NOT_PRODUCT_OWNER"
         );
         _;
@@ -45,13 +49,8 @@ abstract contract AccessModifiers {
 
     function getContract(bytes32 _contractName)
         public
-        virtual
         view
+        virtual
         returns (address _addr);
 
-    function getService(bytes32 _contractName)
-        public
-        virtual
-        view
-        returns (address _addr);
 }

@@ -6,34 +6,35 @@ import "../../shared/BaseModuleController.sol";
 import "../../shared/AccessModifiers.sol";
 
 contract RegistryController is RegistryStorageModel, BaseModuleController, AccessModifiers {
-    constructor() {
+    constructor(bytes32 _initialRelease) {
         // Init
-        controllers["InstanceOperator"] = msg.sender;
+        release = _initialRelease;
+        contracts[release]["InstanceOperator"] = msg.sender;
     }
 
-    function assignStorage(address _storage) external onlyInstanceOperator {
-        _assignStorage(_storage);
-    }
-
-    function registerService(bytes32 _name, address _addr)
+    function assignStorage(
+        address _storage
+    )
         external
         onlyInstanceOperator
     {
-        controllers[_name] = _addr;
-    }
-
-    function getRelease() external view returns (uint256 _release) {
-        _release = release;
+        _assignStorage(_storage);
     }
 
     /**
      * @dev Register contract in certain release
      */
     function registerInRelease(
-        uint256 _release,
+        bytes32 _release,
         bytes32 _contractName,
         address _contractAddress
-    ) public onlyInstanceOperator {
+    )
+        public
+        onlyInstanceOperator
+    {
+
+        bool isNew = false;
+
         require(
             contractNames[_release].length <= maxContracts,
             "ERROR::MAX_CONTRACTS_LIMIT"
@@ -41,17 +42,23 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
 
         if (contracts[_release][_contractName] == address(0)) {
             contractNames[_release].push(_contractName);
+            contractsInRelease[_release] += 1;
+            isNew = true;
         }
 
         contracts[_release][_contractName] = _contractAddress;
+        require(contractsInRelease[_release] == contractNames[_release].length, 'ERROR::CONTRACT_NUMBER_MISMATCH');
 
-        emit LogContractRegistered(_release, _contractName, _contractAddress);
+        emit LogContractRegistered(_release, _contractName, _contractAddress, isNew);
     }
 
     /**
-     * @dev Register contract in the latest release
+     * @dev Register contract in the current release
      */
-    function register(bytes32 _contractName, address _contractAddress)
+    function register(
+        bytes32 _contractName,
+        address _contractAddress
+    )
         public
         onlyInstanceOperator
     {
@@ -61,7 +68,10 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     /**
      * @dev Deregister contract in certain release
      */
-    function deregisterInRelease(uint256 _release, bytes32 _contractName)
+    function deregisterInRelease(
+        bytes32 _release,
+        bytes32 _contractName
+    )
         public
         onlyInstanceOperator
     {
@@ -81,76 +91,86 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         }
 
         contractNames[_release].pop();
+        contractsInRelease[_release] -= 1;
+        require(contractsInRelease[_release] == contractNames[_release].length, 'ERROR::CONTRACT_NUMBER_MISMATCH');
 
         emit LogContractDeregistered(_release, _contractName);
     }
 
     /**
-     * @dev Deregister contract in the latest release
+     * @dev Deregister contract in the current release
      */
-    function deregister(bytes32 _contractName) public onlyInstanceOperator {
+    function deregister(
+        bytes32 _contractName
+    )
+        public
+        onlyInstanceOperator
+    {
         deregisterInRelease(release, _contractName);
     }
 
     /**
      * @dev Create new release, copy contracts from previous release
      */
-    function prepareRelease()
+    function prepareRelease(
+        bytes32 _newRelease
+    )
         public
         onlyInstanceOperator
-        returns (uint256 _release)
     {
-        uint256 countContracts = contractNames[release].length;
+        uint256 countContracts = contractsInRelease[release];
 
         require(countContracts > 0, "ERROR::EMPTY_RELEASE");
-
-        uint256 nextRelease = release + 1;
+        require(contractsInRelease[_newRelease] == 0, 'ERROR::NEW_RELEASE_NOT_EMPTY');
 
         // todo: think about how to avoid this loop
         for (uint256 i = 0; i < countContracts; i++) {
             bytes32 contractName = contractNames[release][i];
             registerInRelease(
-                nextRelease,
+                _newRelease,
                 contractName,
                 contracts[release][contractName]
             );
         }
 
-        release = nextRelease;
-        _release = release;
+        release = _newRelease;
 
         emit LogReleasePrepared(release);
     }
 
     /**
+     * @dev get current release
+     */
+    function getRelease()
+        external view
+        returns (bytes32 _release)
+    {
+        _release = release;
+    }
+
+    /**
      * @dev Get contract's address in certain release
      */
-    function getContractInRelease(uint256 _release, bytes32 _contractName)
-        public
-        view
+    function getContractInRelease(
+        bytes32 _release,
+        bytes32 _contractName
+    )
+        public view
         returns (address _addr)
     {
         _addr = contracts[_release][_contractName];
     }
 
     /**
-     * @dev Get contract's address in the latest release
+     * @dev Get contract's address in the current release
      */
-    function getContract(bytes32 _contractName)
-        public
-        override
-        view
+    function getContract(
+        bytes32 _contractName
+    )
+        public view override
         returns (address _addr)
     {
         _addr = getContractInRelease(release, _contractName);
     }
 
-    function getService(bytes32 _contractName)
-        public
-        override
-        view
-        returns (address _addr)
-    {
-        _addr = controllers[_contractName];
-    }
 }

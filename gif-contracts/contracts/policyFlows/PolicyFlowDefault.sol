@@ -20,18 +20,17 @@ contract PolicyFlowDefault is WithRegistry {
     ) public returns (uint256 _applicationId) {
         uint256 productId = license().getProductId(msg.sender);
 
-        uint256 metadataId = policy().createPolicyFlow(
-            productId,
-            _bpExternalKey
-        );
+        uint256 metadataId =
+            policy().createPolicyFlow(productId, _bpExternalKey);
 
-        uint256 applicationId = policy().createApplication(
-            productId,
-            metadataId,
-            _premium,
-            _currency,
-            _payoutOptions
-        );
+        uint256 applicationId =
+            policy().createApplication(
+                productId,
+                metadataId,
+                _premium,
+                _currency,
+                _payoutOptions
+            );
 
         _applicationId = applicationId;
     }
@@ -43,10 +42,8 @@ contract PolicyFlowDefault is WithRegistry {
         uint256 productId = license().getProductId(msg.sender);
 
         require(
-            policy().getApplicationState(
-                productId,
-                _applicationId
-            ) == IPolicy.ApplicationState.Applied,
+            policy().getApplicationState(productId, _applicationId) ==
+                IPolicy.ApplicationState.Applied,
             "ERROR::INVALID_APPLICATION_STATE"
         );
 
@@ -56,10 +53,8 @@ contract PolicyFlowDefault is WithRegistry {
             IPolicy.ApplicationState.Underwritten
         );
 
-        (uint256 metadataId, , , ) = policy().getApplicationData(
-            productId,
-            _applicationId
-        );
+        (uint256 metadataId, , , ) =
+            policy().getApplicationData(productId, _applicationId);
 
         uint256 policyId = policy().createPolicy(productId, metadataId);
 
@@ -70,10 +65,8 @@ contract PolicyFlowDefault is WithRegistry {
         uint256 productId = license().getProductId(msg.sender);
 
         require(
-            policy().getApplicationState(
-                productId,
-                _applicationId
-            ) == IPolicy.ApplicationState.Applied,
+            policy().getApplicationState(productId, _applicationId) ==
+                IPolicy.ApplicationState.Applied,
             "ERROR::INVALID_APPLICATION_STATE"
         );
 
@@ -99,10 +92,8 @@ contract PolicyFlowDefault is WithRegistry {
         uint256 productId = license().getProductId(msg.sender);
 
         require(
-            policy().getClaimState(
-                productId,
-                _claimId
-            ) == IPolicy.ClaimState.Applied,
+            policy().getClaimState(productId, _claimId) ==
+                IPolicy.ClaimState.Applied,
             "ERROR::INVALID_CLAIM_STATE"
         );
 
@@ -121,10 +112,8 @@ contract PolicyFlowDefault is WithRegistry {
         uint256 productId = license().getProductId(msg.sender);
 
         require(
-            policy().getClaimState(
-                productId,
-                _claimId
-            ) == IPolicy.ClaimState.Applied,
+            policy().getClaimState(productId, _claimId) ==
+                IPolicy.ClaimState.Applied,
             "ERROR::INVALID_CLAIM_STATE"
         );
 
@@ -139,10 +128,8 @@ contract PolicyFlowDefault is WithRegistry {
         uint256 productId = license().getProductId(msg.sender);
 
         require(
-            policy().getPolicyState(
-                productId,
-                _policyId
-            ) == IPolicy.PolicyState.Active,
+            policy().getPolicyState(productId, _policyId) ==
+                IPolicy.PolicyState.Active,
             "ERROR::INVALID_POLICY_STATE"
         );
 
@@ -206,31 +193,41 @@ contract PolicyFlowDefault is WithRegistry {
         external
         view
         returns (
-        uint256 applicationId,
-        uint256 policyId,
-        // ERC721 token
-        address tokenContract,
-        // Core
-        address registryContract,
-        uint256 release,
-        // Datetime
-        uint256 createdAt,
-        uint256 updatedAt
+            uint256 applicationId,
+            uint256 policyId,
+            // ERC721 token
+            address tokenContract,
+            // Core
+            address registryContract,
+            uint256 release,
+            // Datetime
+            uint256 createdAt,
+            uint256 updatedAt
         )
     {
         uint256 productId = license().getProductId(msg.sender);
 
-        (applicationId, policyId, tokenContract, registryContract, release, createdAt, updatedAt)
-            = policy().getMetadataByExternalKey(productId, _bpExternalKey);
+        (
+            applicationId,
+            policyId,
+            tokenContract,
+            registryContract,
+            release,
+            createdAt,
+            updatedAt
+        ) = policy().getMetadataByExternalKey(productId, _bpExternalKey);
     }
 
     function getStateMessage(bytes32 _bpExternalKey)
         external
         view
-        returns ( bytes32 stateMessage )
+        returns (bytes32 stateMessage)
     {
         uint256 productId = license().getProductId(msg.sender);
-        stateMessage = policy().getStateMessageByExternalKey(productId, _bpExternalKey);
+        stateMessage = policy().getStateMessageByExternalKey(
+            productId,
+            _bpExternalKey
+        );
     }
 
     function license() internal view returns (ILicenseController) {

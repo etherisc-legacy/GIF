@@ -9,6 +9,7 @@ abstract contract ModuleController is WithRegistry, BaseModuleController {
     fallback() external {
         revert("ERROR::FALLBACK_FUNCTION_NOW_ALLOWED");
     }
+
     /* solhint-enable payable-fallback */
 
     function assignStorage(address _storage) external onlyInstanceOperator {

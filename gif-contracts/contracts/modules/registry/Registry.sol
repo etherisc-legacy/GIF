@@ -7,16 +7,19 @@ import "../../shared/BaseModuleStorage.sol";
 contract Registry is RegistryStorageModel, BaseModuleStorage {
     bytes32 public constant NAME = "Registry";
 
-    constructor(address _controller) {
+    constructor(address _controller, bytes32 _initialRelease) {
         // Init
-        controllers["InstanceOperator"] = msg.sender;
+        release = _initialRelease;
+        contracts[release]["InstanceOperator"] = msg.sender;
+        contractNames[release].push("Registry");
+        contractsInRelease[release] = 1;
         _assignController(_controller);
     }
 
     function assignController(address _controller) external {
         // todo: use onlyInstanceOperator modifier
         require(
-            msg.sender == controllers["InstanceOperator"],
+            msg.sender == contracts[release]["InstanceOperator"],
             "ERROR::NOT_AUTHORIZED"
         );
         _assignController(_controller);

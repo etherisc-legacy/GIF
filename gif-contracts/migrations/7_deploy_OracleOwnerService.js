@@ -17,7 +17,7 @@ module.exports = async (deployer, network) => {
   const OracleOwnerServiceName = await oracleOwnerService.NAME.call();
 
   info('Register OracleOwnerService in Registry');
-  await registry.registerService(OracleOwnerServiceName, oracleOwnerService.address, { gas: 100000 })
+  await registry.register(OracleOwnerServiceName, oracleOwnerService.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   if (network === 'xdai') {

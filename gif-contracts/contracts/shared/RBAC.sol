@@ -21,7 +21,10 @@ contract RBAC is Ownable {
         rolesKeys.push(_role);
     }
 
-    function addRoleToAccount(address _address, bytes32 _role) public onlyOwner {
+    function addRoleToAccount(address _address, bytes32 _role)
+        public
+        onlyOwner
+    {
         require(roles[_role] != 0);
 
         permissions[_address] = permissions[_address] | roles[_role];

@@ -2,15 +2,21 @@ pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 interface IRegistry {
+
     event LogContractRegistered(
-        uint256 release,
+        bytes32 release,
         bytes32 contractName,
-        address contractAddress
+        address contractAddress,
+        bool isNew
     );
 
-    event LogContractDeregistered(uint256 release, bytes32 contractName);
+    event LogContractDeregistered(
+        bytes32 release,
+        bytes32 contractName
+    );
 
-    event LogInterfaceIdRegistered(bytes4 interfaceId, bytes32 contractName);
+    event LogReleasePrepared(
+        bytes32 release
+    );
 
-    event LogReleasePrepared(uint256 release);
 }
