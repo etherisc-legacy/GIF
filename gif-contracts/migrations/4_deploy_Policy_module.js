@@ -1,4 +1,3 @@
-const { verify } = require('truffle-source-verify/lib');
 const { info } = require('../io/logger');
 
 
@@ -8,7 +7,7 @@ const Policy = artifacts.require('modules/policy/Policy.sol');
 const PolicyController = artifacts.require('modules/policy/PolicyController.sol');
 
 
-module.exports = async (deployer, network) => {
+module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed();
   const registry = await RegistryController.at(registryStorage.address);
 
@@ -35,11 +34,4 @@ module.exports = async (deployer, network) => {
   info('Register Policy module in Registry');
   await registry.register(policyStorageName, policyStorage.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
-
-  if (network === 'xdai') {
-    info('Verifying Policy on Blockscout');
-    await verify(['Policy'], 'xdai', 'Apache-2.0');
-    info('Verifying PolicyController on Blockscout');
-    await verify(['PolicyController'], 'xdai', 'Apache-2.0');
-  }
 };

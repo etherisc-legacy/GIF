@@ -3,7 +3,7 @@ const { info } = require('../io/logger');
 
 const InstanceOperatorService = artifacts.require('gif-services/InstanceOperatorService.sol');
 
-module.exports = async (deployer, networks, accounts) => {
+module.exports = async (deployer, network, accounts) => {
   const instanceOperator = await InstanceOperatorService.deployed();
 
   info('Register Sandbox account');

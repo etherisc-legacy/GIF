@@ -35,7 +35,8 @@
     "docs": "echo 'Generage documentation'; rimraf ./docs/* && SOLC_ARGS='openzeppelin-solidity=$(pwd)/node_modules/openzeppelin-solidity' solidity-docgen . contracts .",
     "update-solc-version": "echo 'Update solc compiler version'; ./bin/command updateSolcVersion",
     "clean": "echo 'Clean repository'; rimraf build coverage",
-    "prepare-verification": "echo 'Concat sources for verification on Etherscan'; bin/lib/prepare-verification.sh"
+    "prepare-verification": "echo 'Concat sources for verification on Etherscan'; bin/lib/prepare-verification.sh",
+    "do-verify": "echo 'Verify Contracts on xDai'; bin/lib/doVerify.js"
   },
   "dependencies": {
     "@etherisc/microservice": "^0.6.7-sandbox",
