@@ -3,7 +3,7 @@ const { info } = require('../io/logger');
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
-const initialRelease = web3.utils.bytesToHex('1.0.0');
+const initialRelease = web3.utils.fromAscii('1.0.0');
 
 module.exports = async (deployer) => {
   // Deploy storage and controller contracts
