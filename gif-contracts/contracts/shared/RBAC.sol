@@ -1,4 +1,4 @@
-pragma solidity 0.8.0;
+pragma solidity >0.6.0; // TODO: Change this to 0.8.0 as soon as ChainLink releases 0.8
 // SPDX-License-Identifier: Apache-2.0
 
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
