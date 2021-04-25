@@ -2,7 +2,7 @@ pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./QueryStorageModel.sol";
-import "../../IOracle.sol";
+import "../../shared/IOracle.sol";
 import "../../shared/ModuleController.sol";
 
 contract QueryController is QueryStorageModel, ModuleController {

@@ -16,7 +16,7 @@ abstract contract Oracle is IOracle, RBAC {
         _;
     }
 
-    constructor(address _oracleService) {
+    constructor(address _oracleService) public {
         oracleService = IOracleService(_oracleService);
     }
 
