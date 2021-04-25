@@ -1,8 +1,8 @@
-pragma solidity >0.6.0; // TODO: change this to 0.8.0 as soon as Chainlink releases 0.8
+pragma solidity ^0.6.0; // TODO: change this to 0.8.0 as soon as Chainlink releases 0.8
 // SPDX-License-Identifier: Apache-2.0
 
-import "./services/IOracleService.sol";
-import "./shared/RBAC.sol";
+import "./IOracleService.sol";
+import "./RBAC.sol";
 import "./IOracle.sol";
 
 abstract contract Oracle is IOracle, RBAC {

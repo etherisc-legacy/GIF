@@ -1,8 +1,8 @@
-pragma solidity 0.8.0;
+pragma solidity ^0.6.0;
 // SPDX-License-Identifier: Apache-2.0
 
-import "./shared/RBAC.sol";
-import "./services/IProductService.sol";
+import "./RBAC.sol";
+import "./IProductService.sol";
 
 contract Product is RBAC {
 
