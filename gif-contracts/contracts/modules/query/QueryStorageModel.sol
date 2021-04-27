@@ -7,7 +7,8 @@ contract QueryStorageModel is IQuery {
     // Oracle types
     mapping(bytes32 => OracleType) public oracleTypes;
     mapping(bytes32 => mapping (uint256 => OracleAssignmentState)) public assignedOracles;
-    bytes32[] public oracleTypeNames;
+    // TODO: change to mapping
+    mapping(uint256 => bytes32) public oracleTypeNames;
     uint256 public oracleTypeNamesIncrement = 1; // first oracleType is 1
 
 

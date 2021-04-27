@@ -36,7 +36,7 @@ contract QueryController is QueryStorageModel, ModuleController {
             0
         );
 
-        oracleTypeNames.push(_oracleTypeName);
+        oracleTypeNames[oracleTypeNamesIncrement] = _oracleTypeName;
         oracleTypeNamesIncrement += 1;
 
         emit LogOracleTypeProposed(
