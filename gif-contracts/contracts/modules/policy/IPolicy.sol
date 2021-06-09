@@ -15,7 +15,8 @@ interface IPolicy {
     );
 
     event LogNewApplication(
-        uint256 bpkey
+        uint256 productId,
+        bytes32 bpkey
     );
 
     event LogApplicationStateChanged(
@@ -47,6 +48,7 @@ interface IPolicy {
     event LogNewPayout(
         bytes32 bpKey,
         uint256 claimId,
+        uint256 payoutId,
         PayoutState state
     );
 
@@ -83,39 +85,28 @@ interface IPolicy {
     struct Metadata {
         // Lookup
         uint256 productId;
-
         bytes options; // ABI-encoded contract data: premium, currency, payout options etc.
-
         uint256 claimsCount;
         uint256 payoutsCount;
         bool hasPolicy;
         bool hasApplication;
-
-        // ERC721 token
-        address tokenContract;
-        // Core
-        address registryContract;
-        uint256 release;
-        // State
         PolicyFlowState state;
-        bytes32 stateMessage;
-        // Datetime
         uint256 createdAt;
         uint256 updatedAt;
+
+        address tokenContract;
+        address registryContract;
+        uint256 release;
     }
 
     struct Application {
         ApplicationState state;
-        bytes32 stateMessage;
-        // Datetime
         uint256 createdAt;
         uint256 updatedAt;
     }
 
     struct Policy {
         PolicyState state;
-        bytes32 stateMessage;
-        // Datetime
         uint256 createdAt;
         uint256 updatedAt;
     }
@@ -123,10 +114,7 @@ interface IPolicy {
     struct Claim {
         // Data to prove claim, ABI-encoded
         bytes data;
-        // State
         ClaimState state;
-        bytes32 stateMessage;
-        // Datetime
         uint256 createdAt;
         uint256 updatedAt;
     }
@@ -135,10 +123,7 @@ interface IPolicy {
         // Data describing the payout, ABI-encoded
         bytes data;
         uint256 claimId;
-        // State
         PayoutState state;
-        bytes32 stateMessage;
-        // Datetime
         uint256 createdAt;
         uint256 updatedAt;
     }

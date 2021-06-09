@@ -17,5 +17,5 @@ contract PolicyStorageModel is IPolicy {
     mapping(bytes32 => mapping (uint256 => Claim)) public claims;
 
     // Payouts
-    mapping(uint256 => mapping (uint256 => Payout)) public payouts;
+    mapping(bytes32 => mapping (uint256 => Payout)) public payouts;
 }

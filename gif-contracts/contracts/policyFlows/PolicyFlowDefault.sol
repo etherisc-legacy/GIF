@@ -14,116 +14,127 @@ contract PolicyFlowDefault is WithRegistry {
 
     function newApplication(
         bytes32 _bpKey,
-        bytes _options // replaces premium, currency, payoutOptions
-    ) public returns (uint256 _applicationId) {
+        bytes calldata _options // replaces premium, currency, payoutOptions
+    )
+        public
+    {
         // the calling contract is the Product contract, which needs to have a productId in the license contract.
         uint256 productId = license().getProductId(msg.sender);
 
-        uint256 metadataId =
-            policy().createPolicyFlow(productId, _bpKey);
+        policy().createPolicyFlow(productId, _bpKey);
+        policy().createApplication(_bpKey, _options);
 
-        uint256 applicationId =
-            policy().createApplication(
-                metadataId,
-                _options
-            );
-
-        _applicationId = applicationId;
     }
 
-    function underwrite(bytes32 _bpKey)
+    function underwrite(
+        bytes32 _bpKey
+    )
         external
-        returns (uint256 _policyId)
     {
         require(
-            policy().getApplicationState(_applicationId) ==
+            policy().getApplicationState(_bpKey) ==
                 IPolicy.ApplicationState.Applied,
-            "ERROR::INVALID_APPLICATION_STATE"
+            "ERROR:PFD-001:INVALID_APPLICATION_STATE"
         );
 
-        policy().setApplicationState(
-            _applicationId,
-            IPolicy.ApplicationState.Underwritten
-        );
-
-        (uint256 metadataId, , , ) =
-            policy().getApplicationData(_applicationId);
-
-        uint256 policyId = policy().createPolicy(metadataId);
-
-        _policyId = policyId;
+        policy().setApplicationState(_bpKey, IPolicy.ApplicationState.Underwritten);
+        policy().createPolicy(_bpKey);
     }
 
-    function decline(uint256 _applicationId) external {
+    function decline(
+        bytes32 _bpKey
+    )
+        external
+    {
         require(
-            policy().getApplicationState(_applicationId) ==
+            policy().getApplicationState(_bpKey) ==
                 IPolicy.ApplicationState.Applied,
-            "ERROR::INVALID_APPLICATION_STATE"
+            "ERROR:PFD-002:INVALID_APPLICATION_STATE"
         );
 
-        policy().setApplicationState(
-            _applicationId,
-            IPolicy.ApplicationState.Declined
-        );
+        policy().setApplicationState(_bpKey, IPolicy.ApplicationState.Declined);
     }
 
-    function newClaim(uint256 _policyId) external returns (uint256 _claimId) {
-        uint256 claimId = policy().createClaim(_policyId, "");
+    function newClaim(
+        bytes32 _bpKey,
+        bytes calldata _data
+    )
+        external
+        returns (uint256 _claimId)
+    {
+        uint256 claimId = policy().createClaim(_bpKey, _data);
 
         _claimId = claimId;
     }
 
-    function confirmClaim(uint256 _claimId, uint256 _sum)
+    function confirmClaim(
+        bytes32 _bpKey,
+        uint256 _claimId,
+        bytes calldata _data
+    )
         external
         returns (uint256 _payoutId)
     {
         require(
-            policy().getClaimState(_claimId) ==
+            policy().getClaimState(_bpKey, _claimId) ==
                 IPolicy.ClaimState.Applied,
-            "ERROR::INVALID_CLAIM_STATE"
+            "ERROR:PFD-003:INVALID_CLAIM_STATE"
         );
 
         policy().setClaimState(
+            _bpKey,
             _claimId,
             IPolicy.ClaimState.Confirmed
         );
 
-        uint256 payoutId = policy().createPayout(_claimId, _sum);
+        uint256 payoutId = policy().createPayout(_bpKey, _claimId, _data);
 
         _payoutId = payoutId;
     }
 
-    function declineClaim(uint256 _claimId) external {
+    function declineClaim(
+        bytes32 _bpKey,
+        uint256 _claimId
+    )
+        external
+    {
         require(
-            policy().getClaimState(_claimId) ==
+            policy().getClaimState(_bpKey, _claimId) ==
                 IPolicy.ClaimState.Applied,
-            "ERROR::INVALID_CLAIM_STATE"
+            "ERROR:PFD-004:INVALID_CLAIM_STATE"
         );
 
         policy().setClaimState(
+            _bpKey,
             _claimId,
             IPolicy.ClaimState.Declined
         );
     }
 
-    function expire(uint256 _policyId) external {
+    function expire(
+        bytes32 _bpKey
+    ) external {
         require(
-            policy().getPolicyState(_policyId) ==
+            policy().getPolicyState(_bpKey) ==
                 IPolicy.PolicyState.Active,
-            "ERROR::INVALID_POLICY_STATE"
+            "ERROR:PFD-005:INVALID_POLICY_STATE"
         );
 
         policy().setPolicyState(
-            _policyId,
+            _bpKey,
             IPolicy.PolicyState.Expired
         );
     }
 
-    function payout(uint256 _payoutId, uint256 _amount)
+    function payout(
+        bytes32 _bpKey,
+        uint256 _payoutId,
+        bool _complete,
+        bytes calldata _data
+    )
         external
-        returns (uint256 _remainder)
     {
-        _remainder = policy().payOut(_payoutId, _amount);
+        policy().payOut(_bpKey, _payoutId, _complete, _data);
     }
 
     function register(bytes32 _productName, bytes32 _policyFlow) external {
@@ -133,72 +144,16 @@ contract PolicyFlowDefault is WithRegistry {
     function request(
         bytes calldata _input,
         string calldata _callbackMethodName,
-        address _callabackContractAddress,
+        address _callbackContractAddress,
         bytes32 _oracleTypeName,
         uint256 _responsibleOracleId
     ) external returns (uint256 _requestId) {
         _requestId = query().request(
             _input,
             _callbackMethodName,
-            _callabackContractAddress,
+            _callbackContractAddress,
             _oracleTypeName,
             _responsibleOracleId
-        );
-    }
-
-    function getPayoutOptions(uint256 _applicationId)
-        external
-        view
-        returns (uint256[] memory _payoutOptions)
-    {
-        _payoutOptions = policy().getPayoutOptions(_applicationId);
-    }
-
-    function getPremium(uint256 _applicationId)
-        external
-        view
-        returns (uint256 _premium)
-    {
-        _premium = policy().getPremium(_applicationId);
-    }
-
-    function getMetadata(bytes32 _bpKey)
-        external
-        view
-        returns (
-            uint256 productId,
-            uint256 applicationId,
-            uint256 policyId,
-            // ERC721 token
-            address tokenContract,
-            // Core
-            address registryContract,
-            uint256 release,
-            // Datetime
-            uint256 createdAt,
-            uint256 updatedAt
-        )
-    {
-
-        (
-            productId,
-            applicationId,
-            policyId,
-            tokenContract,
-            registryContract,
-            release,
-            createdAt,
-            updatedAt
-        ) = policy().getMetadataByExternalKey(_bpKey);
-    }
-
-    function getStateMessage(bytes32 _bpKey)
-        external
-        view
-        returns (bytes32 stateMessage)
-    {
-        stateMessage = policy().getStateMessageByExternalKey(
-            _bpKey
         );
     }
 

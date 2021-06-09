@@ -3,60 +3,23 @@ pragma solidity ^0.6.0;
 // SPDX-License-Identifier: Apache-2.0
 
 interface IProductService {
-    function register(bytes32 _productName, bytes32 _policyFlow)
-        external
-        returns (uint256 _registrationId);
-
-    function newApplication(
-        bytes32 _bpKey,
-        uint256 _premium,
-        bytes32 _currency,
-        uint256[] calldata _payoutOptions
-    ) external returns (uint256 _applicationId);
-
-    function underwrite(uint256 applicationId)
-        external
-        returns (uint256 _policyId);
-
-    function decline(uint256 _applicationId) external;
-
-    function newClaim(uint256 _policyId) external returns (uint256 _claimId);
-
-    function confirmClaim(uint256 _claimId, uint256 _sum)
-        external
-        returns (uint256 _payoutId);
-
-    function declineClaim(uint256 _claimId) external;
-
-    function expire(uint256 _policyId) external;
-
-    function payout(uint256 _payoutId, uint256 _sum)
-        external
-        returns (uint256 _remainder);
-
-    function getPayoutOptions(uint256 _applicationId)
-        external
-        returns (uint256[] memory _payoutOptions);
-
-    function getPremium(uint256 _applicationId)
-        external
-        returns (uint256 _premium);
-
+    function register(bytes32 _productName, bytes32 _policyFlow) external returns (uint256 _registrationId);
+    function newApplication(bytes32 _bpKey, bytes _options) external;
+    function underwrite(bytes32 _bpKey) external;
+    function decline(bytes32 _bpKey) external;
+    function newClaim(bytes32 _bpKey) external returns (uint256 _claimId);
+    function confirmClaim(bytes32 _bpKey, uint256 _claimId, bytes _data) external returns (uint256 _payoutId);
+    function declineClaim(bytes32 _bpKey, uint256 _claimId) external;
+    function expire(bytes32 _bpKey) external;
+    function payout(bytes32 _bpKey, uint256 _payoutId, bool _complete, bytes _data) external;
     function request(
         bytes calldata _input,
         string calldata _callbackMethodName,
-        address _callabackContractAddress,
+        address _callbackContractAddress,
         bytes32 _oracleTypeName,
         uint256 _responsibleOracleId
     ) external returns (uint256 _requestId);
 
-    function getContract(bytes32 _contractName)
-        external
-        view
-        returns (address _contractAddress);
-
-    function getService(bytes32 _contractName)
-        external
-        view
-        returns (address _contractAddress);
+    function getContract(bytes32 _contractName) external view returns (address _contractAddress);
+    function getService(bytes32 _contractName) external view returns (address _contractAddress);
 }

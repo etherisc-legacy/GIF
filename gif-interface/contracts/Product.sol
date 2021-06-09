@@ -54,69 +54,79 @@ contract Product is RBAC {
 
     function _newApplication(
         bytes32 _bpKey,
-        uint256 _premium,
-        bytes32 _currency,
-        uint256[] memory _payoutOptions
-    ) internal returns (uint256 _applicationId) {
+        bytes _options
+    )
+        internal
+        returns (uint256 _applicationId)
+    {
         _applicationId = productService.newApplication(
             _bpKey,
-            _premium,
-            _currency,
-            _payoutOptions
+            _options
         );
     }
 
-    function _underwrite(uint256 _applicationId)
+    function _underwrite(
+        bytes32 _bpKey
+    )
         internal
-        returns (uint256 _policyId)
     {
-        _policyId = productService.underwrite(_applicationId);
+        productService.underwrite(_bpKey);
     }
 
-    function _decline(uint256 _applicationId) internal {
-        productService.decline(_applicationId);
-    }
-
-    function _newClaim(uint256 _policyId) internal returns (uint256 _claimId) {
-        _claimId = productService.newClaim(_policyId);
-    }
-
-    function _confirmClaim(uint256 _claimId, uint256 _amount)
-    internal
-    returns (uint256 _payoutId)
-    {
-        _payoutId = productService.confirmClaim(_claimId, _amount);
-    }
-
-    function _declineClaim(uint256 _claimId)
-    internal
-    {
-        productService.declineClaim(_claimId);
-    }
-
-    function _expire(uint256 _policyId) internal {
-        productService.expire(_policyId);
-    }
-
-    function _payout(uint256 _payoutId, uint256 _amount)
+    function _decline(
+        bytes32 _bpKey
+    )
         internal
-        returns (uint256 _remainder)
     {
-        _remainder = productService.payout(_payoutId, _amount);
+        productService.decline(_bpKey);
     }
 
-    function _getPayoutOptions(uint256 _applicationId)
+    function _newClaim(
+        uint256 _bpKey,
+        bytes _data
+    )
         internal
-        returns (uint256[] memory _payoutOptions)
+        returns (uint256 _claimId)
     {
-        _payoutOptions = productService.getPayoutOptions(_applicationId);
+        _claimId = productService.newClaim(_bpKey, _data);
     }
 
-    function _getPremium(uint256 _applicationId)
+    function _confirmClaim(
+        bytes32 _bpKey,
+        uint256 _claimId,
+        uint256 _data
+    )
         internal
-        returns (uint256 _premium)
+        returns (uint256 _payoutId)
     {
-        _premium = productService.getPremium(_applicationId);
+        _payoutId = productService.confirmClaim(_claimId, _data);
+    }
+
+    function _declineClaim(
+        bytes32 _bpKey,
+        uint256 _claimId
+    )
+        internal
+    {
+        productService.declineClaim(_bpKey);
+    }
+
+    function _expire(
+        uint256 _policyId
+    )
+        internal
+    {
+        productService.expire(_bpKey);
+    }
+
+    function _payout(
+        bytes32 _bpKey,
+        uint256 _payoutId,
+        bytes _data
+    )
+        internal
+    {
+        productService.payout(_bpKey, _payoutId, _data);
     }
 
     function _request(
@@ -124,7 +134,10 @@ contract Product is RBAC {
         string memory _callbackMethodName,
         bytes32 _oracleTypeName,
         uint256 _responsibleOracleId
-    ) internal returns (uint256 _requestId) {
+    )
+        internal
+        returns (uint256 _requestId)
+    {
         _requestId = productService.request(
             _input,
             _callbackMethodName,

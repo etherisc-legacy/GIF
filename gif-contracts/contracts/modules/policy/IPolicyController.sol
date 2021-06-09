@@ -8,10 +8,7 @@ interface IPolicyController {
         uint256 _productId,
         bytes32 _bpKey
         )
-        external
-        returns (
-            uint256 _metadataId
-        );
+        external;
 
     function setPolicyFlowState(
         uint256 _metadataId,
@@ -20,24 +17,19 @@ interface IPolicyController {
         external;
 
     function createApplication(
-        uint256 _metadataId,
-        uint256 _premium,
-        bytes32 _currency,
-        uint256[] calldata _payoutOptions
+        bytes32 _bpKey,
+        bytes calldata _options
         )
-        external
-        returns (
-            uint256 _applicationId
-        );
+        external;
 
     function setApplicationState(
-        uint256 _applicationId,
+        bytes32 _bpKey,
         IPolicy.ApplicationState _state
         )
         external;
 
     function createPolicy(
-        uint256 _metadataId
+        bytes32 _bpKey
         )
         external
         returns (
@@ -45,14 +37,14 @@ interface IPolicyController {
         );
 
     function setPolicyState(
-        uint256 _policyId,
+        bytes32 _bpKey,
         IPolicy.PolicyState _state
         )
         external;
 
     function createClaim(
-        uint256 _policyId,
-        bytes32 _data
+        bytes32 _bpKey,
+        bytes calldata _data
         )
         external
         returns (
@@ -60,14 +52,16 @@ interface IPolicyController {
         );
 
     function setClaimState(
+        bytes32 _bpKey,
         uint256 _claimId,
         IPolicy.ClaimState _state
         )
         external;
 
     function createPayout(
+        bytes32 _bpKey,
         uint256 _claimId,
-        uint256 _amount
+        bytes calldata _data
         )
         external
         returns (
@@ -75,8 +69,10 @@ interface IPolicyController {
         );
 
     function payOut(
+        bytes32 _bpKey,
         uint256 _payoutId,
-        uint256 _amount
+        bool _complete,
+        bytes calldata _data
         )
         external
         returns (
@@ -84,43 +80,14 @@ interface IPolicyController {
         );
 
     function setPayoutState(
+        bytes32 _bpkey,
         uint256 _payoutId,
         IPolicy.PayoutState _state
         )
         external;
 
-    function getApplicationData(
-        uint256 _applicationId
-        )
-        external
-        view
-        returns (
-            uint256 _metadataId,
-            uint256 _premium,
-            bytes32 _currency,
-            IPolicy.ApplicationState _state
-        );
-
-    function getPayoutOptions(
-        uint256 _applicationId
-        )
-        external
-        view
-        returns (
-            uint256[] memory _payoutOptions
-        );
-
-    function getPremium(
-        uint256 _applicationId
-        )
-        external
-        view
-        returns (
-            uint256 _premium
-        );
-
     function getApplicationState(
-        uint256 _applicationId
+        bytes32 _bpkey
         )
         external
         view
@@ -129,7 +96,7 @@ interface IPolicyController {
         );
 
     function getPolicyState(
-        uint256 _policyId
+        bytes32 _bpkey
         )
         external
         view
@@ -138,6 +105,7 @@ interface IPolicyController {
         );
 
     function getClaimState(
+        bytes32 _bpkey,
         uint256 _claimId
         )
         external
@@ -147,6 +115,7 @@ interface IPolicyController {
         );
 
     function getPayoutState(
+        bytes32 _bpkey,
         uint256 _payoutId
         )
         external
@@ -155,31 +124,4 @@ interface IPolicyController {
             IPolicy.PayoutState _state
         );
 
-    function getMetadataByExternalKey(
-        bytes32 _bpKey
-        )
-        external
-        view
-        returns (
-            uint256 productId,
-            uint256 applicationId,
-            uint256 policyId,
-            // ERC721 token
-            address tokenContract,
-            // Core
-            address registryContract,
-            uint256 release,
-            // Datetime
-            uint256 createdAt,
-            uint256 updatedAt
-        );
-
-    function getStateMessageByExternalKey(
-        bytes32 _bpKey
-        )
-        external
-        view
-        returns (
-            bytes32 stateMessage
-        );
 }
