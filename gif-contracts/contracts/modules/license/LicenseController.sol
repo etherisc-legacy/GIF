@@ -39,43 +39,31 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     /*
      * @dev Approve product
      */
-    function approveProduct(uint256 _id) external onlyInstanceOperator {
+    function setProductApproved(uint256 _id, bool _approved) external onlyInstanceOperator {
         require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
         require(
-            products[_id].approved != true,
-            "ERROR::PRODUCT_ALREADY_APPROVED"
+            products[_id].approved != _approved,
+            "ERROR::PRODUCT_WRONG_APPROVAL_STATE"
         );
         require(
-            productIdByAddress[products[_id].addr] == 0,
+            (_approved && productIdByAddress[products[_id].addr] == 0) ||
+            (!_approved && productIdByAddress[products[_id].addr] != 0),
             "ERROR::PRODUCT_ADDRESS_ALREADY_APPROVED"
         );
         // todo: check if policyFlow is correct
         // todo: should we allow products with the same name?
 
-        products[_id].approved = true;
-        productIdByAddress[products[_id].addr] = _id;
+        products[_id].approved = _approved;
+        if (_approved) {
+            productIdByAddress[products[_id].addr] = _id;
+        } else  {
+            delete productIdByAddress[products[_id].addr];
+        }
 
-        emit LogProductApproved(_id, products[_id].name, products[_id].addr);
+        emit LogProductSetApproved(_id, products[_id].name, products[_id].addr, _approved);
     }
 
-    /*
-     * @dev Disapprove product
-     */
-    function disapproveProduct(uint256 _id) external onlyInstanceOperator {
-        require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
-        require(products[_id].approved == true, "ERROR::PRODUCT_NOT_APPROVED");
-        require(
-            productIdByAddress[products[_id].addr] > 0,
-            "ERROR::PRODUCT_ADDRESS_NOT_APPROVED"
-        );
-
-        products[_id].approved = false;
-        delete productIdByAddress[products[_id].addr];
-
-        emit LogProductDisapproved(_id, products[_id].name, products[_id].addr);
-    }
-
-    function pauseProduct(uint256 _id) external onlyInstanceOperator {
+    function setProductPaused(uint256 _id, bool _paused) external onlyInstanceOperator {
         // todo: should be restricted to ProductOwners
         require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
         require(
@@ -83,22 +71,9 @@ contract LicenseController is LicenseStorageModel, ModuleController {
             "ERROR::PRODUCT_NOT_ACTIVE"
         );
 
-        products[_id].paused = true;
+        products[_id].paused = _paused;
 
-        emit LogProductPaused(_id, products[_id].name, products[_id].addr);
-    }
-
-    function unpauseProduct(uint256 _id) external onlyInstanceOperator {
-        // todo: should be restricted to ProductOwners
-        require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
-        require(
-            productIdByAddress[products[_id].addr] > 0,
-            "ERROR::PRODUCT_NOT_ACTIVE"
-        );
-
-        products[_id].paused = false;
-
-        emit LogProductUnpaused(_id, products[_id].name, products[_id].addr);
+        emit LogProductSetPaused(_id, products[_id].name, products[_id].addr, _paused);
     }
 
     /**

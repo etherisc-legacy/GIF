@@ -11,7 +11,6 @@ interface IPolicy {
     );
 
     event LogMetadataStateChanged(
-        uint256 productId,
         uint256 metadataId,
         PolicyFlowState state
     );
@@ -23,7 +22,6 @@ interface IPolicy {
     );
 
     event LogApplicationStateChanged(
-        uint256 productId,
         uint256 metadataId,
         uint256 applicationId,
         ApplicationState state
@@ -37,7 +35,6 @@ interface IPolicy {
     );
 
     event LogPolicyStateChanged(
-        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         PolicyState state
@@ -52,7 +49,6 @@ interface IPolicy {
     );
 
     event LogClaimStateChanged(
-        uint256 productId,
         uint256 metadataId,
         uint256 policyId,
         uint256 claimId,
@@ -70,7 +66,6 @@ interface IPolicy {
     );
 
     event LogPayoutStateChanged(
-        uint256 productId,
         uint256 payoutId,
         uint256 metadataId,
         uint256 policyId,
@@ -111,6 +106,7 @@ interface IPolicy {
     // Objects
     struct Metadata {
         // Lookup
+        uint256 productId;
         uint256 applicationId;
         uint256 policyId;
         uint256[] claimIds;

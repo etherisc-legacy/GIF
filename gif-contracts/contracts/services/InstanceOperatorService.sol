@@ -31,8 +31,8 @@ contract InstanceOperatorService is WithRegistry, Ownable {
 
     /* License */
 
-    function setProductApproval(uint256 _productId, bool _approve) external onlyOwner {
-        license().setProductApproval(_productId, _approve);
+    function setProductApproved(uint256 _productId, bool _approved) external onlyOwner {
+        license().setProductApproved(_productId, _approved);
     }
 
     function setProductPaused(uint256 _productId, bool _paused) external onlyOwner {

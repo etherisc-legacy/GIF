@@ -2,6 +2,7 @@ pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 interface ILicense {
+
     event LogNewProduct(
         uint256 productId,
         bytes32 name,
@@ -9,13 +10,9 @@ interface ILicense {
         bytes32 policyFlow
     );
 
-    event LogProductApproved(uint256 productId, bytes32 name, address addr);
+    event LogProductSetApproved(uint256 productId, bytes32 name, address addr, bool _approved);
 
-    event LogProductDisapproved(uint256 productId, bytes32 name, address addr);
-
-    event LogProductPaused(uint256 productId, bytes32 name, address addr);
-
-    event LogProductUnpaused(uint256 productId, bytes32 name, address addr);
+    event LogProductSetPaused(uint256 productId, bytes32 name, address addr, bool _paused);
 
     struct Product {
         address productOwner;

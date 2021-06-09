@@ -25,7 +25,6 @@ contract PolicyFlowDefault is WithRegistry {
 
         uint256 applicationId =
             policy().createApplication(
-                productId,
                 metadataId,
                 _premium,
                 _currency,
@@ -39,48 +38,40 @@ contract PolicyFlowDefault is WithRegistry {
         external
         returns (uint256 _policyId)
     {
-        uint256 productId = license().getProductId(msg.sender);
-
         require(
-            policy().getApplicationState(productId, _applicationId) ==
+            policy().getApplicationState(_applicationId) ==
                 IPolicy.ApplicationState.Applied,
             "ERROR::INVALID_APPLICATION_STATE"
         );
 
         policy().setApplicationState(
-            productId,
             _applicationId,
             IPolicy.ApplicationState.Underwritten
         );
 
         (uint256 metadataId, , , ) =
-            policy().getApplicationData(productId, _applicationId);
+            policy().getApplicationData(_applicationId);
 
-        uint256 policyId = policy().createPolicy(productId, metadataId);
+        uint256 policyId = policy().createPolicy(metadataId);
 
         _policyId = policyId;
     }
 
     function decline(uint256 _applicationId) external {
-        uint256 productId = license().getProductId(msg.sender);
-
         require(
-            policy().getApplicationState(productId, _applicationId) ==
+            policy().getApplicationState(_applicationId) ==
                 IPolicy.ApplicationState.Applied,
             "ERROR::INVALID_APPLICATION_STATE"
         );
 
         policy().setApplicationState(
-            productId,
             _applicationId,
             IPolicy.ApplicationState.Declined
         );
     }
 
     function newClaim(uint256 _policyId) external returns (uint256 _claimId) {
-        uint256 productId = license().getProductId(msg.sender);
-
-        uint256 claimId = policy().createClaim(productId, _policyId, "");
+        uint256 claimId = policy().createClaim(_policyId, "");
 
         _claimId = claimId;
     }
@@ -89,52 +80,43 @@ contract PolicyFlowDefault is WithRegistry {
         external
         returns (uint256 _payoutId)
     {
-        uint256 productId = license().getProductId(msg.sender);
-
         require(
-            policy().getClaimState(productId, _claimId) ==
+            policy().getClaimState(_claimId) ==
                 IPolicy.ClaimState.Applied,
             "ERROR::INVALID_CLAIM_STATE"
         );
 
         policy().setClaimState(
-            productId,
             _claimId,
             IPolicy.ClaimState.Confirmed
         );
 
-        uint256 payoutId = policy().createPayout(productId, _claimId, _sum);
+        uint256 payoutId = policy().createPayout(_claimId, _sum);
 
         _payoutId = payoutId;
     }
 
     function declineClaim(uint256 _claimId) external {
-        uint256 productId = license().getProductId(msg.sender);
-
         require(
-            policy().getClaimState(productId, _claimId) ==
+            policy().getClaimState(_claimId) ==
                 IPolicy.ClaimState.Applied,
             "ERROR::INVALID_CLAIM_STATE"
         );
 
         policy().setClaimState(
-            productId,
             _claimId,
             IPolicy.ClaimState.Declined
         );
     }
 
     function expire(uint256 _policyId) external {
-        uint256 productId = license().getProductId(msg.sender);
-
         require(
-            policy().getPolicyState(productId, _policyId) ==
+            policy().getPolicyState(_policyId) ==
                 IPolicy.PolicyState.Active,
             "ERROR::INVALID_POLICY_STATE"
         );
 
         policy().setPolicyState(
-            productId,
             _policyId,
             IPolicy.PolicyState.Expired
         );
@@ -144,9 +126,7 @@ contract PolicyFlowDefault is WithRegistry {
         external
         returns (uint256 _remainder)
     {
-        uint256 productId = license().getProductId(msg.sender);
-
-        _remainder = policy().payOut(productId, _payoutId, _amount);
+        _remainder = policy().payOut(_payoutId, _amount);
     }
 
     function register(bytes32 _productName, bytes32 _policyFlow) external {
@@ -174,9 +154,7 @@ contract PolicyFlowDefault is WithRegistry {
         view
         returns (uint256[] memory _payoutOptions)
     {
-        uint256 productId = license().getProductId(msg.sender);
-
-        _payoutOptions = policy().getPayoutOptions(productId, _applicationId);
+        _payoutOptions = policy().getPayoutOptions(_applicationId);
     }
 
     function getPremium(uint256 _applicationId)
@@ -184,15 +162,14 @@ contract PolicyFlowDefault is WithRegistry {
         view
         returns (uint256 _premium)
     {
-        uint256 productId = license().getProductId(msg.sender);
-
-        _premium = policy().getPremium(productId, _applicationId);
+        _premium = policy().getPremium(_applicationId);
     }
 
     function getMetadata(bytes32 _bpExternalKey)
         external
         view
         returns (
+            uint256 productId,
             uint256 applicationId,
             uint256 policyId,
             // ERC721 token
@@ -205,9 +182,9 @@ contract PolicyFlowDefault is WithRegistry {
             uint256 updatedAt
         )
     {
-        uint256 productId = license().getProductId(msg.sender);
 
         (
+            productId,
             applicationId,
             policyId,
             tokenContract,
@@ -215,7 +192,7 @@ contract PolicyFlowDefault is WithRegistry {
             release,
             createdAt,
             updatedAt
-        ) = policy().getMetadataByExternalKey(productId, _bpExternalKey);
+        ) = policy().getMetadataByExternalKey(_bpExternalKey);
     }
 
     function getStateMessage(bytes32 _bpExternalKey)
@@ -223,9 +200,7 @@ contract PolicyFlowDefault is WithRegistry {
         view
         returns (bytes32 stateMessage)
     {
-        uint256 productId = license().getProductId(msg.sender);
         stateMessage = policy().getStateMessageByExternalKey(
-            productId,
             _bpExternalKey
         );
     }

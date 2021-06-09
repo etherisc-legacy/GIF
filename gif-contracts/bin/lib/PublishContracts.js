@@ -42,6 +42,7 @@ class Contracts {
       if (artifactContent.networks[networkId]) {
         this.log.info(`Publishing ${artifactContent.contractName} at ${artifactContent.networks[networkId].address}`);
 
+        /*
         const product = 'platform';
 
         await this.amqp.publish({
@@ -57,9 +58,9 @@ class Contracts {
             product,
           },
         });
+        */
       }
     }
-
     this.log.info('Published content of build folder');
     // this.shutdown(); // won't publish otherwise
   }

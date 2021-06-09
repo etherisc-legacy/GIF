@@ -6,13 +6,8 @@ interface ILicenseController {
         external
         returns (uint256 _id);
 
-    function approveProduct(uint256 _id) external;
-
-    function disapproveProduct(uint256 _id) external;
-
-    function pauseProduct(uint256 _id) external;
-
-    function unpauseProduct(uint256 _id) external;
+    function setProductApproved(uint256 _id, bool _approved) external;
+    function setProductPaused(uint256 _id, bool _paused) external;
 
     function isApprovedProduct(address _addr)
         external
