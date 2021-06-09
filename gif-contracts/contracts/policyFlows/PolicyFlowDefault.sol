@@ -13,28 +13,25 @@ contract PolicyFlowDefault is WithRegistry {
     constructor(address _registry) WithRegistry(_registry) {}
 
     function newApplication(
-        bytes32 _bpExternalKey,
-        uint256 _premium,
-        bytes32 _currency,
-        uint256[] memory _payoutOptions
+        bytes32 _bpKey,
+        bytes _options // replaces premium, currency, payoutOptions
     ) public returns (uint256 _applicationId) {
+        // the calling contract is the Product contract, which needs to have a productId in the license contract.
         uint256 productId = license().getProductId(msg.sender);
 
         uint256 metadataId =
-            policy().createPolicyFlow(productId, _bpExternalKey);
+            policy().createPolicyFlow(productId, _bpKey);
 
         uint256 applicationId =
             policy().createApplication(
                 metadataId,
-                _premium,
-                _currency,
-                _payoutOptions
+                _options
             );
 
         _applicationId = applicationId;
     }
 
-    function underwrite(uint256 _applicationId)
+    function underwrite(bytes32 _bpKey)
         external
         returns (uint256 _policyId)
     {
@@ -165,7 +162,7 @@ contract PolicyFlowDefault is WithRegistry {
         _premium = policy().getPremium(_applicationId);
     }
 
-    function getMetadata(bytes32 _bpExternalKey)
+    function getMetadata(bytes32 _bpKey)
         external
         view
         returns (
@@ -192,16 +189,16 @@ contract PolicyFlowDefault is WithRegistry {
             release,
             createdAt,
             updatedAt
-        ) = policy().getMetadataByExternalKey(_bpExternalKey);
+        ) = policy().getMetadataByExternalKey(_bpKey);
     }
 
-    function getStateMessage(bytes32 _bpExternalKey)
+    function getStateMessage(bytes32 _bpKey)
         external
         view
         returns (bytes32 stateMessage)
     {
         stateMessage = policy().getStateMessageByExternalKey(
-            _bpExternalKey
+            _bpKey
         );
     }
 

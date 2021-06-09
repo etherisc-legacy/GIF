@@ -6,7 +6,7 @@ import "./IPolicy.sol";
 interface IPolicyController {
     function createPolicyFlow(
         uint256 _productId,
-        bytes32 _bpExternalKey
+        bytes32 _bpKey
         )
         external
         returns (
@@ -156,7 +156,7 @@ interface IPolicyController {
         );
 
     function getMetadataByExternalKey(
-        bytes32 _bpExternalKey
+        bytes32 _bpKey
         )
         external
         view
@@ -175,7 +175,7 @@ interface IPolicyController {
         );
 
     function getStateMessageByExternalKey(
-        bytes32 _bpExternalKey
+        bytes32 _bpKey
         )
         external
         view

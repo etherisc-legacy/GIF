@@ -5,23 +5,17 @@ import "./IPolicy.sol";
 
 contract PolicyStorageModel is IPolicy {
     // Metadata
-    mapping(uint256 => Metadata) public metadata;
-    mapping(bytes32 => uint256) public metadataIdByBpKey;
-    uint256 public metadataIdIncrement;
+    mapping(bytes32 => Metadata) public metadata;
 
     // Applications
-    mapping(uint256 => Application) public applications;
-    uint256 public applicationIdIncrement;
+    mapping(bytes32 => Application) public applications;
 
     // Policies
-    mapping(uint256 => Policy) public policies;
-    uint256 public policyIdIncrement;
+    mapping(bytes32 => Policy) public policies;
 
     // Claims
-    mapping(uint256 => Claim) public claims;
-    uint256 public claimIdIncrement;
+    mapping(bytes32 => mapping (uint256 => Claim)) public claims;
 
     // Payouts
-    mapping(uint256 => Payout) public payouts;
-    uint256 public payoutIdIncrement;
+    mapping(uint256 => mapping (uint256 => Payout)) public payouts;
 }

@@ -5,90 +5,66 @@ interface IPolicy {
     // Events
     event LogNewMetadata(
         uint256 productId,
-        bytes32 bpExternalKey,
-        uint256 metadataId,
+        bytes32 bpKey,
         PolicyFlowState state
     );
 
     event LogMetadataStateChanged(
-        uint256 metadataId,
+        bytes32 bpKey,
         PolicyFlowState state
     );
 
     event LogNewApplication(
-        uint256 productId,
-        uint256 metadataId,
-        uint256 applicationId
+        uint256 bpkey
     );
 
     event LogApplicationStateChanged(
-        uint256 metadataId,
-        uint256 applicationId,
+        bytes32 bpKey,
         ApplicationState state
     );
 
     event LogNewPolicy(
-        uint256 productId,
-        uint256 metadataId,
-        uint256 policyId,
-        uint256 applicationId
+        bytes32 bpKey
     );
 
     event LogPolicyStateChanged(
-        uint256 metadataId,
-        uint256 policyId,
+        bytes32 bpKey,
         PolicyState state
     );
 
     event LogNewClaim(
-        uint256 productId,
-        uint256 metadataId,
-        uint256 policyId,
+        bytes32 bpKey,
         uint256 claimId,
         ClaimState state
     );
 
     event LogClaimStateChanged(
-        uint256 metadataId,
-        uint256 policyId,
+        bytes32 bpKey,
         uint256 claimId,
         ClaimState state
     );
 
     event LogNewPayout(
-        uint256 productId,
-        uint256 payoutId,
-        uint256 metadataId,
-        uint256 policyId,
+        bytes32 bpKey,
         uint256 claimId,
-        uint256 amount,
         PayoutState state
     );
 
     event LogPayoutStateChanged(
+        bytes32 bpKey,
         uint256 payoutId,
-        uint256 metadataId,
-        uint256 policyId,
-        uint256 claimId,
         PayoutState state
     );
 
     event LogPayoutCompleted(
-        uint256 productId,
-        uint256 policyId,
+        bytes32 bpKey,
         uint256 payoutId,
-        uint256 metadataId,
-        uint256 amount,
         PayoutState state
     );
 
     event LogPartialPayout(
-        uint256 productId,
-        uint256 policyId,
+        bytes32 bpKey,
         uint256 payoutId,
-        uint256 metadataId,
-        uint256 amount,
-        uint256 remainder,
         PayoutState state
     );
 
@@ -107,12 +83,14 @@ interface IPolicy {
     struct Metadata {
         // Lookup
         uint256 productId;
-        uint256 applicationId;
-        uint256 policyId;
-        uint256[] claimIds;
-        uint256[] payoutIds;
+
+        bytes options; // ABI-encoded contract data: premium, currency, payout options etc.
+
+        uint256 claimsCount;
+        uint256 payoutsCount;
         bool hasPolicy;
         bool hasApplication;
+
         // ERC721 token
         address tokenContract;
         // Core
@@ -121,26 +99,12 @@ interface IPolicy {
         // State
         PolicyFlowState state;
         bytes32 stateMessage;
-        // BPMN
-        // PolicyState[] next;
-
-        // BP
-        bytes32 bpExternalKey;
         // Datetime
         uint256 createdAt;
         uint256 updatedAt;
     }
 
     struct Application {
-        uint256 metadataId;
-        // Premium
-        uint256 premium;
-        bytes32 currency;
-        // Proof
-
-        // Payout
-        uint256[] payoutOptions;
-        // State
         ApplicationState state;
         bytes32 stateMessage;
         // Datetime
@@ -149,8 +113,6 @@ interface IPolicy {
     }
 
     struct Policy {
-        uint256 metadataId;
-        // State
         PolicyState state;
         bytes32 stateMessage;
         // Datetime
@@ -159,30 +121,23 @@ interface IPolicy {
     }
 
     struct Claim {
-        uint256 metadataId;
-        // Data
-        bytes32 data;
+        // Data to prove claim, ABI-encoded
+        bytes data;
         // State
         ClaimState state;
         bytes32 stateMessage;
-        // Proof
-
         // Datetime
         uint256 createdAt;
         uint256 updatedAt;
     }
 
     struct Payout {
-        uint256 metadataId;
+        // Data describing the payout, ABI-encoded
+        bytes data;
         uint256 claimId;
-        // Amounts
-        uint256 expectedAmount;
-        uint256 actualAmount;
         // State
         PayoutState state;
         bytes32 stateMessage;
-        // Proof
-
         // Datetime
         uint256 createdAt;
         uint256 updatedAt;

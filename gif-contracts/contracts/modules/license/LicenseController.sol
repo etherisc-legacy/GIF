@@ -24,7 +24,8 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         // todo: add restriction, allow only ProductOwners
         require(productIdByAddress[_addr] == 0, "ERROR::PRODUCT_IS_ACTIVE");
 
-        _id = ++productIdIncrement;
+        productIdIncrement += 1;
+        _id = productIdIncrement;
 
         // todo: check required policyFlow existence
 

@@ -79,7 +79,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         uint256 countContracts = contractNames[_release].length;
 
         // todo: think about how to avoid this loop
-        for (uint256 i = 0; i < countContracts; i++) {
+        for (uint256 i = 0; i < countContracts; i += 1) {
             if (contractNames[_release][i] == _contractName) {
                 indexToDelete = i;
                 break;
@@ -124,7 +124,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         require(contractsInRelease[_newRelease] == 0, 'ERROR::NEW_RELEASE_NOT_EMPTY');
 
         // todo: think about how to avoid this loop
-        for (uint256 i = 0; i < countContracts; i++) {
+        for (uint256 i = 0; i < countContracts; i += 1) {
             bytes32 contractName = contractNames[release][i];
             registerInRelease(
                 _newRelease,

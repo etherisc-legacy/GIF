@@ -53,13 +53,13 @@ contract Product is RBAC {
     }
 
     function _newApplication(
-        bytes32 _bpExternalKey,
+        bytes32 _bpKey,
         uint256 _premium,
         bytes32 _currency,
         uint256[] memory _payoutOptions
     ) internal returns (uint256 _applicationId) {
         _applicationId = productService.newApplication(
-            _bpExternalKey,
+            _bpKey,
             _premium,
             _currency,
             _payoutOptions
