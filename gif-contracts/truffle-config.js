@@ -69,6 +69,6 @@ module.exports = {
     },
   },
 
-  plugins: ['truffle-source-verify'],
+  plugins: ['truffle-source-verify', 'truffle-plugin-store'],
 
 };

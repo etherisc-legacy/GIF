@@ -2,8 +2,8 @@ pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 interface IQuery {
-    enum OracleTypeState {Inactive, Active}
 
+    enum OracleTypeState {Inactive, Active}
     enum OracleState {Inactive, Active}
     enum OracleAssignmentState {Unassigned, Proposed, Assigned}
 

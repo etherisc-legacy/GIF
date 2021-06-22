@@ -3,6 +3,8 @@ pragma solidity 0.8.0;
 
 interface ILicense {
 
+    enum ProductState {Proposed, Approved, Paused}
+
     event LogNewProduct(
         uint256 productId,
         bytes32 name,
@@ -22,7 +24,6 @@ interface ILicense {
         bytes32 version;
         bytes32 release;
         address policyToken;
-        bool approved;
-        bool paused;
+        ProductState state;
     }
 }

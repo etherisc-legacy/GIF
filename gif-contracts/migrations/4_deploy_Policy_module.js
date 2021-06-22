@@ -12,7 +12,7 @@ module.exports = async (deployer) => {
   const registry = await RegistryController.at(registryStorage.address);
 
   // Deploy storage and controller contracts
-  await deployer.deploy(Policy, registryStorage.address, 0, 0, 0, 0, 0, { gas: 2000000 });
+  await deployer.deploy(Policy, registryStorage.address, { gas: 2000000 });
 
   await deployer.deploy(PolicyController, registryStorage.address, { gas: 4000000 });
   // Etherscan doesn't detects constructor arguments for this contract

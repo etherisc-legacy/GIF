@@ -29,10 +29,12 @@ contract LicenseController is LicenseStorageModel, ModuleController {
 
         // todo: check required policyFlow existence
 
-        products[_id].name = _name;
-        products[_id].addr = _addr;
-        products[_id].policyFlow = _policyFlow;
-        products[_id].release = getRelease();
+        Product storage product = products[_id];
+        product.name = _name;
+        product.addr = _addr;
+        product.policyFlow = _policyFlow;
+        product.release = getRelease();
+        product.state = ProductState.Proposed;
 
         emit LogNewProduct(_id, _name, _addr, _policyFlow);
     }
@@ -40,10 +42,10 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     /*
      * @dev Approve product
      */
-    function setProductApproved(uint256 _id, bool _approved) external onlyInstanceOperator {
+    function setProductApproved(uint256 _id, ProductState _approved) external onlyInstanceOperator {
         require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
         require(
-            products[_id].approved != _approved,
+            products[_id].state != _approved,
             "ERROR::PRODUCT_WRONG_APPROVAL_STATE"
         );
         require(
