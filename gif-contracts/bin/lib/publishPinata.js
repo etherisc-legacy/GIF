@@ -1,50 +1,37 @@
 #!/usr/bin/env node
 require('dotenv').config();
-const pinataSDK = require('@pinata/sdk');
 const path = require('path');
 const fs = require('fs-jetpack');
-const fileStream = require('fs');
 
 
-const pinata = pinataSDK(process.env.PINATA_KEY, process.env.PINATA_SECRET);
+const ipfsPath = '/home/christoph/Documents/sandbox/ipfs';
+const GIFPath = '/GIF';
+const metaPath = '/meta';
+const srcPath = '/src';
+const { settings: { release } } = require('../../package.json');
 
 
 const { log } = console;
 
 async function main() {
   const artifactPaths = fs.find('./build', { matching: '*.json' });
-
+  const releasePath = `${ipfsPath}${GIFPath}/releases/${release}`;
+  if (fs.exists(releasePath)) {
+    throw new Error('Release already published - bump release first!');
+  }
   log('Uploading sources & metadata to IPFS (via Pinata)...');
   log('========================================================');
 
   for (const _path of artifactPaths) {
     const artifact = require(path.join(process.cwd(), _path));
-    const options = {
-      pinataMetadata: {
-        name: artifact.contractName,
-        keyvalues: {
-          type: 'metadata',
-          date: Date.now(),
-        },
-      },
-      pinataOptions: {
-        cidVersion: 0,
-      },
-    };
-    log();
-    log(artifact.contractName);
-    log('-'.repeat(artifact.contractName.length));
-
-    const resM = await pinata.pinJSONToIPFS(JSON.parse(artifact.metadata), options);
-    log(`metadata: ${resM.IpfsHash}`);
-
-    options.pinataMetadata.keyvalues.type = 'source';
-    fs.write('/tmp/source.txt', artifact.source);
-    const readableStream = fileStream.createReadStream('/tmp/source.txt');
-    const resS = await pinata.pinFileToIPFS(readableStream, options);
-
-    log(`source:   ${resS.IpfsHash}`);
+    const metaFN = `${releasePath}${metaPath}/${artifact.contractName}.meta.json`;
+    const srcFN = `${releasePath}${srcPath}/${artifact.contractName}.sol`;
+    log(`Writing ${artifact.contractName} to ${metaFN} / ${srcFN} ...`);
+    fs.write(metaFN, artifact.metadata);
+    fs.write(srcFN, artifact.source);
   }
+
+  // TODO: direct upload to Pinata
 
   log();
   log('Finished.');
@@ -54,6 +41,6 @@ async function main() {
 main()
   .then(() => process.exit(0))
   .catch((err) => {
-    log(err);
+    log(err.message);
     process.exit(1);
   });
