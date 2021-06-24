@@ -5,6 +5,7 @@ import "./PolicyStorageModel.sol";
 import "../../shared/ModuleController.sol";
 
 contract PolicyController is PolicyStorageModel, ModuleController {
+    bytes32 public constant NAME = "PolicyController";
 
     constructor(address _registry) WithRegistry(_registry) {}
 

@@ -54,7 +54,7 @@ contract Product is RBAC {
 
     function _newApplication(
         bytes32 _bpKey,
-        bytes _options
+        bytes calldata _options
     )
         internal
         returns (uint256 _applicationId)
@@ -83,7 +83,7 @@ contract Product is RBAC {
 
     function _newClaim(
         uint256 _bpKey,
-        bytes _data
+        bytes calldata _data
     )
         internal
         returns (uint256 _claimId)
@@ -94,7 +94,7 @@ contract Product is RBAC {
     function _confirmClaim(
         bytes32 _bpKey,
         uint256 _claimId,
-        uint256 _data
+        bytes calldata _data
     )
         internal
         returns (uint256 _payoutId)
@@ -122,7 +122,7 @@ contract Product is RBAC {
     function _payout(
         bytes32 _bpKey,
         uint256 _payoutId,
-        bytes _data
+        bytes calldata _data
     )
         internal
     {
