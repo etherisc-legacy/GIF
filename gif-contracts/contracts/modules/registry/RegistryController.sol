@@ -6,6 +6,8 @@ import "../../shared/BaseModuleController.sol";
 import "../../shared/AccessModifiers.sol";
 
 contract RegistryController is RegistryStorageModel, BaseModuleController, AccessModifiers {
+    bytes32 public constant NAME = "RegistryController";
+
     constructor(bytes32 _initialRelease) {
         // Init
         release = _initialRelease;

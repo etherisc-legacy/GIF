@@ -6,6 +6,8 @@ import "../../shared/IOracle.sol";
 import "../../shared/ModuleController.sol";
 
 contract QueryController is QueryStorageModel, ModuleController {
+    bytes32 public constant NAME = "QueryController";
+
     modifier isResponsibleOracle(uint256 _requestId, address _responder) {
         require(
             oracles[oracleRequests[_requestId].responsibleOracleId].oracleContract == _responder,

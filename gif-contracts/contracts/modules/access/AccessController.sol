@@ -5,6 +5,8 @@ import "./AccessStorageModel.sol";
 import "../../shared/ModuleController.sol";
 
 contract AccessController is AccessStorageModel, ModuleController {
+    bytes32 public constant NAME = "AccessController";
+
     constructor(address _registry) WithRegistry(_registry) {}
 
     function createRole(bytes32 _role) external onlyInstanceOperator {
