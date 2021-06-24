@@ -28,8 +28,11 @@ module.exports = async (deployer) => {
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   const licenseStorageName = await licenseStorage.NAME.call();
+  const licenseControllerName = await licenseController.NAME.call();
 
   info('Register License module in Registry');
   await registry.register(licenseStorageName, licenseStorage.address, { gas: 100000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+  await registry.register(licenseControllerName, licenseController.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 };

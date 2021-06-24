@@ -42,41 +42,14 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     /*
      * @dev Approve product
      */
-    function setProductApproved(uint256 _id, ProductState _approved) external onlyInstanceOperator {
+    function setProductState(uint256 _id, ProductState _state) external onlyInstanceOperator {
         require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
-        require(
-            products[_id].state != _approved,
-            "ERROR::PRODUCT_WRONG_APPROVAL_STATE"
-        );
-        require(
-            (_approved && productIdByAddress[products[_id].addr] == 0) ||
-            (!_approved && productIdByAddress[products[_id].addr] != 0),
-            "ERROR::PRODUCT_ADDRESS_ALREADY_APPROVED"
-        );
-        // todo: check if policyFlow is correct
-        // todo: should we allow products with the same name?
-
-        products[_id].approved = _approved;
-        if (_approved) {
+        products[_id].state = _state;
+        if (_state == ProductState.Approved) {
             productIdByAddress[products[_id].addr] = _id;
-        } else  {
-            delete productIdByAddress[products[_id].addr];
         }
 
-        emit LogProductSetApproved(_id, products[_id].name, products[_id].addr, _approved);
-    }
-
-    function setProductPaused(uint256 _id, bool _paused) external onlyInstanceOperator {
-        // todo: should be restricted to ProductOwners
-        require(products[_id].addr != address(0), "ERROR::PRODUCT_DOES_NOT_EXIST");
-        require(
-            productIdByAddress[products[_id].addr] > 0,
-            "ERROR::PRODUCT_NOT_ACTIVE"
-        );
-
-        products[_id].paused = _paused;
-
-        emit LogProductSetPaused(_id, products[_id].name, products[_id].addr, _paused);
+        emit LogProductSetState(_id, products[_id].name, products[_id].addr, _state);
     }
 
     /**
@@ -87,18 +60,19 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         view
         returns (bool _approved)
     {
-        _approved = products[productIdByAddress[_addr]].approved == true && productIdByAddress[_addr] > 0 && products[productIdByAddress[_addr]].addr == _addr;
+        Product storage product = products[productIdByAddress[_addr]];
+        _approved = product.state == ProductState.Approved || product.state == ProductState.Paused;
     }
 
     /**
      * @dev Check if contract is paused product
      */
     function isPausedProduct(address _addr) public view returns (bool _paused) {
-        _paused = products[productIdByAddress[_addr]].paused == true;
+        _paused = products[productIdByAddress[_addr]].state == ProductState.Paused;
     }
 
     function isValidCall(address _addr) public view returns (bool _valid) {
-        _valid = isApprovedProduct(_addr) && !isPausedProduct(_addr);
+        _valid = products[productIdByAddress[_addr]].state != ProductState.Proposed;
     }
 
     function authorize(address _sender)

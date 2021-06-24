@@ -28,8 +28,11 @@ module.exports = async (deployer) => {
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   const queryStorageName = await queryStorage.NAME.call();
+  const queryControllerName = await queryController.NAME.call();
 
   info('Register Query module in Registry');
   await registry.register(queryStorageName, queryStorage.address, { gas: 100000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+  await registry.register(queryControllerName, queryController.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 };

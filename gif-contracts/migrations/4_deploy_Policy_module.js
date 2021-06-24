@@ -30,8 +30,11 @@ module.exports = async (deployer) => {
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 
   const policyStorageName = await policyStorage.NAME.call();
+  const policyControllerName = await policyController.NAME.call();
 
   info('Register Policy module in Registry');
   await registry.register(policyStorageName, policyStorage.address, { gas: 100000 })
+    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+  await registry.register(policyControllerName, policyController.address, { gas: 100000 })
     .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
 };

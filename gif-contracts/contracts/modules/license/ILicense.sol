@@ -12,9 +12,7 @@ interface ILicense {
         bytes32 policyFlow
     );
 
-    event LogProductSetApproved(uint256 productId, bytes32 name, address addr, bool _approved);
-
-    event LogProductSetPaused(uint256 productId, bytes32 name, address addr, bool _paused);
+    event LogProductSetState(uint256 productId, bytes32 name, address addr, ProductState state);
 
     struct Product {
         address productOwner;
