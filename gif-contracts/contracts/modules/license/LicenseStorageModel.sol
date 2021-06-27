@@ -10,5 +10,4 @@ contract LicenseStorageModel is ILicense {
 
     // todo: Add list of approved products
     // todo: Add list of products for approval
-
 }

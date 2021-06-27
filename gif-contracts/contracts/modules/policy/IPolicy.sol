@@ -1,4 +1,5 @@
 pragma solidity 0.8.0;
+
 // SPDX-License-Identifier: Apache-2.0
 
 interface IPolicy {
@@ -9,35 +10,17 @@ interface IPolicy {
         PolicyFlowState state
     );
 
-    event LogMetadataStateChanged(
-        bytes32 bpKey,
-        PolicyFlowState state
-    );
+    event LogMetadataStateChanged(bytes32 bpKey, PolicyFlowState state);
 
-    event LogNewApplication(
-        uint256 productId,
-        bytes32 bpkey
-    );
+    event LogNewApplication(uint256 productId, bytes32 bpkey);
 
-    event LogApplicationStateChanged(
-        bytes32 bpKey,
-        ApplicationState state
-    );
+    event LogApplicationStateChanged(bytes32 bpKey, ApplicationState state);
 
-    event LogNewPolicy(
-        bytes32 bpKey
-    );
+    event LogNewPolicy(bytes32 bpKey);
 
-    event LogPolicyStateChanged(
-        bytes32 bpKey,
-        PolicyState state
-    );
+    event LogPolicyStateChanged(bytes32 bpKey, PolicyState state);
 
-    event LogNewClaim(
-        bytes32 bpKey,
-        uint256 claimId,
-        ClaimState state
-    );
+    event LogNewClaim(bytes32 bpKey, uint256 claimId, ClaimState state);
 
     event LogClaimStateChanged(
         bytes32 bpKey,
@@ -64,22 +47,37 @@ interface IPolicy {
         PayoutState state
     );
 
-    event LogPartialPayout(
-        bytes32 bpKey,
-        uint256 payoutId,
-        PayoutState state
-    );
+    event LogPartialPayout(bytes32 bpKey, uint256 payoutId, PayoutState state);
 
     // Statuses
-    enum PolicyFlowState {Started, Paused, Finished}
+    enum PolicyFlowState {
+        Started,
+        Paused,
+        Finished
+    }
 
-    enum ApplicationState {Applied, Revoked, Underwritten, Declined}
+    enum ApplicationState {
+        Applied,
+        Revoked,
+        Underwritten,
+        Declined
+    }
 
-    enum PolicyState {Active, Expired}
+    enum PolicyState {
+        Active,
+        Expired
+    }
 
-    enum ClaimState {Applied, Confirmed, Declined}
+    enum ClaimState {
+        Applied,
+        Confirmed,
+        Declined
+    }
 
-    enum PayoutState {Expected, PaidOut}
+    enum PayoutState {
+        Expected,
+        PaidOut
+    }
 
     // Objects
     struct Metadata {
@@ -93,7 +91,6 @@ interface IPolicy {
         PolicyFlowState state;
         uint256 createdAt;
         uint256 updatedAt;
-
         address tokenContract;
         address registryContract;
         uint256 release;

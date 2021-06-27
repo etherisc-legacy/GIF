@@ -7,7 +7,7 @@ contract BaseModuleStorage is Delegator {
     address public controller;
 
     /* solhint-disable payable-fallback */
-    fallback() virtual external {
+    fallback() external virtual {
         _delegate(controller);
     }
 

@@ -3,18 +3,12 @@ pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 interface IInstanceOperatorService {
-    function assignController(address _storage, address _controller) external;
-
-    function assingStorage(address _controller, address _storage) external;
-
     // License
     function approveProduct(uint256 _productId) external;
 
     function disapproveProduct(uint256 _productId) external;
 
     function pauseProduct(uint256 _productId) external;
-
-    function unpauseProduct(uint256 _productId) external;
 
     // Access
     function createRole(bytes32 _role) external;

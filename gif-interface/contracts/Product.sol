@@ -48,8 +48,11 @@ contract Product is RBAC {
         onChainPaymentMode = _newMode;
     }
 
-    function _register(bytes32 _productName, bytes32 _policyFlow) internal {
-        productId = productService.register(_productName, _policyFlow);
+    function _register(bytes32 _productName, bytes32 _policyFlow)
+        internal
+        returns (uint256 _productId)
+    {
+        _productId = productService.register(_productName, _policyFlow);
     }
 
     function _newApplication(
@@ -57,12 +60,8 @@ contract Product is RBAC {
         bytes calldata _options
     )
         internal
-        returns (uint256 _applicationId)
     {
-        _applicationId = productService.newApplication(
-            _bpKey,
-            _options
-        );
+        productService.newApplication(_bpKey, _options);
     }
 
     function _underwrite(
@@ -82,7 +81,7 @@ contract Product is RBAC {
     }
 
     function _newClaim(
-        uint256 _bpKey,
+        bytes32 _bpKey,
         bytes calldata _data
     )
         internal
@@ -99,7 +98,7 @@ contract Product is RBAC {
         internal
         returns (uint256 _payoutId)
     {
-        _payoutId = productService.confirmClaim(_claimId, _data);
+        _payoutId = productService.confirmClaim(_bpKey, _claimId, _data);
     }
 
     function _declineClaim(
@@ -108,11 +107,11 @@ contract Product is RBAC {
     )
         internal
     {
-        productService.declineClaim(_bpKey);
+        productService.declineClaim(_bpKey, _claimId);
     }
 
     function _expire(
-        uint256 _policyId
+        bytes32 _bpKey
     )
         internal
     {
@@ -122,11 +121,12 @@ contract Product is RBAC {
     function _payout(
         bytes32 _bpKey,
         uint256 _payoutId,
+        bool _complete,
         bytes calldata _data
     )
         internal
     {
-        productService.payout(_bpKey, _payoutId, _data);
+        productService.payout(_bpKey, _payoutId, _complete, _data);
     }
 
     function _request(

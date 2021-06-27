@@ -5,7 +5,11 @@ import "./LedgerStorageModel.sol";
 import "../../shared/WithRegistry.sol";
 import "../../shared/ModuleController.sol";
 
-contract LedgerController is WithRegistry, LedgerStorageModel, ModuleController {
+contract LedgerController is
+    WithRegistry,
+    LedgerStorageModel,
+    ModuleController
+{
     bytes32 public constant NAME = "LedgerController";
 
     constructor(address _registry) WithRegistry(_registry) {}

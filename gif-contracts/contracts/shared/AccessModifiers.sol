@@ -52,5 +52,4 @@ abstract contract AccessModifiers {
         view
         virtual
         returns (address _addr);
-
 }

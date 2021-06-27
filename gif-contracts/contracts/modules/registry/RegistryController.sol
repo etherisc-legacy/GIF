@@ -5,7 +5,11 @@ import "./RegistryStorageModel.sol";
 import "../../shared/BaseModuleController.sol";
 import "../../shared/AccessModifiers.sol";
 
-contract RegistryController is RegistryStorageModel, BaseModuleController, AccessModifiers {
+contract RegistryController is
+    RegistryStorageModel,
+    BaseModuleController,
+    AccessModifiers
+{
     bytes32 public constant NAME = "RegistryController";
 
     constructor(bytes32 _initialRelease) {
@@ -14,12 +18,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         contracts[release]["InstanceOperatorService"] = msg.sender;
     }
 
-    function assignStorage(
-        address _storage
-    )
-        external
-        onlyInstanceOperator
-    {
+    function assignStorage(address _storage) external onlyInstanceOperator {
         _assignStorage(_storage);
     }
 
@@ -30,11 +29,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         bytes32 _release,
         bytes32 _contractName,
         address _contractAddress
-    )
-        public
-        onlyInstanceOperator
-    {
-
+    ) public onlyInstanceOperator {
         bool isNew = false;
 
         require(
@@ -49,18 +44,23 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         }
 
         contracts[_release][_contractName] = _contractAddress;
-        require(contractsInRelease[_release] == contractNames[_release].length, 'ERROR::CONTRACT_NUMBER_MISMATCH');
+        require(
+            contractsInRelease[_release] == contractNames[_release].length,
+            "ERROR::CONTRACT_NUMBER_MISMATCH"
+        );
 
-        emit LogContractRegistered(_release, _contractName, _contractAddress, isNew);
+        emit LogContractRegistered(
+            _release,
+            _contractName,
+            _contractAddress,
+            isNew
+        );
     }
 
     /**
      * @dev Register contract in the current release
      */
-    function register(
-        bytes32 _contractName,
-        address _contractAddress
-    )
+    function register(bytes32 _contractName, address _contractAddress)
         public
         onlyInstanceOperator
     {
@@ -70,10 +70,7 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     /**
      * @dev Deregister contract in certain release
      */
-    function deregisterInRelease(
-        bytes32 _release,
-        bytes32 _contractName
-    )
+    function deregisterInRelease(bytes32 _release, bytes32 _contractName)
         public
         onlyInstanceOperator
     {
@@ -89,12 +86,17 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
         }
 
         if (indexToDelete < countContracts - 1) {
-            contractNames[_release][indexToDelete] = contractNames[_release][countContracts - 1];
+            contractNames[_release][indexToDelete] = contractNames[_release][
+                countContracts - 1
+            ];
         }
 
         contractNames[_release].pop();
         contractsInRelease[_release] -= 1;
-        require(contractsInRelease[_release] == contractNames[_release].length, 'ERROR::CONTRACT_NUMBER_MISMATCH');
+        require(
+            contractsInRelease[_release] == contractNames[_release].length,
+            "ERROR::CONTRACT_NUMBER_MISMATCH"
+        );
 
         emit LogContractDeregistered(_release, _contractName);
     }
@@ -102,28 +104,21 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     /**
      * @dev Deregister contract in the current release
      */
-    function deregister(
-        bytes32 _contractName
-    )
-        public
-        onlyInstanceOperator
-    {
+    function deregister(bytes32 _contractName) public onlyInstanceOperator {
         deregisterInRelease(release, _contractName);
     }
 
     /**
      * @dev Create new release, copy contracts from previous release
      */
-    function prepareRelease(
-        bytes32 _newRelease
-    )
-        public
-        onlyInstanceOperator
-    {
+    function prepareRelease(bytes32 _newRelease) public onlyInstanceOperator {
         uint256 countContracts = contractsInRelease[release];
 
         require(countContracts > 0, "ERROR::EMPTY_RELEASE");
-        require(contractsInRelease[_newRelease] == 0, 'ERROR::NEW_RELEASE_NOT_EMPTY');
+        require(
+            contractsInRelease[_newRelease] == 0,
+            "ERROR::NEW_RELEASE_NOT_EMPTY"
+        );
 
         // todo: think about how to avoid this loop
         for (uint256 i = 0; i < countContracts; i += 1) {
@@ -143,21 +138,16 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     /**
      * @dev get current release
      */
-    function getRelease()
-        external view
-        returns (bytes32 _release)
-    {
+    function getRelease() external view returns (bytes32 _release) {
         _release = release;
     }
 
     /**
      * @dev Get contract's address in certain release
      */
-    function getContractInRelease(
-        bytes32 _release,
-        bytes32 _contractName
-    )
-        public view
+    function getContractInRelease(bytes32 _release, bytes32 _contractName)
+        public
+        view
         returns (address _addr)
     {
         _addr = contracts[_release][_contractName];
@@ -166,13 +156,12 @@ contract RegistryController is RegistryStorageModel, BaseModuleController, Acces
     /**
      * @dev Get contract's address in the current release
      */
-    function getContract(
-        bytes32 _contractName
-    )
-        public view override
+    function getContract(bytes32 _contractName)
+        public
+        view
+        override
         returns (address _addr)
     {
         _addr = getContractInRelease(release, _contractName);
     }
-
 }

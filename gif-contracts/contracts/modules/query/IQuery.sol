@@ -1,11 +1,21 @@
 pragma solidity 0.8.0;
+
 // SPDX-License-Identifier: Apache-2.0
 
 interface IQuery {
-
-    enum OracleTypeState {Inactive, Active}
-    enum OracleState {Inactive, Active}
-    enum OracleAssignmentState {Unassigned, Proposed, Assigned}
+    enum OracleTypeState {
+        Inactive,
+        Active
+    }
+    enum OracleState {
+        Inactive,
+        Active
+    }
+    enum OracleAssignmentState {
+        Unassigned,
+        Proposed,
+        Assigned
+    }
 
     struct OracleType {
         string inputFormat; // e.g. '(uint256 longitude,uint256 latitude)'

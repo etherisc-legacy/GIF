@@ -15,28 +15,17 @@ contract InstanceOperatorService is WithRegistry, Ownable {
 
     constructor(address _registry) WithRegistry(_registry) {}
 
-    function assignController(address _storage, address _controller)
-        external
-        onlyOwner
-    {
-        IModuleStorage(_storage).assignController(_controller);
-    }
-
-    function assignStorage(address _controller, address _storage)
-        external
-        onlyOwner
-    {
-        IModuleController(_controller).assignStorage(_storage);
-    }
-
     /* License */
-
-    function setProductApproved(uint256 _productId, bool _approved) external onlyOwner {
-        license().setProductApproved(_productId, _approved);
+    function approveProduct(uint256 _productId) external {
+        license().approveProduct(_productId);
     }
 
-    function setProductPaused(uint256 _productId, bool _paused) external onlyOwner {
-        license().setProductPaused(_productId, _paused);
+    function disapproveProduct(uint256 _productId) external {
+        license().disapproveProduct(_productId);
+    }
+
+    function pauseProduct(uint256 _productId) external {
+        license().pauseProduct(_productId);
     }
 
     /* Access */
@@ -82,7 +71,7 @@ contract InstanceOperatorService is WithRegistry, Ownable {
         registry.deregister(_contractName);
     }
 
-    function prepareRelease() external onlyOwner{
+    function prepareRelease() external onlyOwner {
         registry.prepareRelease();
     }
 

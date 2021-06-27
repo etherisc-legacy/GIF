@@ -6,11 +6,11 @@ import "./IQuery.sol";
 contract QueryStorageModel is IQuery {
     // Oracle types
     mapping(bytes32 => OracleType) public oracleTypes;
-    mapping(bytes32 => mapping (uint256 => OracleAssignmentState)) public assignedOracles;
+    mapping(bytes32 => mapping(uint256 => OracleAssignmentState))
+        public assignedOracles;
     // TODO: change to mapping
     mapping(uint256 => bytes32) public oracleTypeNames;
     uint256 public oracleTypeNamesIncrement = 1; // first oracleType is 1
-
 
     // Oracles
     mapping(uint256 => Oracle) public oracles;

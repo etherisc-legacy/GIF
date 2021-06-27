@@ -10,7 +10,8 @@ contract QueryController is QueryStorageModel, ModuleController {
 
     modifier isResponsibleOracle(uint256 _requestId, address _responder) {
         require(
-            oracles[oracleRequests[_requestId].responsibleOracleId].oracleContract == _responder,
+            oracles[oracleRequests[_requestId].responsibleOracleId]
+            .oracleContract == _responder,
             "ERROR::NOT_RESPONSIBLE_ORACLE"
         );
         _;
@@ -179,10 +180,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         address _sender,
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    )
-        external
-        onlyOracleOwner
-    {
+    ) external onlyOracleOwner {
         require(
             oracles[_oracleId].oracleOwner == _sender,
             "ERROR::NOT_ORACLE_OWNER"
@@ -196,11 +194,13 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
         );
         require(
-            assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Unassigned,
+            assignedOracles[_oracleTypeName][_oracleId] ==
+                OracleAssignmentState.Unassigned,
             "ERROR::ORACLE_ALREADY_PROPOSED_OR_ASSIGNED"
         );
 
-        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState.Proposed;
+        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
+        .Proposed;
 
         emit LogOracleProposedToOracleType(_oracleTypeName, _oracleId);
     }
@@ -210,7 +210,6 @@ contract QueryController is QueryStorageModel, ModuleController {
         bytes32 _oracleTypeName,
         uint256 _oracleId
     ) external onlyOracleOwner {
-
         require(
             oracles[_oracleId].oracleOwner == _sender,
             "ERROR::NOT_ORACLE_OWNER"
@@ -224,11 +223,13 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
         );
         require(
-            assignedOracles[_oracleTypeName][_oracleId] != OracleAssignmentState.Unassigned,
+            assignedOracles[_oracleTypeName][_oracleId] !=
+                OracleAssignmentState.Unassigned,
             "ERROR::ORACLE_NOT_PROPOSED_OR_ASSIGNED"
         );
 
-        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState.Unassigned;
+        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
+        .Unassigned;
         oracleTypes[_oracleTypeName].activeOracles -= 1;
         oracles[_oracleId].activeOracleTypes -= 1;
 
@@ -249,11 +250,13 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR::ORACLE_DOES_NOT_EXIST"
         );
         require(
-            assignedOracles[_oracleTypeName][_oracleId] == OracleAssignmentState.Proposed,
+            assignedOracles[_oracleTypeName][_oracleId] ==
+                OracleAssignmentState.Proposed,
             "ERROR::ORACLE_NOT_PROPOSED"
         );
 
-        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState.Assigned;
+        assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
+        .Assigned;
         oracleTypes[_oracleTypeName].activeOracles += 1;
         oracles[_oracleId].activeOracleTypes += 1;
 
@@ -318,14 +321,10 @@ contract QueryController is QueryStorageModel, ModuleController {
         // todo: send reward
 
         _responseId = oracleResponses.length;
-        oracleResponses.push(OracleResponse(
-            _requestId,
-            _responder,
-            block.timestamp,
-            status
-        ));
+        oracleResponses.push(
+            OracleResponse(_requestId, _responder, block.timestamp, status)
+        );
 
         emit LogOracleResponded(_requestId, _responseId, _responder, status);
     }
-
 }
