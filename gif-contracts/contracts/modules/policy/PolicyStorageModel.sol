@@ -18,4 +18,6 @@ contract PolicyStorageModel is IPolicy {
 
     // Payouts
     mapping(bytes32 => mapping(uint256 => Payout)) public payouts;
+
+    bytes32[] public bpKeys;
 }

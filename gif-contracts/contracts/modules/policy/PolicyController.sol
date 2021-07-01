@@ -24,6 +24,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         meta.state = PolicyFlowState.Started;
         meta.createdAt = block.timestamp;
         meta.updatedAt = block.timestamp;
+        bpKeys.push(_bpKey);
 
         emit LogNewMetadata(_productId, _bpKey, PolicyFlowState.Started);
     }
@@ -271,5 +272,9 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         returns (PayoutState _state)
     {
         return payouts[_bpKey][_payoutId].state;
+    }
+
+    function getBpKeyCount() public returns (uint256 _count) {
+        return bpKeys.length;
     }
 }
