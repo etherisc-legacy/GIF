@@ -28,6 +28,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
 
         productIdIncrement += 1;
         _id = productIdIncrement;
+        productIdByAddress[_addr] = _id;
 
         // todo: check required policyFlow existence
 
