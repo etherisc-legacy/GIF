@@ -24,7 +24,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         bytes32 _policyFlow
     ) external returns (uint256 _id) {
         // todo: add restriction, allow only ProductOwners
-        require(productIdByAddress[_addr] == 0, "ERROR::PRODUCT_IS_ACTIVE");
+        require(productIdByAddress[_addr] == 0, "ERROR:LIC-001:PRODUCT_IS_ACTIVE");
 
         productIdIncrement += 1;
         _id = productIdIncrement;
@@ -120,7 +120,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     {
         require(
             productIdByAddress[_addr] > 0,
-            "ERROR::PRODUCT_NOT_APPROVED_OR_DOES_NOT_EXIST"
+            "ERROR:LIC-002:PRODUCT_NOT_APPROVED_OR_DOES_NOT_EXIST"
         );
 
         _productId = productIdByAddress[_addr];

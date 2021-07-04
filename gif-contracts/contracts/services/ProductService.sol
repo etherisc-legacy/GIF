@@ -13,8 +13,8 @@ contract ProductService is WithRegistry, Delegator {
     fallback() external {
         (bool authorized, address policyFlow) = license().authorize(msg.sender);
 
-        require(authorized == true, "ERROR::NOT_AUTHORIZED");
-        require(policyFlow != address(0), "ERROR::POLICY_FLOW_NOT_RESOLVED");
+        require(authorized == true, "ERROR:PRS-001:NOT_AUTHORIZED");
+        require(policyFlow != address(0), "ERROR:PRS-002:POLICY_FLOW_NOT_RESOLVED");
 
         _delegate(policyFlow);
     }

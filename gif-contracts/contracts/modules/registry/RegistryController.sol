@@ -34,7 +34,7 @@ contract RegistryController is
 
         require(
             contractNames[_release].length <= maxContracts,
-            "ERROR::MAX_CONTRACTS_LIMIT"
+            "ERROR:REC-001:MAX_CONTRACTS_LIMIT"
         );
 
         if (contracts[_release][_contractName] == address(0)) {
@@ -46,7 +46,7 @@ contract RegistryController is
         contracts[_release][_contractName] = _contractAddress;
         require(
             contractsInRelease[_release] == contractNames[_release].length,
-            "ERROR::CONTRACT_NUMBER_MISMATCH"
+            "ERROR:REC-002:CONTRACT_NUMBER_MISMATCH"
         );
 
         emit LogContractRegistered(
@@ -95,7 +95,7 @@ contract RegistryController is
         contractsInRelease[_release] -= 1;
         require(
             contractsInRelease[_release] == contractNames[_release].length,
-            "ERROR::CONTRACT_NUMBER_MISMATCH"
+            "ERROR:REC-003:CONTRACT_NUMBER_MISMATCH"
         );
 
         emit LogContractDeregistered(_release, _contractName);
@@ -117,7 +117,7 @@ contract RegistryController is
         require(countContracts > 0, "ERROR::EMPTY_RELEASE");
         require(
             contractsInRelease[_newRelease] == 0,
-            "ERROR::NEW_RELEASE_NOT_EMPTY"
+            "ERROR:REC-004:NEW_RELEASE_NOT_EMPTY"
         );
 
         // todo: think about how to avoid this loop

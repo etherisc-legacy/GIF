@@ -16,7 +16,7 @@ contract Product is RBAC {
     modifier onlySandbox {
         require(
             msg.sender == productService.getService("Sandbox"),
-            "ERROR::ACCESS_DENIED"
+            "ERROR:PRO-001:ACCESS_DENIED"
         );
         _;
     }
@@ -24,7 +24,7 @@ contract Product is RBAC {
     modifier onlyOracle {
         require(
             msg.sender == productService.getContract("Query"),
-            "ERROR::ACCESS_DENIED"
+            "ERROR:PRO-002:ACCESS_DENIED"
         );
         _;
     }

@@ -12,7 +12,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         require(
             oracles[oracleRequests[_requestId].responsibleOracleId]
             .oracleContract == _responder,
-            "ERROR::NOT_RESPONSIBLE_ORACLE"
+            "ERROR:QUC-001:NOT_RESPONSIBLE_ORACLE"
         );
         _;
     }
@@ -27,7 +27,7 @@ contract QueryController is QueryStorageModel, ModuleController {
     ) external onlyOracleOwner {
         require(
             oracleTypes[_oracleTypeName].initialized == false,
-            "ERROR::ORACLE_TYPE_ALREADY_INITIALIZED"
+            "ERROR:QUC-002:ORACLE_TYPE_ALREADY_INITIALIZED"
         );
 
         oracleTypes[_oracleTypeName] = OracleType(
@@ -56,11 +56,11 @@ contract QueryController is QueryStorageModel, ModuleController {
     {
         require(
             oracleTypes[_oracleTypeName].initialized == true,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
+            "ERROR:QUC-003:ORACLE_TYPE_NOT_INITIALIZED"
         );
         require(
             oracleTypes[_oracleTypeName].state != OracleTypeState.Active,
-            "ERROR::ORACLE_TYPE_ALREADY_ACTIVE"
+            "ERROR:QUC-004:ORACLE_TYPE_ALREADY_ACTIVE"
         );
 
         oracleTypes[_oracleTypeName].state = OracleTypeState.Active;
@@ -74,15 +74,15 @@ contract QueryController is QueryStorageModel, ModuleController {
     {
         require(
             oracleTypes[_oracleTypeName].initialized == true,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
+            "ERROR:QUC-005:ORACLE_TYPE_NOT_INITIALIZED"
         );
         require(
             oracleTypes[_oracleTypeName].state == OracleTypeState.Active,
-            "ERROR::ORACLE_TYPE_NOT_ACTIVE"
+            "ERROR:QUC-006:ORACLE_TYPE_NOT_ACTIVE"
         );
         require(
             oracleTypes[_oracleTypeName].activeOracles == 0,
-            "ERROR::ORACLE_TYPE_HAS_ACTIVE_ORACLES"
+            "ERROR:QUC-007:ORACLE_TYPE_HAS_ACTIVE_ORACLES"
         );
 
         oracleTypes[_oracleTypeName].state = OracleTypeState.Inactive;
@@ -97,7 +97,7 @@ contract QueryController is QueryStorageModel, ModuleController {
     ) external onlyOracleOwner returns (uint256 _oracleId) {
         require(
             oracleIdByAddress[_oracleContract] == 0,
-            "ERROR::ORACLE_ALREADY_EXISTS"
+            "ERROR:QUC-008:ORACLE_ALREADY_EXISTS"
         );
 
         _oracleId = oracleIdIncrement;
@@ -122,11 +122,11 @@ contract QueryController is QueryStorageModel, ModuleController {
     ) external onlyOracleOwner {
         require(
             oracleIdByAddress[_newOracleContract] == 0,
-            "ERROR::ORACLE_ALREADY_EXISTS"
+            "ERROR:QUC-009:ORACLE_ALREADY_EXISTS"
         );
         require(
             oracles[_oracleId].oracleOwner == _sender,
-            "ERROR::NOT_ORACLE_OWNER"
+            "ERROR:QUC-010:NOT_ORACLE_OWNER"
         );
 
         address prevContract = oracles[_oracleId].oracleContract;
@@ -145,11 +145,11 @@ contract QueryController is QueryStorageModel, ModuleController {
     function activateOracle(uint256 _oracleId) external onlyInstanceOperator {
         require(
             oracles[_oracleId].oracleContract != address(0),
-            "ERROR::ORACLE_DOES_NOT_EXIST"
+            "ERROR:QUC-011:ORACLE_DOES_NOT_EXIST"
         );
         require(
             oracles[_oracleId].state != OracleState.Active,
-            "ERROR::ORACLE_IS_ALREADY_ACTIVE"
+            "ERROR:QUC-012:ORACLE_IS_ALREADY_ACTIVE"
         );
 
         oracles[_oracleId].state = OracleState.Active;
@@ -160,15 +160,15 @@ contract QueryController is QueryStorageModel, ModuleController {
     function deactivateOracle(uint256 _oracleId) external onlyInstanceOperator {
         require(
             oracles[_oracleId].oracleContract != address(0),
-            "ERROR::ORACLE_DOES_NOT_EXIST"
+            "ERROR:QUC-013:ORACLE_DOES_NOT_EXIST"
         );
         require(
             oracles[_oracleId].state == OracleState.Active,
-            "ERROR::ORACLE_NOT_ACTIVE"
+            "ERROR:QUC-014:ORACLE_NOT_ACTIVE"
         );
         require(
             oracles[_oracleId].activeOracleTypes == 0,
-            "ERROR::ORACLE_ALREADY_ASSIGNED_TO_ORACLE_TYPES"
+            "ERROR:QUC-015:ORACLE_ALREADY_ASSIGNED_TO_ORACLE_TYPES"
         );
 
         oracles[_oracleId].state = OracleState.Inactive;
@@ -183,20 +183,20 @@ contract QueryController is QueryStorageModel, ModuleController {
     ) external onlyOracleOwner {
         require(
             oracles[_oracleId].oracleOwner == _sender,
-            "ERROR::NOT_ORACLE_OWNER"
+            "ERROR:QUC-016:NOT_ORACLE_OWNER"
         );
         require(
             oracles[_oracleId].oracleContract != address(0),
-            "ERROR::ORACLE_DOES_NOT_EXIST"
+            "ERROR:QUC-017:ORACLE_DOES_NOT_EXIST"
         );
         require(
             oracleTypes[_oracleTypeName].initialized == true,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
+            "ERROR:QUC-018:ORACLE_TYPE_NOT_INITIALIZED"
         );
         require(
             assignedOracles[_oracleTypeName][_oracleId] ==
                 OracleAssignmentState.Unassigned,
-            "ERROR::ORACLE_ALREADY_PROPOSED_OR_ASSIGNED"
+            "ERROR:QUC-019:ORACLE_ALREADY_PROPOSED_OR_ASSIGNED"
         );
 
         assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
@@ -212,20 +212,20 @@ contract QueryController is QueryStorageModel, ModuleController {
     ) external onlyOracleOwner {
         require(
             oracles[_oracleId].oracleOwner == _sender,
-            "ERROR::NOT_ORACLE_OWNER"
+            "ERROR:QUC-020:NOT_ORACLE_OWNER"
         );
         require(
             oracles[_oracleId].oracleContract != address(0),
-            "ERROR::ORACLE_DOES_NOT_EXIST"
+            "ERROR:QUC-021:ORACLE_DOES_NOT_EXIST"
         );
         require(
             oracleTypes[_oracleTypeName].initialized == true,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
+            "ERROR:QUC-022:ORACLE_TYPE_NOT_INITIALIZED"
         );
         require(
             assignedOracles[_oracleTypeName][_oracleId] !=
                 OracleAssignmentState.Unassigned,
-            "ERROR::ORACLE_NOT_PROPOSED_OR_ASSIGNED"
+            "ERROR:QUC-023:ORACLE_NOT_PROPOSED_OR_ASSIGNED"
         );
 
         assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
@@ -242,17 +242,17 @@ contract QueryController is QueryStorageModel, ModuleController {
     ) external onlyInstanceOperator {
         require(
             oracleTypes[_oracleTypeName].initialized == true,
-            "ERROR::ORACLE_TYPE_NOT_INITIALIZED"
+            "ERROR:QUC-024:ORACLE_TYPE_NOT_INITIALIZED"
         );
 
         require(
             oracles[_oracleId].oracleContract != address(0),
-            "ERROR::ORACLE_DOES_NOT_EXIST"
+            "ERROR:QUC-025:ORACLE_DOES_NOT_EXIST"
         );
         require(
             assignedOracles[_oracleTypeName][_oracleId] ==
                 OracleAssignmentState.Proposed,
-            "ERROR::ORACLE_NOT_PROPOSED"
+            "ERROR:QUC-026:ORACLE_NOT_PROPOSED"
         );
 
         assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
