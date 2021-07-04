@@ -2,6 +2,10 @@
 require('dotenv').config();
 const path = require('path');
 const fs = require('fs-jetpack');
+const pinataSDK = require('@pinata/sdk');
+
+
+const pinata = pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_API_SECRET);
 
 
 const ipfsPath = '/home/christoph/Documents/sandbox/ipfs';
@@ -19,7 +23,7 @@ async function main() {
   if (fs.exists(releasePath)) {
     throw new Error('Release already published - bump release first!');
   }
-  log('Uploading sources & metadata to IPFS (via Pinata)...');
+  log('Writing sources & metadata...');
   log('========================================================');
 
   for (const _path of artifactPaths) {
@@ -31,8 +35,21 @@ async function main() {
     fs.write(srcFN, artifact.source);
   }
 
-  // TODO: direct upload to Pinata
+  log('Uploading to Pinata');
+  log('========================================================');
 
+  const options = {
+    pinataMetadata: {
+      name: `${GIFPath}/releases/${release}`,
+      keyvalues: { release },
+    },
+    pinataOptions: {
+      cidVersion: 0,
+      wrapWithDirectory: true,
+    },
+  };
+
+  pinata.pinFromFS(ipfsPath, options);
   log();
   log('Finished.');
   log();
