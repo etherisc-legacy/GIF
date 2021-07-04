@@ -12,7 +12,7 @@ interface IPolicy {
 
     event LogMetadataStateChanged(bytes32 bpKey, PolicyFlowState state);
 
-    event LogNewApplication(uint256 productId, bytes32 bpkey);
+    event LogNewApplication(uint256 productId, bytes32 bpKey);
 
     event LogApplicationStateChanged(bytes32 bpKey, ApplicationState state);
 

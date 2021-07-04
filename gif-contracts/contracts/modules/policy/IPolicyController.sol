@@ -48,27 +48,27 @@ interface IPolicyController {
     ) external returns (uint256 _remainder);
 
     function setPayoutState(
-        bytes32 _bpkey,
+        bytes32 _bpKey,
         uint256 _payoutId,
         IPolicy.PayoutState _state
     ) external;
 
-    function getApplicationState(bytes32 _bpkey)
+    function getApplicationState(bytes32 _bpKey)
         external
         view
         returns (IPolicy.ApplicationState _state);
 
-    function getPolicyState(bytes32 _bpkey)
+    function getPolicyState(bytes32 _bpKey)
         external
         view
         returns (IPolicy.PolicyState _state);
 
-    function getClaimState(bytes32 _bpkey, uint256 _claimId)
+    function getClaimState(bytes32 _bpKey, uint256 _claimId)
         external
         view
         returns (IPolicy.ClaimState _state);
 
-    function getPayoutState(bytes32 _bpkey, uint256 _payoutId)
+    function getPayoutState(bytes32 _bpKey, uint256 _payoutId)
         external
         view
         returns (IPolicy.PayoutState _state);

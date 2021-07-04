@@ -274,7 +274,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         return payouts[_bpKey][_payoutId].state;
     }
 
-    function getBpKeyCount() public returns (uint256 _count) {
+    function getBpKeyCount() public view returns (uint256 _count) {
         return bpKeys.length;
     }
 }
