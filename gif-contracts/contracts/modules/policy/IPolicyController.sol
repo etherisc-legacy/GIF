@@ -19,7 +19,7 @@ interface IPolicyController {
         IPolicy.ApplicationState _state
     ) external;
 
-    function createPolicy(bytes32 _bpKey) external returns (uint256 _policyId);
+    function createPolicy(bytes32 _bpKey) external;
 
     function setPolicyState(bytes32 _bpKey, IPolicy.PolicyState _state)
         external;

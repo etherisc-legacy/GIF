@@ -16,35 +16,37 @@ contract PolicyFlowDefault is WithRegistry {
         bytes32 _bpKey,
         bytes calldata _options // replaces premium, currency, payoutOptions
     ) public {
+        IPolicyController policy = policy();
         // the calling contract is the Product contract, which needs to have a productId in the license contract.
         uint256 productId = license().getProductId(msg.sender);
 
-        policy().createPolicyFlow(productId, _bpKey);
-        policy().createApplication(_bpKey, _options);
+        policy.createPolicyFlow(productId, _bpKey);
+        policy.createApplication(_bpKey, _options);
     }
 
-    function underwrite(bytes32 _bpKey) external {
+    function underwrite(bytes32 _bpKey) public {
+        IPolicyController policy = policy();
         require(
-            policy().getApplicationState(_bpKey) ==
+            policy.getApplicationState(_bpKey) ==
                 IPolicy.ApplicationState.Applied,
             "ERROR:PFD-001:INVALID_APPLICATION_STATE"
         );
-
-        policy().setApplicationState(
+        policy.setApplicationState(
             _bpKey,
             IPolicy.ApplicationState.Underwritten
         );
-        policy().createPolicy(_bpKey);
+        policy.createPolicy(_bpKey);
     }
 
     function decline(bytes32 _bpKey) external {
+        IPolicyController policy = policy();
         require(
-            policy().getApplicationState(_bpKey) ==
+            policy.getApplicationState(_bpKey) ==
                 IPolicy.ApplicationState.Applied,
             "ERROR:PFD-002:INVALID_APPLICATION_STATE"
         );
 
-        policy().setApplicationState(_bpKey, IPolicy.ApplicationState.Declined);
+        policy.setApplicationState(_bpKey, IPolicy.ApplicationState.Declined);
     }
 
     function newClaim(bytes32 _bpKey, bytes calldata _data)
@@ -59,34 +61,37 @@ contract PolicyFlowDefault is WithRegistry {
         uint256 _claimId,
         bytes calldata _data
     ) external returns (uint256 _payoutId) {
+        IPolicyController policy = policy();
         require(
-            policy().getClaimState(_bpKey, _claimId) ==
+            policy.getClaimState(_bpKey, _claimId) ==
                 IPolicy.ClaimState.Applied,
             "ERROR:PFD-003:INVALID_CLAIM_STATE"
         );
 
-        policy().setClaimState(_bpKey, _claimId, IPolicy.ClaimState.Confirmed);
+        policy.setClaimState(_bpKey, _claimId, IPolicy.ClaimState.Confirmed);
 
-        _payoutId = policy().createPayout(_bpKey, _claimId, _data);
+        _payoutId = policy.createPayout(_bpKey, _claimId, _data);
     }
 
     function declineClaim(bytes32 _bpKey, uint256 _claimId) external {
+        IPolicyController policy = policy();
         require(
-            policy().getClaimState(_bpKey, _claimId) ==
+            policy.getClaimState(_bpKey, _claimId) ==
                 IPolicy.ClaimState.Applied,
             "ERROR:PFD-004:INVALID_CLAIM_STATE"
         );
 
-        policy().setClaimState(_bpKey, _claimId, IPolicy.ClaimState.Declined);
+        policy.setClaimState(_bpKey, _claimId, IPolicy.ClaimState.Declined);
     }
 
     function expire(bytes32 _bpKey) external {
+        IPolicyController policy = policy();
         require(
-            policy().getPolicyState(_bpKey) == IPolicy.PolicyState.Active,
+            policy.getPolicyState(_bpKey) == IPolicy.PolicyState.Active,
             "ERROR:PFD-005:INVALID_POLICY_STATE"
         );
 
-        policy().setPolicyState(_bpKey, IPolicy.PolicyState.Expired);
+        policy.setPolicyState(_bpKey, IPolicy.PolicyState.Expired);
     }
 
     function payout(

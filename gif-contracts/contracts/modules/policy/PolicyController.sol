@@ -44,7 +44,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
     /* Application */
     function createApplication(bytes32 _bpKey, bytes calldata _options)
-        public
+        external
         onlyPolicyFlow("Policy")
     {
         Metadata storage meta = metadata[_bpKey];
@@ -87,12 +87,13 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     /* Policy */
-    function createPolicy(bytes32 _bpKey) external onlyPolicyFlow("Policy") {
+    function createPolicy(bytes32 _bpKey) external { //}onlyPolicyFlow("Policy") {
+
         Metadata storage meta = metadata[_bpKey];
         require(meta.createdAt > 0, "ERROR:POC-007:METADATA_DOES_NOT_EXIST");
         require(
             meta.hasPolicy == false,
-            "ERROR:POC-008:POLICY_ALREADY_EXISTS_FOR_BPKEY-2"
+            "ERROR:POC-008:POLICY_ALREADY_EXISTS_FOR_BPKEY"
         );
 
         Policy storage policy = policies[_bpKey];
@@ -136,11 +137,11 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         Policy storage policy = policies[_bpKey];
         require(policy.createdAt > 0, "ERROR:POC-010:POLICY_DOES_NOT_EXIST");
 
+        _claimId = meta.claimsCount;
         Claim storage claim = claims[_bpKey][_claimId];
         require(claim.createdAt == 0, "ERROR:POC-012:CLAIM_ALREADY_EXISTS");
 
         meta.claimsCount += 1;
-        _claimId = meta.claimsCount;
         meta.updatedAt = block.timestamp;
 
         claim.state = ClaimState.Applied;
@@ -177,12 +178,12 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         Claim storage claim = claims[_bpKey][_claimId];
         require(claim.createdAt > 0, "ERROR:POC-014:CLAIM_DOES_NOT_EXIST");
 
-        meta.payoutsCount += 1;
         _payoutId = meta.payoutsCount;
-        meta.updatedAt = block.timestamp;
-
         Payout storage payout = payouts[_bpKey][_payoutId];
         require(payout.createdAt == 0, "ERROR:POC-015:PAYOUT_ALREADY_EXISTS");
+
+        meta.payoutsCount += 1;
+        meta.updatedAt = block.timestamp;
 
         payout.claimId = _claimId;
         payout.data = _data;

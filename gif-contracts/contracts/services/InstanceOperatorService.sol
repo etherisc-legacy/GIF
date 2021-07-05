@@ -15,6 +15,14 @@ contract InstanceOperatorService is WithRegistry, Ownable {
 
     constructor(address _registry) WithRegistry(_registry) {}
 
+    function assignController(address _storage, address _controller) external onlyOwner {
+        IModuleStorage(_storage).assignController(_controller);
+    }
+
+    function assignStorage(address _controller, address _storage) external onlyOwner {
+        IModuleController(_controller).assignStorage(_storage);
+    }
+
     /* License */
     function approveProduct(uint256 _productId) external {
         license().approveProduct(_productId);
