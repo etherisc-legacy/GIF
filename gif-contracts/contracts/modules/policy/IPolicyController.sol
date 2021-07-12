@@ -72,4 +72,9 @@ interface IPolicyController {
         external
         view
         returns (IPolicy.PayoutState _state);
+
+    function applications(bytes32 _bpKey) external view returns (IPolicy.Application memory _application);
+    function policies(bytes32 _bpKey) external view returns (IPolicy.Policy memory _policy);
+    function claims(bytes32 _bpKey, uint256 _claimId) external view returns (IPolicy.Claim memory _claim);
+    function payouts(bytes32 _bpKey, uint256 _payoutId) external view returns (IPolicy.Payout memory _payout);
 }

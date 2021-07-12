@@ -24,6 +24,11 @@ contract PolicyFlowDefault is WithRegistry {
         policy.createApplication(_bpKey, _data);
     }
 
+    function getApplicationData(bytes32 _bpKey) external view returns (bytes memory _data) {
+        IPolicyController policy = getPolicy();
+        return policy.applications(_bpKey).data;
+    }
+
     function underwrite(bytes32 _bpKey) public {
         IPolicyController policy = getPolicy();
         require(
@@ -54,6 +59,11 @@ contract PolicyFlowDefault is WithRegistry {
         returns (uint256 _claimId)
     {
         _claimId = getPolicy().createClaim(_bpKey, _data);
+    }
+
+    function getClaimData(bytes32 _bpKey, uint256 _claimId) external view returns (bytes memory _data) {
+        IPolicyController policy = getPolicy();
+        return policy.claims(_bpKey, _claimId).data;
     }
 
     function confirmClaim(
@@ -101,6 +111,11 @@ contract PolicyFlowDefault is WithRegistry {
         bytes calldata _data
     ) external {
         getPolicy().payOut(_bpKey, _payoutId, _complete, _data);
+    }
+
+    function getPayoutData(bytes32 _bpKey, uint256 _payoutId) external view returns (bytes memory _data) {
+        IPolicyController policy = getPolicy();
+        return policy.payouts(_bpKey, _payoutId).data;
     }
 
     function register(bytes32 _productName, bytes32 _policyFlow) external {

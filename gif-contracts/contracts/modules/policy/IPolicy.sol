@@ -83,7 +83,6 @@ interface IPolicy {
     struct Metadata {
         // Lookup
         uint256 productId;
-        bytes data; // ABI-encoded contract data: premium, currency, payout options etc.
         uint256 claimsCount;
         uint256 payoutsCount;
         bool hasPolicy;
@@ -97,6 +96,7 @@ interface IPolicy {
     }
 
     struct Application {
+        bytes data; // ABI-encoded contract data: premium, currency, payout options etc.
         ApplicationState state;
         uint256 createdAt;
         uint256 updatedAt;

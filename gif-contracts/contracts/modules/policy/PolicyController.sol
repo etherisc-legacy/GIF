@@ -57,13 +57,13 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         );
 
         application.state = ApplicationState.Applied;
+        application.data = _data;
         application.createdAt = block.timestamp;
         application.updatedAt = block.timestamp;
 
         assert(meta.createdAt > 0);
         assert(meta.hasApplication == false);
 
-        meta.data = _data;
         meta.hasApplication = true;
         meta.updatedAt = block.timestamp;
 
