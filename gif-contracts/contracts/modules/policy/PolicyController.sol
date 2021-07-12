@@ -43,7 +43,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     /* Application */
-    function createApplication(bytes32 _bpKey, bytes calldata _options)
+    function createApplication(bytes32 _bpKey, bytes calldata _data)
         external
         onlyPolicyFlow("Policy")
     {
@@ -63,7 +63,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         assert(meta.createdAt > 0);
         assert(meta.hasApplication == false);
 
-        meta.options = _options;
+        meta.data = _data;
         meta.hasApplication = true;
         meta.updatedAt = block.timestamp;
 
@@ -171,7 +171,11 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         bytes32 _bpKey,
         uint256 _claimId,
         bytes calldata _data
-    ) external onlyPolicyFlow("Policy") returns (uint256 _payoutId) {
+    )
+        external
+        onlyPolicyFlow("Policy")
+        returns (uint256 _payoutId)
+    {
         Metadata storage meta = metadata[_bpKey];
         require(meta.createdAt > 0, "ERROR:POC-013:METADATA_DOES_NOT_EXIST");
 

@@ -57,11 +57,11 @@ contract Product is RBAC {
 
     function _newApplication(
         bytes32 _bpKey,
-        bytes calldata _options
+        bytes calldata _data
     )
         internal
     {
-        productService.newApplication(_bpKey, _options);
+        productService.newApplication(_bpKey, _data);
     }
 
     function _underwrite(

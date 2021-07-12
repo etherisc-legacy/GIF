@@ -11,7 +11,7 @@ interface IPolicyController {
         IPolicy.PolicyFlowState _state
     ) external;
 
-    function createApplication(bytes32 _bpKey, bytes calldata _options)
+    function createApplication(bytes32 _bpKey, bytes calldata _data)
         external;
 
     function setApplicationState(
@@ -45,7 +45,7 @@ interface IPolicyController {
         uint256 _payoutId,
         bool _complete,
         bytes calldata _data
-    ) external returns (uint256 _remainder);
+    ) external;
 
     function setPayoutState(
         bytes32 _bpKey,
