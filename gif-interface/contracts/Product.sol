@@ -146,4 +146,18 @@ contract Product is RBAC {
             _responsibleOracleId
         );
     }
+
+    function _getApplicationData(bytes32 _bpKey) internal view returns (bytes memory _data) {
+        return productService.getApplicationData(_bpKey);
+    }
+
+    function _getClaimData(bytes32 _bpKey, uint256 _claimId) internal view returns (bytes memory _data) {
+        return productService.getClaimData(_bpKey, _claimId);
+    }
+
+    function _getApplicationData(bytes32 _bpKey, uint256 _payoutId) internal view returns (bytes memory _data) {
+        return productService.getPayoutData(_bpKey, _payoutId);
+    }
+
+
 }
