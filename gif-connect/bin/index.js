@@ -1,0 +1,170 @@
+const axios = require('axios');
+const ethers = require('ethers');
+const cbor = require('cbor');
+const multihashes = require('multihashes');
+// const abiDecoder = require('abi-decoder');
+
+
+const gif = {};
+
+gif.Instance = class Instance {
+  /**
+   *
+   * @param {string} httpProvider
+   * @param {string} registryAddress
+   */
+  constructor(httpProvider, registryAddress) {
+    this.httpProvider = httpProvider;
+    this.registryAddress = registryAddress;
+    this.provider = new ethers.providers.JsonRpcProvider(httpProvider);
+    this.contracts = [];
+    this.Registry = null;
+  }
+
+  static CBOR_PROCESSORS = [
+    {
+      origin: 'ipfs',
+      process: multihashes.toB58String,
+    },
+    {
+      origin: 'bzzr0',
+      process: data => ethers.utils.hexlify(data)
+        .slice(2),
+    },
+    {
+      origin: 'bzzr1',
+      process: data => ethers.utils.hexlify(data)
+        .slice(2),
+    },
+  ];
+
+  /**
+   *
+   * @param {string} bytecode
+   * @returns {{}}
+   */
+  cborDecode(bytecode) {
+    const bytes = ethers.utils.arrayify(bytecode);
+    const cborLength = bytes[bytes.length - 2] * 0x100 + bytes[bytes.length - 1];
+    const bytecodeBuffer = Buffer.from(bytes.slice(bytes.length - 2 - cborLength, -2));
+    const data = cbor.decodeFirstSync(bytecodeBuffer);
+    for (let idx = 0; idx < Instance.CBOR_PROCESSORS.length; idx += 1) {
+      const cborProcessor = Instance.CBOR_PROCESSORS[idx];
+      const cborBytes = data[cborProcessor.origin];
+      if (cborBytes) {
+        const metadataId = cborProcessor.process(cborBytes);
+        return { [cborProcessor.origin]: metadataId };
+      }
+    }
+    throw new Error();
+  }
+
+  /**
+   *
+   * @param {string} addr
+   * @returns {Promise<{}>}
+   */
+  async ipfsLink(addr) {
+    const byteCode = await this.provider.getCode(addr);
+    if (byteCode && byteCode !== '0x') {
+      return this.cborDecode(byteCode);
+    }
+    throw new Error();
+  }
+
+  /**
+   *
+   * @param {string} addr
+   * @returns {Promise<*[]|*>}
+   */
+  async getAbi(addr) {
+    try {
+      const regIPFS = await this.ipfsLink(addr);
+      if (regIPFS && regIPFS.ipfs) {
+        const gatewayLink = `https://gateway.pinata.cloud/ipfs/${regIPFS.ipfs}`;
+        const { data: { abi } } = await axios.get(gatewayLink, { responseType: 'json' });
+        return abi;
+      }
+    } catch (err) {
+      throw new Error(`Could not find ipfs link at address ${addr}`);
+    }
+    throw new Error(`Could not find ipfs link at address ${addr}`);
+  }
+
+  /**
+   *
+   * @param {string} text
+   * @returns {string}
+   */
+  s32b(text) {
+    return ethers.utils.formatBytes32String(text.slice(0, 31));
+  }
+
+  /**
+   *
+   * @returns {Promise<Contract>}
+   */
+  async getRegistry() {
+    if (!this.Registry) {
+      const registryAbi = await this.getAbi(this.registryAddress);
+      const Registry = new ethers.Contract(
+        this.registryAddress,
+        registryAbi,
+        this.provider,
+      );
+      const controller = Registry.controller();
+      const augmentedRegistryAbi = await this.augmentAbi(registryAbi, controller);
+      this.Registry = new ethers.Contract(
+        this.registryAddress,
+        augmentedRegistryAbi,
+        this.provider,
+      );
+    }
+    return this.Registry;
+  }
+
+  /**
+   *
+   * @param {{}} contractAbi
+   * @param {string} controllerAddress
+   * @returns {Promise<*>}
+   */
+  async augmentAbi(contractAbi, controllerAddress) {
+    if (controllerAddress !== '0x0000000000000000000000000000000000000000') {
+      const controllerAbi = await this.getAbi(controllerAddress);
+      controllerAbi.forEach((item) => {
+        if (!contractAbi.some(it => it.name === item.name)) {
+          contractAbi.push(item);
+        }
+      });
+    }
+    return contractAbi;
+  }
+
+
+  /**
+   * @param {string} contractName
+   * @returns {Promise<void>}
+   */
+  async getContract(contractName) {
+    if (!this.contracts[contractName]) {
+      const Registry = await this.getRegistry();
+      const contractNameB32 = this.s32b(contractName);
+      const contractAddress = await Registry.getContract(contractNameB32);
+      let contractAbi = await this.getAbi(contractAddress);
+      if (contractAbi.some(item => item.name === 'assignController')) {
+        const controllerName = `${contractName}Controller`;
+        const controllerNameB32 = this.s32b(controllerName);
+        const controllerAddress = await Registry.getContract(controllerNameB32);
+        contractAbi = await this.augmentAbi(contractAbi, controllerAddress);
+      }
+      this.contracts[contractName] = {
+        address: contractAddress,
+        abi: contractAbi,
+      };
+    }
+    return this.contracts[contractName];
+  }
+};
+
+module.exports = gif;
