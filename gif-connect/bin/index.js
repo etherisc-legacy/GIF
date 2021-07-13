@@ -2,14 +2,13 @@ const axios = require('axios');
 const ethers = require('ethers');
 const cbor = require('cbor');
 const multihashes = require('multihashes');
-// const abiDecoder = require('abi-decoder');
 
 
 const gif = {};
 
 gif.Instance = class Instance {
   /**
-   *
+   * Returns an instance object.
    * @param {string} httpProvider
    * @param {string} registryAddress
    */
@@ -39,7 +38,7 @@ gif.Instance = class Instance {
   ];
 
   /**
-   *
+   * Decodes cbor information at the end of a given code
    * @param {string} bytecode
    * @returns {{}}
    */
@@ -60,7 +59,7 @@ gif.Instance = class Instance {
   }
 
   /**
-   *
+   * Extracts the encoded ipfs information from code at a given address.
    * @param {string} addr
    * @returns {Promise<{}>}
    */
@@ -73,7 +72,8 @@ gif.Instance = class Instance {
   }
 
   /**
-   *
+   * Returns the abi for a given address, provided the code at the address
+   * has encoded ipfs information and the abi is published on ipfs.
    * @param {string} addr
    * @returns {Promise<*[]|*>}
    */
@@ -92,7 +92,7 @@ gif.Instance = class Instance {
   }
 
   /**
-   *
+   * Converts the first 31 characters of a string in a bytes32 string.
    * @param {string} text
    * @returns {string}
    */
@@ -101,7 +101,7 @@ gif.Instance = class Instance {
   }
 
   /**
-   *
+   * Returns the ethers.js Registry Contract object.
    * @returns {Promise<Contract>}
    */
   async getRegistry() {
@@ -124,7 +124,7 @@ gif.Instance = class Instance {
   }
 
   /**
-   *
+   * In case of a storage contract, the abi is augmented with the controller functions.
    * @param {{}} contractAbi
    * @param {string} controllerAddress
    * @returns {Promise<*>}
@@ -143,10 +143,12 @@ gif.Instance = class Instance {
 
 
   /**
+   * Returns address an abi of a given GIF contract.
+   * In case of a storage contract, the abi is augmented with the controller functions.
    * @param {string} contractName
    * @returns {Promise<void>}
    */
-  async getContract(contractName) {
+  async getContractConfig(contractName) {
     if (!this.contracts[contractName]) {
       const Registry = await this.getRegistry();
       const contractNameB32 = this.s32b(contractName);
@@ -164,6 +166,16 @@ gif.Instance = class Instance {
       };
     }
     return this.contracts[contractName];
+  }
+
+  /**
+   * Returns an ethers.js Contract Object.
+   * @param {string} contractName
+   * @returns {Promise<*>}
+   */
+  async getContract(contractName) {
+    const config = this.getContractConfig(contractName);
+    return ethers.Contract(config.address, config.abi, this.provider);
   }
 };
 
