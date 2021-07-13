@@ -1,18 +1,22 @@
 const gif = require('../bin/index.js');
 
 
-const instance = new gif.Instance('http://localhost:8545', '0x9F544a3Fc3D1045e6ec49D4ecEF6dCD700457165');
-
-
-console.log(instance);
-
+const { log } = console;
 /**
- *
+ * Main function
  * @returns {Promise<void>}
  */
 const main = async () => {
+  const instance = new gif.Instance('http://localhost:8545', '0x9F544a3Fc3D1045e6ec49D4ecEF6dCD700457165');
+  log(instance);
+
+  const conConfig = await instance.getContractConfig('Query');
+  log(`Contract address: ${conConfig.address}, ABI: ${conConfig.abi.length} elements.`);
+
   const con = await instance.getContract('Query');
-  console.log('Con', con);
+  log(`Contract object Class=${con.constructor.name}`);
+
+  log(instance);
 };
 
 main()
@@ -20,6 +24,6 @@ main()
     process.exit(0);
   })
   .catch((err) => {
-    console.log(err);
+    log(err);
     process.exit(1);
   });

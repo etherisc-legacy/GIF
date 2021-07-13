@@ -16,6 +16,7 @@ gif.Instance = class Instance {
     this.httpProvider = httpProvider;
     this.registryAddress = registryAddress;
     this.provider = new ethers.providers.JsonRpcProvider(httpProvider);
+    this.contractConfigs = [];
     this.contracts = [];
     this.Registry = null;
   }
@@ -160,12 +161,12 @@ gif.Instance = class Instance {
         const controllerAddress = await Registry.getContract(controllerNameB32);
         contractAbi = await this.augmentAbi(contractAbi, controllerAddress);
       }
-      this.contracts[contractName] = {
+      this.contractConfigs[contractName] = {
         address: contractAddress,
         abi: contractAbi,
       };
     }
-    return this.contracts[contractName];
+    return this.contractConfigs[contractName];
   }
 
   /**
@@ -175,7 +176,8 @@ gif.Instance = class Instance {
    */
   async getContract(contractName) {
     const config = await this.getContractConfig(contractName);
-    return new ethers.Contract(config.address, config.abi, this.provider);
+    this.contracts[contractName] = new ethers.Contract(config.address, config.abi, this.provider);
+    return this.contracts[contractName];
   }
 };
 
