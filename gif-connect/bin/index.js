@@ -82,7 +82,7 @@ gif.Instance = class Instance {
       const regIPFS = await this.ipfsLink(addr);
       if (regIPFS && regIPFS.ipfs) {
         const gatewayLink = `https://gateway.pinata.cloud/ipfs/${regIPFS.ipfs}`;
-        const { data: { abi } } = await axios.get(gatewayLink, { responseType: 'json' });
+        const { data: { output: { abi } } } = await axios.get(gatewayLink, { responseType: 'json' });
         return abi;
       }
     } catch (err) {
@@ -174,8 +174,8 @@ gif.Instance = class Instance {
    * @returns {Promise<*>}
    */
   async getContract(contractName) {
-    const config = this.getContractConfig(contractName);
-    return ethers.Contract(config.address, config.abi, this.provider);
+    const config = await this.getContractConfig(contractName);
+    return new ethers.Contract(config.address, config.abi, this.provider);
   }
 };
 
