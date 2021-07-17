@@ -179,6 +179,33 @@ gif.Instance = class Instance {
     this.contracts[contractName] = new ethers.Contract(config.address, config.abi, this.provider);
     return this.contracts[contractName];
   }
+
+  /**
+   * Returns address of ProductService Contract.
+   * @returns {Promise<*>}
+   */
+  async getProductServiceAddress() {
+    const { address } = await this.getContractConfig('ProductService');
+    return address;
+  }
+
+  /**
+   * Returns address of OracleService Contract.
+   * @returns {Promise<*>}
+   */
+  async getOracleServiceAddress() {
+    const { address } = await this.getContractConfig('OracleService');
+    return address;
+  }
+
+  /**
+   * Returns address of OracleOwnerService Contract.
+   * @returns {Promise<*>}
+   */
+  async getOracleOwnerServiceAddress() {
+    const { address } = await this.getContractConfig('OracleOwnerService');
+    return address;
+  }
 };
 
 module.exports = gif;

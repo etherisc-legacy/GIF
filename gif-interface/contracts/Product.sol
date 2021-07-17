@@ -4,7 +4,7 @@ pragma solidity ^0.6.0;
 import "./RBAC.sol";
 import "./IProductService.sol";
 
-contract Product is RBAC {
+abstract contract Product is RBAC {
 
     bool public developmentMode = false;
     bool public maintenanceMode = false;
@@ -57,7 +57,7 @@ contract Product is RBAC {
 
     function _newApplication(
         bytes32 _bpKey,
-        bytes calldata _data
+        bytes memory _data
     )
         internal
     {
@@ -82,7 +82,7 @@ contract Product is RBAC {
 
     function _newClaim(
         bytes32 _bpKey,
-        bytes calldata _data
+        bytes memory _data
     )
         internal
         returns (uint256 _claimId)
@@ -93,7 +93,7 @@ contract Product is RBAC {
     function _confirmClaim(
         bytes32 _bpKey,
         uint256 _claimId,
-        bytes calldata _data
+        bytes memory _data
     )
         internal
         returns (uint256 _payoutId)
@@ -122,7 +122,7 @@ contract Product is RBAC {
         bytes32 _bpKey,
         uint256 _payoutId,
         bool _complete,
-        bytes calldata _data
+        bytes memory _data
     )
         internal
     {

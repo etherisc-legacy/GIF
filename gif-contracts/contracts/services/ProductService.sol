@@ -21,9 +21,9 @@ contract ProductService is WithRegistry, Delegator {
 
     function register(bytes32 _name, bytes32 _policyFlow)
         external
-        returns (uint256 _registrationId)
+        returns (uint256 _productId)
     {
-        _registrationId = license().register(_name, msg.sender, _policyFlow);
+        _productId = license().register(_name, msg.sender, _policyFlow);
     }
 
     function license() internal view returns (ILicenseController) {

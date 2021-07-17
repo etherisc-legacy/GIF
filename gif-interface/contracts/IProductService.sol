@@ -12,9 +12,9 @@ interface IProductService {
     function declineClaim(bytes32 _bpKey, uint256 _claimId) external;
     function expire(bytes32 _bpKey) external;
     function payout(bytes32 _bpKey, uint256 _payoutId, bool _complete, bytes calldata _data) external;
-    function getApplicationData(bytes32 _bpKey) external view returns (bytes _data);
-    function getClaimData(bytes32 _bpKey, uint256 _claimId) external view returns (bytes _data);
-    function getPayoutData(bytes32 _bpKey, uint256 _payoutId) external view returns (bytes _data);
+    function getApplicationData(bytes32 _bpKey) external view returns (bytes memory _data);
+    function getClaimData(bytes32 _bpKey, uint256 _claimId) external view returns (bytes memory _data);
+    function getPayoutData(bytes32 _bpKey, uint256 _payoutId) external view returns (bytes memory _data);
 
     function request(
         bytes calldata _input,
