@@ -13,27 +13,24 @@ contract OracleOwnerService is WithRegistry {
     function proposeOracleType(
         bytes32 _oracleTypeName,
         string calldata _inputFormat,
-        string calldata _callbackFormat,
-        string calldata _description
+        string calldata _callbackFormat
     ) external {
         // todo: oracle owner should be approved
         query().proposeOracleType(
             _oracleTypeName,
             _inputFormat,
-            _callbackFormat,
-            _description
+            _callbackFormat
         );
     }
 
     function proposeOracle(
-        address _oracleContract,
-        string calldata _description
+        bytes32 _name,
+        address _oracleContract
     ) external returns (uint256 _oracleId) {
         // todo: oracle owner should be approved
         _oracleId = query().proposeOracle(
-            msg.sender,
-            _oracleContract,
-            _description
+            _name,
+            _oracleContract
         );
     }
 
@@ -43,7 +40,17 @@ contract OracleOwnerService is WithRegistry {
     ) external {
         // todo: oracle owner should be approved
         query().proposeOracleToOracleType(
-            msg.sender,
+            _oracleTypeName,
+            _oracleId
+        );
+    }
+
+    function revokeOracleFromOracleType(
+        bytes32 _oracleTypeName,
+        uint256 _oracleId
+    ) external {
+        // todo: oracle owner should be approved
+        query().revokeOracleFromOracleType(
             _oracleTypeName,
             _oracleId
         );

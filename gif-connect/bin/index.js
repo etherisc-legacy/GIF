@@ -13,6 +13,7 @@ gif.Instance = class Instance {
    * @param {string} registryAddress
    */
   constructor(httpProvider, registryAddress) {
+    if (!registryAddress) throw new Error('Registry Address not provided, aborting... ');
     this.httpProvider = httpProvider;
     this.registryAddress = registryAddress;
     this.provider = new ethers.providers.JsonRpcProvider(httpProvider);

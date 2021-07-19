@@ -7,58 +7,49 @@ import "../../shared/ModuleController.sol";
 contract LicenseController is LicenseStorageModel, ModuleController {
     bytes32 public constant NAME = "LicenseController";
 
-    constructor(address _registry, uint256 _productIdIncrement)
-        WithRegistry(_registry)
-    {
-        // productIdIncrement should be equal to the value from the last deployed licence storage or zero
-        productIdIncrement = _productIdIncrement;
-    }
+    constructor(address _registry) WithRegistry(_registry) {}
 
     /**
      * @dev Register new product
-     * _addr the address of the calling contract, i.e. the product contract to register.
+     * _productContract the address of the calling contract, i.e. the product contract to register.
      */
-    function register(
+    function proposeProduct(
         bytes32 _name,
-        address _addr,
+        address _productContract,
         bytes32 _policyFlow
-    ) external returns (uint256 _id) {
+    ) external returns (uint256 _productId) {
         // todo: add restriction, allow only ProductOwners
-        require(productIdByAddress[_addr] == 0, "ERROR:LIC-001:PRODUCT_IS_ACTIVE");
+        require(productIdByAddress[_productContract] == 0, "ERROR:LIC-001:PRODUCT_IS_ACTIVE");
 
-        productIdIncrement += 1;
-        _id = productIdIncrement;
-        productIdByAddress[_addr] = _id;
+        productCount += 1;
+        _productId = productCount;
+        productIdByAddress[_productContract] = _productId;
 
         // todo: check required policyFlow existence
 
-        Product storage product = products[_id];
-        product.name = _name;
-        product.addr = _addr;
-        product.policyFlow = _policyFlow;
-        product.release = getRelease();
-        product.state = ProductState.Proposed;
+        products[_productId] = Product(
+            _name,
+            _productContract,
+            _policyFlow,
+            getRelease(),
+            ProductState.Proposed
+        );
 
-        emit LogNewProduct(_id, _name, _addr, _policyFlow);
+        emit LogProductProposed(_productId, _name, _productContract, _policyFlow);
     }
 
-    /*
-     * @dev Approve product
-     */
     function setProductState(uint256 _id, ProductState _state) internal {
         require(
-            products[_id].addr != address(0),
+            products[_id].productContract != address(0),
             "ERROR::PRODUCT_DOES_NOT_EXIST"
         );
         products[_id].state = _state;
         if (_state == ProductState.Approved) {
-            productIdByAddress[products[_id].addr] = _id;
+            productIdByAddress[products[_id].productContract] = _id;
         }
 
         emit LogProductSetState(
             _id,
-            products[_id].name,
-            products[_id].addr,
             _state
         );
     }
@@ -113,16 +104,16 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         );
     }
 
-    function getProductId(address _addr)
+    function getProductId(address _productContract)
         public
         view
         returns (uint256 _productId)
     {
         require(
-            productIdByAddress[_addr] > 0,
+            productIdByAddress[_productContract] > 0,
             "ERROR:LIC-002:PRODUCT_NOT_APPROVED_OR_DOES_NOT_EXIST"
         );
 
-        _productId = productIdByAddress[_addr];
+        _productId = productIdByAddress[_productContract];
     }
 }

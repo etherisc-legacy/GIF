@@ -22,12 +22,12 @@ abstract contract Oracle is IOracle, RBAC {
         address _oracleService,
         address _oracleOwnerService,
         bytes32 _oracleTypeName,
-        string calldata _description)
-        external
+        string memory _description)
+        public
     {
         oracleService = IOracleService(_oracleService);
         oracleOwnerService = IOracleOwnerService(_oracleOwnerService);
-        uint256 oracleId = oracleOwnerService.proposeOracle(this, _description);
+        uint256 oracleId = oracleOwnerService.proposeOracle(address(this), _description);
         oracleOwnerService.proposeOracleToOracleType(_oracleTypeName, oracleId);
     }
 

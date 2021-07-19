@@ -4,12 +4,14 @@ pragma solidity 0.8.0;
 
 interface IQuery {
     enum OracleTypeState {
-        Inactive,
-        Active
+        Uninitialized,
+        Proposed,
+        Approved
     }
     enum OracleState {
-        Inactive,
-        Active
+        Proposed,
+        Approved,
+        Paused
     }
     enum OracleAssignmentState {
         Unassigned,
@@ -20,16 +22,13 @@ interface IQuery {
     struct OracleType {
         string inputFormat; // e.g. '(uint256 longitude,uint256 latitude)'
         string callbackFormat; // e.g. '(uint256 longitude,uint256 latitude)'
-        string description;
         OracleTypeState state;
-        bool initialized;
         uint256 activeOracles;
     }
 
     struct Oracle {
-        address oracleOwner;
+        bytes32 name;
         address oracleContract;
-        string description;
         OracleState state;
         uint256 activeOracleTypes;
     }
@@ -54,15 +53,15 @@ interface IQuery {
     event LogOracleTypeProposed(
         bytes32 oracleTypeName,
         string inputFormat,
-        string callbackFormat,
-        string description
+        string callbackFormat
     );
 
-    event LogOracleTypeActivated(bytes32 oracleTypeName);
+    event LogOracleTypeApproved(bytes32 oracleTypeName);
 
-    event LogOracleTypeDeactivated(bytes32 oracleTypeName);
+    event LogOracleTypeDisapproved(bytes32 oracleTypeName);
 
-    event LogOracleProposed(address oracleContract, string description);
+    event LogOracleProposed(uint256 oracleId, bytes32 name, address oracleContract);
+    event LogOracleSetState(uint256 oracleId, OracleState state);
 
     event LogOracleContractUpdated(
         uint256 oracleId,
@@ -70,19 +69,9 @@ interface IQuery {
         address nextContract
     );
 
-    event LogOracleActivated(uint256 oracleId);
-
-    event LogOracleDeactivated(uint256 oracleId);
-
     event LogOracleProposedToOracleType(
         bytes32 oracleTypeName,
         uint256 oracleId
-    );
-
-    event LogOraclePriceUpdatedInType(
-        uint256 oracleId,
-        uint256 oracleTypeId,
-        uint256 price
     );
 
     event LogOracleRevokedFromOracleType(

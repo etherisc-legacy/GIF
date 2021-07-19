@@ -24,7 +24,11 @@ contract PolicyFlowDefault is WithRegistry {
         policy.createApplication(_bpKey, _data);
     }
 
-    function getApplicationData(bytes32 _bpKey) external view returns (bytes memory _data) {
+    function getApplicationData(bytes32 _bpKey)
+        external
+        view
+        returns (bytes memory _data)
+    {
         IPolicyController policy = getPolicy();
         return policy.applications(_bpKey).data;
     }
@@ -61,7 +65,11 @@ contract PolicyFlowDefault is WithRegistry {
         _claimId = getPolicy().createClaim(_bpKey, _data);
     }
 
-    function getClaimData(bytes32 _bpKey, uint256 _claimId) external view returns (bytes memory _data) {
+    function getClaimData(bytes32 _bpKey, uint256 _claimId)
+        external
+        view
+        returns (bytes memory _data)
+    {
         IPolicyController policy = getPolicy();
         return policy.claims(_bpKey, _claimId).data;
     }
@@ -113,13 +121,17 @@ contract PolicyFlowDefault is WithRegistry {
         getPolicy().payOut(_bpKey, _payoutId, _complete, _data);
     }
 
-    function getPayoutData(bytes32 _bpKey, uint256 _payoutId) external view returns (bytes memory _data) {
+    function getPayoutData(bytes32 _bpKey, uint256 _payoutId)
+        external
+        view
+        returns (bytes memory _data)
+    {
         IPolicyController policy = getPolicy();
         return policy.payouts(_bpKey, _payoutId).data;
     }
 
-    function register(bytes32 _productName, bytes32 _policyFlow) external {
-        getLicense().register(_productName, msg.sender, _policyFlow);
+    function proposeProduct(bytes32 _productName, bytes32 _policyFlow) external {
+        getLicense().proposeProduct(_productName, msg.sender, _policyFlow);
     }
 
     function request(

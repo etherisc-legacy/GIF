@@ -3,9 +3,9 @@ pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 interface ILicenseController {
-    function register(
+    function proposeProduct(
         bytes32 _name,
-        address _addr,
+        address _productContract,
         bytes32 _policyFlow
     ) external returns (uint256 _id);
 

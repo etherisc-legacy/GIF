@@ -14,16 +14,19 @@ contract ProductService is WithRegistry, Delegator {
         (bool authorized, address policyFlow) = license().authorize(msg.sender);
 
         require(authorized == true, "ERROR:PRS-001:NOT_AUTHORIZED");
-        require(policyFlow != address(0), "ERROR:PRS-002:POLICY_FLOW_NOT_RESOLVED");
+        require(
+            policyFlow != address(0),
+            "ERROR:PRS-002:POLICY_FLOW_NOT_RESOLVED"
+        );
 
         _delegate(policyFlow);
     }
 
-    function register(bytes32 _name, bytes32 _policyFlow)
+    function proposeProduct(bytes32 _name, bytes32 _policyFlow)
         external
         returns (uint256 _productId)
     {
-        _productId = license().register(_name, msg.sender, _policyFlow);
+        _productId = license().proposeProduct(_name, msg.sender, _policyFlow);
     }
 
     function license() internal view returns (ILicenseController) {

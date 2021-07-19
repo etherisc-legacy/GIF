@@ -15,11 +15,17 @@ contract InstanceOperatorService is WithRegistry, Ownable {
 
     constructor(address _registry) WithRegistry(_registry) {}
 
-    function assignController(address _storage, address _controller) external onlyOwner {
+    function assignController(address _storage, address _controller)
+        external
+        onlyOwner
+    {
         IModuleStorage(_storage).assignController(_controller);
     }
 
-    function assignStorage(address _controller, address _storage) external onlyOwner {
+    function assignStorage(address _controller, address _storage)
+        external
+        onlyOwner
+    {
         IModuleController(_controller).assignStorage(_storage);
     }
 
@@ -84,12 +90,20 @@ contract InstanceOperatorService is WithRegistry, Ownable {
     }
 
     /* Query */
-    function activateOracleType(bytes32 _oracleTypeName) external onlyOwner {
-        query().activateOracleType(_oracleTypeName);
+    function approveOracleType(bytes32 _oracleTypeName) external onlyOwner {
+        query().approveOracleType(_oracleTypeName);
     }
 
-    function activateOracle(uint256 _oracleId) external onlyOwner {
-        query().activateOracle(_oracleId);
+    function disapproveOracleType(bytes32 _oracleTypeName) external onlyOwner {
+        query().disapproveOracleType(_oracleTypeName);
+    }
+
+    function approveOracle(uint256 _oracleId) external onlyOwner {
+        query().approveOracle(_oracleId);
+    }
+
+    function disapproveOracle(uint256 _oracleId) external onlyOwner {
+        query().disapproveOracle(_oracleId);
     }
 
     function assignOracleToOracleType(

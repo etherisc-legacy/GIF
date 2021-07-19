@@ -7,40 +7,35 @@ interface IQueryController {
     function proposeOracleType(
         bytes32 _oracleTypeName,
         string calldata _inputFormat,
-        string calldata _callbackFormat,
-        string calldata _description
+        string calldata _callbackFormat
     ) external;
 
-    function activateOracleType(bytes32 _oracleTypeName) external;
+    function approveOracleType(bytes32 _oracleTypeName) external;
 
-    function deactivateOracleType(bytes32 _oracleTypeName) external;
+    function disapproveOracleType(bytes32 _oracleTypeName) external;
 
     function removeOracleType(bytes32 _oracleTypeName) external;
 
     function proposeOracle(
-        address _sender,
-        address _oracleContract,
-        string calldata _description
+        bytes32 _name,
+        address _oracleContract
     ) external returns (uint256 _oracleId);
 
     function updateOracleContract(
-        address _sender,
         address _newOracleContract,
         uint256 _oracleId
     ) external;
 
-    function activateOracle(uint256 _oracleId) external;
+    function approveOracle(uint256 _oracleId) external;
 
-    function deactivateOracle(uint256 _oracleId) external;
+    function disapproveOracle(uint256 _oracleId) external;
 
     function proposeOracleToOracleType(
-        address _sender,
         bytes32 _oracleTypeName,
         uint256 _oracleId
     ) external;
 
     function revokeOracleFromOracleType(
-        address _sender,
         bytes32 _oracleTypeName,
         uint256 _oracleId
     ) external;
@@ -53,7 +48,7 @@ interface IQueryController {
     function request(
         bytes calldata _input,
         string calldata _callbackMethodName,
-        address _callabackContractAddress,
+        address _callbackContractAddress,
         bytes32 _oracleTypeName,
         uint256 _responsibleOracleId
     ) external returns (uint256 _requestId);

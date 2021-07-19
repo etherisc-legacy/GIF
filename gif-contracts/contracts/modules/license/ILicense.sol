@@ -9,28 +9,23 @@ interface ILicense {
         Paused
     }
 
-    event LogNewProduct(
+    event LogProductProposed(
         uint256 productId,
         bytes32 name,
-        address addr,
+        address productContract,
         bytes32 policyFlow
     );
 
     event LogProductSetState(
         uint256 productId,
-        bytes32 name,
-        address addr,
         ProductState state
     );
 
     struct Product {
-        address productOwner;
         bytes32 name;
-        address addr;
+        address productContract;
         bytes32 policyFlow;
-        bytes32 version;
         bytes32 release;
-        address policyToken;
         ProductState state;
     }
 }
