@@ -33,7 +33,7 @@ abstract contract Product is RBAC {
         public
     {
         productService = IProductService(_productService);
-        _register(_name, _policyFlow);
+        _proposeProduct(_name, _policyFlow);
     }
 
     function setDevelopmentMode(bool _newMode) internal {
@@ -48,11 +48,11 @@ abstract contract Product is RBAC {
         onChainPaymentMode = _newMode;
     }
 
-    function _register(bytes32 _productName, bytes32 _policyFlow)
+    function _proposeProduct(bytes32 _productName, bytes32 _policyFlow)
         internal
         returns (uint256 _productId)
     {
-        _productId = productService.register(_productName, _policyFlow);
+        _productId = productService.proposeProduct(_productName, _policyFlow);
     }
 
     function _newApplication(

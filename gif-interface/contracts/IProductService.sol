@@ -3,7 +3,7 @@ pragma solidity ^0.6.0;
 // SPDX-License-Identifier: Apache-2.0
 
 interface IProductService {
-    function register(bytes32 _productName, bytes32 _policyFlow) external returns (uint256 _productId);
+    function proposeProduct(bytes32 _productName, bytes32 _policyFlow) external returns (uint256 _productId);
     function newApplication(bytes32 _bpKey, bytes calldata _data) external;
     function underwrite(bytes32 _bpKey) external;
     function decline(bytes32 _bpKey) external;

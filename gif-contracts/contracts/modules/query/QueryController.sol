@@ -17,7 +17,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         _;
     }
 
-    constructor(address _registry, uint256 ) WithRegistry(_registry) {}
+    constructor(address _registry) WithRegistry(_registry) {}
 
     function proposeOracleType(
         bytes32 _oracleTypeName,
