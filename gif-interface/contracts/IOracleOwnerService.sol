@@ -11,8 +11,7 @@ interface IOracleOwnerService {
     ) external;
 
     function proposeOracle(
-        bytes32 _oracleName,
-        address _oracleContract
+        bytes32 _oracleName
     ) external returns (uint256 _oracleId);
 
     function proposeOracleToOracleType(
