@@ -33,7 +33,7 @@ abstract contract Product is RBAC {
         public
     {
         productService = IProductService(_productService);
-        _proposeProduct(_name, _policyFlow);
+        productId = _proposeProduct(_name, _policyFlow);
     }
 
     function setDevelopmentMode(bool _newMode) internal {
@@ -158,6 +158,5 @@ abstract contract Product is RBAC {
     function _getApplicationData(bytes32 _bpKey, uint256 _payoutId) internal view returns (bytes memory _data) {
         return productService.getPayoutData(_bpKey, _payoutId);
     }
-
 
 }

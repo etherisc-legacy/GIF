@@ -130,8 +130,11 @@ contract PolicyFlowDefault is WithRegistry {
         return policy.payouts(_bpKey, _payoutId).data;
     }
 
-    function proposeProduct(bytes32 _productName, bytes32 _policyFlow) external {
-        getLicense().proposeProduct(_productName, msg.sender, _policyFlow);
+    function proposeProduct(bytes32 _productName, bytes32 _policyFlow)
+    external
+    returns (uint256 _productId)
+    {
+        _productId = getLicense().proposeProduct(_productName, msg.sender, _policyFlow);
     }
 
     function request(

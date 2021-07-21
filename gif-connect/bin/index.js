@@ -11,12 +11,14 @@ gif.Instance = class Instance {
    * Returns an instance object.
    * @param {string} httpProvider
    * @param {string} registryAddress
+   * @param {string} mnemonic
    */
-  constructor(httpProvider, registryAddress) {
+  constructor(httpProvider, registryAddress, mnemonic = '') {
     if (!registryAddress) throw new Error('Registry Address not provided, aborting... ');
     this.httpProvider = httpProvider;
     this.registryAddress = registryAddress;
     this.provider = new ethers.providers.JsonRpcProvider(httpProvider);
+    this.wallet = mnemonic ? ethers.Wallet.fromMnemonic(mnemonic).connect(this.provider) : null;
     this.contractConfigs = [];
     this.contracts = [];
     this.Registry = null;
@@ -177,7 +179,8 @@ gif.Instance = class Instance {
    */
   async getContract(contractName) {
     const config = await this.getContractConfig(contractName);
-    this.contracts[contractName] = new ethers.Contract(config.address, config.abi, this.provider);
+    const providerOrSigner = this.wallet ? this.wallet : this.provider;
+    this.contracts[contractName] = new ethers.Contract(config.address, config.abi, providerOrSigner);
     return this.contracts[contractName];
   }
 
