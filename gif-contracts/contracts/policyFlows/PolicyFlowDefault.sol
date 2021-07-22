@@ -138,6 +138,7 @@ contract PolicyFlowDefault is WithRegistry {
     }
 
     function request(
+        bytes32 _bpKey,
         bytes calldata _input,
         string calldata _callbackMethodName,
         address _callbackContractAddress,
@@ -145,6 +146,7 @@ contract PolicyFlowDefault is WithRegistry {
         uint256 _responsibleOracleId
     ) external returns (uint256 _requestId) {
         _requestId = getQuery().request(
+            _bpKey,
             _input,
             _callbackMethodName,
             _callbackContractAddress,

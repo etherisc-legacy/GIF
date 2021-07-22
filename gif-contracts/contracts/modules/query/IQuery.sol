@@ -35,6 +35,7 @@ interface IQuery {
 
     struct OracleRequest {
         bytes data;
+        bytes32 bpKey;
         string callbackMethodName;
         address callbackContractAddress;
         bytes32 oracleTypeName;

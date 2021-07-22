@@ -2,6 +2,7 @@ const axios = require('axios');
 const ethers = require('ethers');
 const cbor = require('cbor');
 const multihashes = require('multihashes');
+const abiDecoder = require('abi-decoder');
 
 
 const gif = {};
@@ -21,6 +22,7 @@ gif.Instance = class Instance {
     this.wallet = mnemonic ? ethers.Wallet.fromMnemonic(mnemonic).connect(this.provider) : null;
     this.contractConfigs = [];
     this.contracts = [];
+    this.abiAddresses = [];
     this.Registry = null;
   }
 
@@ -79,20 +81,26 @@ gif.Instance = class Instance {
    * Returns the abi for a given address, provided the code at the address
    * has encoded ipfs information and the abi is published on ipfs.
    * @param {string} addr
+   * @param {integer} timeout
    * @returns {Promise<*[]|*>}
    */
-  async getAbi(addr) {
+  async getAbi(addr, timeout = 0) {
+    let regIPFS;
     try {
-      const regIPFS = await this.ipfsLink(addr);
-      if (regIPFS && regIPFS.ipfs) {
-        const gatewayLink = `https://gateway.pinata.cloud/ipfs/${regIPFS.ipfs}`;
-        const { data: { output: { abi } } } = await axios.get(gatewayLink, { responseType: 'json' });
-        return abi;
-      }
+      regIPFS = await this.ipfsLink(addr);
     } catch (err) {
       throw new Error(`Could not find ipfs link at address ${addr}`);
     }
-    throw new Error(`Could not find ipfs link at address ${addr}`);
+    if (!regIPFS || !regIPFS.ipfs) {
+      throw new Error(`Could not find ipfs link at address ${addr}`);
+    }
+    const gatewayLink = `https://gateway.pinata.cloud/ipfs/${regIPFS.ipfs}`;
+    try {
+      const { data: { output: { abi } } } = await axios.get(gatewayLink, { responseType: 'json', timeout });
+      return abi;
+    } catch (err) {
+      return [];
+    }
   }
 
   /**
@@ -209,6 +217,27 @@ gif.Instance = class Instance {
   async getOracleOwnerServiceAddress() {
     const { address } = await this.getContractConfig('OracleOwnerService');
     return address;
+  }
+
+  /**
+   *
+   * @param {{}} receipt
+   * @returns {Promise<void>}
+   */
+  async getDecodedLogs(receipt) {
+    const addresses = receipt.logs.map(item => item.address);
+    const newAddresses = addresses.filter(elem => this.abiAddresses.indexOf(elem) === -1);
+    const newUniqueAddresses = newAddresses.filter((elem, pos) => newAddresses.indexOf(elem) === pos);
+    this.abiAddresses = this.abiAddresses.concat(newUniqueAddresses);
+    for (let idx = 0; idx < newUniqueAddresses.length; idx += 1) {
+      const abi = await this.getAbi(newAddresses[idx], 1000);
+      if (abi.length > 0) {
+        abiDecoder.addABI(abi);
+      } else {
+        // console.log(newAddresses[idx]);
+      }
+    }
+    return abiDecoder.decodeLogs(receipt.logs);
   }
 };
 

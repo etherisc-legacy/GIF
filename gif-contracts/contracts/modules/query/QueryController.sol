@@ -231,6 +231,7 @@ contract QueryController is QueryStorageModel, ModuleController {
     /* Oracle Request */
     // 1->1
     function request(
+        bytes32 _bpKey,
         bytes calldata _input,
         string calldata _callbackMethodName,
         address _callabackContractAddress,
@@ -245,6 +246,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         // todo: get token from product
 
         OracleRequest storage req = oracleRequests[_requestId];
+        req.bpKey = _bpKey;
         req.data = _input;
         req.callbackMethodName = _callbackMethodName;
         req.callbackContractAddress = _callabackContractAddress;
@@ -279,17 +281,26 @@ contract QueryController is QueryStorageModel, ModuleController {
                     abi.encodePacked(req.callbackMethodName, "(uint256,bytes)")
                 ),
                 _requestId,
+                req.bpKey,
                 _data
             )
         );
 
         // todo: send reward
-
+        // TODO: check if oracleResponses can be omitted
         _responseId = oracleResponses.length;
         oracleResponses.push(
             OracleResponse(_requestId, _responder, block.timestamp, status)
         );
 
         emit LogOracleResponded(_requestId, _responseId, _responder, status);
+    }
+
+    function getOracleRequestCount() public view returns (uint256 _count) {
+        return oracleRequests.length;
+    }
+
+    function getOracleResponseCount() public view returns (uint256 _count) {
+        return oracleResponses.length;
     }
 }

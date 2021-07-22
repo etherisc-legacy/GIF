@@ -46,6 +46,7 @@ interface IQueryController {
     ) external;
 
     function request(
+        bytes32 _bpKey,
         bytes calldata _input,
         string calldata _callbackMethodName,
         address _callbackContractAddress,
