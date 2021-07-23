@@ -41,7 +41,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     function setProductState(uint256 _id, ProductState _state) internal {
         require(
             products[_id].productContract != address(0),
-            "ERROR::PRODUCT_DOES_NOT_EXIST"
+            "ERROR:LIC-001:PRODUCT_DOES_NOT_EXIST"
         );
         products[_id].state = _state;
         if (_state == ProductState.Approved) {

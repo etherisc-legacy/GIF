@@ -4,7 +4,7 @@ pragma solidity 0.8.0;
 
 contract Delegator {
     function _delegate(address _implementation) internal {
-        require(_implementation != address(0), "ERROR::UNKNOWN_IMPLEMENTATION");
+        require(_implementation != address(0), "ERROR:DEL-001:UNKNOWN_IMPLEMENTATION");
 
         bytes memory data = msg.data;
 

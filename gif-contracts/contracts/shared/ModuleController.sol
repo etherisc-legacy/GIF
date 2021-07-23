@@ -7,7 +7,7 @@ import "./WithRegistry.sol";
 abstract contract ModuleController is WithRegistry, BaseModuleController {
     /* solhint-disable payable-fallback */
     fallback() external {
-        revert("ERROR::FALLBACK_FUNCTION_NOW_ALLOWED");
+        revert("ERROR:MOC-001:FALLBACK_FUNCTION_NOW_ALLOWED");
     }
 
     /* solhint-enable payable-fallback */

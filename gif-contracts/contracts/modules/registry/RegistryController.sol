@@ -114,7 +114,7 @@ contract RegistryController is
     function prepareRelease(bytes32 _newRelease) public onlyInstanceOperator {
         uint256 countContracts = contractsInRelease[release];
 
-        require(countContracts > 0, "ERROR::EMPTY_RELEASE");
+        require(countContracts > 0, "ERROR:REC-001:EMPTY_RELEASE");
         require(
             contractsInRelease[_newRelease] == 0,
             "ERROR:REC-004:NEW_RELEASE_NOT_EMPTY"

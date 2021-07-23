@@ -53,28 +53,8 @@ interface IPolicyController {
         IPolicy.PayoutState _state
     ) external;
 
-    function getApplicationState(bytes32 _bpKey)
-        external
-        view
-        returns (IPolicy.ApplicationState _state);
-
-    function getPolicyState(bytes32 _bpKey)
-        external
-        view
-        returns (IPolicy.PolicyState _state);
-
-    function getClaimState(bytes32 _bpKey, uint256 _claimId)
-        external
-        view
-        returns (IPolicy.ClaimState _state);
-
-    function getPayoutState(bytes32 _bpKey, uint256 _payoutId)
-        external
-        view
-        returns (IPolicy.PayoutState _state);
-
-    function applications(bytes32 _bpKey) external view returns (IPolicy.Application memory _application);
-    function policies(bytes32 _bpKey) external view returns (IPolicy.Policy memory _policy);
-    function claims(bytes32 _bpKey, uint256 _claimId) external view returns (IPolicy.Claim memory _claim);
-    function payouts(bytes32 _bpKey, uint256 _payoutId) external view returns (IPolicy.Payout memory _payout);
+    function getApplication(bytes32 _bpKey) external view returns (IPolicy.Application memory _application);
+    function getPolicy(bytes32 _bpKey) external view returns (IPolicy.Policy memory _policy);
+    function getClaim(bytes32 _bpKey, uint256 _claimId) external view returns (IPolicy.Claim memory _claim);
+    function getPayout(bytes32 _bpKey, uint256 _payoutId) external view returns (IPolicy.Payout memory _payout);
 }

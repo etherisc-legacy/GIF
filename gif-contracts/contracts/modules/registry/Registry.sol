@@ -20,7 +20,7 @@ contract Registry is RegistryStorageModel, BaseModuleStorage {
         // todo: use onlyInstanceOperator modifier
         require(
             msg.sender == contracts[release]["InstanceOperator"],
-            "ERROR::NOT_AUTHORIZED"
+            "ERROR:REG-001:NOT_AUTHORIZED"
         );
         _assignController(_controller);
     }

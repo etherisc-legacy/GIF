@@ -6,19 +6,19 @@ abstract contract AccessModifiers {
     modifier onlyInstanceOperator() {
         require(
             msg.sender == getContract("InstanceOperatorService"),
-            "ERROR::NOT_INSTANCE_OPERATOR"
+            "ERROR:ACM-001:NOT_INSTANCE_OPERATOR"
         );
         _;
     }
 
     modifier onlyPolicyFlow(bytes32 _module) {
         // Allow only from delegator
-        require(address(this) == getContract(_module), "ERROR::NOT_ON_STORAGE");
+        require(address(this) == getContract(_module), "ERROR:ACM-002:NOT_ON_STORAGE");
 
         // Allow only ProductService (it delegates to PolicyFlow)
         require(
             msg.sender == getContract("ProductService"),
-            "ERROR::NOT_PRODUCT_SERVICE"
+            "ERROR:ACM-003:NOT_PRODUCT_SERVICE"
         );
         _;
     }
@@ -26,7 +26,7 @@ abstract contract AccessModifiers {
     modifier onlyOracleService() {
         require(
             msg.sender == getContract("OracleService"),
-            "ERROR::NOT_ORACLE_SERVICE"
+            "ERROR:ACM-004:NOT_ORACLE_SERVICE"
         );
         _;
     }
@@ -34,7 +34,7 @@ abstract contract AccessModifiers {
     modifier onlyOracleOwner() {
         require(
             msg.sender == getContract("OracleOwnerService"),
-            "ERROR::NOT_ORACLE_OWNER"
+            "ERROR:ACM-005:NOT_ORACLE_OWNER"
         );
         _;
     }
@@ -42,7 +42,7 @@ abstract contract AccessModifiers {
     modifier onlyProductOwner() {
         require(
             msg.sender == getContract("ProductOwnerService"),
-            "ERROR::NOT_PRODUCT_OWNER"
+            "ERROR:ACM-006:NOT_PRODUCT_OWNER"
         );
         _;
     }

@@ -241,6 +241,22 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         emit LogPayoutStateChanged(_bpKey, _payoutId, _state);
     }
 
+    function getApplication(bytes32 _bpKey) external view returns (IPolicy.Application memory _application) {
+        return applications[_bpKey];
+    }
+
+    function getPolicy(bytes32 _bpKey) external view returns (IPolicy.Policy memory _policy) {
+        return policies[_bpKey];
+    }
+
+    function getClaim(bytes32 _bpKey, uint256 _claimId) external view returns (IPolicy.Claim memory _claim) {
+        return claims[_bpKey][_claimId];
+    }
+
+    function getPayout(bytes32 _bpKey, uint256 _payoutId) external view returns (IPolicy.Payout memory _payout) {
+        return payouts[_bpKey][_payoutId];
+    }
+
     function getBpKeyCount() public view returns (uint256 _count) {
         return bpKeys.length;
     }
