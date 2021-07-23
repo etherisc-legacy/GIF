@@ -278,7 +278,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         (bool status, ) = req.callbackContractAddress.call(
             abi.encodeWithSignature(
                 string(
-                    abi.encodePacked(req.callbackMethodName, "(uint256,bytes)")
+                    abi.encodePacked(req.callbackMethodName, "(uint256,bytes32,bytes)")
                 ),
                 _requestId,
                 req.bpKey,

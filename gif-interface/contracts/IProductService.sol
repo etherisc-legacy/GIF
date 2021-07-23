@@ -17,6 +17,7 @@ interface IProductService {
     function getPayoutData(bytes32 _bpKey, uint256 _payoutId) external view returns (bytes memory _data);
 
     function request(
+        bytes32 _bpKey,
         bytes calldata _input,
         string calldata _callbackMethodName,
         address _callbackContractAddress,

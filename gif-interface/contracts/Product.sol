@@ -130,6 +130,7 @@ abstract contract Product is RBAC {
     }
 
     function _request(
+        bytes32 _bpKey,
         bytes memory _input,
         string memory _callbackMethodName,
         bytes32 _oracleTypeName,
@@ -139,6 +140,7 @@ abstract contract Product is RBAC {
         returns (uint256 _requestId)
     {
         _requestId = productService.request(
+            _bpKey,
             _input,
             _callbackMethodName,
             address(this),

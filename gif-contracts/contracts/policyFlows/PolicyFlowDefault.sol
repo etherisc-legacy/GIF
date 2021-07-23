@@ -15,7 +15,7 @@ contract PolicyFlowDefault is WithRegistry {
     function newApplication(
         bytes32 _bpKey,
         bytes calldata _data // replaces premium, currency, payoutOptions
-    ) public {
+    ) external {
         IPolicyController policy = getPolicy();
         // the calling contract is the Product contract, which needs to have a productId in the license contract.
         uint256 productId = getLicense().getProductId(msg.sender);
@@ -36,7 +36,7 @@ contract PolicyFlowDefault is WithRegistry {
     function underwrite(bytes32 _bpKey) public {
         IPolicyController policy = getPolicy();
         require(
-            policy.getApplicationState(_bpKey) ==
+            policy.applications(_bpKey).state ==
                 IPolicy.ApplicationState.Applied,
             "ERROR:PFD-001:INVALID_APPLICATION_STATE"
         );
@@ -50,7 +50,7 @@ contract PolicyFlowDefault is WithRegistry {
     function decline(bytes32 _bpKey) external {
         IPolicyController policy = getPolicy();
         require(
-            policy.getApplicationState(_bpKey) ==
+            policy.applications(_bpKey).state ==
                 IPolicy.ApplicationState.Applied,
             "ERROR:PFD-002:INVALID_APPLICATION_STATE"
         );
@@ -81,7 +81,7 @@ contract PolicyFlowDefault is WithRegistry {
     ) external returns (uint256 _payoutId) {
         IPolicyController policy = getPolicy();
         require(
-            policy.getClaimState(_bpKey, _claimId) ==
+            policy.claims(_bpKey, _claimId).state ==
                 IPolicy.ClaimState.Applied,
             "ERROR:PFD-003:INVALID_CLAIM_STATE"
         );
@@ -94,7 +94,7 @@ contract PolicyFlowDefault is WithRegistry {
     function declineClaim(bytes32 _bpKey, uint256 _claimId) external {
         IPolicyController policy = getPolicy();
         require(
-            policy.getClaimState(_bpKey, _claimId) ==
+            policy.claims(_bpKey, _claimId).state ==
                 IPolicy.ClaimState.Applied,
             "ERROR:PFD-004:INVALID_CLAIM_STATE"
         );
@@ -105,7 +105,7 @@ contract PolicyFlowDefault is WithRegistry {
     function expire(bytes32 _bpKey) external {
         IPolicyController policy = getPolicy();
         require(
-            policy.getPolicyState(_bpKey) == IPolicy.PolicyState.Active,
+            policy.policies(_bpKey).state == IPolicy.PolicyState.Active,
             "ERROR:PFD-005:INVALID_POLICY_STATE"
         );
 
