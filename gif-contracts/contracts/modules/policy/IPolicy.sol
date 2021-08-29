@@ -50,34 +50,15 @@ interface IPolicy {
     event LogPartialPayout(bytes32 bpKey, uint256 payoutId, PayoutState state);
 
     // Statuses
-    enum PolicyFlowState {
-        Started,
-        Paused,
-        Finished
-    }
+    enum PolicyFlowState {Started, Paused, Finished}
 
-    enum ApplicationState {
-        Applied,
-        Revoked,
-        Underwritten,
-        Declined
-    }
+    enum ApplicationState {Applied, Revoked, Underwritten, Declined}
 
-    enum PolicyState {
-        Active,
-        Expired
-    }
+    enum PolicyState {Active, Expired}
 
-    enum ClaimState {
-        Applied,
-        Confirmed,
-        Declined
-    }
+    enum ClaimState {Applied, Confirmed, Declined}
 
-    enum PayoutState {
-        Expected,
-        PaidOut
-    }
+    enum PayoutState {Expected, PaidOut}
 
     // Objects
     struct Metadata {

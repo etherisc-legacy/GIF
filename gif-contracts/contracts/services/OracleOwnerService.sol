@@ -23,9 +23,7 @@ contract OracleOwnerService is WithRegistry {
         );
     }
 
-    function proposeOracle(
-        bytes32 _name
-    ) external returns (uint256 _oracleId) {
+    function proposeOracle(bytes32 _name) external returns (uint256 _oracleId) {
         // todo: oracle owner should be approved
         _oracleId = query().proposeOracle(_name, msg.sender);
     }
@@ -35,10 +33,14 @@ contract OracleOwnerService is WithRegistry {
         uint256 _oracleId
     ) external {
         // todo: oracle owner should be approved
-        query().proposeOracleToOracleType(
-            _oracleTypeName,
-            _oracleId
-        );
+        query().proposeOracleToOracleType(_oracleTypeName, _oracleId);
+    }
+
+    function updateOracleContract(address _newOracleContract, uint256 _oracleId)
+        external
+    {
+        // todo: oracle owner should be approved
+        query().updateOracleContract(_newOracleContract, _oracleId);
     }
 
     function revokeOracleFromOracleType(
@@ -46,10 +48,7 @@ contract OracleOwnerService is WithRegistry {
         uint256 _oracleId
     ) external {
         // todo: oracle owner should be approved
-        query().revokeOracleFromOracleType(
-            _oracleTypeName,
-            _oracleId
-        );
+        query().revokeOracleFromOracleType(_oracleTypeName, _oracleId);
     }
 
     /* Lookup */

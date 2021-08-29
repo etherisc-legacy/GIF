@@ -16,15 +16,12 @@ interface IQueryController {
 
     function removeOracleType(bytes32 _oracleTypeName) external;
 
-    function proposeOracle(
-        bytes32 _name,
-        address _oracleContract
-    ) external returns (uint256 _oracleId);
+    function proposeOracle(bytes32 _name, address _oracleContract)
+        external
+        returns (uint256 _oracleId);
 
-    function updateOracleContract(
-        address _newOracleContract,
-        uint256 _oracleId
-    ) external;
+    function updateOracleContract(address _newOracleContract, uint256 _oracleId)
+        external;
 
     function approveOracle(uint256 _oracleId) external;
 

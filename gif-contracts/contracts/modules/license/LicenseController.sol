@@ -19,7 +19,10 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         bytes32 _policyFlow
     ) external returns (uint256 _productId) {
         // todo: add restriction, allow only ProductOwners
-        require(productIdByAddress[_productContract] == 0, "ERROR:LIC-001:PRODUCT_IS_ACTIVE");
+        require(
+            productIdByAddress[_productContract] == 0,
+            "ERROR:LIC-001:PRODUCT_IS_ACTIVE"
+        );
 
         productCount += 1;
         _productId = productCount;
@@ -35,7 +38,12 @@ contract LicenseController is LicenseStorageModel, ModuleController {
             ProductState.Proposed
         );
 
-        emit LogProductProposed(_productId, _name, _productContract, _policyFlow);
+        emit LogProductProposed(
+            _productId,
+            _name,
+            _productContract,
+            _policyFlow
+        );
     }
 
     function setProductState(uint256 _id, ProductState _state) internal {
@@ -48,10 +56,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
             productIdByAddress[products[_id].productContract] = _id;
         }
 
-        emit LogProductSetState(
-            _id,
-            _state
-        );
+        emit LogProductSetState(_id, _state);
     }
 
     function approveProduct(uint256 _id) external onlyInstanceOperator {

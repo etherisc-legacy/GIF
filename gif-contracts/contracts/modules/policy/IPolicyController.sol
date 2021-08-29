@@ -11,8 +11,7 @@ interface IPolicyController {
         IPolicy.PolicyFlowState _state
     ) external;
 
-    function createApplication(bytes32 _bpKey, bytes calldata _data)
-        external;
+    function createApplication(bytes32 _bpKey, bytes calldata _data) external;
 
     function setApplicationState(
         bytes32 _bpKey,
@@ -53,8 +52,23 @@ interface IPolicyController {
         IPolicy.PayoutState _state
     ) external;
 
-    function getApplication(bytes32 _bpKey) external view returns (IPolicy.Application memory _application);
-    function getPolicy(bytes32 _bpKey) external view returns (IPolicy.Policy memory _policy);
-    function getClaim(bytes32 _bpKey, uint256 _claimId) external view returns (IPolicy.Claim memory _claim);
-    function getPayout(bytes32 _bpKey, uint256 _payoutId) external view returns (IPolicy.Payout memory _payout);
+    function getApplication(bytes32 _bpKey)
+        external
+        view
+        returns (IPolicy.Application memory _application);
+
+    function getPolicy(bytes32 _bpKey)
+        external
+        view
+        returns (IPolicy.Policy memory _policy);
+
+    function getClaim(bytes32 _bpKey, uint256 _claimId)
+        external
+        view
+        returns (IPolicy.Claim memory _claim);
+
+    function getPayout(bytes32 _bpKey, uint256 _payoutId)
+        external
+        view
+        returns (IPolicy.Payout memory _payout);
 }

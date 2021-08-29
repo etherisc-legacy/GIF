@@ -13,7 +13,10 @@ abstract contract AccessModifiers {
 
     modifier onlyPolicyFlow(bytes32 _module) {
         // Allow only from delegator
-        require(address(this) == getContract(_module), "ERROR:ACM-002:NOT_ON_STORAGE");
+        require(
+            address(this) == getContract(_module),
+            "ERROR:ACM-002:NOT_ON_STORAGE"
+        );
 
         // Allow only ProductService (it delegates to PolicyFlow)
         require(

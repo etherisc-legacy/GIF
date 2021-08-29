@@ -9,9 +9,9 @@ interface IOracleOwnerService {
         string calldata _callbackFormat
     ) external;
 
-    function proposeOracle(
-        address _oracleContract
-    ) external returns (uint256 _oracleId);
+    function proposeOracle(address _oracleContract)
+        external
+        returns (uint256 _oracleId);
 
     function proposeOracleToOracleType(
         bytes32 _oracleTypeName,
@@ -22,5 +22,4 @@ interface IOracleOwnerService {
         bytes32 _oracleTypeName,
         uint256 _oracleId
     ) external;
-
 }

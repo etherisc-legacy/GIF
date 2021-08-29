@@ -32,7 +32,7 @@
     "coverage": "echo 'Run coverage'; solidity-coverage",
     "open-coverage": "echo 'Open coverage report'; opn ./coverage/index.html",
     "lint": "echo 'Lint contracts'; solhint \\\"contracts/**/*.sol\\\"",
-    "prettier": "prettier --write contracts/**/*.sol",
+    "prettier": "prettier --write './contracts/**/*.sol'",
     "docs": "echo 'Generage documentation'; rimraf ./docs/* && SOLC_ARGS='openzeppelin-solidity=$(pwd)/node_modules/openzeppelin-solidity' solidity-docgen . contracts .",
     "update-solc-version": "echo 'Update solc compiler version'; ./bin/command updateSolcVersion",
     "clean": "echo 'Clean repository'; rimraf build coverage",

@@ -11,7 +11,7 @@ contract QueryController is QueryStorageModel, ModuleController {
     modifier isResponsibleOracle(uint256 _requestId, address _responder) {
         require(
             oracles[oracleRequests[_requestId].responsibleOracleId]
-            .oracleContract == _responder,
+                .oracleContract == _responder,
             "ERROR:QUC-001:NOT_RESPONSIBLE_ORACLE"
         );
         _;
@@ -82,10 +82,11 @@ contract QueryController is QueryStorageModel, ModuleController {
         emit LogOracleTypeDisapproved(_oracleTypeName);
     }
 
-    function proposeOracle(
-        bytes32 _name,
-        address _oracleContract
-    ) external onlyOracleOwner returns (uint256 _oracleId) {
+    function proposeOracle(bytes32 _name, address _oracleContract)
+        external
+        onlyOracleOwner
+        returns (uint256 _oracleId)
+    {
         require(
             oracleIdByAddress[_oracleContract] == 0,
             "ERROR:QUC-008:ORACLE_ALREADY_EXISTS"
@@ -105,10 +106,10 @@ contract QueryController is QueryStorageModel, ModuleController {
         emit LogOracleProposed(_oracleId, _name, _oracleContract);
     }
 
-    function updateOracleContract(
-        address _newOracleContract,
-        uint256 _oracleId
-    ) external onlyOracleOwner {
+    function updateOracleContract(address _newOracleContract, uint256 _oracleId)
+        external
+        onlyOracleOwner
+    {
         require(
             oracleIdByAddress[_newOracleContract] == 0,
             "ERROR:QUC-009:ORACLE_ALREADY_EXISTS"
@@ -133,10 +134,7 @@ contract QueryController is QueryStorageModel, ModuleController {
             "ERROR:QUC-011:ORACLE_DOES_NOT_EXIST"
         );
         oracles[_oracleId].state = _state;
-        LogOracleSetState(
-            _oracleId,
-            _state
-        );
+        LogOracleSetState(_oracleId, _state);
     }
 
     function approveOracle(uint256 _oracleId) external onlyInstanceOperator {
@@ -170,7 +168,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         );
 
         assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
-        .Proposed;
+            .Proposed;
 
         emit LogOracleProposedToOracleType(_oracleTypeName, _oracleId);
     }
@@ -194,7 +192,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         );
 
         assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
-        .Unassigned;
+            .Unassigned;
         oracleTypes[_oracleTypeName].activeOracles -= 1;
         oracles[_oracleId].activeOracleTypes -= 1;
 
@@ -221,7 +219,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         );
 
         assignedOracles[_oracleTypeName][_oracleId] = OracleAssignmentState
-        .Assigned;
+            .Assigned;
         oracleTypes[_oracleTypeName].activeOracles += 1;
         oracles[_oracleId].activeOracleTypes += 1;
 
@@ -259,7 +257,7 @@ contract QueryController is QueryStorageModel, ModuleController {
             _input
         );
 
-        emit LogOracleRequested(_requestId, _responsibleOracleId);
+        emit LogOracleRequested(_bpKey, _requestId, _responsibleOracleId);
     }
 
     /* Oracle Response */
@@ -267,40 +265,30 @@ contract QueryController is QueryStorageModel, ModuleController {
         uint256 _requestId,
         address _responder,
         bytes calldata _data
-    )
-        external
-        onlyOracleService
-        isResponsibleOracle(_requestId, _responder)
-        returns (uint256 _responseId)
-    {
+    ) external onlyOracleService isResponsibleOracle(_requestId, _responder) {
         OracleRequest storage req = oracleRequests[_requestId];
 
-        (bool status, ) = req.callbackContractAddress.call(
-            abi.encodeWithSignature(
-                string(
-                    abi.encodePacked(req.callbackMethodName, "(uint256,bytes32,bytes)")
-                ),
-                _requestId,
-                req.bpKey,
-                _data
-            )
-        );
+        (bool status, ) =
+            req.callbackContractAddress.call(
+                abi.encodeWithSignature(
+                    string(
+                        abi.encodePacked(
+                            req.callbackMethodName,
+                            "(uint256,bytes32,bytes)"
+                        )
+                    ),
+                    _requestId,
+                    req.bpKey,
+                    _data
+                )
+            );
 
         // todo: send reward
-        // TODO: check if oracleResponses can be omitted
-        _responseId = oracleResponses.length;
-        oracleResponses.push(
-            OracleResponse(_requestId, _responder, block.timestamp, status)
-        );
 
-        emit LogOracleResponded(_requestId, _responseId, _responder, status);
+        emit LogOracleResponded(req.bpKey, _requestId, _responder, status);
     }
 
     function getOracleRequestCount() public view returns (uint256 _count) {
         return oracleRequests.length;
-    }
-
-    function getOracleResponseCount() public view returns (uint256 _count) {
-        return oracleResponses.length;
     }
 }

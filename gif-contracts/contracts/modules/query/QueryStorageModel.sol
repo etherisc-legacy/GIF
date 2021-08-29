@@ -21,7 +21,4 @@ contract QueryStorageModel is IQuery {
 
     // Requests
     OracleRequest[] public oracleRequests;
-
-    // Responses
-    OracleResponse[] public oracleResponses;
 }

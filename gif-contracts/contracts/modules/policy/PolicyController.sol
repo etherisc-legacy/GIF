@@ -87,7 +87,8 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     /* Policy */
-    function createPolicy(bytes32 _bpKey) external { //}onlyPolicyFlow("Policy") {
+    function createPolicy(bytes32 _bpKey) external {
+        //}onlyPolicyFlow("Policy") {
 
         Metadata storage meta = metadata[_bpKey];
         require(meta.createdAt > 0, "ERROR:POC-007:METADATA_DOES_NOT_EXIST");
@@ -158,7 +159,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         ClaimState _state
     ) external onlyPolicyFlow("Policy") {
         Claim storage claim = claims[_bpKey][_claimId];
-        require(claim.createdAt > 0, "ERROR:POC-012:CLAIM_DOES_NOT_EXIST");
+        require(claim.createdAt > 0, "ERROR:POC-013:CLAIM_DOES_NOT_EXIST");
 
         claim.state = _state;
         claim.updatedAt = block.timestamp;
@@ -171,20 +172,16 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         bytes32 _bpKey,
         uint256 _claimId,
         bytes calldata _data
-    )
-        external
-        onlyPolicyFlow("Policy")
-        returns (uint256 _payoutId)
-    {
+    ) external onlyPolicyFlow("Policy") returns (uint256 _payoutId) {
         Metadata storage meta = metadata[_bpKey];
-        require(meta.createdAt > 0, "ERROR:POC-013:METADATA_DOES_NOT_EXIST");
+        require(meta.createdAt > 0, "ERROR:POC-014:METADATA_DOES_NOT_EXIST");
 
         Claim storage claim = claims[_bpKey][_claimId];
-        require(claim.createdAt > 0, "ERROR:POC-014:CLAIM_DOES_NOT_EXIST");
+        require(claim.createdAt > 0, "ERROR:POC-015:CLAIM_DOES_NOT_EXIST");
 
         _payoutId = meta.payoutsCount;
         Payout storage payout = payouts[_bpKey][_payoutId];
-        require(payout.createdAt == 0, "ERROR:POC-015:PAYOUT_ALREADY_EXISTS");
+        require(payout.createdAt == 0, "ERROR:POC-016:PAYOUT_ALREADY_EXISTS");
 
         meta.payoutsCount += 1;
         meta.updatedAt = block.timestamp;
@@ -208,10 +205,10 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         require(meta.createdAt > 0, "ERROR:POC-017:METADATA_DOES_NOT_EXIST");
 
         Payout storage payout = payouts[_bpKey][_payoutId];
-        require(payout.createdAt > 0, "ERROR:POC-016:PAYOUT_DOES_NOT_EXIST");
+        require(payout.createdAt > 0, "ERROR:POC-018:PAYOUT_DOES_NOT_EXIST");
         require(
             payout.state == PayoutState.Expected,
-            "ERROR:POC-018:PAYOUT_ALREADY_COMPLETED"
+            "ERROR:POC-019:PAYOUT_ALREADY_COMPLETED"
         );
 
         payout.data = _data;
@@ -233,7 +230,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         PayoutState _state
     ) external onlyPolicyFlow("Policy") {
         Payout storage payout = payouts[_bpKey][_payoutId];
-        require(payout.createdAt > 0, "ERROR:POC-019:PAYOUT_DOES_NOT_EXIST");
+        require(payout.createdAt > 0, "ERROR:POC-020:PAYOUT_DOES_NOT_EXIST");
 
         payout.state = _state;
         payout.updatedAt = block.timestamp;
@@ -241,19 +238,35 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         emit LogPayoutStateChanged(_bpKey, _payoutId, _state);
     }
 
-    function getApplication(bytes32 _bpKey) external view returns (IPolicy.Application memory _application) {
+    function getApplication(bytes32 _bpKey)
+        external
+        view
+        returns (IPolicy.Application memory _application)
+    {
         return applications[_bpKey];
     }
 
-    function getPolicy(bytes32 _bpKey) external view returns (IPolicy.Policy memory _policy) {
+    function getPolicy(bytes32 _bpKey)
+        external
+        view
+        returns (IPolicy.Policy memory _policy)
+    {
         return policies[_bpKey];
     }
 
-    function getClaim(bytes32 _bpKey, uint256 _claimId) external view returns (IPolicy.Claim memory _claim) {
+    function getClaim(bytes32 _bpKey, uint256 _claimId)
+        external
+        view
+        returns (IPolicy.Claim memory _claim)
+    {
         return claims[_bpKey][_claimId];
     }
 
-    function getPayout(bytes32 _bpKey, uint256 _payoutId) external view returns (IPolicy.Payout memory _payout) {
+    function getPayout(bytes32 _bpKey, uint256 _payoutId)
+        external
+        view
+        returns (IPolicy.Payout memory _payout)
+    {
         return payouts[_bpKey][_payoutId];
     }
 

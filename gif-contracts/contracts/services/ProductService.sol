@@ -23,8 +23,8 @@ contract ProductService is WithRegistry, Delegator {
     }
 
     function proposeProduct(bytes32 _name, bytes32 _policyFlow)
-    external
-    returns (uint256 _productId)
+        external
+        returns (uint256 _productId)
     {
         _productId = license().proposeProduct(_name, msg.sender, _policyFlow);
     }

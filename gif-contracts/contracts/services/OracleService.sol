@@ -9,12 +9,9 @@ contract OracleService is WithRegistry {
 
     constructor(address _registry) WithRegistry(_registry) {}
 
-    function respond(uint256 _requestId, bytes calldata _data)
-        external
-        returns (uint256 _responseId)
-    {
+    function respond(uint256 _requestId, bytes calldata _data) external {
         // todo: oracle contract should be approved
-        _responseId = query().respond(_requestId, msg.sender, _data);
+        query().respond(_requestId, msg.sender, _data);
     }
 
     /* Lookup */

@@ -16,8 +16,6 @@ import "../modules/query/IQueryController.sol";
  * (if not, it reverts in PolicyController.sol)
  */
 
-
-
 contract PolicyFlowDefault is WithRegistry {
     bytes32 public constant NAME = "PolicyFlowDefault";
 
@@ -142,10 +140,14 @@ contract PolicyFlowDefault is WithRegistry {
     }
 
     function proposeProduct(bytes32 _productName, bytes32 _policyFlow)
-    external
-    returns (uint256 _productId)
+        external
+        returns (uint256 _productId)
     {
-        _productId = getLicenseContract().proposeProduct(_productName, msg.sender, _policyFlow);
+        _productId = getLicenseContract().proposeProduct(
+            _productName,
+            msg.sender,
+            _policyFlow
+        );
     }
 
     function request(
