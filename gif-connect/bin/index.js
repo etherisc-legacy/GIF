@@ -74,7 +74,7 @@ gif.Instance = class Instance {
     if (byteCode && byteCode !== '0x') {
       return this.cborDecode(byteCode);
     }
-    throw new Error();
+    throw new Error('Bytecode could not be loaded');
   }
 
   /**
