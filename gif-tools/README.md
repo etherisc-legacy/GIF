@@ -19,7 +19,7 @@ $ npm install -g @etherisc/gif-tools
 $ gif-tools COMMAND
 running command...
 $ gif-tools (-v|--version|version)
-@etherisc/gif-tools/0.1.1 linux-x64 node-v12.21.0
+@etherisc/gif-tools/0.1.2 linux-x64 node-v12.21.0
 $ gif-tools --help [COMMAND]
 USAGE
   $ gif-tools COMMAND
@@ -29,8 +29,8 @@ USAGE
 # Commands
 <!-- commands -->
 * [`gif-tools help [COMMAND]`](#gif-tools-help-command)
-* [`gif-tools selectResources`](#gif-tools-selectresources)
-* [`gif-tools updateSolcVersion`](#gif-tools-updatesolcversion)
+* [`gif-tools select-resources`](#gif-tools-select-resources)
+* [`gif-tools update-solc-version`](#gif-tools-update-solc-version)
 * [`gif-tools verify`](#gif-tools-verify)
 
 ## `gif-tools help [COMMAND]`
@@ -50,27 +50,27 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.3/src/commands/help.ts)_
 
-## `gif-tools selectResources`
+## `gif-tools select-resources`
 
 Select resources for compile / migrate / test
 
 ```
 USAGE
-  $ gif-tools selectResources
+  $ gif-tools select-resources
 ```
 
-_See code: [src/commands/selectResources.js](https://github.com/etherisc/GIF/blob/v0.1.1/src/commands/selectResources.js)_
+_See code: [src/commands/select-resources.js](https://github.com/etherisc/GIF/blob/v0.1.2/src/commands/select-resources.js)_
 
-## `gif-tools updateSolcVersion`
+## `gif-tools update-solc-version`
 
 Set solc compiler version in smart contracts-available. Version should be specified in package.json
 
 ```
 USAGE
-  $ gif-tools updateSolcVersion
+  $ gif-tools update-solc-version
 ```
 
-_See code: [src/commands/updateSolcVersion.js](https://github.com/etherisc/GIF/blob/v0.1.1/src/commands/updateSolcVersion.js)_
+_See code: [src/commands/update-solc-version.js](https://github.com/etherisc/GIF/blob/v0.1.2/src/commands/update-solc-version.js)_
 
 ## `gif-tools verify`
 
@@ -81,5 +81,5 @@ USAGE
   $ gif-tools verify
 ```
 
-_See code: [src/commands/verify.js](https://github.com/etherisc/GIF/blob/v0.1.1/src/commands/verify.js)_
+_See code: [src/commands/verify.js](https://github.com/etherisc/GIF/blob/v0.1.2/src/commands/verify.js)_
 <!-- commandsstop -->
