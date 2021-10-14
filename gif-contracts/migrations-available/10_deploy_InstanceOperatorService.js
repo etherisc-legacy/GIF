@@ -1,10 +1,8 @@
-const { info } = require('../io/logger');
-
+const info = console.log;
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
 const InstanceOperatorService = artifacts.require('gif-services/InstanceOperatorService.sol');
-
 
 module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed();
@@ -17,5 +15,5 @@ module.exports = async (deployer) => {
 
   info('Register InstanceOperatorService in Registry');
   await registry.register(instanceOperatorName, instanceOperator.address, { gas: 100000 })
-    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`));
 };
