@@ -1,5 +1,4 @@
-const { info } = require('../io/logger');
-
+const info = console.log;
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
@@ -20,5 +19,5 @@ module.exports = async (deployer) => {
   info('Register PolicyFlowDefault in Registry');
 
   await instanceOperatorService.register(policyFlowDefaultName, policyFlowDefault.address, { gas: 100000 })
-    .on('transactionHash', txHash => info(`transaction hash: ${txHash}\n`));
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`));
 };

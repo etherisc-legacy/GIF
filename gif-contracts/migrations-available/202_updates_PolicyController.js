@@ -1,5 +1,4 @@
-const { info } = require('../io/logger');
-
+const info = console.log;
 
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const InstanceOperatorService = artifacts.require('gif-services/InstanceOperatorService.sol');
