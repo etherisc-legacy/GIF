@@ -2,42 +2,58 @@ require('dotenv').config();
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const { settings } = require('./package');
 
-
 const hdWalletConfig = {
-  mnemonic: process.env.MNEMONIC,
-  providerOrUrl: process.env.HTTP_PROVIDER,
+  development: {
+    mnemonic: process.env.DEV_MNEMONIC,
+    providerOrUrl: process.env.DEV_HTTP_PROVIDER,
+  },
+  xdai: {
+    mnemonic: process.env.XDAI_MNEMONIC,
+    providerOrUrl: process.env.XDAI_HTTP_PROVIDER,
+  },
+  sokol: {
+    mnemonic: process.env.SOKOL_MNEMONIC,
+    providerOrUrl: process.env.SOKOL_HTTP_PROVIDER,
+  },
 };
 
-/* eslint-disable no-console */
-console.log(`Deploying to Network ID = ${process.env.TRUFFLE_NETWORK_ID}`);
-console.log(`Truffle host = ${process.env.TRUFFLE_HOST}:${process.env.TRUFFLE_PORT}`);
-
-
 module.exports = {
+
   migrations_directory: process.env.MIGRATIONS_DIRECTORY || './migrations',
   contracts_build_directory: process.env.CONTRACTS_BUILD_DIRECTORY || './build',
 
   networks: {
 
     development: {
-      provider: () => new HDWalletProvider(hdWalletConfig),
-      host: process.env.TRUFFLE_HOST,
-      port: process.env.TRUFFLE_PORT,
-      network_id: process.env.TRUFFLE_NETWORK_ID,
-      gas: process.env.TRUFFLE_GAS,
-      gasPrice: process.env.TRUFFLE_GASPRICE,
-      websockets: process.env.TRUFFLE_WEBSOCKETS,
+      provider: () => new HDWalletProvider(hdWalletConfig.development),
+      host: process.env.DEV_HOST,
+      port: process.env.DEV_PORT,
+      network_id: process.env.DEV_NETWORK_ID,
+      gas: process.env.GAS,
+      gasPrice: process.env.GASPRICE,
+      websockets: process.env.WEBSOCKETS,
       skipDryRun: true,
     },
 
     xdai: {
-      provider: () => new HDWalletProvider(hdWalletConfig),
-      host: process.env.TRUFFLE_HOST,
-      port: process.env.TRUFFLE_PORT,
-      network_id: process.env.TRUFFLE_NETWORK_ID,
-      gas: process.env.TRUFFLE_GAS,
-      gasPrice: process.env.TRUFFLE_GASPRICE,
-      websockets: process.env.TRUFFLE_WEBSOCKETS,
+      provider: () => new HDWalletProvider(hdWalletConfig.xdai),
+      host: process.env.XDAI_HOST,
+      port: process.env.XDAI_PORT,
+      network_id: process.env.XDAI_NETWORK_ID,
+      gas: process.env.GAS,
+      gasPrice: process.env.GASPRICE,
+      websockets: process.env.WEBSOCKETS,
+      skipDryRun: true,
+    },
+
+    sokol: {
+      provider: () => new HDWalletProvider(hdWalletConfig.sokol),
+      host: process.env.SOKOL_HOST,
+      port: process.env.SOKOL_PORT,
+      network_id: process.env.SOKOL_NETWORK_ID,
+      gas: process.env.GAS,
+      gasPrice: process.env.GASPRICE,
+      websockets: process.env.WEBSOCKETS,
       skipDryRun: true,
     },
 
@@ -63,8 +79,8 @@ module.exports = {
           enabled: true,
           runs: 200,
         },
-        evmVersion: 'byzantium', // -> constantinople
-        evmTarget: 'byzantium', // -> constantinople, hack for truffle-source-verify
+        evmVersion: 'london',
+        evmTarget: 'london',
       },
     },
   },
