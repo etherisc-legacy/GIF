@@ -1,6 +1,6 @@
 {
   "name": "@etherisc/gif-contracts",
-  "version": "1.3.2",
+  "version": "1.1.35",
   "description": "Etherisc Generic Insurance Framework smart contracts",
   "repository": {
     "type": "git",
@@ -14,54 +14,17 @@
   "files": [
     "contracts-available/*"
   ],
-  "oclif": {
-    "commands": "bin/commands"
-  },
-  "scripts": {
-    "migrate:prod": "truffle migrate --verbose-rpc --network ${NETWORK}",
-    "migrate:reset:prod": "truffle migrate --reset --verbose-rpc --network ${NETWORK}",
-    "compile": "echo 'Compile contracts-available'; truffle compile",
-    "migrate": "echo 'Deploy contracts-available'; truffle migrate",
-    "migrate:reset": "echo 'Deploy contracts-available'; truffle migrate --reset",
-    "test": "echo 'Test contracts-available'; truffle test",
-    "console": "echo 'Open truffle console'; truffle console",
-    "develop": "echo 'Open truffle console for development network'; truffle develop",
-    "exec": "echo 'Execute truffle script'; truffle exec",
-    "debug": "echo 'Start truffle debugger'; truffle debug",
-    "networks": "echo 'Show addresses for deployed contracts-available on each network'; truffle networks",
-    "coverage": "echo 'Run coverage'; solidity-coverage",
-    "open-coverage": "echo 'Open coverage report'; opn ./coverage/index.html",
-    "lint": "echo 'Lint contracts-available'; solhint \\\\\\\"contracts/**/*.sol\\\\\\\"",
-    "prettier": "prettier --write 'contracts-available/**/*.sol'",
-    "docs": "echo 'Generage documentation'; rimraf ./docs/* && SOLC_ARGS='openzeppelin-solidity=$(pwd)/node_modules/openzeppelin-solidity' solidity-docgen . contracts-available .",
-    "update-solc-version": "echo 'Update solc compiler version'; ./bin/command updateSolcVersion",
-    "clean": "echo 'Clean repository'; rimraf build coverage",
-    "prepare-verification": "echo 'Concat sources for verification on Etherscan'; ../gif-tools/src/lib/prepare-verification.sh",
-    "do-verify": "echo 'Verify Contracts on xDai'; ../gif-tools/src/lib/doVerify.js"
-  },
+  "scripts": {},
   "dependencies": {
-    "@etherisc/gif-tools": "^0.1.2",
-    "@oclif/command": "^1.8.0",
-    "@oclif/errors": "^1.3.5",
-    "@pinata/sdk": "^1.1.23",
     "@truffle/hdwallet-provider": "^1.0.37",
-    "babel-eslint": "^10.1.0",
-    "chalk": "^4.1.0",
-    "cloudflare": "^2.7.0",
     "dotenv": "^8.2.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "fs-jetpack": "^2.4.0",
-    "js-yaml": "^4.0.0",
-    "openzeppelin-solidity": "^4.0.0",
-    "opn-cli": "^3.1.0",
-    "rimraf": "^2.7.1",
-    "solhint": "^1.0.10",
-    "solidity-coverage": "git+https://github.com/kandrianov/solidity-coverage.git",
-    "solidity-docgen": "^0.5.11",
-    "truffle-source-verify": "0.0.6",
-    "winston": "^3.3.3"
+    "openzeppelin-solidity": "^4.0.0"
   },
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "@babel/eslint-parser": "^7.15.8",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1"
   }
 }

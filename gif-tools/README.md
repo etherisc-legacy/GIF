@@ -19,7 +19,7 @@ $ npm install -g @etherisc/gif-tools
 $ gif-tools COMMAND
 running command...
 $ gif-tools (-v|--version|version)
-@etherisc/gif-tools/0.1.2 linux-x64 node-v12.21.0
+@etherisc/gif-tools/0.1.3 linux-x64 node-v16.11.1
 $ gif-tools --help [COMMAND]
 USAGE
   $ gif-tools COMMAND
@@ -59,7 +59,7 @@ USAGE
   $ gif-tools select-resources
 ```
 
-_See code: [src/commands/select-resources.js](https://github.com/etherisc/GIF/blob/v0.1.2/src/commands/select-resources.js)_
+_See code: [src/commands/select-resources.js](https://github.com/etherisc/GIF/blob/v0.1.3/src/commands/select-resources.js)_
 
 ## `gif-tools update-solc-version`
 
@@ -70,7 +70,7 @@ USAGE
   $ gif-tools update-solc-version
 ```
 
-_See code: [src/commands/update-solc-version.js](https://github.com/etherisc/GIF/blob/v0.1.2/src/commands/update-solc-version.js)_
+_See code: [src/commands/update-solc-version.js](https://github.com/etherisc/GIF/blob/v0.1.3/src/commands/update-solc-version.js)_
 
 ## `gif-tools verify`
 
@@ -81,5 +81,5 @@ USAGE
   $ gif-tools verify
 ```
 
-_See code: [src/commands/verify.js](https://github.com/etherisc/GIF/blob/v0.1.2/src/commands/verify.js)_
+_See code: [src/commands/verify.js](https://github.com/etherisc/GIF/blob/v0.1.3/src/commands/verify.js)_
 <!-- commandsstop -->
