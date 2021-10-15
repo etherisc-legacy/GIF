@@ -13,6 +13,7 @@ import "../shared/IModuleStorage.sol";
 contract InstanceOperatorService is WithRegistry, Ownable {
     bytes32 public constant NAME = "InstanceOperatorService";
 
+    // solhint-disable-next-line no-empty-blocks
     constructor(address _registry) WithRegistry(_registry) {}
 
     function assignController(address _storage, address _controller)

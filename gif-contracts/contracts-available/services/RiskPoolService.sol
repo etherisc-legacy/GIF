@@ -9,7 +9,15 @@ contract RiskPoolService is WithRegistry, Ownable {
 
     address payable public riskPoolAddress;
 
+    // solhint-disable-next-line no-empty-blocks
     constructor(address _registry) WithRegistry(_registry) {}
+
+    function setRiskPoolAddress(address payable _riskPoolAddress)
+        external
+        onlyOwner
+    {
+        riskPoolAddress = _riskPoolAddress;
+    }
 
     function getRiskPoolAddress()
         external
@@ -19,10 +27,4 @@ contract RiskPoolService is WithRegistry, Ownable {
         return riskPoolAddress;
     }
 
-    function setRiskPoolAddress(address payable _riskPoolAddress)
-        external
-        onlyOwner
-    {
-        riskPoolAddress = _riskPoolAddress;
-    }
 }

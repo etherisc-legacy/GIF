@@ -1,18 +1,16 @@
 {
-  "extends": "default",
+  "extends": "solhint:recommended",
   "rules": {
-    "two-lines-top-level-separator": false,
-    "bracket-align": "warn",
+    "compiler-version": ["error","^0.8.0"],
     "code-complexity": "warn",
+    "no-complex-fallback": "off",
+    "payable-fallback": "off",
     "const-name-snakecase": "warn",
-    "expression-indent": "warn",
     "function-max-lines": "warn",
-    "statement-indent": "warn",
-    "indent": ["warn", 4],
     "quotes": ["error", "double"],
     "max-line-length": ["warn", 120],
-    "separate-by-one-line-in-contract": "warn",
-    "space-after-comma": "warn",
-    "func-order": "warn"
+    "ordering": "warn",
+    "reason-string": ["warn",{"maxLength":64}],
+    "func-visibility": ["warn", {"ignoreConstructors":true}]
   }
 }

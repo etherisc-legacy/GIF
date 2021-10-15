@@ -8,6 +8,7 @@ import "../modules/license/ILicenseController.sol";
 contract ProductService is WithRegistry, Delegator {
     bytes32 public constant NAME = "ProductService";
 
+    // solhint-disable-next-line no-empty-blocks
     constructor(address _registry) WithRegistry(_registry) {}
 
     fallback() external {

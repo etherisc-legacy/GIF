@@ -8,6 +8,7 @@ import "../shared/WithRegistry.sol";
 contract OracleOwnerService is WithRegistry {
     bytes32 public constant NAME = "OracleOwnerService";
 
+    // solhint-disable-next-line no-empty-blocks
     constructor(address _registry) WithRegistry(_registry) {}
 
     function proposeOracleType(

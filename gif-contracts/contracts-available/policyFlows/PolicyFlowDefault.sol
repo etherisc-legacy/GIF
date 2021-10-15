@@ -19,6 +19,7 @@ import "../modules/query/IQueryController.sol";
 contract PolicyFlowDefault is WithRegistry {
     bytes32 public constant NAME = "PolicyFlowDefault";
 
+    // solhint-disable-next-line no-empty-blocks
     constructor(address _registry) WithRegistry(_registry) {}
 
     function newApplication(
@@ -33,16 +34,7 @@ contract PolicyFlowDefault is WithRegistry {
         policy.createApplication(_bpKey, _data);
     }
 
-    function getApplicationData(bytes32 _bpKey)
-        external
-        view
-        returns (bytes memory _data)
-    {
-        IPolicyController policy = getPolicyContract();
-        return policy.getApplication(_bpKey).data;
-    }
-
-    function underwrite(bytes32 _bpKey) public {
+    function underwrite(bytes32 _bpKey) external {
         IPolicyController policy = getPolicyContract();
         require(
             policy.getApplication(_bpKey).state ==
@@ -74,15 +66,6 @@ contract PolicyFlowDefault is WithRegistry {
         _claimId = getPolicyContract().createClaim(_bpKey, _data);
     }
 
-    function getClaimData(bytes32 _bpKey, uint256 _claimId)
-        external
-        view
-        returns (bytes memory _data)
-    {
-        IPolicyController policy = getPolicyContract();
-        return policy.getClaim(_bpKey, _claimId).data;
-    }
-
     function confirmClaim(
         bytes32 _bpKey,
         uint256 _claimId,
@@ -91,7 +74,7 @@ contract PolicyFlowDefault is WithRegistry {
         IPolicyController policy = getPolicyContract();
         require(
             policy.getClaim(_bpKey, _claimId).state ==
-                IPolicy.ClaimState.Applied,
+            IPolicy.ClaimState.Applied,
             "ERROR:PFD-003:INVALID_CLAIM_STATE"
         );
 
@@ -104,7 +87,7 @@ contract PolicyFlowDefault is WithRegistry {
         IPolicyController policy = getPolicyContract();
         require(
             policy.getClaim(_bpKey, _claimId).state ==
-                IPolicy.ClaimState.Applied,
+            IPolicy.ClaimState.Applied,
             "ERROR:PFD-004:INVALID_CLAIM_STATE"
         );
 
@@ -130,18 +113,9 @@ contract PolicyFlowDefault is WithRegistry {
         getPolicyContract().payOut(_bpKey, _payoutId, _complete, _data);
     }
 
-    function getPayoutData(bytes32 _bpKey, uint256 _payoutId)
-        external
-        view
-        returns (bytes memory _data)
-    {
-        IPolicyController policy = getPolicyContract();
-        return policy.getPayout(_bpKey, _payoutId).data;
-    }
-
     function proposeProduct(bytes32 _productName, bytes32 _policyFlow)
-        external
-        returns (uint256 _productId)
+    external
+    returns (uint256 _productId)
     {
         _productId = getLicenseContract().proposeProduct(
             _productName,
@@ -166,6 +140,33 @@ contract PolicyFlowDefault is WithRegistry {
             _oracleTypeName,
             _responsibleOracleId
         );
+    }
+
+    function getApplicationData(bytes32 _bpKey)
+        external
+        view
+        returns (bytes memory _data)
+    {
+        IPolicyController policy = getPolicyContract();
+        return policy.getApplication(_bpKey).data;
+    }
+
+    function getClaimData(bytes32 _bpKey, uint256 _claimId)
+        external
+        view
+        returns (bytes memory _data)
+    {
+        IPolicyController policy = getPolicyContract();
+        return policy.getClaim(_bpKey, _claimId).data;
+    }
+
+    function getPayoutData(bytes32 _bpKey, uint256 _payoutId)
+        external
+        view
+        returns (bytes memory _data)
+    {
+        IPolicyController policy = getPolicyContract();
+        return policy.getPayout(_bpKey, _payoutId).data;
     }
 
     function getLicenseContract() internal view returns (ILicenseController) {
