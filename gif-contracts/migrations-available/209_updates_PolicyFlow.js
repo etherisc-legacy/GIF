@@ -3,7 +3,7 @@ const info = console.log;
 const Registry = artifacts.require('modules/registry/Registry.sol');
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
 const InstanceOperatorService = artifacts.require('gif-services/InstanceOperatorService.sol');
-const PolicyFlowDefault = artifacts.require('policyFlows/PolicyFlowDefault.sol');
+const PolicyFlowDefault = artifacts.require('flows/PolicyFlowDefault.sol');
 
 module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed();

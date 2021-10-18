@@ -11,9 +11,9 @@ import "../modules/query/IQueryController.sol";
  * PolicyFlowDefault is a delegate of ProductService.sol.
  * Access Control is maintained:
  * 1) by checking condition in ProductService.sol
- * 2) by modifiers "onlyPolicyFlow" in PolicyController.sol
+ * 2) by modifiers "onlyPolicyFlow" in StakeController.sol
  * For all functions here, msg.sender is = address of ProductService.sol which is registered in the Registry.
- * (if not, it reverts in PolicyController.sol)
+ * (if not, it reverts in StakeController.sol)
  */
 
 contract PolicyFlowDefault is WithRegistry {
