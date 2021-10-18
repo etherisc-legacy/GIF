@@ -4,9 +4,6 @@ const path = require('path')
 const {Command} = require('@oclif/command')
 const log = require('../lib/logger')
 
-/**
- *
- */
 class SelectResources extends Command {
   /**
    *
@@ -17,12 +14,11 @@ class SelectResources extends Command {
     // console.log(fs.list(dir));
 
     fs.dir(dir) // create dir if necessary
-    fs.list(dir)
-    .filter(file => file !== '.keep')
-    .forEach(file => fs.remove(`${dir}/${file}`))
+    for (const file of fs.list(dir)
+    .filter(file => file !== '.keep'))  fs.remove(`${dir}/${file}`)
 
     if (resources && resources.length > 0) {
-      resources.forEach(file => {
+      for (const file of resources) {
         const src = path.resolve(`${dir}-available/${file}`)
         const dest = path.resolve(`${dir}/${file}`)
 
@@ -32,7 +28,7 @@ class SelectResources extends Command {
         } else {
           log.error(`${dir}_available/${file} doesn't exists`)
         }
-      })
+      }
     }
   }
 

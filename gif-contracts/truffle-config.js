@@ -14,6 +14,7 @@ const hdWalletConfig = {
   sokol: {
     mnemonic: process.env.SOKOL_MNEMONIC,
     providerOrUrl: process.env.SOKOL_HTTP_PROVIDER,
+    pollingInterval: 200000,
   },
 };
 
@@ -55,6 +56,8 @@ module.exports = {
       gasPrice: process.env.GASPRICE,
       websockets: process.env.WEBSOCKETS,
       skipDryRun: true,
+      deploymentPollingInterval: 200000,
+      networkCheckTimeout: 999999,
     },
 
     coverage: {
@@ -79,8 +82,7 @@ module.exports = {
           enabled: true,
           runs: 200,
         },
-        evmVersion: 'london',
-        evmTarget: 'london',
+        evmVersion: 'istanbul',
       },
     },
   },

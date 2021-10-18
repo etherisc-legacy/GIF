@@ -29,6 +29,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`gif-tools help [COMMAND]`](#gif-tools-help-command)
+* [`gif-tools publish-pinata`](#gif-tools-publish-pinata)
 * [`gif-tools select-resources`](#gif-tools-select-resources)
 * [`gif-tools update-solc-version`](#gif-tools-update-solc-version)
 * [`gif-tools verify`](#gif-tools-verify)
@@ -49,6 +50,24 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.3/src/commands/help.ts)_
+
+## `gif-tools publish-pinata`
+
+Describe the command here
+
+```
+USAGE
+  $ gif-tools publish-pinata
+
+OPTIONS
+  -n, --name=name  name to print
+
+DESCRIPTION
+  ...
+  Extra documentation goes here
+```
+
+_See code: [src/commands/publish-pinata.js](https://github.com/etherisc/GIF/blob/v0.1.3/src/commands/publish-pinata.js)_
 
 ## `gif-tools select-resources`
 
