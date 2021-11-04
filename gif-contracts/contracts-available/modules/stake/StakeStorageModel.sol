@@ -7,17 +7,8 @@ contract StakeStorageModel is IStake {
     // Metadata
     mapping(bytes32 => Metadata) public metadata;
 
-    // Applications
-    mapping(bytes32 => Application) public applications;
-
-    // Policies
+    // Stakes
     mapping(bytes32 => Stake) public stakes;
-
-    // Claims
-    mapping(bytes32 => mapping(uint256 => Claim)) public claims;
-
-    // Payouts
-    mapping(bytes32 => mapping(uint256 => Payout)) public payouts;
 
     bytes32[] public bpKeys;
 }
