@@ -19,7 +19,7 @@ $ npm install -g @etherisc/gif-tools
 $ gif-tools COMMAND
 running command...
 $ gif-tools (-v|--version|version)
-@etherisc/gif-tools/0.1.3 linux-x64 node-v16.11.1
+@etherisc/gif-tools/0.1.4 linux-x64 node-v16.11.1
 $ gif-tools --help [COMMAND]
 USAGE
   $ gif-tools COMMAND
@@ -29,7 +29,6 @@ USAGE
 # Commands
 <!-- commands -->
 * [`gif-tools help [COMMAND]`](#gif-tools-help-command)
-* [`gif-tools publish-pinata`](#gif-tools-publish-pinata)
 * [`gif-tools select-resources`](#gif-tools-select-resources)
 * [`gif-tools update-solc-version`](#gif-tools-update-solc-version)
 * [`gif-tools verify`](#gif-tools-verify)
@@ -51,24 +50,6 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.3/src/commands/help.ts)_
 
-## `gif-tools publish-pinata`
-
-Describe the command here
-
-```
-USAGE
-  $ gif-tools publish-pinata
-
-OPTIONS
-  -n, --name=name  name to print
-
-DESCRIPTION
-  ...
-  Extra documentation goes here
-```
-
-_See code: [src/commands/publish-pinata.js](https://github.com/etherisc/GIF/blob/v0.1.3/src/commands/publish-pinata.js)_
-
 ## `gif-tools select-resources`
 
 Select resources for compile / migrate / test
@@ -78,7 +59,7 @@ USAGE
   $ gif-tools select-resources
 ```
 
-_See code: [src/commands/select-resources.js](https://github.com/etherisc/GIF/blob/v0.1.3/src/commands/select-resources.js)_
+_See code: [src/commands/select-resources.js](https://github.com/etherisc/GIF/blob/v0.1.4/src/commands/select-resources.js)_
 
 ## `gif-tools update-solc-version`
 
@@ -89,7 +70,7 @@ USAGE
   $ gif-tools update-solc-version
 ```
 
-_See code: [src/commands/update-solc-version.js](https://github.com/etherisc/GIF/blob/v0.1.3/src/commands/update-solc-version.js)_
+_See code: [src/commands/update-solc-version.js](https://github.com/etherisc/GIF/blob/v0.1.4/src/commands/update-solc-version.js)_
 
 ## `gif-tools verify`
 
@@ -100,5 +81,5 @@ USAGE
   $ gif-tools verify
 ```
 
-_See code: [src/commands/verify.js](https://github.com/etherisc/GIF/blob/v0.1.3/src/commands/verify.js)_
+_See code: [src/commands/verify.js](https://github.com/etherisc/GIF/blob/v0.1.4/src/commands/verify.js)_
 <!-- commandsstop -->

@@ -1,35 +1,35 @@
-const info = console.log;
+const info = console.log
 
-const Registry = artifacts.require('modules/registry/Registry.sol');
-const RegistryController = artifacts.require('modules/registry/RegistryController.sol');
-const License = artifacts.require('modules/license/License.sol');
-const LicenseController = artifacts.require('modules/license/LicenseController.sol');
+const Registry = artifacts.require('modules/registry/Registry.sol')
+const RegistryController = artifacts.require('modules/registry/RegistryController.sol')
+const License = artifacts.require('modules/license/License.sol')
+const LicenseController = artifacts.require('modules/license/LicenseController.sol')
 
 module.exports = async (deployer) => {
-  const registryStorage = await Registry.deployed();
-  const registry = await RegistryController.at(registryStorage.address);
+  const registryStorage = await Registry.deployed()
+  const registry = await RegistryController.at(registryStorage.address)
 
   // Deploy storage and controller contracts-available
-  await deployer.deploy(License, registryStorage.address, { gas: 1000000 });
-  await deployer.deploy(LicenseController, registryStorage.address, { gas: 3000000 });
+  await deployer.deploy(License, registryStorage.address, { gas: 1000000 })
+  await deployer.deploy(LicenseController, registryStorage.address, { gas: 3000000 })
 
-  const licenseStorage = await License.deployed();
-  const licenseController = await LicenseController.deployed();
+  const licenseStorage = await License.deployed()
+  const licenseController = await LicenseController.deployed()
 
-  info('Assign controller to storage');
+  info('Assign controller to storage')
   await licenseStorage.assignController(licenseController.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`));
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
 
-  info('Assign storage to controller');
+  info('Assign storage to controller')
   await licenseController.assignStorage(licenseStorage.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`));
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
 
-  const licenseStorageName = await licenseStorage.NAME.call();
-  const licenseControllerName = await licenseController.NAME.call();
+  const licenseStorageName = await licenseStorage.NAME.call()
+  const licenseControllerName = await licenseController.NAME.call()
 
-  info('Register License module in Registry');
+  info('Register License module in Registry')
   await registry.register(licenseStorageName, licenseStorage.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`));
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
   await registry.register(licenseControllerName, licenseController.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`));
-};
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
+}

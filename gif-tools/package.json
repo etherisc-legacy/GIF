@@ -2,6 +2,7 @@
   "name": "@etherisc/gif-tools",
   "description": "Tools for developing GIF applications",
   "version": "0.1.4",
+  "release": "0.1.4",
   "author": "Christoph Mussenbrock @christoph2806",
   "bin": {
     "gif-tools": "./bin/run"
@@ -44,7 +45,7 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint .",
-    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "prepack": "oclif-dev readme",
     "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
     "version": "oclif-dev readme && git add README.md"
   },
