@@ -26,7 +26,7 @@ class SelectResources extends Command {
           fs.symlink(src, dest)
           log.info(`Selected ${dir}: ${dir}/${file}`)
         } else {
-          log.error(`${dir}-available/${file} doesn't exists`)
+          log.error(`${dir}-available/${file} doesn't exist`)
         }
       }
     }
