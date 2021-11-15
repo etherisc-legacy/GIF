@@ -1,6 +1,6 @@
-require('dotenv').config();
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-const { settings } = require('./package');
+require('dotenv').config()
+const HDWalletProvider = require('@truffle/hdwallet-provider')
+const { settings } = require('./package')
 
 const hdWalletConfig = {
   development: {
@@ -16,7 +16,7 @@ const hdWalletConfig = {
     providerOrUrl: process.env.SOKOL_HTTP_PROVIDER,
     pollingInterval: 200000,
   },
-};
+}
 
 module.exports = {
 
@@ -37,6 +37,17 @@ module.exports = {
     },
 
     xdai: {
+      provider: () => new HDWalletProvider(hdWalletConfig.xdai),
+      host: process.env.XDAI_HOST,
+      port: process.env.XDAI_PORT,
+      network_id: process.env.XDAI_NETWORK_ID,
+      gas: process.env.GAS,
+      gasPrice: process.env.GASPRICE,
+      websockets: process.env.WEBSOCKETS,
+      skipDryRun: true,
+    },
+
+    xdai_staging: {
       provider: () => new HDWalletProvider(hdWalletConfig.xdai),
       host: process.env.XDAI_HOST,
       port: process.env.XDAI_PORT,
@@ -89,4 +100,4 @@ module.exports = {
 
   plugins: ['truffle-source-verify', 'truffle-plugin-store'],
 
-};
+}
