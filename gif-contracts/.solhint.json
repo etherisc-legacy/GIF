@@ -1,0 +1,16 @@
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "compiler-version": ["error","^0.8.0"],
+    "code-complexity": "warn",
+    "no-complex-fallback": "off",
+    "payable-fallback": "off",
+    "const-name-snakecase": "warn",
+    "function-max-lines": "warn",
+    "quotes": ["error", "double"],
+    "max-line-length": ["warn", 120],
+    "ordering": "warn",
+    "reason-string": ["warn",{"maxLength":64}],
+    "func-visibility": ["warn", {"ignoreConstructors":true}]
+  }
+}

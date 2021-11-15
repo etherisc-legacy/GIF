@@ -1,35 +1,11 @@
 # DIP Platform
 
 ###### Documentation
-![documentation-badge](https://img.shields.io/badge/Documentation-53.3%25%20%28218%2F409%29-yellow.svg)
-
-###### Test coverage summary
-
-Module         | % Stmts       | % Branch      | % Funcs       | % Lines
--------------- | --------------| --------------| --------------| --------------
-estore_api.v1.0.0 | 0% (0/135) | 0% (0/6) | 0% (0/29) | 0% (0/135)
-estore_contracts.v1.0.0 | - | - | - | -
-estore_ui.v1.0.0 | 1.92% (5/261) | 0% (0/81) | 2.33% (1/43) | 2.06% (5/243)
-@etherisc/etherisc_flight_delay_api.v0.1.1 | 2.38% (2/84) | 0% (0/20) | 3.33% (1/30) | 2.86% (2/70)
-@etherisc/etherisc_flight_delay_ui.v0.1.1 | 35.9% (14/39) | 0% (0/4) | 30.77% (4/13) | 40% (14/35)
-@etherisc/dip_artifacts_storage.v1.0.0 | 43.18% (19/44) | 50% (1/2) | 33.33% (3/9) | 48.72% (19/39)
-@etherisc/dip_contracts.v1.0.0 | - | - | - | -
-@etherisc/dip_ethereum_client.v0.1.1 | - | - | - | -
-@etherisc/dip_event_listener.v0.1.0 | 43.18% (57/132) | 42.86% (6/14) | 44.44% (12/27) | 45.9% (56/122)
-@etherisc/dip_event_logging.v0.2.0 | 45.71% (16/35) | 75% (3/4) | 54.55% (6/11) | 51.61% (16/31)
-@etherisc/dip_fiat_payment_gateway.v0.1.1 | - | - | - | -
-@etherisc/dip_fiat_payout_gateway.v0.1.1 | - | - | - | -
-@etherisc/dip_pdf_generator.v1.0.1 | - | - | - | -
-@etherisc/dip_policy_storage.v0.1.1 | 50.97% (79/155) | 62.5% (5/8) | 41.46% (17/41) | 55.24% (79/143)
-postgresql-service.v1.0.0 | - | - | - | -
-@etherisc/microservice.v0.4.3 | - | - | - | -
-[endOfCoverageTable]: #
-
-
 
 * [Contribution guidelines](CONTRIBUTION.md)
 * [License](LICENSE)
 
+<<<<<<< HEAD
 ## Setup environments
 
 ### A. Setup local development environment
@@ -166,3 +142,5 @@ To switch the kubectl context between environments:
     > kubectl config use-context <contextname>
    
 Note: do not switch contexts during deploy, since the next kubectl instruction will apply to the new active context instead of the one you started the deploy with.
+=======
+>>>>>>> sandbox
