@@ -1,9 +1,10 @@
+// eslint-disable-next-line no-console
 const info = console.log
 
 const Registry = artifacts.require('modules/registry/Registry.sol')
 const RegistryController = artifacts.require('modules/registry/RegistryController.sol')
-const Policy = artifacts.require('modules/policy/Stake.sol')
-const PolicyController = artifacts.require('modules/policy/StakeController.sol')
+const Policy = artifacts.require('modules/policy/Policy.sol')
+const PolicyController = artifacts.require('modules/policy/PolicyController.sol')
 
 module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed()
