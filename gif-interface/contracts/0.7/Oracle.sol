@@ -24,7 +24,6 @@ abstract contract Oracle is IOracle, RBAC {
         bytes32 _oracleTypeName,
         bytes32 _oracleName
     )
-        public
     {
         oracleService = IOracleService(_oracleService);
         oracleOwnerService = IOracleOwnerService(_oracleOwnerService);
