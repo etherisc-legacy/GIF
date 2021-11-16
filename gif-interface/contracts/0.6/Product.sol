@@ -1,5 +1,5 @@
-pragma solidity ^0.6.0;
 // SPDX-License-Identifier: Apache-2.0
+pragma solidity ^0.6.0;
 
 import "./RBAC.sol";
 import "./IProductService.sol";

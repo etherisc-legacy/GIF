@@ -1,6 +1,5 @@
-pragma solidity ^0.6.0;
-
 // SPDX-License-Identifier: Apache-2.0
+pragma solidity ^0.6.0;
 
 interface IProductService {
     function proposeProduct(bytes32 _productName, bytes32 _policyFlow) external returns (uint256 _productId);
