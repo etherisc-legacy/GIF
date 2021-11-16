@@ -1,4 +1,4 @@
-pragma solidity 0.8.0; // TODO: Change this to 0.8.0 as soon as Chainlink releases 0.8
+pragma solidity 0.8.0; // TODO: Change this to 0.7.0 as soon as Chainlink releases 0.7
 
 // SPDX-License-Identifier: Apache-2.0
 

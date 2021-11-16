@@ -1,5 +1,5 @@
-pragma solidity ^0.6.0; // TODO: Change this to 0.8.0 as soon as ChainLink releases 0.8
 // SPDX-License-Identifier: Apache-2.0
+pragma solidity ^0.6.0;
 
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
@@ -16,7 +16,7 @@ contract RBAC is Ownable {
 
     function createRole(bytes32 _role) public onlyOwner {
         require(roles[_role] == 0);
-        // todo: check overflow
+        // TODO: check overflow
         roles[_role] = 1 << rolesKeys.length;
         rolesKeys.push(_role);
     }
