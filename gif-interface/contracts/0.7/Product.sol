@@ -30,7 +30,6 @@ abstract contract Product is RBAC {
     }
 
     constructor(address _productService, bytes32 _name, bytes32 _policyFlow)
-        public
     {
         productService = IProductService(_productService);
         productId = _proposeProduct(_name, _policyFlow);
