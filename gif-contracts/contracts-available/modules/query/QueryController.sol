@@ -232,7 +232,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         bytes32 _bpKey,
         bytes calldata _input,
         string calldata _callbackMethodName,
-        address _callabackContractAddress,
+        address _callbackContractAddress,
         bytes32 _oracleTypeName,
         uint256 _responsibleOracleId
     ) external onlyPolicyFlow("Query") returns (uint256 _requestId) {
@@ -247,7 +247,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         req.bpKey = _bpKey;
         req.data = _input;
         req.callbackMethodName = _callbackMethodName;
-        req.callbackContractAddress = _callabackContractAddress;
+        req.callbackContractAddress = _callbackContractAddress;
         req.oracleTypeName = _oracleTypeName;
         req.responsibleOracleId = _responsibleOracleId;
         req.createdAt = block.timestamp;
