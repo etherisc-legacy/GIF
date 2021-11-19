@@ -31,7 +31,7 @@ abstract contract Oracle is IOracle, RBAC {
         oracleOwnerService.proposeOracleToOracleType(_oracleTypeName, oracleId);
     }
 
-    function _respond(uint256 _requestId, bytes calldata _data) internal {
+    function _respond(uint256 _requestId, bytes memory _data) internal {
         oracleService.respond(_requestId, _data);
     }
 }

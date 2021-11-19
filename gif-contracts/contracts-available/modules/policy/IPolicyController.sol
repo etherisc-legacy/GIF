@@ -7,7 +7,7 @@ interface IPolicyController {
     function createPolicyFlow(uint256 _productId, bytes32 _bpKey) external;
 
     function setPolicyFlowState(
-        uint256 _metadataId,
+        bytes32 _bpKey,
         IPolicy.PolicyFlowState _state
     ) external;
 
@@ -71,4 +71,6 @@ interface IPolicyController {
         external
         view
         returns (IPolicy.Payout memory _payout);
+
+    function getBpKeyCount() external view returns (uint256 _count);
 }

@@ -16,7 +16,7 @@ interface IRegistryController {
 
     function deregister(bytes32 _contractName) external;
 
-    function prepareRelease() external returns (uint256 _release);
+    function prepareRelease(bytes32 _newRelease) external;
 
     function getContractInRelease(bytes32 _release, bytes32 _contractName)
         external

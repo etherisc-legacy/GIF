@@ -4,8 +4,9 @@ pragma solidity 0.8.0;
 import "../modules/query/IQuery.sol";
 import "../modules/query/IQueryController.sol";
 import "../shared/WithRegistry.sol";
+import "./IOracleOwnerService.sol";
 
-contract OracleOwnerService is WithRegistry {
+contract OracleOwnerService is IOracleOwnerService, WithRegistry {
     bytes32 public constant NAME = "OracleOwnerService";
 
     // solhint-disable-next-line no-empty-blocks
@@ -15,7 +16,7 @@ contract OracleOwnerService is WithRegistry {
         bytes32 _oracleTypeName,
         string calldata _inputFormat,
         string calldata _callbackFormat
-    ) external {
+    ) external override {
         // todo: oracle owner should be approved
         query().proposeOracleType(
             _oracleTypeName,
@@ -24,7 +25,7 @@ contract OracleOwnerService is WithRegistry {
         );
     }
 
-    function proposeOracle(bytes32 _name) external returns (uint256 _oracleId) {
+    function proposeOracle(bytes32 _name) external override returns (uint256 _oracleId) {
         // todo: oracle owner should be approved
         _oracleId = query().proposeOracle(_name, msg.sender);
     }
@@ -32,13 +33,13 @@ contract OracleOwnerService is WithRegistry {
     function proposeOracleToOracleType(
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    ) external {
+    ) external override {
         // todo: oracle owner should be approved
         query().proposeOracleToOracleType(_oracleTypeName, _oracleId);
     }
 
     function updateOracleContract(address _newOracleContract, uint256 _oracleId)
-        external
+        external override
     {
         // todo: oracle owner should be approved
         query().updateOracleContract(_newOracleContract, _oracleId);
@@ -47,7 +48,7 @@ contract OracleOwnerService is WithRegistry {
     function revokeOracleFromOracleType(
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    ) external {
+    ) external override {
         // todo: oracle owner should be approved
         query().revokeOracleFromOracleType(_oracleTypeName, _oracleId);
     }

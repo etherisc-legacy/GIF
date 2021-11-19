@@ -46,16 +46,18 @@ contracts:
   - modules/license/ILicenseController.sol
   - modules/license/LicenseStorageModel.sol
   - flows/PolicyFlowDefault.sol
-  - services/OracleService.sol
-  - services/IProductOwnerService.sol
+  - services/IInstanceOperatorService.sol
   - services/InstanceOperatorService.sol
-  - services/RiskPoolService.sol
+  - services/IOracleService.sol
+  - services/OracleService.sol
+  - services/IOracleOwnerService.sol
+  - services/OracleOwnerService.sol
+  - services/IProductService.sol
+  - services/ProductService.sol
+  - services/IProductOwnerService.sol
   - services/ProductOwnerService.sol
   - services/IRiskPoolService.sol
-  - services/IInstanceOperatorService.sol
-  - services/OracleOwnerService.sol
-  - services/ProductService.sol
-  - services/IOracleOwnerService.sol
+  - services/RiskPoolService.sol
   - shared/IOracle.sol
   - shared/ModuleStorage.sol
   - shared/IModuleController.sol

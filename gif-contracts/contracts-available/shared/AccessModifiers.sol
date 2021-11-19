@@ -3,9 +3,16 @@ pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 abstract contract AccessModifiers {
+
+    function getContractFromRegistry(bytes32 _contractName)
+    public
+    view
+    virtual
+    returns (address _addr);
+
     modifier onlyInstanceOperator() {
         require(
-            msg.sender == getContract("InstanceOperatorService"),
+            msg.sender == getContractFromRegistry("InstanceOperatorService"),
             "ERROR:ACM-001:NOT_INSTANCE_OPERATOR"
         );
         _;
@@ -14,13 +21,13 @@ abstract contract AccessModifiers {
     modifier onlyPolicyFlow(bytes32 _module) {
         // Allow only from delegator
         require(
-            address(this) == getContract(_module),
+            address(this) == getContractFromRegistry(_module),
             "ERROR:ACM-002:NOT_ON_STORAGE"
         );
 
         // Allow only ProductService (it delegates to PolicyFlow)
         require(
-            msg.sender == getContract("ProductService"),
+            msg.sender == getContractFromRegistry("ProductService"),
             "ERROR:ACM-003:NOT_PRODUCT_SERVICE"
         );
         _;
@@ -28,7 +35,7 @@ abstract contract AccessModifiers {
 
     modifier onlyOracleService() {
         require(
-            msg.sender == getContract("OracleService"),
+            msg.sender == getContractFromRegistry("OracleService"),
             "ERROR:ACM-004:NOT_ORACLE_SERVICE"
         );
         _;
@@ -36,7 +43,7 @@ abstract contract AccessModifiers {
 
     modifier onlyOracleOwner() {
         require(
-            msg.sender == getContract("OracleOwnerService"),
+            msg.sender == getContractFromRegistry("OracleOwnerService"),
             "ERROR:ACM-005:NOT_ORACLE_OWNER"
         );
         _;
@@ -44,15 +51,10 @@ abstract contract AccessModifiers {
 
     modifier onlyProductOwner() {
         require(
-            msg.sender == getContract("ProductOwnerService"),
+            msg.sender == getContractFromRegistry("ProductOwnerService"),
             "ERROR:ACM-006:NOT_PRODUCT_OWNER"
         );
         _;
     }
 
-    function getContract(bytes32 _contractName)
-        public
-        view
-        virtual
-        returns (address _addr);
 }

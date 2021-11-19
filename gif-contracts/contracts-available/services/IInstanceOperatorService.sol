@@ -23,21 +23,18 @@ interface IInstanceOperatorService {
 
     // Registry
     function registerInRelease(
-        uint256 _release,
+        bytes32 _release,
         bytes32 _contractName,
         address _contractAddress
     ) external;
 
     function register(bytes32 _contractName, address _contractAddress) external;
 
-    function deregisterInRelease(uint256 _release, bytes32 _contractName)
-        external;
+    function deregisterInRelease(bytes32 _release, bytes32 _contractName) external;
 
     function deregister(bytes32 _contractName) external;
 
-    function prepareRelease() external returns (uint256 _release);
-
-    function registerService(bytes32 _name, address _addr) external;
+    function prepareRelease(bytes32 _newRelease) external;
 
     // Query
     function approveOracleType(bytes32 _oracleTypeName) external;

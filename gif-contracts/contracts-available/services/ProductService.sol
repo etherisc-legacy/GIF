@@ -4,6 +4,7 @@ pragma solidity 0.8.0;
 import "../shared/WithRegistry.sol";
 import "../shared/Delegator.sol";
 import "../modules/license/ILicenseController.sol";
+import "./IProductService.sol";
 
 contract ProductService is WithRegistry, Delegator {
     bytes32 public constant NAME = "ProductService";

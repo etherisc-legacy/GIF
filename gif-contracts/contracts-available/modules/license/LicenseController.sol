@@ -1,10 +1,11 @@
 pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
+import "./ILicenseController.sol";
 import "./LicenseStorageModel.sol";
 import "../../shared/ModuleController.sol";
 
-contract LicenseController is LicenseStorageModel, ModuleController {
+contract LicenseController is ILicenseController, LicenseStorageModel, ModuleController {
     bytes32 public constant NAME = "LicenseController";
 
     constructor(address _registry) WithRegistry(_registry) {}
@@ -17,7 +18,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         bytes32 _name,
         address _productContract,
         bytes32 _policyFlow
-    ) external returns (uint256 _productId) {
+    ) external override returns (uint256 _productId) {
         // todo: add restriction, allow only ProductOwners
         require(
             productIdByAddress[_productContract] == 0,
@@ -34,7 +35,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
             _name,
             _productContract,
             _policyFlow,
-            getRelease(),
+            getReleaseFromRegistry(),
             ProductState.Proposed
         );
 
@@ -59,15 +60,15 @@ contract LicenseController is LicenseStorageModel, ModuleController {
         emit LogProductSetState(_id, _state);
     }
 
-    function approveProduct(uint256 _id) external onlyInstanceOperator {
+    function approveProduct(uint256 _id) external override onlyInstanceOperator {
         setProductState(_id, ProductState.Approved);
     }
 
-    function pauseProduct(uint256 _id) external onlyInstanceOperator {
+    function pauseProduct(uint256 _id) external override onlyInstanceOperator {
         setProductState(_id, ProductState.Paused);
     }
 
-    function disapproveProduct(uint256 _id) external onlyInstanceOperator {
+    function disapproveProduct(uint256 _id) external override onlyInstanceOperator {
         setProductState(_id, ProductState.Proposed);
     }
 
@@ -75,7 +76,7 @@ contract LicenseController is LicenseStorageModel, ModuleController {
      * @dev Check if contract is approved product
      */
     function isApprovedProduct(uint256 _id)
-        public
+        public override
         view
         returns (bool _approved)
     {
@@ -88,29 +89,29 @@ contract LicenseController is LicenseStorageModel, ModuleController {
     /**
      * @dev Check if contract is paused product
      */
-    function isPausedProduct(uint256 _id) public view returns (bool _paused) {
+    function isPausedProduct(uint256 _id) public override view returns (bool _paused) {
         _paused = products[_id].state == ProductState.Paused;
     }
 
-    function isValidCall(uint256 _id) public view returns (bool _valid) {
+    function isValidCall(uint256 _id) public override view returns (bool _valid) {
         _valid = products[_id].state != ProductState.Proposed;
     }
 
     function authorize(address _sender)
-        public
+        public override
         view
         returns (bool _authorized, address _policyFlow)
     {
         uint256 productId = productIdByAddress[_sender];
         _authorized = isValidCall(productId);
-        _policyFlow = getContractInRelease(
+        _policyFlow = getContractInReleaseFromRegistry(
             products[productId].release,
             products[productId].policyFlow
         );
     }
 
     function getProductId(address _productContract)
-        public
+        public override
         view
         returns (uint256 _productId)
     {

@@ -2,10 +2,11 @@ pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
 import "./QueryStorageModel.sol";
+import "./IQueryController.sol";
 import "../../shared/IOracle.sol";
 import "../../shared/ModuleController.sol";
 
-contract QueryController is QueryStorageModel, ModuleController {
+contract QueryController is IQueryController, QueryStorageModel, ModuleController {
     bytes32 public constant NAME = "QueryController";
 
     modifier isResponsibleOracle(uint256 _requestId, address _responder) {
@@ -23,7 +24,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         bytes32 _oracleTypeName,
         string calldata _inputFormat,
         string calldata _callbackFormat
-    ) external onlyOracleOwner {
+    ) external override onlyOracleOwner {
         require(
             oracleTypes[_oracleTypeName].state == OracleTypeState.Uninitialized,
             "ERROR:QUC-002:ORACLE_TYPE_ALREADY_EXISTS"
@@ -48,6 +49,7 @@ contract QueryController is QueryStorageModel, ModuleController {
 
     function approveOracleType(bytes32 _oracleTypeName)
         external
+        override
         onlyInstanceOperator
     {
         require(
@@ -66,6 +68,7 @@ contract QueryController is QueryStorageModel, ModuleController {
 
     function disapproveOracleType(bytes32 _oracleTypeName)
         external
+        override
         onlyInstanceOperator
     {
         require(
@@ -84,6 +87,7 @@ contract QueryController is QueryStorageModel, ModuleController {
 
     function proposeOracle(bytes32 _name, address _oracleContract)
         external
+        override
         onlyOracleOwner
         returns (uint256 _oracleId)
     {
@@ -108,6 +112,7 @@ contract QueryController is QueryStorageModel, ModuleController {
 
     function updateOracleContract(address _newOracleContract, uint256 _oracleId)
         external
+        override
         onlyOracleOwner
     {
         require(
@@ -137,22 +142,22 @@ contract QueryController is QueryStorageModel, ModuleController {
         LogOracleSetState(_oracleId, _state);
     }
 
-    function approveOracle(uint256 _oracleId) external onlyInstanceOperator {
+    function approveOracle(uint256 _oracleId) external override onlyInstanceOperator {
         setOracleState(_oracleId, OracleState.Approved);
     }
 
-    function pauseOracle(uint256 _oracleId) external onlyInstanceOperator {
+    function pauseOracle(uint256 _oracleId) external override onlyInstanceOperator {
         setOracleState(_oracleId, OracleState.Paused);
     }
 
-    function disapproveOracle(uint256 _oracleId) external onlyInstanceOperator {
+    function disapproveOracle(uint256 _oracleId) external override onlyInstanceOperator {
         setOracleState(_oracleId, OracleState.Proposed);
     }
 
     function proposeOracleToOracleType(
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    ) external onlyOracleOwner {
+    ) external override onlyOracleOwner {
         require(
             oracles[_oracleId].oracleContract != address(0),
             "ERROR:QUC-017:ORACLE_DOES_NOT_EXIST"
@@ -176,7 +181,7 @@ contract QueryController is QueryStorageModel, ModuleController {
     function revokeOracleFromOracleType(
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    ) external onlyOracleOwner {
+    ) external override onlyOracleOwner {
         require(
             oracles[_oracleId].oracleContract != address(0),
             "ERROR:QUC-021:ORACLE_DOES_NOT_EXIST"
@@ -202,7 +207,7 @@ contract QueryController is QueryStorageModel, ModuleController {
     function assignOracleToOracleType(
         bytes32 _oracleTypeName,
         uint256 _oracleId
-    ) external onlyInstanceOperator {
+    ) external override onlyInstanceOperator {
         require(
             oracleTypes[_oracleTypeName].state == OracleTypeState.Approved,
             "ERROR:QUC-024:ORACLE_TYPE_NOT_APPROVED"
@@ -235,7 +240,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         address _callbackContractAddress,
         bytes32 _oracleTypeName,
         uint256 _responsibleOracleId
-    ) external onlyPolicyFlow("Query") returns (uint256 _requestId) {
+    ) external override onlyPolicyFlow("Query") returns (uint256 _requestId) {
         // todo: validate
 
         _requestId = oracleRequests.length;
@@ -265,7 +270,7 @@ contract QueryController is QueryStorageModel, ModuleController {
         uint256 _requestId,
         address _responder,
         bytes calldata _data
-    ) external onlyOracleService isResponsibleOracle(_requestId, _responder) {
+    ) external override onlyOracleService isResponsibleOracle(_requestId, _responder) {
         OracleRequest storage req = oracleRequests[_requestId];
 
         (bool status, ) =

@@ -1,11 +1,13 @@
 pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
+import "./IRegistryController.sol";
 import "./RegistryStorageModel.sol";
 import "../../shared/BaseModuleController.sol";
 import "../../shared/AccessModifiers.sol";
 
 contract RegistryController is
+    IRegistryController,
     RegistryStorageModel,
     BaseModuleController,
     AccessModifiers
@@ -25,11 +27,11 @@ contract RegistryController is
     /**
      * @dev Register contract in certain release
      */
-    function registerInRelease(
+    function _registerInRelease(
         bytes32 _release,
         bytes32 _contractName,
         address _contractAddress
-    ) public onlyInstanceOperator {
+    )  internal onlyInstanceOperator {
         bool isNew = false;
 
         require(
@@ -58,20 +60,35 @@ contract RegistryController is
     }
 
     /**
+     * @dev Register contract in certain release
+     */
+    function registerInRelease(
+        bytes32 _release,
+        bytes32 _contractName,
+        address _contractAddress
+    )  external override onlyInstanceOperator {
+        _registerInRelease(
+            _release,
+            _contractName,
+            _contractAddress
+        );
+    }
+
+    /**
      * @dev Register contract in the current release
      */
     function register(bytes32 _contractName, address _contractAddress)
-        public
+        external override
         onlyInstanceOperator
     {
-        registerInRelease(release, _contractName, _contractAddress);
+        _registerInRelease(release, _contractName, _contractAddress);
     }
 
     /**
      * @dev Deregister contract in certain release
      */
-    function deregisterInRelease(bytes32 _release, bytes32 _contractName)
-        public
+    function _deregisterInRelease(bytes32 _release, bytes32 _contractName)
+        internal
         onlyInstanceOperator
     {
         uint256 indexToDelete;
@@ -101,17 +118,24 @@ contract RegistryController is
         emit LogContractDeregistered(_release, _contractName);
     }
 
+    function deregisterInRelease(bytes32 _release, bytes32 _contractName)
+        external override
+        onlyInstanceOperator
+    {
+        _deregisterInRelease(_release, _contractName);
+    }
+
     /**
      * @dev Deregister contract in the current release
      */
-    function deregister(bytes32 _contractName) public onlyInstanceOperator {
-        deregisterInRelease(release, _contractName);
+    function deregister(bytes32 _contractName) external override onlyInstanceOperator {
+        _deregisterInRelease(release, _contractName);
     }
 
     /**
      * @dev Create new release, copy contracts-available from previous release
      */
-    function prepareRelease(bytes32 _newRelease) public onlyInstanceOperator {
+    function prepareRelease(bytes32 _newRelease) external override onlyInstanceOperator {
         uint256 countContracts = contractsInRelease[release];
 
         require(countContracts > 0, "ERROR:REC-001:EMPTY_RELEASE");
@@ -123,7 +147,7 @@ contract RegistryController is
         // todo: think about how to avoid this loop
         for (uint256 i = 0; i < countContracts; i += 1) {
             bytes32 contractName = contractNames[release][i];
-            registerInRelease(
+            _registerInRelease(
                 _newRelease,
                 contractName,
                 contracts[release][contractName]
@@ -138,15 +162,15 @@ contract RegistryController is
     /**
      * @dev get current release
      */
-    function getRelease() external view returns (bytes32 _release) {
+    function getRelease() external override view returns (bytes32 _release) {
         _release = release;
     }
 
     /**
      * @dev Get contract's address in certain release
      */
-    function getContractInRelease(bytes32 _release, bytes32 _contractName)
-        public
+    function _getContractInRelease(bytes32 _release, bytes32 _contractName)
+        internal
         view
         returns (address _addr)
     {
@@ -154,14 +178,32 @@ contract RegistryController is
     }
 
     /**
+     * @dev Get contract's address in certain release
+     */
+    function getContractInRelease(bytes32 _release, bytes32 _contractName)
+        external override
+        view
+        returns (address _addr)
+    {
+        _addr = _getContractInRelease(_release, _contractName);
+    }
+
+    /**
      * @dev Get contract's address in the current release
      */
     function getContract(bytes32 _contractName)
-        public
+        public override
         view
-        override
         returns (address _addr)
     {
-        _addr = getContractInRelease(release, _contractName);
+        _addr = _getContractInRelease(release, _contractName);
+    }
+
+    function getContractFromRegistry(bytes32 _contractName)
+        public override
+        view
+        returns (address _addr)
+    {
+        _addr = _getContractInRelease(release, _contractName);
     }
 }

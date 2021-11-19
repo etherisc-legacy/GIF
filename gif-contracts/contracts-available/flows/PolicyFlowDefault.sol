@@ -170,14 +170,14 @@ contract PolicyFlowDefault is WithRegistry {
     }
 
     function getLicenseContract() internal view returns (ILicenseController) {
-        return ILicenseController(getContract("License"));
+        return ILicenseController(getContractFromRegistry("License"));
     }
 
     function getPolicyContract() internal view returns (IPolicyController) {
-        return IPolicyController(getContract("Policy"));
+        return IPolicyController(getContractFromRegistry("Policy"));
     }
 
     function getQueryContract() internal view returns (IQueryController) {
-        return IQueryController(getContract("Query"));
+        return IQueryController(getContractFromRegistry("Query"));
     }
 }

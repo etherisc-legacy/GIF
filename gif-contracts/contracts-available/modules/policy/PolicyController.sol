@@ -1,17 +1,18 @@
 pragma solidity 0.8.0;
 // SPDX-License-Identifier: Apache-2.0
 
+import "./IPolicyController.sol";
 import "./PolicyStorageModel.sol";
 import "../../shared/ModuleController.sol";
 
-contract PolicyController is PolicyStorageModel, ModuleController {
+contract PolicyController is IPolicyController, PolicyStorageModel, ModuleController {
     bytes32 public constant NAME = "PolicyController";
 
     constructor(address _registry) WithRegistry(_registry) {}
 
     /* Metadata */
     function createPolicyFlow(uint256 _productId, bytes32 _bpKey)
-        external
+        external override
         onlyPolicyFlow("Policy")
     {
         Metadata storage meta = metadata[_bpKey];
@@ -30,7 +31,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     function setPolicyFlowState(bytes32 _bpKey, PolicyFlowState _state)
-        external
+        external override
         onlyPolicyFlow("Policy")
     {
         Metadata storage meta = metadata[_bpKey];
@@ -44,7 +45,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
     /* Application */
     function createApplication(bytes32 _bpKey, bytes calldata _data)
-        external
+        external override
         onlyPolicyFlow("Policy")
     {
         Metadata storage meta = metadata[_bpKey];
@@ -71,7 +72,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     function setApplicationState(bytes32 _bpKey, ApplicationState _state)
-        external
+        external override
         onlyPolicyFlow("Policy")
     {
         Application storage application = applications[_bpKey];
@@ -87,7 +88,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     /* Policy */
-    function createPolicy(bytes32 _bpKey) external {
+    function createPolicy(bytes32 _bpKey) external override {
         //}onlyPolicyFlow("Policy") {
 
         Metadata storage meta = metadata[_bpKey];
@@ -114,7 +115,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     function setPolicyState(bytes32 _bpKey, PolicyState _state)
-        external
+        external override
         onlyPolicyFlow("Policy")
     {
         Policy storage policy = policies[_bpKey];
@@ -128,7 +129,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
 
     /* Claim */
     function createClaim(bytes32 _bpKey, bytes calldata _data)
-        external
+        external override
         onlyPolicyFlow("Policy")
         returns (uint256 _claimId)
     {
@@ -157,7 +158,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         bytes32 _bpKey,
         uint256 _claimId,
         ClaimState _state
-    ) external onlyPolicyFlow("Policy") {
+    ) external override onlyPolicyFlow("Policy") {
         Claim storage claim = claims[_bpKey][_claimId];
         require(claim.createdAt > 0, "ERROR:POC-013:CLAIM_DOES_NOT_EXIST");
 
@@ -172,7 +173,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         bytes32 _bpKey,
         uint256 _claimId,
         bytes calldata _data
-    ) external onlyPolicyFlow("Policy") returns (uint256 _payoutId) {
+    ) external override onlyPolicyFlow("Policy") returns (uint256 _payoutId) {
         Metadata storage meta = metadata[_bpKey];
         require(meta.createdAt > 0, "ERROR:POC-014:METADATA_DOES_NOT_EXIST");
 
@@ -200,7 +201,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         uint256 _payoutId,
         bool _complete,
         bytes calldata _data
-    ) external onlyPolicyFlow("Policy") {
+    ) external override onlyPolicyFlow("Policy") {
         Metadata storage meta = metadata[_bpKey];
         require(meta.createdAt > 0, "ERROR:POC-017:METADATA_DOES_NOT_EXIST");
 
@@ -228,7 +229,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
         bytes32 _bpKey,
         uint256 _payoutId,
         PayoutState _state
-    ) external onlyPolicyFlow("Policy") {
+    ) external override onlyPolicyFlow("Policy") {
         Payout storage payout = payouts[_bpKey][_payoutId];
         require(payout.createdAt > 0, "ERROR:POC-020:PAYOUT_DOES_NOT_EXIST");
 
@@ -239,7 +240,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     function getApplication(bytes32 _bpKey)
-        external
+        external override
         view
         returns (IPolicy.Application memory _application)
     {
@@ -247,7 +248,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     function getPolicy(bytes32 _bpKey)
-        external
+        external override
         view
         returns (IPolicy.Policy memory _policy)
     {
@@ -255,7 +256,7 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     function getClaim(bytes32 _bpKey, uint256 _claimId)
-        external
+        external override
         view
         returns (IPolicy.Claim memory _claim)
     {
@@ -263,14 +264,14 @@ contract PolicyController is PolicyStorageModel, ModuleController {
     }
 
     function getPayout(bytes32 _bpKey, uint256 _payoutId)
-        external
+        external override
         view
         returns (IPolicy.Payout memory _payout)
     {
         return payouts[_bpKey][_payoutId];
     }
 
-    function getBpKeyCount() public view returns (uint256 _count) {
+    function getBpKeyCount() external override view returns (uint256 _count) {
         return bpKeys.length;
     }
 }

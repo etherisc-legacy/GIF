@@ -14,8 +14,6 @@ interface IQueryController {
 
     function disapproveOracleType(bytes32 _oracleTypeName) external;
 
-    function removeOracleType(bytes32 _oracleTypeName) external;
-
     function proposeOracle(bytes32 _name, address _oracleContract)
         external
         returns (uint256 _oracleId);
@@ -24,6 +22,7 @@ interface IQueryController {
         external;
 
     function approveOracle(uint256 _oracleId) external;
+    function pauseOracle(uint256 _oracleId) external;
 
     function disapproveOracle(uint256 _oracleId) external;
 
@@ -55,5 +54,5 @@ interface IQueryController {
         uint256 _requestId,
         address _responder,
         bytes calldata _data
-    ) external returns (uint256 _responseId);
+    ) external;
 }
