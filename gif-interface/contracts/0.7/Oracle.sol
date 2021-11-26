@@ -12,7 +12,7 @@ abstract contract Oracle is IOracle, RBAC {
 
     modifier onlyQuery {
         require(
-            msg.sender == oracleService.getContract("Query"),
+            msg.sender == oracleService.getContractFromRegistry("Query"),
             "ERROR:ORA-001:ACCESS_DENIED"
         );
         _;

@@ -8,48 +8,52 @@ root: true
 
 parser: '@babel/eslint-parser'
 parserOptions:
-  sourceType: 'module'
-  requireConfigFile: false
+    sourceType: 'module'
+    requireConfigFile: false
 
 extends:
-  - oclif
+    - airbnb
 
 env:
-  browser: true
-  node: true
-  mocha: true
-  jest: true
+    browser: true
+    node: true
+    mocha: true
+    jest: true
 
 globals:
-  should: writable
-  artifacts: writable
-  contract: writable
-  web3: writable
+    should: writable
+    artifacts: writable
+    contract: writable
+    web3: writable
 
 rules:
-  max-len:
-    - error
-    - 120
-    - 2
-    - ignoreUrls: true
-      ignoreComments: false
-      ignoreRegExpLiterals: true
-      ignoreStrings: true
-      ignoreTemplateLiterals: true
-  no-await-in-loop: 0
-  import/no-unresolved: 0
-  import/no-dynamic-require: 0
-  import/extensions: 0
+    max-len:
+        - error
+        - 120
+        - 2
+        - ignoreUrls: true
+          ignoreComments: false
+          ignoreRegExpLiterals: true
+          ignoreStrings: true
+          ignoreTemplateLiterals: true
+    no-await-in-loop: 0
+    import/no-unresolved: 0
+    import/no-dynamic-require: 0
+    import/extensions: 0
 
-  global-require: 0
-  no-underscore-dangle: 0
-  no-unused-vars:
-    - error
-    - args: none
-  no-return-assign: 0
-  no-confusing-arrow: 0
-  no-nested-ternary: 0
-  class-methods-use-this: 0
+    global-require: 0
+    no-underscore-dangle: 0
+    no-unused-vars:
+        - error
+        - args: none
+    no-return-assign: 0
+    no-confusing-arrow: 0
+    no-nested-ternary: 0
+    class-methods-use-this: 0
 
-  require-jsdoc: 0
-  valid-jsdoc: 0
+    require-jsdoc: 0
+    valid-jsdoc: 0
+
+    semi:
+      - error
+      - never

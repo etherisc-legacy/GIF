@@ -47,11 +47,11 @@ module.exports = {
       skipDryRun: true,
     },
 
-    xdai_staging: {
-      provider: () => new HDWalletProvider(hdWalletConfig.xdai),
-      host: process.env.XDAI_HOST,
-      port: process.env.XDAI_PORT,
-      network_id: process.env.XDAI_NETWORK_ID,
+    polygon: {
+      provider: () => new HDWalletProvider(hdWalletConfig.polygon),
+      host: process.env.POLYGON_HOST,
+      port: process.env.POLYGON_PORT,
+      network_id: process.env.POLYGON_NETWORK_ID,
       gas: process.env.GAS,
       gasPrice: process.env.GASPRICE,
       websockets: process.env.WEBSOCKETS,

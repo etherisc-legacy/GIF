@@ -23,6 +23,5 @@ interface IProductService {
         bytes32 _oracleTypeName,
         uint256 _responsibleOracleId
     ) external returns (uint256 _requestId);
-    function getContract(bytes32 _contractName) external view returns (address _contractAddress);
-    function getService(bytes32 _contractName) external view returns (address _contractAddress);
+    function getContractFromRegistry(bytes32 _contractName) external view returns (address _contractAddress);
 }
