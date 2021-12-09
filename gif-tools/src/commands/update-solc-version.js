@@ -9,7 +9,7 @@ const log = require('../lib/logger')
  */
 class UpdateSolcVersion extends Command {
   /**
-   * Get required version and update smart contracts-available-available files
+   * Get required version and update smart contracts files
    */
   run() {
     fs.find('contracts', { matching: '*.sol' })
@@ -28,6 +28,6 @@ class UpdateSolcVersion extends Command {
   }
 }
 
-UpdateSolcVersion.description = 'Set solc compiler version in smart contracts-available-available. Version should be specified in package.json'
+UpdateSolcVersion.description = 'Set solc compiler version in smart contracts. Version should be specified in package.json'
 
 module.exports = UpdateSolcVersion

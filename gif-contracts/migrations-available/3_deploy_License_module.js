@@ -10,7 +10,7 @@ module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed()
   const registry = await RegistryController.at(registryStorage.address)
 
-  // Deploy storage and controller contracts-available-available
+  // Deploy storage and controller contracts
   await deployer.deploy(License, registryStorage.address)
   await deployer.deploy(LicenseController, registryStorage.address)
 

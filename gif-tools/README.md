@@ -63,7 +63,7 @@ _See code: [src/commands/select-resources.js](https://github.com/etherisc/GIF/bl
 
 ## `gif-tools update-solc-version`
 
-Set solc compiler version in smart contracts-available. Version should be specified in package.json
+Set solc compiler version in smart contracts. Version should be specified in package.json
 
 ```
 USAGE
@@ -74,7 +74,7 @@ _See code: [src/commands/update-solc-version.js](https://github.com/etherisc/GIF
 
 ## `gif-tools verify`
 
-Prepare verification of contracts-available
+Prepare verification of contracts
 
 ```
 USAGE

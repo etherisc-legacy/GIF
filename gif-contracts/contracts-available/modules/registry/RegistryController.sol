@@ -133,7 +133,7 @@ contract RegistryController is
     }
 
     /**
-     * @dev Create new release, copy contracts-available-available from previous release
+     * @dev Create new release, copy contracts from previous release
      */
     function prepareRelease(bytes32 _newRelease) external override onlyInstanceOperator {
         uint256 countContracts = contractsInRelease[release];

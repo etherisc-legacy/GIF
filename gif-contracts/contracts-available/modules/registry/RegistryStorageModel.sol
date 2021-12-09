@@ -13,7 +13,7 @@ contract RegistryStorageModel is IRegistry {
 
     /**
      * @dev  Save number of items to iterate through
-     * Currently we have < 20 contracts-available-available.
+     * Currently we have < 20 contracts.
      */
     uint256 public maxContracts = 100;
 
@@ -21,6 +21,6 @@ contract RegistryStorageModel is IRegistry {
     mapping(bytes32 => mapping(bytes32 => address)) public contracts;
     // release => contract name []
     mapping(bytes32 => bytes32[]) public contractNames;
-    // number of contracts-available-available in release
+    // number of contracts in release
     mapping(bytes32 => uint256) public contractsInRelease;
 }

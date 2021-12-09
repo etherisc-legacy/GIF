@@ -9,7 +9,7 @@ const initialRelease = web3.utils.fromAscii(settings.release)
 
 module.exports = async (deployer) => {
   info('here0')
-  // Deploy storage and controller contracts-available-available
+  // Deploy storage and controller contracts
   await deployer.deploy(RegistryController, initialRelease)
 
   const registryController = await RegistryController.deployed()

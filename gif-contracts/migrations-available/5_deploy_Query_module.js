@@ -10,14 +10,14 @@ module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed()
   const registry = await RegistryController.at(registryStorage.address)
 
-  // Deploy storage and controller contracts-available-available
+  // Deploy storage and controller contracts
   await deployer.deploy(Query, registryStorage.address)
   await deployer.deploy(QueryController, registryStorage.address)
 
   const queryStorage = await Query.deployed()
   const queryController = await QueryController.deployed()
 
-  // Bind storage & controller contracts-available-available
+  // Bind storage & controller contracts
   info('Assign controller to storage')
   await queryStorage.assignController(queryController.address)
     .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
