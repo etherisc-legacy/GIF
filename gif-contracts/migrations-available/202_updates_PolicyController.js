@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-console
 const info = console.log
 
 const Registry = artifacts.require('modules/registry/Registry.sol')
@@ -11,7 +12,7 @@ module.exports = async (deployer) => {
   const instanceOperator = await InstanceOperatorService.deployed()
 
   info('Deploy new PolicyController')
-  await deployer.deploy(PolicyController, registryStorage.address, { gas: 6000000 })
+  await deployer.deploy(PolicyController, registryStorage.address)
   const policyController = await PolicyController.deployed()
 
   await instanceOperator.assignController(policy.address, policyController.address)

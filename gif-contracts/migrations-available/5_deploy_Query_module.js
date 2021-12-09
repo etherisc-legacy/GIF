@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-console
 const info = console.log
 
 const Registry = artifacts.require('modules/registry/Registry.sol')
@@ -9,28 +10,28 @@ module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed()
   const registry = await RegistryController.at(registryStorage.address)
 
-  // Deploy storage and controller contracts-available
-  await deployer.deploy(Query, registryStorage.address, { gas: 2000000 })
-  await deployer.deploy(QueryController, registryStorage.address, { gas: 6000000 })
+  // Deploy storage and controller contracts-available-available
+  await deployer.deploy(Query, registryStorage.address)
+  await deployer.deploy(QueryController, registryStorage.address)
 
   const queryStorage = await Query.deployed()
   const queryController = await QueryController.deployed()
 
-  // Bind storage & controller contracts-available
+  // Bind storage & controller contracts-available-available
   info('Assign controller to storage')
-  await queryStorage.assignController(queryController.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
+  await queryStorage.assignController(queryController.address)
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
 
   info('Assign storage to controller')
-  await queryController.assignStorage(queryStorage.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
+  await queryController.assignStorage(queryStorage.address)
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
 
   const queryStorageName = await queryStorage.NAME.call()
   const queryControllerName = await queryController.NAME.call()
 
   info('Register Query module in Registry')
-  await registry.register(queryStorageName, queryStorage.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
-  await registry.register(queryControllerName, queryController.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
+  await registry.register(queryStorageName, queryStorage.address)
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
+  await registry.register(queryControllerName, queryController.address)
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
 }

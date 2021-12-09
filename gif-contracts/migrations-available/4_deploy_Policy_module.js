@@ -10,30 +10,28 @@ module.exports = async (deployer) => {
   const registryStorage = await Registry.deployed()
   const registry = await RegistryController.at(registryStorage.address)
 
-  // Deploy storage and controller contracts-available
-  await deployer.deploy(Policy, registryStorage.address, { gas: 2000000 })
+  // Deploy storage and controller contracts-available-available
+  await deployer.deploy(Policy, registryStorage.address)
 
-  await deployer.deploy(PolicyController, registryStorage.address, { gas: 4000000 })
-  // Etherscan doesn't detects constructor arguments for this contract
-  info('PolicyController constructor arguments: %s\n', web3.eth.abi.encodeParameters(['address'], [registryStorage.address]).substr(2))
+  await deployer.deploy(PolicyController, registryStorage.address)
 
   const policyStorage = await Policy.deployed()
   const policyController = await PolicyController.deployed()
 
   info('Assign controller to storage')
-  await policyStorage.assignController(policyController.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
+  await policyStorage.assignController(policyController.address)
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
 
   info('Assign storage to controller')
-  await policyController.assignStorage(policyStorage.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
+  await policyController.assignStorage(policyStorage.address)
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
 
   const policyStorageName = await policyStorage.NAME.call()
   const policyControllerName = await policyController.NAME.call()
 
   info('Register Policy module in Registry')
-  await registry.register(policyStorageName, policyStorage.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
-  await registry.register(policyControllerName, policyController.address, { gas: 100000 })
-    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}\n`))
+  await registry.register(policyStorageName, policyStorage.address)
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
+  await registry.register(policyControllerName, policyController.address)
+    .on('transactionHash', (txHash) => info(`transaction hash: ${txHash}`))
 }

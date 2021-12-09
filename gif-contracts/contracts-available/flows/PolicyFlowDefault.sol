@@ -27,9 +27,10 @@ contract PolicyFlowDefault is WithRegistry {
         bytes calldata _data // replaces premium, currency, payoutOptions
     ) external {
         IPolicyController policy = getPolicyContract();
+        ILicenseController license = getLicenseContract();
         // the calling contract is the Product contract, which needs to have a productId in the license contract.
-        uint256 productId = getLicenseContract().getProductId(msg.sender);
-
+        uint256 productId = license.getProductId(msg.sender);
+        require(!license.isPausedProduct(productId), "ERROR:PFD-006:PRODUCT_IS_PAUSED");
         policy.createPolicyFlow(productId, _bpKey);
         policy.createApplication(_bpKey, _data);
     }

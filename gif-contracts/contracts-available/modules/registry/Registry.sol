@@ -14,6 +14,8 @@ contract Registry is RegistryStorageModel, BaseModuleStorage {
         contractNames[release].push("InstanceOperatorService");
         contractsInRelease[release] = 1;
         _assignController(_controller);
+        // register the deployment block for reading logs
+        startBlock = block.number;
     }
 
     function assignController(address _controller) external {

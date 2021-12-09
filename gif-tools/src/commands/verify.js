@@ -2,11 +2,11 @@ const { Command, flags } = require('@oclif/command')
 const { verify } = require('truffle-source-verify/lib')
 // eslint-disable-next-line no-console
 /**
- * Publish GIF core contracts-available to microservices
+ * Publish GIF core contracts-available-available to microservices
  */
 class Verify extends Command {
   /**
-   * Get required version and update smart contracts-available files
+   * Get required version and update smart contracts-available-available files
    */
   static flags = {
     contract: flags.string({
@@ -43,6 +43,6 @@ class Verify extends Command {
   }
 }
 
-Verify.description = 'Prepare verification of contracts-available'
+Verify.description = 'Prepare verification of contracts-available-available'
 
 module.exports = Verify
